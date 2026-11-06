@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "targets": [
+    "codex",
+    "copilot"
+  ],
+  "selection": {
+    "guidelines": [
+      "code-quality",
+      "testing-guidelines",
+      "component-library",
+      "design-tokens"
+    ],
+    "skills": [
+      "tdd",
+      "typescript-refactor",
+      "build-react-components",
+      "establish-design-system"
+    ],
+    "agents": [
+      "research",
+      "refactorer"
+    ]
+  },
+  "outputs": {
+    "AGENTS.md": {
+      "mode": "block",
+      "hash": "50a66f1242f71ab51e065ae0827ac37063aa8a538d9e8dde47f75c04d5b6db44"
+    },
+    ".github/copilot-instructions.md": {
+      "mode": "block",
+      "hash": "50a66f1242f71ab51e065ae0827ac37063aa8a538d9e8dde47f75c04d5b6db44"
+    },
+    ".agents/guidelines/code-quality.md": {
+      "mode": "file",
+      "hash": "7c19d3165fe7a169c3c05d4893699c79f82d1a1a778b265cbf9e1d0b58c2679e"
+    },
+    ".agents/guidelines/testing-guidelines.md": {
+      "mode": "file",
+      "hash": "789ca52564b22663aaf8e0caf2e0486dddc471bbb3c20e00a27e77270cc2e419"
+    },
+    ".agents/guidelines/component-library.md": {
+      "mode": "file",
+      "hash": "947432ebac102006890aa116b0f15537d5d2c20622ad08fa06c3a42910bbdef6"
+    },
+    ".agents/skills/tdd/SKILL.md": {
+      "mode": "file",
+      "hash": "1dd76ee9fe26f6b21d6340aee5e5cff58097acb4e8c7759c4cf3cb249e9d7cd7"
+    },
+    ".agents/skills/typescript-refactor/SKILL.md": {
+      "mode": "file",
+      "hash": "e4d755ba58b0e107d897a36454dc09e5612b0b65e3e3044eede9fb2548e83c0b"
+    },
+    ".agents/skills/typescript-refactor/references/typescript-field-guide.md": {
+      "mode": "file",
+      "hash": "31312e3348117b02e48b1f93ee2c3addf9a8fdc0230cec67fd9eef2a8f238783"
+    },
+    ".agents/skills/build-react-components/SKILL.md": {
+      "mode": "file",
+      "hash": "214c2797c91d929d12a289fc1e2a4dbf29b8b6ab37cd32a5b4dfe0b62e9a4b8e"
+    },
+    ".agents/skills/establish-design-system/SKILL.md": {
+      "mode": "file",
+      "hash": "9ffe2b0e4307484fc373c29ed3442ffab23596dfef79c7953b0c3252bd25c843"
+    },
+    ".codex/agents/research.toml": {
+      "mode": "file",
+      "hash": "c218a929313f616ccd64a12bf5626b47f0f475dd8ffcc259b9fb0fd64f039825"
+    },
+    ".github/agents/research.agent.md": {
+      "mode": "file",
+      "hash": "8ad7dbf40cdc6c7765d2c8dfb3b958f2df3e5ef250b9384c234f33b74da23175"
+    },
+    ".codex/agents/refactorer.toml": {
+      "mode": "file",
+      "hash": "8e84e4999265504c299478c1df81045b8c673ef6c146531337155939c3da08b7"
+    },
+    ".github/agents/refactorer.agent.md": {
+      "mode": "file",
+      "hash": "f06bd2788a13de168899fb6ef54b7c267c2b691550846166e782ce0849d6f9c8"
+    },
+    ".agents/guidelines/design-tokens.md": {
+      "mode": "file",
+      "hash": "db472a50a19c5a0cffff48b2ca4c17a5b82188e77a5b60d36c5bc35d8729ea6c"
+    }
+  }
+}

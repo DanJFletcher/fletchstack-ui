@@ -1,0 +1,412 @@
+{
+  "$description": "Internal raw values. DTCG 2025.10.",
+  "primitive": {
+    "white": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "alpha": 1
+      }
+    },
+    "ink": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.09019607843137255,
+          0.13725490196078433,
+          0.2196078431372549
+        ],
+        "alpha": 1
+      }
+    },
+    "blue": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1411764705882353,
+          0.29411764705882354,
+          0.6901960784313725
+        ],
+        "alpha": 1
+      }
+    },
+    "blueHover": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.10588235294117647,
+          0.23529411764705882,
+          0.5686274509803921
+        ],
+        "alpha": 1
+      }
+    },
+    "blueActive": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0784313725490196,
+          0.1803921568627451,
+          0.45098039215686275
+        ],
+        "alpha": 1
+      }
+    },
+    "blueTint": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9098039215686274,
+          0.9372549019607843,
+          1
+        ],
+        "alpha": 1
+      }
+    },
+    "bluePressed": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8235294117647058,
+          0.8705882352941177,
+          0.9725490196078431
+        ],
+        "alpha": 1
+      }
+    },
+    "line": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.3215686274509804,
+          0.39215686274509803,
+          0.49411764705882355
+        ],
+        "alpha": 1
+      }
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8941176470588236,
+          0.9098039215686274,
+          0.9372549019607843
+        ],
+        "alpha": 1
+      }
+    },
+    "muted": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2980392156862745,
+          0.34901960784313724,
+          0.42745098039215684
+        ],
+        "alpha": 1
+      }
+    },
+    "navy": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.06666666666666667,
+          0.07450980392156863,
+          0.1607843137254902
+        ],
+        "alpha": 1
+      }
+    },
+    "pale": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9568627450980393,
+          0.9372549019607843,
+          1
+        ],
+        "alpha": 1
+      }
+    },
+    "lavender": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7803921568627451,
+          0.7098039215686275,
+          1
+        ],
+        "alpha": 1
+      }
+    },
+    "lavenderHover": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8431372549019608,
+          0.792156862745098,
+          1
+        ],
+        "alpha": 1
+      }
+    },
+    "lavenderActive": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.6862745098039216,
+          0.5843137254901961,
+          0.9294117647058824
+        ],
+        "alpha": 1
+      }
+    },
+    "violet": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1607843137254902,
+          0.1411764705882353,
+          0.25882352941176473
+        ],
+        "alpha": 1
+      }
+    },
+    "violetHover": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.21568627450980393,
+          0.18823529411764706,
+          0.3137254901960784
+        ],
+        "alpha": 1
+      }
+    },
+    "violetPressed": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.27058823529411763,
+          0.2235294117647059,
+          0.37254901960784315
+        ],
+        "alpha": 1
+      }
+    },
+    "gold": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9490196078431372,
+          0.8352941176470589,
+          0.5450980392156862
+        ],
+        "alpha": 1
+      }
+    },
+    "nightMuted": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7215686274509804,
+          0.6941176470588235,
+          0.803921568627451
+        ],
+        "alpha": 1
+      }
+    },
+    "nightDisabled": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.18823529411764706,
+          0.18823529411764706,
+          0.2784313725490196
+        ],
+        "alpha": 1
+      }
+    },
+    "transparent": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "alpha": 0
+      }
+    },
+    "px0": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      }
+    },
+    "px1": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      }
+    },
+    "px3": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "px"
+      }
+    },
+    "px4": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
+    "px8": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "px10": {
+      "$type": "dimension",
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      }
+    },
+    "px12": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      }
+    },
+    "px16": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "px20": {
+      "$type": "dimension",
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      }
+    },
+    "px24": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      }
+    },
+    "px32": {
+      "$type": "dimension",
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      }
+    },
+    "px36": {
+      "$type": "dimension",
+      "$value": {
+        "value": 36,
+        "unit": "px"
+      }
+    },
+    "px44": {
+      "$type": "dimension",
+      "$value": {
+        "value": 44,
+        "unit": "px"
+      }
+    },
+    "px52": {
+      "$type": "dimension",
+      "$value": {
+        "value": 52,
+        "unit": "px"
+      }
+    },
+    "small": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.875,
+        "unit": "rem"
+      }
+    },
+    "medium": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      }
+    },
+    "large": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.125,
+        "unit": "rem"
+      }
+    },
+    "sans": {
+      "$type": "fontFamily",
+      "$value": [
+        "Arial",
+        "Helvetica",
+        "sans-serif"
+      ]
+    },
+    "serif": {
+      "$type": "fontFamily",
+      "$value": [
+        "Georgia",
+        "Times New Roman",
+        "serif"
+      ]
+    },
+    "semibold": {
+      "$type": "fontWeight",
+      "$value": 600
+    },
+    "lineHeight": {
+      "$type": "number",
+      "$value": 1.5
+    }
+  }
+}

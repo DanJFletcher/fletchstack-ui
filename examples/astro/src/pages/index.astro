@@ -1,0 +1,15 @@
+---
+import { Button } from 'fletchstack-ui';
+import 'fletchstack-ui/styles.css';
+import SaveAction from '../components/SaveAction';
+---
+<html lang="en" data-theme="luna">
+  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>Astro library verification</title></head>
+  <body style="background:var(--fs-surface);color:var(--fs-text);padding:var(--fs-space-inset)">
+    <main>
+      <h1>Account settings</h1>
+      <form action="/preferences" method="post"><Button type="submit" variant="secondary">Save without JavaScript</Button></form>
+      <section style="margin-top:var(--fs-space-stack)"><SaveAction client:load /></section>
+    </main>
+  </body>
+</html>

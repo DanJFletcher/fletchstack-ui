@@ -1,0 +1,121 @@
+.fs-button {
+  appearance: none;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--fs-button-gap);
+  max-inline-size: 100%;
+  margin: 0;
+  border: var(--fs-button-border-width) solid;
+  border-radius: var(--fs-button-radius);
+  font-family: var(--fs-button-font-family);
+  font-weight: var(--fs-button-font-weight);
+  line-height: var(--fs-button-font-line-height);
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+/* Preserve native hiding, including browser-managed hidden states. */
+.fs-button:not([hidden]) { display: inline-flex; }
+
+.fs-button > * { min-inline-size: 0; max-inline-size: 100%; }
+
+.fs-button:focus-visible {
+  outline: var(--fs-button-focus-width) solid var(--fs-button-focus-color);
+  outline-offset: var(--fs-button-focus-offset);
+}
+
+.fs-button--small {
+  font-size: var(--fs-button-size-small-font);
+  padding-block: var(--fs-button-size-small-block);
+  padding-inline: var(--fs-button-size-small-inline);
+  min-block-size: var(--fs-button-size-small-minimum);
+  min-inline-size: min(100%, var(--fs-button-size-small-minimum));
+}
+
+.fs-button--medium {
+  font-size: var(--fs-button-size-medium-font);
+  padding-block: var(--fs-button-size-medium-block);
+  padding-inline: var(--fs-button-size-medium-inline);
+  min-block-size: var(--fs-button-size-medium-minimum);
+  min-inline-size: min(100%, var(--fs-button-size-medium-minimum));
+}
+
+.fs-button--large {
+  font-size: var(--fs-button-size-large-font);
+  padding-block: var(--fs-button-size-large-block);
+  padding-inline: var(--fs-button-size-large-inline);
+  min-block-size: var(--fs-button-size-large-minimum);
+  min-inline-size: min(100%, var(--fs-button-size-large-minimum));
+}
+
+.fs-button--primary {
+  background-color: var(--fs-button-primary-default-background);
+  color: var(--fs-button-primary-default-text);
+  border-color: var(--fs-button-primary-default-border);
+}
+
+.fs-button--primary:hover:not(:disabled) {
+  background-color: var(--fs-button-primary-hover-background);
+  color: var(--fs-button-primary-hover-text);
+  border-color: var(--fs-button-primary-hover-border);
+}
+
+.fs-button--primary:active:not(:disabled) {
+  background-color: var(--fs-button-primary-active-background);
+  color: var(--fs-button-primary-active-text);
+  border-color: var(--fs-button-primary-active-border);
+}
+
+.fs-button--secondary {
+  background-color: var(--fs-button-secondary-default-background);
+  color: var(--fs-button-secondary-default-text);
+  border-color: var(--fs-button-secondary-default-border);
+}
+
+.fs-button--secondary:hover:not(:disabled) {
+  background-color: var(--fs-button-secondary-hover-background);
+  color: var(--fs-button-secondary-hover-text);
+  border-color: var(--fs-button-secondary-hover-border);
+}
+
+.fs-button--secondary:active:not(:disabled) {
+  background-color: var(--fs-button-secondary-active-background);
+  color: var(--fs-button-secondary-active-text);
+  border-color: var(--fs-button-secondary-active-border);
+}
+
+.fs-button--ghost {
+  background-color: var(--fs-button-ghost-default-background);
+  color: var(--fs-button-ghost-default-text);
+  border-color: var(--fs-button-ghost-default-border);
+}
+
+.fs-button--ghost:hover:not(:disabled) {
+  background-color: var(--fs-button-ghost-hover-background);
+  color: var(--fs-button-ghost-hover-text);
+  border-color: var(--fs-button-ghost-hover-border);
+}
+
+.fs-button--ghost:active:not(:disabled) {
+  background-color: var(--fs-button-ghost-active-background);
+  color: var(--fs-button-ghost-active-text);
+  border-color: var(--fs-button-ghost-active-border);
+}
+
+.fs-button:disabled {
+  background-color: var(--fs-button-disabled-background);
+  color: var(--fs-button-disabled-text);
+  border-color: var(--fs-button-disabled-border);
+  cursor: not-allowed;
+}
+
+@media (forced-colors: active) {
+  .fs-button { border-color: ButtonText; }
+  .fs-button:disabled { color: GrayText; border-color: GrayText; }
+  .fs-button:focus-visible { outline-color: Highlight; }
+}

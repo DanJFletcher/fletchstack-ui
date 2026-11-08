@@ -1,0 +1,344 @@
+{
+  "$description": "luna semantic contract. DTCG 2025.10.",
+  "semantic": {
+    "surface": {
+      "$type": "color",
+      "$value": "{primitive.navy}",
+      "$description": "Background of a themed region."
+    },
+    "text": {
+      "$type": "color",
+      "$value": "{primitive.pale}",
+      "$description": "Default text on the themed surface."
+    },
+    "font": {
+      "body": {
+        "$type": "fontFamily",
+        "$value": "{primitive.sans}",
+        "$description": "Body font stack."
+      },
+      "size": {
+        "$type": "dimension",
+        "$value": "{primitive.medium}",
+        "$description": "Default body size; follows user font preferences."
+      },
+      "lineHeight": {
+        "$type": "number",
+        "$value": "{primitive.lineHeight}",
+        "$description": "Body line height, unitless."
+      }
+    },
+    "space": {
+      "inline": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "inline spacing for consumer layouts."
+      },
+      "stack": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "stack spacing for consumer layouts."
+      },
+      "inset": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "inset spacing for consumer layouts."
+      }
+    },
+    "button": {
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.serif}",
+          "$description": "Control font stack."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Control label weight."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Control line height, unitless."
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Control corner radius."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Control border thickness."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Gap between label and decorative icon."
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.gold}",
+          "$description": "Keyboard focus ring on the themed surface."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Focus ring thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Space between control and focus ring."
+        }
+      },
+      "size": {
+        "small": {
+          "font": {
+            "$type": "dimension",
+            "$value": "{primitive.small}",
+            "$description": "small label font size."
+          },
+          "block": {
+            "$type": "dimension",
+            "$value": "{primitive.px8}",
+            "$description": "small vertical padding."
+          },
+          "inline": {
+            "$type": "dimension",
+            "$value": "{primitive.px12}",
+            "$description": "small horizontal padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px36}",
+            "$description": "small minimum target width and height."
+          }
+        },
+        "medium": {
+          "font": {
+            "$type": "dimension",
+            "$value": "{primitive.medium}",
+            "$description": "medium label font size."
+          },
+          "block": {
+            "$type": "dimension",
+            "$value": "{primitive.px10}",
+            "$description": "medium vertical padding."
+          },
+          "inline": {
+            "$type": "dimension",
+            "$value": "{primitive.px16}",
+            "$description": "medium horizontal padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px44}",
+            "$description": "medium minimum target width and height."
+          }
+        },
+        "large": {
+          "font": {
+            "$type": "dimension",
+            "$value": "{primitive.large}",
+            "$description": "large label font size."
+          },
+          "block": {
+            "$type": "dimension",
+            "$value": "{primitive.px12}",
+            "$description": "large vertical padding."
+          },
+          "inline": {
+            "$type": "dimension",
+            "$value": "{primitive.px20}",
+            "$description": "large horizontal padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px52}",
+            "$description": "large minimum target width and height."
+          }
+        }
+      },
+      "primary": {
+        "default": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.lavender}",
+            "$description": "primary default background."
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{primitive.navy}",
+            "$description": "primary default label color."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{primitive.lavender}",
+            "$description": "primary default border color."
+          }
+        },
+        "hover": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.lavenderHover}",
+            "$description": "primary hover background."
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{primitive.navy}",
+            "$description": "primary hover label color."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{primitive.lavenderHover}",
+            "$description": "primary hover border color."
+          }
+        },
+        "active": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.lavenderActive}",
+            "$description": "primary active background."
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{primitive.navy}",
+            "$description": "primary active label color."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{primitive.lavenderActive}",
+            "$description": "primary active border color."
+          }
+        }
+      },
+      "secondary": {
+        "default": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.violet}",
+            "$description": "secondary default background."
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{primitive.pale}",
+            "$description": "secondary default label color."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{primitive.lavender}",
+            "$description": "secondary default border color."
+          }
+        },
+        "hover": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.violetHover}",
+            "$description": "secondary hover background."
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{primitive.pale}",
+            "$description": "secondary hover label color."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{primitive.lavender}",
+            "$description": "secondary hover border color."
+          }
+        },
+        "active": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.violetPressed}",
+            "$description": "secondary active background."
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{primitive.pale}",
+            "$description": "secondary active label color."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{primitive.lavender}",
+            "$description": "secondary active border color."
+          }
+        }
+      },
+      "ghost": {
+        "default": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.transparent}",
+            "$description": "ghost default background."
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{primitive.lavender}",
+            "$description": "ghost default label color."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{primitive.transparent}",
+            "$description": "ghost default border color."
+          }
+        },
+        "hover": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.violetHover}",
+            "$description": "ghost hover background."
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{primitive.pale}",
+            "$description": "ghost hover label color."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{primitive.transparent}",
+            "$description": "ghost hover border color."
+          }
+        },
+        "active": {
+          "background": {
+            "$type": "color",
+            "$value": "{primitive.violetPressed}",
+            "$description": "ghost active background."
+          },
+          "text": {
+            "$type": "color",
+            "$value": "{primitive.pale}",
+            "$description": "ghost active label color."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{primitive.transparent}",
+            "$description": "ghost active border color."
+          }
+        }
+      },
+      "disabled": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.nightDisabled}",
+          "$description": "Disabled control background."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.nightMuted}",
+          "$description": "Disabled control text."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{primitive.nightMuted}",
+          "$description": "Disabled control border."
+        }
+      }
+    }
+  }
+}

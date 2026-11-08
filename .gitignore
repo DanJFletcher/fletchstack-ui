@@ -1,7 +1,9 @@
 node_modules/
 dist/
 storybook-static/
-coverage/
+/coverage/
 *.tgz
 .verification/
 .astro/
+playwright-report/
+test-results/

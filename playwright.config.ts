@@ -1,0 +1,22 @@
+import { defineConfig, devices } from '@playwright/test';
+
+const baseURL = 'http://127.0.0.1:6007';
+
+export default defineConfig({
+  testDir: './tests/e2e',
+  testMatch: '**/*.spec.ts',
+  forbidOnly: Boolean(process.env['CI']),
+  retries: 0,
+  reporter: [['list'], ['html', { open: 'never' }], ['./tests/e2e/coverage/reporter.mjs']],
+  use: {
+    baseURL,
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+  },
+  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  webServer: {
+    command: 'npm run tokens && npx --no-install storybook dev --host 127.0.0.1 --port 6007 --ci --no-open --disable-telemetry',
+    url: `${baseURL}/iframe.html`,
+    reuseExistingServer: !process.env['CI'],
+  },
+});

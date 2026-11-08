@@ -1,5 +1,17 @@
 # Verification evidence
 
+## Component and Storybook E2E coverage — 2026-11-08
+
+On macOS with Node 22.23.4, `npm run test:e2e` and a clean sequential `CI=true npm run test:e2e` each passed all 20 Chromium journeys. The independent browser report reached 100% statements, branches, functions, and lines for each scoped executable file. [Coverage configuration](../tests/e2e/coverage/report.mjs) includes component and authored Storybook JavaScript/TypeScript, inventories unvisited files, and excludes scripts and Node configuration. Documentation prose and CSS are verified through navigation and computed layout/style assertions rather than JavaScript counters. See the [test guide](../tests/README.md#independent-e2e-coverage-gate) for scope and reproduction.
+
+Failure sensitivity was exercised: a temporary, never-imported component module appeared at 0% and made the command exit 1 even though its selected test passed. The probe was removed. The documentation journey also failed on an actual broken Foundation → Tokens link; fixing both docs links to target the manager route made navigation through Tokens → Consumer Override pass. Storybook's successful play completion is required before preview interactions.
+
+Also passed: `npm run lint`, `npm run typecheck`, `npm run test:unit` (128 tests; independent 100% coverage), `npm run test:integration` (75 tests; independent 100% coverage), `npm run test:storybook` (16 tests with accessibility failures enabled), `npm run build`, and `npm run build-storybook`. An initial parallel verification run triggered Vite reloads while other checks wrote generated files; the final CI-mode E2E run passed after those processes finished, matching the workflow's sequential execution. Remote GitHub Actions was not run as part of this check.
+
+These additions do not establish Firefox/WebKit coverage, full Gatsby/Astro application coverage, CSS coverage, or assistive-technology certification. The earlier framework and manual accessibility gaps below remain applicable.
+
+## Initial library verification
+
 Run date: 2026-11-06. Environment: macOS arm64, temporary Node 22.23.4 runtime, npm 10.9.9, Chromium 158 via Playwright 1.65.0. The shell initially had no Node, and system Git could not run because Apple developer tools were unavailable. No Git commit was created.
 
 ## Commands and observed outcomes

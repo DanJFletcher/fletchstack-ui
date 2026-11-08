@@ -15,7 +15,9 @@
       "tdd",
       "typescript-refactor",
       "build-react-components",
-      "establish-design-system"
+      "establish-design-system",
+      "react-testing-library",
+      "playwright-e2e"
     ],
     "agents": [
       "research",
@@ -43,6 +45,10 @@
       "mode": "file",
       "hash": "947432ebac102006890aa116b0f15537d5d2c20622ad08fa06c3a42910bbdef6"
     },
+    ".agents/guidelines/design-tokens.md": {
+      "mode": "file",
+      "hash": "db472a50a19c5a0cffff48b2ca4c17a5b82188e77a5b60d36c5bc35d8729ea6c"
+    },
     ".agents/skills/tdd/SKILL.md": {
       "mode": "file",
       "hash": "1dd76ee9fe26f6b21d6340aee5e5cff58097acb4e8c7759c4cf3cb249e9d7cd7"
@@ -63,6 +69,10 @@
       "mode": "file",
       "hash": "9ffe2b0e4307484fc373c29ed3442ffab23596dfef79c7953b0c3252bd25c843"
     },
+    ".agents/skills/react-testing-library/SKILL.md": {
+      "mode": "file",
+      "hash": "ad75e33852e8489ad59b2ea5226b644eb0fe0b7f3a135b02f204669674b85f2e"
+    },
     ".codex/agents/research.toml": {
       "mode": "file",
       "hash": "c218a929313f616ccd64a12bf5626b47f0f475dd8ffcc259b9fb0fd64f039825"
@@ -79,9 +89,29 @@
       "mode": "file",
       "hash": "f06bd2788a13de168899fb6ef54b7c267c2b691550846166e782ce0849d6f9c8"
     },
-    ".agents/guidelines/design-tokens.md": {
+    ".agents/skills/playwright-e2e/SKILL.md": {
       "mode": "file",
-      "hash": "db472a50a19c5a0cffff48b2ca4c17a5b82188e77a5b60d36c5bc35d8729ea6c"
+      "hash": "89c0a2b46ae16416c3ac0c0220791dea6a68730aaafe8e28924ee2f9a497ca9a"
+    },
+    ".agents/skills/playwright-e2e/references/debugging-and-ci.md": {
+      "mode": "file",
+      "hash": "6f98d216f53bf32d8b9fe71ef1c6a539a00aa75b16ea9b1998fac737b3691132"
+    },
+    ".agents/skills/playwright-e2e/references/fixtures-auth-and-data.md": {
+      "mode": "file",
+      "hash": "c75dd882a57c1cc991328361994587a82a99b7e34a02a44d14a359e82138d969"
+    },
+    ".agents/skills/playwright-e2e/references/locators-and-async.md": {
+      "mode": "file",
+      "hash": "6c5cf4f8056209ecb9fff7f518eca0d169226d0aba1671a89e46176ae6599333"
+    },
+    ".agents/skills/playwright-e2e/references/specialized-checks.md": {
+      "mode": "file",
+      "hash": "2f09f348b1b6ee845c20773f75013a7fb5f0da5eeae51f8bc8465a2ad49ffa55"
+    },
+    ".agents/skills/playwright-e2e/references/test-design.md": {
+      "mode": "file",
+      "hash": "aaade13bffee101f6ed74464a7b658ab7237610ac5fd5660ae977a19fd95047d"
     }
   }
 }

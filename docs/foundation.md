@@ -30,7 +30,7 @@ Verify keyboard focus and activation, 200% text, 320px reflow, and WCAG text spa
 
 ## Theme boundaries and handoff
 
-`:root` defaults to Corporate. `[data-theme="corporate"]` and `[data-theme="luna"]` each redeclare the complete contract. Sibling and nested scopes therefore work in server-rendered HTML. Build-time alias resolution emits literal semantic values at each boundary; there are no inherited CSS aliases to bind to a parent theme. Scoped overrides inherit until a nested explicit theme resets them. New themes copy the same semantic contract and provide their own primitive references, then run the generator; no Button change is required.
+`:root:not([data-theme])` defaults to Corporate. Explicit document themes never compete with these defaults, regardless of filename ordering. `[data-theme="corporate"]` and `[data-theme="luna"]` each redeclare the complete contract. Sibling and nested scopes therefore work in server-rendered HTML. Build-time alias resolution emits literal semantic values at each boundary; there are no inherited CSS aliases to bind to a parent theme. Scoped overrides inherit until a nested explicit theme resets them. New themes copy the same semantic contract and provide their own primitive references, then run the generator; no Button change is required.
 
 No Figma import/export was exercised. The supported DTCG subset is color (sRGB), dimension (px/rem), fontFamily, fontWeight and number. Unsupported types fail explicitly. Raw sRGB components become CSS rgb(), dimensions retain units, font family arrays become quoted CSS lists, and numbers remain unitless. No typography pixel conversion is performed.
 

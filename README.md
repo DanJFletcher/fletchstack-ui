@@ -50,7 +50,7 @@ Button owns its padding and label/icon gap. Parents own external spacing and pla
 
 ## Themes and scoped customization
 
-Corporate is applied at `:root`. Set the stable attribute on a document or any containing element. A theme attribute sets tokens; use the surface/text roles to paint a region.
+Corporate is applied at `:root:not([data-theme])`. Set the stable attribute on a document or any containing element. An explicit document theme takes precedence regardless of theme filename ordering. A theme attribute sets tokens; use the surface/text roles to paint a region.
 
 ```html
 <html data-theme="corporate">
@@ -182,7 +182,7 @@ npm run storybook          # http://localhost:6006; Corporate/Luna toolbar
 npm run tokens             # validate sources; generate CSS and token reference
 npm run lint
 npm run typecheck
-npm test                   # unit tests + Chromium Storybook interactions and axe
+npm test                   # unit tests, browser regressions, Storybook interactions and axe
 npm run test:unit
 npm run test:storybook
 npm run build              # ESM, declarations, and explicit CSS exports

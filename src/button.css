@@ -1,7 +1,6 @@
 .fs-button {
   appearance: none;
   box-sizing: border-box;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -19,6 +18,9 @@
   overflow-wrap: anywhere;
   cursor: pointer;
 }
+
+/* Preserve native hiding, including browser-managed hidden states. */
+.fs-button:not([hidden]) { display: inline-flex; }
 
 .fs-button > * { min-inline-size: 0; max-inline-size: 100%; }
 

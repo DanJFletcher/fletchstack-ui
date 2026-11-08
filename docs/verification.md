@@ -51,7 +51,18 @@ Verified 3px solid focus outlines. At a 320 CSS pixel viewport, 200% root font s
 - **Gatsby not built:** a minimal Gatsby page is supplied; package ESM/CSS bundling and React 18/19 SSR were exercised independently. This does not constitute a full Gatsby integration test.
 - No manual VoiceOver/NVDA session, human keyboard session, Safari/Firefox run, browser zoom test, forced-colors OS session, or deployed-site test was performed. Browser keyboard automation and 200% text enlargement are recorded separately from these checks. Automated results are not a WCAG conformance certification.
 - No Figma/design-tool exchange was configured or tested. The JSON-to-CSS handoff is authoritative and tested.
-- The GitHub Actions workflow is supplied but has not run on GitHub.
+- GitHub Actions subsequently passed on both push and pull-request runs at commit `d3b28ff`.
+
+## PR review regressions (2026-11-08)
+
+Chromium reproduced both review findings before their fixes:
+
+- A native `hidden` Button was visibly rendered, and real Tab navigation focused it. Two separate regressions failed, then passed after limiting flex display to buttons without a `hidden` attribute.
+- A temporary `brand.json` copied from Luna sorted before Corporate. The generated stylesheet incorrectly painted the document's Button Corporate blue (`rgb(36, 75, 176)`) instead of lavender (`rgb(199, 181, 255)`). The browser regression passed after restricting Corporate defaults to `:root:not([data-theme])`.
+
+The isolated theme fixture runs the real generator without adding a third shipped theme. Additional browser cases confirm the unthemed root defaults to Corporate and explicit Corporate/Luna roots retain their colors. All six regressions run in the integration project through `npm test`, including CI; rerun them alone with `npm test -- --project integration`.
+
+On macOS with Node 24.22.2, lint, type checking, all 33 tests (11 unit, six integration, 16 Storybook), the library build, and the static Storybook build passed. Built-package browser checks again passed for both themes' state contrast, focus indicators, 320px reflow, 200% text enlargement, and text spacing. `npm run verify:package` passed for packed exports, declarations, CSS imports/bundling, and deterministic React 18/19 SSR. Storybook retains its preview bundle-size warnings. The framework and manual accessibility gaps above remain unchanged.
 
 ## Reproduce the optional Astro check
 

@@ -9,10 +9,10 @@ async function readTokens(file) {
 }
 
 /**
- * Render complete semantic declarations for a theme boundary.
+ * Render complete theme declarations, defaulting only roots without a theme.
  **/
 function renderScope(name, values) {
-  const selector = name === 'corporate' ? ':root, [data-theme="corporate"]' : `[data-theme="${name}"]`;
+  const selector = name === 'corporate' ? ':root:not([data-theme]), [data-theme="corporate"]' : `[data-theme="${name}"]`;
   return `${selector} {\n${Object.entries(values).map(([key, value]) => `  ${key}: ${value};`).join('\n')}\n}`;
 }
 

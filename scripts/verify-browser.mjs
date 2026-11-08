@@ -49,7 +49,7 @@ async function checkContrast(button, label, boundary = true) {
   const background = state.background === 'rgba(0, 0, 0, 0)' || state.background.endsWith(', 0)') ? state.surface : state.background;
   const ratio = contrast(state.text, background);
   assert.ok(ratio >= 4.5, `${label}: label contrast ${ratio.toFixed(2)} < 4.5`);
-  if (boundary) assert.ok(contrast(state.border, state.surface) >= 3, `${label}: boundary contrast < 3`);
+  if (boundary) { assert.ok(contrast(state.border, state.surface) >= 3, `${label}: boundary contrast < 3`); }
 
   return ratio;
 }

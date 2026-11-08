@@ -175,6 +175,8 @@ export default function SaveAction() {
 
 Storybook's **Design System → Foundation** and **Design System → Tokens** pages render the authoritative Markdown documents directly, keeping the in-app guidance and repository documentation in sync.
 
+See the [test guide](tests/README.md) for suite boundaries, file naming, shared fixtures, and commands for running a single test or feature. Tests are grouped by suite (`unit`, `integration`, or `e2e`), then by feature (`components`, `tokens`, `themes`, or `build`).
+
 ```sh
 npm ci
 npx playwright install chromium
@@ -183,8 +185,10 @@ npm run tokens             # validate sources; generate CSS and token reference
 npm run lint
 npm run typecheck
 npm test                   # unit tests, browser regressions, Storybook interactions and axe
-npm run test:unit
+npm run test:unit           # unit suite only; enforces 100% coverage per production file
+npm run test:integration    # integration suite only; independently enforces the same 100% gate
 npm run test:storybook
+npm run test:e2e            # Chromium component/Storybook journeys; independent 100% coverage gate
 npm run build              # ESM, declarations, and explicit CSS exports
 npm run build-storybook    # static site in storybook-static
 npm run verify:browser     # built CSS contrast, focus, reflow; screenshots in .verification
@@ -193,6 +197,22 @@ npm pack                   # installable tarball; prepack rebuilds everything
 ```
 
 Package verification installs dependencies into a temporary directory and deletes it afterward; it needs npm registry access. Chromium checks run headlessly. Storybook's `a11y.test: 'error'` is wired into its Vitest addon; accessibility violations fail tests. A temporary unnamed-button probe confirmed that behavior.
+
+Unit coverage uses V8 and requires **100% statements, branches, functions, and lines for every included file**. The target includes all TypeScript library source and the token compiler, token generator, and stylesheet packaging scripts. Unimported production files are included in the denominator. Unit tests mock filesystem boundaries and do not launch browsers, use the network, or write generated files.
+
+The re-export-only [public entry point](src/index.ts) has no executable coverage counters. V8 displays 0% for that empty row; all executable code and the aggregate totals reach 100%.
+
+Run `npm run test:unit` or `npm run test:integration` to enforce the thresholds independently. The [unit report](coverage/unit/index.html) and [integration report](coverage/integration/index.html) have separate HTML and JSON outputs. CI runs both coverage gates separately from Storybook, so one suite cannot inflate another's result. Both suites use the same production-code scope; verification harnesses (`scripts/verify-*.mjs`), stories, examples, configuration, declarations, and generated assets are excluded. The re-export-only entry point remains included despite having no executable counters.
+
+Integration tests exercise real JSON parsing, filesystem operations, token compilation, CSS generation, documentation output, and stylesheet packaging. Synthetic token projects use temporary directories that are removed after each test. A command-entry smoke test regenerates the repository's checked-in token CSS and reference and checks that they are unchanged. Token generation's callable operation accepts a project directory URL; the existing CLI still builds the repository's tokens.
+
+Chromium integration tests verify hidden and disabled behavior, theme selection, server rendering followed by React hydration, keyboard activation, form submission/reset, forwarded refs, accessible icon composition, semantic overrides, and visible focus in both themes. Coverage measures JavaScript/TypeScript execution in the Vitest process, including server rendering; the separately bundled browser fixture validates client behavior but does not contribute to those counters. CSS behavior is asserted in the browser, not measured by JavaScript coverage. Storybook interaction and accessibility tests remain necessary even with 100% unit and integration coverage.
+
+### TypeScript strictness
+
+[tsconfig.json](tsconfig.json) enables the complete `strict` family plus checked indexed access, exact optional properties, explicit index-signature access, override checks, exhaustive return paths, unused-code checks, and errors for unreachable code, unused labels, and switch fallthrough. Module checks require type-only imports where appropriate, isolated compilation, erasable TypeScript syntax, consistent filename casing, and resolvable side-effect imports. Emission is blocked on errors. These additional checks are separate from [`strict` in TypeScript](https://www.typescriptlang.org/tsconfig/#strict).
+
+`npm run typecheck` checks both the development project and [tsconfig.build.json](tsconfig.build.json). The library build additionally requires explicit public declaration types through `isolatedDeclarations` and fully checks dependency declarations (`skipLibCheck: false`). The development project retains `skipLibCheck: true` because Storybook 10.6.6's declarations currently fail `exactOptionalPropertyTypes` internally; our TypeScript source, stories, tests, and configuration still receive all strict checks. JavaScript utilities and tests remain ESLint/Vitest checked, outside the TypeScript project (`allowJs: false`). Packed-consumer checks separately verify React 18/19 declarations under NodeNext resolution.
 
 ## Planning with OpenSpec
 

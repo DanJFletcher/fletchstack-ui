@@ -1,5 +1,14 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": { "noEmit": false, "declaration": true, "emitDeclarationOnly": true, "outDir": "dist", "rootDir": "src" },
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "isolatedDeclarations": true,
+    "emitDeclarationOnly": true,
+    "skipLibCheck": false,
+    "types": ["react"],
+    "outDir": "dist",
+    "rootDir": "src"
+  },
   "include": ["src/**/*.ts", "src/**/*.tsx"]
 }

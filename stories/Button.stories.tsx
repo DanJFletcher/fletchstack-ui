@@ -6,7 +6,11 @@ import { Button } from '../src';
 const meta = {
   title: 'Components/Button', component: Button, tags: ['autodocs'],
   args: { children: 'Save changes', onClick: fn() },
-  argTypes: { variant: { control: 'select', options: ['primary', 'secondary', 'ghost'] }, size: { control: 'select', options: ['small', 'medium', 'large'] } },
+  argTypes: {
+    variant: { control: 'select', options: ['primary', 'secondary', 'ghost'] },
+    size: { control: 'select', options: ['small', 'medium', 'large'] },
+    className: { control: 'text' }, title: { control: 'text' }, hidden: { control: 'boolean' },
+  },
   parameters: { docs: { description: { component: 'Primary commits the main action. Secondary offers an alternative. Ghost is for low-emphasis actions. Use explicit type="submit" in forms. Parents own placement and sibling spacing; Button owns its label/icon gap and padding.' } } },
 } satisfies Meta<typeof Button>;
 export default meta;
@@ -25,9 +29,11 @@ export const VariantsAndSizes: Story = {
 export const KeyboardActivation: Story = {
   play: async ({ canvasElement, args }) => {
     const button = within(canvasElement).getByRole('button', { name: 'Save changes' });
+
     await userEvent.tab();
     await expect(button).toHaveFocus();
     await expect(button.matches(':focus-visible')).toBe(true);
+
     await userEvent.keyboard('{Enter}');
     await userEvent.keyboard(' ');
     await expect(args.onClick).toHaveBeenCalledTimes(2);
@@ -39,8 +45,10 @@ export const Disabled: Story = {
   render: args => <div className="actions"><Button {...args} /><Button variant="secondary" disabled>Cancel</Button><Button variant="ghost" disabled>Learn more</Button></div>,
   play: async ({ canvasElement, args }) => {
     const button = within(canvasElement).getByRole('button', { name: 'Save changes' });
+
     await userEvent.click(button);
     await userEvent.tab();
+
     await expect(button).toBeDisabled();
     await expect(button).not.toHaveFocus();
     await expect(args.onClick).not.toHaveBeenCalled();
@@ -63,10 +71,13 @@ export const NativeForm: Story = {
   render: () => <FormExample />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
     await userEvent.click(canvas.getByRole('button', { name: 'Ordinary action' }));
     await expect(canvas.getByRole('status')).toHaveTextContent('No submission');
+
     await userEvent.click(canvas.getByRole('button', { name: 'Submit changes' }));
     await expect(canvas.getByRole('status')).toHaveTextContent('Submitted');
+
     await userEvent.click(canvas.getByRole('button', { name: 'Reset changes' }));
     await expect(canvas.getByRole('status')).toHaveTextContent('Reset');
   },
@@ -102,6 +113,7 @@ export const NestedTheme: Story = {
   render: () => <section data-theme="luna" className="theme-panel stack"><h2>Luna outer region</h2><Button>Outer action</Button><section data-theme="corporate" className="theme-panel stack"><h2>Corporate inner region</h2><Button>Inner action</Button><div data-theme="luna" className="theme-panel"><Button>Nested Luna action</Button></div></section></section>,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
     await expect(getComputedStyle(canvas.getByRole('button', { name: 'Outer action' })).backgroundColor).toBe('rgb(199, 181, 255)');
     await expect(getComputedStyle(canvas.getByRole('button', { name: 'Inner action' })).backgroundColor).toBe('rgb(36, 75, 176)');
     await expect(getComputedStyle(canvas.getByRole('button', { name: 'Nested Luna action' })).backgroundColor).toBe('rgb(199, 181, 255)');
@@ -112,6 +124,7 @@ export const ConsumerOverride: Story = {
   render: () => <div data-theme="corporate" className="theme-panel stack"><h2>Your brand, same control</h2><div className="actions consumer-brand"><Button>Forest brand action</Button><Button style={{ '--fs-button-radius': '0px' }}>Local square override</Button></div><Button>Unmodified sibling</Button></div>,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
     await expect(getComputedStyle(canvas.getByRole('button', { name: 'Forest brand action' })).backgroundColor).toBe('rgb(20, 98, 61)');
     await expect(getComputedStyle(canvas.getByRole('button', { name: 'Local square override' })).borderRadius).toBe('0px');
     await expect(getComputedStyle(canvas.getByRole('button', { name: 'Unmodified sibling' })).backgroundColor).toBe('rgb(36, 75, 176)');
@@ -126,6 +139,7 @@ export const RefAccess: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
     await userEvent.click(canvas.getByRole('button', { name: 'Focus the next action' }));
     await expect(canvas.getByRole('button', { name: 'Target action' })).toHaveFocus();
   },

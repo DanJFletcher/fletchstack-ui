@@ -12,7 +12,7 @@ export function validateValue(type, value, path) {
     number: v => typeof v === 'number' && Number.isFinite(v),
   };
 
-  if (!validators[type]?.(value)) throw new Error(`Invalid ${type} value at ${path}`);
+  if (!validators[type]?.(value)) { throw new Error(`Invalid ${type} value at ${path}`); }
 }
 
 /**
@@ -26,9 +26,9 @@ function unitInterval(value) {
  * Convert a validated raw value into CSS without changing typography units.
  **/
 export function cssValue(type, value) {
-  if (type === 'dimension') return `${value.value}${value.unit}`;
-  if (type === 'color') return `rgb(${value.components.map(channel => Math.round(channel * 255)).join(' ')} / ${value.alpha ?? 1})`;
-  if (type === 'fontFamily') return value.map(name => genericFamilies.has(name) ? name : JSON.stringify(name)).join(', ');
+  if (type === 'dimension') { return `${value.value}${value.unit}`; }
+  if (type === 'color') { return `rgb(${value.components.map(channel => Math.round(channel * 255)).join(' ')} / ${value.alpha ?? 1})`; }
+  if (type === 'fontFamily') { return value.map(name => genericFamilies.has(name) ? name : JSON.stringify(name)).join(', '); }
 
   return String(value);
 }

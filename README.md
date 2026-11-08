@@ -194,4 +194,19 @@ npm pack                   # installable tarball; prepack rebuilds everything
 
 Package verification installs dependencies into a temporary directory and deletes it afterward; it needs npm registry access. Chromium checks run headlessly. Storybook's `a11y.test: 'error'` is wired into its Vitest addon; accessibility violations fail tests. A temporary unnamed-button probe confirmed that behavior.
 
+## Planning with OpenSpec
+
+OpenSpec is pinned as a development dependency and restored by `npm ci`. Run its CLI locally with `npx openspec`; no global installation is required. The [project configuration](openspec/config.yaml) uses the `spec-driven` schema. [Specs](openspec/specs) describe accepted behavior; [changes](openspec/changes) hold proposals, designs, spec deltas, and implementation tasks before archiving.
+
+Start a proposal with `$openspec-propose "your idea"` in Codex or `/opsx-propose "your idea"` in GitHub Copilot. Review the generated artifacts, then use `$openspec-apply-change` or `/opsx-apply` to implement the change. Restart the IDE to discover the generated skills and commands.
+
+```sh
+npx openspec list                              # active changes
+npx openspec list --specs                      # accepted specs
+npx openspec validate --all --strict --no-interactive
+npx openspec update                            # refresh generated tool integrations
+```
+
+The initial setup contains no proposals or accepted specs. For future work, consult the existing [foundation](docs/foundation.md) and repository guidelines when writing artifacts; implementation continues to use the existing test and verification commands above. See the [official OpenSpec setup documentation](https://openspec.dev/docs/setup) for the workflow and tool integrations.
+
 [Foundation](docs/foundation.md) · [Implementation plan](docs/implementation-plan.md) · [Verification results and gaps](docs/verification.md)

@@ -20,15 +20,28 @@ test('the token command reproduces the checked-in CSS and reference', async () =
 test('the stylesheet command publishes separate and combined CSS exports', async ({ root }) => {
   // arrange
   await mkdir(new URL('src/generated', root), { recursive: true });
+  await Promise.all(['textarea', 'field', 'form-group', 'checkbox', 'select', 'text-input', 'button', 'card', 'icon'].map(family => mkdir(new URL(`src/components/${family}`, root), { recursive: true })));
   await mkdir(new URL('dist', root));
   await writeFile(new URL('src/generated/tokens.css', root), ':root { --fs-text: black; }');
-  await copyFile(new URL('../../../src/button.css', import.meta.url), new URL('src/button.css', root));
-  await copyFile(new URL('../../../src/icon.css', import.meta.url), new URL('src/icon.css', root));
-  await copyFile(new URL('../../../src/card.css', import.meta.url), new URL('src/card.css', root));
+  await copyFile(new URL('../../../src/components/button/button.css', import.meta.url), new URL('src/components/button/button.css', root));
+  await copyFile(new URL('../../../src/components/icon/icon.css', import.meta.url), new URL('src/components/icon/icon.css', root));
+  await copyFile(new URL('../../../src/components/card/card.css', import.meta.url), new URL('src/components/card/card.css', root));
 
-  const icon = await readFile(new URL('src/icon.css', root), 'utf8');
-  const card = await readFile(new URL('src/card.css', root), 'utf8');
-  const button = await readFile(new URL('src/button.css', root), 'utf8');
+  await copyFile(new URL('../../../src/components/select/select.css', import.meta.url), new URL('src/components/select/select.css', root));
+  await copyFile(new URL('../../../src/components/text-input/text-input.css', import.meta.url), new URL('src/components/text-input/text-input.css', root));
+  await copyFile(new URL('../../../src/components/checkbox/checkbox.css', import.meta.url), new URL('src/components/checkbox/checkbox.css', root));
+  await copyFile(new URL('../../../src/components/form-group/form-group.css', import.meta.url), new URL('src/components/form-group/form-group.css', root));
+  await copyFile(new URL('../../../src/components/field/field.css', import.meta.url), new URL('src/components/field/field.css', root));
+  await copyFile(new URL('../../../src/components/textarea/textarea.css', import.meta.url), new URL('src/components/textarea/textarea.css', root));
+  const textarea = await readFile(new URL('src/components/textarea/textarea.css', root), 'utf8');
+  const field = await readFile(new URL('src/components/field/field.css', root), 'utf8');
+  const formGroup = await readFile(new URL('src/components/form-group/form-group.css', root), 'utf8');
+  const checkbox = await readFile(new URL('src/components/checkbox/checkbox.css', root), 'utf8');
+  const textInput = await readFile(new URL('src/components/text-input/text-input.css', root), 'utf8');
+  const select = await readFile(new URL('src/components/select/select.css', root), 'utf8');
+  const icon = await readFile(new URL('src/components/icon/icon.css', root), 'utf8');
+  const card = await readFile(new URL('src/components/card/card.css', root), 'utf8');
+  const button = await readFile(new URL('src/components/button/button.css', root), 'utf8');
   const previousDirectory = process.cwd();
 
   // act
@@ -40,6 +53,6 @@ test('the stylesheet command publishes separate and combined CSS exports', async
   }
 
   // assert
-  const result = await Promise.all(['tokens.css', 'button.css', 'icon.css', 'card.css', 'styles.css'].map(name => readFile(new URL(`dist/${name}`, root), 'utf8')));
-  expect(result).toEqual([':root { --fs-text: black; }', button, icon, card, `:root { --fs-text: black; }\n${button}\n${icon}\n${card}`]);
+  const result = await Promise.all(['tokens.css', 'field.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'textarea.css', 'styles.css'].map(name => readFile(new URL(`dist/${name}`, root), 'utf8')));
+  expect(result).toEqual([':root { --fs-text: black; }', field, button, icon, card, select, textInput, checkbox, formGroup, textarea, `:root { --fs-text: black; }\n${field}\n${button}\n${icon}\n${card}\n${select}\n${textInput}\n${checkbox}\n${formGroup}\n${textarea}`]);
 });

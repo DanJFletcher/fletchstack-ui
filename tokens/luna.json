@@ -675,6 +675,744 @@
           }
         }
       }
+    },
+    "select": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Select closed control and native option surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Select field and control foreground."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Select helper and placeholder text."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightControl}",
+        "$description": "Select default control boundary."
+      },
+      "hoverBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Select hovered enabled boundary."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorNight}",
+        "$description": "Select invalid boundary and error message."
+      },
+      "disabledSurface": {
+        "$type": "color",
+        "$value": "{primitive.nightDisabled}",
+        "$description": "Disabled select background."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled select foreground."
+      },
+      "disabledBorder": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled select boundary."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Select control corner radius."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Select boundary thickness."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Select label, control, and message separation."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Select horizontal inset."
+      },
+      "chevronClearance": {
+        "$type": "dimension",
+        "$value": "{primitive.px48}",
+        "$description": "Select end padding reserved for decorative chevron."
+      },
+      "chevronSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Select chevron dimensions."
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.gold}",
+          "$description": "Select keyboard focus indicator."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Select focus outline thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px2}",
+          "$description": "Select focus outline offset."
+        }
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Select label, control, and message family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Select body size."
+        },
+        "message": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Select supporting text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Select label emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Select text line height."
+        }
+      },
+      "size": {
+        "small": {
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px4}",
+            "$description": "small select vertical padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px36}",
+            "$description": "small select minimum control height."
+          }
+        },
+        "medium": {
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px8}",
+            "$description": "medium select vertical padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px44}",
+            "$description": "medium select minimum control height."
+          }
+        },
+        "large": {
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px12}",
+            "$description": "large select vertical padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px52}",
+            "$description": "large select minimum control height."
+          }
+        }
+      }
+    },
+    "textInput": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Text input control surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Text input field and control foreground."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Text input helper and placeholder text."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightControl}",
+        "$description": "Text input default control boundary."
+      },
+      "hoverBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Text input hovered enabled boundary."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorNight}",
+        "$description": "Text input invalid boundary and error message."
+      },
+      "disabledSurface": {
+        "$type": "color",
+        "$value": "{primitive.nightDisabled}",
+        "$description": "Disabled text input background."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled text input foreground."
+      },
+      "disabledBorder": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled text input boundary."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Text input control corner radius."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Text input boundary thickness."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Text input label, control, and message separation."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Text input horizontal padding."
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.gold}",
+          "$description": "Text input keyboard focus indicator."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Text input focus outline thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px2}",
+          "$description": "Text input focus outline offset."
+        }
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Text input label, control, and message family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Text input body size."
+        },
+        "message": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Text input supporting text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Text input label emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Text input text line height."
+        }
+      },
+      "size": {
+        "small": {
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px4}",
+            "$description": "small text input vertical padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px36}",
+            "$description": "small text input minimum control height."
+          }
+        },
+        "medium": {
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px8}",
+            "$description": "medium text input vertical padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px44}",
+            "$description": "medium text input minimum control height."
+          }
+        },
+        "large": {
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px12}",
+            "$description": "large text input vertical padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px52}",
+            "$description": "large text input minimum control height."
+          }
+        }
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Text input example placeholder foreground."
+      },
+      "adornmentText": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Text input non-editable prefix and suffix text."
+      },
+      "adornmentBorder": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightLine}",
+        "$description": "Text input decorative prefix and suffix separator."
+      },
+      "adornmentGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Text input separation around prefix and suffix content."
+      },
+      "preferredWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px140}",
+        "$description": "Preferred input width before grouped adornments wrap."
+      }
+    },
+    "checkbox": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Unchecked checkbox surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Checkbox visible label foreground."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Checkbox description foreground."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightControl}",
+        "$description": "Unchecked checkbox boundary."
+      },
+      "hoverBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Hovered checkbox boundary."
+      },
+      "selectedSurface": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Checked or mixed checkbox surface."
+      },
+      "selectedBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Checked or mixed checkbox boundary."
+      },
+      "selectedHoverSurface": {
+        "$type": "color",
+        "$value": "{primitive.lavenderHover}",
+        "$description": "Hovered checked or mixed surface."
+      },
+      "selectedHoverBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavenderHover}",
+        "$description": "Hovered checked or mixed boundary."
+      },
+      "mark": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Checkbox tick and mixed dash foreground."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorNight}",
+        "$description": "Invalid checkbox boundary and error message."
+      },
+      "disabledSurface": {
+        "$type": "color",
+        "$value": "{primitive.nightDisabled}",
+        "$description": "Disabled unchecked checkbox surface."
+      },
+      "disabledSelectedSurface": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled checked or mixed checkbox surface."
+      },
+      "disabledBorder": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled checkbox boundary."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled checkbox label and description."
+      },
+      "disabledMark": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Disabled checkbox tick and dash foreground."
+      },
+      "controlSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Checkbox control dimensions."
+      },
+      "markSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Checkbox mark dimensions."
+      },
+      "markStroke": {
+        "$type": "number",
+        "$value": "{primitive.iconStroke}",
+        "$description": "Checkbox mark stroke in SVG user units."
+      },
+      "hitArea": {
+        "$type": "dimension",
+        "$value": "{primitive.px44}",
+        "$description": "Minimum clickable checkbox label height and width."
+      },
+      "labelGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Separation between checkbox and label text."
+      },
+      "labelPadding": {
+        "$type": "dimension",
+        "$value": "{primitive.px10}",
+        "$description": "Vertical checkbox label padding."
+      },
+      "descriptionGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Separation between label and description."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Small checkbox control corner radius in both themes."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Checkbox boundary thickness."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Checkbox label and message font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Checkbox label text size."
+        },
+        "description": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Checkbox description and error text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Checkbox label emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Checkbox text line height."
+        }
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.gold}",
+          "$description": "Checkbox keyboard focus indicator."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Checkbox focus outline thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Checkbox focus clearance."
+        }
+      }
+    },
+    "formGroup": {
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Form group legend and default text."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Form group description and helper text."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorNight}",
+        "$description": "Form group validation message."
+      },
+      "legendGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Spacing after the shared legend and context."
+      },
+      "controlGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Spacing between related controls."
+      },
+      "messageGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Spacing before group helper and error messages."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Form group font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Form group legend text size."
+        },
+        "description": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Form group description and message text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Form group legend emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Form group text line height."
+        }
+      }
+    },
+    "field": {
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Field label and default text."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Field description and helper text."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorNight}",
+        "$description": "Field validation message."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Field font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Field label text size."
+        },
+        "description": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Field description and message text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Field label emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Field text line height."
+        }
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Spacing after the field label, control, and messages."
+      }
+    },
+    "textarea": {
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Textarea field and control foreground."
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Textarea control surface."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightControl}",
+        "$description": "Textarea default control boundary."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Textarea control corner radius."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Textarea boundary thickness."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Textarea horizontal padding."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Textarea label, control, and message separation."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Textarea label, control, and message family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Textarea body size."
+        },
+        "message": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Textarea supporting text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Textarea label emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Textarea text line height."
+        }
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Textarea helper and placeholder text."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorNight}",
+        "$description": "Textarea invalid boundary and error message."
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Textarea example placeholder foreground."
+      },
+      "hoverBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Textarea hovered enabled boundary."
+      },
+      "disabledSurface": {
+        "$type": "color",
+        "$value": "{primitive.nightDisabled}",
+        "$description": "Disabled textarea background."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled textarea foreground."
+      },
+      "disabledBorder": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled textarea boundary."
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.gold}",
+          "$description": "Textarea keyboard focus indicator."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Textarea focus outline thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px2}",
+          "$description": "Textarea focus outline offset."
+        }
+      },
+      "minimumHeight": {
+        "$type": "dimension",
+        "$value": "{primitive.px120}",
+        "$description": "Textarea minimum height before native rows or resizing."
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Textarea vertical content padding."
+      }
     }
   }
 }

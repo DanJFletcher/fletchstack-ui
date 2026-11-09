@@ -125,6 +125,144 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-card-title-font-size` | Card title font size. | dimension |
 | `--fs-card-title-font-weight` | Card title emphasis. | fontWeight |
 | `--fs-card-title-font-line-height` | Card title line height. | number |
+| `--fs-select-surface` | Select closed control and native option surface. | color |
+| `--fs-select-text` | Select field and control foreground. | color |
+| `--fs-select-muted` | Select helper and placeholder text. | color |
+| `--fs-select-border` | Select default control boundary. | color |
+| `--fs-select-hover-border` | Select hovered enabled boundary. | color |
+| `--fs-select-error` | Select invalid boundary and error message. | color |
+| `--fs-select-disabled-surface` | Disabled select background. | color |
+| `--fs-select-disabled-text` | Disabled select foreground. | color |
+| `--fs-select-disabled-border` | Disabled select boundary. | color |
+| `--fs-select-radius` | Select control corner radius. | dimension |
+| `--fs-select-border-width` | Select boundary thickness. | dimension |
+| `--fs-select-gap` | Select label, control, and message separation. | dimension |
+| `--fs-select-padding-inline` | Select horizontal inset. | dimension |
+| `--fs-select-chevron-clearance` | Select end padding reserved for decorative chevron. | dimension |
+| `--fs-select-chevron-size` | Select chevron dimensions. | dimension |
+| `--fs-select-focus-color` | Select keyboard focus indicator. | color |
+| `--fs-select-focus-width` | Select focus outline thickness. | dimension |
+| `--fs-select-focus-offset` | Select focus outline offset. | dimension |
+| `--fs-select-font-family` | Select label, control, and message family. | fontFamily |
+| `--fs-select-font-size` | Select body size. | dimension |
+| `--fs-select-font-message` | Select supporting text size. | dimension |
+| `--fs-select-font-weight` | Select label emphasis. | fontWeight |
+| `--fs-select-font-line-height` | Select text line height. | number |
+| `--fs-select-size-small-padding` | small select vertical padding. | dimension |
+| `--fs-select-size-small-minimum` | small select minimum control height. | dimension |
+| `--fs-select-size-medium-padding` | medium select vertical padding. | dimension |
+| `--fs-select-size-medium-minimum` | medium select minimum control height. | dimension |
+| `--fs-select-size-large-padding` | large select vertical padding. | dimension |
+| `--fs-select-size-large-minimum` | large select minimum control height. | dimension |
+| `--fs-text-input-surface` | Text input control surface. | color |
+| `--fs-text-input-text` | Text input field and control foreground. | color |
+| `--fs-text-input-muted` | Text input helper and placeholder text. | color |
+| `--fs-text-input-border` | Text input default control boundary. | color |
+| `--fs-text-input-hover-border` | Text input hovered enabled boundary. | color |
+| `--fs-text-input-error` | Text input invalid boundary and error message. | color |
+| `--fs-text-input-disabled-surface` | Disabled text input background. | color |
+| `--fs-text-input-disabled-text` | Disabled text input foreground. | color |
+| `--fs-text-input-disabled-border` | Disabled text input boundary. | color |
+| `--fs-text-input-radius` | Text input control corner radius. | dimension |
+| `--fs-text-input-border-width` | Text input boundary thickness. | dimension |
+| `--fs-text-input-gap` | Text input label, control, and message separation. | dimension |
+| `--fs-text-input-padding-inline` | Text input horizontal padding. | dimension |
+| `--fs-text-input-focus-color` | Text input keyboard focus indicator. | color |
+| `--fs-text-input-focus-width` | Text input focus outline thickness. | dimension |
+| `--fs-text-input-focus-offset` | Text input focus outline offset. | dimension |
+| `--fs-text-input-font-family` | Text input label, control, and message family. | fontFamily |
+| `--fs-text-input-font-size` | Text input body size. | dimension |
+| `--fs-text-input-font-message` | Text input supporting text size. | dimension |
+| `--fs-text-input-font-weight` | Text input label emphasis. | fontWeight |
+| `--fs-text-input-font-line-height` | Text input text line height. | number |
+| `--fs-text-input-size-small-padding` | small text input vertical padding. | dimension |
+| `--fs-text-input-size-small-minimum` | small text input minimum control height. | dimension |
+| `--fs-text-input-size-medium-padding` | medium text input vertical padding. | dimension |
+| `--fs-text-input-size-medium-minimum` | medium text input minimum control height. | dimension |
+| `--fs-text-input-size-large-padding` | large text input vertical padding. | dimension |
+| `--fs-text-input-size-large-minimum` | large text input minimum control height. | dimension |
+| `--fs-text-input-placeholder` | Text input example placeholder foreground. | color |
+| `--fs-text-input-adornment-text` | Text input non-editable prefix and suffix text. | color |
+| `--fs-text-input-adornment-border` | Text input decorative prefix and suffix separator. | color |
+| `--fs-text-input-adornment-gap` | Text input separation around prefix and suffix content. | dimension |
+| `--fs-text-input-preferred-width` | Preferred input width before grouped adornments wrap. | dimension |
+| `--fs-checkbox-surface` | Unchecked checkbox surface. | color |
+| `--fs-checkbox-text` | Checkbox visible label foreground. | color |
+| `--fs-checkbox-muted` | Checkbox description foreground. | color |
+| `--fs-checkbox-border` | Unchecked checkbox boundary. | color |
+| `--fs-checkbox-hover-border` | Hovered checkbox boundary. | color |
+| `--fs-checkbox-selected-surface` | Checked or mixed checkbox surface. | color |
+| `--fs-checkbox-selected-border` | Checked or mixed checkbox boundary. | color |
+| `--fs-checkbox-selected-hover-surface` | Hovered checked or mixed surface. | color |
+| `--fs-checkbox-selected-hover-border` | Hovered checked or mixed boundary. | color |
+| `--fs-checkbox-mark` | Checkbox tick and mixed dash foreground. | color |
+| `--fs-checkbox-error` | Invalid checkbox boundary and error message. | color |
+| `--fs-checkbox-disabled-surface` | Disabled unchecked checkbox surface. | color |
+| `--fs-checkbox-disabled-selected-surface` | Disabled checked or mixed checkbox surface. | color |
+| `--fs-checkbox-disabled-border` | Disabled checkbox boundary. | color |
+| `--fs-checkbox-disabled-text` | Disabled checkbox label and description. | color |
+| `--fs-checkbox-disabled-mark` | Disabled checkbox tick and dash foreground. | color |
+| `--fs-checkbox-control-size` | Checkbox control dimensions. | dimension |
+| `--fs-checkbox-mark-size` | Checkbox mark dimensions. | dimension |
+| `--fs-checkbox-mark-stroke` | Checkbox mark stroke in SVG user units. | number |
+| `--fs-checkbox-hit-area` | Minimum clickable checkbox label height and width. | dimension |
+| `--fs-checkbox-label-gap` | Separation between checkbox and label text. | dimension |
+| `--fs-checkbox-label-padding` | Vertical checkbox label padding. | dimension |
+| `--fs-checkbox-description-gap` | Separation between label and description. | dimension |
+| `--fs-checkbox-radius` | Small checkbox control corner radius in both themes. | dimension |
+| `--fs-checkbox-border-width` | Checkbox boundary thickness. | dimension |
+| `--fs-checkbox-font-family` | Checkbox label and message font family. | fontFamily |
+| `--fs-checkbox-font-size` | Checkbox label text size. | dimension |
+| `--fs-checkbox-font-description` | Checkbox description and error text size. | dimension |
+| `--fs-checkbox-font-weight` | Checkbox label emphasis. | fontWeight |
+| `--fs-checkbox-font-line-height` | Checkbox text line height. | number |
+| `--fs-checkbox-focus-color` | Checkbox keyboard focus indicator. | color |
+| `--fs-checkbox-focus-width` | Checkbox focus outline thickness. | dimension |
+| `--fs-checkbox-focus-offset` | Checkbox focus clearance. | dimension |
+| `--fs-form-group-text` | Form group legend and default text. | color |
+| `--fs-form-group-muted` | Form group description and helper text. | color |
+| `--fs-form-group-error` | Form group validation message. | color |
+| `--fs-form-group-legend-gap` | Spacing after the shared legend and context. | dimension |
+| `--fs-form-group-control-gap` | Spacing between related controls. | dimension |
+| `--fs-form-group-message-gap` | Spacing before group helper and error messages. | dimension |
+| `--fs-form-group-font-family` | Form group font family. | fontFamily |
+| `--fs-form-group-font-size` | Form group legend text size. | dimension |
+| `--fs-form-group-font-description` | Form group description and message text size. | dimension |
+| `--fs-form-group-font-weight` | Form group legend emphasis. | fontWeight |
+| `--fs-form-group-font-line-height` | Form group text line height. | number |
+| `--fs-field-text` | Field label and default text. | color |
+| `--fs-field-muted` | Field description and helper text. | color |
+| `--fs-field-error` | Field validation message. | color |
+| `--fs-field-font-family` | Field font family. | fontFamily |
+| `--fs-field-font-size` | Field label text size. | dimension |
+| `--fs-field-font-description` | Field description and message text size. | dimension |
+| `--fs-field-font-weight` | Field label emphasis. | fontWeight |
+| `--fs-field-font-line-height` | Field text line height. | number |
+| `--fs-field-gap` | Spacing after the field label, control, and messages. | dimension |
+| `--fs-textarea-text` | Textarea field and control foreground. | color |
+| `--fs-textarea-surface` | Textarea control surface. | color |
+| `--fs-textarea-border` | Textarea default control boundary. | color |
+| `--fs-textarea-radius` | Textarea control corner radius. | dimension |
+| `--fs-textarea-border-width` | Textarea boundary thickness. | dimension |
+| `--fs-textarea-padding-inline` | Textarea horizontal padding. | dimension |
+| `--fs-textarea-gap` | Textarea label, control, and message separation. | dimension |
+| `--fs-textarea-font-family` | Textarea label, control, and message family. | fontFamily |
+| `--fs-textarea-font-size` | Textarea body size. | dimension |
+| `--fs-textarea-font-message` | Textarea supporting text size. | dimension |
+| `--fs-textarea-font-weight` | Textarea label emphasis. | fontWeight |
+| `--fs-textarea-font-line-height` | Textarea text line height. | number |
+| `--fs-textarea-muted` | Textarea helper and placeholder text. | color |
+| `--fs-textarea-error` | Textarea invalid boundary and error message. | color |
+| `--fs-textarea-placeholder` | Textarea example placeholder foreground. | color |
+| `--fs-textarea-hover-border` | Textarea hovered enabled boundary. | color |
+| `--fs-textarea-disabled-surface` | Disabled textarea background. | color |
+| `--fs-textarea-disabled-text` | Disabled textarea foreground. | color |
+| `--fs-textarea-disabled-border` | Disabled textarea boundary. | color |
+| `--fs-textarea-focus-color` | Textarea keyboard focus indicator. | color |
+| `--fs-textarea-focus-width` | Textarea focus outline thickness. | dimension |
+| `--fs-textarea-focus-offset` | Textarea focus outline offset. | dimension |
+| `--fs-textarea-minimum-height` | Textarea minimum height before native rows or resizing. | dimension |
+| `--fs-textarea-padding-block` | Textarea vertical content padding. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

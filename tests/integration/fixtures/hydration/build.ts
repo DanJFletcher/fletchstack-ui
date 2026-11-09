@@ -7,7 +7,7 @@ import { build } from 'vite';
 /**
  * Bundle the real React hydration fixture without external services or repository outputs.
  **/
-export async function buildHydrationFixture(entry = new URL('./hydrate.tsx', import.meta.url)) {
+export async function buildHydrationFixture(entry = new URL('../../components/button/fixtures/hydrate.tsx', import.meta.url)) {
   const directory = await mkdtemp(join(tmpdir(), 'fletchstack-hydration-'));
   try {
     await build({ configFile: false, logLevel: 'silent', esbuild: { jsxDev: false }, define: { 'process.env.NODE_ENV': '"production"' }, build: {

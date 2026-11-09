@@ -26,6 +26,7 @@ function previewPath(story: string, options: StoryOptions) {
  **/
 export async function openStory(page: Page, story: string, options: StoryOptions = {}) {
   await page.goto(previewPath(story, options));
+  await expect(page.locator('main.showcase')).toBeVisible();
 
   await expect.poll(() => page.evaluate(() => {
     const previewWindow = window as Window & {

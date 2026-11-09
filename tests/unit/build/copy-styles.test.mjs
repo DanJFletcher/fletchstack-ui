@@ -7,15 +7,23 @@ beforeEach(() => {
   vi.resetModules();
   vi.resetAllMocks();
   files.copyFile.mockResolvedValue(undefined);
-  files.readFile.mockResolvedValueOnce(':root { --fs-text: black; }').mockResolvedValueOnce('.fs-button { color: var(--fs-text); }').mockResolvedValueOnce('.fs-icon { width: var(--fs-icon-size-medium); }').mockResolvedValueOnce('.fs-card { color: var(--fs-card-text); }');
+  files.readFile.mockResolvedValueOnce(':root { --fs-text: black; }').mockResolvedValueOnce('.fs-field { display: grid; }').mockResolvedValueOnce('.fs-button { color: var(--fs-text); }').mockResolvedValueOnce('.fs-icon { width: var(--fs-icon-size-medium); }').mockResolvedValueOnce('.fs-card { color: var(--fs-card-text); }').mockResolvedValueOnce('.fs-select { color: var(--fs-select-text); }').mockResolvedValueOnce('.fs-text-input { color: var(--fs-text-input-text); }').mockResolvedValueOnce('.fs-checkbox { color: var(--fs-checkbox-text); }');
+  files.readFile.mockResolvedValueOnce('.fs-form-group { display: block; }');
+  files.readFile.mockResolvedValueOnce('.fs-textarea { resize: vertical; }');
   files.writeFile.mockResolvedValue(undefined);
 });
 
 it.each([
   { source: 'src/generated/tokens.css', destination: 'dist/tokens.css' },
-  { source: 'src/button.css', destination: 'dist/button.css' },
-  { source: 'src/icon.css', destination: 'dist/icon.css' },
-  { source: 'src/card.css', destination: 'dist/card.css' },
+  { source: 'src/components/field/field.css', destination: 'dist/field.css' },
+  { source: 'src/components/button/button.css', destination: 'dist/button.css' },
+  { source: 'src/components/icon/icon.css', destination: 'dist/icon.css' },
+  { source: 'src/components/card/card.css', destination: 'dist/card.css' },
+  { source: 'src/components/select/select.css', destination: 'dist/select.css' },
+  { source: 'src/components/text-input/text-input.css', destination: 'dist/text-input.css' },
+  { source: 'src/components/textarea/textarea.css', destination: 'dist/textarea.css' },
+  { source: 'src/components/form-group/form-group.css', destination: 'dist/form-group.css' },
+  { source: 'src/components/checkbox/checkbox.css', destination: 'dist/checkbox.css' },
 ])('publishes $source at $destination', async ({ source, destination }) => {
   // act
   await import('../../../scripts/copy-styles.mjs');
@@ -26,7 +34,7 @@ it.each([
 
 it('combines tokens before component styles in the public stylesheet', async () => {
   // arrange
-  const expected = ':root { --fs-text: black; }\n.fs-button { color: var(--fs-text); }\n.fs-icon { width: var(--fs-icon-size-medium); }\n.fs-card { color: var(--fs-card-text); }';
+  const expected = ':root { --fs-text: black; }\n.fs-field { display: grid; }\n.fs-button { color: var(--fs-text); }\n.fs-icon { width: var(--fs-icon-size-medium); }\n.fs-card { color: var(--fs-card-text); }\n.fs-select { color: var(--fs-select-text); }\n.fs-text-input { color: var(--fs-text-input-text); }\n.fs-checkbox { color: var(--fs-checkbox-text); }\n.fs-form-group { display: block; }\n.fs-textarea { resize: vertical; }';
 
   // act
   await import('../../../scripts/copy-styles.mjs');

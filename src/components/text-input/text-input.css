@@ -1,0 +1,68 @@
+.fs-text-input-field {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  color: var(--fs-text-input-text);
+  font-family: var(--fs-text-input-font-family);
+  font-size: var(--fs-text-input-font-size);
+  line-height: var(--fs-text-input-font-line-height);
+  overflow-wrap: anywhere;
+}
+.fs-text-input-field:not([hidden]) { display: grid; gap: var(--fs-text-input-gap); }
+.fs-text-input-field__label { font-weight: var(--fs-text-input-font-weight); }
+.fs-text-input__control {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--fs-text-input-adornment-gap);
+  min-inline-size: 0;
+  border: var(--fs-text-input-border-width) solid var(--fs-text-input-border);
+  border-radius: var(--fs-text-input-radius);
+  background: var(--fs-text-input-surface);
+  padding-inline: var(--fs-text-input-padding-inline);
+}
+.fs-text-input {
+  appearance: none;
+  box-sizing: border-box;
+  flex: 1 1 var(--fs-text-input-preferred-width);
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  inline-size: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-family: var(--fs-text-input-font-family);
+  font-size: var(--fs-text-input-font-size);
+  line-height: var(--fs-text-input-font-line-height);
+  padding-inline: 0;
+}
+.fs-text-input:focus { outline: none; }
+.fs-text-input::placeholder { color: var(--fs-text-input-placeholder); opacity: 1; font-style: italic; }
+.fs-text-input__control:hover:not(:has(:disabled)) { border-color: var(--fs-text-input-hover-border); }
+.fs-text-input__control:has(.fs-text-input[aria-invalid="true"]:not(:disabled)), .fs-text-input__control:has(.fs-text-input[aria-invalid="grammar"]:not(:disabled)), .fs-text-input__control:has(.fs-text-input[aria-invalid="spelling"]:not(:disabled)) { border-color: var(--fs-text-input-error); }
+.fs-text-input__control:has(.fs-text-input:focus-visible) { outline: var(--fs-text-input-focus-width) solid var(--fs-text-input-focus-color); outline-offset: var(--fs-text-input-focus-offset); }
+.fs-text-input__control:has(.fs-text-input:disabled) { background: var(--fs-text-input-disabled-surface); border-color: var(--fs-text-input-disabled-border); color: var(--fs-text-input-disabled-text); cursor: not-allowed; }
+.fs-text-input:disabled { color: var(--fs-text-input-disabled-text); cursor: not-allowed; opacity: 1; }
+.fs-text-input:disabled::placeholder { color: var(--fs-text-input-disabled-text); }
+.fs-text-input__adornment { box-sizing: border-box; min-inline-size: 0; max-inline-size: 100%; color: var(--fs-text-input-adornment-text); }
+.fs-text-input__adornment--prefix { border-inline-end: var(--fs-text-input-border-width) solid var(--fs-text-input-adornment-border); padding-inline-end: var(--fs-text-input-adornment-gap); }
+.fs-text-input__adornment--suffix { border-inline-start: var(--fs-text-input-border-width) solid var(--fs-text-input-adornment-border); padding-inline-start: var(--fs-text-input-adornment-gap); }
+.fs-text-input__control:has(:disabled) .fs-text-input__adornment { color: var(--fs-text-input-disabled-text); }
+.fs-text-input-field--small .fs-text-input__control { min-block-size: var(--fs-text-input-size-small-minimum); }
+.fs-text-input-field--medium .fs-text-input__control { min-block-size: var(--fs-text-input-size-medium-minimum); }
+.fs-text-input-field--large .fs-text-input__control { min-block-size: var(--fs-text-input-size-large-minimum); }
+.fs-text-input-field--small .fs-text-input { padding-block: var(--fs-text-input-size-small-padding); }
+.fs-text-input-field--medium .fs-text-input { padding-block: var(--fs-text-input-size-medium-padding); }
+.fs-text-input-field--large .fs-text-input { padding-block: var(--fs-text-input-size-large-padding); }
+.fs-text-input-field .fs-text-input-field__helper, .fs-text-input-field .fs-text-input-field__error { margin: 0; max-inline-size: none; font-size: var(--fs-text-input-font-message); }
+.fs-text-input-field__helper { color: var(--fs-text-input-muted); }
+.fs-text-input-field__error { color: var(--fs-text-input-error); }
+@media (forced-colors: active) {
+  .fs-text-input__control { background: Field; color: FieldText; border-color: ButtonText; }
+  .fs-text-input__control:has(.fs-text-input:focus-visible) { outline-color: Highlight; }
+  .fs-text-input__control:has(.fs-text-input:disabled), .fs-text-input:disabled { color: GrayText; border-color: GrayText; }
+  .fs-text-input-field__error { color: CanvasText; }
+}

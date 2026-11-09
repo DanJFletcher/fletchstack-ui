@@ -1,10 +1,10 @@
 # Test guide
 
-Tests are organized by suite, then feature. Start with the feature's directory and choose the boundary you need to verify.
+Focused unit tests live with their component family. Integration and E2E remain central by suite and family. Start with the [component organization guide](../docs/component-organization.md) and choose the boundary you need to verify.
 
 | Location | Responsibility | Environment |
 | --- | --- | --- |
-| [unit/components/](unit/components/) | Component DOM contracts and focused server-rendered markup | Per-file jsdom or Node and React SSR |
+| [component families](../src/components/) | Component DOM contracts and focused server-rendered markup | Per-file jsdom or Node and React SSR |
 | [unit/tokens/](unit/tokens/) | Token compilation, validation, naming, and value conversion | Node; synthetic in-memory inputs |
 | [unit/build/](unit/build/) | Build orchestration and errors at filesystem boundaries | Node; filesystem mocked |
 | [integration/components/](integration/components/) | Hydration, forms, keyboard behavior, refs, and native visibility | Chromium and real React |
@@ -13,7 +13,7 @@ Tests are organized by suite, then feature. Start with the feature's directory a
 | [integration/build/](integration/build/) | Command entry points and stylesheet publication | Node; real filesystem |
 | [e2e/components/](e2e/components/) | Served component behavior through HTTP and a browser | Playwright Test and Chromium against local Storybook |
 | [e2e/storybook/](e2e/storybook/) | Documentation navigation and theme toolbar | Real Storybook manager and preview iframe |
-| [../stories/](../stories/) | Component examples, interactions, and automated accessibility checks | Storybook in Chromium |
+| [component stories](../src/components/) and [foundations/patterns](../stories/) | Component examples, interactions, and automated accessibility checks | Storybook in Chromium |
 
 ## Naming and discovery
 
@@ -21,26 +21,26 @@ Tests are organized by suite, then feature. Start with the feature's directory a
 - Add a behavior suffix when a component has distinct boundaries: `Button.hidden.test.ts`, `Button.hydration.test.ts`.
 - Group related function scenarios with `describe` blocks. The [compiler tests](unit/tokens/token-compiler.test.mjs) contain compilation, flattening, and CSS naming together.
 - Use `.tsx` for React test files, `.ts` for other TypeScript tests, and `.mjs` for JavaScript module tests.
-- The unit project discovers only `unit/**/*.test.{ts,tsx,mjs}`; integration discovers only `integration/**/*.test.{ts,tsx,mjs}`. Helpers and sample applications do not use a `.test` suffix.
+- The unit project discovers `tests/unit/**/*.test.{ts,tsx,mjs}` and `src/components/**/__tests__/**/*.test.{ts,tsx,mjs}`; integration discovers only `integration/**/*.test.{ts,tsx,mjs}`. Helpers and sample applications do not use a `.test` suffix.
 - Playwright Test discovers only `e2e/**/*.spec.ts`. E2E tests import `test` and `expect` from [fixtures/test.ts](e2e/fixtures/test.ts), which automatically collects browser coverage. Vitest unit/integration tests keep their existing imports and discovery patterns.
 - Add new tests within the appropriate feature directory. Add a new directory only when the tests represent a distinct feature or responsibility.
 
 ## DOM test setup
 
-DOM component tests use React Testing Library and jsdom. The unit project defaults to Node; opt a DOM test file in with its environment directive and explicit setup import. For a file inside `unit/components/`, begin with:
+DOM component tests use React Testing Library and jsdom. The unit project defaults to Node; opt a DOM test file in with its environment directive and explicit setup import. For a file inside `src/components/<family>/__tests__/`, begin with:
 
 ```tsx
 // @vitest-environment jsdom
-import '../setup/dom';
+import '../../../../tests/support/dom';
 import { render, screen } from '@testing-library/react';
 ```
 
-[setup/dom.ts](unit/setup/dom.ts) registers `@testing-library/jest-dom/vitest` matchers, calls React Testing Library cleanup after each test, and sets/restores only React's act-environment flag. Vitest hooks are imported rather than global, so setup owns this lifecycle explicitly. Do not import this module in Node SSR, token/build, integration, or Storybook tests. A React test does not need separate DOM Testing Library query imports; React Testing Library already exposes them.
+[support/dom.ts](support/dom.ts) registers `@testing-library/jest-dom/vitest` matchers, calls React Testing Library cleanup after each test, and sets/restores only React's act-environment flag. Vitest hooks are imported rather than global, so setup owns this lifecycle explicitly. Do not import this module in Node SSR, token/build, integration, or Storybook tests. A React test does not need separate DOM Testing Library query imports; React Testing Library already exposes them.
 
 Run the DOM file independently with:
 
 ```sh
-npx --no-install vitest run --project unit tests/unit/components/Button.test.tsx
+npx --no-install vitest run --project unit src/components/button/__tests__/Button.test.tsx
 ```
 
 SSR tests retain the Node environment and direct `react-dom/server` rendering. DOM tests run without Chromium; browser integration and Storybook checks still require it.
@@ -53,14 +53,14 @@ For interaction tests, create `const user = userEvent.setup()` before rendering,
 
 | Contract or risk | Primary test location | Assertion boundary |
 | --- | --- | --- |
-| Label and icon-only names; decorative composition | [Button.test.tsx](unit/components/Button.test.tsx) | Role/name queries and accessible names |
-| Default/explicit types, disabled/hidden attributes, external form association | [Button.test.tsx](unit/components/Button.test.tsx) | Native DOM attributes, state, and form ownership |
-| Variant and size selection | [Button.test.tsx](unit/components/Button.test.tsx) | Exact class membership for deliberate CSS styling hooks, independent of ordering |
-| Consumer classes, conventional styles, semantic custom properties | [Button.test.tsx](unit/components/Button.test.tsx) | Forwarded class membership and inline property values, not computed appearance |
-| Handler forwarding, disabled activation, public ref focus, prop updates | [Button.test.tsx](unit/components/Button.test.tsx) | Awaited interactions, callback outcomes, focus, and `rerender` |
-| Native markup, repeatable initial HTML, types/state/ARIA/customization before hydration | [Button.ssr.test.tsx](unit/components/Button.ssr.test.tsx) | Real server rendering with no browser globals |
-| Hydration, native forms, keyboard activation, disabled tab order, focus styling | [Button.hydration.test.ts](integration/components/Button.hydration.test.ts) | Real React and Chromium after server rendering |
-| CSS preserving native hidden behavior and tab order | [Button.hidden.test.ts](integration/components/Button.hidden.test.ts) | Actual browser visibility and navigation |
+| Label and icon-only names; decorative composition | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Role/name queries and accessible names |
+| Default/explicit types, disabled/hidden attributes, external form association | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Native DOM attributes, state, and form ownership |
+| Variant and size selection | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Exact class membership for deliberate CSS styling hooks, independent of ordering |
+| Consumer classes, conventional styles, semantic custom properties | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Forwarded class membership and inline property values, not computed appearance |
+| Handler forwarding, disabled activation, public ref focus, prop updates | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Awaited interactions, callback outcomes, focus, and `rerender` |
+| Native markup, repeatable initial HTML, types/state/ARIA/customization before hydration | [Button.ssr.test.tsx](../src/components/button/__tests__/Button.ssr.test.tsx) | Real server rendering with no browser globals |
+| Hydration, native forms, keyboard activation, disabled tab order, focus styling | [Button.hydration.test.ts](integration/components/button/Button.hydration.test.ts) | Real React and Chromium after server rendering |
+| CSS preserving native hidden behavior and tab order | [Button.hidden.test.ts](integration/components/button/Button.hidden.test.ts) | Actual browser visibility and navigation |
 | Theme selection, CSS cascade, visual states, reflow, accessibility | [Theme integration](integration/themes/), [stories](../stories/), and [browser verification](../scripts/verify-browser.mjs) | Generated styles, real browser behavior, and existing accessibility checks |
 
 Class checks deliberately verify the CSS hooks that select variant/size styling; they do not prove colors or layout. Similarly, inspecting a custom property's inline value proves forwarding, not theme resolution. The hidden-attribute DOM test explicitly includes hidden elements because such an element has no accessible name; browser tests prove that it is actually hidden and skipped by Tab.
@@ -73,7 +73,7 @@ Keep one-off setup near its test. Share setup when several tests need the same l
 
 - [browser.ts](integration/fixtures/browser.ts) owns a Chromium browser per test file, a fresh isolated page per test, page-error collection, and cleanup. Import its `test` and use `test.beforeEach` for scenario-specific page setup.
 - [token-project.mjs](integration/fixtures/token-project.mjs) supplies temporary project directories, synthetic token documents, and cleanup. It is used only by integration tests; unit tests keep their filesystem doubles local.
-- [hydration/](integration/fixtures/hydration/) holds the real React sample app, browser entry point, and temporary Vite bundler used by the hydration tests.
+- [hydration/build.ts](integration/fixtures/hydration/build.ts) owns shared temporary Vite bundling. Real React apps and browser entries live beside each [integration family](integration/components/) under `fixtures/`.
 
 Do not import one test file from another or share assertion logic across suites. Unit and integration suites should independently verify their respective boundaries. Follow the [testing guidelines](../.agents/guidelines/testing-guidelines.md) for readable scenarios and precise assertions.
 
@@ -93,9 +93,9 @@ Run a single file or feature without enforcing whole-suite coverage:
 
 ```sh
 npx --no-install vitest run --project unit tests/unit/tokens/token-compiler.test.mjs
-npx --no-install vitest run --project unit tests/unit/components/Button.test.tsx
-npx --no-install vitest run --project unit tests/unit/components/Button.ssr.test.tsx
-npx --no-install vitest run --project integration tests/integration/components/Button.hydration.test.ts
+npx --no-install vitest run --project unit src/components/button/__tests__/Button.test.tsx
+npx --no-install vitest run --project unit src/components/button/__tests__/Button.ssr.test.tsx
+npx --no-install vitest run --project integration tests/integration/components/button/Button.hydration.test.ts
 npx --no-install vitest run --project unit tests/unit/tokens
 npx --no-install vitest run --project integration tests/integration/components -t 'disabled'
 ```
@@ -106,7 +106,7 @@ For Vitest watch mode, omit `run`. Install the browser once with `npx --no-insta
 
 [playwright.config.ts](../playwright.config.ts) configures the dedicated Playwright Test runner. `npm run test:e2e` generates tokens, starts Storybook at `http://127.0.0.1:6007`, waits for the preview server, runs Chromium tests over HTTP, and stops the server it started. It can reuse a manually started server at that address locally; CI always starts its own. The usual development Storybook port remains 6006.
 
-The [Button journeys](e2e/components/Button.spec.ts) exercise every variant and size, keyboard activation and focus, disabled and hidden controls, native forms, ref access, icon composition, native attributes, consumer classes, and enlarged/spaced long labels at 320px. [Theme journeys](e2e/components/themes.spec.ts) verify sibling and nested scopes plus consumer overrides. [Storybook journeys](e2e/storybook/documentation.spec.ts) navigate Foundation → Tokens → the override example and switch themes through the actual toolbar. The [preview adapter](e2e/fixtures/storybook.ts) waits for Storybook's successful `storyFinished` event so play-function failures cannot silently pass or race subsequent interactions.
+The [Button journeys](e2e/components/button/Button.spec.ts) exercise every variant and size, keyboard activation and focus, disabled and hidden controls, native forms, ref access, icon composition, native attributes, consumer classes, and enlarged/spaced long labels at 320px. [Theme journeys](e2e/themes/themes.spec.ts) verify sibling and nested scopes plus consumer overrides. [Storybook journeys](e2e/storybook/documentation.spec.ts) navigate Foundation → Tokens → the override example and switch themes through the actual toolbar. The [preview adapter](e2e/fixtures/storybook.ts) waits for Storybook's successful `storyFinished` event so play-function failures cannot silently pass or race subsequent interactions.
 
 Keep theme-specific story IDs in the Button test's scenario table and group cases with `test.describe`. Use named preview options, such as `openStory(page, 'components-button--interaction-states', { theme: 'luna' })` or `openStory(page, 'components-button--playground', { args: { hidden: true } })`, instead of hand-built query strings. Pass a complete Storybook story ID so the same adapter supports Button and Icon. Reuse locators locally; keep actions and assertions visible in each scenario. Give longer journeys descriptive `test.step` blocks so the report identifies the stage that failed.
 
@@ -115,7 +115,7 @@ This suite exercises the real Storybook browser bundle; it is not a full Gatsby 
 ```sh
 npx --no-install playwright install chromium
 npm run test:e2e
-npm run test:e2e -- tests/e2e/components/Button.spec.ts
+npm run test:e2e -- tests/e2e/components/button/Button.spec.ts
 npm run test:e2e -- --headed
 npm run test:e2e:ui
 npm run test:e2e:report
@@ -134,7 +134,7 @@ The normal `npm run test:e2e` command enforces this gate locally and in CI. A fi
 Exercise DOM-test cleanup with a reproducible shuffled order:
 
 ```sh
-npx --no-install vitest run --project unit tests/unit/components/Button.test.tsx --sequence.shuffle --sequence.seed=42
+npx --no-install vitest run --project unit src/components/button/__tests__/Button.test.tsx --sequence.shuffle --sequence.seed=42
 ```
 
 ## Coverage and isolation
@@ -145,8 +145,8 @@ Coverage includes library source and token/build scripts. It excludes verificati
 
 Temporary projects and bundles are removed after use. The command-entry smoke test intentionally regenerates the checked-in token CSS and documentation and verifies they are unchanged. Browser layout and focus checks stay in integration tests; Storybook retains its accessibility checks.
 
-Icon contracts are covered by [DOM tests](unit/components/Icon.test.tsx), [SSR tests](unit/components/Icon.ssr.test.tsx), [named artwork tests](unit/components/named-icons.test.tsx), [hydration integration](integration/components/Icon.hydration.test.ts), and [served Storybook journeys](e2e/components/Icon.spec.ts). The packed-consumer checks also verify single-icon and Button-only bundles omit unused artwork.
+Icon contracts are covered by [DOM tests](../src/components/icon/__tests__/Icon.test.tsx), [SSR tests](../src/components/icon/__tests__/Icon.ssr.test.tsx), [named artwork tests](../src/components/icon/__tests__/named-icons.test.tsx), [hydration integration](integration/components/icon/Icon.hydration.test.ts), and [served Storybook journeys](e2e/components/icon/Icon.spec.ts). The packed-consumer checks also verify single-icon and Button-only bundles omit unused artwork.
 
-The searchable Gallery uses shared [story-only metadata](../stories/icon-catalog.ts). [Catalog integrity tests](unit/storybook/icon-catalog.test.ts) check public named-export membership, order and synonyms. [Gallery DOM tests](unit/storybook/icon-gallery.test.tsx) exercise literal matching, feedback, empty-state recovery and keyboard focus. [Browser journeys](e2e/storybook/icon-gallery.spec.ts) cover the real preview, theme toolbar, styled controls, preview sizes, local theme selection, and narrow/enlarged text. These helper modules remain in the existing complete-inventory E2E coverage gate; unit/integration production coverage scopes remain unchanged. Storybook's play journey restores all eight results before the accessibility scan.
+The searchable Gallery uses shared [story-only metadata](../src/components/icon/stories/icon-catalog.ts). [Catalog integrity tests](../src/components/icon/stories/__tests__/icon-catalog.test.ts) check public named-export membership, order and synonyms. [Gallery DOM tests](../src/components/icon/stories/__tests__/icon-gallery.test.tsx) exercise literal matching, feedback, empty-state recovery and keyboard focus. [Browser journeys](e2e/components/icon/icon-gallery.spec.ts) cover the real preview, theme toolbar, styled controls, preview sizes, local theme selection, and narrow/enlarged text. These helper modules remain in the existing complete-inventory E2E coverage gate; unit/integration production coverage scopes remain unchanged. Storybook's play journey restores all eight results before the accessibility scan.
 
 Spatial-system coverage lives in [unit token contracts](unit/tokens/spatial-contract.test.mjs), [real-generation integration](integration/tokens/spatial-contract.test.mjs), and [Storybook browser journeys](e2e/storybook/spatial-system.spec.ts). The [frozen legacy contract](fixtures/spatial-legacy-tokens.json) records the 90 pre-change public defaults per theme; additions are allowed, while unintended changes fail. Browser tests check corrected gallery coupling, semantic gap selection, nested resets, guide links, and the example-specific responsive breakpoint. Native select typeahead supplies a real keyboard journey; popup arrow navigation must also be checked on supported real browsers/platforms. Production coverage scopes and thresholds are unchanged.

@@ -1,6 +1,6 @@
 # Fletchstack UI
 
-A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. Public components include `Button`, composable `Card` parts, `Icon`, and eight opt-in named icons.
+A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. Public components include `Button`, `Field` and its label/message atoms, `FormGroup`, `Checkbox`, `Select`, `TextInput`, `Textarea`, composable `Card` parts, `Icon`, and eight opt-in named icons.
 
 ## Install and import
 
@@ -23,6 +23,36 @@ import 'fletchstack-ui/styles.css';
 ```
 
 Import the combined stylesheet once in your app entry or layout. Alternatively import `fletchstack-ui/tokens.css` followed by `fletchstack-ui/button.css`. JavaScript deliberately does not import CSS, so Node server rendering needs no CSS loader. CSS exports are marked as side effects for bundlers. No provider, browser storage, theme effect, external font, or browser global is required by the library.
+
+## Field primitives
+
+`FieldLabel`, `FieldDescription`, and `FieldError` expose the shared form text patterns. `Field` composes a label and helper/error messages around a consumer-owned native control through a render prop. Existing TextInput and Select compose Field; Checkbox and FormGroup share the atoms and internal accessibility wiring. Existing props and separate stylesheet imports remain supported. For custom controls, import tokens.css and field.css, or the combined stylesheet. See the [Field usage and contract](docs/field.md) and **Components / Field** in Storybook.
+
+## FormGroup contract
+
+`FormGroup` uses a native fieldset and visible legend for related controls. It supports shared description, helper/error messages, native disabled behavior, vertical or wrapping horizontal layouts, refs, and semantic token overrides. Use its children render prop to pass shared accessibility relationships to each control. See the [FormGroup contract](docs/form-group.md) and **Components / FormGroup** in Storybook. Separate-style consumers import tokens.css, form-group.css, and the styles for their controls.
+
+## Checkbox contract
+
+`Checkbox` wraps a native independent choice with a required visible `label`, optional `description`/`error`, native checked/defaultChecked and form behavior, disabled state, and a forwarded input ref. `indeterminate` synchronizes the native mixed property on client mount and prop changes. Group related choices with fieldset/legend and derive Select all state in the parent.
+
+Corporate/Luna themes expose independent `--fs-checkbox-*` tokens. Defaults match the reference: 20px control, 44px minimum clickable label, and 8px label gap. The combined stylesheet includes Checkbox; separate-style consumers import tokens.css, icon.css, and checkbox.css. See the [Checkbox contract](docs/checkbox.md) and **Components / Checkbox** in Storybook.
+
+## Textarea contract
+
+`Textarea` composes Field around a native multiline textarea. It supports controlled/uncontrolled string values, linked helper/errors, vertical resizing, read-only selection, disabled editing, native form attributes, refs, and optional `showCount` length guidance. Default minimum height is 120px with 16px text and 12px padding. The counter follows native UTF-16/maxLength semantics and form resets. See the [Textarea contract](docs/textarea.md) and **Components / Textarea** in Storybook. Separate-style consumers import tokens.css and textarea.css.
+
+## TextInput contract
+
+`TextInput` is a labeled native single-line field with `helperText`, `error`, textual `prefix`/`suffix`, and small/medium/large sizing. It supports text, email, password, search, tel, and url types; controlled/uncontrolled values; read-only selection; disabled editing; native form attributes; and refs. Corporate/Luna themes expose independent `--fs-text-input-*` tokens. Use `wrapperStyle` for the enclosing control's border, shape, and spacing. Adornments are described to assistive technology and excluded from the submitted value.
+
+See the [TextInput usage and contract](docs/text-input.md) and **Components / TextInput** in Storybook. The combined stylesheet includes TextInput; separate-style consumers import tokens.css and text-input.css.
+
+## Select contract
+
+`Select` is a labeled native single-choice field. Pass `label` and native `option`/`optgroup` children; use `placeholder`, `helperText`, and `error` for prompts and linked descriptions. Controlled `value`/`onChange`, uncontrolled `defaultValue`, native form attributes, disabled options, and refs are supported. `size` accepts `small`, `medium` (default), or `large`.
+
+Corporate and Luna share independent `--fs-select-*` tokens. Native popup styling follows the browser/OS. The combined stylesheet includes Select; separate-style consumers import tokens.css, icon.css, and select.css. See the [Select contract and usage](docs/select.md) and **Components / Select** in Storybook.
 
 ## Card contract
 
@@ -296,7 +326,7 @@ const brandIconStyle: IconStyle = {
 
 Public tokens are `--fs-icon-size-small`, `--fs-icon-size-medium`, `--fs-icon-size-large`, and `--fs-icon-stroke-width`. Dimensions use fixed CSS pixels; text enlargement does not double the artwork. Stroke width is unitless SVG user units and scales with the viewBox. Scoped overrides inherit until a nested explicit theme resets them. Keep icon/text contrast appropriate to the containing surface when overriding colors.
 
-To add a named icon, create a small ref-forwarding component that renders Icon with fixed 24×24 SVG children, export it individually, and extend the catalog stories and contract tests. Keep artwork within the viewBox with stroke clearance. Preserve unused-icon removal through the packed-bundle checks. See [Icon stories](stories/Icon.stories.tsx) for custom artwork and the catalog.
+To add a named icon, create a small ref-forwarding component that renders Icon with fixed 24×24 SVG children, export it individually, and extend the catalog stories and contract tests. Keep artwork within the viewBox with stroke clearance. Preserve unused-icon removal through the packed-bundle checks. See [Icon stories](src/components/icon/stories/Icon.stories.tsx) for custom artwork and the catalog.
 
 ### Search the icon collection
 
@@ -307,3 +337,7 @@ Gallery metadata and search UI are Storybook-only and introduce no React library
 ### Spatial system
 
 See the [spatial guide](docs/spatial-system.md) and **Design System → Spatial System** in Storybook for the 4px working rhythm, precision exceptions, and choosing semantic roles. The runnable Spatial Examples demonstrate parent-owned gaps, scoped/nested overrides, and responsive section spacing. Use `--fs-space-gap-actions` for sibling actions, `--fs-space-inset-container` for container padding, and `--fs-layout-section-gap` for major sections. Existing spacing names and defaults remain supported; the guide records gallery padding/height coupling corrections.
+
+## Contributing component examples and tests
+
+See [component organization](docs/component-organization.md) for family ownership, stable Storybook links, and development/package boundaries, and the [test guide](tests/README.md) for focused and complete verification commands.

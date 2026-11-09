@@ -1,0 +1,103 @@
+[
+  {
+    "original": "src/Button.tsx",
+    "current": "src/components/button/Button.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/Card.tsx",
+    "current": "src/components/card/Card.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/Checkbox.tsx",
+    "current": "src/components/checkbox/Checkbox.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/Field.tsx",
+    "current": "src/components/field/Field.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/FieldPrimitives.tsx",
+    "current": "src/components/field/FieldPrimitives.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/FormGroup.tsx",
+    "current": "src/components/form-group/FormGroup.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/Icon.tsx",
+    "current": "src/components/icon/Icon.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/Select.tsx",
+    "current": "src/components/select/Select.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/TextInput.tsx",
+    "current": "src/components/text-input/TextInput.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/Textarea.tsx",
+    "current": "src/components/textarea/Textarea.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/icons/ArrowRightIcon.tsx",
+    "current": "src/components/icon/named/ArrowRightIcon.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/icons/CheckIcon.tsx",
+    "current": "src/components/icon/named/CheckIcon.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/icons/ChevronDownIcon.tsx",
+    "current": "src/components/icon/named/ChevronDownIcon.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/icons/CloseIcon.tsx",
+    "current": "src/components/icon/named/CloseIcon.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/icons/ExternalLinkIcon.tsx",
+    "current": "src/components/icon/named/ExternalLinkIcon.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/icons/MoonIcon.tsx",
+    "current": "src/components/icon/named/MoonIcon.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/icons/PlusIcon.tsx",
+    "current": "src/components/icon/named/PlusIcon.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/icons/SunIcon.tsx",
+    "current": "src/components/icon/named/SunIcon.tsx",
+    "unchangedExceptImports": true
+  },
+  {
+    "original": "src/index.ts",
+    "current": "src/index.ts",
+    "unchangedExceptImports": true,
+    "verification": "Public export declarations match the frozen entrypoint after normalizing module specifiers; family indexes explicitly re-export the same members."
+  },
+  {
+    "original": "src/internal/useFieldAccessibility.ts",
+    "current": "src/internal/hooks/useFieldAccessibility.ts",
+    "unchangedExceptImports": true
+  }
+]

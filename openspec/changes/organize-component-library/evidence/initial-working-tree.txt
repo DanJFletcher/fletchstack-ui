@@ -1,0 +1,66 @@
+ M .storybook/preview.tsx
+ M README.md
+ M docs/foundation.md
+ M docs/tokens.md
+ M package.json
+ M scripts/copy-styles.mjs
+ M scripts/fixtures/consumer.mjs
+ M scripts/fixtures/consumer.tsx
+ M src/generated/tokens.css
+ M src/index.ts
+ M stories/stories.css
+ M tests/integration/build/entrypoints.test.mjs
+ M tests/unit/build/copy-styles.test.mjs
+ M tokens/corporate.json
+ M tokens/luna.json
+ M tokens/primitives.json
+?? docs/checkbox.md
+?? docs/field.md
+?? docs/form-group.md
+?? docs/select.md
+?? docs/text-input.md
+?? docs/textarea.md
+?? openspec/changes/organize-component-library/
+?? src/Checkbox.tsx
+?? src/Field.tsx
+?? src/FieldPrimitives.tsx
+?? src/FormGroup.tsx
+?? src/Select.tsx
+?? src/TextInput.tsx
+?? src/Textarea.tsx
+?? src/checkbox.css
+?? src/field.css
+?? src/form-group.css
+?? src/internal/
+?? src/select.css
+?? src/text-input.css
+?? src/textarea.css
+?? stories/Checkbox.stories.tsx
+?? stories/Field.stories.tsx
+?? stories/FormGroup.stories.tsx
+?? stories/Select.stories.tsx
+?? stories/TextInput.stories.tsx
+?? stories/Textarea.stories.tsx
+?? tests/e2e/components/Checkbox.spec.ts
+?? tests/e2e/components/Field.spec.ts
+?? tests/e2e/components/FormGroup.spec.ts
+?? tests/e2e/components/Select.spec.ts
+?? tests/e2e/components/TextInput.spec.ts
+?? tests/e2e/components/Textarea.spec.ts
+?? tests/integration/components/Checkbox.hydration.dom.test.tsx
+?? tests/integration/components/Checkbox.hydration.test.ts
+?? tests/integration/components/Field.ssr.test.tsx
+?? tests/integration/components/FormGroup.ssr.test.tsx
+?? tests/integration/components/Select.ssr.test.tsx
+?? tests/integration/components/TextInput.ssr.test.tsx
+?? tests/integration/components/Textarea.hydration.dom.test.tsx
+?? tests/integration/components/Textarea.ssr.test.tsx
+?? tests/integration/fixtures/hydration/CheckboxApp.tsx
+?? tests/integration/fixtures/hydration/hydrate-checkbox.tsx
+?? tests/unit/components/Checkbox.test.tsx
+?? tests/unit/components/Field.test.tsx
+?? tests/unit/components/FieldPrimitives.test.tsx
+?? tests/unit/components/FormGroup.test.tsx
+?? tests/unit/components/Select.test.tsx
+?? tests/unit/components/TextInput.test.tsx
+?? tests/unit/components/Textarea.test.tsx

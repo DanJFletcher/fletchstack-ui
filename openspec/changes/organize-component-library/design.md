@@ -24,6 +24,10 @@ The main spec inventory is empty. Four completed changes remain unarchived. In p
 
 ## Decisions
 
+### Approved follow-up: controlled Textarea counter
+
+The owner approved the proposed counter-listener fix after the migration exposed a failing controlled-editing regression. Controlled counters derive their length from `value`; they must not subscribe to native input/reset observation, whose state update can restore the old controlled DOM value before the consumer's React change handler runs. Include controlled ownership in the effect dependencies so observers are cleaned up when ownership changes. Uncontrolled editing and normal/canceled reset behavior remain covered. This narrow correction is the approved exception to the migration's behavior-preserving scope; no API, styling, or token changes are introduced.
+
 ### 1. Use component-family folders, independent of navigation categories
 
 Adopt lowercase kebab-case family directories and preserve PascalCase public component filenames. One family can contain several exports; there is no rule requiring one folder or implementation file per export.

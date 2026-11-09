@@ -1,10 +1,32 @@
 // @vitest-environment jsdom
 import '../../../../tests/support/dom';
 import { act, render, screen } from '@testing-library/react';
-import { createRef } from 'react';
+import { createRef, useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { expect, it, vi } from 'vitest';
 import { Textarea } from '../Textarea';
+
+/**
+ * Exercise a consumer that owns the textarea value through its change callback.
+ **/
+function ControlledTextarea() {
+  const [value, setValue] = useState('');
+
+  return <Textarea label="Description" value={value} onChange={event => setValue(event.target.value)} showCount />;
+}
+
+it('preserves consumer-controlled multiline edits with the counter enabled', async () => {
+  // arrange
+  const user = userEvent.setup();
+  render(<ControlledTextarea />);
+
+  // act
+  await user.type(screen.getByRole('textbox'), 'Edited{Enter}summary');
+
+  // assert
+  expect(screen.getByRole('textbox')).toHaveValue('Edited\nsummary');
+  expect(screen.getByRole('textbox')).toHaveAccessibleDescription('14');
+});
 
 it('names the native multiline control with a visible label', () => {
   // arrange

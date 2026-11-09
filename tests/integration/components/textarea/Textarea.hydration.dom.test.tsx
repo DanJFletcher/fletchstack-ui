@@ -2,12 +2,38 @@
 import '@testing-library/jest-dom/vitest';
 import { act, cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { createRef } from 'react';
+import { createRef, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { afterEach, expect, it } from 'vitest';
 import { Textarea } from '../../../../src/index';
 
 afterEach(cleanup);
+
+/**
+ * Keep controlled state owned by a real React consumer before and after hydration.
+ **/
+function ControlledTextarea() {
+  const [value, setValue] = useState('First');
+
+  return <Textarea label="Description" value={value} onChange={event => setValue(event.target.value)} showCount />;
+}
+
+it('preserves controlled editing after hydrating a server-rendered counter', async () => {
+  // arrange
+  const user = userEvent.setup();
+  const given = <ControlledTextarea />;
+  const container = document.createElement('div');
+  container.innerHTML = renderToString(given);
+  document.body.appendChild(container);
+  render(given, { container, hydrate: true });
+
+  // act
+  await user.type(screen.getByRole('textbox'), '!');
+
+  // assert
+  expect(screen.getByRole('textbox')).toHaveValue('First!');
+  expect(screen.getByRole('textbox')).toHaveAccessibleDescription('6');
+});
 
 it('hydrates a native textarea and updates its server-rendered count', async () => {
   // arrange

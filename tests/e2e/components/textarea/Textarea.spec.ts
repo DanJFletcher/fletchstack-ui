@@ -54,21 +54,23 @@ test('Textarea matches the reference minimum height, padding, and vertical resiz
   expect((await page.getByRole('textbox').boundingBox())!.height).toBeGreaterThan(bounds.height);
 });
 
-test('Textarea keeps its controlled counter in sync', async ({ page }) => {
-  await openStory(page, 'components-textarea--controlled');
-  const input = page.getByRole('textbox');
-  await expect(input).toHaveAccessibleDescription('15');
-  await input.focus();
-  await page.keyboard.press('ControlOrMeta+A');
-  await page.keyboard.type('Edited');
-  await page.keyboard.press('Enter');
-  await page.keyboard.type('summary');
-  await expect(input).toHaveValue('Edited\nsummary');
-  await expect(input).toHaveAccessibleDescription('14');
-  await expect(page.getByLabel('Current description')).toHaveText(/^Edited\nsummary$/);
-  await page.getByRole('button', { name: 'Focus description' }).click();
-  await expect(page.getByRole('textbox')).toBeFocused();
-});
+for (const theme of ['corporate', 'luna'] as const) {
+  test(`${theme} Textarea keeps its controlled counter in sync`, async ({ page }) => {
+    await openStory(page, 'components-textarea--controlled', { theme });
+    const input = page.getByRole('textbox');
+    await expect(input).toHaveAccessibleDescription('15');
+    await input.focus();
+    await page.keyboard.press('ControlOrMeta+A');
+    await page.keyboard.type('Edited');
+    await page.keyboard.press('Enter');
+    await page.keyboard.type('summary');
+    await expect(input).toHaveValue('Edited\nsummary');
+    await expect(input).toHaveAccessibleDescription('14');
+    await expect(page.getByLabel('Current description')).toHaveText(/^Edited\nsummary$/);
+    await page.getByRole('button', { name: 'Focus description' }).click();
+    await expect(page.getByRole('textbox')).toBeFocused();
+  });
+}
 
 test('Textarea counter tracks native submission, reset, and canceled reset', async ({ page }) => {
   await openStory(page, 'components-textarea--native-form');

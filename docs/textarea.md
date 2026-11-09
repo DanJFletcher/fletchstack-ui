@@ -6,6 +6,8 @@ Textarea composes Field. It accepts native textarea attributes and a native ref,
 
 `showCount` displays the UTF-16 code-unit length, matching native maxLength semantics, followed by `/ maxLength` when a nonnegative limit is supplied. Counter text is associated with the control without a live region on every keystroke. Native maxLength constrains user input; existing controlled or initial values are never silently truncated. Count follows typing, controlled updates, default-value changes, native form resets (including canceled resets), and form ownership changes. Programmatic value mutations must dispatch an input event to update an uncontrolled count.
 
+For controlled usage, update `value` from `onChange`; the count derives directly from that supplied value. Native input/reset observation is reserved for uncontrolled values so counter updates do not interrupt consumer-controlled editing.
+
 ```tsx
 <Textarea label="Project description" name="description"
   placeholder="Describe your project..." helperText="Describe the goals of your project."
@@ -18,6 +20,6 @@ Import combined styles, or tokens.css plus textarea.css. Existing Field styles a
 
 The initial visible-label test failed before implementation and passed afterward. A real Chromium test reproduced a counter reading the old value during a native form reset; reset synchronization now runs after the native default action and cancels its pending timer when unmounted.
 
-All 322 unit tests and 115 integration tests passed with 100% per-file coverage. Checks include SSR and hydration, multiline editing, controlled updates, external form ownership, normal/canceled resets, unmount cleanup, refs, native disabled/read-only semantics, and message relationships. All 120 Storybook interaction and axe checks passed with accessibility failures configured as errors. Both themes were visually reviewed. Browser checks exercise actual resize-handle dragging, native maxLength, read-only selection, keyboard focus, Enter/Tab, and 320px reflow with 200% text and user spacing.
+The controlled-counter keyboard regression subsequently exposed native counter observation interrupting React's controlled change callback. It failed before the fix and passed after controlled counters stopped subscribing to native input/reset observation. Exact multiline editing and the derived count are checked in both themes, with additional unit and jsdom hydration checks for consumer-owned React state.
 
-All 191 full browser regression tests passed with 100% per-file browser coverage, including native ref-based focusing. Package and Storybook builds, TypeScript, lint, public package consumers, and icon tree-shaking passed. Real screen-reader output remains unverified.
+The complete library verification passed 336 unit tests, 132 integration tests, 128 Storybook interaction/accessibility checks, and 224 Chromium E2E tests. Unit, integration, and browser coverage each independently reached 100% per file. Existing checks retain native reset/canceled-reset behavior, refs, resizing, maxLength, read-only/disabled behavior, keyboard focus, and 320px reflow with enlarged/spaced text. Package and Storybook builds, TypeScript, lint, packed React 18/19 consumers, CSS entrypoints, and icon tree-shaking passed. Real screen-reader output remains unverified.

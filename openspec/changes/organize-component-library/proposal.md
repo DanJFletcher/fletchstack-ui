@@ -13,6 +13,7 @@ Component implementations, CSS, stories, and focused tests currently live in sep
 - Give independently reusable public field atoms discoverable component examples and documentation; keep card parts documented with their parent.
 - Pin existing component/story IDs before changing titles, retaining existing preview links, documentation links, and browser-test routes.
 - Update discovery, declaration exclusions, coverage inventories, stylesheet publication, and contributor documentation for the new layout without shipping stories/tests or changing public CSS entrypoints.
+- Include the subsequently approved controlled Textarea counter correction: observe native input/reset only for uncontrolled values, preserving React change callbacks and prop-derived controlled counts.
 
 ## Capabilities
 

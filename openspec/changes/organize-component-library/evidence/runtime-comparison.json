@@ -47,7 +47,8 @@
   {
     "original": "src/Textarea.tsx",
     "current": "src/components/textarea/Textarea.tsx",
-    "unchangedExceptImports": true
+    "unchangedExceptImports": false,
+    "approvedFollowUp": "Skip native input/reset observation for controlled counters, deriving their count from value and cleaning up when ownership changes. Approved by the owner after the relocation exposed the controlled-editing regression."
   },
   {
     "original": "src/icons/ArrowRightIcon.tsx",

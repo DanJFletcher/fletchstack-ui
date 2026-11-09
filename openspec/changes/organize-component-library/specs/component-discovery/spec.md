@@ -71,6 +71,11 @@ Reorganized documentation and examples SHALL retain Corporate/Luna theme selecti
 - **WHEN** a consumer selects Corporate or Luna and uses a field-atom example by keyboard
 - **THEN** the control has its intended name, description, validation state, and visible focus
 
+#### Scenario: Edit the controlled Textarea counter example
+- **WHEN** a consumer edits the controlled Textarea example with its counter enabled in either theme
+- **THEN** the consumer change handler receives the multiline edits and retains the exact value
+- **AND** the counter derives its length from that controlled value without restoring stale text
+
 #### Scenario: Read narrow enlarged examples
 - **WHEN** a touched example is displayed at 320 CSS pixels with 200% text, 1.5 line height, 0.12em letter spacing, 0.16em word spacing, and 2em paragraph spacing
 - **THEN** its labels, messages, and controls remain readable and usable without clipped content or page-level horizontal overflow

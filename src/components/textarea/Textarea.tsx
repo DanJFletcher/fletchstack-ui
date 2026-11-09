@@ -29,18 +29,19 @@ function observeCharacterCount(element: HTMLTextAreaElement, update: () => void)
 }
 
 /**
- * Keep optional length guidance aligned with native and controlled textarea values.
+ * Derive controlled counts from props; observe native edits only for uncontrolled values.
  **/
 function useTextareaCount(input: RefObject<HTMLTextAreaElement | null>, { value, defaultValue, form, showCount }: Pick<TextareaProps, 'value' | 'defaultValue' | 'form' | 'showCount'>) {
   const [length, setLength] = useState((value ?? defaultValue ?? '').length);
+  const controlled = value !== undefined;
   useEffect(() => {
-    if (!showCount) { return; }
+    if (!showCount || controlled) { return; }
     const element = input.current!;
     const update = () => setLength(element.value.length);
     update();
 
     return observeCharacterCount(element, update);
-  }, [input, showCount, defaultValue, form]);
+  }, [input, showCount, defaultValue, form, controlled]);
 
   return value === undefined ? length : value.length;
 }

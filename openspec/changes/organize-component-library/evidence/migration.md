@@ -10,7 +10,7 @@ Production component behavior, CSS contents, published CSS filenames and order, 
 
 ## Implementation verification
 
-- All 20 pre-existing production TypeScript modules match their frozen hashes after reversing only import-path relocation; see [runtime comparison](runtime-comparison.json). Public runtime/type export declarations and package entrypoints match the baseline. All ten source stylesheets, including generated tokens, retain their hashes; existing separate/combined publication assertions pass.
+- The relocation-only comparison matched all 20 pre-existing production TypeScript modules after reversing import-path relocation. The subsequently approved controlled Textarea fix is the sole intentional runtime exception; see [runtime comparison](runtime-comparison.json). Public runtime/type export declarations and package entrypoints match the baseline. All ten source stylesheets, including generated tokens, retain their hashes; existing separate/combined publication assertions pass.
 - All 52 pre-existing test files retain a unique mapped destination. All 133 legacy story/docs IDs retain their type, name, and owning family. Actual legacy documentation routes, category placement, canonical pattern links, and Card prop tabs have browser checks in addition to index assertions.
 - Unit: 335 tests across 22 files passed, independently at 100% statements/branches/functions/lines. Integration: 131 tests across 19 files passed, independently at the same per-file thresholds. The additional post-review inventory assertion passed in its focused run.
 - Storybook: 128 interaction/accessibility checks across 13 CSF files passed after relocation, new atom pages, and example ordering. This includes all existing examples and eight new field-atom examples.
@@ -25,10 +25,22 @@ During staging, a moved Icon hydration fixture exposed a relative stylesheet URL
 
 The first concurrent form browser checks reached rendered controls but timed out while awaiting the full story/play lifecycle. The shared adapter now waits for the visible preview decorator before polling the existing successful lifecycle event; no assertion, retry policy, or timeout was relaxed. Subsequent full-suite results are recorded below.
 
-## Remaining verification issue
+## Previously blocking verification issue
 
 The full browser run passed 222/223 checks; the existing Foundation → Tokens navigation journey failed once, then both documentation journeys passed on a focused run with a fresh server. Final full-suite verification is still pending. The new documentation-order assertion also required matching Storybook's heading permalink accessible name; its focused check now passes. The atom documentation regression is scoped to its demo controls rather than the prop editor, and all three focused checks pass with instance-specific IDs.
 
 The complete browser coverage gate correctly failed on an unexercised controlled Textarea change callback. Moving its interactive examples into a colocated module made the missing callback coverage explicit. The old test changed only whitespace and used a whitespace-normalizing text assertion, allowing an unchanged controlled value to pass. The strengthened keyboard journey now checks distinct multiline text, its exact value, and the derived counter, and fails against the existing component.
 
-Diagnosis: `useTextareaCount` observes native input even for a controlled value. Its state update can restore the controlled DOM value before React dispatches the consumer change callback. Proposed fix, awaiting approval: skip the native listener for controlled values (which already derive their count from `value`) and clean up when ownership changes. This is a pre-existing runtime bug outside the proposal's behavior-preserving scope; no production fix has been applied. The scope question was presented through the apply workflow before proceeding.
+Diagnosis: `useTextareaCount` observed native input even for a controlled value. Its state update could restore the controlled DOM value before React dispatched the consumer change callback. The owner subsequently approved the proposed fix: skip the native listener for controlled values, which already derive their count from `value`, and include controlled ownership in the effect dependencies for cleanup. This narrow runtime correction is recorded in the proposal, design, and controlled-example scenario.
+
+## Final verification after the approved fix
+
+The Chromium controlled-counter regression failed before the production edit and passed after the guard/dependency change, with its exact multiline value and derived length assertions retained. Its full E2E coverage now includes both Corporate and Luna. Added unit and jsdom hydration checks verify a real consumer-owned React value and its count; existing uncontrolled input/reset/canceled-reset cases remain intact.
+
+- `npm run test:unit`: 336 tests passed across 22 files, independently at 100% per-file statements, branches, functions, and lines.
+- `npm run test:integration`: 132 tests passed across 19 files, independently at the same 100% per-file thresholds.
+- `npm run test:storybook`: all 128 interaction/accessibility checks passed across 13 CSF files.
+- `npm run test:e2e`: all 224 Chromium tests passed; every scoped library and Storybook module reached 100% statements, branches, functions, and lines. The controlled example callback and family entrypoints are included; no coverage exclusions or thresholds were relaxed.
+- Lint, development/build type checks, packed-package verification (including the package build), and the static Storybook build passed before the served browser suites. Packed React 18/19 SSR, public types/CSS consumers, and icon bundle isolation passed.
+
+The formerly intermittent Foundation → Tokens journey passed in the final complete run. All 24 migration tasks are complete. Screen-reader and non-Chromium testing remain unperformed; this change adds no visual styling or semantic markup changes.

@@ -38,6 +38,6 @@
 ## 6. Complete integration verification
 
 - [x] 6.1 Compare final discovered tests, story/docs ID-to-meaning mappings, production/documentation runtime inventories, exports, and stylesheet contents/order with the baseline; verify every relocation is accounted for and no duplicate discovery or development module enters the package.
-- [ ] 6.2 Run the existing lint, type, package/Storybook build, unit, integration, Storybook accessibility, and E2E commands; verify independent unit/integration/browser 100% per-file gates remain intact, completing token/build mutations before served browser suites.
+- [x] 6.2 Run the existing lint, type, package/Storybook build, unit, integration, Storybook accessibility, and E2E commands; verify independent unit/integration/browser 100% per-file gates remain intact, completing token/build mutations before served browser suites.
 - [x] 6.3 Verify packed-package consumers, runtime/type/CSS entrypoints, deterministic SSR, hydration, and single-icon tree-shaking; inspect actual published JavaScript/declarations and confirm the existing consumer fixtures pass without new runtime dependencies.
 - [x] 6.4 Compare representative views in both themes and check touched examples at 320px, 200% text, prescribed text spacing, and keyboard navigation; record observed results and any unperformed screen-reader checks, then review the diff for scope and preservation of pre-existing edits.

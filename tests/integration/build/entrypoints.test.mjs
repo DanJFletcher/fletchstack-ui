@@ -24,8 +24,10 @@ test('the stylesheet command publishes separate and combined CSS exports', async
   await writeFile(new URL('src/generated/tokens.css', root), ':root { --fs-text: black; }');
   await copyFile(new URL('../../../src/button.css', import.meta.url), new URL('src/button.css', root));
   await copyFile(new URL('../../../src/icon.css', import.meta.url), new URL('src/icon.css', root));
+  await copyFile(new URL('../../../src/card.css', import.meta.url), new URL('src/card.css', root));
 
   const icon = await readFile(new URL('src/icon.css', root), 'utf8');
+  const card = await readFile(new URL('src/card.css', root), 'utf8');
   const button = await readFile(new URL('src/button.css', root), 'utf8');
   const previousDirectory = process.cwd();
 
@@ -38,6 +40,6 @@ test('the stylesheet command publishes separate and combined CSS exports', async
   }
 
   // assert
-  const result = await Promise.all(['tokens.css', 'button.css', 'icon.css', 'styles.css'].map(name => readFile(new URL(`dist/${name}`, root), 'utf8')));
-  expect(result).toEqual([':root { --fs-text: black; }', button, icon, `:root { --fs-text: black; }\n${button}\n${icon}`]);
+  const result = await Promise.all(['tokens.css', 'button.css', 'icon.css', 'card.css', 'styles.css'].map(name => readFile(new URL(`dist/${name}`, root), 'utf8')));
+  expect(result).toEqual([':root { --fs-text: black; }', button, icon, card, `:root { --fs-text: black; }\n${button}\n${icon}\n${card}`]);
 });

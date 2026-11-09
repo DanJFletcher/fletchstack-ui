@@ -560,6 +560,121 @@
           "$description": "Separation between major website sections; may be overridden responsively."
         }
       }
+    },
+    "card": {
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Decorative card boundary thickness."
+      },
+      "padding": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{primitive.px16}",
+          "$description": "Compact region padding."
+        },
+        "medium": {
+          "$type": "dimension",
+          "$value": "{primitive.px24}",
+          "$description": "Default region padding."
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{primitive.px40}",
+          "$description": "Spacious region padding."
+        }
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Vertical separation between content children."
+      },
+      "footerGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Separation between wrapping footer children."
+      },
+      "mediaWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px200}",
+        "$description": "Preferred horizontal media width before wrapping."
+      },
+      "contentWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px400}",
+        "$description": "Preferred horizontal body width before wrapping."
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Default card surface."
+      },
+      "filledSurface": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightPanel}",
+        "$description": "Filled card surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Card primary text."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Card supporting text."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightLine}",
+        "$description": "Decorative card and footer border."
+      },
+      "mediaSurface": {
+        "$type": "color",
+        "$value": "{primitive.violet}",
+        "$description": "Card media background."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Card corner radius."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Card body and title font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Card body font size."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Card body line height."
+        }
+      },
+      "title": {
+        "font": {
+          "size": {
+            "$type": "dimension",
+            "$value": "{primitive.heading}",
+            "$description": "Card title font size."
+          },
+          "weight": {
+            "$type": "fontWeight",
+            "$value": "{primitive.semibold}",
+            "$description": "Card title emphasis."
+          },
+          "lineHeight": {
+            "$type": "number",
+            "$value": "{primitive.headingLineHeight}",
+            "$description": "Card title line height."
+          }
+        }
+      }
     }
   }
 }

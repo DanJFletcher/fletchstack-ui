@@ -1,0 +1,51 @@
+.fs-card {
+  --fs-card-current-padding: var(--fs-card-padding-medium);
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  border: var(--fs-card-border-width) solid var(--fs-card-border);
+  border-radius: var(--fs-card-radius);
+  overflow: clip;
+  background: var(--fs-card-surface);
+  color: var(--fs-card-text);
+  font-family: var(--fs-card-font-family);
+  font-size: var(--fs-card-font-size);
+  line-height: var(--fs-card-font-line-height);
+  overflow-wrap: anywhere;
+}
+
+.fs-card:not([hidden]) { display: flex; flex-direction: column; }
+.fs-card--horizontal:not([hidden]) { flex-direction: row; flex-wrap: wrap; }
+.fs-card--filled { background: var(--fs-card-filled-surface); border-color: transparent; }
+.fs-card--plain { background: transparent; border-color: transparent; }
+.fs-card--none { --fs-card-current-padding: 0px; }
+.fs-card--small { --fs-card-current-padding: var(--fs-card-padding-small); }
+.fs-card--large { --fs-card-current-padding: var(--fs-card-padding-large); }
+
+.fs-card__header, .fs-card__content, .fs-card__footer, .fs-card__media {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+.fs-card__header, .fs-card__content, .fs-card__footer { padding: var(--fs-card-current-padding); }
+.fs-card__header:not([hidden]), .fs-card__content:not([hidden]) { display: flex; flex-direction: column; gap: var(--fs-card-gap); }
+.fs-card__content { flex: 1 1 var(--fs-card-content-width); }
+.fs-card--vertical > .fs-card__content { flex-basis: auto; }
+.fs-card__header + .fs-card__content { padding-block-start: 0; }
+.fs-card__footer:not([hidden]) { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--fs-card-footer-gap); }
+.fs-card__footer > *, .fs-card__header > *, .fs-card__content > * { min-inline-size: 0; max-inline-size: 100%; }
+.fs-card__footer--divided { border-block-start: var(--fs-card-border-width) solid var(--fs-card-border); }
+/* Nested parts share the body's inset instead of accumulating padding. */
+.fs-card__content > .fs-card__header, .fs-card__content > .fs-card__content, .fs-card__content > .fs-card__footer { padding-inline: 0; }
+.fs-card__content > .fs-card__header { padding-block: 0; }
+.fs-card__content > .fs-card__footer { padding-block-end: 0; }
+.fs-card__media { background: var(--fs-card-media-surface); }
+.fs-card--horizontal > .fs-card__media { flex: 1 1 var(--fs-card-media-width); }
+.fs-card__media img, .fs-card__media video { display: block; max-inline-size: 100%; block-size: auto; }
+.fs-card .fs-card__title { margin: 0; font-family: var(--fs-card-font-family); font-size: var(--fs-card-title-font-size); font-weight: var(--fs-card-title-font-weight); line-height: var(--fs-card-title-font-line-height); }
+.fs-card .fs-card__description { margin: 0; max-inline-size: none; color: var(--fs-card-muted); }
+
+@media (forced-colors: active) {
+  .fs-card { border-color: CanvasText; }
+  .fs-card__footer--divided { border-color: CanvasText; }
+}

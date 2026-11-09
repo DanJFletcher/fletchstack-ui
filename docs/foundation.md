@@ -56,6 +56,10 @@ The user's supplied gallery reference supersedes the initial native-control pres
 
 New semantic `gallery.*` roles in both theme sources define the documentation palette, muted text, panel/card/control boundaries, accent selection, focus, typography, radii, minimum control/card dimensions, preferred column width, and spacing. Each aliases a raw primitive directly. These are public CSS customization roles, documented in the generated token reference; they add no React exports or gallery runtime to the package. The approved reference supplies the design decision for these roles instead of borrowing unrelated Button roles. Corporate uses light panels and blue selection; Luna uses navy, lavender selection, pale text, and gold focus. Decorative card borders can be subtle; interactive field boundaries must remain ≥3:1, and all supporting text ≥4.5:1. Controls retain native behavior with authored semantic appearance and visible focus. All heights are minima; typography uses rem, fixed spatial dimensions use px, names/code wrap, and the grid never requires horizontal scrolling.
 
+## Card pattern
+
+The user's Card reference layouts approve the passive surface, optional separated footer, and responsive media/content composition recorded in the [Card contract](card.md). Independent `card.*` semantic roles in both themes supply its visual values; it composes existing Button and Icon without taking over their semantics. Card supplies no activation, hover, selected, or disabled state.
+
 ## Spatial system handoff
 
 The [spatial system](spatial-system.md) expands this foundation with a preferred scale, intent-based layout roles, a complete spatial-role audit, precision exceptions, and compatibility guidance. Component padding and parent placement remain separate responsibilities. Both themes use the same default spacing; shape and color can differ. The gallery uses independent search-padding, heading-gap, and preview-edge-inset roles so unrelated geometry overrides no longer change spacing.

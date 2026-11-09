@@ -100,6 +100,27 @@
   --fs-gallery-heading-gap: 16px;
   --fs-gallery-preview-inset: 1px;
   --fs-layout-section-gap: 64px;
+  --fs-card-border-width: 1px;
+  --fs-card-padding-small: 16px;
+  --fs-card-padding-medium: 24px;
+  --fs-card-padding-large: 40px;
+  --fs-card-gap: 24px;
+  --fs-card-footer-gap: 16px;
+  --fs-card-media-width: 200px;
+  --fs-card-content-width: 400px;
+  --fs-card-surface: rgb(255 255 255 / 1);
+  --fs-card-filled-surface: rgb(244 246 251 / 1);
+  --fs-card-text: rgb(23 35 56 / 1);
+  --fs-card-muted: rgb(82 100 126 / 1);
+  --fs-card-border: rgb(215 220 231 / 1);
+  --fs-card-media-surface: rgb(232 239 255 / 1);
+  --fs-card-radius: 4px;
+  --fs-card-font-family: "Arial", "Helvetica", sans-serif;
+  --fs-card-font-size: 1rem;
+  --fs-card-font-line-height: 1.5;
+  --fs-card-title-font-size: 1.5rem;
+  --fs-card-title-font-weight: 600;
+  --fs-card-title-font-line-height: 1.25;
 }
 
 [data-theme="luna"] {
@@ -203,4 +224,25 @@
   --fs-gallery-heading-gap: 16px;
   --fs-gallery-preview-inset: 1px;
   --fs-layout-section-gap: 64px;
+  --fs-card-border-width: 1px;
+  --fs-card-padding-small: 16px;
+  --fs-card-padding-medium: 24px;
+  --fs-card-padding-large: 40px;
+  --fs-card-gap: 24px;
+  --fs-card-footer-gap: 16px;
+  --fs-card-media-width: 200px;
+  --fs-card-content-width: 400px;
+  --fs-card-surface: rgb(17 19 41 / 1);
+  --fs-card-filled-surface: rgb(26 27 52 / 1);
+  --fs-card-text: rgb(244 239 255 / 1);
+  --fs-card-muted: rgb(182 179 206 / 1);
+  --fs-card-border: rgb(53 54 79 / 1);
+  --fs-card-media-surface: rgb(41 36 66 / 1);
+  --fs-card-radius: 12px;
+  --fs-card-font-family: "Arial", "Helvetica", sans-serif;
+  --fs-card-font-size: 1rem;
+  --fs-card-font-line-height: 1.5;
+  --fs-card-title-font-size: 1.5rem;
+  --fs-card-title-font-weight: 600;
+  --fs-card-title-font-line-height: 1.25;
 }

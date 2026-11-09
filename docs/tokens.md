@@ -104,6 +104,27 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-gallery-heading-gap` | Separation after the gallery heading, independent of container inset. | dimension |
 | `--fs-gallery-preview-inset` | Technical edge inset inside preview-size boundaries; not a general spacing step. | dimension |
 | `--fs-layout-section-gap` | Separation between major website sections; may be overridden responsively. | dimension |
+| `--fs-card-border-width` | Decorative card boundary thickness. | dimension |
+| `--fs-card-padding-small` | Compact region padding. | dimension |
+| `--fs-card-padding-medium` | Default region padding. | dimension |
+| `--fs-card-padding-large` | Spacious region padding. | dimension |
+| `--fs-card-gap` | Vertical separation between content children. | dimension |
+| `--fs-card-footer-gap` | Separation between wrapping footer children. | dimension |
+| `--fs-card-media-width` | Preferred horizontal media width before wrapping. | dimension |
+| `--fs-card-content-width` | Preferred horizontal body width before wrapping. | dimension |
+| `--fs-card-surface` | Default card surface. | color |
+| `--fs-card-filled-surface` | Filled card surface. | color |
+| `--fs-card-text` | Card primary text. | color |
+| `--fs-card-muted` | Card supporting text. | color |
+| `--fs-card-border` | Decorative card and footer border. | color |
+| `--fs-card-media-surface` | Card media background. | color |
+| `--fs-card-radius` | Card corner radius. | dimension |
+| `--fs-card-font-family` | Card body and title font family. | fontFamily |
+| `--fs-card-font-size` | Card body font size. | dimension |
+| `--fs-card-font-line-height` | Card body line height. | number |
+| `--fs-card-title-font-size` | Card title font size. | dimension |
+| `--fs-card-title-font-weight` | Card title emphasis. | fontWeight |
+| `--fs-card-title-font-line-height` | Card title line height. | number |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

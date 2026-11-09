@@ -573,6 +573,13 @@
         "value": 96,
         "unit": "px"
       }
+    },
+    "px400": {
+      "$type": "dimension",
+      "$value": {
+        "value": 400,
+        "unit": "px"
+      }
     }
   }
 }

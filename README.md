@@ -1,6 +1,6 @@
 # Fletchstack UI
 
-A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. Public components include `Button`, `Icon`, and eight opt-in named icons.
+A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. Public components include `Button`, composable `Card` parts, `Icon`, and eight opt-in named icons.
 
 ## Install and import
 
@@ -23,6 +23,19 @@ import 'fletchstack-ui/styles.css';
 ```
 
 Import the combined stylesheet once in your app entry or layout. Alternatively import `fletchstack-ui/tokens.css` followed by `fletchstack-ui/button.css`. JavaScript deliberately does not import CSS, so Node server rendering needs no CSS loader. CSS exports are marked as side effects for bundlers. No provider, browser storage, theme effect, external font, or browser global is required by the library.
+
+## Card contract
+
+Compose `CardHeader`, `CardContent`, `CardMedia`, `CardTitle`, `CardDescription`, and `CardFooter` inside `Card`. All parts are optional and accept native attributes, refs, className, and typed style overrides.
+
+| Prop | Options / default | Purpose |
+| --- | --- | --- |
+| `variant` | `outlined` (default), `filled`, `plain` | Surface treatment |
+| `padding` | `none`, `small`, `medium` (default), `large` | Internal region padding |
+| `orientation` | `vertical` (default), `horizontal` | Stacked or intrinsically wrapping media/content layout |
+| `as` | `div` (default), `article`, `section` | Document semantics; provide a name where appropriate |
+
+`CardTitle` supports `as="h1"` through `"h6"` or `"p"`; `CardFooter divided` adds a rule. Cards are passive surfaces: place native links, disclosures, or Button inside for interaction. Customize the `--fs-card-*` tokens to adjust colors, typography, media width, spacing, and shape. The combined stylesheet includes Card; separate-style consumers import `fletchstack-ui/card.css` after tokens. See the [full contract and example](docs/card.md), or **Components / Card** in Storybook for the supplied reference layouts and theme examples.
 
 ## Button contract
 

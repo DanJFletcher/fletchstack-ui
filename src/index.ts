@@ -1,4 +1,6 @@
 export { Button } from './Button.js';
+export { Card, CardHeader, CardContent, CardFooter, CardMedia, CardTitle, CardDescription } from './Card.js';
+export type { CardProps, CardStyle, CardPartProps, CardFooterProps, CardTitleProps, CardDescriptionProps } from './Card.js';
 export type { ButtonProps, ButtonStyle } from './Button.js';
 export { Icon } from './Icon.js';
 export type { IconProps, IconSize, IconStyle, NamedIconProps } from './Icon.js';

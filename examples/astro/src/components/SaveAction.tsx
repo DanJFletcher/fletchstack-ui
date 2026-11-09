@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from 'fletchstack-ui';
+import { Button, CheckIcon } from 'fletchstack-ui';
 
 /**
  * Own the event handler inside the React island; Astro only passes serializable data.
@@ -7,5 +7,5 @@ import { Button } from 'fletchstack-ui';
 export default function SaveAction() {
   const [saved, setSaved] = useState(false);
 
-  return <Button onClick={() => setSaved(true)} disabled={saved}>{saved ? 'Saved' : 'Save changes'}</Button>;
+  return <Button onClick={() => setSaved(true)} disabled={saved}><CheckIcon /><span>{saved ? 'Saved' : 'Save changes'}</span></Button>;
 }

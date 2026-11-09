@@ -7,13 +7,14 @@ beforeEach(() => {
   vi.resetModules();
   vi.resetAllMocks();
   files.copyFile.mockResolvedValue(undefined);
-  files.readFile.mockResolvedValueOnce(':root { --fs-text: black; }').mockResolvedValueOnce('.fs-button { color: var(--fs-text); }');
+  files.readFile.mockResolvedValueOnce(':root { --fs-text: black; }').mockResolvedValueOnce('.fs-button { color: var(--fs-text); }').mockResolvedValueOnce('.fs-icon { width: var(--fs-icon-size-medium); }');
   files.writeFile.mockResolvedValue(undefined);
 });
 
 it.each([
   { source: 'src/generated/tokens.css', destination: 'dist/tokens.css' },
   { source: 'src/button.css', destination: 'dist/button.css' },
+  { source: 'src/icon.css', destination: 'dist/icon.css' },
 ])('publishes $source at $destination', async ({ source, destination }) => {
   // act
   await import('../../../scripts/copy-styles.mjs');
@@ -24,7 +25,7 @@ it.each([
 
 it('combines tokens before component styles in the public stylesheet', async () => {
   // arrange
-  const expected = ':root { --fs-text: black; }\n.fs-button { color: var(--fs-text); }';
+  const expected = ':root { --fs-text: black; }\n.fs-button { color: var(--fs-text); }\n.fs-icon { width: var(--fs-icon-size-medium); }';
 
   // act
   await import('../../../scripts/copy-styles.mjs');

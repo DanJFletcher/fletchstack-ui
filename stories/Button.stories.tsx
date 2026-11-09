@@ -1,7 +1,7 @@
 import { createRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
-import { Button } from '../src';
+import { Button, MoonIcon } from '../src';
 
 const meta = {
   title: 'Components/Button', component: Button, tags: ['autodocs'],
@@ -82,13 +82,6 @@ export const NativeForm: Story = {
     await expect(canvas.getByRole('status')).toHaveTextContent('Reset');
   },
 };
-
-/**
- * A decorative moon that inherits the label color without entering its name.
- **/
-function MoonIcon() {
-  return <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.4 15.4A8.5 8.5 0 0 1 8.6 3.6 9 9 0 1 0 20.4 15.4Z" /></svg>;
-}
 
 export const Composition: Story = {
   render: () => <div className="stack"><h1>Make room for the next step</h1><p>A parent flex wrapper supplies the gap. Icons are children, not a special Button API.</p><div className="actions">

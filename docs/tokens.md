@@ -63,5 +63,36 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-button-disabled-background` | Disabled control background. | color |
 | `--fs-button-disabled-text` | Disabled control text. | color |
 | `--fs-button-disabled-border` | Disabled control border. | color |
+| `--fs-icon-size-small` | Small icon width and height in CSS pixels. | dimension |
+| `--fs-icon-size-medium` | Medium icon width and height in CSS pixels. | dimension |
+| `--fs-icon-size-large` | Large icon width and height in CSS pixels. | dimension |
+| `--fs-icon-stroke-width` | Outline stroke width in SVG user units; scales with the viewBox. | number |
+| `--fs-gallery-surface` | Gallery background. | color |
+| `--fs-gallery-panel` | Raised documentation panels and selected-control group background. | color |
+| `--fs-gallery-text` | Gallery primary text and artwork. | color |
+| `--fs-gallery-muted` | Gallery supporting text; maintains AA contrast. | color |
+| `--fs-gallery-border` | Decorative card and divider boundaries. | color |
+| `--fs-gallery-control-border` | Interactive field boundaries; at least 3:1 against the surface. | color |
+| `--fs-gallery-accent` | Selected preview-size fill. | color |
+| `--fs-gallery-on-accent` | Text on the selected preview size. | color |
+| `--fs-gallery-focus` | Gallery keyboard focus indicator. | color |
+| `--fs-gallery-radius` | Gallery card and control corner radius. | dimension |
+| `--fs-gallery-border-width` | Gallery boundary thickness. | dimension |
+| `--fs-gallery-control-height` | Minimum gallery input and preview-size target height. | dimension |
+| `--fs-gallery-card-height` | Minimum gallery card height; grows with content. | dimension |
+| `--fs-gallery-column-width` | Minimum preferred gallery column width before wrapping. | dimension |
+| `--fs-gallery-gap` | Gallery grid and control spacing. | dimension |
+| `--fs-gallery-inset` | Gallery section and card insets. | dimension |
+| `--fs-gallery-compact-inset` | Compact gallery control inset. | dimension |
+| `--fs-gallery-artwork-gap` | Space below gallery artwork. | dimension |
+| `--fs-gallery-focus-width` | Visible keyboard outline thickness. | dimension |
+| `--fs-gallery-focus-offset` | Outline clearance around gallery controls. | dimension |
+| `--fs-gallery-font-body` | Gallery body text size. | dimension |
+| `--fs-gallery-font-caption` | Gallery metadata and export-name size. | dimension |
+| `--fs-gallery-font-heading` | Gallery title size. | dimension |
+| `--fs-gallery-font-mono` | Gallery export names and code samples. | fontFamily |
+| `--fs-gallery-font-weight` | Gallery heading and brand emphasis. | fontWeight |
+| `--fs-gallery-font-heading-line-height` | Compact gallery heading line height, unitless. | number |
+| `--fs-gallery-clear-size` | Minimum explicit clear-search target size. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.

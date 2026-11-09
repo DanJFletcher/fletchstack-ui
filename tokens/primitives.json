@@ -407,6 +407,137 @@
     "lineHeight": {
       "$type": "number",
       "$value": 1.5
+    },
+    "iconStroke": {
+      "$type": "number",
+      "$value": 2
+    },
+    "galleryNightPanel": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.10196078431372549,
+          0.10588235294117647,
+          0.20392156862745098
+        ],
+        "alpha": 1
+      }
+    },
+    "galleryNightLine": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.20784313725490197,
+          0.21176470588235294,
+          0.30980392156862746
+        ],
+        "alpha": 1
+      }
+    },
+    "galleryNightMuted": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7137254901960784,
+          0.7019607843137254,
+          0.807843137254902
+        ],
+        "alpha": 1
+      }
+    },
+    "galleryNightControl": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.5215686274509804,
+          0.5098039215686274,
+          0.615686274509804
+        ],
+        "alpha": 1
+      }
+    },
+    "galleryDayPanel": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9568627450980393,
+          0.9647058823529412,
+          0.984313725490196
+        ],
+        "alpha": 1
+      }
+    },
+    "galleryDayLine": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8431372549019608,
+          0.8627450980392157,
+          0.9058823529411765
+        ],
+        "alpha": 1
+      }
+    },
+    "px6": {
+      "$type": "dimension",
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      }
+    },
+    "px40": {
+      "$type": "dimension",
+      "$value": {
+        "value": 40,
+        "unit": "px"
+      }
+    },
+    "px140": {
+      "$type": "dimension",
+      "$value": {
+        "value": 140,
+        "unit": "px"
+      }
+    },
+    "px200": {
+      "$type": "dimension",
+      "$value": {
+        "value": 200,
+        "unit": "px"
+      }
+    },
+    "caption": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.75,
+        "unit": "rem"
+      }
+    },
+    "heading": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      }
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": [
+        "ui-monospace",
+        "SFMono-Regular",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "headingLineHeight": {
+      "$type": "number",
+      "$value": 1.25
     }
   }
 }

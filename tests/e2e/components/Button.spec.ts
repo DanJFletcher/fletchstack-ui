@@ -17,7 +17,7 @@ const themes = [
 for (const theme of themes) {
   test.describe(theme.name, () => {
     test('keyboard focus skips disabled controls', async ({ page }) => {
-      await openStory(page, 'interaction-states', { theme: theme.id });
+      await openStory(page, 'components-button--interaction-states', { theme: theme.id });
 
       const primary = page.getByRole('button', { name: 'Primary action', exact: true });
       const secondary = page.getByRole('button', { name: 'Secondary action', exact: true });
@@ -40,7 +40,7 @@ for (const theme of themes) {
     });
 
     test('all variants offer all sizes', async ({ page }) => {
-      await openStory(page, theme.variants);
+      await openStory(page, `components-button--${theme.variants}`);
       await expect(page.getByRole('heading', { name: 'One action. Two atmospheres.' })).toBeVisible();
 
       for (const variant of ['primary', 'secondary', 'ghost']) {
@@ -56,12 +56,12 @@ for (const theme of themes) {
     });
 
     test('keyboard example finishes Enter and Space activation', async ({ page }) => {
-      await openStory(page, theme.keyboard);
+      await openStory(page, `components-button--${theme.keyboard}`);
       await expect(page.getByRole('button', { name: 'Save changes' })).toBeFocused();
     });
 
     test('disabled examples cannot receive keyboard focus', async ({ page }) => {
-      await openStory(page, theme.disabled);
+      await openStory(page, `components-button--${theme.disabled}`);
       const save = page.getByRole('button', { name: 'Save changes' });
 
       await expect(page.getByRole('button')).toHaveCount(3);
@@ -75,7 +75,7 @@ for (const theme of themes) {
 
     test('long labels reflow with enlarged and spaced text', async ({ page }) => {
       await page.setViewportSize({ width: 320, height: 700 });
-      await openStory(page, theme.longLabels);
+      await openStory(page, `components-button--${theme.longLabels}`);
       await page.addStyleTag({ content: `
         html { font-size: 200%; }
         .fs-button {
@@ -101,7 +101,7 @@ for (const theme of themes) {
 }
 
 test('native default, submit and reset types preserve form behavior', async ({ page }) => {
-  await openStory(page, 'native-form');
+  await openStory(page, 'components-button--native-form');
   const status = page.getByRole('status');
   await expect(status).toHaveText('Reset');
 
@@ -123,7 +123,7 @@ test('native default, submit and reset types preserve form behavior', async ({ p
 });
 
 test('consumers can forward a ref to move focus', async ({ page }) => {
-  await openStory(page, 'ref-access');
+  await openStory(page, 'components-button--ref-access');
   const target = page.getByRole('button', { name: 'Target action' });
   await expect(target).toBeFocused();
 
@@ -132,7 +132,7 @@ test('consumers can forward a ref to move focus', async ({ page }) => {
 });
 
 test('decorative icons preserve accessible button names and parent spacing', async ({ page }) => {
-  await openStory(page, 'composition');
+  await openStory(page, 'components-button--composition');
   const save = page.getByRole('button', { name: 'Save changes', exact: true });
 
   await expect(page.getByRole('button')).toHaveCount(4);
@@ -145,7 +145,7 @@ test('decorative icons preserve accessible button names and parent spacing', asy
 });
 
 test('native attributes and consumer classes reach the real button', async ({ page }) => {
-  await openStory(page, 'playground', {
+  await openStory(page, 'components-button--playground', {
     args: { className: 'consumer-action', children: 'Publish', title: 'Publish settings' },
   });
   const button = page.getByRole('button', { name: 'Publish', exact: true });
@@ -156,7 +156,7 @@ test('native attributes and consumer classes reach the real button', async ({ pa
 });
 
 test('hidden native buttons stay out of layout and keyboard order', async ({ page }) => {
-  await openStory(page, 'playground', { args: { hidden: true } });
+  await openStory(page, 'components-button--playground', { args: { hidden: true } });
   const hiddenButton = page.getByRole('button', { name: 'Save changes', includeHidden: true });
   await expect(hiddenButton).toBeHidden();
 

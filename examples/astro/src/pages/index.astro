@@ -1,5 +1,5 @@
 ---
-import { Button } from 'fletchstack-ui';
+import { Button, MoonIcon } from 'fletchstack-ui';
 import 'fletchstack-ui/styles.css';
 import SaveAction from '../components/SaveAction';
 ---
@@ -8,7 +8,7 @@ import SaveAction from '../components/SaveAction';
   <body style="background:var(--fs-surface);color:var(--fs-text);padding:var(--fs-space-inset)">
     <main>
       <h1>Account settings</h1>
-      <form action="/preferences" method="post"><Button type="submit" variant="secondary">Save without JavaScript</Button></form>
+      <form action="/preferences" method="post"><Button type="submit" variant="secondary"><MoonIcon />Save without JavaScript</Button></form>
       <section style="margin-top:var(--fs-space-stack)"><SaveAction client:load /></section>
     </main>
   </body>

@@ -1,0 +1,23 @@
+/* Geometry and paint follow the Icon foundation; parents own placement and gaps. */
+.fs-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  margin: 0;
+  stroke-width: var(--fs-icon-stroke-width);
+}
+
+.fs-icon--small {
+  width: var(--fs-icon-size-small);
+  height: var(--fs-icon-size-small);
+}
+
+.fs-icon--medium {
+  width: var(--fs-icon-size-medium);
+  height: var(--fs-icon-size-medium);
+}
+
+.fs-icon--large {
+  width: var(--fs-icon-size-large);
+  height: var(--fs-icon-size-large);
+}

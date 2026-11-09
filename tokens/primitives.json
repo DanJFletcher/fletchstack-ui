@@ -580,6 +580,38 @@
         "value": 400,
         "unit": "px"
       }
+    },
+    "errorDay": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7058823529411765,
+          0.13725490196078433,
+          0.09411764705882353
+        ],
+        "alpha": 1
+      }
+    },
+    "errorNight": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.7058823529411765,
+          0.6705882352941176
+        ],
+        "alpha": 1
+      }
+    },
+    "px120": {
+      "$type": "dimension",
+      "$value": {
+        "value": 120,
+        "unit": "px"
+      },
+      "$description": "Textarea minimum height."
     }
   }
 }

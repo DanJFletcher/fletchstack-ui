@@ -1,11 +1,23 @@
 import { copyFile, readFile, writeFile } from 'node:fs/promises';
 
 await copyFile('src/generated/tokens.css', 'dist/tokens.css');
-await copyFile('src/button.css', 'dist/button.css');
-await copyFile('src/icon.css', 'dist/icon.css');
-await copyFile('src/card.css', 'dist/card.css');
+await copyFile('src/components/field/field.css', 'dist/field.css');
+await copyFile('src/components/button/button.css', 'dist/button.css');
+await copyFile('src/components/icon/icon.css', 'dist/icon.css');
+await copyFile('src/components/card/card.css', 'dist/card.css');
+await copyFile('src/components/select/select.css', 'dist/select.css');
+await copyFile('src/components/text-input/text-input.css', 'dist/text-input.css');
+await copyFile('src/components/checkbox/checkbox.css', 'dist/checkbox.css');
+await copyFile('src/components/form-group/form-group.css', 'dist/form-group.css');
+await copyFile('src/components/textarea/textarea.css', 'dist/textarea.css');
 const tokens = await readFile('dist/tokens.css', 'utf8');
+const field = await readFile('dist/field.css', 'utf8');
 const button = await readFile('dist/button.css', 'utf8');
 const icon = await readFile('dist/icon.css', 'utf8');
 const card = await readFile('dist/card.css', 'utf8');
-await writeFile('dist/styles.css', `${tokens}\n${button}\n${icon}\n${card}`);
+const select = await readFile('dist/select.css', 'utf8');
+const textInput = await readFile('dist/text-input.css', 'utf8');
+const checkbox = await readFile('dist/checkbox.css', 'utf8');
+const formGroup = await readFile('dist/form-group.css', 'utf8');
+const textarea = await readFile('dist/textarea.css', 'utf8');
+await writeFile('dist/styles.css', `${tokens}\n${field}\n${button}\n${icon}\n${card}\n${select}\n${textInput}\n${checkbox}\n${formGroup}\n${textarea}`);

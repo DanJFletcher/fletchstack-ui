@@ -1,0 +1,20 @@
+.fs-field {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  color: var(--fs-field-text);
+  font-family: var(--fs-field-font-family);
+  font-size: var(--fs-field-font-size);
+  line-height: var(--fs-field-font-line-height);
+  overflow-wrap: anywhere;
+}
+.fs-field:not([hidden]) { display: grid; gap: var(--fs-field-gap); }
+.fs-field > * { min-inline-size: 0; max-inline-size: 100%; }
+.fs-field-label { font: inherit; font-weight: var(--fs-field-font-weight); overflow-wrap: anywhere; }
+.fs-field-description,
+.fs-field-error { margin: 0; max-inline-size: 100%; font-size: var(--fs-field-font-description); line-height: inherit; overflow-wrap: anywhere; }
+.fs-field-description { color: var(--fs-field-muted); }
+.fs-field-error { color: var(--fs-field-error); }
+@media (forced-colors: active) {
+  .fs-field-error { color: CanvasText; }
+}

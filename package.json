@@ -18,7 +18,13 @@
     "./button.css": "./dist/button.css",
     "./package.json": "./package.json",
     "./icon.css": "./dist/icon.css",
-    "./card.css": "./dist/card.css"
+    "./card.css": "./dist/card.css",
+    "./select.css": "./dist/select.css",
+    "./text-input.css": "./dist/text-input.css",
+    "./checkbox.css": "./dist/checkbox.css",
+    "./form-group.css": "./dist/form-group.css",
+    "./field.css": "./dist/field.css",
+    "./textarea.css": "./dist/textarea.css"
   },
   "files": [
     "dist",

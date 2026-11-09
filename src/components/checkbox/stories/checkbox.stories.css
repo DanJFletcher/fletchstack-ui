@@ -1,0 +1,3 @@
+.checkbox-demo__group { min-inline-size: 0; margin: 0; padding: var(--fs-space-inset); border: var(--fs-checkbox-border-width) solid var(--fs-checkbox-border); border-radius: var(--fs-checkbox-radius); }
+.checkbox-demo__group legend { font-weight: var(--fs-checkbox-font-weight); padding-inline: var(--fs-space-gap-label); }
+.checkbox-demo__children { padding-inline-start: calc(var(--fs-checkbox-control-size) + var(--fs-checkbox-label-gap)); }

@@ -7,7 +7,7 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { beforeAll, expect } from 'vitest';
 import { test } from '../fixtures/browser';
-import { Button } from '../../../src/Button';
+import { Button } from '../../../src/components/button/Button';
 
 /**
  * Build CSS in an isolated fixture with a custom theme sorted before Corporate.
@@ -29,7 +29,7 @@ async function buildThemeFixture() {
 let css: string;
 
 beforeAll(async () => {
-  css = await buildThemeFixture() + await readFile(new URL('../../../src/button.css', import.meta.url), 'utf8');
+  css = await buildThemeFixture() + await readFile(new URL('../../../src/components/button/button.css', import.meta.url), 'utf8');
 });
 
 test.for([

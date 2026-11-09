@@ -7,7 +7,9 @@ import { dirname } from 'node:path';
  **/
 export function inScope(path) {
   return /^(src|stories|\.storybook)\/.*\.[jt]sx?$/.test(path)
-    && !path.endsWith('.d.ts') && !/^\.storybook\/main\.[jt]s$/.test(path);
+    && !path.endsWith('.d.ts') && !/^\.storybook\/main\.[jt]s$/.test(path)
+    && !/(?:^|\/)(?:__tests__|fixtures|setup)\//.test(path)
+    && !/\.(?:test|spec)\.[jt]sx?$/.test(path);
 }
 
 /**

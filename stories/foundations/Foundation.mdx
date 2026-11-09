@@ -1,0 +1,10 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import foundation from '../../docs/foundation.md?raw';
+
+<Meta title="Design System/Foundation" />
+
+<Markdown>{foundation.replace('[spatial system](spatial-system.md)', 'spatial system (linked below)')}</Markdown>
+
+<a href="./?path=/docs/design-system-tokens--docs" target="_top">Explore the public semantic token reference →</a>
+
+<a href="./?path=/docs/design-system-spatial-system--docs" target="_top">Explore the spatial system →</a>

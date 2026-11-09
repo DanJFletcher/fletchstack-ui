@@ -56,6 +56,18 @@ The user's supplied gallery reference supersedes the initial native-control pres
 
 New semantic `gallery.*` roles in both theme sources define the documentation palette, muted text, panel/card/control boundaries, accent selection, focus, typography, radii, minimum control/card dimensions, preferred column width, and spacing. Each aliases a raw primitive directly. These are public CSS customization roles, documented in the generated token reference; they add no React exports or gallery runtime to the package. The approved reference supplies the design decision for these roles instead of borrowing unrelated Button roles. Corporate uses light panels and blue selection; Luna uses navy, lavender selection, pale text, and gold focus. Decorative card borders can be subtle; interactive field boundaries must remain ≥3:1, and all supporting text ≥4.5:1. Controls retain native behavior with authored semantic appearance and visible focus. All heights are minima; typography uses rem, fixed spatial dimensions use px, names/code wrap, and the grid never requires horizontal scrolling.
 
+## Checkbox pattern
+
+The user's Checkbox reference approves independent native choices, a clickable label/description, checked and mixed marks, errors, disabled choices, and the Corporate/Luna language. The [Checkbox contract](checkbox.md) records 20px controls, 44px minimum hit areas, 8px label gaps, independent `checkbox.*` roles, native form/keyboard behavior, and client-only indeterminate state. A consumer-owned fieldset/legend composition demonstrates none/some/all group selection.
+
+## Text input pattern
+
+The user's Text Input reference approves the [TextInput contract](text-input.md): a labeled native single-line field with linked helper/error descriptions, textual adornments, read-only selection, disabled editing, and the existing Corporate/Luna theme language. Independent `textInput.*` semantic roles supply a 44px default minimum height, 16px text, and 12px horizontal padding. Native input behavior owns editing, selection, form participation, and keyboard navigation.
+
+## Select pattern
+
+The user's supplied Select design approves a visible-label single-choice field with helper/error descriptions, disabled choices, keyboard navigation, and Corporate/Luna variants. The [Select contract](select.md) records native select semantics, platform popup rendering, 44px default minimum control height, and independent `select.*` semantic roles. Native option/optgroup children retain selection, form, and keyboard behavior.
+
 ## Card pattern
 
 The user's Card reference layouts approve the passive surface, optional separated footer, and responsive media/content composition recorded in the [Card contract](card.md). Independent `card.*` semantic roles in both themes supply its visual values; it composes existing Button and Icon without taking over their semantics. Card supplies no activation, hover, selected, or disabled state.
@@ -63,3 +75,15 @@ The user's Card reference layouts approve the passive surface, optional separate
 ## Spatial system handoff
 
 The [spatial system](spatial-system.md) expands this foundation with a preferred scale, intent-based layout roles, a complete spatial-role audit, precision exceptions, and compatibility guidance. Component padding and parent placement remain separate responsibilities. Both themes use the same default spacing; shape and color can differ. The gallery uses independent search-padding, heading-gap, and preview-edge-inset roles so unrelated geometry overrides no longer change spacing.
+
+## Form group pattern
+
+The supplied Form Group reference approves the native fieldset/legend composition recorded in the [FormGroup contract](form-group.md), shared descriptions and errors, native descendant disabling, and vertical/horizontal layouts. Independent `formGroup.*` semantic roles provide both theme palettes, an 8px legend gap, 12px control gap, and 8px message gap. Parents own the 24px space between groups.
+
+## Shared field primitives
+
+The approved extraction introduces the [Field contract](field.md): native FieldLabel, paragraph/inline FieldDescription and FieldError, and a Field composition with consumer-owned controls. Independent `field.*` roles follow existing form typography, message colors, and spacing. Existing component-specific token roles and native semantics remain authoritative within TextInput, Select, Checkbox, and FormGroup.
+
+## Textarea pattern
+
+The supplied multiline field reference approves the [Textarea contract](textarea.md): native textarea semantics, shared Field label/messages, vertical resizing, optional character guidance, read-only and disabled behavior. Independent `textarea.*` semantic roles in both themes provide a 120px minimum height, 16px type, 12px padding, and current form-state colors.

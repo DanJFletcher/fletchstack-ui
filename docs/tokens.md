@@ -12,6 +12,11 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-space-inline` | inline spacing for consumer layouts. | dimension |
 | `--fs-space-stack` | stack spacing for consumer layouts. | dimension |
 | `--fs-space-inset` | inset spacing for consumer layouts. | dimension |
+| `--fs-space-gap-label` | Gap for closely associated label/control content. | dimension |
+| `--fs-space-gap-actions` | Parent-owned gap between sibling actions. | dimension |
+| `--fs-space-gap-related` | Gap between related siblings needing more separation. | dimension |
+| `--fs-space-stack-group` | Parent-owned separation between related content groups. | dimension |
+| `--fs-space-inset-container` | Default padding inside a content container. | dimension |
 | `--fs-button-font-family` | Control font stack. | fontFamily |
 | `--fs-button-font-weight` | Control label weight. | fontWeight |
 | `--fs-button-font-line-height` | Control line height, unitless. | number |
@@ -94,5 +99,12 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-gallery-font-weight` | Gallery heading and brand emphasis. | fontWeight |
 | `--fs-gallery-font-heading-line-height` | Compact gallery heading line height, unitless. | number |
 | `--fs-gallery-clear-size` | Minimum explicit clear-search target size. | dimension |
+| `--fs-gallery-search-padding-inline` | Search horizontal padding, independent of minimum control height. | dimension |
+| `--fs-gallery-search-padding-block` | Search vertical padding, independent of other compact insets. | dimension |
+| `--fs-gallery-heading-gap` | Separation after the gallery heading, independent of container inset. | dimension |
+| `--fs-gallery-preview-inset` | Technical edge inset inside preview-size boundaries; not a general spacing step. | dimension |
+| `--fs-layout-section-gap` | Separation between major website sections; may be overridden responsively. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
+
+Choose a role by its purpose rather than its current value. See the [Spatial system](spatial-system.md) for spacing, sizing, layout ownership, and compatibility guidance.

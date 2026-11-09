@@ -8,6 +8,11 @@
   --fs-space-inline: 12px;
   --fs-space-stack: 24px;
   --fs-space-inset: 24px;
+  --fs-space-gap-label: 8px;
+  --fs-space-gap-actions: 12px;
+  --fs-space-gap-related: 16px;
+  --fs-space-stack-group: 24px;
+  --fs-space-inset-container: 24px;
   --fs-button-font-family: "Arial", "Helvetica", sans-serif;
   --fs-button-font-weight: 600;
   --fs-button-font-line-height: 1.5;
@@ -90,6 +95,11 @@
   --fs-gallery-font-weight: 600;
   --fs-gallery-font-heading-line-height: 1.25;
   --fs-gallery-clear-size: 24px;
+  --fs-gallery-search-padding-inline: 36px;
+  --fs-gallery-search-padding-block: 8px;
+  --fs-gallery-heading-gap: 16px;
+  --fs-gallery-preview-inset: 1px;
+  --fs-layout-section-gap: 64px;
 }
 
 [data-theme="luna"] {
@@ -101,6 +111,11 @@
   --fs-space-inline: 12px;
   --fs-space-stack: 24px;
   --fs-space-inset: 24px;
+  --fs-space-gap-label: 8px;
+  --fs-space-gap-actions: 12px;
+  --fs-space-gap-related: 16px;
+  --fs-space-stack-group: 24px;
+  --fs-space-inset-container: 24px;
   --fs-button-font-family: "Georgia", "Times New Roman", serif;
   --fs-button-font-weight: 600;
   --fs-button-font-line-height: 1.5;
@@ -183,4 +198,9 @@
   --fs-gallery-font-weight: 600;
   --fs-gallery-font-heading-line-height: 1.25;
   --fs-gallery-clear-size: 24px;
+  --fs-gallery-search-padding-inline: 36px;
+  --fs-gallery-search-padding-block: 8px;
+  --fs-gallery-heading-gap: 16px;
+  --fs-gallery-preview-inset: 1px;
+  --fs-layout-section-gap: 64px;
 }

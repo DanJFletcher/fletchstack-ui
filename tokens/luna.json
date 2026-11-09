@@ -43,6 +43,33 @@
         "$type": "dimension",
         "$value": "{primitive.px24}",
         "$description": "inset spacing for consumer layouts."
+      },
+      "gap": {
+        "label": {
+          "$type": "dimension",
+          "$value": "{primitive.px8}",
+          "$description": "Gap for closely associated label/control content."
+        },
+        "actions": {
+          "$type": "dimension",
+          "$value": "{primitive.px12}",
+          "$description": "Parent-owned gap between sibling actions."
+        },
+        "related": {
+          "$type": "dimension",
+          "$value": "{primitive.px16}",
+          "$description": "Gap between related siblings needing more separation."
+        }
+      },
+      "stack-group": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Parent-owned separation between related content groups."
+      },
+      "inset-container": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Default padding inside a content container."
       }
     },
     "button": {
@@ -501,6 +528,37 @@
         "$type": "dimension",
         "$value": "{primitive.px24}",
         "$description": "Minimum explicit clear-search target size."
+      },
+      "search": {
+        "paddingInline": {
+          "$type": "dimension",
+          "$value": "{primitive.px36}",
+          "$description": "Search horizontal padding, independent of minimum control height."
+        },
+        "paddingBlock": {
+          "$type": "dimension",
+          "$value": "{primitive.px8}",
+          "$description": "Search vertical padding, independent of other compact insets."
+        }
+      },
+      "headingGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Separation after the gallery heading, independent of container inset."
+      },
+      "previewInset": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Technical edge inset inside preview-size boundaries; not a general spacing step."
+      }
+    },
+    "layout": {
+      "section": {
+        "gap": {
+          "$type": "dimension",
+          "$value": "{primitive.px64}",
+          "$description": "Separation between major website sections; may be overridden responsively."
+        }
       }
     }
   }

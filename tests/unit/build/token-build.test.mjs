@@ -122,3 +122,15 @@ it('surfaces output write errors', async () => {
   // assert
   await expect(result).rejects.toBe(expected);
 });
+
+it('links the spatial guide from the generated public reference', async () => {
+  // arrange
+  provideTokens();
+  const expected = '[Spatial system](spatial-system.md)';
+
+  // act
+  await import('../../../scripts/build-tokens.mjs');
+
+  // assert
+  expect(outputAt('/docs/tokens.md')).toContain(expected);
+});

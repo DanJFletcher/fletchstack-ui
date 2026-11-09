@@ -13,7 +13,7 @@ const preview: Preview = {
   initialGlobals: { theme: 'corporate' },
   parameters: {
     layout: 'fullscreen',
-    options: { storySort: { order: ['Design System', ['Foundation', 'Tokens'], 'Components'] } },
+    options: { storySort: { order: ['Design System', ['Foundation', 'Spatial System', 'Spatial Examples', 'Tokens'], 'Components'] } },
     a11y: { test: 'error', options: { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] } } },
     controls: { expanded: true },
   },

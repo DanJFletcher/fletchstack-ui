@@ -1,0 +1,16 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+import spatial from '../docs/spatial-system.md?raw';
+
+<Meta title="Design System/Spatial System" />
+
+<Markdown>{spatial.replace('[verification record](verification.md)', 'verification record (see repository documentation)')}</Markdown>
+
+<a href="./?path=/story/design-system-spatial-examples--scale" target="_top">Compare the spacing scale →</a>
+
+<a href="./?path=/story/design-system-spatial-examples--composition" target="_top">Try parent-owned spacing →</a>
+
+<a href="./?path=/story/design-system-spatial-examples--scoped-overrides" target="_top">Explore scoped spacing →</a>
+
+<a href="./?path=/story/design-system-spatial-examples--responsive-sections" target="_top">Explore responsive sections →</a>
+
+<a href="./?path=/docs/design-system-tokens--docs" target="_top">Read the spatial token reference →</a>

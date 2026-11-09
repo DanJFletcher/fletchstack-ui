@@ -16,7 +16,8 @@
     "./styles.css": "./dist/styles.css",
     "./tokens.css": "./dist/tokens.css",
     "./button.css": "./dist/button.css",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./icon.css": "./dist/icon.css"
   },
   "files": [
     "dist",

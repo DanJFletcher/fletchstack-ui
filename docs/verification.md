@@ -90,3 +90,77 @@ node scripts/verify-astro.mjs
 ```
 
 This small fixture is kept outside the root dependency graph. Remove `.verification/astro` before recreating it when changing its dependency versions.
+
+## Icon implementation baseline — 2026-11-08
+
+Before icon changes, lint, type checking, the library build, 128 unit tests, 75 integration tests, and 20 E2E tests passed. Unit, integration, and E2E each independently reached 100% of their scoped statements, branches, functions, and lines. The existing local agent-guides-installer tarball dependency remains a clean-CI-installation limitation; this change does not alter it.
+
+## Icon visual review — 2026-11-08
+
+Visually reviewed captured Storybook catalog output with all eight named icons at 16px, 20px, and 24px in Corporate and Luna. The artwork is recognizable, uses a consistent outline, and remains unclipped. A browser geometry check also confirmed stroke clearance for all 48 rendered catalog instances. Reviewed default, hover, active, disabled, and keyboard-focus compositions in both themes: artwork inherits the control color and the icon-only Button's ring remains visible. Reviewed 320px layouts with 200% root text size and WCAG text-spacing overrides: labels wrap, controls grow vertically, fixed icons remain 20px, and no horizontal overflow was detected. Reviewed scoped size/stroke overrides and nested theme reset visually.
+
+Local screenshots were captured under the ignored `.verification/icons-*.png` paths. Keyboard activation, focus order, image names, hydration, CSS state inheritance, and reflow were exercised automatically in Chromium. No VoiceOver/NVDA or other real assistive-technology session was performed; this is not a screen-reader certification. Firefox/WebKit were not run.
+
+Observed red-to-green checks: real theme compilation initially omitted all four icon properties; Icon's initial SVG wrapper lacked the labeled image role/name; stylesheet publication omitted icon.css; and the catalog initially lacked all eight exports. Those focused tests passed after their respective changes. Packed typing also caught the JSX hyphenated-attribute loophole in an omitted aria-label prop, leading to explicit forbidden attributes in public types. Additional contract and browser cases were added after those implementations; they are final-behavior evidence rather than individual red-to-green cycles.
+
+## Icon final acceptance — 2026-11-08
+
+All checks passed sequentially after implementation:
+
+| Command | Observed result |
+| --- | --- |
+| `npm run lint` | Passed with SonarJS and required braces |
+| `npm run typecheck` | Passed, including isolated library declarations |
+| `npm run test:unit` | 184 tests; independent 100% statements/branches/functions/lines |
+| `npm run test:integration` | 87 tests; independent 100% statements/branches/functions/lines |
+| `npm run test:storybook` | 24 tests, with WCAG accessibility violations configured as failures |
+| `CI=true npm run test:e2e` | 32 Chromium journeys; independent 100% per browser source file; scripts excluded |
+| `npm run build` | Passed; Icon and eight named exports, declarations, and icon.css included |
+| `node scripts/verify-browser.mjs` | Passed existing built-package contrast/state/focus/reflow checks |
+| `npm run build-storybook` | Passed; existing preview chunk-size warnings remain |
+| `npm run verify:package` | Passed packed exports, combined/selective CSS, React 18/19 types and deterministic SSR, and production bundle opt-in checks |
+
+The unit and integration reports each count 136/136 statements, 109/109 branches, 38/38 functions, and 108/108 lines in their scoped executable source/build scripts. E2E separately covers the component source and authored Storybook browser modules; none of these gates borrow counters from another suite.
+
+Packed consumer compilation now includes the actual Gatsby page source and Astro React island source under both React type generations. React SSR and real Chromium hydration were exercised. No full Gatsby site build or Astro production site build was run for this icon change; earlier dated framework evidence above describes previous work, not a rerun. No framework version/support range was changed.
+
+The opt-in checks bundle an entry importing only MoonIcon, one importing only Button, and a positive control importing MoonIcon plus SunIcon. They inspect unique SVG geometry: used artwork stays, the other seven icons disappear from the single-icon bundle, and Button-only output contains no catalog artwork. React remains external. No new runtime dependency was added. The pre-existing local agent-guides-installer tarball remains a clean GitHub CI-install limitation; no remote Actions run is claimed. Changes remain uncommitted for review.
+
+## Searchable icon gallery — 2026-11-08
+
+Scope: Components/Icon/Gallery (`components-icon--gallery`), shared story-only metadata, native search controls, and discovery documentation. The comparison Catalog remains eight icons × three sizes × two themes. Existing uncommitted Icon work was retained; no library source, public token, package export, dependency, or shipped CSS was changed for the gallery.
+
+Baseline: `npm run lint`, `npm run typecheck`, `npm run test:storybook` (24 tests), and `CI=true npm run test:e2e` (32 tests, all four scoped metrics 100%) passed before extraction. Three metadata integrity tests and the existing Catalog browser comparison passed after extraction.
+
+TDD evidence: the export-name normalization test initially failed because typing `  mOoN  ` still displayed eight entries instead of MoonIcon alone. It passed after literal filtering was added. The polite-count test then failed for the missing status region and passed after feedback was added. A separate initial special-character test failed in user-event's keyboard parser; escaping its literal opening bracket fixed the test input, rather than treating that harness error as a product regression.
+
+Final automated checks:
+
+- `npm run lint` and `npm run typecheck`: passed.
+- Focused gallery/catalog RTL tests: 23 passed; includes names/uses/synonyms, normalization, literal brackets, initial/singular/plural/zero counts, empty recovery, focus, keyboard clearing, already-empty clearing, non-interactive cards, and unique field associations across instances.
+- `npm run test:unit`: 207 tests passed; 100% statements (136/136), branches (109/109), functions (38/38), and lines (108/108).
+- `npm run test:integration`: 87 tests passed; independently the same 100% production metrics.
+- `npm run test:storybook`: 25 passed, with axe WCAG 2/2.1/2.2 AA rules and `a11y.test: error` preserved. Gallery play restores the complete collection after filtering and clearing.
+- `CI=true npm run test:e2e`: 41 passed with no retries. Complete-inventory per-file 100% statements/branches/functions/lines includes the new catalog and gallery modules; scripts remain outside E2E scope. Nine new journeys check search, keyboard recovery, native contrast, enlarged reflow in both themes, and the real theme toolbar.
+
+Visual/browser evidence: inspected Corporate and Luna full collections, keyword-filtered results, empty results, keyboard-visible focus, and 320px layouts with 200% root text size, 1.5 line height, 0.12em letter spacing, 0.16em word spacing, and 2em paragraph spacing. Ten local screenshots were inspected under ignored `.verification/gallery-*.png`. Names/descriptions wrap; controls remain usable; browser assertions confirm no page-level horizontal overflow or overflowing cards. Search remains focused while filtering; clear restores it after mouse or keyboard activation.
+
+Measured Chromium native-control contrast (text/background; boundary/surface; boundary/field; focus/surface; focus/field): Corporate **21.00 / 4.54 / 4.54 / 5.98 / 5.98**; Luna **11.20 / 4.95 / 3.04 / 10.50 / 6.43**. Native focus is visibly blue in Corporate and light blue in Luna; persistent browser checks enforce text ≥4.5 and boundary/focus ≥3. These are measurements of this Chromium environment, not a guarantee for every OS/native palette.
+
+Unperformed checks: real screen-reader announcement review, Safari/Firefox native-control appearance, and additional operating systems. No full Gatsby or Astro site build was added for this Storybook-only change. The existing local `agent-guides-installer` tarball dependency remains a known clean remote-install limitation; it was not changed by this work.
+
+Build/package acceptance: `npm run build`, `npm run build-storybook`, and `npm run verify:package` passed. The library remains 3.06 kB (0.97 kB gzip). Packed consumers validated unchanged public exports, declarations, stylesheet imports, React 18.3.1/19.3.1 deterministic SSR, and single-icon/Button-only unused-artwork removal with a positive control. A served static-build smoke check confirmed the Gallery index and sidebar entry, successful play lifecycle, keyword filtering to PlusIcon, and clearing back to eight cards. The library JavaScript was checked for absence of gallery headings, labels, empty-state text, filtering identifiers, and catalog keywords/uses. Static Storybook emitted its existing large-chunk advisory; package verification emitted a transient peer-resolution advisory while switching React versions, with both compatibility checks passing.
+
+## Gallery visual reference revision — 2026-11-08
+
+The user's replacement screenshot is the approved design for this revision. The gallery now has a branded breadcrumb strip, compact title/subtitle, labeled local theme selector, icon-prefixed search and explicit clear target, native radio preview-size controls, four centered outlined cards per desktop row, monospaced export names, and a usage/accessibility footer. At smaller widths the grid collapses intrinsically. The theme selector calls its inherited option **Storybook**, accurately describing toolbar inheritance rather than implying operating-system theme detection. Corporate remains the global default; Luna supplies the reference's dark navy/lavender treatment.
+
+The reference supersedes the initial native-control/no-new-tokens restriction. Twenty-seven additive semantic gallery roles now alias DTCG primitives in both themes (90 total semantic properties per theme), covering documentation colors, emphasis, focus, spacing, shape, typography and minimum dimensions. The generated token reference documents each purpose. Gallery React code remains outside the library bundle and public React exports are unchanged. Interactive control borders and focus deliberately retain stronger contrast than the subtle decorative card borders.
+
+Observed TDD: the new preview-size and local-theme tests first failed because their radio/combobox controls did not exist; both passed after implementation. Final checks passed: `npm run lint`, `npm run typecheck`, `npm run test:unit` (209 tests), `npm run test:integration` (87), `npm run test:storybook` (25, accessibility failures enabled), and `CI=true npm run test:e2e` (43, no retries). Unit, integration, and complete-inventory component/Storybook E2E coverage each remain independently 100% across all four gated metrics. Browser tests cover all size options, native arrow-key radio operation and visible focus, local theme selection/toolbar inheritance, literal search/clear behavior, themed search text/boundary/focus contrast, and 320px reflow with 200% text plus spacing overrides. Supporting text uses the theme-specific semantic muted role rather than opacity.
+
+Visual inspection compared the 1024×768 Luna view to the supplied reference and checked Corporate, full/filtered/empty states, keyboard focus, and enlarged 320px layouts. Export names, descriptions, controls, and the code sample wrap without page overflow. Updated local screenshots are under ignored `.verification/gallery-*.png`. The explicit clear action remains keyboard accessible even for an empty query, and cards remain non-interactive.
+
+`npm run build`, `npm run build-storybook`, `npm run verify:package`, and strict OpenSpec validation passed. Packed declarations, CSS imports, React 18/19 deterministic SSR, unchanged React exports, and unused-icon removal passed; library JavaScript remains 3.06 kB (0.97 kB gzip). Existing Storybook chunk-size and React-switch peer-resolution advisories remain non-failing. Real screen-reader review and Safari/Firefox checks remain unperformed; no full framework site builds were added for this documentation change.
+
+Final visual refinement: the grid retains empty column tracks so filtered cards keep their original desktop width rather than stretching. All 11 focused gallery browser journeys, lint, type checking, and the static Storybook rebuild passed afterward. A served static build was exercised for both themes and all ten screenshots regenerated; filtered-card width is now explicitly asserted against the full collection in the browser suite.

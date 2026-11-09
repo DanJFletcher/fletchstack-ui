@@ -1,6 +1,6 @@
 # Fletchstack UI
 
-A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. The initial public component is `Button`.
+A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. Public components include `Button`, `Icon`, and eight opt-in named icons.
 
 ## Install and import
 
@@ -112,14 +112,14 @@ Tokens follow DTCG 2025.10 with exactly two conceptual layers: raw primitives an
 Current Gatsby 5.16.1 accepts React 18 and 19. A minimal page:
 
 ```tsx
-import { Button } from 'fletchstack-ui';
+import { Button, CheckIcon } from 'fletchstack-ui';
 import 'fletchstack-ui/styles.css';
 
 export default function SettingsPage() {
   return (
     <main data-theme="corporate">
       <h1>Settings</h1>
-      <Button onClick={() => window.alert('Saved')}>Save changes</Button>
+      <Button onClick={() => window.alert('Saved')}><CheckIcon /><span>Save changes</span></Button>
     </main>
   );
 }
@@ -142,14 +142,14 @@ Static React rendering needs no client directive and ships no component hydratio
 
 ```astro
 ---
-import { Button } from 'fletchstack-ui';
+import { Button, CheckIcon } from 'fletchstack-ui';
 import 'fletchstack-ui/styles.css';
 import SaveAction from '../components/SaveAction';
 ---
 <html lang="en" data-theme="luna">
   <body style="background:var(--fs-surface);color:var(--fs-text);padding:var(--fs-space-inset)">
     <form action="/preferences" method="post">
-      <Button type="submit">Save without JavaScript</Button>
+      <Button type="submit"><CheckIcon />Save without JavaScript</Button>
     </form>
     <SaveAction client:load />
   </body>
@@ -161,11 +161,11 @@ Own interactive handlers inside the React island so no function crosses Astro's 
 ```tsx
 // src/components/SaveAction.tsx
 import { useState } from 'react';
-import { Button } from 'fletchstack-ui';
+import { Button, CheckIcon } from 'fletchstack-ui';
 
 export default function SaveAction() {
   const [saved, setSaved] = useState(false);
-  return <Button disabled={saved} onClick={() => setSaved(true)}>{saved ? 'Saved' : 'Save changes'}</Button>;
+  return <Button disabled={saved} onClick={() => setSaved(true)}><CheckIcon /><span>{saved ? 'Saved' : 'Save changes'}</span></Button>;
 }
 ```
 
@@ -230,3 +230,63 @@ npx openspec update                            # refresh generated tool integrat
 The initial setup contains no proposals or accepted specs. For future work, consult the existing [foundation](docs/foundation.md) and repository guidelines when writing artifacts; implementation continues to use the existing test and verification commands above. See the [official OpenSpec setup documentation](https://openspec.dev/docs/setup) for the workflow and tool integrations.
 
 [Foundation](docs/foundation.md) · [Implementation plan](docs/implementation-plan.md) · [Verification results and gaps](docs/verification.md)
+
+## Icon and optional named artwork
+
+`Icon` owns one SVG root; supply trusted SVG children such as paths/groups, not a nested SVG or a markup string. It defaults to a 24×24 viewBox, medium (20px) dimensions, no fill, and a currentColor outline. Custom artwork can change viewBox, fill, and stroke. It adds no margin or parent gap.
+
+```tsx
+import { Button, Icon, MoonIcon, CheckIcon, type IconStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/styles.css';
+
+<Icon label="Custom shape" viewBox="0 0 32 32" fill="currentColor" stroke="none">
+  <path d="M4 4h24v24H4Z" />
+</Icon>
+<Button><CheckIcon /><span>Save changes</span></Button>
+<Button aria-label="Switch to night mode"><MoonIcon /></Button>
+<MoonIcon label="Night mode" size="large" />
+```
+
+Omit `label` for decoration. Omitted, empty, and whitespace-only labels produce `aria-hidden="true"`. A nonblank label is trimmed and exposes `role="img"` with that accessible name. SVGs stay non-focusable; name an icon-only Button on the Button itself. Icon owns role, naming/focus attributes, and width/height, so these are excluded from its native SVG props and stripped from untyped inputs. Compatible native SVG attributes, handlers, SVG refs, className, and style pass through. Consumer artwork must avoid focusable descendants and conflicting title-based naming; consumers own unique IDs used by their artwork.
+
+| Prop | Contract |
+| --- | --- |
+| `children` | Consumer SVG artwork; available on Icon only |
+| `viewBox` | Defaults to `0 0 24 24`; customizable on Icon only |
+| `size` | `small` 16px, `medium` 20px (default), `large` 24px |
+| `label` | Optional accessible image name; omit for decoration |
+| `ref` | Native `SVGSVGElement` access |
+| `className`, `style` | SVG customization and public semantic overrides |
+
+All named artwork uses a shared 24×24 outline convention with round caps/joins. Each export composes Icon, supports the same size/label/ref/customization contract, and owns its artwork and viewBox. Import only what you need; unused artwork is removable from production bundles. There is no runtime name registry or icon collection dependency.
+
+| Export | Intended use |
+| --- | --- |
+| `MoonIcon` | Night mode and celestial accents |
+| `SunIcon` | Light mode |
+| `CheckIcon` | Success and confirmation |
+| `CloseIcon` | Dismiss or cancel |
+| `ChevronDownIcon` | Expand a section or menu |
+| `ArrowRightIcon` | Continue or navigate forward |
+| `PlusIcon` | Add or create |
+| `ExternalLinkIcon` | Indicate an external destination |
+
+For selective CSS, import `fletchstack-ui/tokens.css` then `fletchstack-ui/icon.css`, adding `button.css` when composing Button. Combined `styles.css` includes all three. JavaScript imports no styles or browser globals, so SSR needs no CSS loader. Corporate and Luna share icon geometry; icons inherit the context's semantic color, including Button interaction states.
+
+```tsx
+const brandIconStyle: IconStyle = {
+  '--fs-icon-size-medium': '28px',
+  '--fs-icon-stroke-width': 3,
+};
+<div style={brandIconStyle}><MoonIcon /><SunIcon label="Daytime" /></div>
+```
+
+Public tokens are `--fs-icon-size-small`, `--fs-icon-size-medium`, `--fs-icon-size-large`, and `--fs-icon-stroke-width`. Dimensions use fixed CSS pixels; text enlargement does not double the artwork. Stroke width is unitless SVG user units and scales with the viewBox. Scoped overrides inherit until a nested explicit theme resets them. Keep icon/text contrast appropriate to the containing surface when overriding colors.
+
+To add a named icon, create a small ref-forwarding component that renders Icon with fixed 24×24 SVG children, export it individually, and extend the catalog stories and contract tests. Keep artwork within the viewBox with stroke clearance. Preserve unused-icon removal through the packed-bundle checks. See [Icon stories](stories/Icon.stories.tsx) for custom artwork and the catalog.
+
+### Search the icon collection
+
+Open **Components → Icon → Gallery** in Storybook to browse named artwork, export names, and intended uses. Search names, uses, or curated synonyms (for example, `new` finds PlusIcon). Matching is an immediate literal substring, ignoring case and surrounding whitespace; blank input shows all eight icons. The result count announces updates, and **Clear search** restores all results and focus to search. Cards have no actions. Use the existing **Catalog** story to compare all three sizes in both themes; Gallery follows the Corporate/Luna toolbar selection by default; its Theme selector can also set a local Corporate or Luna preview. Use the Preview size radio group to compare 16, 20, and 24px artwork.
+
+Gallery metadata and search UI are Storybook-only and introduce no React library export or runtime dependency. The semantic `--fs-gallery-*` properties style the documentation surface and controls; see the generated [token reference](docs/tokens.md).

@@ -339,6 +339,169 @@
           "$description": "Disabled control border."
         }
       }
+    },
+    "icon": {
+      "size": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{primitive.px16}",
+          "$description": "Small icon width and height in CSS pixels."
+        },
+        "medium": {
+          "$type": "dimension",
+          "$value": "{primitive.px20}",
+          "$description": "Medium icon width and height in CSS pixels."
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{primitive.px24}",
+          "$description": "Large icon width and height in CSS pixels."
+        }
+      },
+      "strokeWidth": {
+        "$type": "number",
+        "$value": "{primitive.iconStroke}",
+        "$description": "Outline stroke width in SVG user units; scales with the viewBox."
+      }
+    },
+    "gallery": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Gallery background."
+      },
+      "panel": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightPanel}",
+        "$description": "Raised documentation panels and selected-control group background."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Gallery primary text and artwork."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Gallery supporting text; maintains AA contrast."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightLine}",
+        "$description": "Decorative card and divider boundaries."
+      },
+      "controlBorder": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightControl}",
+        "$description": "Interactive field boundaries; at least 3:1 against the surface."
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Selected preview-size fill."
+      },
+      "onAccent": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Text on the selected preview size."
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{primitive.gold}",
+        "$description": "Gallery keyboard focus indicator."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px6}",
+        "$description": "Gallery card and control corner radius."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Gallery boundary thickness."
+      },
+      "controlHeight": {
+        "$type": "dimension",
+        "$value": "{primitive.px36}",
+        "$description": "Minimum gallery input and preview-size target height."
+      },
+      "cardHeight": {
+        "$type": "dimension",
+        "$value": "{primitive.px140}",
+        "$description": "Minimum gallery card height; grows with content."
+      },
+      "columnWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px200}",
+        "$description": "Minimum preferred gallery column width before wrapping."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Gallery grid and control spacing."
+      },
+      "inset": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Gallery section and card insets."
+      },
+      "compactInset": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Compact gallery control inset."
+      },
+      "artworkGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Space below gallery artwork."
+      },
+      "focusWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px3}",
+        "$description": "Visible keyboard outline thickness."
+      },
+      "focusOffset": {
+        "$type": "dimension",
+        "$value": "{primitive.px3}",
+        "$description": "Outline clearance around gallery controls."
+      },
+      "font": {
+        "body": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Gallery body text size."
+        },
+        "caption": {
+          "$type": "dimension",
+          "$value": "{primitive.caption}",
+          "$description": "Gallery metadata and export-name size."
+        },
+        "heading": {
+          "$type": "dimension",
+          "$value": "{primitive.heading}",
+          "$description": "Gallery title size."
+        },
+        "mono": {
+          "$type": "fontFamily",
+          "$value": "{primitive.mono}",
+          "$description": "Gallery export names and code samples."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Gallery heading and brand emphasis."
+        },
+        "headingLineHeight": {
+          "$type": "number",
+          "$value": "{primitive.headingLineHeight}",
+          "$description": "Compact gallery heading line height, unitless."
+        }
+      },
+      "clearSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Minimum explicit clear-search target size."
+      }
     }
   }
 }

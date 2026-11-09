@@ -1,2 +1,12 @@
 export { Button } from './Button.js';
 export type { ButtonProps, ButtonStyle } from './Button.js';
+export { Icon } from './Icon.js';
+export type { IconProps, IconSize, IconStyle, NamedIconProps } from './Icon.js';
+export { MoonIcon } from './icons/MoonIcon.js';
+export { SunIcon } from './icons/SunIcon.js';
+export { CheckIcon } from './icons/CheckIcon.js';
+export { CloseIcon } from './icons/CloseIcon.js';
+export { ChevronDownIcon } from './icons/ChevronDownIcon.js';
+export { ArrowRightIcon } from './icons/ArrowRightIcon.js';
+export { PlusIcon } from './icons/PlusIcon.js';
+export { ExternalLinkIcon } from './icons/ExternalLinkIcon.js';

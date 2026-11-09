@@ -9,7 +9,7 @@ interface StoryOptions {
  * Encode preview settings using Storybook's globals and simple-args protocol.
  **/
 function previewPath(story: string, options: StoryOptions) {
-  const query = new URLSearchParams({ id: `components-button--${story}`, viewMode: 'story' });
+  const query = new URLSearchParams({ id: story, viewMode: 'story' });
   if (options.theme) {
     query.set('globals', `theme:${options.theme}`);
   }

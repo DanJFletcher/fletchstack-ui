@@ -1,5 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRightIcon, Button, CheckIcon, ChevronDownIcon, CloseIcon, ExternalLinkIcon, Icon, MoonIcon, PlusIcon, SunIcon } from '../../../../../src/index';
+import { ArrowRightIcon } from '../../../../../src/components/icon/named/ArrowRightIcon';
+import { Button } from '../../../../../src/components/button/Button';
+import { CheckIcon } from '../../../../../src/components/icon/named/CheckIcon';
+import { ChevronDownIcon } from '../../../../../src/components/icon/named/ChevronDownIcon';
+import { CloseIcon } from '../../../../../src/components/icon/named/CloseIcon';
+import { ExternalLinkIcon } from '../../../../../src/components/icon/named/ExternalLinkIcon';
+import { Icon } from '../../../../../src/components/icon/Icon';
+import { MoonIcon } from '../../../../../src/components/icon/named/MoonIcon';
+import { PlusIcon } from '../../../../../src/components/icon/named/PlusIcon';
+import { SunIcon } from '../../../../../src/components/icon/named/SunIcon';
 
 const catalog = [MoonIcon, SunIcon, CheckIcon, CloseIcon, ChevronDownIcon, ArrowRightIcon, PlusIcon, ExternalLinkIcon];
 

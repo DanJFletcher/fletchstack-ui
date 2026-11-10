@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Textarea } from '../../../../src/index';
+import { Textarea } from '../../../../src/components/textarea/Textarea';
 
 test.for([
   { theme: 'corporate', expected: 'rgb(255, 255, 255)' },

@@ -5,7 +5,8 @@ import userEvent from '@testing-library/user-event';
 import { createRef, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { FormGroup, Switch } from '../../../../src/index';
+import { FormGroup } from '../../../../src/components/form-group/FormGroup';
+import { Switch } from '../../../../src/components/switch/Switch';
 
 it('hydrates a controlled setting and retains its stable name after toggling', async () => {
   // arrange

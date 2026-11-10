@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Stack } from '../../../../src/index';
+import { Stack } from '../../../../src/components/stack/Stack';
 
 test.for(['corporate', 'luna'])('server-rendered %s Stack lays out every semantic gap before hydration', async (theme, { page }) => {
   // arrange

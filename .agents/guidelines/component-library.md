@@ -8,6 +8,8 @@ For example, a request for a destructive action variant should identify the acti
 
 ## Component boundaries
 
+Use direct implementation imports in focused component DOM, SSR and hydration tests and their fixture apps so affected unit/integration discovery follows real component dependencies. Preserve dedicated public-entrypoint and composed-consumer tests plus installed-package verification. During the development cycle, use focused red/green tests and affected related feedback as described in [the testing guidelines](testing-guidelines.md); complete the repository's full verification after implementation, repairing failures and repeating it before completion.
+
 An atomic component has one coherent public responsibility. A composed component combines existing pieces to deliver a larger pattern and owns the relationships among those pieces. Document supported slots, variants, and behavior so consumers can compose components without relying on internal markup.
 
 - A `Button` owns its padding, border, and gap between its label and icon. A native button supplies activation semantics. An icon-only button needs an accessible name.

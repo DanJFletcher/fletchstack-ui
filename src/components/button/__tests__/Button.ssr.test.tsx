@@ -2,7 +2,7 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { Button, type ButtonProps } from '../../../index';
+import { Button, type ButtonProps } from '../Button';
 
 describe('Button server rendering', () => {
   it('runs without browser globals', () => {

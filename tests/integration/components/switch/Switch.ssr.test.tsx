@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Switch } from '../../../../src/index';
+import { Switch } from '../../../../src/components/switch/Switch';
 
 test.for([
   { theme: 'corporate', surface: 'rgb(36, 75, 176)' },

@@ -4,7 +4,8 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { Badge, CheckIcon, type BadgeProps } from '../../../../src/index';
+import { Badge, type BadgeProps } from '../../../../src/components/badge/Badge';
+import { CheckIcon } from '../../../../src/components/icon/named/CheckIcon';
 
 it('hydrates a published badge with decorative artwork and native attributes intact', () => {
   // arrange

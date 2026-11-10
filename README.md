@@ -230,6 +230,8 @@ npm run typecheck
 npm test                   # unit tests, browser regressions, Storybook interactions and axe
 npm run test:unit           # unit suite only; enforces 100% coverage per production file
 npm run test:integration    # integration suite only; independently enforces the same 100% gate
+npm run test:unit:affected -- --base origin/main        # coverage-free related development feedback
+npm run test:integration:affected -- --base origin/main --dry-run  # explain selection without execution
 npm run test:storybook
 npm run test:e2e            # Focused Chromium journeys; coverage-free
 npm run test:e2e:coverage   # Opt-in diagnostic JavaScript coverage; no percentage gate

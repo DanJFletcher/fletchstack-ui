@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { Section, type SectionProps } from '../../../../src/index';
+import { Section, type SectionProps } from '../../../../src/components/section/Section';
 
 it.each<SectionProps>([{}, { spacing: 'compact' }, { spacing: 'spacious' }, { as: 'div', spacing: 'default' }])('hydrates %j while retaining native attributes and child order', props => {
   // arrange

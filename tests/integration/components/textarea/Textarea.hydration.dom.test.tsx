@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { createRef, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { afterEach, expect, it } from 'vitest';
-import { Textarea } from '../../../../src/index';
+import { Textarea } from '../../../../src/components/textarea/Textarea';
 
 afterEach(cleanup);
 

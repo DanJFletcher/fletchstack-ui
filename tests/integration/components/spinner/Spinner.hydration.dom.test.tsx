@@ -4,7 +4,8 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { Button, Spinner } from '../../../../src/index';
+import { Button } from '../../../../src/components/button/Button';
+import { Spinner } from '../../../../src/components/spinner/Spinner';
 
 it('hydrates loading text without introducing keyboard focus or duplicate status roles', () => {
   // arrange

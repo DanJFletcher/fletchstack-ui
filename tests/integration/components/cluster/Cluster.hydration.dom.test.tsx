@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { Cluster } from '../../../../src/index';
+import { Cluster } from '../../../../src/components/cluster/Cluster';
 
 it.each(['none', 'actions', 'related'] as const)('hydrates the %s relationship while preserving native attributes and child order', gap => {
   // arrange

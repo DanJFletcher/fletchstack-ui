@@ -1,6 +1,6 @@
 import { renderToString } from 'react-dom/server';
 import { expect, it } from 'vitest';
-import { Icon } from '../../../index';
+import { Icon } from '../Icon';
 
 it('produces deterministic SVG markup without browser globals', () => {
   // arrange

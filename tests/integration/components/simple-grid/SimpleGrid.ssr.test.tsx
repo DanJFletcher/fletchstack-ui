@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { SimpleGrid } from '../../../../src/components/simple-grid/index';
+import { SimpleGrid } from '../../../../src/components/simple-grid/SimpleGrid';
 
 test('server-rendered collections form equal tracks at different parent widths before hydration', async ({ page }) => {
   // arrange

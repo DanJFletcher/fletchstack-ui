@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { Container } from '../../../../src/index';
+import { Container } from '../../../../src/components/container/Container';
 
 it.each(['reading', 'content', 'wide'] as const)('hydrates the %s layout while preserving native attributes, children and refs', size => {
   // arrange

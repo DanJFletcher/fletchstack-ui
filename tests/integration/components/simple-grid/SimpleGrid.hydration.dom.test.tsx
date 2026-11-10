@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { SimpleGrid } from '../../../../src/index';
+import { SimpleGrid } from '../../../../src/components/simple-grid/SimpleGrid';
 
 it.each(['none', 'related', 'group'] as const)('hydrates the %s relationship while preserving native attributes and child order', gap => {
   // arrange

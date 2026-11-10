@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Link } from '../../../../src/index';
+import { Link } from '../../../../src/components/link/Link';
 
 test.for([
   { theme: 'corporate', foreground: 'rgb(36, 75, 176)' },

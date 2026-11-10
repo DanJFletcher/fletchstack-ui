@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Select } from '../../../../src/index';
+import { Select } from '../../../../src/components/select/Select';
 
 test.for([
   { theme: 'corporate', expected: 'rgb(255, 255, 255)' },

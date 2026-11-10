@@ -4,7 +4,10 @@ import { render, screen } from '@testing-library/react';
 import { expect, it } from 'vitest';
 import { createRef } from 'react';
 import userEvent from '@testing-library/user-event';
-import { FormGroup, Checkbox, TextInput, Select } from '../../../index';
+import { FormGroup } from '../FormGroup';
+import { Checkbox } from '../../checkbox/Checkbox';
+import { TextInput } from '../../text-input/TextInput';
+import { Select } from '../../select/Select';
 
 it('names a native group using its legend', () => {
   // arrange

@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { expect, it } from 'vitest';
-import { FieldLabel, FieldDescription, FieldError } from '../../../index';
+import { FieldLabel, FieldDescription, FieldError } from '../FieldPrimitives';
 
 it('connects the standalone native label to a control', () => {
   // arrange

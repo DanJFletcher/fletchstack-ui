@@ -24,7 +24,7 @@ Focused unit tests live with their component family. Integration and E2E remain 
 - Group related function scenarios with `describe` blocks. The [compiler tests](unit/tokens/token-compiler.test.mjs) contain compilation, flattening, and CSS naming together.
 - Use `.tsx` for React test files, `.ts` for other TypeScript tests, and `.mjs` for JavaScript module tests.
 - The unit project discovers `tests/unit/**/*.test.{ts,tsx,mjs}` and `src/components/**/__tests__/**/*.test.{ts,tsx,mjs}`; integration discovers only `integration/**/*.test.{ts,tsx,mjs}`. Helpers and sample applications do not use a `.test` suffix.
-- Playwright Test discovers only `e2e/**/*.spec.ts`. E2E tests import `test` and `expect` from [fixtures/test.ts](e2e/fixtures/test.ts), which automatically collects browser coverage. Vitest unit/integration tests keep their existing imports and discovery patterns.
+- Playwright Test discovers only `e2e/**/*.spec.ts`. E2E tests import `test` and `expect` from [fixtures/test.ts](e2e/fixtures/test.ts), which keeps ordinary runs coverage-free and collects coverage only when diagnostics are enabled. Vitest unit/integration discovery patterns are unchanged.
 - Add new tests within the appropriate feature directory. Add a new directory only when the tests represent a distinct feature or responsibility.
 
 ## DOM test setup
@@ -80,6 +80,39 @@ Keep one-off setup near its test. Share setup when several tests need the same l
 Do not import one test file from another or share assertion logic across suites. Unit and integration suites should independently verify their respective boundaries. Follow the [testing guidelines](../.agents/guidelines/testing-guidelines.md) for readable scenarios and precise assertions.
 
 ## Running tests
+
+### Affected unit and integration feedback
+
+Use explicit files without coverage for red/green, including new tests. Use affected commands during green/refactor:
+
+```sh
+npm run test:unit:affected -- --base origin/main
+npm run test:integration:affected -- --base origin/main
+npm run test:integration:affected -- --base origin/main --dry-run
+```
+
+The base is required; choose the ref whose merge-base with HEAD covers your branch work. `--base HEAD` is useful for local-only edits, but does not include earlier committed work. Commands union committed branch, staged, unstaged, and nonignored untracked changes, preserving cancelling edits and both rename paths. They neither fetch history nor change branches. Missing history yields a full requested-project fallback. Invalid arguments, a non-Git directory, or broken test discovery fail.
+
+Output identifies the project, base/HEAD/merge-base, changed paths, selected files and reasons. Outcomes are `selected`, `full-fallback`, `safely-empty`, or an error with nonzero status. Dry run discovers specifications without executing test modules/hooks, launching Chromium, generating tokens, or touching coverage. The only options are `--base <git-ref>` and `--dry-run`; project/config/coverage overrides are rejected.
+
+Vitest owns normal import dependency selection. Focused component tests and server/client fixture apps import implementation modules directly; real composed dependencies remain intact. Dedicated [public export](unit/build/public-api.test.tsx), [consumer composition](integration/build/public-consumer.test.tsx), named-icon/catalog contracts, and packed-consumer checks intentionally retain public-barrel confidence. Broad selection of those suites is expected.
+
+The [policy](../scripts/affected-policy.mjs) is deliberately conservative:
+
+| Changed input | Development selection |
+| --- | --- |
+| Implementation, test or imported helper | Vitest-related owners and directly changed tests |
+| Component CSS | Full integration; no additional unit appearance tests |
+| Tokens, generated CSS/reference, scripts, configuration, dependencies or public barrels | Full requested project |
+| Integration fixture/resource, stories/docs or added source/test inventory | Full integration; related owners or conservative fallback in unit |
+| Runtime rename/deletion, unknown resource or unproven runtime owners | Full requested project |
+| Unrelated OpenSpec planning prose | Safely empty unless another input selects tests |
+
+Paths under E2E or documentation are not blanket-ignored: some unit/integration tests import helpers there or read files from disk. A new unsupported dependency pattern must gain a tested rule or retain the full fallback. No custom export-aware graph, persistent selector cache or E2E/Storybook selection is provided. See [selection and runtime verification](../docs/affected-test-verification.md) for measured results and limitations.
+
+Affected runs are coverage-free even in full-fallback mode and preserve prior reports. They are partial development feedback, not a complete-verification claim. Once implementation is complete, run the existing full commands and required verification, including independent unit/integration coverage, browser checks and package/SSR verification. Repair failures with focused runs, then repeat full verification on the final state. Required CI stays complete.
+
+For example, add a new Button test, run that explicit file to observe red, implement it and rerun the file for green, then run both affected commands while refactoring. If final full integration exposes an unrelated regression, reproduce it with its explicit test, fix it, and rerun full verification before reporting completion. A conservative full fallback during development is expected when shared inputs change.
 
 Run commands from the repository root:
 

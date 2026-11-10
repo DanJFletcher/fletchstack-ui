@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardMedia, CardTitle } from '../../../../src/index';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardMedia, CardTitle } from '../../../../src/components/card/Card';
 
 test.for([
   { theme: 'corporate', surface: 'rgb(255, 255, 255)' },

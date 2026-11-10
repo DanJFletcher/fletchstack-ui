@@ -2,7 +2,10 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { FormGroup, Checkbox, Select, TextInput } from '../../../../src/index';
+import { FormGroup } from '../../../../src/components/form-group/FormGroup';
+import { Checkbox } from '../../../../src/components/checkbox/Checkbox';
+import { Select } from '../../../../src/components/select/Select';
+import { TextInput } from '../../../../src/components/text-input/TextInput';
 
 test.for([
   { theme: 'corporate', expected: 'rgb(23, 35, 56)' },

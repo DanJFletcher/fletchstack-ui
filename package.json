@@ -72,7 +72,9 @@
     "storybook": "npm run tokens && storybook dev -p 6006 --no-open --disable-telemetry",
     "build-storybook": "npm run tokens && storybook build --disable-telemetry",
     "verify:package": "node scripts/verify-package.mjs",
-    "verify:browser": "npm run build && node scripts/verify-browser.mjs"
+    "verify:browser": "npm run build && node scripts/verify-browser.mjs",
+    "test:unit:affected": "node scripts/test-affected.mjs unit",
+    "test:integration:affected": "node scripts/test-affected.mjs integration"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

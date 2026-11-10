@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Separator } from '../../../../src/index';
+import { Separator } from '../../../../src/components/separator/Separator';
 
 test.for(['corporate', 'luna'])('server-rendered %s rules fill parent dimensions without adding spacing', async (theme, { page }) => {
   // arrange

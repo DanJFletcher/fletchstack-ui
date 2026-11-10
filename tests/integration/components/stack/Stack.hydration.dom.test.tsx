@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { Stack } from '../../../../src/index';
+import { Stack } from '../../../../src/components/stack/Stack';
 
 it.each(['none', 'related', 'group', 'section'] as const)('hydrates the %s relationship with native attributes and a div ref', gap => {
   // arrange

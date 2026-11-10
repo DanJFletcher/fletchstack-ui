@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Checkbox } from '../../../../../src/index';
+import { Button } from '../../../../../src/components/button/Button';
+import { Checkbox } from '../../../../../src/components/checkbox/Checkbox';
 
 /**
  * Hydrate native checkbox properties, descriptions, and the public input ref.

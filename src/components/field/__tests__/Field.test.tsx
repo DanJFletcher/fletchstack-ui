@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { expect, it } from 'vitest';
 import { createRef } from 'react';
 import userEvent from '@testing-library/user-event';
-import { Field } from '../../../index';
+import { Field } from '../Field';
 
 it('associates its visible label with a consumer-owned native control', () => {
   // arrange

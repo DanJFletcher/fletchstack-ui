@@ -2,7 +2,8 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Badge, CheckIcon } from '../../../../src/index';
+import { Badge } from '../../../../src/components/badge/Badge';
+import { CheckIcon } from '../../../../src/components/icon/named/CheckIcon';
 
 test.for(['corporate', 'luna'])('server-rendered %s badges retain standalone geometry when Icon CSS loads last', async (theme, { page }) => {
   // arrange

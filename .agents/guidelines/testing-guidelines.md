@@ -10,6 +10,10 @@ A good test answers three questions at a glance: what is being tested, under wha
 
 ## Core principles
 
+For this repository's development loop, run an explicit test file without coverage to establish red and green, then use `npm run test:unit:affected -- --base <git-ref>` and `npm run test:integration:affected -- --base <git-ref>` during refactoring. Choose a comparison base covering the branch work and inspect selection reasons. Accept conservative full-project fallbacks when resources or dependencies cannot be classified; never equate an uncertain empty selection with a passing test. Before the commands exist, use explicit focused files while bootstrapping them.
+
+After implementation is complete, run required full verification with the unchanged independent unit/integration coverage gates and other required browser/build/package checks. Fix discovered failures using focused feedback, then repeat full verification before completion. Keep focused tests on direct implementation imports; dedicated public-entrypoint/composed-consumer tests and package checks retain public API confidence. See [the test guide](../../tests/README.md#affected-unit-and-integration-feedback) for commands, resource fallbacks and import responsibilities.
+
 1. **One behavior per test.** Each test verifies a single outcome of a single action. If the test name needs the word "and", split it.
 2. **Arrange, Act, Assert, always.** Every test has three visibly separated phases, in that order, each appearing once.
 3. **Test behavior, not implementation.** Assert on what the unit returns or what observable effect it has, never on how it gets there. A correct refactor must not break a test.

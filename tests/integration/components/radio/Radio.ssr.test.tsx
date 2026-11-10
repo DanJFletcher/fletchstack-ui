@@ -5,7 +5,8 @@ import userEvent from '@testing-library/user-event';
 import { createRef, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it } from 'vitest';
-import { FormGroup, Radio } from '../../../../src/index';
+import { FormGroup } from '../../../../src/components/form-group/FormGroup';
+import { Radio } from '../../../../src/components/radio/Radio';
 
 it('hydrates consumer-owned selection with linked group errors', async () => {
   // arrange

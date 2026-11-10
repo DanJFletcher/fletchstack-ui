@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { Separator, type SeparatorProps } from '../../../../src/index';
+import { Separator, type SeparatorProps } from '../../../../src/components/separator/Separator';
 
 it.each(['horizontal', 'vertical'] as const)('hydrates a semantic %s boundary without a focus stop', orientation => {
   // arrange

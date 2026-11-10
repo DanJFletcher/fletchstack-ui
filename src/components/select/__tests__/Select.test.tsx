@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { expect, it, vi } from 'vitest';
-import { Select } from '../../../index';
+import { Select } from '../Select';
 
 it('names the field using its visible label', () => {
   // arrange

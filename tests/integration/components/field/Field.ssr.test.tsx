@@ -2,7 +2,8 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Field, FieldDescription, FieldError, FieldLabel } from '../../../../src/index';
+import { Field } from '../../../../src/components/field/Field';
+import { FieldDescription, FieldError, FieldLabel } from '../../../../src/components/field/FieldPrimitives';
 
 test.for([
   { theme: 'corporate', expected: 'rgb(180, 35, 24)' },

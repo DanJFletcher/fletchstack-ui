@@ -3,7 +3,8 @@ import '../../../../tests/support/dom';
 import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { expect, it } from 'vitest';
-import { Button, Icon } from '../../../index';
+import { Button } from '../../button/Button';
+import { Icon } from '../Icon';
 
 it('uses a trimmed label as its image name', () => {
   // arrange

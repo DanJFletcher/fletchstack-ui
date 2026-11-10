@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Spinner } from '../../../../src/index';
+import { Spinner } from '../../../../src/components/spinner/Spinner';
 
 test.for(['corporate', 'luna'])('server-rendered %s spinners retain text under reduced motion without Icon CSS', async (theme, { page }) => {
   // arrange

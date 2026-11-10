@@ -3,7 +3,8 @@ import '../../../../tests/support/dom';
 import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { describe, expect, it } from 'vitest';
-import { Card, CardHeader, CardMedia, CardContent, CardTitle, CardDescription, CardFooter, Button } from '../../../index';
+import { Card, CardHeader, CardMedia, CardContent, CardTitle, CardDescription, CardFooter } from '../Card';
+import { Button } from '../../button/Button';
 
 describe('Card', () => {
   it('exposes a consumer-named article with composed content', () => {

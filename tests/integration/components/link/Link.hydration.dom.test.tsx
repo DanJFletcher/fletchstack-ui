@@ -4,7 +4,8 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { ArrowRightIcon, Link } from '../../../../src/index';
+import { ArrowRightIcon } from '../../../../src/components/icon/named/ArrowRightIcon';
+import { Link } from '../../../../src/components/link/Link';
 
 it('hydrates a new-tab link with stable description relationships', () => {
   // arrange

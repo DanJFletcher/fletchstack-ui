@@ -4,7 +4,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { afterEach, expect, it } from 'vitest';
-import { Checkbox } from '../../../../src/index';
+import { Checkbox } from '../../../../src/components/checkbox/Checkbox';
 
 afterEach(cleanup);
 

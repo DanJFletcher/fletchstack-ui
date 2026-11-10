@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { AspectRatio } from '../../../../src/components/aspect-ratio/index';
+import { AspectRatio } from '../../../../src/components/aspect-ratio/AspectRatio';
 
 test('server-rendered frames preserve ratios despite oversized intrinsic children before hydration', async ({ page }) => {
   // arrange

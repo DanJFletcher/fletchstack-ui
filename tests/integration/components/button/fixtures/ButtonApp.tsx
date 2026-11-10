@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button } from '../../../../../src/index';
+import { Button } from '../../../../../src/components/button/Button';
 
 /**
  * Exercise the public Button API in a real React form that can render and hydrate.

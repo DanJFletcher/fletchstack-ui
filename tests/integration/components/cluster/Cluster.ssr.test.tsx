@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Cluster } from '../../../../src/index';
+import { Cluster } from '../../../../src/components/cluster/Cluster';
 
 test.for(['corporate', 'luna'])('server-rendered %s Cluster wraps with both gap axes before hydration', async (theme, { page }) => {
   // arrange

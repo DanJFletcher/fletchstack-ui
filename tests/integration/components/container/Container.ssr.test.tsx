@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Container } from '../../../../src/index';
+import { Container } from '../../../../src/components/container/Container';
 
 test.for(['corporate', 'luna'])('server-rendered %s Container constrains and centers before hydration', async (theme, { page }) => {
   // arrange

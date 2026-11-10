@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { renderToString } from 'react-dom/server';
 import { expect } from 'vitest';
 import { test } from '../../fixtures/browser';
-import { Section } from '../../../../src/components/section/index';
+import { Section } from '../../../../src/components/section/Section';
 
 test.for(['corporate', 'luna'])('server-rendered %s sections apply both block-padding edges before hydration', async (theme, { page }) => {
   // arrange

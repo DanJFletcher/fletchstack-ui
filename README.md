@@ -231,7 +231,8 @@ npm test                   # unit tests, browser regressions, Storybook interact
 npm run test:unit           # unit suite only; enforces 100% coverage per production file
 npm run test:integration    # integration suite only; independently enforces the same 100% gate
 npm run test:storybook
-npm run test:e2e            # Chromium component/Storybook journeys; independent 100% coverage gate
+npm run test:e2e            # Focused Chromium journeys; coverage-free
+npm run test:e2e:coverage   # Opt-in diagnostic JavaScript coverage; no percentage gate
 npm run build              # ESM, declarations, and explicit CSS exports
 npm run build-storybook    # static site in storybook-static
 npm run verify:browser     # built CSS contrast, focus, reflow; screenshots in .verification
@@ -373,3 +374,19 @@ Optional centered reading/content/wide page widths with responsive inline gutter
 ## Stack
 
 Optional vertical direct-child layout with existing semantic gap roles and logical cross-axis alignment. Preserves child margins/order and composes with Container and fields. Load `stack.css` plus tokens, or combined styles. See the [Stack contract](docs/stack.md) and [spatial guide](docs/spatial-system.md).
+
+## Cluster
+
+Optional intrinsic wrapping rows with existing semantic gaps, per-row alignment and logical justification. Preserves child widths, margins and native interactions; composes with Container and Stack. Load `cluster.css` plus tokens, or combined styles. See the [Cluster contract](docs/cluster.md) and [spatial guide](docs/spatial-system.md).
+
+## SimpleGrid
+
+Optional equal-width auto-fit collection columns with a 240px preferred minimum and related/group/zero semantic gaps. Responds to parent width and shrinks to fit narrow parents. Load `simple-grid.css` plus tokens, or combined styles. See the [SimpleGrid contract](docs/simple-grid.md).
+
+## AspectRatio
+
+Optional proportional media frame, defaulting to 16:9 with positive numeric ratios. The child owns fitting and accessibility; captions remain outside and overflow stays visible. Load `aspect-ratio.css` or combined styles. See the [AspectRatio contract](docs/aspect-ratio.md).
+
+## Section
+
+Optional native page topic with compact 32px, default 64px or spacious 96px block padding; use `as="div"` for a visual wrapper. Container owns width/gutters; child layouts and parent gaps remain independent. Load `section.css` plus tokens, or combined styles. See the [Section contract](docs/section.md).

@@ -1,6 +1,21 @@
 import { expect, test } from '../fixtures/test';
 import baseline from '../../fixtures/component-organization-baseline.json' with { type: 'json' };
+import retiredSmokes from '../../fixtures/retired-story-smokes.json' with { type: 'json' };
 import { openStory } from '../fixtures/storybook';
+
+test('stories formerly covered by smoke loops remain discoverable and testable', async ({ request }) => {
+  const response = await request.get('/index.json');
+  expect(response.ok()).toBe(true);
+  const index = await response.json();
+
+  for (const group of retiredSmokes) {
+    for (const id of group.stories) {
+      expect(index.entries[id], id).toMatchObject({ id, type: 'story', importPath: group.source });
+      expect(index.entries[id].tags, id).toContain('test');
+      expect(index.entries[id].tags, id).not.toContain('test-skip');
+    }
+  }
+});
 
 test('legacy story and documentation IDs retain their corresponding examples', async ({ request, page }) => {
   await openStory(page, 'components-textarea--both-themes');

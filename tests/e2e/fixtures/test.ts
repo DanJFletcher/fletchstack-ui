@@ -1,14 +1,10 @@
 import { test as base, expect } from '@playwright/test';
-import { coverageReport } from '../coverage/report.mjs';
+import { withBrowserCoverage, type BrowserCoverageOptions } from '../coverage/lifecycle';
 
-export const test = base.extend<{ browserCoverage: void }>({
-  browserCoverage: [async ({ page }, use) => {
-    await page.coverage.startJSCoverage({ resetOnNavigation: false });
-    try {
-      await use();
-    } finally {
-      await coverageReport().add(await page.coverage.stopJSCoverage());
-    }
+export const test = base.extend<BrowserCoverageOptions & { browserCoverage: void }>({
+  collectBrowserCoverage: [false, { option: true }],
+  browserCoverage: [async ({ page, collectBrowserCoverage }, use) => {
+    await withBrowserCoverage(collectBrowserCoverage, page.coverage, use);
   }, { auto: true }],
 });
 

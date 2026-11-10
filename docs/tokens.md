@@ -378,6 +378,10 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-container-max-width-wide` | Wide Container maximum, including inline gutters. | dimension |
 | `--fs-container-gutter-small` | Container inline gutter below 600px viewport width. | dimension |
 | `--fs-container-gutter-large` | Container inline gutter at and above 600px viewport width. | dimension |
+| `--fs-simple-grid-min-item-width` | Preferred SimpleGrid item minimum; a single column shrinks below this width to fit its parent. | dimension |
+| `--fs-section-padding-compact` | Section compact padding at each block edge; independent of sibling section gaps. | dimension |
+| `--fs-section-padding-default` | Section default padding at each block edge; independent of sibling section gaps. | dimension |
+| `--fs-section-padding-spacious` | Section spacious padding at each block edge; independent of sibling section gaps. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

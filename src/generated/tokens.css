@@ -374,6 +374,10 @@
   --fs-container-max-width-wide: 1440px;
   --fs-container-gutter-small: 16px;
   --fs-container-gutter-large: 24px;
+  --fs-simple-grid-min-item-width: 240px;
+  --fs-section-padding-compact: 32px;
+  --fs-section-padding-default: 64px;
+  --fs-section-padding-spacious: 96px;
 }
 
 [data-theme="luna"] {
@@ -751,4 +755,8 @@
   --fs-container-max-width-wide: 1440px;
   --fs-container-gutter-small: 16px;
   --fs-container-gutter-large: 24px;
+  --fs-simple-grid-min-item-width: 240px;
+  --fs-section-padding-compact: 32px;
+  --fs-section-padding-default: 64px;
+  --fs-section-padding-spacious: 96px;
 }

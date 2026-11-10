@@ -110,10 +110,3 @@ test('Link retains underlines and keyboard focus in forced colors', async ({ pag
   await expect(page.getByRole('link')).toHaveCSS('outline-style', 'solid');
   await expect(page.getByRole('link')).toHaveCSS('text-decoration-line', 'underline');
 });
-
-for (const story of ['playground', 'standalone', 'external-destination', 'new-tab', 'unavailable', 'states', 'usage', 'keyboard', 'both-themes', 'customization', 'download', 'empty-destination', 'named-target', 'ref-access', 'long-text']) {
-  test(`the ${story} Link example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-link--${story}`);
-    await expect(page.locator('.fs-link').first()).toBeVisible();
-  });
-}

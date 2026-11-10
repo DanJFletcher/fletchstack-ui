@@ -1,5 +1,7 @@
 # Test guide
 
+The [browser-behavior matrix](browser-behavior-matrix.md) assigns each browser guarantee to its owning layer. Its [case audit](browser-check-audit.json) records the original standalone checks and the surviving confidence for each simplification.
+
 Focused unit tests live with their component family. Integration and E2E remain central by suite and family. Start with the [component organization guide](../docs/component-organization.md) and choose the boundary you need to verify.
 
 | Location | Responsibility | Environment |
@@ -123,13 +125,25 @@ npm run test:e2e:report
 
 E2E tests use Playwright's isolated browser contexts, accessible locators, and auto-waiting assertions. Retries are disabled so failures are visible. Failure screenshots and retained traces are written under `test-results/`; the test report is written to `playwright-report/`. These generated directories are ignored by Git and ESLint. The E2E command runs separately in CI and does not contribute to either Vitest coverage gate. `npm test` continues to run the Vitest suites; use `npm run test:e2e` for E2E execution.
 
-### Independent E2E coverage gate
+### Coverage-free E2E and diagnostic measurement
 
-Chromium's native V8 coverage is collected before navigation, preserved across manager/iframe navigation, and merged by `monocart-coverage-reports` using source maps. The [report configuration](e2e/coverage/report.mjs) inventories all JavaScript/TypeScript browser modules in `src/`, `stories/`, and `.storybook/`, including files never loaded. Type declarations and the Node-only `.storybook/main.ts` configuration are excluded. **Scripts are outside E2E coverage.** MDX/Markdown prose and CSS have no authored JavaScript counters; the documentation and computed styling journeys verify their observable behavior instead. Dependencies, generated framework wrappers, test fixtures, and Node build tooling are also outside the gate.
+`npm run test:e2e` runs the complete focused Chromium suite without starting V8 coverage, cleaning caches, or writing coverage artifacts. File/name filters use the same mode and preserve normal assertion failures, screenshots and retained traces. Existing diagnostic artifacts are untouched, not evidence for this run.
 
-The [reporter](e2e/coverage/reporter.mjs) clears cached counters before every run and requires **100% statements, branches, functions, and lines per scoped file**, comparing exact covered/total counts rather than rounded percentages. Zero-counter metrics are vacuous; missing coverage fails. Coverage ignore comments are disabled. The HTML report is [coverage/e2e/index.html](../coverage/e2e/index.html), with V8 details and a machine-readable summary alongside it. Unit, integration, and E2E reports never share counters.
+```sh
+npm run test:e2e
+npm run test:e2e -- tests/e2e/components/select/Select.spec.ts
+npm run test:e2e -- --grep 'native keyboard'
+npm run test:e2e:coverage
+npm run test:e2e:coverage -- tests/e2e/components/select/Select.spec.ts
+```
 
-The normal `npm run test:e2e` command enforces this gate locally and in CI. A filtered run still enforces the complete inventory and can therefore pass its selected tests but exit unsuccessfully for incomplete coverage. For focused debugging without the whole-suite gate, override reporters explicitly: `npx --no-install playwright test --grep 'native default' --reporter=list`. Run the normal command before submitting changes. Coverage proves execution of mapped JavaScript, not CSS coverage, accessibility compliance, or cross-browser compatibility; this suite currently runs Chromium only.
+The opt-in command uses the same suites/server/browser through a thin coverage configuration. It collects Chromium V8 data across navigation and writes HTML/JSON under `coverage/e2e/`. `diagnostic-summary.json` separately lists production, story/demo and preview files and exact metric totals, invocation/filter information, selected suites/tests, test status and report-generation time. Unloaded authored modules remain in the denominator. Reports explicitly describe JavaScript execution measurement, not completion of the browser-behavior matrix.
+
+Percentages are informational, including 0% for unloaded modules. Test failures, missing expected collection data, and collection/reporting/write errors still fail the command. Each diagnostic run cleans its own cache; counters never satisfy unit/integration gates. A filtered diagnostic run shows its selection and must not be presented as complete browser verification. A request-only selection with no JavaScript produces no measurement and fails rather than inventing data.
+
+The inventory still includes authored browser JavaScript/TypeScript in `src/`, `stories/`, and `.storybook/`, excluding declarations, tests/setup/fixtures, generated framework wrappers, external dependencies and Node-only `.storybook/main.ts`. Scripts, CSS and prose have no browser-JavaScript counters. See the [browser-behavior matrix](browser-behavior-matrix.md) for their actual verification owners. Independent unit and integration coverage scope and 100% per-file thresholds are unchanged.
+
+Complete CI verification requires all Storybook render/play/a11y checks, the complete focused browser suite, production gates and existing build/package checks. The separate manually dispatched diagnostic workflow measures coverage on demand. There is no affected selector or scheduled diagnostic run in this change.
 
 Exercise DOM-test cleanup with a reproducible shuffled order:
 
@@ -147,6 +161,6 @@ Temporary projects and bundles are removed after use. The command-entry smoke te
 
 Icon contracts are covered by [DOM tests](../src/components/icon/__tests__/Icon.test.tsx), [SSR tests](../src/components/icon/__tests__/Icon.ssr.test.tsx), [named artwork tests](../src/components/icon/__tests__/named-icons.test.tsx), [hydration integration](integration/components/icon/Icon.hydration.test.ts), and [served Storybook journeys](e2e/components/icon/Icon.spec.ts). The packed-consumer checks also verify single-icon and Button-only bundles omit unused artwork.
 
-The searchable Gallery uses shared [story-only metadata](../src/components/icon/stories/icon-catalog.ts). [Catalog integrity tests](../src/components/icon/stories/__tests__/icon-catalog.test.ts) check public named-export membership, order and synonyms. [Gallery DOM tests](../src/components/icon/stories/__tests__/icon-gallery.test.tsx) exercise literal matching, feedback, empty-state recovery and keyboard focus. [Browser journeys](e2e/components/icon/icon-gallery.spec.ts) cover the real preview, theme toolbar, styled controls, preview sizes, local theme selection, and narrow/enlarged text. These helper modules remain in the existing complete-inventory E2E coverage gate; unit/integration production coverage scopes remain unchanged. Storybook's play journey restores all eight results before the accessibility scan.
+The searchable Gallery uses shared [story-only metadata](../src/components/icon/stories/icon-catalog.ts). [Catalog integrity tests](../src/components/icon/stories/__tests__/icon-catalog.test.ts) check public named-export membership, order and synonyms. [Gallery DOM tests](../src/components/icon/stories/__tests__/icon-gallery.test.tsx) exercise literal matching, feedback, empty-state recovery and keyboard focus. [Browser journeys](e2e/components/icon/icon-gallery.spec.ts) cover the real preview, theme toolbar, styled controls, preview sizes, local theme selection, and narrow/enlarged text. These helper modules remain visible in the complete-inventory diagnostic browser report; unit/integration production coverage scopes remain unchanged. Storybook's play journey restores all eight results before the accessibility scan.
 
 Spatial-system coverage lives in [unit token contracts](unit/tokens/spatial-contract.test.mjs), [real-generation integration](integration/tokens/spatial-contract.test.mjs), and [Storybook browser journeys](e2e/storybook/spatial-system.spec.ts). The [frozen legacy contract](fixtures/spatial-legacy-tokens.json) records the 90 pre-change public defaults per theme; additions are allowed, while unintended changes fail. Browser tests check corrected gallery coupling, semantic gap selection, nested resets, guide links, and the example-specific responsive breakpoint. Native select typeahead supplies a real keyboard journey; popup arrow navigation must also be checked on supported real browsers/platforms. Production coverage scopes and thresholds are unchanged.

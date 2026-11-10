@@ -13,7 +13,7 @@ The owner-supplied Stack design and request approve this optional vertical layou
 | group | `--fs-space-stack-group` | 24px |
 | section | `--fs-layout-section-gap` | 64px |
 
-These existing variables are used directly: no new tokens or aliases are needed. Scoped overrides inherit normally, while explicit nested themes restore their complete defaults. The component CSS contains no breakpoint. Consumers can change the existing roles with their own scoped CSS/media queries; Stack stays vertical at every width. Horizontal wrapping belongs to the separately proposed Cluster component, which this change does not implement. Ordinary wrapping flex rows remain available.
+These existing variables are used directly: no new tokens or aliases are needed. Scoped overrides inherit normally, while explicit nested themes restore their complete defaults. The component CSS contains no breakpoint. Consumers can change the existing roles with their own scoped CSS/media queries; Stack stays vertical at every width. Use the optional [Cluster](./cluster.md) component for horizontal wrapping relationships. Ordinary wrapping flex rows remain available.
 
 ## Ownership and accessibility
 

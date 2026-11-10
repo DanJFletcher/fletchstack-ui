@@ -27,7 +27,7 @@ function sourcePath(path, info = {}) {
  **/
 export function coverageReport() {
   return new CoverageReport({
-    name: 'Component and Storybook E2E coverage', outputDir: 'coverage/e2e',
+    name: 'Diagnostic component and Storybook JavaScript coverage', outputDir: 'coverage/e2e',
     reports: ['v8', 'v8-json', 'console-details', 'json-summary'], v8Ignore: false,
     entryFilter: entry => inScope(new URL(entry.url, 'http://localhost').pathname.slice(1)),
     sourceFilter: inScope, sourcePath,

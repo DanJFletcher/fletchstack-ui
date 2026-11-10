@@ -238,3 +238,73 @@ export const invalidStackDirection = <Stack direction="row" />;
 export const invalidStackResponsiveGap = <Stack gap={{ mobile: 'related' }} />;
 // @ts-expect-error Stack always renders a native div.
 export const invalidStackElement = <Stack as="section" />;
+
+import { Cluster, type ClusterProps, type ClusterStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/cluster.css';
+const clusterRef = createRef<HTMLDivElement>();
+const clusterStyle: ClusterStyle = { '--fs-space-gap-actions': '24px' };
+const clusterProps: ClusterProps = { gap: 'related', align: 'baseline', justify: 'end', style: clusterStyle, children: <Button>Save</Button> };
+export const cluster = <Cluster {...clusterProps} ref={clusterRef} id="actions" />;
+export const composedCluster = <Container><Stack><Cluster><Button>Save</Button><Button>Preview</Button></Cluster></Stack></Container>;
+// @ts-expect-error Cluster gap maps to three supported relationships.
+export const invalidClusterGap = <Cluster gap="section" />;
+// @ts-expect-error Cluster has no stretch alignment.
+export const invalidClusterAlignment = <Cluster align="stretch" />;
+// @ts-expect-error Cluster does not distribute equal-width spaces.
+export const invalidClusterJustify = <Cluster justify="space-between" />;
+// @ts-expect-error Cluster always uses wrapping rows.
+export const invalidClusterDirection = <Cluster direction="column" />;
+// @ts-expect-error Consumers use scoped CSS instead of breakpoint objects.
+export const invalidClusterResponsiveGap = <Cluster gap={{ mobile: 'actions' }} />;
+// @ts-expect-error Cluster always renders a div.
+export const invalidClusterElement = <Cluster as="nav" />;
+
+import { SimpleGrid, type SimpleGridProps, type SimpleGridStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/simple-grid.css';
+const simpleGridRef = createRef<HTMLDivElement>();
+const simpleGridStyle: SimpleGridStyle = { '--fs-simple-grid-min-item-width': '180px', '--fs-space-gap-related': '24px' };
+const simpleGridProps: SimpleGridProps = { gap: 'group', style: simpleGridStyle, children: <Button>Open project</Button> };
+export const simpleGrid = <SimpleGrid {...simpleGridProps} ref={simpleGridRef} aria-label="Projects" />;
+export const composedSimpleGrid = <Container><Stack><SimpleGrid><Button>First</Button><Button>Second</Button></SimpleGrid></Stack></Container>;
+// @ts-expect-error SimpleGrid supports only the documented gap relationships.
+export const invalidSimpleGridGap = <SimpleGrid gap="actions" />;
+// @ts-expect-error SimpleGrid has no fixed column-count API.
+export const invalidSimpleGridColumns = <SimpleGrid columns={3} />;
+// @ts-expect-error Consumers use scoped CSS rather than breakpoint objects.
+export const invalidSimpleGridResponsiveGap = <SimpleGrid gap={{ mobile: 'related' }} />;
+// @ts-expect-error SimpleGrid always renders a div.
+export const invalidSimpleGridElement = <SimpleGrid as="section" />;
+
+import { AspectRatio, type AspectRatioProps, type AspectRatioStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/aspect-ratio.css';
+const aspectRatioRef = createRef<HTMLDivElement>();
+const aspectRatioStyle: AspectRatioStyle = { aspectRatio: '4 / 3', '--fs-space-gap-related': '24px' };
+const aspectRatioProps: AspectRatioProps = { ratio: 3 / 4, style: aspectRatioStyle, children: <img alt="Project landscape" /> };
+export const aspectRatio = <AspectRatio {...aspectRatioProps} ref={aspectRatioRef} aria-describedby="caption" />;
+export const composedAspectRatio = <SimpleGrid><AspectRatio ratio={1}><img alt="Project artwork" /></AspectRatio></SimpleGrid>;
+// @ts-expect-error Ratio is numeric width divided by height.
+export const invalidAspectRatioString = <AspectRatio ratio="16:9" />;
+// @ts-expect-error Fitting belongs to the media child.
+export const invalidAspectRatioFit = <AspectRatio fit="cover" />;
+// @ts-expect-error AspectRatio has no polymorphic API.
+export const invalidAspectRatioElement = <AspectRatio as="figure" />;
+// @ts-expect-error Responsive ratio objects are outside the API.
+export const invalidAspectRatioResponsive = <AspectRatio ratio={{ mobile: 1 }} />;
+// @ts-expect-error AspectRatio owns its content layer; use children for media.
+export const invalidAspectRatioRawContent = <AspectRatio dangerouslySetInnerHTML={{ __html: '<img alt="Artwork" />' }} />;
+
+import { Section, type SectionProps, type SectionStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/section.css';
+const sectionRef = createRef<HTMLElement>();
+const sectionStyle: SectionStyle = { '--fs-section-padding-default': '32px', paddingInline: 0 };
+const sectionProps: SectionProps = { spacing: 'spacious', as: 'section', style: sectionStyle, children: <h2 id="topic-heading">Project topic</h2> };
+export const section = <Section {...sectionProps} ref={sectionRef} aria-labelledby="topic-heading" />;
+export const visualSection = <Section as="div" spacing="compact" ref={sectionRef}><Container><Stack><SimpleGrid><Button>Open project</Button></SimpleGrid></Stack></Container></Section>;
+// @ts-expect-error Section supports only compact, default and spacious presets.
+export const invalidSectionSpacing = <Section spacing="none" />;
+// @ts-expect-error Section has only section and div native wrappers.
+export const invalidSectionElement = <Section as="article" />;
+// @ts-expect-error Responsive decisions belong to scoped CSS.
+export const invalidSectionResponsive = <Section spacing={{ mobile: 'compact' }} />;
+// @ts-expect-error Inline gutters belong to Container.
+export const invalidSectionGutters = <Section gutters />;

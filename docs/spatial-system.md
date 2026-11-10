@@ -32,7 +32,7 @@ A 6px radius, 3px focus ring, 140px card minimum, and 200px column constraint ar
 | `--fs-space-inset-container` | 24px | A content container's interior |
 | `--fs-layout-section-gap` | 64px | Major website sections |
 
-These are initial defaults, not mandates to replace all existing component roles. Button owns its padding and label/icon gap; Icon owns its artwork size. The parent owns placement, margins, sibling gaps, and container insets. Use ordinary flex/grid wrappers for child layout; they remain fully supported. The optional [Stack](./stack.md) component is a convenience for vertical direct-child gaps and cross-axis alignment; no Grid component is required. The optional [Container](./container.md) primitive owns only maximum width, centering, and responsive inline gutters, and can surround those wrappers. Ordinary CSS wrappers remain fully supported.
+These are initial defaults, not mandates to replace all existing component roles. Button owns its padding and label/icon gap; Icon owns its artwork size. The parent owns placement, margins, sibling gaps, and container insets. Use ordinary flex/grid wrappers for child layout; they remain fully supported. The optional [Stack](./stack.md) component is a convenience for vertical direct-child gaps and cross-axis alignment; no Grid component is required. The optional [SimpleGrid](./simple-grid.md) distributes collection items into equal-width auto-fit columns, with a 240px preferred minimum that shrinks to fit narrow parents. It uses existing related/group gap roles directly and adds only the semantic `--fs-simple-grid-min-item-width` sizing role (240px in both themes). Use ordinary CSS Grid for unequal tracks or spanning; children own their internal layout and surfaces. The optional [Container](./container.md) primitive owns only maximum width, centering, and responsive inline gutters, and can surround those wrappers. Ordinary CSS wrappers remain fully supported.
 
 ```css
 .settings-actions {
@@ -168,7 +168,7 @@ Storybook's [Container examples](http://localhost:6006/?path=/story/components-c
 
 [Stack](./stack.md) is a convenience for column flexbox with CSS gap, not a replacement for ordinary flex/grid wrappers. Use related (default) for `--fs-space-gap-related` (16px), group for `--fs-space-stack-group` (24px), section for `--fs-layout-section-gap` (64px), or none for zero. These variables are consumed directly, retain scoped overrides and nested-theme resets, and have identical Corporate/Luna defaults. No Stack-specific token aliases are introduced.
 
-Stack owns only participating direct-child gaps and cross-axis alignment. Stretch is the default; start/center/end position content across the inline axis, with start/end following writing direction. DOM, reading and keyboard order stay unchanged. Stack stays vertical at every width. Consumers can override the existing roles through scoped CSS and media queries; horizontal wrapping belongs to the separately proposed Cluster, or an ordinary wrapping flex row today.
+Stack owns only participating direct-child gaps and cross-axis alignment. Stretch is the default; start/center/end position content across the inline axis, with start/end following writing direction. DOM, reading and keyboard order stay unchanged. Stack stays vertical at every width. Consumers can override the existing roles through scoped CSS and media queries; horizontal wrapping can use the optional [Cluster](./cluster.md) or an ordinary wrapping flex row.
 
 Keep composed fields as individual children: TextInput, Textarea, Select and FormGroup already own label/control/message spacing and accessibility associations. Splitting those parts into outer Stack children gives them the wrong sibling relationship. React fragments do not establish a grouped flex item. Nest a real Stack or ordinary wrapper when several nodes form one relationship.
 
@@ -195,3 +195,41 @@ CSS gap inserts no spacer nodes and reserves no space for display:none or native
 ```
 
 Use `gap="section"` with that consumer class to change the section gap while preserving vertical flow. JavaScript imports no CSS or browser globals and requires no provider/layout effect/hydration. Import tokens and `stack.css` (plus composed component CSS), or combined `styles.css`. Demonstration outlines and measurement blocks in Storybook are consumer guides, not Stack's appearance.
+
+
+## Optional Cluster
+
+[Cluster](./cluster.md) is an optional wrapping row of intrinsic children, using CSS flexbox with row direction and wrap enabled. It complements Container's width/gutters and Stack's vertical relationships without replacing ordinary CSS wrappers. It does not supply equal-width Grid tracks or interactive toolbar/ButtonGroup/selection behavior.
+
+The actions default consumes `--fs-space-gap-actions` (12px) directly on both axes; related consumes `--fs-space-gap-related` (16px), and none is zero. Existing scoped overrides, consumer media queries and explicit nested-theme resets apply without new aliases or tokens. Corporate and Luna share layout defaults. Wrapping responds to the parent width at the same viewport size; Cluster has no breakpoint or automatic mobile column mode.
+
+Align start/center/end/baseline controls the cross axis within each row. Justify start/center/end positions each row along available inline space, respecting writing direction. DOM, reading and native tab order are unchanged. Cluster adds no roles, tabindex, arrow navigation, focus management, padding, surface, border, shadow or fixed height. Parents own group labels and specialized interaction semantics.
+
+Children retain intrinsic widths and native interactions; Cluster imposes no growth/equal-width or broad descendant styles. Supported controls such as Button can shrink and wrap their own text. Unsupported fixed-minimum or unbreakable content still needs consumer-owned handling. Overflow and focus rings are not clipped. Hidden/display:none items reserve no gap, while visibility:hidden still participates. Consumer child margins can add to CSS gap; nested clusters independently own their direct relationships.
+
+```tsx
+<Container>
+  <Stack gap="group">
+    <h2>Project overview</h2>
+    <Cluster>
+      <Button>Save changes</Button>
+      <Button variant="secondary">Preview</Button>
+      <Badge tone="info">New</Badge>
+    </Cluster>
+  </Stack>
+</Container>
+```
+
+Import tokens plus `cluster.css` and composed component styles, or combined `styles.css`. CSS layout works before hydration with no provider, browser global or layout effect. Storybook's guides, measurement blocks and fixed parent sizes are demonstration styles, not Cluster styling. Ordinary wrapping flex wrappers remain fully supported.
+
+## Optional AspectRatio
+
+[AspectRatio](./aspect-ratio.md) reserves proportional media geometry from available width, defaulting to 16:9; `ratio={1}` is square and `ratio={3 / 4}` is portrait. It complements SimpleGrid and Card without owning their gaps, surfaces or insets. The ratio is content geometry, with no new theme tokens or JavaScript measurement. Parents own width and placement, children own media fitting and native semantics, and captions stay outside the frame. No automatic clipping or keyboard behavior is added. Ordinary native CSS aspect-ratio wrappers remain supported; avoid fixed-ratio containers for reflowing text.
+
+## Optional Section
+
+[Section](./section.md) gives a meaningful page topic block padding: compact 32px, default 64px or spacious 96px at both ends. The public roles `--fs-section-padding-compact`, `--fs-section-padding-default` and `--fs-section-padding-spacious` directly reference existing 32/64/96px primitives, independently of `--fs-layout-section-gap`. Both themes share defaults; scoped CSS may override them, and explicit nested themes reset their contract.
+
+Compose Section → Container → Stack/SimpleGrid: Section owns block padding, Container owns width and gutters, child layouts own gaps and wrapping, and the parent owns any extra separation between sections. Adjacent default sections contribute both 64px edges (128px between content edges before child margins or parent gaps). Section preserves child margins and adds no surface, border, inline padding, clipping, heading or keyboard stop. Associate meaningful sections with visible headings; use `as="div"` for visual grouping.
+
+Responsive padding is an explicit consumer decision, with no built-in breakpoint. For example, apply `.project-section { --fs-section-padding-default: 64px; }` and override that role to 32px inside `@media (max-width:600px)`. Child layouts handle columns and text reflow. Ordinary native wrappers remain supported.

@@ -88,10 +88,3 @@ test('Radio scoped themes remain independent', async ({ page }) => {
   await expect(corporate.getByRole('radio', { name: 'Express delivery' })).toHaveCSS('border-color', 'rgb(36, 75, 176)');
   await expect(luna.getByRole('radio', { name: 'Standard delivery' })).toHaveCSS('border-color', 'rgb(199, 181, 255)');
 });
-
-for (const story of ['playground', 'selected', 'invalid', 'disabled', 'states', 'group-selection', 'controlled', 'native-form', 'both-themes', 'shared-error', 'disabled-group', 'customization', 'ref-access', 'long-labels']) {
-  test(`the ${story} Radio example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-radio--${story}`);
-    await expect(page.getByRole('radio').first()).toBeVisible();
-  });
-}

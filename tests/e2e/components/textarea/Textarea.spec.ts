@@ -33,13 +33,6 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-for (const story of ['playground', 'filled', 'disabled', 'read-only', 'length-guidance', 'unlimited-count', 'states', 'both-themes', 'customization', 'descriptions']) {
-  test(`the ${story} Textarea example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-textarea--${story}`);
-    await expect(page.getByRole('textbox').first()).toBeVisible();
-  });
-}
-
 test('Textarea matches the reference minimum height, padding, and vertical resizing', async ({ page }) => {
   await openStory(page, 'components-textarea--playground');
   await expect(page.getByRole('textbox')).toHaveCSS('min-height', '120px');

@@ -2,16 +2,16 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createElement, version } from 'react';
 import { renderToString } from 'react-dom/server';
-import { Badge, Button, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
+import { Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['ArrowRightIcon', 'Badge', 'Button', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'CloseIcon', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Icon', 'Link', 'MoonIcon', 'PlusIcon', 'Radio', 'Select', 'Separator', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'TextInput', 'Textarea']);
+assert.deepEqual(Object.keys(library).sort(), ['ArrowRightIcon', 'AspectRatio', 'Badge', 'Button', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'CloseIcon', 'Cluster', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Icon', 'Link', 'MoonIcon', 'PlusIcon', 'Radio', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'TextInput', 'Textarea']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const html = renderToString(element);
 assert.match(html, /type="button"/);
 assert.match(html, /aria-label="Save settings"/);
 assert.equal(renderToString(element), html);
-for (const path of ['styles.css', 'tokens.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'field.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css']) {
+for (const path of ['styles.css', 'tokens.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'field.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'cluster.css', 'simple-grid.css', 'aspect-ratio.css', 'section.css']) {
   const content = readFileSync(new URL(import.meta.resolve(`fletchstack-ui/${path}`)), 'utf8');
   assert.ok(content.length > 0);
   if (['styles.css', 'tokens.css'].includes(path)) {
@@ -106,3 +106,39 @@ assert.match(stackMarkup, /id="settings"/);
 assert.match(stackMarkup, /fs-stack--gap-group fs-stack--align-start/);
 assert.match(stackMarkup, /First<\/p><p>Second/);
 assert.doesNotMatch(stackMarkup, /tabindex=|role=/);
+
+const clusterElement = createElement(Cluster, { gap: 'related', align: 'baseline', justify: 'end', id: 'actions' }, createElement('button', {}, 'Save'), createElement('button', {}, 'Preview'));
+const clusterMarkup = renderToString(clusterElement);
+assert.equal(renderToString(clusterElement), clusterMarkup);
+assert.match(clusterMarkup, /id="actions"/);
+assert.match(clusterMarkup, /fs-cluster--gap-related fs-cluster--align-baseline fs-cluster--justify-end/);
+assert.match(clusterMarkup, /Save<\/button><button>Preview/);
+assert.doesNotMatch(clusterMarkup, /tabindex=|role=/);
+
+const simpleGridElement = createElement(SimpleGrid, { gap: 'group', id: 'projects', style: { '--fs-simple-grid-min-item-width': '180px' } }, createElement('button', {}, 'First'), createElement('button', {}, 'Second'));
+const simpleGridMarkup = renderToString(simpleGridElement);
+assert.equal(renderToString(simpleGridElement), simpleGridMarkup);
+assert.match(simpleGridMarkup, /id="projects"/);
+assert.match(simpleGridMarkup, /fs-simple-grid--gap-group/);
+assert.match(simpleGridMarkup, /--fs-simple-grid-min-item-width:180px/);
+assert.match(simpleGridMarkup, /First<\/button><button>Second/);
+assert.doesNotMatch(simpleGridMarkup, /tabindex=|role=/);
+
+const aspectRatioElement = createElement(AspectRatio, { ratio: 1, id: 'project-media', 'aria-describedby': 'caption' }, createElement('img', { alt: 'Project artwork' }));
+const aspectRatioMarkup = renderToString(aspectRatioElement);
+assert.equal(renderToString(aspectRatioElement), aspectRatioMarkup);
+assert.match(aspectRatioMarkup, /id="project-media"/);
+assert.match(aspectRatioMarkup, /aspect-ratio:1/);
+assert.match(aspectRatioMarkup, /alt="Project artwork"/);
+assert.doesNotMatch(aspectRatioMarkup, /tabindex=|role=/);
+assert.match(renderToString(createElement(AspectRatio, { ratio: 0 })), /aspect-ratio:1.7777777777777777/);
+
+const sectionElement = createElement(Section, { spacing: 'compact', id: 'projects', 'aria-labelledby': 'topic' }, createElement('h2', { id: 'topic' }, 'Projects'));
+const sectionMarkup = renderToString(sectionElement);
+assert.equal(renderToString(sectionElement), sectionMarkup);
+assert.match(sectionMarkup, /^<section/);
+assert.match(sectionMarkup, /fs-section--spacing-compact/);
+assert.match(sectionMarkup, /aria-labelledby="topic"/);
+assert.doesNotMatch(sectionMarkup, /tabindex=|role=|spacing=/);
+assert.match(renderToString(createElement(Section, { as: 'div' }, 'Visual grouping')), /^<div/);
+assert.match(renderToString(createElement(Section)), /fs-section--spacing-default/);

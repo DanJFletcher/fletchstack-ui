@@ -1,0 +1,9 @@
+.fs-simple-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--fs-simple-grid-min-item-width)), 1fr));
+  gap: var(--fs-space-gap-related);
+  min-inline-size: 0;
+}
+.fs-simple-grid[hidden] { display: none; }
+.fs-simple-grid--gap-none { gap: 0; }
+.fs-simple-grid--gap-group { gap: var(--fs-space-stack-group); }

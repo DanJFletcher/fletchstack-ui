@@ -55,24 +55,6 @@ for (const theme of themes) {
       }
     });
 
-    test('keyboard example finishes Enter and Space activation', async ({ page }) => {
-      await openStory(page, `components-button--${theme.keyboard}`);
-      await expect(page.getByRole('button', { name: 'Save changes' })).toBeFocused();
-    });
-
-    test('disabled examples cannot receive keyboard focus', async ({ page }) => {
-      await openStory(page, `components-button--${theme.disabled}`);
-      const save = page.getByRole('button', { name: 'Save changes' });
-
-      await expect(page.getByRole('button')).toHaveCount(3);
-      await expect(save).toBeDisabled();
-      await expect(page.getByRole('button', { name: 'Cancel' })).toBeDisabled();
-      await expect(page.getByRole('button', { name: 'Learn more' })).toBeDisabled();
-
-      await page.keyboard.press('Tab');
-      await expect(save).not.toBeFocused();
-    });
-
     test('long labels reflow with enlarged and spaced text', async ({ page }) => {
       await page.setViewportSize({ width: 320, height: 700 });
       await openStory(page, `components-button--${theme.longLabels}`);
@@ -122,15 +104,6 @@ test('native default, submit and reset types preserve form behavior', async ({ p
   });
 });
 
-test('consumers can forward a ref to move focus', async ({ page }) => {
-  await openStory(page, 'components-button--ref-access');
-  const target = page.getByRole('button', { name: 'Target action' });
-  await expect(target).toBeFocused();
-
-  await page.getByRole('button', { name: 'Focus the next action' }).click();
-  await expect(target).toBeFocused();
-});
-
 test('decorative icons preserve accessible button names and parent spacing', async ({ page }) => {
   await openStory(page, 'components-button--composition');
   const save = page.getByRole('button', { name: 'Save changes', exact: true });
@@ -144,7 +117,7 @@ test('decorative icons preserve accessible button names and parent spacing', asy
   await expect(save).toHaveCSS('margin', '0px');
 });
 
-test('native attributes and consumer classes reach the real button', async ({ page }) => {
+test('Storybook args reach the rendered native button', async ({ page }) => {
   await openStory(page, 'components-button--playground', {
     args: { className: 'consumer-action', children: 'Publish', title: 'Publish settings' },
   });

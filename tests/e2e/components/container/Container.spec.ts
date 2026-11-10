@@ -18,19 +18,21 @@ async function geometry(locator: Locator) {
 }
 
 for (const theme of ['corporate', 'luna'] as const) {
-  for (const [size, width] of [['reading', 720], ['content', 1120], ['wide', 1440]] as const) {
-    test(`${theme} ${size} maximum includes gutters and centers within its parent`, async ({ page }) => {
-      await page.setViewportSize({ width: 1800, height: 900 });
-      await openStory(page, 'components-container--width-presets', { theme });
-      const box = await geometry(page.getByTestId(`preset-${size}`));
-      expect(box.width).toBe(width);
-      expect(box.start).toBe((box.parent - width) / 2);
-      expect(box.end).toBe(box.start);
-      expect(box.paddingStart).toBe('24px');
-      expect(box.paddingEnd).toBe('24px');
-      expect(box.box).toBe('border-box');
-    });
-  }
+  test(`${theme} Container width presets include gutters and center`, async ({ page }) => {
+    await page.setViewportSize({ width: 1800, height: 900 });
+    await openStory(page, 'components-container--width-presets', { theme });
+    for (const [size, width] of [['reading', 720], ['content', 1120], ['wide', 1440]] as const) {
+      await test.step(`${theme} ${size} maximum includes gutters and centers within its parent`, async () => {
+        const box = await geometry(page.getByTestId(`preset-${size}`));
+        expect(box.width).toBe(width);
+        expect(box.start).toBe((box.parent - width) / 2);
+        expect(box.end).toBe(box.start);
+        expect(box.paddingStart).toBe('24px');
+        expect(box.paddingEnd).toBe('24px');
+        expect(box.box).toBe('border-box');
+      });
+    }
+  });
 
   test(`${theme} gutters change at exactly 600px while the outer box still fills its parent`, async ({ page }) => {
     await page.setViewportSize({ width: 599, height: 900 });
@@ -168,10 +170,3 @@ test('native hidden suppresses Container and its children', async ({ page }) => 
   await openStory(page, 'components-container--hidden');
   await expect(page.locator('.fs-container')).toHaveCSS('display', 'none');
 });
-
-for (const story of ['playground', 'width-presets', 'responsive-gutters', 'without-gutters', 'nesting', 'token-overrides', 'composition', 'both-themes', 'narrow-parents']) {
-  test(`the ${story} Container example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-container--${story}`);
-    await expect(page.locator('.fs-container').first()).toBeVisible();
-  });
-}

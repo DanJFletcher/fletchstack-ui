@@ -119,3 +119,19 @@ The owner-approved Container design adds optional centered 720/1120/1440px maxim
 ## Stack
 
 The owner-approved Stack design adds optional vertical direct-child relationships with related/group/section gaps using existing shared roles directly, plus zero gap and logical cross-axis alignment. It preserves child margins and order, adds no inset/surface, and composes with existing Container and fields. See the [Stack contract](./stack.md) and [spatial guide](./spatial-system.md). No tokens are added.
+
+## Cluster
+
+The owner-approved Cluster design adds passive intrinsic wrapping rows with existing actions/related gap roles, logical row justification and within-row alignment, including baseline. It preserves native child interactions/order/margins and adds no toolbar semantics or surface. See the [Cluster contract](./cluster.md) and [spatial guide](./spatial-system.md). No tokens are added.
+
+## SimpleGrid
+
+The supplied SimpleGrid pattern adds passive equal-width auto-fit columns with a 240px preferred item minimum, related/group gaps and no surface or interactive semantics. Both themes expose the same `--fs-simple-grid-min-item-width` role. See the [SimpleGrid contract](./simple-grid.md) and [spatial guide](./spatial-system.md).
+
+## AspectRatio
+
+The supplied AspectRatio pattern adds passive proportional geometry for images, videos and embeds. It defaults to 16:9, isolates intrinsic child dimensions, and supplies no surface or clipping. Child presentation and captions remain consumer-owned. See the [AspectRatio contract](./aspect-ratio.md). No theme tokens are added.
+
+## Section
+
+The supplied Section pattern adds semantic page regions with compact 32px, default 64px and spacious 96px block padding. Independent Section semantic roles reference existing primitives in both themes. Section stays transparent, supplies no inline gutters or child layout, and supports a div alternative for visual grouping. See the [Section contract](./section.md) and [spatial guide](./spatial-system.md).

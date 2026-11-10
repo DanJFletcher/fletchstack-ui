@@ -2,8 +2,10 @@ import { forwardRef, type ComponentPropsWithoutRef, type CSSProperties, type For
 
 export type BadgeTone = 'neutral' | 'info' | 'success' | 'warning' | 'danger';
 export type BadgeStyle = CSSProperties & { [token: `--fs-${string}`]: string | number | undefined };
+
 const ownedAttributes = ['role', 'tabIndex', 'contentEditable', 'aria-live', 'aria-atomic', 'aria-hidden', 'aria-label', 'aria-labelledby', 'dangerouslySetInnerHTML'] as const;
 type OwnedAttribute = typeof ownedAttributes[number] | Extract<keyof ComponentPropsWithoutRef<'span'>, `on${string}`>;
+
 export type BadgeProps = Omit<ComponentPropsWithoutRef<'span'>, 'children' | 'style' | OwnedAttribute> & { [Attribute in OwnedAttribute]?: never } & {
   children: string | number;
   tone?: BadgeTone;

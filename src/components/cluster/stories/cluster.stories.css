@@ -1,0 +1,15 @@
+/* Consumer-owned guides, measurement geometry and typography, not Cluster styling. */
+.cluster-demo-outline { outline: var(--fs-separator-thickness) dashed var(--fs-separator-color); outline-offset: -1px; }
+.cluster-demo-wide { inline-size: 640px; max-inline-size: 100%; }
+.cluster-demo-narrow { inline-size: 240px; max-inline-size: 100%; }
+.cluster-demo-measure { inline-size: 180px; max-inline-size: 100%; }
+.cluster-demo-justify { inline-size: 220px; max-inline-size: 100%; }
+.cluster-demo-box { box-sizing: border-box; inline-size: 80px; block-size: 24px; border: var(--fs-separator-thickness) solid var(--fs-separator-color); border-radius: var(--fs-gallery-radius); }
+.cluster-demo-row { block-size: 64px; }
+.cluster-demo .cluster-demo-copy { margin: 0; overflow-wrap: anywhere; }
+.cluster-baseline-marker { display: inline-block; inline-size: 0; block-size: 0; }
+.cluster-demo-flex { display: flex; inline-size: 240px; max-inline-size: 100%; }
+.cluster-demo-fixed { flex: 0 0 80px; }
+.cluster-demo-flex > .fs-cluster { flex: 1; }
+.cluster-demo-grid { display: grid; grid-template-columns: 80px minmax(0, 1fr); inline-size: 240px; max-inline-size: 100%; }
+@media (max-width: 600px) { .cluster-responsive { --fs-space-gap-actions: 24px; } }

@@ -1,5 +1,9 @@
 # Verification evidence
 
+## Browser test simplification — 2026-11-10
+
+See [the staged runtime and failure-sensitivity evidence](browser-runtime-verification.md) and [required browser-behavior matrix](../tests/browser-behavior-matrix.md). This change replaces mandatory standalone-browser 100% JavaScript coverage with coverage-free required journeys and opt-in diagnostic reports. The historical results and policies below describe their original verification dates; independent unit/integration coverage gates remain unchanged.
+
 ## Component and Storybook E2E coverage — 2026-11-08
 
 On macOS with Node 22.23.4, `npm run test:e2e` and a clean sequential `CI=true npm run test:e2e` each passed all 20 Chromium journeys. The independent browser report reached 100% statements, branches, functions, and lines for each scoped executable file. [Coverage configuration](../tests/e2e/coverage/report.mjs) includes component and authored Storybook JavaScript/TypeScript, inventories unvisited files, and excludes scripts and Node configuration. Documentation prose and CSS are verified through navigation and computed layout/style assertions rather than JavaScript counters. See the [test guide](../tests/README.md#independent-e2e-coverage-gate) for scope and reproduction.

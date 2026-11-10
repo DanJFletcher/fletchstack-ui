@@ -1,0 +1,28 @@
+name: Diagnostic browser coverage
+
+on:
+  workflow_dispatch:
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e:coverage
+        env:
+          STORYBOOK_DISABLE_TELEMETRY: '1'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: diagnostic-browser-coverage
+          path: |
+            coverage/e2e/
+            playwright-report/
+            test-results/
+          if-no-files-found: warn

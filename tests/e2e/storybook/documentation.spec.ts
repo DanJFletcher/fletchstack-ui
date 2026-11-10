@@ -1,4 +1,5 @@
 import { expect, test } from '../fixtures/test';
+import { waitForStory } from '../fixtures/storybook';
 
 test('design foundation links to tokens and a working override example', async ({ page }) => {
   const preview = page.frameLocator('#storybook-preview-iframe');
@@ -16,8 +17,12 @@ test('design foundation links to tokens and a working override example', async (
   });
 
   await test.step('See the tokens applied to a component', async () => {
-    await preview.getByRole('link', { name: 'See semantic overrides on Button →' }).click();
+    const [frame] = await Promise.all([
+      page.waitForEvent('framenavigated', { predicate: frame => new URL(frame.url()).searchParams.get('id') === 'components-button--consumer-override' }),
+      preview.getByRole('link', { name: 'See semantic overrides on Button →' }).click(),
+    ]);
     await expect(page).toHaveURL(/\/\?path=\/story\/components-button--consumer-override/);
+    await waitForStory(frame);
     await expect(preview.getByRole('button', { name: 'Forest brand action' }))
       .toHaveCSS('background-color', 'rgb(20, 98, 61)');
   });

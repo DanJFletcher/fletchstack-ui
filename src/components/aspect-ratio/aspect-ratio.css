@@ -1,0 +1,15 @@
+.fs-aspect-ratio {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+  align-self: start;
+}
+.fs-aspect-ratio[hidden] { display: none; }
+.fs-aspect-ratio__content {
+  position: absolute;
+  inset: 0;
+  min-inline-size: 0;
+  min-block-size: 0;
+}

@@ -823,6 +823,14 @@
         "unit": "px"
       },
       "$description": "Approved Container maximum width, inclusive of gutters."
+    },
+    "px240": {
+      "$type": "dimension",
+      "$value": {
+        "value": 240,
+        "unit": "px"
+      },
+      "$description": "Approved SimpleGrid preferred minimum item width."
     }
   }
 }

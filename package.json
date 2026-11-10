@@ -32,7 +32,11 @@
     "./badge.css": "./dist/badge.css",
     "./separator.css": "./dist/separator.css",
     "./container.css": "./dist/container.css",
-    "./stack.css": "./dist/stack.css"
+    "./stack.css": "./dist/stack.css",
+    "./cluster.css": "./dist/cluster.css",
+    "./simple-grid.css": "./dist/simple-grid.css",
+    "./aspect-ratio.css": "./dist/aspect-ratio.css",
+    "./section.css": "./dist/section.css"
   },
   "files": [
     "dist",
@@ -62,6 +66,7 @@
     "test:integration": "vitest run --project integration --coverage --coverage.reportsDirectory=coverage/integration",
     "test:storybook": "vitest run --project storybook",
     "test:e2e": "playwright test",
+    "test:e2e:coverage": "playwright test --config=playwright.coverage.config.ts",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:report": "playwright show-report",
     "storybook": "npm run tokens && storybook dev -p 6006 --no-open --disable-telemetry",

@@ -41,13 +41,6 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-for (const story of ['playground', 'filled', 'invalid', 'disabled', 'read-only', 'content-patterns', 'states', 'both-themes', 'sizes', 'controlled', 'native-form', 'keyboard-and-read-only', 'descriptions', 'customization', 'input-types', 'long-labels', 'luna-states']) {
-  test(`the ${story} TextInput example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-textinput--${story}`);
-    await expect(page.getByRole('textbox').first()).toBeVisible();
-  });
-}
-
 test('TextInput links context and excludes adornments from its editable value', async ({ page }) => {
   await openStory(page, 'components-textinput--descriptions');
   const input = page.getByRole('textbox', { name: 'Website' });

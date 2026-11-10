@@ -1,0 +1,305 @@
+[
+  {
+    "suite": "tests/e2e/components/aspect-ratio/AspectRatio.spec.ts",
+    "stories": [
+      "components-aspectratio--playground",
+      "components-aspectratio--ratios",
+      "components-aspectratio--responsive",
+      "components-aspectratio--media-fitting",
+      "components-aspectratio--composition",
+      "components-aspectratio--both-themes",
+      "components-aspectratio--custom-ratio",
+      "components-aspectratio--native-style-override",
+      "components-aspectratio--invalid-ratios",
+      "components-aspectratio--video",
+      "components-aspectratio--embed",
+      "components-aspectratio--overflow",
+      "components-aspectratio--native-focus",
+      "components-aspectratio--nested",
+      "components-aspectratio--narrow-parents",
+      "components-aspectratio--empty"
+    ],
+    "source": "./src/components/aspect-ratio/stories/AspectRatio.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/badge/Badge.spec.ts",
+    "stories": [
+      "components-badge--playground",
+      "components-badge--tones",
+      "components-badge--in-context",
+      "components-badge--count",
+      "components-badge--both-themes",
+      "components-badge--customization",
+      "components-badge--long-label",
+      "components-badge--passive-semantics"
+    ],
+    "source": "./src/components/badge/stories/Badge.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/checkbox/Checkbox.spec.ts",
+    "stories": [
+      "components-checkbox--playground",
+      "components-checkbox--checked",
+      "components-checkbox--indeterminate",
+      "components-checkbox--invalid",
+      "components-checkbox--disabled",
+      "components-checkbox--states",
+      "components-checkbox--both-themes",
+      "components-checkbox--group-selection",
+      "components-checkbox--controlled",
+      "components-checkbox--native-form",
+      "components-checkbox--keyboard",
+      "components-checkbox--descriptions",
+      "components-checkbox--customization",
+      "components-checkbox--ref-access",
+      "components-checkbox--long-labels",
+      "components-checkbox--luna-group",
+      "components-checkbox--luna-states"
+    ],
+    "source": "./src/components/checkbox/stories/Checkbox.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/cluster/Cluster.spec.ts",
+    "stories": [
+      "components-cluster--playground",
+      "components-cluster--gaps",
+      "components-cluster--wrapping",
+      "components-cluster--alignments",
+      "components-cluster--baseline",
+      "components-cluster--justification",
+      "components-cluster--composition",
+      "components-cluster--both-themes",
+      "components-cluster--badges",
+      "components-cluster--long-labels",
+      "components-cluster--hidden-children",
+      "components-cluster--nested",
+      "components-cluster--scoped-overrides",
+      "components-cluster--right-to-left",
+      "components-cluster--consumer-margins",
+      "components-cluster--responsive-gap",
+      "components-cluster--narrow-parents"
+    ],
+    "source": "./src/components/cluster/stories/Cluster.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/container/Container.spec.ts",
+    "stories": [
+      "components-container--playground",
+      "components-container--width-presets",
+      "components-container--responsive-gutters",
+      "components-container--without-gutters",
+      "components-container--nesting",
+      "components-container--token-overrides",
+      "components-container--composition",
+      "components-container--both-themes",
+      "components-container--narrow-parents"
+    ],
+    "source": "./src/components/container/stories/Container.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/link/Link.spec.ts",
+    "stories": [
+      "components-link--playground",
+      "components-link--standalone",
+      "components-link--external-destination",
+      "components-link--new-tab",
+      "components-link--unavailable",
+      "components-link--states",
+      "components-link--usage",
+      "components-link--keyboard",
+      "components-link--both-themes",
+      "components-link--customization",
+      "components-link--download",
+      "components-link--empty-destination",
+      "components-link--named-target",
+      "components-link--ref-access",
+      "components-link--long-text"
+    ],
+    "source": "./src/components/link/stories/Link.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/radio/Radio.spec.ts",
+    "stories": [
+      "components-radio--playground",
+      "components-radio--selected",
+      "components-radio--invalid",
+      "components-radio--disabled",
+      "components-radio--states",
+      "components-radio--group-selection",
+      "components-radio--controlled",
+      "components-radio--native-form",
+      "components-radio--both-themes",
+      "components-radio--shared-error",
+      "components-radio--disabled-group",
+      "components-radio--customization",
+      "components-radio--ref-access",
+      "components-radio--long-labels"
+    ],
+    "source": "./src/components/radio/stories/Radio.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/section/Section.spec.ts",
+    "stories": [
+      "components-section--playground",
+      "components-section--spacing-presets",
+      "components-section--composition",
+      "components-section--responsive",
+      "components-section--both-themes",
+      "components-section--semantics",
+      "components-section--scoped-overrides",
+      "components-section--adjacent",
+      "components-section--child-margins",
+      "components-section--nested",
+      "components-section--native-focus",
+      "components-section--narrow-parents",
+      "components-section--native-style-override"
+    ],
+    "source": "./src/components/section/stories/Section.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/select/Select.spec.ts",
+    "stories": [
+      "components-select--playground",
+      "components-select--browser-default",
+      "components-select--selected",
+      "components-select--invalid",
+      "components-select--disabled",
+      "components-select--states",
+      "components-select--both-themes",
+      "components-select--sizes",
+      "components-select--controlled",
+      "components-select--native-form",
+      "components-select--groups-and-descriptions",
+      "components-select--customization",
+      "components-select--long-labels",
+      "components-select--luna-states"
+    ],
+    "source": "./src/components/select/stories/Select.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/separator/Separator.spec.ts",
+    "stories": [
+      "components-separator--playground",
+      "components-separator--semantic",
+      "components-separator--vertical",
+      "components-separator--composition",
+      "components-separator--both-themes",
+      "components-separator--customization",
+      "components-separator--passive-semantics"
+    ],
+    "source": "./src/components/separator/stories/Separator.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/simple-grid/SimpleGrid.spec.ts",
+    "stories": [
+      "components-simplegrid--playground",
+      "components-simplegrid--reflow",
+      "components-simplegrid--gaps",
+      "components-simplegrid--sparse",
+      "components-simplegrid--row-heights",
+      "components-simplegrid--composition",
+      "components-simplegrid--both-themes",
+      "components-simplegrid--customization",
+      "components-simplegrid--hidden-children",
+      "components-simplegrid--nested",
+      "components-simplegrid--right-to-left",
+      "components-simplegrid--consumer-margins",
+      "components-simplegrid--narrow-parents",
+      "components-simplegrid--empty-and-single"
+    ],
+    "source": "./src/components/simple-grid/stories/SimpleGrid.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/spinner/Spinner.spec.ts",
+    "stories": [
+      "components-spinner--playground",
+      "components-spinner--sizes",
+      "components-spinner--loading-patterns",
+      "components-spinner--both-themes",
+      "components-spinner--decorative",
+      "components-spinner--content-region",
+      "components-spinner--customization",
+      "components-spinner--reduced-motion",
+      "components-spinner--blank-label",
+      "components-spinner--long-label"
+    ],
+    "source": "./src/components/spinner/stories/Spinner.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/stack/Stack.spec.ts",
+    "stories": [
+      "components-stack--playground",
+      "components-stack--gaps",
+      "components-stack--alignments",
+      "components-stack--nested",
+      "components-stack--scoped-overrides",
+      "components-stack--responsive-gap",
+      "components-stack--form-composition",
+      "components-stack--both-themes",
+      "components-stack--long-content",
+      "components-stack--hidden-children",
+      "components-stack--consumer-margins",
+      "components-stack--narrow-parents"
+    ],
+    "source": "./src/components/stack/stories/Stack.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/switch/Switch.spec.ts",
+    "stories": [
+      "components-switch--playground",
+      "components-switch--on",
+      "components-switch--disabled",
+      "components-switch--states",
+      "components-switch--both-themes",
+      "components-switch--controlled",
+      "components-switch--keyboard",
+      "components-switch--native-form",
+      "components-switch--composition",
+      "components-switch--disabled-group",
+      "components-switch--customization",
+      "components-switch--ref-access",
+      "components-switch--long-labels",
+      "components-switch--right-to-left"
+    ],
+    "source": "./src/components/switch/stories/Switch.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/text-input/TextInput.spec.ts",
+    "stories": [
+      "components-textinput--playground",
+      "components-textinput--filled",
+      "components-textinput--invalid",
+      "components-textinput--disabled",
+      "components-textinput--read-only",
+      "components-textinput--content-patterns",
+      "components-textinput--states",
+      "components-textinput--both-themes",
+      "components-textinput--sizes",
+      "components-textinput--controlled",
+      "components-textinput--native-form",
+      "components-textinput--keyboard-and-read-only",
+      "components-textinput--descriptions",
+      "components-textinput--customization",
+      "components-textinput--input-types",
+      "components-textinput--long-labels",
+      "components-textinput--luna-states"
+    ],
+    "source": "./src/components/text-input/stories/TextInput.stories.tsx"
+  },
+  {
+    "suite": "tests/e2e/components/textarea/Textarea.spec.ts",
+    "stories": [
+      "components-textarea--playground",
+      "components-textarea--filled",
+      "components-textarea--disabled",
+      "components-textarea--read-only",
+      "components-textarea--length-guidance",
+      "components-textarea--unlimited-count",
+      "components-textarea--states",
+      "components-textarea--both-themes",
+      "components-textarea--customization",
+      "components-textarea--descriptions"
+    ],
+    "source": "./src/components/textarea/stories/Textarea.stories.tsx"
+  }
+]

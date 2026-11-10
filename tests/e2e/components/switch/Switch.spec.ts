@@ -129,13 +129,6 @@ test('Switch customization preserves its thumb within the wider track', async ({
   expect(paint.left + Number.parseFloat(paint.thumbWidth)).toBeLessThan(48);
 });
 
-for (const story of ['playground', 'on', 'disabled', 'states', 'both-themes', 'controlled', 'keyboard', 'native-form', 'composition', 'disabled-group', 'customization', 'ref-access', 'long-labels', 'right-to-left']) {
-  test(`the ${story} Switch example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-switch--${story}`);
-    await expect(page.getByRole('switch').first()).toBeVisible();
-  });
-}
-
 /**
  * Read the rendered track and thumb paint without relying on component state internals.
  **/

@@ -82,10 +82,3 @@ test('Spinner honors native hidden semantics despite its inline flex layout', as
   await expect(page.getByRole('status')).toHaveCount(0);
   await expect(page.locator('.fs-spinner')).toHaveCSS('display', 'none');
 });
-
-for (const story of ['playground', 'sizes', 'loading-patterns', 'both-themes', 'decorative', 'content-region', 'customization', 'reduced-motion', 'blank-label', 'long-label']) {
-  test(`the ${story} Spinner example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-spinner--${story}`);
-    await expect(page.locator('.fs-spinner').first()).toBeVisible();
-  });
-}

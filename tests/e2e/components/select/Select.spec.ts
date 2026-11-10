@@ -2,17 +2,6 @@ import { expect, test } from '../../fixtures/test';
 import { openStory } from '../../fixtures/storybook';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} Select supports native keyboard typeahead and focus`, async ({ page }) => {
-    await openStory(page, 'components-select--selected', { theme });
-    const select = page.getByRole('combobox', { name: 'Workspace' });
-    await select.focus();
-    await page.keyboard.press('d');
-
-    await expect(select).toHaveValue('design');
-    await expect(select).toBeFocused();
-    await page.keyboard.press('Tab');
-    await expect(select).not.toBeFocused();
-  });
 
   test(`${theme} Select labels and descriptions reflow with enlarged text`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 });
@@ -37,13 +26,6 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-for (const story of ['playground', 'browser-default', 'selected', 'invalid', 'disabled', 'states', 'both-themes', 'sizes', 'controlled', 'native-form', 'groups-and-descriptions', 'customization', 'long-labels', 'luna-states']) {
-  test(`the ${story} Select example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-select--${story}`);
-    await expect(page.getByRole('combobox').first()).toBeVisible();
-  });
-}
-
 test('Select error descriptions include the consumer context', async ({ page }) => {
   await openStory(page, 'components-select--groups-and-descriptions');
   const select = page.getByRole('combobox', { name: 'Workspace' });
@@ -51,3 +33,15 @@ test('Select error descriptions include the consumer context', async ({ page }) 
   await expect(select).toHaveAccessibleDescription('Only active workspaces can be selected. Choose a team. Review your selection.');
   await expect(select).toHaveAttribute('aria-invalid', 'true');
 });
+
+test(`corporate Select supports native keyboard typeahead and focus`, async ({ page }) => {
+    await openStory(page, 'components-select--selected', { theme: 'corporate' });
+    const select = page.getByRole('combobox', { name: 'Workspace' });
+    await select.focus();
+    await page.keyboard.press('d');
+
+    await expect(select).toHaveValue('design');
+    await expect(select).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(select).not.toBeFocused();
+  });

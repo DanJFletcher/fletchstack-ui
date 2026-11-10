@@ -94,10 +94,3 @@ test('vertical Separator retains logical geometry in right-to-left layouts', asy
   await expect(page.getByRole('separator')).toHaveCSS('border-right-width', '1px');
   await expect(page.getByRole('separator')).toHaveCSS('border-left-width', '0px');
 });
-
-for (const story of ['playground', 'semantic', 'vertical', 'composition', 'both-themes', 'customization', 'passive-semantics']) {
-  test(`the ${story} Separator example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-separator--${story}`);
-    await expect(page.locator('.fs-separator').first()).toBeVisible();
-  });
-}

@@ -20,7 +20,7 @@ test('the token command reproduces the checked-in CSS and reference', async () =
 test('the stylesheet command publishes separate and combined CSS exports', async ({ root }) => {
   // arrange
   await mkdir(new URL('src/generated', root), { recursive: true });
-  await Promise.all(['stack', 'container', 'separator', 'badge', 'spinner', 'switch', 'link', 'radio', 'textarea', 'field', 'form-group', 'checkbox', 'select', 'text-input', 'button', 'card', 'icon'].map(family => mkdir(new URL(`src/components/${family}`, root), { recursive: true })));
+  await Promise.all(['section', 'aspect-ratio', 'simple-grid', 'cluster', 'stack', 'container', 'separator', 'badge', 'spinner', 'switch', 'link', 'radio', 'textarea', 'field', 'form-group', 'checkbox', 'select', 'text-input', 'button', 'card', 'icon'].map(family => mkdir(new URL(`src/components/${family}`, root), { recursive: true })));
   await mkdir(new URL('dist', root));
   await writeFile(new URL('src/generated/tokens.css', root), ':root { --fs-text: black; }');
   await copyFile(new URL('../../../src/components/button/button.css', import.meta.url), new URL('src/components/button/button.css', root));
@@ -41,6 +41,14 @@ test('the stylesheet command publishes separate and combined CSS exports', async
   await copyFile(new URL('../../../src/components/separator/separator.css', import.meta.url), new URL('src/components/separator/separator.css', root));
   await copyFile(new URL('../../../src/components/container/container.css', import.meta.url), new URL('src/components/container/container.css', root));
   await copyFile(new URL('../../../src/components/stack/stack.css', import.meta.url), new URL('src/components/stack/stack.css', root));
+  await copyFile(new URL('../../../src/components/cluster/cluster.css', import.meta.url), new URL('src/components/cluster/cluster.css', root));
+  await copyFile(new URL('../../../src/components/simple-grid/simple-grid.css', import.meta.url), new URL('src/components/simple-grid/simple-grid.css', root));
+  await copyFile(new URL('../../../src/components/aspect-ratio/aspect-ratio.css', import.meta.url), new URL('src/components/aspect-ratio/aspect-ratio.css', root));
+  await copyFile(new URL('../../../src/components/section/section.css', import.meta.url), new URL('src/components/section/section.css', root));
+  const section = await readFile(new URL('src/components/section/section.css', root), 'utf8');
+  const aspectRatio = await readFile(new URL('src/components/aspect-ratio/aspect-ratio.css', root), 'utf8');
+  const simpleGrid = await readFile(new URL('src/components/simple-grid/simple-grid.css', root), 'utf8');
+  const cluster = await readFile(new URL('src/components/cluster/cluster.css', root), 'utf8');
   const stack = await readFile(new URL('src/components/stack/stack.css', root), 'utf8');
   const container = await readFile(new URL('src/components/container/container.css', root), 'utf8');
   const separator = await readFile(new URL('src/components/separator/separator.css', root), 'utf8');
@@ -69,6 +77,6 @@ test('the stylesheet command publishes separate and combined CSS exports', async
   }
 
   // assert
-  const result = await Promise.all(['tokens.css', 'field.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'styles.css'].map(name => readFile(new URL(`dist/${name}`, root), 'utf8')));
-  expect(result).toEqual([':root { --fs-text: black; }', field, button, icon, card, select, textInput, checkbox, formGroup, textarea, radio, link, switchStyles, spinner, badge, separator, container, stack, `:root { --fs-text: black; }\n${field}\n${button}\n${icon}\n${card}\n${select}\n${textInput}\n${checkbox}\n${formGroup}\n${textarea}\n${radio}\n${link}\n${switchStyles}\n${spinner}\n${badge}\n${separator}\n${container}\n${stack}`]);
+  const result = await Promise.all(['tokens.css', 'field.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'cluster.css', 'simple-grid.css', 'aspect-ratio.css', 'section.css', 'styles.css'].map(name => readFile(new URL(`dist/${name}`, root), 'utf8')));
+  expect(result).toEqual([':root { --fs-text: black; }', field, button, icon, card, select, textInput, checkbox, formGroup, textarea, radio, link, switchStyles, spinner, badge, separator, container, stack, cluster, simpleGrid, aspectRatio, section, `:root { --fs-text: black; }\n${field}\n${button}\n${icon}\n${card}\n${select}\n${textInput}\n${checkbox}\n${formGroup}\n${textarea}\n${radio}\n${link}\n${switchStyles}\n${spinner}\n${badge}\n${separator}\n${container}\n${stack}\n${cluster}\n${simpleGrid}\n${aspectRatio}\n${section}`]);
 });

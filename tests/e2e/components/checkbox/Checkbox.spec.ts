@@ -87,10 +87,3 @@ test('Checkbox marks retain system contrast when hovered in forced colors', asyn
   });
   expect(result.actual).toBe(result.expected);
 });
-
-for (const story of ['playground', 'checked', 'indeterminate', 'invalid', 'disabled', 'states', 'both-themes', 'group-selection', 'controlled', 'native-form', 'keyboard', 'descriptions', 'customization', 'ref-access', 'long-labels', 'luna-group', 'luna-states']) {
-  test(`the ${story} Checkbox example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-checkbox--${story}`);
-    await expect(page.getByRole('checkbox').first()).toBeVisible();
-  });
-}

@@ -2028,6 +2028,32 @@
           "$description": "Container inline gutter at and above 600px viewport width."
         }
       }
+    },
+    "simple-grid": {
+      "minItemWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px240}",
+        "$description": "Preferred SimpleGrid item minimum; a single column shrinks below this width to fit its parent."
+      }
+    },
+    "section": {
+      "padding": {
+        "compact": {
+          "$type": "dimension",
+          "$value": "{primitive.px32}",
+          "$description": "Section compact padding at each block edge; independent of sibling section gaps."
+        },
+        "default": {
+          "$type": "dimension",
+          "$value": "{primitive.px64}",
+          "$description": "Section default padding at each block edge; independent of sibling section gaps."
+        },
+        "spacious": {
+          "$type": "dimension",
+          "$value": "{primitive.px96}",
+          "$description": "Section spacious padding at each block edge; independent of sibling section gaps."
+        }
+      }
     }
   }
 }

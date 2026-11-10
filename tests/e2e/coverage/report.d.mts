@@ -4,6 +4,6 @@ import type { CoverageReport } from 'monocart-coverage-reports';
  **/
 export function coverageReport(): CoverageReport;
 /**
- * Identify authored browser modules eligible for the independent E2E gate.
+ * Identify authored browser modules eligible for diagnostic inventory accounting.
  **/
 export function inScope(path: string): boolean;

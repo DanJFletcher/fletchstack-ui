@@ -71,10 +71,3 @@ test('Badge text remains legible in forced colors', async ({ page }) => {
   await expect(page.getByText('Published', { exact: true })).toBeVisible();
   await expect(page.locator('.fs-badge--success')).toHaveCSS('outline-style', 'solid');
 });
-
-for (const story of ['playground', 'tones', 'in-context', 'count', 'both-themes', 'customization', 'long-label', 'passive-semantics']) {
-  test(`the ${story} Badge example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-badge--${story}`);
-    await expect(page.locator('.fs-badge').first()).toBeVisible();
-  });
-}

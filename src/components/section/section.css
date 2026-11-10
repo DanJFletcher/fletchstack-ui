@@ -1,0 +1,8 @@
+.fs-section {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding-block: var(--fs-section-padding-default);
+  padding-inline: 0;
+}
+.fs-section--spacing-compact { padding-block: var(--fs-section-padding-compact); }
+.fs-section--spacing-spacious { padding-block: var(--fs-section-padding-spacious); }

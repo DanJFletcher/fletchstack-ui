@@ -26,13 +26,15 @@ async function alignment(stack: Locator) {
 }
 
 for (const theme of ['corporate', 'luna'] as const) {
-  for (const [gap, pixels] of [['none', 0], ['related', 16], ['group', 24], ['section', 64]] as const) {
-    test(`${theme} ${gap} Stack uses the existing ${pixels}px relationship`, async ({ page }) => {
-      await openStory(page, 'components-stack--gaps', { theme });
-      expect(await itemGaps(page.getByTestId(`gap-${gap}`))).toEqual([pixels, pixels]);
-      await expect(page.getByTestId(`gap-${gap}`)).toHaveCSS('flex-direction', 'column');
-    });
-  }
+  test(`${theme} Stack gap presets preserve every relationship`, async ({ page }) => {
+    await openStory(page, 'components-stack--gaps', { theme });
+    for (const [gap, pixels] of [['none', 0], ['related', 16], ['group', 24], ['section', 64]] as const) {
+      await test.step(`${theme} ${gap} Stack uses the existing ${pixels}px relationship`, async () => {
+        expect(await itemGaps(page.getByTestId(`gap-${gap}`))).toEqual([pixels, pixels]);
+        await expect(page.getByTestId(`gap-${gap}`)).toHaveCSS('flex-direction', 'column');
+      });
+    }
+  });
 
   test(`${theme} form remains usable at 320px with enlarged and spaced text`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 1000 });
@@ -48,16 +50,18 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-for (const align of ['stretch', 'start', 'center', 'end'] as const) {
-  test(`${align} alignment controls only the cross axis and honors fixed child widths`, async ({ page }) => {
-    await openStory(page, 'components-stack--alignments');
-    const box = await alignment(page.getByTestId(`align-${align}`));
-    expect(box.fixed).toBe(120);
-    expect(box.order).toEqual(['One', 'Two', 'Three']);
-    const expected = { stretch: { start: 0, end: 0 }, start: { start: 0 }, center: { start: box.end }, end: { end: 0 } };
-    expect(box).toMatchObject(expected[align]);
-  });
-}
+test('Stack alignment presets honor fixed widths', async ({ page }) => {
+  await openStory(page, 'components-stack--alignments');
+  for (const align of ['stretch', 'start', 'center', 'end'] as const) {
+    await test.step(`${align} alignment controls only the cross axis and honors fixed child widths`, async () => {
+      const box = await alignment(page.getByTestId(`align-${align}`));
+      expect(box.fixed).toBe(120);
+      expect(box.order).toEqual(['One', 'Two', 'Three']);
+      const expected = { stretch: { start: 0, end: 0 }, start: { start: 0 }, center: { start: box.end }, end: { end: 0 } };
+      expect(box).toMatchObject(expected[align]);
+    });
+  }
+});
 
 for (const [align, edge] of [['start', 'end'], ['end', 'start']] as const) {
   test(`RTL ${align} follows writing direction without reordering`, async ({ page }) => {
@@ -181,10 +185,3 @@ test('native hidden suppresses the complete Stack', async ({ page }) => {
   await openStory(page, 'components-stack--hidden');
   await expect(page.locator('.fs-stack')).toHaveCSS('display', 'none');
 });
-
-for (const story of ['playground', 'gaps', 'alignments', 'nested', 'scoped-overrides', 'responsive-gap', 'form-composition', 'both-themes', 'long-content', 'hidden-children', 'consumer-margins', 'narrow-parents']) {
-  test(`the ${story} Stack example renders successfully`, async ({ page }) => {
-    await openStory(page, `components-stack--${story}`);
-    await expect(page.locator('.fs-stack').first()).toBeVisible();
-  });
-}

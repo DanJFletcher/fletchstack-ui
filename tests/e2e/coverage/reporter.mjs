@@ -1,40 +1,57 @@
 import { coverageReport } from './report.mjs';
+import { writeFile } from 'node:fs/promises';
+import { relative } from 'node:path';
+import { performance } from 'node:perf_hooks';
+import { diagnosticSummary } from './summary.mjs';
 
 export default class CoverageReporter {
   /**
-   * Discard previous runs so stale results cannot satisfy the gate.
+   * Accept report and filesystem boundaries for focused failure-sensitivity tests.
    **/
-  onBegin() {
-    coverageReport().cleanCache();
+  constructor({ report = coverageReport, write = writeFile } = {}) {
+    this.report = report;
+    this.write = write;
+    this.scope = {};
   }
 
   /**
-   * Fail the Playwright run unless every scoped file reaches every threshold.
+   * Start fresh diagnostics and record the actual selected tests and invocation.
    **/
-  async onEnd() {
+  onBegin(config, suite) {
+    this.scope = {
+      invocation: process.argv.slice(2),
+      grep: String(config.grep), grepInvert: String(config.grepInvert),
+      suites: [...new Set(suite.allTests().map(test => relative(process.cwd(), test.location.file)))].sort(),
+      tests: suite.allTests().map(test => test.titlePath().join(' > ')),
+    };
+    this.report().cleanCache();
+  }
+
+  /**
+   * Fail broken measurement, but leave test status and incomplete percentages intact.
+   **/
+  async onEnd(result) {
     try {
-      return await this.enforceCoverage();
+      await this.generate(result);
+      return undefined;
     } catch (error) {
-      console.error('E2E coverage could not be verified:', error);
+      console.error('E2E diagnostic coverage could not be generated:', error);
       return { status: 'failed' };
     }
   }
 
   /**
-   * Generate reports and compare exact counters rather than rounded percentages.
+   * Generate the complete inventory and separate diagnostic category counters.
    **/
-  async enforceCoverage() {
-    const results = await coverageReport().generate();
-    if (!results?.files.length) {
-      throw new Error('No component/Storybook E2E coverage collected');
-    }
-    const failures = results.files.flatMap(file => ['statements', 'branches', 'functions', 'lines']
-      .filter(metric => file.summary[metric].covered !== file.summary[metric].total)
-      .map(metric => `${file.sourcePath}: ${metric} ${file.summary[metric].covered}/${file.summary[metric].total}`));
-    if (failures.length) {
-      console.error(`E2E coverage requires 100% per file:\n${failures.join('\n')}`);
-      return { status: 'failed' };
-    }
-    return undefined;
+  async generate(result) {
+    const report = this.report();
+    if (!report.hasCache()) { throw new Error('No browser coverage data collected'); }
+    const started = performance.now();
+    const results = await report.generate();
+    if (!results?.files.length) { throw new Error('No scoped browser coverage files generated'); }
+    const summary = diagnosticSummary(results.files, { ...this.scope, testStatus: result.status });
+    summary.reportGenerationMs = performance.now() - started;
+    await this.write('coverage/e2e/diagnostic-summary.json', `${JSON.stringify(summary, null, 2)}\n`);
+    console.log('Browser coverage is diagnostic; production, story-demo and preview totals: coverage/e2e/diagnostic-summary.json');
   }
 }

@@ -1,0 +1,2 @@
+.separator-actions { display: flex; flex-wrap: wrap; align-items: stretch; gap: var(--fs-space-inline); }
+.separator-height { block-size: var(--fs-layout-section-gap); }

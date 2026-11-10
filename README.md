@@ -341,3 +341,35 @@ See the [spatial guide](docs/spatial-system.md) and **Design System → Spatial 
 ## Contributing component examples and tests
 
 See [component organization](docs/component-organization.md) for family ownership, stable Storybook links, and development/package boundaries, and the [test guide](tests/README.md) for focused and complete verification commands.
+
+## Radio
+
+[Radio](docs/radio.md) is a native mutually exclusive choice with a visible label, optional descriptions/errors, controlled or uncontrolled selection, and Corporate/Luna styles. Compose related options with FormGroup and a shared name. Import the combined stylesheet or tokens.css + field.css + radio.css. See Components → Forms → Radio in Storybook.
+
+## Link
+
+[Link](docs/link.md) preserves native navigation, inherited typography, underlines, and explicit new-tab announcements. Omit href for unavailable text; external icons do not change the target. Find inline/standalone and Corporate/Luna examples under Components → Navigation → Link. Import combined styles or tokens.css + link.css.
+
+## Switch
+
+[Switch](docs/switch.md) turns a setting on or off with a stable label, native keyboard/form behavior, controlled or uncontrolled state, and Corporate/Luna styles. Find it under Components → Forms → Switch. Import combined styles or tokens.css + field.css + switch.css.
+
+## Spinner
+
+[Spinner](docs/spinner.md) shows unknown-duration loading with inherited color, 16/20/24px sizes, status text, decorative reuse, and reduced-motion support. Consumers own pending/busy state and removal on completion. Find it under Components → Feedback → Spinner. Import combined styles or tokens.css + spinner.css.
+
+## Badge
+
+Passive status, category, and exact-count pills with five semantic tones, optional decorative artwork, and Corporate/Luna themes. Import `Badge` from the package and load `badge.css` with the tokens, or use `styles.css`. See the [Badge contract](docs/badge.md).
+
+## Separator
+
+Horizontal and vertical rules with decorative grouping or opt-in semantic separation, theme tokens, and parent-owned spacing. Import `Separator` and load `separator.css` with tokens, or use `styles.css`. See the [Separator contract](docs/separator.md).
+
+## Container
+
+Optional centered reading/content/wide page widths with responsive inline gutters and no surface or child layout. Load `container.css` with tokens or use combined styles. Ordinary wrappers remain supported; see the [Container contract](docs/container.md) and [spatial guide](docs/spatial-system.md).
+
+## Stack
+
+Optional vertical direct-child layout with existing semantic gap roles and logical cross-axis alignment. Preserves child margins/order and composes with Container and fields. Load `stack.css` plus tokens, or combined styles. See the [Stack contract](docs/stack.md) and [spatial guide](docs/spatial-system.md).

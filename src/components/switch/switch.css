@@ -1,0 +1,22 @@
+.fs-switch-field { box-sizing: border-box; min-inline-size: 0; max-inline-size: 100%; color: var(--fs-switch-text); font-family: var(--fs-switch-font-family); font-size: var(--fs-switch-font-size); line-height: var(--fs-switch-font-line-height); overflow-wrap: anywhere; }
+.fs-switch__label { box-sizing: border-box; display: flex; align-items: flex-start; gap: var(--fs-switch-label-gap); min-inline-size: min(100%, var(--fs-switch-hit-area)); min-block-size: var(--fs-switch-hit-area); padding-block: var(--fs-switch-label-padding); cursor: pointer; }
+.fs-switch { position: relative; appearance: none; box-sizing: border-box; display: block; flex: 0 0 var(--fs-switch-track-width); inline-size: var(--fs-switch-track-width); block-size: var(--fs-switch-track-height); margin: 0; margin-block-start: max(0px, calc((1em * var(--fs-switch-font-line-height) - var(--fs-switch-track-height)) / 2)); border: var(--fs-switch-border-width) solid var(--fs-switch-off-border); border-radius: var(--fs-switch-radius); background: var(--fs-switch-off-surface); color: var(--fs-switch-off-thumb); cursor: inherit; }
+.fs-switch::before { content: ''; position: absolute; inset-block-start: 50%; inset-inline-start: var(--fs-switch-thumb-inset); transform: translateY(-50%); inline-size: var(--fs-switch-thumb-size); block-size: var(--fs-switch-thumb-size); border-radius: 50%; background: currentColor; }
+.fs-switch:checked { background: var(--fs-switch-on-surface); border-color: var(--fs-switch-on-border); color: var(--fs-switch-on-thumb); }
+.fs-switch:checked::before { inset-inline-start: calc(100% - var(--fs-switch-thumb-size) - var(--fs-switch-thumb-inset)); }
+.fs-switch__label:hover .fs-switch:where(:not(:disabled)) { background: var(--fs-switch-off-hover-surface); border-color: var(--fs-switch-off-hover-border); }
+.fs-switch__label:hover .fs-switch:checked:where(:not(:disabled)) { background: var(--fs-switch-on-hover-surface); border-color: var(--fs-switch-on-hover-border); }
+.fs-switch:focus-visible { outline: var(--fs-switch-focus-width) solid var(--fs-switch-focus-color); outline-offset: var(--fs-switch-focus-offset); }
+.fs-switch:disabled { background: var(--fs-switch-disabled-off-surface); border-color: var(--fs-switch-disabled-border); color: var(--fs-switch-disabled-off-thumb); cursor: not-allowed; opacity: 1; }
+.fs-switch:disabled:checked { background: var(--fs-switch-disabled-on-surface); color: var(--fs-switch-disabled-on-thumb); }
+.fs-switch__label:has(:disabled) { color: var(--fs-switch-disabled-text); cursor: not-allowed; }
+.fs-switch__body { display: grid; gap: var(--fs-switch-description-gap); min-inline-size: 0; font-weight: var(--fs-switch-font-weight); }
+.fs-switch__description { color: var(--fs-switch-muted); font-size: var(--fs-switch-font-description); font-weight: normal; }
+.fs-switch__label:has(:disabled) .fs-switch__description { color: var(--fs-switch-disabled-text); }
+@media (forced-colors: active) {
+  .fs-switch-field .fs-switch__label .fs-switch { forced-color-adjust: none; background: Canvas; border-color: ButtonText; color: ButtonText; }
+  .fs-switch-field .fs-switch__label .fs-switch:checked { background: Highlight; border-color: Highlight; color: HighlightText; }
+  .fs-switch-field .fs-switch:disabled { background: Canvas; border-color: GrayText; color: GrayText; }
+  .fs-switch-field .fs-switch:disabled:checked { background: GrayText; color: Canvas; }
+  .fs-switch:focus-visible { outline-color: Highlight; }
+}

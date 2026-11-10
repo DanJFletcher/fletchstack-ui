@@ -1,0 +1,16 @@
+.fs-link { color: var(--fs-link-text); font-family: inherit; font-size: inherit; line-height: inherit; font-weight: var(--fs-link-inline-weight); text-decoration-line: underline; text-decoration-thickness: var(--fs-link-underline-width); text-underline-offset: var(--fs-link-underline-offset); border-radius: var(--fs-link-focus-radius); overflow-wrap: anywhere; }
+.fs-link--standalone { font-weight: var(--fs-link-standalone-weight); }
+.fs-link:visited { color: var(--fs-link-visited); }
+.fs-link:where([href]):hover { color: var(--fs-link-hover); text-decoration-thickness: var(--fs-link-hover-underline-width); }
+.fs-link:where([href]):active { color: var(--fs-link-active); }
+.fs-link:focus-visible { outline: var(--fs-link-focus-width) solid var(--fs-link-focus-color); outline-offset: var(--fs-link-focus-offset); }
+.fs-link:not([href]) { color: var(--fs-link-unavailable); text-decoration: none; cursor: default; }
+.fs-link__icon { display: inline-flex; vertical-align: middle; margin-inline-start: var(--fs-link-icon-gap); }
+.fs-link__icon > svg { inline-size: var(--fs-link-icon-size); block-size: var(--fs-link-icon-size); }
+@media (forced-colors: active) {
+  .fs-link { color: LinkText; }
+  .fs-link:visited { color: VisitedText; }
+  .fs-link:where([href]):hover, .fs-link:where([href]):active { color: ActiveText; }
+  .fs-link:focus-visible { outline-color: Highlight; }
+  .fs-link:not([href]) { color: CanvasText; }
+}

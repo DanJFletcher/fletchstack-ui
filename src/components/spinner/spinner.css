@@ -1,0 +1,11 @@
+.fs-spinner { display: inline-flex; align-items: center; vertical-align: middle; min-inline-size: 0; max-inline-size: 100%; gap: var(--fs-spinner-label-gap); color: inherit; font: inherit; }
+.fs-spinner[hidden] { display: none; }
+.fs-spinner--small { --fs-spinner-size: var(--fs-spinner-size-small); }
+.fs-spinner--medium { --fs-spinner-size: var(--fs-spinner-size-medium); }
+.fs-spinner--large { --fs-spinner-size: var(--fs-spinner-size-large); }
+.fs-spinner .fs-spinner__graphic { display: block; flex: 0 0 auto; inline-size: var(--fs-spinner-size); block-size: var(--fs-spinner-size); stroke-width: var(--fs-spinner-stroke-width); animation: fs-spinner-rotate calc(var(--fs-spinner-rotation-seconds) * 1s) linear infinite; }
+.fs-spinner__track { opacity: var(--fs-spinner-track-opacity); }
+.fs-spinner__label { min-inline-size: 0; overflow-wrap: anywhere; }
+@keyframes fs-spinner-rotate { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .fs-spinner .fs-spinner__graphic { animation: none; } }
+@media (forced-colors: active) { .fs-spinner__track { opacity: 1; stroke: GrayText; } }

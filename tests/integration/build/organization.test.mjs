@@ -26,7 +26,7 @@ function relocated(path) {
 
 it('retains every production module after relocation', async () => {
   // arrange
-  const expected = baseline.production.map(relocated).sort();
+  const expected = [...baseline.production.map(relocated), 'src/components/radio/Radio.tsx', 'src/components/link/Link.tsx', 'src/components/switch/Switch.tsx', 'src/components/spinner/Spinner.tsx', 'src/components/badge/Badge.tsx', 'src/components/separator/Separator.tsx', 'src/components/container/Container.tsx', 'src/components/stack/Stack.tsx'].sort();
 
   // act
   const result = (await inventory('src')).filter(path => /\.tsx?$/.test(path)
@@ -67,7 +67,10 @@ it.each(Object.entries(baseline.hashes).filter(([path]) => path.startsWith('src/
     const destination = relocated(path);
 
     // act
-    const result = createHash('sha256').update(await readFile(destination)).digest('hex');
+    const content = await readFile(destination, 'utf8');
+    // Radio, Link, Switch, Spinner, Badge, Separator, and Container add semantic properties while every legacy token declaration remains frozen.
+    const legacy = destination === 'src/generated/tokens.css' ? content.replace(/^.*--fs-(?:radio|link|switch|spinner|badge|separator|container)-.*\n/gm, '') : content;
+    const result = createHash('sha256').update(legacy).digest('hex');
 
     // assert
     expect(result).toBe(expected);
@@ -79,7 +82,7 @@ it('preserves public runtime and type export declarations', async () => {
   const expected = baseline.publicExports.replace(/from '[^']+'/g, 'from OWNER');
 
   // act
-  const result = (await readFile('src/index.ts', 'utf8')).replace(/from '[^']+'/g, 'from OWNER');
+  const result = (await readFile('src/index.ts', 'utf8')).replace(/^.*from '.\/components\/(?:radio|link|switch|spinner|badge|separator|container|stack)\/index.js';\n/gm, '').replace(/from '[^']+'/g, 'from OWNER');
 
   // assert
   expect(result).toBe(expected);
@@ -87,7 +90,7 @@ it('preserves public runtime and type export declarations', async () => {
 
 it('preserves package export entrypoints', async () => {
   // arrange
-  const expected = baseline.packageExports;
+  const expected = { ...baseline.packageExports, './radio.css': './dist/radio.css', './link.css': './dist/link.css', './switch.css': './dist/switch.css', './spinner.css': './dist/spinner.css', './badge.css': './dist/badge.css', './separator.css': './dist/separator.css', './container.css': './dist/container.css', './stack.css': './dist/stack.css' };
 
   // act
   const result = JSON.parse(await readFile('package.json', 'utf8')).exports;

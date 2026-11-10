@@ -263,6 +263,121 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-textarea-focus-offset` | Textarea focus outline offset. | dimension |
 | `--fs-textarea-minimum-height` | Textarea minimum height before native rows or resizing. | dimension |
 | `--fs-textarea-padding-block` | Textarea vertical content padding. | dimension |
+| `--fs-radio-surface` | Unchecked radio surface. | color |
+| `--fs-radio-text` | Radio visible label foreground. | color |
+| `--fs-radio-muted` | Radio description foreground. | color |
+| `--fs-radio-border` | Unchecked radio boundary. | color |
+| `--fs-radio-error` | Invalid radio boundary and error message. | color |
+| `--fs-radio-disabled-surface` | Disabled unchecked radio surface. | color |
+| `--fs-radio-disabled-border` | Disabled radio boundary. | color |
+| `--fs-radio-disabled-text` | Disabled radio label and description. | color |
+| `--fs-radio-control-size` | Radio control dimensions. | dimension |
+| `--fs-radio-hit-area` | Minimum clickable radio label height and width. | dimension |
+| `--fs-radio-label-gap` | Separation between radio and label text. | dimension |
+| `--fs-radio-label-padding` | Vertical radio label padding. | dimension |
+| `--fs-radio-description-gap` | Separation between label and description. | dimension |
+| `--fs-radio-border-width` | Radio boundary thickness. | dimension |
+| `--fs-radio-font-family` | Radio label and message font family. | fontFamily |
+| `--fs-radio-font-size` | Radio label text size. | dimension |
+| `--fs-radio-font-description` | Radio description and error text size. | dimension |
+| `--fs-radio-font-weight` | Radio label emphasis. | fontWeight |
+| `--fs-radio-font-line-height` | Radio text line height. | number |
+| `--fs-radio-focus-color` | Radio keyboard focus indicator. | color |
+| `--fs-radio-focus-width` | Radio focus outline thickness. | dimension |
+| `--fs-radio-focus-offset` | Radio focus clearance. | dimension |
+| `--fs-radio-hover-border` | Hovered radio boundary. | color |
+| `--fs-radio-selected-border` | Selected radio boundary. | color |
+| `--fs-radio-dot` | Selected radio dot. | color |
+| `--fs-radio-disabled-dot` | Disabled selected radio dot. | color |
+| `--fs-radio-dot-size` | Selected radio dot dimensions. | dimension |
+| `--fs-link-text` | Unvisited link text and decorative icon. | color |
+| `--fs-link-visited` | Visited link foreground; native browser history owns this state. | color |
+| `--fs-link-hover` | Hovered link foreground. | color |
+| `--fs-link-active` | Active link foreground. | color |
+| `--fs-link-unavailable` | Unavailable destination text. | color |
+| `--fs-link-inline-weight` | Inline link weight. | fontWeight |
+| `--fs-link-standalone-weight` | Standalone navigation emphasis. | fontWeight |
+| `--fs-link-underline-width` | Resting link underline thickness. | dimension |
+| `--fs-link-hover-underline-width` | Hovered link underline thickness. | dimension |
+| `--fs-link-underline-offset` | Separation between text and underline. | dimension |
+| `--fs-link-icon-gap` | Space between link text and destination icon. | dimension |
+| `--fs-link-icon-size` | Destination icon dimensions. | dimension |
+| `--fs-link-focus-color` | Link keyboard focus outline. | color |
+| `--fs-link-focus-width` | Link focus outline thickness. | dimension |
+| `--fs-link-focus-offset` | Link focus outline clearance. | dimension |
+| `--fs-link-focus-radius` | Link focus outline corner radius. | dimension |
+| `--fs-switch-off-surface` | Off-state switch track. | color |
+| `--fs-switch-off-border` | Off-state switch boundary. | color |
+| `--fs-switch-off-hover-surface` | Hovered off-state track. | color |
+| `--fs-switch-off-hover-border` | Hovered off-state boundary. | color |
+| `--fs-switch-on-surface` | On-state switch track. | color |
+| `--fs-switch-on-border` | On-state switch boundary. | color |
+| `--fs-switch-on-hover-surface` | Hovered on-state track. | color |
+| `--fs-switch-on-hover-border` | Hovered on-state boundary. | color |
+| `--fs-switch-off-thumb` | Off-state thumb foreground. | color |
+| `--fs-switch-on-thumb` | On-state thumb foreground. | color |
+| `--fs-switch-disabled-off-surface` | Disabled off-state track. | color |
+| `--fs-switch-disabled-on-surface` | Disabled on-state track. | color |
+| `--fs-switch-disabled-border` | Disabled track boundary. | color |
+| `--fs-switch-disabled-off-thumb` | Disabled off-state thumb. | color |
+| `--fs-switch-disabled-on-thumb` | Disabled on-state thumb. | color |
+| `--fs-switch-track-width` | Switch track width. | dimension |
+| `--fs-switch-track-height` | Switch track height. | dimension |
+| `--fs-switch-thumb-size` | Circular thumb dimensions. | dimension |
+| `--fs-switch-thumb-inset` | Thumb clearance inside the track boundary. | dimension |
+| `--fs-switch-radius` | Pill track corner radius. | dimension |
+| `--fs-switch-text` | Switch visible label foreground. | color |
+| `--fs-switch-muted` | Switch description foreground. | color |
+| `--fs-switch-disabled-text` | Disabled switch label and description. | color |
+| `--fs-switch-border-width` | Switch boundary thickness. | dimension |
+| `--fs-switch-hit-area` | Minimum clickable switch label height and width. | dimension |
+| `--fs-switch-label-gap` | Separation between switch and label text. | dimension |
+| `--fs-switch-label-padding` | Vertical switch label padding. | dimension |
+| `--fs-switch-description-gap` | Separation between label and description. | dimension |
+| `--fs-switch-font-family` | Switch label and message font family. | fontFamily |
+| `--fs-switch-font-size` | Switch label text size. | dimension |
+| `--fs-switch-font-description` | Switch description and error text size. | dimension |
+| `--fs-switch-font-weight` | Switch label emphasis. | fontWeight |
+| `--fs-switch-font-line-height` | Switch text line height. | number |
+| `--fs-switch-focus-color` | Switch keyboard focus indicator. | color |
+| `--fs-switch-focus-width` | Switch focus outline thickness. | dimension |
+| `--fs-switch-focus-offset` | Switch focus clearance. | dimension |
+| `--fs-spinner-stroke-width` | Spinner stroke width in SVG viewBox units. | number |
+| `--fs-spinner-label-gap` | Separation between spinner artwork and status text. | dimension |
+| `--fs-spinner-track-opacity` | Faint full-circle track opacity. | number |
+| `--fs-spinner-rotation-seconds` | Seconds per steady rotation; converted with CSS calc and 1s. | number |
+| `--fs-spinner-accent` | Optional spinner accent; default artwork inherits its surrounding text color. | color |
+| `--fs-spinner-size-small` | Small spinner artwork dimensions. | dimension |
+| `--fs-spinner-size-medium` | Medium spinner artwork dimensions. | dimension |
+| `--fs-spinner-size-large` | Large spinner artwork dimensions. | dimension |
+| `--fs-badge-neutral-background` | Neutral badge fill. | color |
+| `--fs-badge-neutral-text` | Neutral badge text and decorative artwork. | color |
+| `--fs-badge-info-background` | Info badge fill. | color |
+| `--fs-badge-info-text` | Info badge text and decorative artwork. | color |
+| `--fs-badge-success-background` | Success badge fill. | color |
+| `--fs-badge-success-text` | Success badge text and decorative artwork. | color |
+| `--fs-badge-warning-background` | Warning badge fill. | color |
+| `--fs-badge-warning-text` | Warning badge text and decorative artwork. | color |
+| `--fs-badge-danger-background` | Danger badge fill. | color |
+| `--fs-badge-danger-text` | Danger badge text and decorative artwork. | color |
+| `--fs-badge-minimum-height` | Minimum badge height; text can grow. | dimension |
+| `--fs-badge-padding-inline` | Badge horizontal padding. | dimension |
+| `--fs-badge-padding-block` | Badge vertical padding. | dimension |
+| `--fs-badge-radius` | Badge pill radius. | dimension |
+| `--fs-badge-icon-size` | Optional badge artwork dimensions. | dimension |
+| `--fs-badge-icon-gap` | Badge artwork and label separation. | dimension |
+| `--fs-badge-outline-width` | Badge boundary in forced colors. | dimension |
+| `--fs-badge-font-family` | Badge font family. | fontFamily |
+| `--fs-badge-font-size` | Badge text size. | dimension |
+| `--fs-badge-font-weight` | Badge text emphasis. | fontWeight |
+| `--fs-badge-font-line-height` | Badge text line height. | number |
+| `--fs-separator-color` | Neutral static separator rule. | color |
+| `--fs-separator-thickness` | Separator thickness in either orientation. | dimension |
+| `--fs-container-max-width-reading` | Reading Container maximum, including inline gutters. | dimension |
+| `--fs-container-max-width-content` | Content Container maximum, including inline gutters. | dimension |
+| `--fs-container-max-width-wide` | Wide Container maximum, including inline gutters. | dimension |
+| `--fs-container-gutter-small` | Container inline gutter below 600px viewport width. | dimension |
+| `--fs-container-gutter-large` | Container inline gutter at and above 600px viewport width. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

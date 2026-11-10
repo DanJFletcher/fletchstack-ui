@@ -6,7 +6,7 @@ Unit tests opt into jsdom per file and explicitly import [DOM support](../tests/
 
 Root `stories/foundations/` owns design guidance, `stories/patterns/` links canonical multi-component examples, and `stories/shared/` owns generic preview support. Component demos and gallery runtime belong to the family. Preview CSS imports are explicit and retain their cascade order.
 
-Storybook uses Design System, Components, Patterns. Components are grouped into Actions, Forms, Surfaces, and Visuals. Pin metadata IDs independently of titles; preserve existing story export keys and ID-to-example meaning when moving or renaming files. Document independently reusable public components separately, and compound parts through their parent. Link patterns to working canonical stories rather than copying implementations.
+Storybook uses Design System, Components, Patterns. Components are grouped into Actions, Forms, Feedback, Layout, Navigation, Surfaces, and Visuals. Pin metadata IDs independently of titles; preserve existing story export keys and ID-to-example meaning when moving or renaming files. Document independently reusable public components separately, and compound parts through their parent. Link patterns to working canonical stories rather than copying implementations.
 
 Development type checking includes tests and stories. Declaration builds and library runtime graphs exclude them. Unit and integration coverage independently include production library/build modules at 100% per file. Browser coverage additionally includes all authored stories, examples, and preview runtime, including unvisited files; tests, fixtures, declarations, and Node configuration are excluded. Never exclude an entire family or lower a gate to accommodate relocation.
 

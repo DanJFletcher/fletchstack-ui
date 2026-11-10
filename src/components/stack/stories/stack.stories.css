@@ -1,0 +1,11 @@
+/* Guides, measurement blocks and consumer-owned copy rules; not shipped in stack.css. */
+.stack-demo-outline { outline: var(--fs-separator-thickness) dashed var(--fs-separator-color); outline-offset: -1px; }
+.stack-demo-item { box-sizing: border-box; min-block-size: 24px; padding: var(--fs-space-gap-label); border: var(--fs-separator-thickness) solid var(--fs-separator-color); border-radius: var(--fs-gallery-radius); }
+.stack-demo .stack-demo-copy { margin: 0; overflow-wrap: anywhere; }
+.stack-align-box { max-inline-size: 320px; }
+.stack-demo-narrow { inline-size: 240px; max-inline-size: 100%; }
+.stack-demo-flex { display: flex; }
+.stack-demo-fixed { flex: 0 0 80px; }
+.stack-demo-grid { display: grid; grid-template-columns: 80px minmax(0, 1fr); }
+@media (max-width: 600px) { .stack-responsive { --fs-layout-section-gap: 32px; } }
+.stack-demo-flex > .fs-stack { flex: 1; }

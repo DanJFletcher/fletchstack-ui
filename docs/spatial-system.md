@@ -32,7 +32,7 @@ A 6px radius, 3px focus ring, 140px card minimum, and 200px column constraint ar
 | `--fs-space-inset-container` | 24px | A content container's interior |
 | `--fs-layout-section-gap` | 64px | Major website sections |
 
-These are initial defaults, not mandates to replace all existing component roles. Button owns its padding and label/icon gap; Icon owns its artwork size. The parent owns placement, margins, sibling gaps, and container insets. Use ordinary flex/grid wrappers; no Stack/Grid React component is required.
+These are initial defaults, not mandates to replace all existing component roles. Button owns its padding and label/icon gap; Icon owns its artwork size. The parent owns placement, margins, sibling gaps, and container insets. Use ordinary flex/grid wrappers for child layout; they remain fully supported. The optional [Stack](./stack.md) component is a convenience for vertical direct-child gaps and cross-axis alignment; no Grid component is required. The optional [Container](./container.md) primitive owns only maximum width, centering, and responsive inline gutters, and can surround those wrappers. Ordinary CSS wrappers remain fully supported.
 
 ```css
 .settings-actions {
@@ -118,7 +118,7 @@ The following audit covers every pre-existing non-typographic spatial dimension 
 
 ## Compatibility and gallery migration
 
-Existing `--fs-space-inline`, `--fs-space-stack`, and `--fs-space-inset` remain supported at 12/24/24px. Every existing public token name/default remains available. No React API or package export changes are required. The new `stack-group` and `inset-container` source keys are siblings of the legacy token leaves, so adding them cannot hide the old tokens during flattening.
+Existing `--fs-space-inline`, `--fs-space-stack`, and `--fs-space-inset` remain supported at 12/24/24px. Every existing public token name/default remains available. The original spatial-role migration required no React API changes. The optional additive Container API and `container.css` export described below leave those existing tokens and wrappers unchanged. The new `stack-group` and `inset-container` source keys are siblings of the legacy token leaves, so adding them cannot hide the old tokens during flattening.
 
 | Previous incidental coupling | Independent role | Preserved default | Override migration |
 | --- | --- | --- | --- |
@@ -141,3 +141,57 @@ The spacing-demo select retains native appearance and keyboard focus with inheri
 - [Atlassian spacing](https://atlassian.design/foundations/spacing): use-case ranges and an 8px base with fractional steps are a useful comparison; this library keeps its existing naming and px contract.
 - [Spectrum spacing](https://spectrum.adobe.com/page/spacing/): proximity communicates relationships, and component/layout spacing serve different purposes.
 - [WCAG target-size guidance](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) and [text-spacing guidance](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html) constrain implementation and verification.
+
+
+## Optional Container
+
+[Container](./container.md) bounds and centers content without replacing a section, stack, grid, or ordinary CSS wrapper. Its border-box maxima include gutters: reading 720px, content 1120px (default), wide 1440px. It fills a narrower parent and can shrink in flex/grid. Inline gutters are 16px below the 600px viewport breakpoint and 24px at and above it; a narrow parent on desktop still uses 24px. Corporate and Luna share these layout values.
+
+Use `gutters={false}` inside an already inset parent or nested Container to avoid doubled gutters. That opt-out preserves width limits and centering. Parents own vertical spacing and semantic sections; children own internal layout, wrapping and minimum sizes. Container adds no background, border, shadow, fixed height, vertical padding, overflow clipping, section semantics, or keyboard behavior. Reading is a width preset, not a guarantee of ideal text measure. Long unbreakable text, fixed-width content, or child intrinsic minima can still overflow; fix those children rather than hiding overflow or focus rings.
+
+```tsx
+<section aria-labelledby="projects" className="page-section">
+  <Container>
+    <h2 id="projects">Projects</h2>
+    <div className="project-grid">{/* Ordinary grid/flex wrappers still own layout. */}</div>
+    <Container size="reading" gutters={false}>{/* No second inset. */}</Container>
+  </Container>
+</section>
+```
+
+New semantic roles are `--fs-container-max-width-reading`, `--fs-container-max-width-content`, `--fs-container-max-width-wide`, `--fs-container-gutter-small`, and `--fs-container-gutter-large`. All reference primitives directly, with no changes to prior spatial roles. Override them in a scope or typed Container styles; nested explicit themes restore their own complete defaults. The component's 600px viewport query is fixed CSS behavior and does not turn the spatial guide's independent responsive example into a global breakpoint API.
+
+Storybook's [Container examples](http://localhost:6006/?path=/story/components-container--width-presets) label outlines and measurements as demonstration guides. Those guides are not Container styles. Import tokens plus `container.css`, or combined `styles.css`; JavaScript includes no stylesheet import, browser global, provider, or layout effect.
+
+
+## Optional Stack
+
+[Stack](./stack.md) is a convenience for column flexbox with CSS gap, not a replacement for ordinary flex/grid wrappers. Use related (default) for `--fs-space-gap-related` (16px), group for `--fs-space-stack-group` (24px), section for `--fs-layout-section-gap` (64px), or none for zero. These variables are consumed directly, retain scoped overrides and nested-theme resets, and have identical Corporate/Luna defaults. No Stack-specific token aliases are introduced.
+
+Stack owns only participating direct-child gaps and cross-axis alignment. Stretch is the default; start/center/end position content across the inline axis, with start/end following writing direction. DOM, reading and keyboard order stay unchanged. Stack stays vertical at every width. Consumers can override the existing roles through scoped CSS and media queries; horizontal wrapping belongs to the separately proposed Cluster, or an ordinary wrapping flex row today.
+
+Keep composed fields as individual children: TextInput, Textarea, Select and FormGroup already own label/control/message spacing and accessibility associations. Splitting those parts into outer Stack children gives them the wrong sibling relationship. React fragments do not establish a grouped flex item. Nest a real Stack or ordinary wrapper when several nodes form one relationship.
+
+CSS gap inserts no spacer nodes and reserves no space for display:none or native hidden children. Visibility:hidden still participates. Consumer child margins are preserved and can add to the gap; reset your own margins explicitly when precise edge-to-edge gap measurement is needed. Nested stacks independently own their direct-child relationships. Stack adds no padding, surface, border, shadow, fixed height or clipping, and does not force widths onto descendants. Items retain their block sizes; constrained-height parents own any overflow/scroll decision. Wrapping and long unbreakable content remain child responsibilities.
+
+```tsx
+<Container>
+  <form>
+    <Stack gap="group">
+      <TextInput label="Project name" name="project" />
+      <Textarea label="Description" name="description" />
+      <Stack align="start"><Button type="submit">Save changes</Button></Stack>
+    </Stack>
+  </form>
+</Container>
+```
+
+```css
+/* Consumer-owned responsive decision; Stack itself has no breakpoint. */
+.project-sections { --fs-layout-section-gap: 64px; }
+@media (max-width: 600px) {
+  .project-sections { --fs-layout-section-gap: 32px; }
+}
+```
+
+Use `gap="section"` with that consumer class to change the section gap while preserving vertical flow. JavaScript imports no CSS or browser globals and requires no provider/layout effect/hydration. Import tokens and `stack.css` (plus composed component CSS), or combined `styles.css`. Demonstration outlines and measurement blocks in Storybook are consumer guides, not Stack's appearance.

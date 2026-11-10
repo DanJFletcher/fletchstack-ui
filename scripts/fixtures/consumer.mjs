@@ -2,16 +2,16 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createElement, version } from 'react';
 import { renderToString } from 'react-dom/server';
-import { Button, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, MoonIcon, Select, TextInput, Textarea } from 'fletchstack-ui';
+import { Badge, Button, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['ArrowRightIcon', 'Button', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'CloseIcon', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Icon', 'MoonIcon', 'PlusIcon', 'Select', 'SunIcon', 'TextInput', 'Textarea']);
+assert.deepEqual(Object.keys(library).sort(), ['ArrowRightIcon', 'Badge', 'Button', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'CloseIcon', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Icon', 'Link', 'MoonIcon', 'PlusIcon', 'Radio', 'Select', 'Separator', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'TextInput', 'Textarea']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const html = renderToString(element);
 assert.match(html, /type="button"/);
 assert.match(html, /aria-label="Save settings"/);
 assert.equal(renderToString(element), html);
-for (const path of ['styles.css', 'tokens.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'field.css', 'textarea.css']) {
+for (const path of ['styles.css', 'tokens.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'field.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css']) {
   const content = readFileSync(new URL(import.meta.resolve(`fletchstack-ui/${path}`)), 'utf8');
   assert.ok(content.length > 0);
   if (['styles.css', 'tokens.css'].includes(path)) {
@@ -60,3 +60,49 @@ const textareaMarkup = renderToString(createElement(Textarea, { label: 'Descript
 assert.match(textareaMarkup, /<textarea[^>]*rows="4"/);
 assert.match(textareaMarkup, /First\nSecond/);
 assert.match(textareaMarkup, /12<!-- --> \/ 200/);
+
+const radioMarkup = renderToString(createElement(Radio, { label: 'Standard', name: 'delivery', value: 'standard', defaultChecked: true }));
+assert.match(radioMarkup, /type="radio"/);
+assert.match(radioMarkup, /checked=""/);
+assert.match(radioMarkup, /name="delivery"/);
+
+const linkMarkup = renderToString(createElement(Link, { href: 'https://example.com/docs', target: '_blank' }, 'Documentation'));
+assert.match(linkMarkup, /href="https:\/\/example.com\/docs"/);
+assert.match(linkMarkup, /rel="noopener"/);
+assert.match(linkMarkup, /Opens in a new tab\./);
+
+const switchMarkup = renderToString(createElement(Switch, { label: 'Notifications', name: 'notifications', value: 'email', defaultChecked: true }));
+assert.match(switchMarkup, /type="checkbox" role="switch"/);
+assert.match(switchMarkup, /checked=""/);
+
+const spinnerMarkup = renderToString(createElement(Spinner, { label: 'Loading projects…' }));
+assert.match(spinnerMarkup, /role="status"/);
+assert.match(spinnerMarkup, /Loading projects…/);
+assert.doesNotMatch(renderToString(createElement(Spinner, { decorative: true })), /role="status"/);
+
+const badgeMarkup = renderToString(createElement(Badge, { tone: 'success' }, 'Published'));
+assert.match(badgeMarkup, /fs-badge--success/);
+assert.doesNotMatch(badgeMarkup, /role=|tabindex=|aria-live=/);
+assert.match(renderToString(createElement(Badge, {}, 0)), />0</);
+
+const separatorMarkup = renderToString(createElement(Separator, { decorative: false, orientation: 'vertical' }));
+assert.match(separatorMarkup, /role="separator"/);
+assert.match(separatorMarkup, /aria-orientation="vertical"/);
+assert.doesNotMatch(separatorMarkup, /tabindex=|aria-valuenow=/);
+assert.match(renderToString(createElement(Separator)), /aria-hidden="true"/);
+
+const containerElement = createElement(Container, { size: 'reading', gutters: false, id: 'article' }, 'Article content');
+const containerMarkup = renderToString(containerElement);
+assert.equal(renderToString(containerElement), containerMarkup);
+assert.match(containerMarkup, /id="article"/);
+assert.match(containerMarkup, /fs-container--reading/);
+assert.match(containerMarkup, /Article content/);
+assert.doesNotMatch(containerMarkup, /fs-container--gutters|tabindex=|role=/);
+
+const stackElement = createElement(Stack, { gap: 'group', align: 'start', id: 'settings' }, createElement('p', {}, 'First'), createElement('p', {}, 'Second'));
+const stackMarkup = renderToString(stackElement);
+assert.equal(renderToString(stackElement), stackMarkup);
+assert.match(stackMarkup, /id="settings"/);
+assert.match(stackMarkup, /fs-stack--gap-group fs-stack--align-start/);
+assert.match(stackMarkup, /First<\/p><p>Second/);
+assert.doesNotMatch(stackMarkup, /tabindex=|role=/);

@@ -24,7 +24,15 @@
     "./checkbox.css": "./dist/checkbox.css",
     "./form-group.css": "./dist/form-group.css",
     "./field.css": "./dist/field.css",
-    "./textarea.css": "./dist/textarea.css"
+    "./textarea.css": "./dist/textarea.css",
+    "./radio.css": "./dist/radio.css",
+    "./link.css": "./dist/link.css",
+    "./switch.css": "./dist/switch.css",
+    "./spinner.css": "./dist/spinner.css",
+    "./badge.css": "./dist/badge.css",
+    "./separator.css": "./dist/separator.css",
+    "./container.css": "./dist/container.css",
+    "./stack.css": "./dist/stack.css"
   },
   "files": [
     "dist",

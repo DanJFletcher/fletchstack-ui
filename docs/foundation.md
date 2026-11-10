@@ -87,3 +87,35 @@ The approved extraction introduces the [Field contract](field.md): native FieldL
 ## Textarea pattern
 
 The supplied multiline field reference approves the [Textarea contract](textarea.md): native textarea semantics, shared Field label/messages, vertical resizing, optional character guidance, read-only and disabled behavior. Independent `textarea.*` semantic roles in both themes provide a 120px minimum height, 16px type, 12px padding, and current form-state colors.
+
+## Radio pattern
+
+The supplied Radio design approves the native mutually exclusive option recorded in the [Radio contract](radio.md). It composes FormGroup and shared field messages, with independent `radio.*` roles for circular 20px controls, 44px minimum hit areas, 8px label gaps, blue/lavender selection, errors, disabled choices, and focus. Native groups retain keyboard, validation, form, and reset behavior.
+
+## Link pattern
+
+The supplied Link reference approves the [Link contract](link.md): native anchors for navigation, inherited text sizing, visible underlines, inline/standalone use, optional decorative icons, explicit new-tab announcements, and unavailable text when no href exists. Independent `link.*` roles provide Corporate blue/purple and Luna lavender states with visible offset focus. External destinations do not automatically open new tabs.
+
+## Switch pattern
+
+The supplied Switch reference approves the [Switch contract](switch.md): a native checkbox with switch semantics for immediate on/off settings, a stable label, optional description, and native keyboard/form behavior. Independent `switch.*` roles define a 40 × 24px track, 20px thumb, 44px minimum hit area, contrast-preserving off states, and Corporate blue/Luna lavender on states. Checkbox remains the pattern for selection within a list.
+
+## Spinner pattern
+
+The supplied Spinner reference approves the [Spinner contract](spinner.md): indeterminate activity, inherited color, 16/20/24px artwork, optional decorative reuse with one announcement owner, and persistent status text under reduced motion. Independent `spinner.*` roles define sizing, gap, stroke, track opacity, rotation speed, and optional Corporate/Luna accent colors. Consumers own pending state, busy regions, and removal on completion.
+
+## Badge
+
+The owner-provided Badge reference approves a passive pill for concise status, category, or exact count, with optional decorative artwork and neutral, info, success, warning, and danger tones in Corporate and Luna. The [Badge contract](./badge.md) records semantics, sizing, token customization, and consumer-owned announcements.
+
+## Separator
+
+The owner-provided Separator reference approves horizontal and vertical neutral 1px rules, with decorative grouping by default and opt-in semantic separation. Parent layouts own surrounding spacing and available dimensions. The [Separator contract](./separator.md) records static semantics, sizing, theme tokens, and customization.
+
+## Container
+
+The owner-approved Container design adds optional centered 720/1120/1440px maximum widths, inclusive of 16px gutters below 600px and 24px from 600px. Both themes share layout values. Parents retain vertical spacing and section semantics; children retain internal layout. See the [Container contract](./container.md) and [spatial guide](./spatial-system.md).
+
+## Stack
+
+The owner-approved Stack design adds optional vertical direct-child relationships with related/group/section gaps using existing shared roles directly, plus zero gap and logical cross-axis alignment. It preserves child margins and order, adds no inset/surface, and composes with existing Container and fields. See the [Stack contract](./stack.md) and [spatial guide](./spatial-system.md). No tokens are added.

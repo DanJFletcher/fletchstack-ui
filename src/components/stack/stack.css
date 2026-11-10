@@ -1,0 +1,15 @@
+.fs-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--fs-space-gap-related);
+  min-inline-size: 0;
+}
+.fs-stack[hidden] { display: none; }
+.fs-stack > * { flex-shrink: 0; }
+.fs-stack--gap-none { gap: 0; }
+.fs-stack--gap-group { gap: var(--fs-space-stack-group); }
+.fs-stack--gap-section { gap: var(--fs-layout-section-gap); }
+.fs-stack--align-start { align-items: flex-start; }
+.fs-stack--align-center { align-items: center; }
+.fs-stack--align-end { align-items: flex-end; }

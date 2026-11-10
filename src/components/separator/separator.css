@@ -1,0 +1,22 @@
+.fs-separator {
+  box-sizing: border-box;
+  display: block;
+  flex: none;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  block-size: var(--fs-separator-thickness);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-block-start: var(--fs-separator-thickness) solid var(--fs-separator-color);
+}
+.fs-separator[hidden] { display: none; }
+.fs-separator--vertical {
+  align-self: stretch;
+  inline-size: var(--fs-separator-thickness);
+  block-size: auto;
+  border-block-start: 0;
+  border-inline-start: var(--fs-separator-thickness) solid var(--fs-separator-color);
+}
+@media (forced-colors: active) { .fs-separator { border-color: CanvasText; } }

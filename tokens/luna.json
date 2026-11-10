@@ -1413,6 +1413,621 @@
         "$value": "{primitive.px12}",
         "$description": "Textarea vertical content padding."
       }
+    },
+    "radio": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Unchecked radio surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Radio visible label foreground."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Radio description foreground."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightControl}",
+        "$description": "Unchecked radio boundary."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorNight}",
+        "$description": "Invalid radio boundary and error message."
+      },
+      "disabledSurface": {
+        "$type": "color",
+        "$value": "{primitive.nightDisabled}",
+        "$description": "Disabled unchecked radio surface."
+      },
+      "disabledBorder": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled radio boundary."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled radio label and description."
+      },
+      "controlSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Radio control dimensions."
+      },
+      "hitArea": {
+        "$type": "dimension",
+        "$value": "{primitive.px44}",
+        "$description": "Minimum clickable radio label height and width."
+      },
+      "labelGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Separation between radio and label text."
+      },
+      "labelPadding": {
+        "$type": "dimension",
+        "$value": "{primitive.px10}",
+        "$description": "Vertical radio label padding."
+      },
+      "descriptionGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Separation between label and description."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Radio boundary thickness."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Radio label and message font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Radio label text size."
+        },
+        "description": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Radio description and error text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.regular}",
+          "$description": "Radio label emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Radio text line height."
+        }
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.gold}",
+          "$description": "Radio keyboard focus indicator."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Radio focus outline thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Radio focus clearance."
+        }
+      },
+      "hoverBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Hovered radio boundary."
+      },
+      "selectedBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Selected radio boundary."
+      },
+      "dot": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Selected radio dot."
+      },
+      "disabledDot": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled selected radio dot."
+      },
+      "dotSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px10}",
+        "$description": "Selected radio dot dimensions."
+      }
+    },
+    "link": {
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Unvisited link text and decorative icon."
+      },
+      "visited": {
+        "$type": "color",
+        "$value": "{primitive.visitedNight}",
+        "$description": "Visited link foreground; native browser history owns this state."
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Hovered link foreground."
+      },
+      "active": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Active link foreground."
+      },
+      "unavailable": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Unavailable destination text."
+      },
+      "inlineWeight": {
+        "$type": "fontWeight",
+        "$value": "{primitive.regular}",
+        "$description": "Inline link weight."
+      },
+      "standaloneWeight": {
+        "$type": "fontWeight",
+        "$value": "{primitive.semibold}",
+        "$description": "Standalone navigation emphasis."
+      },
+      "underlineWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Resting link underline thickness."
+      },
+      "hoverUnderlineWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px2}",
+        "$description": "Hovered link underline thickness."
+      },
+      "underlineOffset": {
+        "$type": "dimension",
+        "$value": "{primitive.px3}",
+        "$description": "Separation between text and underline."
+      },
+      "iconGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Space between link text and destination icon."
+      },
+      "iconSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Destination icon dimensions."
+      },
+      "focusColor": {
+        "$type": "color",
+        "$value": "{primitive.gold}",
+        "$description": "Link keyboard focus outline."
+      },
+      "focusWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px3}",
+        "$description": "Link focus outline thickness."
+      },
+      "focusOffset": {
+        "$type": "dimension",
+        "$value": "{primitive.px3}",
+        "$description": "Link focus outline clearance."
+      },
+      "focusRadius": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Link focus outline corner radius."
+      }
+    },
+    "switch": {
+      "offSurface": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightControl}",
+        "$description": "Off-state switch track."
+      },
+      "offBorder": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightControl}",
+        "$description": "Off-state switch boundary."
+      },
+      "offHoverSurface": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightControl}",
+        "$description": "Hovered off-state track."
+      },
+      "offHoverBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Hovered off-state boundary."
+      },
+      "onSurface": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "On-state switch track."
+      },
+      "onBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "On-state switch boundary."
+      },
+      "onHoverSurface": {
+        "$type": "color",
+        "$value": "{primitive.lavenderHover}",
+        "$description": "Hovered on-state track."
+      },
+      "onHoverBorder": {
+        "$type": "color",
+        "$value": "{primitive.lavenderHover}",
+        "$description": "Hovered on-state boundary."
+      },
+      "offThumb": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Off-state thumb foreground."
+      },
+      "onThumb": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "On-state thumb foreground."
+      },
+      "disabledOffSurface": {
+        "$type": "color",
+        "$value": "{primitive.nightDisabled}",
+        "$description": "Disabled off-state track."
+      },
+      "disabledOnSurface": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled on-state track."
+      },
+      "disabledBorder": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled track boundary."
+      },
+      "disabledOffThumb": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled off-state thumb."
+      },
+      "disabledOnThumb": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Disabled on-state thumb."
+      },
+      "trackWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px40}",
+        "$description": "Switch track width."
+      },
+      "trackHeight": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Switch track height."
+      },
+      "thumbSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Circular thumb dimensions."
+      },
+      "thumbInset": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Thumb clearance inside the track boundary."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Pill track corner radius."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Switch visible label foreground."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Switch description foreground."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Disabled switch label and description."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Switch boundary thickness."
+      },
+      "hitArea": {
+        "$type": "dimension",
+        "$value": "{primitive.px44}",
+        "$description": "Minimum clickable switch label height and width."
+      },
+      "labelGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Separation between switch and label text."
+      },
+      "labelPadding": {
+        "$type": "dimension",
+        "$value": "{primitive.px10}",
+        "$description": "Vertical switch label padding."
+      },
+      "descriptionGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Separation between label and description."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Switch label and message font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Switch label text size."
+        },
+        "description": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Switch description and error text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.regular}",
+          "$description": "Switch label emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Switch text line height."
+        }
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.gold}",
+          "$description": "Switch keyboard focus indicator."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Switch focus outline thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Switch focus clearance."
+        }
+      }
+    },
+    "spinner": {
+      "strokeWidth": {
+        "$type": "number",
+        "$value": "{primitive.iconStroke}",
+        "$description": "Spinner stroke width in SVG viewBox units."
+      },
+      "labelGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Separation between spinner artwork and status text."
+      },
+      "trackOpacity": {
+        "$type": "number",
+        "$value": "{primitive.spinnerTrackOpacity}",
+        "$description": "Faint full-circle track opacity."
+      },
+      "rotationSeconds": {
+        "$type": "number",
+        "$value": "{primitive.spinnerRotationSeconds}",
+        "$description": "Seconds per steady rotation; converted with CSS calc and 1s."
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Optional spinner accent; default artwork inherits its surrounding text color."
+      },
+      "size": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{primitive.px16}",
+          "$description": "Small spinner artwork dimensions."
+        },
+        "medium": {
+          "$type": "dimension",
+          "$value": "{primitive.px20}",
+          "$description": "Medium spinner artwork dimensions."
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{primitive.px24}",
+          "$description": "Large spinner artwork dimensions."
+        }
+      }
+    },
+    "badge": {
+      "neutral": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.violet}",
+          "$description": "Neutral badge fill."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Neutral badge text and decorative artwork."
+        }
+      },
+      "info": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.infoNight}",
+          "$description": "Info badge fill."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Info badge text and decorative artwork."
+        }
+      },
+      "success": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.greenNight}",
+          "$description": "Success badge fill."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.greenPale}",
+          "$description": "Success badge text and decorative artwork."
+        }
+      },
+      "warning": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.amberNight}",
+          "$description": "Warning badge fill."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.amberPale}",
+          "$description": "Warning badge text and decorative artwork."
+        }
+      },
+      "danger": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.redNight}",
+          "$description": "Danger badge fill."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.errorNight}",
+          "$description": "Danger badge text and decorative artwork."
+        }
+      },
+      "minimumHeight": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Minimum badge height; text can grow."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Badge horizontal padding."
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px0}",
+        "$description": "Badge vertical padding."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Badge pill radius."
+      },
+      "iconSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Optional badge artwork dimensions."
+      },
+      "iconGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Badge artwork and label separation."
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Badge boundary in forced colors."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Badge font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.extraSmall}",
+          "$description": "Badge text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Badge text emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Badge text line height."
+        }
+      }
+    },
+    "separator": {
+      "color": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Neutral static separator rule."
+      },
+      "thickness": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Separator thickness in either orientation."
+      }
+    },
+    "container": {
+      "maxWidth": {
+        "reading": {
+          "$type": "dimension",
+          "$value": "{primitive.px720}",
+          "$description": "Reading Container maximum, including inline gutters."
+        },
+        "content": {
+          "$type": "dimension",
+          "$value": "{primitive.px1120}",
+          "$description": "Content Container maximum, including inline gutters."
+        },
+        "wide": {
+          "$type": "dimension",
+          "$value": "{primitive.px1440}",
+          "$description": "Wide Container maximum, including inline gutters."
+        }
+      },
+      "gutter": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{primitive.px16}",
+          "$description": "Container inline gutter below 600px viewport width."
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{primitive.px24}",
+          "$description": "Container inline gutter at and above 600px viewport width."
+        }
+      }
     }
   }
 }

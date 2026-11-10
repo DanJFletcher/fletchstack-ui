@@ -1,0 +1,14 @@
+.fs-container {
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: var(--fs-container-max-width-content);
+  min-inline-size: 0;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+.fs-container--reading { max-inline-size: var(--fs-container-max-width-reading); }
+.fs-container--wide { max-inline-size: var(--fs-container-max-width-wide); }
+.fs-container--gutters { padding-inline: var(--fs-container-gutter-small); }
+@media (min-width: 600px) {
+  .fs-container--gutters { padding-inline: var(--fs-container-gutter-large); }
+}

@@ -10,10 +10,26 @@ beforeEach(() => {
   files.readFile.mockResolvedValueOnce(':root { --fs-text: black; }').mockResolvedValueOnce('.fs-field { display: grid; }').mockResolvedValueOnce('.fs-button { color: var(--fs-text); }').mockResolvedValueOnce('.fs-icon { width: var(--fs-icon-size-medium); }').mockResolvedValueOnce('.fs-card { color: var(--fs-card-text); }').mockResolvedValueOnce('.fs-select { color: var(--fs-select-text); }').mockResolvedValueOnce('.fs-text-input { color: var(--fs-text-input-text); }').mockResolvedValueOnce('.fs-checkbox { color: var(--fs-checkbox-text); }');
   files.readFile.mockResolvedValueOnce('.fs-form-group { display: block; }');
   files.readFile.mockResolvedValueOnce('.fs-textarea { resize: vertical; }');
+  files.readFile.mockResolvedValueOnce('.fs-radio { appearance: none; }');
+  files.readFile.mockResolvedValueOnce('.fs-link { text-decoration-line: underline; }');
+  files.readFile.mockResolvedValueOnce('.fs-switch { appearance: none; }');
+  files.readFile.mockResolvedValueOnce('.fs-spinner { display: inline-flex; }');
+  files.readFile.mockResolvedValueOnce('.fs-badge { display: inline-flex; }');
+  files.readFile.mockResolvedValueOnce('.fs-separator { margin: 0; }');
+  files.readFile.mockResolvedValueOnce('.fs-container { box-sizing: border-box; }');
+  files.readFile.mockResolvedValueOnce('.fs-stack { display: flex; }');
   files.writeFile.mockResolvedValue(undefined);
 });
 
 it.each([
+  { source: 'src/components/stack/stack.css', destination: 'dist/stack.css' },
+  { source: 'src/components/container/container.css', destination: 'dist/container.css' },
+  { source: 'src/components/separator/separator.css', destination: 'dist/separator.css' },
+  { source: 'src/components/badge/badge.css', destination: 'dist/badge.css' },
+  { source: 'src/components/spinner/spinner.css', destination: 'dist/spinner.css' },
+  { source: 'src/components/switch/switch.css', destination: 'dist/switch.css' },
+  { source: 'src/components/link/link.css', destination: 'dist/link.css' },
+  { source: 'src/components/radio/radio.css', destination: 'dist/radio.css' },
   { source: 'src/generated/tokens.css', destination: 'dist/tokens.css' },
   { source: 'src/components/field/field.css', destination: 'dist/field.css' },
   { source: 'src/components/button/button.css', destination: 'dist/button.css' },
@@ -34,7 +50,7 @@ it.each([
 
 it('combines tokens before component styles in the public stylesheet', async () => {
   // arrange
-  const expected = ':root { --fs-text: black; }\n.fs-field { display: grid; }\n.fs-button { color: var(--fs-text); }\n.fs-icon { width: var(--fs-icon-size-medium); }\n.fs-card { color: var(--fs-card-text); }\n.fs-select { color: var(--fs-select-text); }\n.fs-text-input { color: var(--fs-text-input-text); }\n.fs-checkbox { color: var(--fs-checkbox-text); }\n.fs-form-group { display: block; }\n.fs-textarea { resize: vertical; }';
+  const expected = ':root { --fs-text: black; }\n.fs-field { display: grid; }\n.fs-button { color: var(--fs-text); }\n.fs-icon { width: var(--fs-icon-size-medium); }\n.fs-card { color: var(--fs-card-text); }\n.fs-select { color: var(--fs-select-text); }\n.fs-text-input { color: var(--fs-text-input-text); }\n.fs-checkbox { color: var(--fs-checkbox-text); }\n.fs-form-group { display: block; }\n.fs-textarea { resize: vertical; }\n.fs-radio { appearance: none; }\n.fs-link { text-decoration-line: underline; }\n.fs-switch { appearance: none; }\n.fs-spinner { display: inline-flex; }\n.fs-badge { display: inline-flex; }\n.fs-separator { margin: 0; }\n.fs-container { box-sizing: border-box; }\n.fs-stack { display: flex; }';
 
   // act
   await import('../../../scripts/copy-styles.mjs');

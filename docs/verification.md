@@ -1,5 +1,11 @@
 # Verification evidence
 
+## Typography — 2026-11-10
+
+Heading and Text follow the [approved content contract](typography.md). The initial token contract test failed on missing roles before implementation. Final verification passed lint, both TypeScript configurations, 620 unit tests and 286 integration tests (each with independent 100% statement/branch/function/line coverage), 303 Storybook browser tests with axe failures enabled, and all 354 standalone Chromium tests. Library and static Storybook builds, built-package browser checks, and installed package exports/types/styles/bundling/React 18 and 19 SSR checks passed. Affected-run dry runs conservatively selected full fallback because tokens, public exports and shared tooling changed.
+
+Typography-specific browser checks cover both-theme scale and contrast, scoped overrides/nested resets, native hidden behavior, inline-link focus including forced colors, RTL, 320px reflow with 200% root text and user text spacing. Both-theme presentation was visually inspected. Native heading levels and inline composition are asserted by story plays; script-free SSR receives real-browser CSS measurements. No real screen-reader, Firefox or WebKit verification was performed.
+
 ## Browser test simplification — 2026-11-10
 
 See [the staged runtime and failure-sensitivity evidence](browser-runtime-verification.md) and [required browser-behavior matrix](../tests/browser-behavior-matrix.md). This change replaces mandatory standalone-browser 100% JavaScript coverage with coverage-free required journeys and opt-in diagnostic reports. The historical results and policies below describe their original verification dates; independent unit/integration coverage gates remain unchanged.

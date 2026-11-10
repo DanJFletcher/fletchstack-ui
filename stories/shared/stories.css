@@ -9,9 +9,9 @@ body { margin: 0; }
   padding: var(--fs-space-inset);
 }
 .showcase { min-height: 100vh; }
-.showcase h1 { font-size: 2rem; margin-block: 0 var(--fs-space-inline); }
-.showcase h2 { font-size: 1.125rem; margin-block: 0 var(--fs-space-inline); }
-.showcase p:where(:not(.fs-field-description, .fs-field-error)) { max-width: 64ch; margin-block: 0 var(--fs-space-stack); }
+.showcase h1:where(:not(.fs-heading)) { font-size: 2rem; margin-block: 0 var(--fs-space-inline); }
+.showcase h2:where(:not(.fs-heading)) { font-size: 1.125rem; margin-block: 0 var(--fs-space-inline); }
+.showcase p:where(:not(.fs-field-description, .fs-field-error, .fs-text)) { max-width: 64ch; margin-block: 0 var(--fs-space-stack); }
 .stack { display: grid; gap: var(--fs-space-stack); }
 .actions { display: flex; flex-wrap: wrap; align-items: start; gap: var(--fs-space-inline); }
 .theme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--fs-space-stack); }

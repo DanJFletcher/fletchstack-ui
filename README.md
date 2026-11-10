@@ -2,6 +2,10 @@
 
 A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. Public components include `Button`, `Field` and its label/message atoms, `FormGroup`, `Checkbox`, `Select`, `TextInput`, `Textarea`, composable `Card` parts, `Icon`, and eight opt-in named icons.
 
+## Typography
+
+`Heading` provides native h1–h6 semantics independently of page, section, and subheading visual sizes. `Text` provides paragraph or inline span content with lead, body, and small sizes and default or muted tones. Compose with Container for reading width and Stack for spacing. Import `typography.css` with tokens, or use combined styles. See the [Typography contract](docs/typography.md).
+
 ## Install and import
 
 Use Node 22.23.4+ and React/React DOM **^18.2.0 or ^19.0.0**, with matching React and React DOM versions. The package is ESM and includes TypeScript declarations. React is a peer dependency and is not bundled.

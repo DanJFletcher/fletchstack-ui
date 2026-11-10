@@ -2054,6 +2054,91 @@
           "$description": "Section spacious padding at each block edge; independent of sibling section gaps."
         }
       }
+    },
+    "typography": {
+      "heading": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Content heading font family."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.bold}",
+          "$description": "Content heading emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.headingLineHeight}",
+          "$description": "Content heading line height, unitless."
+        },
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Content heading foreground on its themed surface."
+        },
+        "font": {
+          "page": {
+            "$type": "dimension",
+            "$value": "{primitive.pageTitle}",
+            "$description": "page content heading font size."
+          },
+          "section": {
+            "$type": "dimension",
+            "$value": "{primitive.heading}",
+            "$description": "section content heading font size."
+          },
+          "subheading": {
+            "$type": "dimension",
+            "$value": "{primitive.large}",
+            "$description": "subheading content heading font size."
+          }
+        }
+      },
+      "text": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Content text font family."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.regular}",
+          "$description": "Content text weight."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Content text line height, unitless."
+        },
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Default content text foreground."
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "{primitive.nightMuted}",
+          "$description": "Supporting content text foreground with AA contrast."
+        },
+        "font": {
+          "lead": {
+            "$type": "dimension",
+            "$value": "{primitive.large}",
+            "$description": "lead content text font size."
+          },
+          "body": {
+            "$type": "dimension",
+            "$value": "{primitive.medium}",
+            "$description": "body content text font size."
+          },
+          "small": {
+            "$type": "dimension",
+            "$value": "{primitive.small}",
+            "$description": "small content text font size."
+          }
+        }
+      }
     }
   }
 }

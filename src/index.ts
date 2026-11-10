@@ -1,4 +1,6 @@
 export { Textarea } from './components/textarea/index.js';
+export { Heading, Text } from './components/typography/index.js';
+export type { HeadingProps, HeadingStyle, TextProps, TextStyle } from './components/typography/index.js';
 export type { TextareaProps, TextareaStyle } from './components/textarea/index.js';
 export { Field } from './components/field/index.js';
 export type { FieldProps, FieldControlProps } from './components/field/index.js';

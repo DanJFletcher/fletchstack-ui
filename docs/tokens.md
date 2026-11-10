@@ -382,6 +382,21 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-section-padding-compact` | Section compact padding at each block edge; independent of sibling section gaps. | dimension |
 | `--fs-section-padding-default` | Section default padding at each block edge; independent of sibling section gaps. | dimension |
 | `--fs-section-padding-spacious` | Section spacious padding at each block edge; independent of sibling section gaps. | dimension |
+| `--fs-typography-heading-family` | Content heading font family. | fontFamily |
+| `--fs-typography-heading-weight` | Content heading emphasis. | fontWeight |
+| `--fs-typography-heading-line-height` | Content heading line height, unitless. | number |
+| `--fs-typography-heading-color` | Content heading foreground on its themed surface. | color |
+| `--fs-typography-heading-font-page` | page content heading font size. | dimension |
+| `--fs-typography-heading-font-section` | section content heading font size. | dimension |
+| `--fs-typography-heading-font-subheading` | subheading content heading font size. | dimension |
+| `--fs-typography-text-family` | Content text font family. | fontFamily |
+| `--fs-typography-text-weight` | Content text weight. | fontWeight |
+| `--fs-typography-text-line-height` | Content text line height, unitless. | number |
+| `--fs-typography-text-color` | Default content text foreground. | color |
+| `--fs-typography-text-muted` | Supporting content text foreground with AA contrast. | color |
+| `--fs-typography-text-font-lead` | lead content text font size. | dimension |
+| `--fs-typography-text-font-body` | body content text font size. | dimension |
+| `--fs-typography-text-font-small` | small content text font size. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

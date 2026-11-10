@@ -1,0 +1,2 @@
+/* Example parent constraint, not a Typography width or surface. */
+.typography-demo-narrow { max-inline-size: 240px; }

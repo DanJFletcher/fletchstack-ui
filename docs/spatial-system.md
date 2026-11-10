@@ -1,5 +1,7 @@
 # Spatial system
 
+The optional [Heading and Text](./typography.md) components own content typography and reset their own margins. Container controls reading width and Stack controls sibling gaps; ordinary CSS wrappers remain supported. Visual heading size does not select document level.
+
 Use space to communicate relationships: related things sit closer together; groups and page sections receive progressively more separation. This Carbon-inspired system extends the foundation's 4px working rhythm to components and Gatsby/Astro page composition. Corporate and Luna share spacing defaults; visual theme does not select density.
 
 ## Preferred scale

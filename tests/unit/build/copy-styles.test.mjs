@@ -22,10 +22,12 @@ beforeEach(() => {
   files.readFile.mockResolvedValueOnce('.fs-simple-grid { display: grid; }');
   files.readFile.mockResolvedValueOnce('.fs-aspect-ratio { position: relative; }');
   files.readFile.mockResolvedValueOnce('.fs-section { padding-inline: 0; }');
+  files.readFile.mockResolvedValueOnce('.fs-heading { margin: 0; }');
   files.writeFile.mockResolvedValue(undefined);
 });
 
 it.each([
+  { source: 'src/components/typography/typography.css', destination: 'dist/typography.css' },
   { source: 'src/components/section/section.css', destination: 'dist/section.css' },
   { source: 'src/components/aspect-ratio/aspect-ratio.css', destination: 'dist/aspect-ratio.css' },
   { source: 'src/components/simple-grid/simple-grid.css', destination: 'dist/simple-grid.css' },
@@ -58,7 +60,7 @@ it.each([
 
 it('combines tokens before component styles in the public stylesheet', async () => {
   // arrange
-  const expected = ':root { --fs-text: black; }\n.fs-field { display: grid; }\n.fs-button { color: var(--fs-text); }\n.fs-icon { width: var(--fs-icon-size-medium); }\n.fs-card { color: var(--fs-card-text); }\n.fs-select { color: var(--fs-select-text); }\n.fs-text-input { color: var(--fs-text-input-text); }\n.fs-checkbox { color: var(--fs-checkbox-text); }\n.fs-form-group { display: block; }\n.fs-textarea { resize: vertical; }\n.fs-radio { appearance: none; }\n.fs-link { text-decoration-line: underline; }\n.fs-switch { appearance: none; }\n.fs-spinner { display: inline-flex; }\n.fs-badge { display: inline-flex; }\n.fs-separator { margin: 0; }\n.fs-container { box-sizing: border-box; }\n.fs-stack { display: flex; }\n.fs-cluster { flex-wrap: wrap; }\n.fs-simple-grid { display: grid; }\n.fs-aspect-ratio { position: relative; }\n.fs-section { padding-inline: 0; }';
+  const expected = ':root { --fs-text: black; }\n.fs-field { display: grid; }\n.fs-button { color: var(--fs-text); }\n.fs-icon { width: var(--fs-icon-size-medium); }\n.fs-card { color: var(--fs-card-text); }\n.fs-select { color: var(--fs-select-text); }\n.fs-text-input { color: var(--fs-text-input-text); }\n.fs-checkbox { color: var(--fs-checkbox-text); }\n.fs-form-group { display: block; }\n.fs-textarea { resize: vertical; }\n.fs-radio { appearance: none; }\n.fs-link { text-decoration-line: underline; }\n.fs-switch { appearance: none; }\n.fs-spinner { display: inline-flex; }\n.fs-badge { display: inline-flex; }\n.fs-separator { margin: 0; }\n.fs-container { box-sizing: border-box; }\n.fs-stack { display: flex; }\n.fs-cluster { flex-wrap: wrap; }\n.fs-simple-grid { display: grid; }\n.fs-aspect-ratio { position: relative; }\n.fs-section { padding-inline: 0; }\n.fs-heading { margin: 0; }';
 
   // act
   await import('../../../scripts/copy-styles.mjs');

@@ -36,7 +36,8 @@
     "./cluster.css": "./dist/cluster.css",
     "./simple-grid.css": "./dist/simple-grid.css",
     "./aspect-ratio.css": "./dist/aspect-ratio.css",
-    "./section.css": "./dist/section.css"
+    "./section.css": "./dist/section.css",
+    "./typography.css": "./dist/typography.css"
   },
   "files": [
     "dist",

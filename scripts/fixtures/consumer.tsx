@@ -295,6 +295,26 @@ export const invalidAspectRatioRawContent = <AspectRatio dangerouslySetInnerHTML
 
 import { Section, type SectionProps, type SectionStyle } from 'fletchstack-ui';
 import 'fletchstack-ui/section.css';
+import { Heading, Text, type HeadingProps, type HeadingStyle, type TextProps, type TextStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/typography.css';
+const headingRef = createRef<HTMLHeadingElement>();
+const headingStyle: HeadingStyle = { '--fs-typography-heading-font-page': '2.5rem' };
+const headingProps: HeadingProps = { as: 'h1', size: 'page', style: headingStyle, children: 'Project settings' };
+export const contentHeading = <Heading {...headingProps} ref={headingRef} />;
+const paragraphRef = createRef<HTMLParagraphElement>();
+const spanRef = createRef<HTMLSpanElement>();
+const textStyle: TextStyle = { '--fs-typography-text-font-body': '1.125rem' };
+const textProps: TextProps = { size: 'body', tone: 'muted', style: textStyle, children: 'Manage your workspace.' };
+export const contentText = <Text {...textProps} ref={paragraphRef} />;
+export const inlineText = <Text as="span" ref={spanRef}>Updated yesterday</Text>;
+// @ts-expect-error Heading semantics are native heading levels, independent of visual size.
+export const invalidHeadingElement = <Heading as="p" />;
+// @ts-expect-error Visual size is a named content role, not a semantic heading level.
+export const invalidHeadingSize = <Heading size="h1" />;
+// @ts-expect-error Inline content is a span; Text does not replace Link.
+export const invalidTextElement = <Text as="a" href="/projects" />;
+// @ts-expect-error Text tones are default and muted.
+export const invalidTextTone = <Text tone="danger" />;
 const sectionRef = createRef<HTMLElement>();
 const sectionStyle: SectionStyle = { '--fs-section-padding-default': '32px', paddingInline: 0 };
 const sectionProps: SectionProps = { spacing: 'spacious', as: 'section', style: sectionStyle, children: <h2 id="topic-heading">Project topic</h2> };

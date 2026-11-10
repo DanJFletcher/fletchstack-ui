@@ -831,6 +831,17 @@
         "unit": "px"
       },
       "$description": "Approved SimpleGrid preferred minimum item width."
+    },
+    "pageTitle": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "rem"
+      }
+    },
+    "bold": {
+      "$type": "fontWeight",
+      "$value": 700
     }
   }
 }

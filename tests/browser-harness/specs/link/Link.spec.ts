@@ -1,12 +1,16 @@
 import { expect, test } from '../../fixtures/test';
-import { openStory } from '../../fixtures/storybook';
-import { contrast } from '../../fixtures/contrast';
+import { openScenario } from '../../fixtures/scenario';
+import { contrast } from '../../../e2e/fixtures/contrast';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} Link follows native Enter navigation and skips unavailable text`, async ({ page }) => {
-    await openStory(page, 'components-link--keyboard', { theme });
+  test(`${theme} Link follows native Enter navigation and skips unavailable text`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-link--keyboard', { theme });
     const first = page.getByRole('link', { name: 'First destination' });
     const second = page.getByRole('link', { name: 'Second destination' });
+    // Reproduce the story play prerequisite using native keyboard input.
+    await page.keyboard.press('Tab');
+    await expect(first).toBeFocused();
+    await page.keyboard.press('Tab');
     await expect(second).toBeFocused();
     await page.keyboard.press('Shift+Tab');
     await expect(first).toBeFocused();
@@ -17,8 +21,8 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(page.getByRole('heading', { name: 'Keyboard destination' })).toBeVisible();
   });
 
-  test(`${theme} Link preserves underlines and contrast through hover and active states`, async ({ page }) => {
-    await openStory(page, 'components-link--playground', { theme });
+  test(`${theme} Link preserves underlines and contrast through hover and active states`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-link--playground', { theme });
     const link = page.getByRole('link');
     const paint = await link.evaluate(element => {
       const style = getComputedStyle(element);
@@ -39,9 +43,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     await page.mouse.up();
   });
 
-  test(`${theme} Link reflows inherited typography and icons at 320px`, async ({ page }) => {
+  test(`${theme} Link reflows inherited typography and icons at 320px`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 900 });
-    await openStory(page, 'components-link--long-text', { theme });
+    await openScenario(mount, 'components-link--long-text', { theme });
     await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
     const link = page.getByRole('link');
     await link.focus();
@@ -51,8 +55,8 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-test('Link announces and opens explicit new-tab navigation with no opener', async ({ page }) => {
-  await openStory(page, 'components-link--new-tab');
+test('Link announces and opens explicit new-tab navigation with no opener', async ({ page, mount }) => {
+  await openScenario(mount, 'components-link--new-tab');
   const link = page.getByRole('link', { name: 'Read documentation' });
   await expect(link).toHaveAccessibleDescription('Reference material. Opens in a new tab.');
   await expect(link).toHaveAttribute('rel', 'noreferrer noopener');
@@ -64,17 +68,17 @@ test('Link announces and opens explicit new-tab navigation with no opener', asyn
   await popup.close();
 });
 
-test('Link uses the current tab for an ordinary external destination', async ({ page }) => {
+test('Link uses the current tab for an ordinary external destination', async ({ page, mount }) => {
   // Replace only the external document; navigation remains a real browser action.
   await page.route('https://example.com/docs', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><html lang="en"><title>Example documentation</title><h1>Example documentation</h1></html>' }));
-  await openStory(page, 'components-link--external-destination');
+  await openScenario(mount, 'components-link--external-destination');
   await page.getByRole('link', { name: 'Read documentation' }).click();
   await expect(page).toHaveURL('https://example.com/docs');
   await expect(page.getByRole('heading', { name: 'Example documentation' })).toBeVisible();
 });
 
-test('Link preserves modified clicks for opening a destination in another tab', async ({ page }) => {
-  await openStory(page, 'components-link--usage');
+test('Link preserves modified clicks for opening a destination in another tab', async ({ page, mount }) => {
+  await openScenario(mount, 'components-link--usage');
   const popupPromise = page.context().waitForEvent('page');
   await page.getByRole('link', { name: 'privacy policy' }).click({ modifiers: ['ControlOrMeta'] });
   const popup = await popupPromise;
@@ -83,27 +87,27 @@ test('Link preserves modified clicks for opening a destination in another tab', 
   await popup.close();
 });
 
-test('Link preserves native downloads', async ({ page }) => {
-  await openStory(page, 'components-link--download');
+test('Link preserves native downloads', async ({ page, mount }) => {
+  await openScenario(mount, 'components-link--download');
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('link', { name: 'Download component guide' }).click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toBe('component-guide.txt');
 });
 
-test('Link preserves empty-string href as a native hyperlink', async ({ page }) => {
-  await openStory(page, 'components-link--empty-destination');
+test('Link preserves empty-string href as a native hyperlink', async ({ page, mount }) => {
+  await openScenario(mount, 'components-link--empty-destination');
   await expect(page.getByRole('link', { name: 'Current page' })).toHaveAttribute('href', '');
 });
 
-test('Link keeps unavailable text outside the hyperlink semantics', async ({ page }) => {
-  await openStory(page, 'components-link--unavailable');
+test('Link keeps unavailable text outside the hyperlink semantics', async ({ page, mount }) => {
+  await openScenario(mount, 'components-link--unavailable');
   await expect(page.getByRole('link')).toHaveCount(0);
   await expect(page.getByText('Unavailable documentation')).toHaveCSS('text-decoration-line', 'none');
 });
 
-test('Link retains underlines and keyboard focus in forced colors', async ({ page }) => {
-  await openStory(page, 'components-link--playground');
+test('Link retains underlines and keyboard focus in forced colors', async ({ page, mount }) => {
+  await openScenario(mount, 'components-link--playground');
   await page.emulateMedia({ forcedColors: 'active' });
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link')).toBeFocused();

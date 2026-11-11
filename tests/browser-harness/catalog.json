@@ -899,6 +899,46 @@
     "components-text--hidden": {
       "module": "tests/browser-harness/scenarios/Text.tsx",
       "export": "Hidden"
+    },
+    "components-link--playground": {
+      "module": "tests/browser-harness/scenarios/Link.tsx",
+      "export": "Playground"
+    },
+    "components-link--external-destination": {
+      "module": "tests/browser-harness/scenarios/Link.tsx",
+      "export": "ExternalDestination"
+    },
+    "components-link--new-tab": {
+      "module": "tests/browser-harness/scenarios/Link.tsx",
+      "export": "NewTab"
+    },
+    "components-link--unavailable": {
+      "module": "tests/browser-harness/scenarios/Link.tsx",
+      "export": "Unavailable"
+    },
+    "components-link--usage": {
+      "module": "tests/browser-harness/scenarios/Link.tsx",
+      "export": "Usage"
+    },
+    "components-link--keyboard": {
+      "module": "tests/browser-harness/scenarios/Link.tsx",
+      "export": "Keyboard"
+    },
+    "components-link--download": {
+      "module": "tests/browser-harness/scenarios/Link.tsx",
+      "export": "Download"
+    },
+    "components-link--empty-destination": {
+      "module": "tests/browser-harness/scenarios/Link.tsx",
+      "export": "EmptyDestination"
+    },
+    "components-link--long-text": {
+      "module": "tests/browser-harness/scenarios/Link.tsx",
+      "export": "LongText"
+    },
+    "components-heading--native-focus": {
+      "module": "tests/browser-harness/scenarios/Heading.tsx",
+      "export": "NativeFocus"
     }
   },
   "suites": [
@@ -1170,12 +1210,6 @@
       "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/link/Link.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
-    },
-    {
       "project": "components",
       "file": "tests/browser-harness/specs/radio/Radio.spec.ts",
       "scenarios": [
@@ -1323,12 +1357,6 @@
     },
     {
       "project": "chromium",
-      "file": "tests/e2e/components/typography/Typography.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
-    },
-    {
-      "project": "chromium",
       "file": "tests/e2e/storybook/documentation.spec.ts",
       "scope": "storybook-runtime",
       "scenarios": []
@@ -1384,7 +1412,25 @@
         "components-heading--scoped-overrides",
         "components-text--scoped-overrides",
         "components-heading--hidden",
-        "components-text--hidden"
+        "components-text--hidden",
+        "components-heading--native-focus"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "file": "tests/browser-harness/specs/link/Link.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "components-link--keyboard",
+        "components-link--playground",
+        "components-link--long-text",
+        "components-link--new-tab",
+        "components-link--external-destination",
+        "components-link--usage",
+        "components-link--download",
+        "components-link--empty-destination",
+        "components-link--unavailable"
       ],
       "roots": [],
       "resources": []

@@ -1,5 +1,7 @@
 # Typography browser harness migration
 
+Follow-up: the [Link migration](link-harness-migration.md) now moves the remaining inline-link focus case with conservative forwarded-destination analysis. The measurements and scope below describe the original Typography batch.
+
 This continues the [AspectRatio migration](aspect-ratio-harness-migration.md). The original Typography suite at `8e7bdb5` is the audit baseline.
 
 ## Preserved coverage and remaining boundary
@@ -8,7 +10,7 @@ Seven of eight cases move to the [Typography harness suite](../tests/browser-har
 
 The private [Heading](../tests/browser-harness/scenarios/Heading.tsx) and [Text](../tests/browser-harness/scenarios/Text.tsx) modules import implementations and scoped CSS directly. They do not import CSF, the public barrel or unused Link dependencies. Source stories and their plays remain unchanged.
 
-The [inline-link focus case](../tests/e2e/components/typography/Typography.spec.ts) remains intact in Storybook. Link forwards a dynamic `href` to a native anchor; the current dependency graph cannot prove the target's resource ownership. Including that implementation in a harness graph would trigger full fallback for every affected selection. This is a temporary migration limitation, not a claim that focus behavior intrinsically requires Storybook. Link migration needs sound navigation/resource ownership support first. No dynamic-resource fallback was relaxed.
+The [inline-link focus case](../tests/browser-harness/specs/typography/Typography.spec.ts) remains intact in Storybook. Link forwards a dynamic `href` to a native anchor; the current dependency graph cannot prove the target's resource ownership. Including that implementation in a harness graph would trigger full fallback for every affected selection. This is a temporary migration limitation, not a claim that focus behavior intrinsically requires Storybook. Link migration needs sound navigation/resource ownership support first. No dynamic-resource fallback was relaxed.
 
 Six added selection cases cover each private module, the Heading and Text implementations, component CSS and demo CSS. Expected consumers include ButtonGroup, CodeBlock and the harness lifecycle suite where appropriate; Container selection now also includes Typography. An initial expected-consumer list missed CodeBlock/lifecycle, which import the typography composition; that expectation was corrected after checking the source and catalog. Actual discovery still reconciles both projects against Playwright's inventory.
 

@@ -1,3 +1,7 @@
+import { Link } from '../../../src/components/link/Link';
+import { Button } from '../../../src/components/button/Button';
+import '../../../src/components/link/link.css';
+import '../../../src/components/button/button.css';
 import { Container } from '../../../src/components/container/Container';
 import { Heading, type HeadingProps, type HeadingStyle } from '../../../src/components/typography/Heading';
 import { Stack } from '../../../src/components/stack/Stack';
@@ -18,6 +22,8 @@ const LongContent: Scenario<HeadingProps> = { render: () => <Container size="rea
 
 const Hidden: Scenario<HeadingProps> = { args: { hidden: true } };
 
+const NativeFocus: Scenario<HeadingProps> = { render: () => <Stack><Button>Before copy</Button><Heading>Project details</Heading><Text>Read the <Link href="#copy-destination">delivery guidance</Link> before continuing.</Text><Text id="copy-destination">Your preferences can be changed later.</Text><Button>After copy</Button></Stack> };
+
 export const component = Heading;
 export const defaults: HeadingProps = { children: 'Project settings', as: 'h2', size: 'section' };
-export const scenarios = { Sizes, LongContent, ScopedOverrides, Hidden };
+export const scenarios = { NativeFocus, Sizes, LongContent, ScopedOverrides, Hidden };

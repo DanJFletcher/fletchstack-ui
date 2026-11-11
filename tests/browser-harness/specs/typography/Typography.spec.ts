@@ -63,3 +63,17 @@ test('native hidden removes heading and paragraph from layout', async ({ page, m
   await openScenario(mount, 'components-text--hidden');
   await expect(page.locator('.fs-text')).toHaveCSS('display', 'none');
 });
+
+test('copy preserves native tab order and inline links keep visible focus', async ({ page, mount }) => {
+  await openScenario(mount, 'components-heading--native-focus');
+  await page.getByRole('button', { name: 'Before copy' }).focus();
+  await page.keyboard.press('Tab');
+  const link = page.getByRole('link', { name: 'delivery guidance' });
+  await expect(link).toBeFocused();
+  await expect(link).toHaveCSS('outline-style', 'solid');
+  await expect(link.locator('..')).toHaveCSS('overflow', 'visible');
+  await page.emulateMedia({ forcedColors: 'active' });
+  await expect(link).toHaveCSS('outline-style', 'solid');
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('button', { name: 'After copy' })).toBeFocused();
+});

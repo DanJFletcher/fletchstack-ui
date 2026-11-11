@@ -1,6 +1,7 @@
 import { readFileSync, existsSync, statSync } from 'node:fs';
 import { dirname, resolve, relative } from 'node:path';
 import ts from 'typescript';
+import { provenForwardedHrefs } from './forwarded-href.mjs';
 
 /**
  * Resolve local code and CSS resources without executing or transforming modules.
@@ -20,6 +21,7 @@ function codeImports(source, file) {
   const ast = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true);
   const imports = [];
   const unknown = [];
+  const forwarded = [];
   const visit = node => {
     if ((ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) && node.moduleSpecifier && !node.isTypeOnly && !node.importClause?.isTypeOnly) { imports.push(node.moduleSpecifier.text); }
     if (ts.isCallExpression(node) && node.expression.kind === ts.SyntaxKind.ImportKeyword) {
@@ -29,24 +31,25 @@ function codeImports(source, file) {
     if (ts.isNewExpression(node) && node.expression.getText(ast) === 'URL') {
       inspectUrl(node, ast, { imports, unknown });
     }
-    inspectJsxResource(node, ast, { imports, unknown });
+    inspectJsxResource(node, ast, { unknown, forwarded });
     ts.forEachChild(node, visit);
   };
   visit(ast);
   if (ast.parseDiagnostics.length) { unknown.push('Source parse error'); }
   if (/\b(?:fetch|readFile|readFileSync|require|glob|eval|Function)\s*\(/.test(source)) { unknown.push('Runtime resource discovery'); }
-  return { imports, unknown };
+  return { imports, unknown, forwarded };
 }
 
 /**
  * Accept explicit module URL hrefs; the URL visitor records their asset dependencies.
  * Other computed or document-relative browser paths remain unproven.
  **/
-function inspectJsxResource(node, ast, { unknown }) {
+function inspectJsxResource(node, ast, { unknown, forwarded }) {
   if (!ts.isJsxAttribute(node) || !['src', 'srcSet', 'poster', 'href'].includes(node.name.getText(ast))) { return; }
-  if (node.initializer && ts.isStringLiteral(node.initializer) && /^(?:#|data:)/.test(node.initializer.text)) { return; }
+  if (node.initializer && ts.isStringLiteral(node.initializer) && (/^(?:#|data:)/.test(node.initializer.text) || node.name.getText(ast) === 'href' && /^(?:$|https?:\/\/)/.test(node.initializer.text))) { return; }
   const value = node.initializer && ts.isJsxExpression(node.initializer) ? node.initializer.expression : undefined;
   if (value && ts.isPropertyAccessExpression(value) && value.name.text === 'href' && isModuleUrl(value.expression, ast)) { return; }
+  if (node.name.getText(ast) === 'href' && node.parent.parent.tagName.getText(ast) === 'a' && value && ts.isIdentifier(value)) { forwarded.push(node.pos); return; }
   unknown.push('Document-relative or dynamic JSX resource');
 }
 
@@ -91,6 +94,7 @@ function importsFor(file) {
 export function dependencyGraph(entries, root) {
   const files = new Set();
   const unknown = [];
+  const pending = [];
   const paths = Object.fromEntries(entries.map(entry => [entry, [entry]]));
   const queue = entries.map(entry => resolve(root, entry));
   while (queue.length) {
@@ -99,9 +103,12 @@ export function dependencyGraph(entries, root) {
     files.add(file);
     if (!existsSync(file)) { unknown.push(`Missing dependency: ${relative(root, file)}`); continue; }
     const found = importsFor(file);
+    pending.push(...(found.forwarded ?? []).map(position => ({ file, position })));
     unknown.push(...found.unknown.map(reason => `${relative(root, file)}: ${reason}`));
     for (const specifier of found.imports) { followImport({ specifier, file, root, queue, unknown, paths }); }
   }
+  const proven = provenForwardedHrefs([...files], pending);
+  unknown.push(...pending.filter(({ file, position }) => !proven.has(`${file}:${position}`)).map(({ file }) => `${relative(root, file)}: Document-relative or dynamic JSX resource`));
   return { files: [...files].map(file => relative(root, file).replaceAll('\\', '/')).sort(), unknown, paths };
 }
 

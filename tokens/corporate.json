@@ -2139,6 +2139,179 @@
           }
         }
       }
+    },
+    "code-block": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Code viewport surface."
+      },
+      "headerSurface": {
+        "$type": "color",
+        "$value": "{primitive.galleryDayPanel}",
+        "$description": "Code metadata header surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Literal source foreground."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.muted}",
+        "$description": "Supporting language metadata foreground."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryDayLine}",
+        "$description": "Code panel and header boundary."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Code panel boundary thickness."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Code panel corner radius."
+      },
+      "inset": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Code viewport inset on each edge."
+      },
+      "headerPadding": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Code metadata header block padding."
+      },
+      "headerGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Gap between wrapping code metadata and copy action."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.mono}",
+          "$description": "Literal source monospace family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Literal source font size."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Literal source unitless line height."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.regular}",
+          "$description": "Literal source font weight."
+        }
+      },
+      "labelFamily": {
+        "$type": "fontFamily",
+        "$value": "{primitive.sans}",
+        "$description": "Code metadata and feedback font family."
+      },
+      "labelWeight": {
+        "$type": "fontWeight",
+        "$value": "{primitive.semibold}",
+        "$description": "Filename emphasis."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorDay}",
+        "$description": "Copy failure text and action boundary."
+      },
+      "errorSurface": {
+        "$type": "color",
+        "$value": "{primitive.redTint}",
+        "$description": "Copy failure action surface."
+      },
+      "successSurface": {
+        "$type": "color",
+        "$value": "{primitive.blueTint}",
+        "$description": "Successful copy action surface."
+      },
+      "successText": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "Successful copy action foreground."
+      },
+      "successBorder": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "Successful copy action boundary."
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.blue}",
+          "$description": "Keyboard-scrolled code region focus indicator."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Code region focus indicator width."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Code region focus indicator offset."
+        }
+      },
+      "copySurface": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Default copy action surface."
+      },
+      "copyText": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Default copy action foreground."
+      },
+      "copyBorder": {
+        "$type": "color",
+        "$value": "{primitive.line}",
+        "$description": "Default copy action boundary."
+      },
+      "syntax": {
+        "comment": {
+          "$type": "color",
+          "$value": "{primitive.muted}",
+          "$description": "Code syntax comment foreground."
+        },
+        "keyword": {
+          "$type": "color",
+          "$value": "{primitive.blue}",
+          "$description": "Code syntax keyword foreground."
+        },
+        "string": {
+          "$type": "color",
+          "$value": "{primitive.greenInk}",
+          "$description": "Code syntax string foreground."
+        },
+        "number": {
+          "$type": "color",
+          "$value": "{primitive.amberInk}",
+          "$description": "Code syntax number foreground."
+        },
+        "function": {
+          "$type": "color",
+          "$value": "{primitive.visitedDay}",
+          "$description": "Code syntax function foreground."
+        },
+        "operator": {
+          "$type": "color",
+          "$value": "{primitive.ink}",
+          "$description": "Code syntax operator foreground."
+        }
+      }
     }
   }
 }

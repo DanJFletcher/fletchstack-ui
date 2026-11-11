@@ -397,6 +397,39 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-typography-text-font-lead` | lead content text font size. | dimension |
 | `--fs-typography-text-font-body` | body content text font size. | dimension |
 | `--fs-typography-text-font-small` | small content text font size. | dimension |
+| `--fs-code-block-surface` | Code viewport surface. | color |
+| `--fs-code-block-header-surface` | Code metadata header surface. | color |
+| `--fs-code-block-text` | Literal source foreground. | color |
+| `--fs-code-block-muted` | Supporting language metadata foreground. | color |
+| `--fs-code-block-border` | Code panel and header boundary. | color |
+| `--fs-code-block-border-width` | Code panel boundary thickness. | dimension |
+| `--fs-code-block-radius` | Code panel corner radius. | dimension |
+| `--fs-code-block-inset` | Code viewport inset on each edge. | dimension |
+| `--fs-code-block-header-padding` | Code metadata header block padding. | dimension |
+| `--fs-code-block-header-gap` | Gap between wrapping code metadata and copy action. | dimension |
+| `--fs-code-block-font-family` | Literal source monospace family. | fontFamily |
+| `--fs-code-block-font-size` | Literal source font size. | dimension |
+| `--fs-code-block-font-line-height` | Literal source unitless line height. | number |
+| `--fs-code-block-font-weight` | Literal source font weight. | fontWeight |
+| `--fs-code-block-label-family` | Code metadata and feedback font family. | fontFamily |
+| `--fs-code-block-label-weight` | Filename emphasis. | fontWeight |
+| `--fs-code-block-error` | Copy failure text and action boundary. | color |
+| `--fs-code-block-error-surface` | Copy failure action surface. | color |
+| `--fs-code-block-success-surface` | Successful copy action surface. | color |
+| `--fs-code-block-success-text` | Successful copy action foreground. | color |
+| `--fs-code-block-success-border` | Successful copy action boundary. | color |
+| `--fs-code-block-focus-color` | Keyboard-scrolled code region focus indicator. | color |
+| `--fs-code-block-focus-width` | Code region focus indicator width. | dimension |
+| `--fs-code-block-focus-offset` | Code region focus indicator offset. | dimension |
+| `--fs-code-block-copy-surface` | Default copy action surface. | color |
+| `--fs-code-block-copy-text` | Default copy action foreground. | color |
+| `--fs-code-block-copy-border` | Default copy action boundary. | color |
+| `--fs-code-block-syntax-comment` | Code syntax comment foreground. | color |
+| `--fs-code-block-syntax-keyword` | Code syntax keyword foreground. | color |
+| `--fs-code-block-syntax-string` | Code syntax string foreground. | color |
+| `--fs-code-block-syntax-number` | Code syntax number foreground. | color |
+| `--fs-code-block-syntax-function` | Code syntax function foreground. | color |
+| `--fs-code-block-syntax-operator` | Code syntax operator foreground. | color |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

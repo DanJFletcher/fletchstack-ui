@@ -1,3 +1,5 @@
+export { CodeBlock } from './components/code-block/index.js';
+export type { CodeBlockProps, CodeBlockStyle } from './components/code-block/index.js';
 export { ButtonGroup } from './components/button-group/index.js';
 export type { ButtonGroupProps, ButtonGroupStyle } from './components/button-group/index.js';
 export { Textarea } from './components/textarea/index.js';

@@ -38,7 +38,8 @@
     "./aspect-ratio.css": "./dist/aspect-ratio.css",
     "./section.css": "./dist/section.css",
     "./typography.css": "./dist/typography.css",
-    "./button-group.css": "./dist/button-group.css"
+    "./button-group.css": "./dist/button-group.css",
+    "./code-block.css": "./dist/code-block.css"
   },
   "files": [
     "dist",
@@ -109,5 +110,8 @@
     "typescript-eslint": "8.72.1",
     "vite": "7.3.7",
     "vitest": "4.1.12"
+  },
+  "dependencies": {
+    "refractor": "5.0.0"
   }
 }

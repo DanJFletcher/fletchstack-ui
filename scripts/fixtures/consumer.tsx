@@ -342,3 +342,17 @@ export const unnamedActions = <ButtonGroup><Button>Save</Button></ButtonGroup>;
 export const invalidGroupVariant = <ButtonGroup aria-label="Actions" variant="joined" />;
 // @ts-expect-error A group is not an interactive toolbar.
 export const invalidGroupRole = <ButtonGroup aria-label="Actions" role="toolbar" />;
+
+import { CodeBlock, type CodeBlockProps, type CodeBlockStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/code-block.css';
+const codeBlockRef = createRef<HTMLDivElement>();
+const codeBlockStyle: CodeBlockStyle = { '--fs-code-block-inset': '24px' };
+const codeBlockProps: CodeBlockProps = { children: 'const ready = true;', filename: 'settings.ts', language: 'TypeScript', wrap: true, style: codeBlockStyle };
+export const sourceExample = <CodeBlock highlight {...codeBlockProps} ref={codeBlockRef} />;
+export const plainSource = <CodeBlock copyable={false} label="Install command">npm install fletchstack-ui</CodeBlock>;
+// @ts-expect-error Source must be a literal string, not authored React markup.
+export const invalidCodeChildren = <CodeBlock><strong>source</strong></CodeBlock>;
+// @ts-expect-error Raw HTML injection is outside the contract.
+export const invalidCodeHtml = <CodeBlock dangerouslySetInnerHTML={{ __html: 'source' }}>source</CodeBlock>;
+// @ts-expect-error Source is required.
+export const missingCodeSource = <CodeBlock />;

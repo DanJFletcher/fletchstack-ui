@@ -29,15 +29,16 @@ async function consumerBundle(directory, names) {
 }
 
 /**
- * Prove used geometry survives and unused geometry disappears from real bundles.
+ * Verify opted-in artwork and highlighting survive while unrelated consumers omit them.
  **/
 export async function verifyIconBundles(directory) {
-  for (const names of [['MoonIcon'], ['Button'], ['MoonIcon', 'SunIcon']]) {
+  for (const names of [['MoonIcon'], ['Button'], ['MoonIcon', 'SunIcon'], ['CodeBlock']]) {
     const code = await consumerBundle(directory, names);
     for (const [name, marker] of Object.entries(artwork)) {
       assert.equal(code.includes(marker), names.includes(name), `${names.join('+')}: unexpected ${name} artwork retention`);
     }
+    assert.equal(code.includes('Unknown language:'), names.includes('CodeBlock'), 'Only CodeBlock consumers retain the syntax highlighter');
     assert.match(code, /from\s*["']react["']/);
   }
-  console.log('Single-icon, Button-only, and positive-control bundles preserve only opted-in artwork.');
+  console.log('Single-icon, Button-only and positive-control bundles retain only opted-in artwork and syntax highlighting.');
 }

@@ -39,20 +39,30 @@ function codeImports(source, file) {
 }
 
 /**
- * Record explicit media resources and reject computed browser asset paths.
+ * Accept explicit module URL hrefs; the URL visitor records their asset dependencies.
+ * Other computed or document-relative browser paths remain unproven.
  **/
 function inspectJsxResource(node, ast, { unknown }) {
   if (!ts.isJsxAttribute(node) || !['src', 'srcSet', 'poster', 'href'].includes(node.name.getText(ast))) { return; }
   if (node.initializer && ts.isStringLiteral(node.initializer) && /^(?:#|data:)/.test(node.initializer.text)) { return; }
+  const value = node.initializer && ts.isJsxExpression(node.initializer) ? node.initializer.expression : undefined;
+  if (value && ts.isPropertyAccessExpression(value) && value.name.text === 'href' && isModuleUrl(value.expression, ast)) { return; }
   unknown.push('Document-relative or dynamic JSX resource');
+}
+
+/**
+ * Recognize only a literal URL constructed against this module's own location.
+ **/
+function isModuleUrl(node, ast) {
+  return ts.isNewExpression(node) && node.expression.getText(ast) === 'URL' && node.arguments?.length === 2
+    && ts.isStringLiteral(node.arguments[0]) && node.arguments[1].getText(ast) === 'import.meta.url';
 }
 
 /**
  * Only import.meta.url establishes a literal asset's module-relative location.
  **/
 function inspectUrl(node, ast, { imports, unknown }) {
-  const [path, base] = node.arguments ?? [];
-  if (node.arguments?.length === 2 && path && ts.isStringLiteral(path) && base?.getText(ast) === 'import.meta.url') { imports.push(path.text); }
+  if (isModuleUrl(node, ast)) { imports.push(node.arguments[0].text); }
   else { unknown.push('Dynamic or non-module URL resource'); }
 }
 

@@ -47,6 +47,39 @@ it('does not confuse document-relative JSX assets with module-relative imports',
   expect(graph.files).toEqual(['scenarios/demo.tsx']);
 });
 
+it.each(['src', 'poster', 'href'])('follows explicit module-relative JSX %s URLs', attribute => {
+  const root = fixture({
+    'scenarios/demo.tsx': `export const view = <video ${attribute}={new URL('./asset.svg', import.meta.url).href} />;`,
+    'scenarios/asset.svg': '<svg/>',
+  });
+  const graph = dependencyGraph(['scenarios/demo.tsx'], root);
+  expect(graph.unknown).toEqual([]);
+  expect(graph.files).toEqual(['scenarios/asset.svg', 'scenarios/demo.tsx']);
+  expect(graph.paths['scenarios/asset.svg']).toEqual(['scenarios/demo.tsx', 'scenarios/asset.svg']);
+});
+
+it.each([
+  "new URL(name, import.meta.url).href",
+  "new URL('./asset.svg', location.href).href",
+  "new URL('./asset.svg', import.meta.url).toString()",
+  "condition ? new URL('./asset.svg', import.meta.url).href : other",
+  'asset',
+])('retains full fallback for unproven JSX resources: %s', expression => {
+  const root = fixture({ 'scenario.tsx': `export const view = <img src={${expression}} />;`, 'asset.svg': '<svg/>' });
+  const graph = dependencyGraph(['scenario.tsx'], root);
+  const inventory = [{ project: 'components', file: 'test.spec.ts' }];
+  const result = selectBrowserTests({ inventory, graphs: new Map([['test.spec.ts', graph]]), changes: [{ path: 'asset.svg', status: 'M' }] });
+  expect(graph.unknown).toContain('scenario.tsx: Document-relative or dynamic JSX resource');
+  expect(result.mode).toBe('full-fallback');
+  expect(result.suites).toEqual(inventory);
+});
+
+it('does not accept a missing asset just because its JSX URL is module-relative', () => {
+  const root = fixture({ 'scenario.tsx': "export const view = <img src={new URL('./missing.svg', import.meta.url).href} />;" });
+  const graph = dependencyGraph(['scenario.tsx'], root);
+  expect(graph.unknown).toContain('Unresolved local resource: ./missing.svg from scenario.tsx');
+});
+
 it('flags unresolved CSS URLs and never drops the known root', () => {
   const root = fixture({ 'scoped.css': '.x{background:url(var(--asset))}' });
   const graph = dependencyGraph(['scoped.css'], root);
@@ -59,6 +92,7 @@ it('selects direct and transitive Button consumers, while excluding unrelated ha
   const result = selectBrowserTests({ ...ownership, changes: [{ path: 'src/components/button/Button.tsx', status: 'M' }] });
   expect(result.mode).toBe('selected');
   expect(result.suites.filter(suite => suite.project === 'components').map(suite => suite.file)).toEqual([
+    'tests/browser-harness/specs/aspect-ratio/AspectRatio.spec.ts',
     'tests/browser-harness/specs/badge/Badge.spec.ts', 'tests/browser-harness/specs/button-group/ButtonGroup.spec.ts',
     'tests/browser-harness/specs/button/Button.spec.ts', 'tests/browser-harness/specs/card/Card.spec.ts',
     'tests/browser-harness/specs/cluster/Cluster.spec.ts',
@@ -84,6 +118,7 @@ it.each([
   ['Badge', 'badge'], ['Spinner', 'spinner'], ['ButtonGroup', 'button-group'], ['FormGroup', 'form-group'],
   ['Field', 'field'],
   ['Card', 'card'], ['Icon', 'icon'],
+  ['AspectRatio', 'aspect-ratio'],
 ])('selects only the %s suite for its private scenario edit', (name, family) => {
   const ownership = discoverOwnership(process.cwd());
   const result = selectBrowserTests({ ...ownership, changes: [{ path: `tests/browser-harness/scenarios/${name}.tsx`, status: 'M' }] });
@@ -93,7 +128,7 @@ it.each([
 
 it.each([
   ['src/components/cluster/cluster.css', ['cluster/Cluster', 'section/Section', 'simple-grid/SimpleGrid']],
-  ['src/components/container/Container.tsx', ['button-group/ButtonGroup', 'cluster/Cluster', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
+  ['src/components/container/Container.tsx', ['aspect-ratio/AspectRatio', 'button-group/ButtonGroup', 'cluster/Cluster', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
   ['src/components/separator/separator.css', ['separator/Separator']],
   ['src/components/checkbox/checkbox.css', ['checkbox/Checkbox', 'field/Field', 'form-group/FormGroup', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
   ['src/components/text-input/TextInput.tsx', ['cluster/Cluster', 'container/Container', 'field/Field', 'form-group/FormGroup', 'stack/Stack', 'text-input/TextInput']],
@@ -102,9 +137,12 @@ it.each([
   ['src/components/spinner/Spinner.tsx', ['spinner/Spinner']],
   ['src/components/button-group/stories/button-group.stories.css', ['button-group/ButtonGroup']],
   ['src/components/field/stories/field-atoms.css', ['field/FieldAtoms']],
-  ['src/components/card/Card.tsx', ['card/Card', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid']],
+  ['src/components/card/Card.tsx', ['aspect-ratio/AspectRatio', 'card/Card', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid']],
   ['src/components/card/stories/card.stories.css', ['card/Card']],
   ['src/components/icon/named/MoonIcon.tsx', ['button/Button', 'harness/lifecycle', 'icon/Icon']],
+  ['src/components/aspect-ratio/stories/landscape.svg', ['aspect-ratio/AspectRatio']],
+  ['src/components/aspect-ratio/aspect-ratio.css', ['aspect-ratio/AspectRatio']],
+  ['src/components/simple-grid/SimpleGrid.tsx', ['aspect-ratio/AspectRatio', 'section/Section', 'simple-grid/SimpleGrid']],
 ])('includes composed consumers for %s without selecting unrelated harness families', (path, consumers) => {
   const ownership = discoverOwnership(process.cwd());
   const result = selectBrowserTests({ ...ownership, changes: [{ path, status: 'M' }] });

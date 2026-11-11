@@ -799,6 +799,74 @@
     "components-icon--ref-access": {
       "module": "tests/browser-harness/scenarios/Icon.tsx",
       "export": "RefAccess"
+    },
+    "components-aspectratio--playground": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Playground"
+    },
+    "components-aspectratio--ratios": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Ratios"
+    },
+    "components-aspectratio--responsive": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Responsive"
+    },
+    "components-aspectratio--media-fitting": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "MediaFitting"
+    },
+    "components-aspectratio--composition": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Composition"
+    },
+    "components-aspectratio--both-themes": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "BothThemes"
+    },
+    "components-aspectratio--custom-ratio": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "CustomRatio"
+    },
+    "components-aspectratio--native-style-override": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "NativeStyleOverride"
+    },
+    "components-aspectratio--invalid-ratios": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "InvalidRatios"
+    },
+    "components-aspectratio--video": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Video"
+    },
+    "components-aspectratio--embed": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Embed"
+    },
+    "components-aspectratio--overflow": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Overflow"
+    },
+    "components-aspectratio--native-focus": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "NativeFocus"
+    },
+    "components-aspectratio--nested": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Nested"
+    },
+    "components-aspectratio--narrow-parents": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "NarrowParents"
+    },
+    "components-aspectratio--empty": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Empty"
+    },
+    "components-aspectratio--hidden": {
+      "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
+      "export": "Hidden"
     }
   },
   "suites": [
@@ -872,10 +940,29 @@
       "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/aspect-ratio/AspectRatio.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/aspect-ratio/AspectRatio.spec.ts",
+      "scenarios": [
+        "components-aspectratio--playground",
+        "components-aspectratio--ratios",
+        "components-aspectratio--responsive",
+        "components-aspectratio--composition",
+        "components-aspectratio--media-fitting",
+        "components-aspectratio--custom-ratio",
+        "components-aspectratio--native-style-override",
+        "components-aspectratio--invalid-ratios",
+        "components-aspectratio--video",
+        "components-aspectratio--embed",
+        "components-aspectratio--overflow",
+        "components-aspectratio--native-focus",
+        "components-aspectratio--both-themes",
+        "components-aspectratio--nested",
+        "components-aspectratio--narrow-parents",
+        "components-aspectratio--empty",
+        "components-aspectratio--hidden"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "components",

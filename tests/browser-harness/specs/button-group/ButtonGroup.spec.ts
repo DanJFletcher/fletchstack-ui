@@ -1,6 +1,6 @@
 import type { Locator } from '@playwright/test';
 import { expect, test } from '../../fixtures/test';
-import { openStory } from '../../fixtures/storybook';
+import { openScenario } from '../../fixtures/scenario';
 
 /**
  * Measure visible actions in DOM order, including logical corners and border widths.
@@ -15,15 +15,15 @@ async function edges(group: Locator) {
 }
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} joined rows and columns share one seam and only outside corners`, async ({ page }) => {
+  test(`${theme} joined rows and columns share one seam and only outside corners`, async ({ page, mount }) => {
     const radius = theme === 'luna' ? '12px' : '4px';
-    await openStory(page, 'components-button-group--joined', { theme });
+    await openScenario(mount, 'components-button-group--joined', { theme });
     const row = await edges(page.getByRole('group'));
     expect(row.map(button => button.corners)).toEqual([[radius, '0px', radius, '0px'], ['0px', '0px', '0px', '0px'], ['0px', radius, '0px', radius]]);
     expect(row[1]!.left - row[0]!.right).toBe(-row[1]!.border);
     expect(row[2]!.left - row[1]!.right).toBe(-row[2]!.border);
     await expect(page.getByRole('group')).toHaveCSS('flex-wrap', 'nowrap');
-    await openStory(page, 'components-button-group--vertical-joins', { theme });
+    await openScenario(mount, 'components-button-group--vertical-joins', { theme });
     const column = await edges(page.getByRole('group'));
     expect(column.map(button => button.corners)).toEqual([[radius, radius, '0px', '0px'], ['0px', '0px', '0px', '0px'], ['0px', '0px', radius, radius]]);
     expect(column[1]!.top - column[0]!.bottom).toBe(-column[1]!.border);
@@ -31,9 +31,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     expect(column[0]!.width).toBe(column[2]!.width);
   });
 
-  test(`${theme} hidden edge and interior actions retain correct live joins`, async ({ page }) => {
+  test(`${theme} hidden edge and interior actions retain correct live joins`, async ({ page, mount }) => {
     const radius = theme === 'luna' ? '12px' : '4px';
-    await openStory(page, 'components-button-group--hidden-edges', { theme });
+    await openScenario(mount, 'components-button-group--hidden-edges', { theme });
     const row = page.getByRole('group', { name: 'Hidden horizontal edges' });
     const column = page.getByRole('group', { name: 'Hidden vertical edges' });
     expect((await edges(row)).map(button => button.corners)).toEqual([[radius, '0px', radius, '0px'], ['0px', radius, '0px', radius]]);
@@ -49,8 +49,10 @@ for (const theme of ['corporate', 'luna'] as const) {
     expect(await edges(row)).toHaveLength(2);
   });
 
-  test(`${theme} joined middle focus paints above neighbors without clipping`, async ({ page }) => {
-    await openStory(page, 'components-button-group--joined-focus', { theme });
+  test(`${theme} joined middle focus paints above neighbors without clipping`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-button-group--joined-focus', { theme });
+    await page.getByRole('button', { name: 'Save draft' }).click();
+    await page.keyboard.press('Tab');
     const middle = page.getByRole('button', { name: 'Preview' });
     await expect(middle).toBeFocused();
     await expect(middle).toHaveCSS('outline-style', 'solid');
@@ -64,8 +66,8 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(page.getByRole('button', { name: 'Publish' })).toHaveCSS('outline-style', 'solid');
   });
 
-  test(`${theme} separated actions wrap intrinsically with a 12px gap in narrow parents`, async ({ page }) => {
-    await openStory(page, 'components-button-group--wrapping', { theme });
+  test(`${theme} separated actions wrap intrinsically with a 12px gap in narrow parents`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-button-group--wrapping', { theme });
     const wide = await edges(page.getByRole('group', { name: 'Wide actions' }));
     const narrow = await edges(page.getByRole('group', { name: 'Narrow actions' }));
     expect(wide[2]!.top).toBe(wide[0]!.top);
@@ -75,9 +77,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(page.getByRole('group', { name: 'Unwrapped actions' })).toHaveCSS('flex-wrap', 'nowrap');
   });
 
-  test(`${theme} long labels reflow at 320px with 200% text and user spacing`, async ({ page }) => {
+  test(`${theme} long labels reflow at 320px with 200% text and user spacing`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 1000 });
-    await openStory(page, 'components-button-group--long-labels', { theme });
+    await openScenario(mount, 'components-button-group--long-labels', { theme });
     await page.addStyleTag({ content: 'html {font-size:200%} * {line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}' });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     for (const group of await page.getByRole('group').all()) {
@@ -88,8 +90,8 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-test('RTL joins follow source order from inline start and preserve logical corners', async ({ page }) => {
-  await openStory(page, 'components-button-group--rtl');
+test('RTL joins follow source order from inline start and preserve logical corners', async ({ page, mount }) => {
+  await openScenario(mount, 'components-button-group--rtl');
   const row = await edges(page.getByRole('group'));
   expect(row[0]!.left).toBeGreaterThan(row[1]!.left);
   expect(row[0]!.left - row[1]!.right).toBe(-1);
@@ -99,8 +101,8 @@ test('RTL joins follow source order from inline start and preserve logical corne
   await expect(page.getByRole('button', { name: 'Preview' })).toBeFocused();
 });
 
-test('fullWidth and equalWidth are independent and final wrapped rows expand equally', async ({ page }) => {
-  await openStory(page, 'components-button-group--widths');
+test('fullWidth and equalWidth are independent and final wrapped rows expand equally', async ({ page, mount }) => {
+  await openScenario(mount, 'components-button-group--widths');
   const intrinsic = await page.getByRole('group', { name: 'Intrinsic', exact: true }).boundingBox();
   const full = await page.getByRole('group', { name: 'Full width', exact: true }).boundingBox();
   expect(intrinsic!.width).toBeLessThan(full!.width);
@@ -115,8 +117,8 @@ test('fullWidth and equalWidth are independent and final wrapped rows expand equ
   expect(column.map(button => button.width)).toEqual([600, 600, 600]);
 });
 
-test('alignment remains on the logical inline axis in both orientations and RTL', async ({ page }) => {
-  await openStory(page, 'components-button-group--alignments');
+test('alignment remains on the logical inline axis in both orientations and RTL', async ({ page, mount }) => {
+  await openScenario(mount, 'components-button-group--alignments');
   for (const direction of ['ltr', 'rtl']) {
     await page.locator('html').evaluate((element, dir) => element.setAttribute('dir', dir), direction);
     for (const orientation of ['horizontal', 'vertical']) {
@@ -139,15 +141,15 @@ test('alignment remains on the logical inline axis in both orientations and RTL'
   }
 });
 
-test('CSS token scopes retain action gaps and nested themes reset them', async ({ page }) => {
-  await openStory(page, 'components-button-group--scoped-gap');
+test('CSS token scopes retain action gaps and nested themes reset them', async ({ page, mount }) => {
+  await openScenario(mount, 'components-button-group--scoped-gap');
   await expect(page.getByRole('group', { name: 'Scoped actions' })).toHaveCSS('gap', '20px');
   await expect(page.getByRole('group', { name: 'Reset actions' })).toHaveCSS('gap', '12px');
   await expect(page.getByRole('group', { name: 'Sibling actions' })).toHaveCSS('gap', '12px');
 });
 
-test('native Tab, Enter, Space, external submit and reset remain action-owned', async ({ page }) => {
-  await openStory(page, 'components-button-group--composition');
+test('native Tab, Enter, Space, external submit and reset remain action-owned', async ({ page, mount }) => {
+  await openScenario(mount, 'components-button-group--composition');
   const group = page.getByRole('group', { name: 'Article actions' });
   await expect(group).toHaveAttribute('aria-labelledby', 'editor-actions');
   await expect(group).not.toHaveAttribute('tabindex');
@@ -166,8 +168,8 @@ test('native Tab, Enter, Space, external submit and reset remain action-owned', 
   await expect(page.getByRole('textbox')).toHaveValue('Draft article');
 });
 
-test('disabled group actions cannot be re-enabled and disabled children leave the tab sequence', async ({ page }) => {
-  await openStory(page, 'components-button-group--disabled-actions');
+test('disabled group actions cannot be re-enabled and disabled children leave the tab sequence', async ({ page, mount }) => {
+  await openScenario(mount, 'components-button-group--disabled-actions');
   for (const button of await page.getByRole('group', { name: 'Page actions' }).getByRole('button').all()) {
     await expect(button).toBeDisabled();
   }
@@ -176,7 +178,7 @@ test('disabled group actions cannot be re-enabled and disabled children leave th
   await expect(page.getByRole('button', { name: 'Delete' })).not.toBeFocused();
 });
 
-test('native hidden removes the group from layout', async ({ page }) => {
-  await openStory(page, 'components-button-group--hidden');
+test('native hidden removes the group from layout', async ({ page, mount }) => {
+  await openScenario(mount, 'components-button-group--hidden');
   await expect(page.locator('.fs-button-group')).toHaveCSS('display', 'none');
 });

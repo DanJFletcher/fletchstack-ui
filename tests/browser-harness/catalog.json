@@ -543,6 +543,130 @@
     "components-select--long-labels": {
       "module": "tests/browser-harness/scenarios/Select.tsx",
       "export": "LongLabels"
+    },
+    "components-badge--tones": {
+      "module": "tests/browser-harness/scenarios/Badge.tsx",
+      "export": "Tones"
+    },
+    "components-badge--count": {
+      "module": "tests/browser-harness/scenarios/Badge.tsx",
+      "export": "Count"
+    },
+    "components-badge--customization": {
+      "module": "tests/browser-harness/scenarios/Badge.tsx",
+      "export": "Customization"
+    },
+    "components-badge--long-label": {
+      "module": "tests/browser-harness/scenarios/Badge.tsx",
+      "export": "LongLabel"
+    },
+    "components-badge--hidden": {
+      "module": "tests/browser-harness/scenarios/Badge.tsx",
+      "export": "Hidden"
+    },
+    "components-badge--passive-semantics": {
+      "module": "tests/browser-harness/scenarios/Badge.tsx",
+      "export": "PassiveSemantics"
+    },
+    "components-spinner--playground": {
+      "module": "tests/browser-harness/scenarios/Spinner.tsx",
+      "export": "Playground"
+    },
+    "components-spinner--sizes": {
+      "module": "tests/browser-harness/scenarios/Spinner.tsx",
+      "export": "Sizes"
+    },
+    "components-spinner--decorative": {
+      "module": "tests/browser-harness/scenarios/Spinner.tsx",
+      "export": "Decorative"
+    },
+    "components-spinner--content-region": {
+      "module": "tests/browser-harness/scenarios/Spinner.tsx",
+      "export": "ContentRegion"
+    },
+    "components-spinner--long-label": {
+      "module": "tests/browser-harness/scenarios/Spinner.tsx",
+      "export": "LongLabel"
+    },
+    "components-spinner--hidden": {
+      "module": "tests/browser-harness/scenarios/Spinner.tsx",
+      "export": "Hidden"
+    },
+    "components-button-group--joined": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "Joined"
+    },
+    "components-button-group--vertical-joins": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "VerticalJoins"
+    },
+    "components-button-group--wrapping": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "Wrapping"
+    },
+    "components-button-group--widths": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "Widths"
+    },
+    "components-button-group--alignments": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "Alignments"
+    },
+    "components-button-group--disabled-actions": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "DisabledActions"
+    },
+    "components-button-group--joined-focus": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "JoinedFocus"
+    },
+    "components-button-group--rtl": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "RTL"
+    },
+    "components-button-group--hidden-edges": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "HiddenEdges"
+    },
+    "components-button-group--composition": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "Composition"
+    },
+    "components-button-group--scoped-gap": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "ScopedGap"
+    },
+    "components-button-group--long-labels": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "LongLabels"
+    },
+    "components-button-group--hidden": {
+      "module": "tests/browser-harness/scenarios/ButtonGroup.tsx",
+      "export": "Hidden"
+    },
+    "components-formgroup--playground": {
+      "module": "tests/browser-harness/scenarios/FormGroup.tsx",
+      "export": "Playground"
+    },
+    "components-formgroup--states": {
+      "module": "tests/browser-harness/scenarios/FormGroup.tsx",
+      "export": "States"
+    },
+    "components-formgroup--composition": {
+      "module": "tests/browser-harness/scenarios/FormGroup.tsx",
+      "export": "Composition"
+    },
+    "components-formgroup--native-children": {
+      "module": "tests/browser-harness/scenarios/FormGroup.tsx",
+      "export": "NativeChildren"
+    },
+    "components-formgroup--both-themes": {
+      "module": "tests/browser-harness/scenarios/FormGroup.tsx",
+      "export": "BothThemes"
+    },
+    "components-formgroup--descriptions": {
+      "module": "tests/browser-harness/scenarios/FormGroup.tsx",
+      "export": "Descriptions"
     }
   },
   "suites": [
@@ -622,16 +746,39 @@
       "scenarios": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/badge/Badge.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/badge/Badge.spec.ts",
+      "scenarios": [
+        "components-badge--tones",
+        "components-badge--long-label",
+        "components-badge--count",
+        "components-badge--customization",
+        "components-badge--hidden",
+        "components-badge--passive-semantics"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/button-group/ButtonGroup.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/button-group/ButtonGroup.spec.ts",
+      "scenarios": [
+        "components-button-group--joined",
+        "components-button-group--vertical-joins",
+        "components-button-group--hidden-edges",
+        "components-button-group--joined-focus",
+        "components-button-group--wrapping",
+        "components-button-group--long-labels",
+        "components-button-group--rtl",
+        "components-button-group--widths",
+        "components-button-group--alignments",
+        "components-button-group--scoped-gap",
+        "components-button-group--composition",
+        "components-button-group--disabled-actions",
+        "components-button-group--hidden"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "chromium",
@@ -715,10 +862,18 @@
       "scenarios": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/form-group/FormGroup.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/form-group/FormGroup.spec.ts",
+      "scenarios": [
+        "components-formgroup--playground",
+        "components-formgroup--composition",
+        "components-formgroup--states",
+        "components-formgroup--both-themes",
+        "components-formgroup--native-children",
+        "components-formgroup--descriptions"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "chromium",
@@ -824,10 +979,18 @@
       "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/spinner/Spinner.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/spinner/Spinner.spec.ts",
+      "scenarios": [
+        "components-spinner--playground",
+        "components-spinner--decorative",
+        "components-spinner--long-label",
+        "components-spinner--sizes",
+        "components-spinner--content-region",
+        "components-spinner--hidden"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "components",

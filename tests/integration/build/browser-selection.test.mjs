@@ -59,11 +59,13 @@ it('selects direct and transitive Button consumers, while excluding unrelated ha
   const result = selectBrowserTests({ ...ownership, changes: [{ path: 'src/components/button/Button.tsx', status: 'M' }] });
   expect(result.mode).toBe('selected');
   expect(result.suites.filter(suite => suite.project === 'components').map(suite => suite.file)).toEqual([
+    'tests/browser-harness/specs/badge/Badge.spec.ts', 'tests/browser-harness/specs/button-group/ButtonGroup.spec.ts',
     'tests/browser-harness/specs/button/Button.spec.ts', 'tests/browser-harness/specs/cluster/Cluster.spec.ts',
     'tests/browser-harness/specs/code-block/CodeBlock.spec.ts', 'tests/browser-harness/specs/container/Container.spec.ts',
     'tests/browser-harness/specs/harness/lifecycle.spec.ts', 'tests/browser-harness/specs/radio/Radio.spec.ts',
     'tests/browser-harness/specs/section/Section.spec.ts',
     'tests/browser-harness/specs/separator/Separator.spec.ts', 'tests/browser-harness/specs/simple-grid/SimpleGrid.spec.ts',
+    'tests/browser-harness/specs/spinner/Spinner.spec.ts',
     'tests/browser-harness/specs/stack/Stack.spec.ts', 'tests/browser-harness/specs/switch/Switch.spec.ts',
     'tests/browser-harness/specs/textarea/Textarea.spec.ts',
   ]);
@@ -77,6 +79,7 @@ it.each([
   ['SimpleGrid', 'simple-grid'], ['Separator', 'separator'],
   ['Checkbox', 'checkbox'], ['Radio', 'radio'], ['Switch', 'switch'],
   ['TextInput', 'text-input'], ['Textarea', 'textarea'], ['Select', 'select'],
+  ['Badge', 'badge'], ['Spinner', 'spinner'], ['ButtonGroup', 'button-group'], ['FormGroup', 'form-group'],
 ])('selects only the %s suite for its private scenario edit', (name, family) => {
   const ownership = discoverOwnership(process.cwd());
   const result = selectBrowserTests({ ...ownership, changes: [{ path: `tests/browser-harness/scenarios/${name}.tsx`, status: 'M' }] });
@@ -86,11 +89,14 @@ it.each([
 
 it.each([
   ['src/components/cluster/cluster.css', ['cluster/Cluster', 'section/Section', 'simple-grid/SimpleGrid']],
-  ['src/components/container/Container.tsx', ['cluster/Cluster', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
+  ['src/components/container/Container.tsx', ['button-group/ButtonGroup', 'cluster/Cluster', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
   ['src/components/separator/separator.css', ['separator/Separator']],
-  ['src/components/checkbox/checkbox.css', ['checkbox/Checkbox', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
-  ['src/components/text-input/TextInput.tsx', ['cluster/Cluster', 'container/Container', 'stack/Stack', 'text-input/TextInput']],
-  ['src/components/form-group/FormGroup.tsx', ['radio/Radio', 'stack/Stack', 'switch/Switch']],
+  ['src/components/checkbox/checkbox.css', ['checkbox/Checkbox', 'form-group/FormGroup', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
+  ['src/components/text-input/TextInput.tsx', ['cluster/Cluster', 'container/Container', 'form-group/FormGroup', 'stack/Stack', 'text-input/TextInput']],
+  ['src/components/form-group/FormGroup.tsx', ['form-group/FormGroup', 'radio/Radio', 'stack/Stack', 'switch/Switch']],
+  ['src/components/badge/badge.css', ['badge/Badge', 'cluster/Cluster', 'simple-grid/SimpleGrid']],
+  ['src/components/spinner/Spinner.tsx', ['spinner/Spinner']],
+  ['src/components/button-group/stories/button-group.stories.css', ['button-group/ButtonGroup']],
 ])('includes composed consumers for %s without selecting unrelated harness families', (path, consumers) => {
   const ownership = discoverOwnership(process.cwd());
   const result = selectBrowserTests({ ...ownership, changes: [{ path, status: 'M' }] });

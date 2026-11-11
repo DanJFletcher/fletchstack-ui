@@ -31,7 +31,7 @@
   "tests/e2e/components/Card.spec.ts": "tests/e2e/components/card/Card.spec.ts",
   "tests/e2e/components/Checkbox.spec.ts": "tests/browser-harness/specs/checkbox/Checkbox.spec.ts",
   "tests/e2e/components/Field.spec.ts": "tests/e2e/components/field/Field.spec.ts",
-  "tests/e2e/components/FormGroup.spec.ts": "tests/e2e/components/form-group/FormGroup.spec.ts",
+  "tests/e2e/components/FormGroup.spec.ts": "tests/browser-harness/specs/form-group/FormGroup.spec.ts",
   "tests/e2e/components/Icon.spec.ts": "tests/e2e/components/icon/Icon.spec.ts",
   "tests/e2e/components/Select.spec.ts": "tests/browser-harness/specs/select/Select.spec.ts",
   "tests/e2e/components/TextInput.spec.ts": "tests/browser-harness/specs/text-input/TextInput.spec.ts",

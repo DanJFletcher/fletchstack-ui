@@ -1,0 +1,451 @@
+[
+  {
+    "source": "tests/e2e/components/button/Button.spec.ts",
+    "title": "'keyboard focus skips disabled controls'",
+    "owner": "tests/browser-harness/specs/button/Button.spec.ts",
+    "assertions": [
+      "await expect(primary).toBeFocused();",
+      "await expect(primary).toHaveCSS('outline-style', 'solid');",
+      "await expect(secondary).toBeFocused();",
+      "await expect(ghost).toBeFocused();",
+      "await expect(disabled).not.toBeFocused();",
+      "await expect(disabled).toBeDisabled();"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/button/Button.spec.ts",
+    "title": "'all variants offer all sizes'",
+    "owner": "tests/browser-harness/specs/button/Button.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('heading', { name: 'One action. Two atmospheres.' })).toBeVisible();",
+      "await expect(section.getByRole('button')).toHaveText(['small action', 'medium action', 'large action']);",
+      "await expect(section.getByRole('button', { name: 'small action' })).toHaveCSS('font-size', '14px');",
+      "await expect(section.getByRole('button', { name: 'medium action' })).toHaveCSS('font-size', '16px');",
+      "await expect(section.getByRole('button', { name: 'large action' })).toHaveCSS('font-size', '18px');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/button/Button.spec.ts",
+    "title": "'long labels reflow with enlarged and spaced text'",
+    "owner": "tests/browser-harness/specs/button/Button.spec.ts",
+    "assertions": [
+      "await expect(button).toBeVisible();",
+      "await expect(button).toHaveCSS('font-size', '32px');",
+      "expect(pageFitsViewport).toBe(true);",
+      "expect(labelFitsButton).toBe(true);",
+      "await expect(page.getByRole('button', { name: 'ReviewYourAccountPreferencesBeforeContinuing' })).toBeVisible();"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/button/Button.spec.ts",
+    "title": "'native default, submit and reset types preserve form behavior'",
+    "owner": "tests/browser-harness/specs/button/Button.spec.ts",
+    "assertions": [
+      "await expect(status).toHaveText('Reset');",
+      "await test.step('Default type leaves the form untouched', async () => {\n    await page.getByRole('button', { name: 'Ordinary action' }).click();\n    await expect(status).toHaveText('Reset');\n  });",
+      "await test.step('Enter on the submit button submits the form', async () => {\n    await page.getByRole('button', { name: 'Submit changes' }).focus();\n    await page.keyboard.press('Enter');\n    await expect(status).toHaveText('Submitted');\n  });",
+      "await test.step('The reset button resets the form', async () => {\n    await page.getByRole('button', { name: 'Reset changes' }).click();\n    await expect(status).toHaveText('Reset');\n  });"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/button/Button.spec.ts",
+    "title": "'decorative icons preserve accessible button names and parent spacing'",
+    "owner": "tests/browser-harness/specs/button/Button.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('button')).toHaveCount(4);",
+      "await expect(save).toBeVisible();",
+      "await expect(page.getByRole('button', { name: 'Switch to night mode', exact: true })).toBeVisible();",
+      "await expect(page.getByRole('img')).toHaveCount(0);",
+      "await expect(page.locator('.actions')).toHaveCSS('gap', '12px');",
+      "await expect(save).toHaveCSS('margin', '0px');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/button/Button.spec.ts",
+    "title": "'Storybook args reach the rendered native button'",
+    "owner": "tests/e2e/components/button/Button.spec.ts",
+    "assertions": [
+      "await expect(button).toHaveClass(/consumer-action/);",
+      "await expect(button).toHaveAttribute('type', 'button');",
+      "await expect(button).toHaveAttribute('title', 'Publish settings');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/button/Button.spec.ts",
+    "title": "'hidden native buttons stay out of layout and keyboard order'",
+    "owner": "tests/browser-harness/specs/button/Button.spec.ts",
+    "assertions": [
+      "await expect(hiddenButton).toBeHidden();",
+      "await expect(hiddenButton).not.toBeFocused();"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "`${theme} Stack gap presets preserve every relationship`",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "await test.step(`${theme} ${gap} Stack uses the existing ${pixels}px relationship`, async () => {\n        expect(await itemGaps(page.getByTestId(`gap-${gap}`))).toEqual([pixels, pixels]);\n        await expect(page.getByTestId(`gap-${gap}`)).toHaveCSS('flex-direction', 'column');\n      });"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "`${theme} form remains usable at 320px with enlarged and spaced text`",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('textbox', { name: 'Project name' })).toBeVisible();",
+      "await expect(page.getByRole('textbox', { name: 'Description' })).toBeVisible();",
+      "await expect(page.getByRole('checkbox', { name: 'Email updates' })).toBeVisible();",
+      "await expect(page.getByRole('status')).toHaveText('Project settings saved.');",
+      "expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'Stack alignment presets honor fixed widths'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "await test.step(`${align} alignment controls only the cross axis and honors fixed child widths`, async () => {\n      const box = await alignment(page.getByTestId(`align-${align}`));\n      expect(box.fixed).toBe(120);\n      expect(box.order).toEqual(['One', 'Two', 'Three']);\n      const expected = { stretch: { start: 0, end: 0 }, start: { start: 0 }, center: { start: box.end }, end: { end: 0 } };\n      expect(box).toMatchObject(expected[align]);\n    });"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "`RTL ${align} follows writing direction without reordering`",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "expect(box[edge]).toBe(0);",
+      "expect(box.order).toEqual(['One', 'Two', 'Three']);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'default Stack has related gaps and no inset, surface, boundary or focus stop'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "expect(await itemGaps(stack)).toEqual([16, 16]);",
+      "await expect(stack).toHaveCSS('align-items', 'stretch');",
+      "await expect(stack).toHaveCSS('padding', '0px');",
+      "await expect(stack).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');",
+      "await expect(stack).toHaveCSS('border-top-width', '0px');",
+      "await expect(stack).toHaveCSS('box-shadow', 'none');",
+      "await expect(stack).toHaveCSS('overflow', 'visible');",
+      "await expect(stack).not.toHaveAttribute('tabindex');",
+      "await expect(stack).not.toHaveAttribute('role');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'nested Stacks own independent direct-child gaps'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "expect(await itemGaps(page.getByTestId('outer-stack'))).toEqual([24]);",
+      "expect(await itemGaps(page.getByTestId('inner-stack'))).toEqual([16, 16]);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'hidden children reserve no space or extra gap'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "expect(await itemGaps(page.getByTestId('hidden-children'))).toEqual([16]);",
+      "await expect(page.getByText('Hidden', { exact: true })).toBeHidden();",
+      "await expect(page.getByText('Not displayed', { exact: true })).toBeHidden();"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'consumer child margins remain additional to the Stack gap'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "expect(await itemGaps(page.getByTestId('margin-stack'))).toEqual([24]);",
+      "await expect(page.getByText('First', { exact: true })).toHaveCSS('margin-bottom', '8px');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'scoped spacing overrides preserve independent roles and nested theme resets'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "expect(await itemGaps(page.getByTestId('scoped-stack'))).toEqual([32, 32]);",
+      "expect(await itemGaps(page.getByTestId('independent-stack'))).toEqual([24, 24]);",
+      "expect(await itemGaps(page.getByTestId('reset-stack'))).toEqual([16, 16]);",
+      "expect(await itemGaps(page.getByTestId('sibling-stack'))).toEqual([16, 16]);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'consumer responsive gap CSS changes spacing while Stack stays vertical'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "expect(await itemGaps(stack)).toEqual([64, 64]);",
+      "expect(await itemGaps(stack)).toEqual([32, 32]);",
+      "expect(await itemGaps(stack)).toEqual([32, 32]);",
+      "await expect(stack).toHaveCSS('flex-direction', 'column');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'Stack can shrink within narrow flex/grid parents'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "await expect(page.getByTestId('flex-stack')).toHaveCSS('width', '160px');",
+      "await expect(page.getByTestId('grid-stack')).toHaveCSS('width', '160px');",
+      "await expect(page.getByTestId('flex-stack')).toHaveCSS('min-width', '0px');",
+      "await expect(page.getByTestId('grid-stack')).toHaveCSS('min-width', '0px');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'long children grow under text enlargement with no fixed Stack height or clipping'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "expect(after!.height).toBeGreaterThan(before!.height);",
+      "await expect(stack).toHaveCSS('overflow', 'visible');",
+      "expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'Stack preserves form keyboard order and focus clearance inside Container'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('textbox', { name: 'Description' })).toBeFocused();",
+      "await expect(page.getByRole('checkbox', { name: 'Email updates' })).toBeFocused();",
+      "await expect(button).toBeFocused();",
+      "await expect(button).toHaveCSS('outline-style', 'solid');",
+      "expect(clearance).toEqual({ left: true, right: true, clipping: false });",
+      "await expect(page.getByRole('button', { name: 'Reset form' })).toBeFocused();",
+      "await expect(page.getByRole('textbox', { name: 'Project name' })).toHaveValue('Website refresh');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'Corporate and Luna keep the same layout relationships'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "expect(await itemGaps(corporate)).toEqual([24, 24]);",
+      "expect(await itemGaps(luna)).toEqual([24, 24]);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/stack/Stack.spec.ts",
+    "title": "'native hidden suppresses the complete Stack'",
+    "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
+    "assertions": [
+      "await expect(page.locator('.fs-stack')).toHaveCSS('display', 'none');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "`${theme} literal code preserves whitespace and uses approved typography and AA paint`",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "expect(await source.textContent()).toBe('\\n\\t<div>Markup & whitespace stay literal.</div>\\n<script>not executed</script>\\n');",
+      "await expect(source).toHaveCSS('font-size', '14px');",
+      "await expect(source).toHaveCSS('line-height', '21px');",
+      "await expect(source).toHaveCSS('padding', '16px');",
+      "expect(await source.evaluate(element => getComputedStyle(element).fontFamily)).toContain('monospace');",
+      "expect(contrast(paint.text, paint.surface)).toBeGreaterThanOrEqual(4.5);",
+      "expect(contrast(paint.muted, paint.header)).toBeGreaterThanOrEqual(4.5);",
+      "expect(paint.radius).toBe(theme === 'luna' ? '12px' : '4px');",
+      "await expect(page.getByRole('button')).toHaveCSS('background-color', theme === 'luna' ? 'rgb(199, 181, 255)' : 'rgb(255, 255, 255)');",
+      "await expect(page.getByRole('button')).toHaveCSS('color', theme === 'luna' ? 'rgb(17, 19, 41)' : 'rgb(23, 35, 56)');",
+      "await expect(source.locator('script')).toHaveCount(0);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "`${theme} code scrolls by keyboard while wrap reflows without changing source`",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "expect(await scroll.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(true);",
+      "expect(await wrapped.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);",
+      "expect(await wrapped.textContent()).toBe(await scroll.textContent());",
+      "await expect.poll(() => scroll.evaluate(element => element.scrollLeft)).toBeGreaterThan(0);",
+      "await expect(scroll).toHaveCSS('outline-style', 'solid');",
+      "await expect(page.locator('.fs-code-block').first()).toHaveCSS('overflow', 'visible');",
+      "await expect(scroll).not.toBeFocused();",
+      "expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "`${theme} copy failure remains focused with one visible polite result and sufficient contrast`",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('button', { name: 'Try again settings.ts' })).toBeFocused();",
+      "await expect(status).toBeVisible();",
+      "await expect(status).toHaveText('Copy failed. Select the code to copy manually.');",
+      "await expect(page.getByRole('alert')).toHaveCount(0);",
+      "await expect(page.getByRole('status')).toHaveCount(1);",
+      "expect(contrast(paint.color, paint.surface)).toBeGreaterThanOrEqual(4.5);",
+      "await expect(page.locator('.fs-code-block')).toHaveCSS('overflow', 'visible');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "`${theme} long metadata and source reflow at 320px with enlarged and spaced text`",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);",
+      "expect(await region.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);",
+      "await expect(page.getByRole('button')).toBeVisible();",
+      "await expect(page.getByRole('button')).toHaveCSS('outline-style', 'solid');",
+      "await expect(page.locator('.fs-code-block')).toHaveCSS('overflow', 'visible');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'native clipboard writing preserves exact raw text and keeps the button focused'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('button', { name: 'Copied literal.txt' })).toBeFocused();",
+      "expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('\\n\\t<div>Markup & whitespace stay literal.</div>\\n<script>not executed</script>\\n');",
+      "await expect(page.getByRole('status')).toHaveText('Code copied.');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'wrapped display still copies the unmodified long source'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('button', { name: 'Copied settings.ts' })).toBeVisible();",
+      "expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(original);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'missing clipboard APIs offer manual copy without throwing or trapping keyboard focus'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('button', { name: 'Try again settings.ts' })).toBeFocused();",
+      "await expect(page.getByRole('status')).toHaveText('Copy failed. Select the code to copy manually.');",
+      "await expect(page.getByRole('region')).toBeFocused();",
+      "await expect(page.getByRole('region')).not.toBeFocused();"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'copy feedback retry clears the failure and reports success once'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('button', { name: 'Copied settings.ts' })).toBeFocused();",
+      "await expect(page.getByRole('status')).toHaveCount(1);",
+      "await expect(page.getByRole('status')).toHaveText('Code copied.');",
+      "await expect(page.locator('.fs-code-block__feedback--error')).toHaveCount(0);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'scoped code tokens inherit and reset at nested explicit themes'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('region', { name: 'Scoped source' })).toHaveCSS('padding', '24px');",
+      "await expect(page.getByRole('region', { name: 'Scoped source' })).toHaveCSS('font-size', '18px');",
+      "await expect(page.getByRole('region', { name: 'Reset source' })).toHaveCSS('padding', '16px');",
+      "await expect(page.getByRole('region', { name: 'Reset source' })).toHaveCSS('font-size', '14px');",
+      "await expect(page.getByRole('region', { name: 'Sibling source' })).toHaveCSS('padding', '16px');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'RTL metadata preserves LTR source and places the copy action at logical inline end'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('region')).toHaveCSS('direction', 'ltr');",
+      "expect(button!.x).toBeLessThan(filename!.x);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'forced colors retain code, failure text and keyboard focus'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('button')).toHaveCSS('outline-style', 'solid');",
+      "await expect(page.getByRole('status')).toBeVisible();",
+      "await expect(page.getByRole('region')).toBeFocused();",
+      "await expect(page.getByRole('region')).toHaveCSS('outline-style', 'solid');",
+      "await expect(page.locator('.fs-code-block')).toHaveCSS('border-style', 'solid');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'native hidden removes code and controls from layout'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.locator('.fs-code-block')).toHaveCSS('display', 'none');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'metadata variations keep copy at logical inline end in either writing direction'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "expect(result.inset).toBeCloseTo(17, 2);",
+      "expect(result.gap).toBeCloseTo(12, 2);"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "`${theme} syntax tokens retain readable theme colors and exact source`",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(source).toHaveText('// Workspace settings\\nconst count: number = 12;\\nfunction greet(name: string) { return \"Hello \" + name; }\\nconst ready = true;');",
+      "expect(contrast(color, paint.surface)).toBeGreaterThanOrEqual(4.5);",
+      "await expect(source.locator('.token.keyword').first()).toHaveCSS('color', theme === 'luna' ? 'rgb(199, 181, 255)' : 'rgb(36, 75, 176)');",
+      "await expect(source.locator('.token.string').first()).not.toHaveCSS('color', theme === 'luna' ? 'rgb(199, 181, 255)' : 'rgb(36, 75, 176)');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "`${theme} highlighted long tokens wrap at 320px with enlarged and spaced text`",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(source.locator('.token.keyword').first()).toHaveText('const');",
+      "expect(await source.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);",
+      "expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);",
+      "await expect(page.getByRole('button')).toHaveCSS('outline-style', 'solid');",
+      "await expect(page.locator('.fs-code-block')).toHaveCSS('overflow', 'visible');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'highlighted markup copies exact text without creating executable HTML'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(source).toHaveText('\\n\\t<script>literal & text</script>\\n');",
+      "await expect(source.locator('script')).toHaveCount(0);",
+      "await expect(source.locator('code > .token.tag')).toHaveCount(2);",
+      "expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('\\n\\t<script>literal & text</script>\\n');",
+      "await expect(page.getByRole('button', { name: 'Copied literal.html' })).toBeFocused();"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'unsupported languages and explicit opt-out remain plain code'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.locator('code .token')).toHaveCount(0);",
+      "await expect(page.getByRole('region').first()).toHaveText('const settings = {\\n  theme: \"corporate\",\\n};');",
+      "await expect(page.getByRole('region').last()).toHaveText('const settings = {\\n  theme: \"corporate\",\\n};');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'syntax overrides inherit and explicit nested themes reset them'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(page.getByRole('region', { name: 'Scoped source' }).locator('.token.keyword')).toHaveCSS('color', 'rgb(138, 35, 100)');",
+      "await expect(page.getByRole('region', { name: 'Reset source' }).locator('.token.keyword')).toHaveCSS('color', 'rgb(199, 181, 255)');",
+      "await expect(page.getByRole('region', { name: 'Sibling source' }).locator('.token.keyword')).toHaveCSS('color', 'rgb(36, 75, 176)');"
+    ]
+  },
+  {
+    "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
+    "title": "'forced colors keep highlighted tokens readable without relying on syntax colors'",
+    "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+    "assertions": [
+      "await expect(source.locator('.token.keyword').first()).toHaveCSS('color', foreground);",
+      "await expect(source).toHaveCSS('outline-style', 'solid');"
+    ]
+  }
+]

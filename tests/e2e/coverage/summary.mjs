@@ -4,6 +4,7 @@ const metrics = ['statements', 'branches', 'functions', 'lines'];
  * Keep demonstration helpers separate from production and preview configuration.
  **/
 function category(path) {
+  if (path.startsWith('tests/browser-harness/')) { return 'harness'; }
   if (path.startsWith('.storybook/')) { return 'preview'; }
   if (path.startsWith('stories/') || path.includes('/stories/')) { return 'story-demo'; }
 
@@ -26,7 +27,7 @@ function totals(files) {
  * Describe the measured inventory and selection without claiming verification completeness.
  **/
 export function diagnosticSummary(files, scope) {
-  const categories = Object.fromEntries(['production', 'story-demo', 'preview'].map(name => {
+  const categories = Object.fromEntries(['production', 'story-demo', 'preview', 'harness'].map(name => {
     const members = files.filter(file => category(file.sourcePath) === name);
 
     return [name, { files: members.map(file => file.sourcePath).sort(), metrics: totals(members) }];

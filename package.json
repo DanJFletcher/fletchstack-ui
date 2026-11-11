@@ -68,16 +68,19 @@
     "test:unit": "vitest run --project unit --coverage --coverage.reportsDirectory=coverage/unit",
     "test:integration": "vitest run --project integration --coverage --coverage.reportsDirectory=coverage/integration",
     "test:storybook": "vitest run --project storybook",
-    "test:e2e": "playwright test",
+    "test:e2e": "node tests/browser-harness/run.mjs",
     "test:e2e:coverage": "playwright test --config=playwright.coverage.config.ts",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:report": "playwright show-report",
+    "test:e2e:report": "playwright show-report playwright-report/storybook",
     "storybook": "npm run tokens && storybook dev -p 6006 --no-open --disable-telemetry",
     "build-storybook": "npm run tokens && storybook build --disable-telemetry",
     "verify:package": "node scripts/verify-package.mjs",
     "verify:browser": "npm run build && node scripts/verify-browser.mjs",
     "test:unit:affected": "node scripts/test-affected.mjs unit",
-    "test:integration:affected": "node scripts/test-affected.mjs integration"
+    "test:integration:affected": "node scripts/test-affected.mjs integration",
+    "test:e2e:components": "playwright test --config=playwright.components.config.ts",
+    "test:e2e:storybook": "playwright test --config=playwright.config.ts",
+    "test:e2e:affected": "node tests/browser-harness/affected.mjs"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

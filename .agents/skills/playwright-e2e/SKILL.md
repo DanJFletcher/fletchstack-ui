@@ -11,7 +11,7 @@ Produce tests that detect an important regression, own their state, and make cle
 
 Inspect the relevant requirements, existing tests, installed Playwright version, configuration, fixture imports, package scripts, application startup and CI. Reuse the working setup and the project's package manager. Inspect actual UI semantics through available browser tools, traces or source; do not present invented selectors, routes or APIs as verified facts. Check version-sensitive APIs against the installed version before using them.
 
-- **Author:** Add the smallest coherent scenario that proves the requested outcome. For new behavior or bug fixes, use the project's TDD workflow when available and observe the meaningful pre-fix failure where feasible.
+- **Author:** Add the smallest coherent scenario that proves the requested outcome. Choose test cadence and evidence under the shared [development policy](../../guidelines/testing-guidelines.md#development-policy), including meaningful pre-fix reproduction for bugs where feasible.
 - **Review:** Stay read-only. Identify concrete missed regressions, false passes, races or isolation problems with locations and consequences; distinguish demonstrated failures from suspected risks.
 - **Diagnose:** Reproduce the focused failure and classify it as product, test or environment related before changing code. Preserve the behavioral requirement when the product is broken.
 

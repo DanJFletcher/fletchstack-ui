@@ -14,6 +14,7 @@ Focused unit tests live with their component family. Integration and E2E remain 
 | [integration/tokens/](integration/tokens/) | JSON documents through the real compiler to generated files | Node; temporary directories |
 | [integration/build/](integration/build/) | Command entry points and stylesheet publication | Node; real filesystem |
 | [e2e/components/](e2e/components/) | Served component behavior through HTTP and a browser | Playwright Test and Chromium against local Storybook |
+| [browser-harness/specs/](browser-harness/specs/) | Button, Stack and CodeBlock native behavior, CSS and geometry | Playwright Test and Chromium against the private Vite gallery |
 | [e2e/storybook/](e2e/storybook/) | Documentation navigation and theme toolbar | Real Storybook manager and preview iframe |
 | [component stories](../src/components/) and [foundations/patterns](../stories/) | Component examples, interactions, and automated accessibility checks | Storybook in Chromium |
 
@@ -83,7 +84,7 @@ Do not import one test file from another or share assertion logic across suites.
 
 ### Affected unit and integration feedback
 
-Use explicit files without coverage for red/green, including new tests. Use affected commands during green/refactor:
+Choose incremental TDD, batched test-first, or implementation followed by tests under the [development policy](../.agents/guidelines/testing-guidelines.md#development-policy). Use explicit files without coverage for focused checks, including newly added tests. Use affected commands for related feedback as implementation evolves and during refactoring:
 
 ```sh
 npm run test:unit:affected -- --base origin/main
@@ -108,11 +109,33 @@ The [policy](../scripts/affected-policy.mjs) is deliberately conservative:
 | Runtime rename/deletion, unknown resource or unproven runtime owners | Full requested project |
 | Unrelated OpenSpec planning prose | Safely empty unless another input selects tests |
 
-Paths under E2E or documentation are not blanket-ignored: some unit/integration tests import helpers there or read files from disk. A new unsupported dependency pattern must gain a tested rule or retain the full fallback. No custom export-aware graph, persistent selector cache or E2E/Storybook selection is provided. See [selection and runtime verification](../docs/affected-test-verification.md) for measured results and limitations.
+Paths under E2E or documentation are not blanket-ignored: some unit/integration tests import helpers there or read files from disk. A new unsupported dependency pattern must gain a tested rule or retain the full fallback. These unit/integration selectors provide no export-aware graph or persistent cache. Browser selection uses the separate [harness ownership policy](browser-harness/README.md#affected-selection). See [unit/integration selection evidence](../docs/affected-test-verification.md) for its measured results and limitations.
 
-Affected runs are coverage-free even in full-fallback mode and preserve prior reports. They are partial development feedback, not a complete-verification claim. Once implementation is complete, run the existing full commands and required verification, including independent unit/integration coverage, browser checks and package/SSR verification. Repair failures with focused runs, then repeat full verification on the final state. Required CI stays complete.
+Affected unit/integration runs are coverage-free even in full-fallback mode and preserve prior reports. They are partial development feedback, not a replacement for the independent full unit/integration coverage gates. At local completion retain those gates and required lint/type/build/package/SSR checks, and follow the [browser completion policy](#local-browser-completion). Required CI stays complete.
 
-For example, add a new Button test, run that explicit file to observe red, implement it and rerun the file for green, then run both affected commands while refactoring. If final full integration exposes an unrelated regression, reproduce it with its explicit test, fix it, and rerun full verification before reporting completion. A conservative full fallback during development is expected when shared inputs change.
+For selected incremental TDD, add a new Button test, run that explicit file to observe a meaningful failure, implement it and rerun the file for green, then use affected feedback while refactoring. For a routine feature tested afterward, establish its API and accessibility contract, implement a coherent increment, add tests with expectations derived from that contract, and run those explicit files plus related affected checks. A first-run pass is valid final-behavior evidence; no artificial failure is required. Both approaches retain required full verification.
+
+If final full integration exposes a regression, reproduce it with its explicit test, fix it, and rerun that required full gate on the final state. Browser reruns follow the final repair's impact rather than automatically repeating every unrelated E2E suite. A conservative full fallback is expected when shared inputs change.
+
+## Local browser completion
+
+During iteration, run specific browser scenarios and regression tests. At local completion for browser-impacting changes, run all Storybook render/play/accessibility checks and affected E2E suites, including composed consumers and retained served-Storybook boundaries. Use `npm run test:e2e:affected -- --base <git-ref>` and inspect its reasons. Explicit suite selection requires a stated ownership rationale; uncertain ownership requires the complete suite.
+
+| Changed input | Local E2E scope |
+| --- | --- |
+| Component implementation or scoped CSS with proven consumers | Owning suites plus dependent compositions |
+| Shared tokens, generated/global styles, browser setup or dependency/public-export configuration | Complete E2E |
+| Unknown impact or missing ownership | Complete E2E with fallback explanation |
+| Test-only repair with known dependencies | Changed tests and affected suites |
+| Shared readiness or harness repair | Complete E2E |
+
+After a failure, reproduce it and repair it with focused checks, then rerun the scope affected by the final changes. Do not repeat unrelated local E2E solely because a failure happened. Never reuse results across relevant subsequent edits. Complete required CI always runs every browser suite and must pass after a CI failure is repaired. Independent full unit/integration coverage, lint, type, build and package obligations are unchanged.
+
+Report actual commands/scope, fallbacks, known failures, unrun checks and pending CI. An affected pass is local evidence, not complete repository verification or merge readiness. Known documentation-navigation failures remain visible even when a component's selected checks pass.
+
+This policy is repository-local. Reinstalling upstream agent-guides may overwrite local guideline/skill edits; preserve this section and reconcile the shared execution policy afterward. Updating the external guide source or installer is separate work.
+
+The development policy and coordinated skills are repository-local customizations of the installer-managed files listed in [agi.json](../agi.json). Preserve those local changes when reviewing a future installer refresh; do not rewrite manifest fingerprints to mark them as upstream content. Updating the shared agent-guides source or installer package is separate work.
 
 Run commands from the repository root:
 
@@ -139,44 +162,48 @@ For Vitest watch mode, omit `run`. Install the browser once with `npx --no-insta
 
 ## Playwright E2E tests
 
-[playwright.config.ts](../playwright.config.ts) configures the dedicated Playwright Test runner. `npm run test:e2e` generates tokens, starts Storybook at `http://127.0.0.1:6007`, waits for the preview server, runs Chromium tests over HTTP, and stops the server it started. It can reuse a manually started server at that address locally; CI always starts its own. The usual development Storybook port remains 6006.
+[The complete runner](browser-harness/run.mjs) makes `npm run test:e2e` run both disjoint projects, sequentially: the private Vite gallery on port 6008 through [the component configuration](../playwright.components.config.ts), then retained Storybook on port 6007 through [the Storybook configuration](../playwright.config.ts). Each project generates tokens before starting its own server. Locally an existing server may be reused; CI starts its own. Interactive Storybook remains on port 6006. Explicit file filters route only to the owning project; focused project commands accept the full Playwright option set.
 
-The [Button journeys](e2e/components/button/Button.spec.ts) exercise every variant and size, keyboard activation and focus, disabled and hidden controls, native forms, ref access, icon composition, native attributes, consumer classes, and enlarged/spaced long labels at 320px. [Theme journeys](e2e/themes/themes.spec.ts) verify sibling and nested scopes plus consumer overrides. [Storybook journeys](e2e/storybook/documentation.spec.ts) navigate Foundation → Tokens → the override example and switch themes through the actual toolbar. The [preview adapter](e2e/fixtures/storybook.ts) waits for Storybook's successful `storyFinished` event so play-function failures cannot silently pass or race subsequent interactions.
+The [Button harness journeys](browser-harness/specs/button/Button.spec.ts) own native activation/forms, disabled/hidden order, real focus, variants/sizes, icon composition and enlarged/spaced labels. [Retained Button delivery](e2e/components/button/Button.spec.ts) owns Storybook args. Stack and CodeBlock use the same private harness while their SSR/hydration/package checks stay separate. [Theme journeys](e2e/themes/themes.spec.ts) retain sibling/nested scopes and consumer overrides. [Storybook journeys](e2e/storybook/documentation.spec.ts) retain docs navigation and the actual toolbar. The [preview adapter](e2e/fixtures/storybook.ts) still requires successful `storyFinished` completion.
 
-Keep theme-specific story IDs in the Button test's scenario table and group cases with `test.describe`. Use named preview options, such as `openStory(page, 'components-button--interaction-states', { theme: 'luna' })` or `openStory(page, 'components-button--playground', { args: { hidden: true } })`, instead of hand-built query strings. Pass a complete Storybook story ID so the same adapter supports Button and Icon. Reuse locators locally; keep actions and assertions visible in each scenario. Give longer journeys descriptive `test.step` blocks so the report identifies the stage that failed.
+Use [openScenario](browser-harness/fixtures/scenario.ts) with explicit theme/args for catalogued harness scenarios. Retained tests use named [openStory options](e2e/fixtures/storybook.ts) and complete public story IDs instead of hand-built query strings. Keep actions and assertions visible in each journey. See [scenario authoring and isolation](browser-harness/README.md) and the [behavior matrix](browser-behavior-matrix.md).
 
-This suite exercises the real Storybook browser bundle; it is not a full Gatsby or Astro site test. Existing Vitest browser integration and Storybook accessibility tests remain separate and are not replaced.
+The harness verifies development component behavior; retained tests verify the served Storybook boundary. Neither replaces Gatsby/Astro consumer verification, existing browser integration, package checks or Storybook render/play/accessibility tests.
 
 ```sh
 npx --no-install playwright install chromium
 npm run test:e2e
-npm run test:e2e -- tests/e2e/components/button/Button.spec.ts
+npm run test:e2e:components -- button
+npm run test:e2e:storybook -- button
+npm run test:e2e:affected -- --base origin/main --dry-run
+npm run test:e2e:affected -- --base origin/main
 npm run test:e2e -- --headed
-npm run test:e2e:ui
+npm run test:e2e:ui         # Retained Storybook UI
+npm run test:e2e:components -- --ui
 npm run test:e2e:report
 ```
 
-E2E tests use Playwright's isolated browser contexts, accessible locators, and auto-waiting assertions. Retries are disabled so failures are visible. Failure screenshots and retained traces are written under `test-results/`; the test report is written to `playwright-report/`. These generated directories are ignored by Git and ESLint. The E2E command runs separately in CI and does not contribute to either Vitest coverage gate. `npm test` continues to run the Vitest suites; use `npm run test:e2e` for E2E execution.
+E2E tests use fresh browser contexts, accessible locators and auto-waiting assertions. Retries remain disabled. Failure screenshots/traces and HTML reports use separate `components` and `storybook` directories under `test-results/` and `playwright-report/`. Open a specific report with `npx --no-install playwright show-report playwright-report/components` (or `storybook`). These outputs are ignored. Required CI still runs the complete E2E command and all existing gates. `npm test` remains Vitest; standalone E2E does not contribute to either production coverage gate.
 
 ### Coverage-free E2E and diagnostic measurement
 
-`npm run test:e2e` runs the complete focused Chromium suite without starting V8 coverage, cleaning caches, or writing coverage artifacts. File/name filters use the same mode and preserve normal assertion failures, screenshots and retained traces. Existing diagnostic artifacts are untouched, not evidence for this run.
+`npm run test:e2e` runs the complete Chromium suite without starting V8 coverage, cleaning caches, or writing coverage artifacts. File filters route to their owning projects; use a focused project command for title filters so an unrelated project with no matching cases does not fail the invocation. All ordinary modes preserve assertion failures, screenshots and retained traces. Existing diagnostic artifacts are untouched, not evidence for this run.
 
 ```sh
 npm run test:e2e
 npm run test:e2e -- tests/e2e/components/select/Select.spec.ts
-npm run test:e2e -- --grep 'native keyboard'
+npm run test:e2e:storybook -- --grep 'native keyboard'
 npm run test:e2e:coverage
 npm run test:e2e:coverage -- tests/e2e/components/select/Select.spec.ts
 ```
 
-The opt-in command uses the same suites/server/browser through a thin coverage configuration. It collects Chromium V8 data across navigation and writes HTML/JSON under `coverage/e2e/`. `diagnostic-summary.json` separately lists production, story/demo and preview files and exact metric totals, invocation/filter information, selected suites/tests, test status and report-generation time. Unloaded authored modules remain in the denominator. Reports explicitly describe JavaScript execution measurement, not completion of the browser-behavior matrix.
+The opt-in command includes both projects through [the diagnostic configuration](../playwright.coverage.config.ts), starts both servers, collects Chromium V8 data across navigation and writes HTML/JSON under `coverage/e2e/`. `diagnostic-summary.json` separately lists production, story/demo, preview and harness files with exact counters, invocation/filter information, selected projects/suites/tests, test status and report-generation time. Unloaded authored modules remain in the denominator. Reports describe execution measurement, not completion of the browser-behavior matrix.
 
 Percentages are informational, including 0% for unloaded modules. Test failures, missing expected collection data, and collection/reporting/write errors still fail the command. Each diagnostic run cleans its own cache; counters never satisfy unit/integration gates. A filtered diagnostic run shows its selection and must not be presented as complete browser verification. A request-only selection with no JavaScript produces no measurement and fails rather than inventing data.
 
-The inventory still includes authored browser JavaScript/TypeScript in `src/`, `stories/`, and `.storybook/`, excluding declarations, tests/setup/fixtures, generated framework wrappers, external dependencies and Node-only `.storybook/main.ts`. Scripts, CSS and prose have no browser-JavaScript counters. See the [browser-behavior matrix](browser-behavior-matrix.md) for their actual verification owners. Independent unit and integration coverage scope and 100% per-file thresholds are unchanged.
+The diagnostic inventory includes authored browser JavaScript/TypeScript in [src/](../src/), [stories/](../stories/), [.storybook/](../.storybook/), [gallery/](browser-harness/gallery/) and [scenarios/](browser-harness/scenarios/). It excludes declarations, test/runner/fixture code, framework wrappers, dependencies and Node-only Storybook configuration. CSS and prose have no JavaScript counters. Independent production unit/integration scopes and 100% per-file thresholds remain unchanged.
 
-Complete CI verification requires all Storybook render/play/a11y checks, the complete focused browser suite, production gates and existing build/package checks. The separate manually dispatched diagnostic workflow measures coverage on demand. There is no affected selector or scheduled diagnostic run in this change.
+Complete CI requires all Storybook render/play/a11y checks, both complete browser projects, production gates and existing build/package checks. Affected selection is for local completion under the policy above. Its static scenario graph includes composed consumers; retained Storybook conservatively owns all authored source/story/runtime resources because the preview shares CSS and public-barrel imports. Missing ownership or unknown inputs trigger a complete fallback. See [selector limits](browser-harness/README.md#affected-selection) and [pilot measurements and fault probes](../docs/component-harness-verification.md). The separate manually dispatched diagnostic workflow remains on demand.
 
 Exercise DOM-test cleanup with a reproducible shuffled order:
 

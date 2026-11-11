@@ -1,0 +1,22 @@
+# Tasks
+
+## 1. Shared policy and selected TDD
+
+- [x] 1.1 Update the [testing guidelines](../../../.agents/guidelines/testing-guidelines.md) with proportional contract-first planning, three supported cadences, intent-grounded expectations, regression/refactor evidence, and accurate reporting; replace the every-test-must-fail checklist item and retain unit-only scope for authoring rules. Verify routine test-after, reproducible/unavailable bug, and refactor walkthroughs satisfy the [specification](specs/agent-testing-workflow/spec.md) without artificial failures or extra approval.
+- [x] 1.2 Narrow the [TDD skill](../../../.agents/skills/tdd/SKILL.md) frontmatter and opening activation rule to explicit requests or deliberate selection; retain meaningful red/green checks and link execution/reporting to the shared policy. Verify an explicit TDD walkthrough still requires the intended pre-implementation failure while an ordinary behavior change does not auto-select it.
+
+## 2. Consistent skill routing and execution documentation
+
+- [x] 2.1 Update the [component-building](../../../.agents/skills/build-react-components/SKILL.md), [React Testing Library](../../../.agents/skills/react-testing-library/SKILL.md), and [Playwright](../../../.agents/skills/playwright-e2e/SKILL.md) skills to defer cadence selection to shared policy; qualify the React skill's closing failure-evidence rule. Verify a routine component tested afterward and batched rule tests remain valid through every applicable entry point while browser/accessibility obligations remain intact.
+- [x] 2.2 Update the [refactoring skill](../../../.agents/skills/typescript-refactor/SKILL.md) behavior-change referral and [component guidelines](../../../.agents/guidelines/component-library.md) execution language. Verify passing baseline requirements remain for refactors, inline design review remains sufficient, and no mandatory delegation or synthetic red step is introduced.
+- [x] 2.3 Revise the [test guide](../../../tests/README.md) with cadence-neutral focused/affected execution, selected-TDD and test-after examples, and the local installer-customization boundary. Verify commands match existing scripts, declared-base/fallback rules and complete verification remain explicit, and no installer manifest hashes or dependencies change.
+
+## 3. Pending specification reconciliation
+
+- [x] 3.1 Confirm the affected-test capability remains pending, then make only its [Development and completion workflow requirement](../add-affected-unit-integration-tests/specs/affected-unit-integration-testing/spec.md#requirement-development-and-completion-workflow) conditional on selected incremental TDD. Add supersession notes linking this change in its [proposal](../add-affected-unit-integration-tests/proposal.md) and [design](../add-affected-unit-integration-tests/design.md). Verify existing scenarios, all selection/coverage safeguards, completed tasks, and historical evidence remain intact; if the capability has since been accepted, rebase planning as described in [the design](design.md#6-reconcile-pending-specifications-explicitly) before editing.
+- [x] 3.2 Run `npx --no-install openspec validate add-affected-unit-integration-tests --strict` and `npx --no-install openspec validate adopt-flexible-agent-testing --strict`; review both workflow requirements together and confirm neither future archive order can reinstate unconditional TDD. Record validation results without archiving or syncing either change.
+
+## 4. Integrated instruction review
+
+- [x] 4.1 Audit all changed live guidance for unconditional TDD referrals, blanket failure-proof requirements, broken relative links, and mismatched skill names/frontmatter. Trace the six positive walkthroughs and the wrong-expectation, vacuous-assertion, and final-verification-failure cases from [the design](design.md#7-validate-guidance-with-concrete-walkthroughs). Record a concise review result and any gaps in this change; distinguish instruction review from actual agent-behavior or performance measurements.
+- [x] 4.2 Review the final diff for scope and consistency: confirm no production code, existing tests, test scripts, CI gates, coverage thresholds, installer fingerprints, or external source files changed; confirm operational policy is concise and research rationale stays in planning. Report completed checks and limitations without claiming measured runtime savings or running unrelated production suites for prose-only changes.

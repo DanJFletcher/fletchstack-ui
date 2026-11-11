@@ -9,7 +9,7 @@ Test what a person can observe and do through the rendered UI. Choose scenarios 
 
 ## Establish the test boundary
 
-Inspect the existing runner, DOM environment, package versions, setup files, test commands, and render helpers before editing. Reuse the project's conventions and test workflow. When a TDD skill is available, use it for new behavior and bug fixes.
+Inspect the existing runner, DOM environment, package versions, setup files, test commands, and render helpers before editing. Reuse the project's conventions and choose test cadence and evidence under the shared [development policy](../../guidelines/testing-guidelines.md#development-policy).
 
 Render the relevant component or composition with the providers it needs. Keep children real when their integration is part of the behavior; isolate external dependencies at their boundaries. Verify visible output, input values, focus, enabled states, navigation, or a public callback whose effect defines the contract. Avoid assertions on component instances, hook state, private methods, lifecycle execution, or which child component was rendered. [Guiding principles](https://testing-library.com/docs/guiding-principles/)
 
@@ -67,4 +67,4 @@ it('confirms a subscription after submission', async () => {
 
 For a failed query, inspect the rendered DOM with `screen.debug()` and check the expected role, accessible name, scope, and timing. A missing semantic query can reveal missing labels or inappropriate markup; address the relevant UI defect within scope rather than immediately weakening the query. [React API](https://testing-library.com/docs/react-testing-library/api/) · [Queries](https://testing-library.com/docs/queries/about/)
 
-Run the affected tests through the project's runner and report the commands and observed results. For behavior changes, confirm the test detects the missing or broken behavior. Keep browser-dependent verification gaps explicit: a DOM simulation cannot establish layout or real assistive-technology behavior, and semantic queries alone do not prove accessibility compliance.
+Run the affected tests through the project's runner and report the commands and observed results. Follow the shared [development policy](../../guidelines/testing-guidelines.md#development-policy) for regression reproduction and focused probes when assertion effectiveness is uncertain; routine tests added after implementation do not each require an observed failure. Keep browser-dependent verification gaps explicit: a DOM simulation cannot establish layout or real assistive-technology behavior, and semantic queries alone do not prove accessibility compliance.

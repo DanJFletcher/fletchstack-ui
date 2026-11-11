@@ -121,7 +121,7 @@ Focused unit/integration tests and fixtures SHALL use direct implementation impo
 
 ### Requirement: Development and completion workflow
 
-The TDD skill and applicable guidelines SHALL require a specific failing test for red, the same test for green, and affected unit/integration runs during refactoring. Required full verification MUST run after implementation. Failures MUST be repaired with focused feedback followed by repeated full verification before completion.
+When incremental TDD is selected under the repository's agent-testing-workflow policy, the TDD skill and applicable guidelines SHALL require a specific failing test for red, the same test for green, and affected unit/integration runs during refactoring. For every permitted cadence, required full verification MUST run after implementation. Failures MUST be repaired with focused feedback followed by repeated full verification before completion.
 
 #### Scenario: Iterative TDD
 - **WHEN** an agent develops a behavior in red-green-refactor cycles

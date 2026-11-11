@@ -1,0 +1,393 @@
+{
+  "scenarios": {
+    "components-button--playground": {
+      "module": "tests/browser-harness/scenarios/Button.tsx",
+      "export": "Playground"
+    },
+    "components-button--interaction-states": {
+      "module": "tests/browser-harness/scenarios/Button.tsx",
+      "export": "InteractionStates"
+    },
+    "components-button--variants-and-sizes": {
+      "module": "tests/browser-harness/scenarios/Button.tsx",
+      "export": "VariantsAndSizes"
+    },
+    "components-button--composition": {
+      "module": "tests/browser-harness/scenarios/Button.tsx",
+      "export": "Composition"
+    },
+    "components-button--native-form": {
+      "module": "tests/browser-harness/scenarios/Button.tsx",
+      "export": "NativeForm"
+    },
+    "components-button--long-labels": {
+      "module": "tests/browser-harness/scenarios/Button.tsx",
+      "export": "LongLabels"
+    },
+    "components-button--luna-variants": {
+      "module": "tests/browser-harness/scenarios/Button.tsx",
+      "export": "LunaVariants"
+    },
+    "components-button--luna-long-labels": {
+      "module": "tests/browser-harness/scenarios/Button.tsx",
+      "export": "LunaLongLabels"
+    },
+    "components-stack--playground": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "Playground"
+    },
+    "components-stack--gaps": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "Gaps"
+    },
+    "components-stack--alignments": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "Alignments"
+    },
+    "components-stack--nested": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "Nested"
+    },
+    "components-stack--scoped-overrides": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "ScopedOverrides"
+    },
+    "components-stack--responsive-gap": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "ResponsiveGap"
+    },
+    "components-stack--form-composition": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "FormComposition"
+    },
+    "components-stack--both-themes": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "BothThemes"
+    },
+    "components-stack--long-content": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "LongContent"
+    },
+    "components-stack--hidden-children": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "HiddenChildren"
+    },
+    "components-stack--consumer-margins": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "ConsumerMargins"
+    },
+    "components-stack--narrow-parents": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "NarrowParents"
+    },
+    "components-stack--hidden": {
+      "module": "tests/browser-harness/scenarios/Stack.tsx",
+      "export": "Hidden"
+    },
+    "components-code-block--playground": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "Playground"
+    },
+    "components-code-block--metadata": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "Metadata"
+    },
+    "components-code-block--long-lines": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "LongLines"
+    },
+    "components-code-block--wrapped": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "Wrapped"
+    },
+    "components-code-block--literal-content": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "LiteralContent"
+    },
+    "components-code-block--copy-failure": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "CopyFailure"
+    },
+    "components-code-block--copy-retry": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "CopyRetry"
+    },
+    "components-code-block--scoped-overrides": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "ScopedOverrides"
+    },
+    "components-code-block--long-metadata": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "LongMetadata"
+    },
+    "components-code-block--rtl": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "RTL"
+    },
+    "components-code-block--hidden": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "Hidden"
+    },
+    "components-code-block--syntax-highlighting": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "SyntaxHighlighting"
+    },
+    "components-code-block--plain-text-fallback": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "PlainTextFallback"
+    },
+    "components-code-block--highlighted-markup": {
+      "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
+      "export": "HighlightedMarkup"
+    }
+  },
+  "suites": [
+    {
+      "file": "tests/browser-harness/specs/button/Button.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "components-button--playground",
+        "components-button--interaction-states",
+        "components-button--variants-and-sizes",
+        "components-button--composition",
+        "components-button--native-form",
+        "components-button--long-labels",
+        "components-button--luna-variants",
+        "components-button--luna-long-labels"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "file": "tests/browser-harness/specs/stack/Stack.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "components-stack--playground",
+        "components-stack--gaps",
+        "components-stack--alignments",
+        "components-stack--nested",
+        "components-stack--scoped-overrides",
+        "components-stack--responsive-gap",
+        "components-stack--form-composition",
+        "components-stack--both-themes",
+        "components-stack--long-content",
+        "components-stack--hidden-children",
+        "components-stack--consumer-margins",
+        "components-stack--narrow-parents",
+        "components-stack--hidden"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "file": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "components-code-block--playground",
+        "components-code-block--metadata",
+        "components-code-block--long-lines",
+        "components-code-block--wrapped",
+        "components-code-block--literal-content",
+        "components-code-block--copy-failure",
+        "components-code-block--copy-retry",
+        "components-code-block--scoped-overrides",
+        "components-code-block--long-metadata",
+        "components-code-block--rtl",
+        "components-code-block--hidden",
+        "components-code-block--syntax-highlighting",
+        "components-code-block--plain-text-fallback",
+        "components-code-block--highlighted-markup"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "file": "tests/browser-harness/specs/harness/lifecycle.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "components-button--playground",
+        "components-code-block--playground"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/aspect-ratio/AspectRatio.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/badge/Badge.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/button-group/ButtonGroup.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/button/Button.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/card/Card.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/checkbox/Checkbox.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/cluster/Cluster.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/container/Container.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/field/Field.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/field/FieldAtoms.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/form-group/FormGroup.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/icon/icon-gallery.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/icon/Icon.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/link/Link.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/radio/Radio.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/section/Section.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/select/Select.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/separator/Separator.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/simple-grid/SimpleGrid.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/spinner/Spinner.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/switch/Switch.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/text-input/TextInput.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/textarea/Textarea.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/components/typography/Typography.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/storybook/documentation.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/storybook/organization.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/storybook/preview-lifecycle.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/storybook/spatial-system.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/themes/themes.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
+    }
+  ],
+  "discovery": {
+    "playwright.config.ts": "1ad329baf96f0f23d4859f7c983db53978a84f5efa500cafb0839c2d9c325bb6",
+    "playwright.components.config.ts": "af508ca48bc348d1effd5ad87fc0d729e73be2b8c1c619e40671bae28aca6cfd"
+  }
+}

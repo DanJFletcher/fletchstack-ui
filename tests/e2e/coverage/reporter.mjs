@@ -22,6 +22,7 @@ export default class CoverageReporter {
       invocation: process.argv.slice(2),
       grep: String(config.grep), grepInvert: String(config.grepInvert),
       suites: [...new Set(suite.allTests().map(test => relative(process.cwd(), test.location.file)))].sort(),
+      projects: [...new Set(suite.allTests().map(test => test.parent.project()?.name).filter(Boolean))].sort(),
       tests: suite.allTests().map(test => test.titlePath().join(' > ')),
     };
     this.report().cleanCache();
@@ -52,6 +53,6 @@ export default class CoverageReporter {
     const summary = diagnosticSummary(results.files, { ...this.scope, testStatus: result.status });
     summary.reportGenerationMs = performance.now() - started;
     await this.write('coverage/e2e/diagnostic-summary.json', `${JSON.stringify(summary, null, 2)}\n`);
-    console.log('Browser coverage is diagnostic; production, story-demo and preview totals: coverage/e2e/diagnostic-summary.json');
+    console.log('Browser coverage is diagnostic; production, story-demo, preview and harness totals: coverage/e2e/diagnostic-summary.json');
   }
 }

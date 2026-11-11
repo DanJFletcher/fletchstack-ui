@@ -10,13 +10,13 @@ Read the project's instructions and the code quality guideline at `.agents/guide
 ## Choose a mode
 
 - **Review.** Stay read-only. Trace public callers, relevant tests, and where the affected policy lives. For each finding, give the location, affected callers, concrete maintenance cost, a proportionate change, and the behavior to preserve. Rank findings by impact and confidence. Call out similar code that should stay separate when that distinction matters.
-- **Edit.** Keep the change within the agreed scope. Establish passing coverage for the affected public behavior before editing. If the baseline is missing or fails, report the gap and resolve it before making the refactor.
+- **Edit.** Keep the change within the agreed scope. Establish passing coverage for the affected public behavior before editing. If coverage is missing, add relevant characterization checks; if the baseline fails, report and resolve the gap before making the refactor. No artificial failing behavior is required.
 - **After a green implementation.** Consider whether a small cleanup would reduce a concrete maintenance cost. Handle routine cleanup inline. A read-only second opinion or a bounded delegated edit can help when independent review adds value. Leave the code alone when no useful cleanup is apparent.
 
 ## Make and verify a refactor
 
 1. Record the pre-edit test command and result. Check that the tests exercise the public outcomes the edit could affect.
-2. Make one small change at a time. Preserve accepted inputs, outputs, side effects, and which error takes precedence. For command-line tools, check relevant exit statuses, output, and file effects in a temporary project. Use the TDD skill for intentional behavior changes when it is installed.
+2. Make one small change at a time. Preserve accepted inputs, outputs, side effects, and which error takes precedence. For command-line tools, check relevant exit statuses, output, and file effects in a temporary project. For intentional behavior changes, choose test cadence and evidence under the shared [development policy](../../guidelines/testing-guidelines.md#development-policy).
 3. Rerun the focused tests and relevant lint and type checks. Review the diff from its callers for clarity, naming, and scope. Report what changed, the before and after check results, and any gaps.
 
 ## Delegate selectively

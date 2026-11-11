@@ -245,7 +245,9 @@ npm run test:integration    # integration suite only; independently enforces the
 npm run test:unit:affected -- --base origin/main        # coverage-free related development feedback
 npm run test:integration:affected -- --base origin/main --dry-run  # explain selection without execution
 npm run test:storybook
-npm run test:e2e            # Focused Chromium journeys; coverage-free
+npm run test:e2e            # Complete harness + retained Storybook E2E; coverage-free
+npm run test:e2e:components # Private Button/Stack/CodeBlock browser scenarios
+npm run test:e2e:affected -- --base origin/main --dry-run # Explain local browser scope
 npm run test:e2e:coverage   # Opt-in diagnostic JavaScript coverage; no percentage gate
 npm run build              # ESM, declarations, and explicit CSS exports
 npm run build-storybook    # static site in storybook-static
@@ -355,7 +357,7 @@ See the [spatial guide](docs/spatial-system.md) and **Design System → Spatial 
 
 ## Contributing component examples and tests
 
-See [component organization](docs/component-organization.md) for family ownership, stable Storybook links, and development/package boundaries, and the [test guide](tests/README.md) for focused and complete verification commands.
+See [component organization](docs/component-organization.md) for family ownership, stable Storybook links, and development/package boundaries, and the [test guide](tests/README.md) for focused and complete verification commands. The [local browser completion policy](tests/README.md#local-browser-completion) uses affected E2E for known component scope, complete local browser checks for shared or uncertain changes, and complete required CI. Independent full unit/integration coverage gates and existing build/package checks remain required.
 
 ## Radio
 

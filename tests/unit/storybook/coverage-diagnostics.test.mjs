@@ -46,6 +46,18 @@ it('does not turn zero-counter code into an invented percentage', () => {
   expect(result.categories.production.metrics.lines).toEqual({ covered: 0, total: 0, percent: null });
 });
 
+it('separates harness helpers from production totals', () => {
+  // arrange
+  const files = [file('tests/browser-harness/gallery/main.tsx', 1)];
+
+  // act
+  const result = diagnosticSummary(files, {});
+
+  // assert
+  expect(result.categories.harness.metrics.lines).toEqual({ covered: 1, total: 2, percent: 50 });
+  expect(result.categories.production.files).toEqual([]);
+});
+
 it('cleans diagnostic cache before collecting a new run', () => {
   // arrange
   const coverage = report();

@@ -1,18 +1,44 @@
-# Unit Test Writing Guidelines for Agents
+# Testing Guidelines for Agents
 
 ## Purpose and scope
 
-You are writing unit tests that a human will read, debug and maintain long after you are gone. Optimize for the reader first, then for resilience to change, then for coverage.
+The development policy below applies across test layers. The unit-test writing rules from **Core principles** onward apply only to unit tests; browser journeys and integration tests retain their own interaction and environment requirements.
 
-Apply these rules to every unit test you write or modify. When the project already has established test conventions (framework, file layout, helper libraries, naming), match them; these rules govern how each test is written, not which tools are used. If a rule here conflicts with an explicit instruction from the user, follow the user and note the trade-off.
+You are writing tests that a human will read, debug and maintain long after you are gone. Optimize for the reader first, then for resilience to change, then for coverage.
+
+Match established test conventions (framework, file layout, helper libraries, naming). If a rule here conflicts with an explicit instruction from the user, follow the user and note the trade-off.
 
 A good test answers three questions at a glance: what is being tested, under what conditions, and what should happen. If a reader has to scroll, jump to another file or run the test to understand it, the test needs work.
 
+## Development policy
+
+Establish intended observable behavior, important edge cases, and the appropriate verification boundaries before implementation. Reuse existing requirements and public contracts; a short checklist is sufficient when needed. Separate planning documents, isolated contexts, and testing or review agents are not mandatory. Delegate only when authorized and useful.
+
+Choose incremental TDD, batched test-first, or implementation followed by tests according to uncertainty and risk. Honor an explicit user-selected workflow. Routine choices need neither extra approval nor a justification report. Use the [TDD skill](../skills/tdd/SKILL.md) only for an explicit request or a deliberate choice of incremental TDD, not merely because it is installed or behavior changes.
+
+- **New behavior:** implement coherent increments with targeted behavioral tests. Related examples can be written together before implementation; routine features with a clear contract can be tested afterward.
+- **Bug fixes:** where feasible, reproduce the defect with a focused failing regression test before changing production code, then verify that test passes after the fix. Distinguish behavioral failures from setup errors. If reproduction is infeasible, state the concrete limitation, perform available verification, and report the missing evidence.
+- **Behavior-preserving refactors:** establish passing coverage of affected public behavior before editing; add relevant characterization checks if coverage is missing. Rerun appropriate checks afterward. No artificial failing behavior is required.
+
+Derive expected outcomes from requirements, public contracts, or independently justified examples. Inspect implementation and callers to discover additional cases and integration details, but do not copy current output as proof of intended behavior. For example, when a contract clamps discounted prices at zero, `applyDiscount(10, 15)` must be tested against `0`, even if current code returns `-5`. Resolve disagreements against the contract; correct a demonstrably wrong test rather than weakening assertions solely to get a pass.
+
+Run the tests you add or change. A test passing on its first run after implementation establishes final behavior; it need not be made to fail artificially. Use a focused failure probe or equivalent concrete evidence when an assertion might pass vacuously or miss the intended defect, and restore temporary perturbations before final verification. Keep observed regression reproduction, deliberate probes, and final passing checks distinct in reports; disclose unrun checks and concrete blockers.
+
+Review touched implementation for clarity, appropriate responsibilities, and concrete maintenance concerns separately from interpreting test results. Inline review is sufficient for routine work; clean up only where it provides a useful improvement.
+
+## Repository test execution
+
+During development, run explicit test files without coverage for known or newly added cases, and use `npm run test:unit:affected -- --base <git-ref>` and `npm run test:integration:affected -- --base <git-ref>` for related feedback. Choose a comparison base covering the branch work and inspect selection reasons. Accept conservative full-project fallbacks when resources or dependencies cannot be classified; never equate an uncertain empty selection with a passing test. These commands provide partial feedback, not complete verification.
+
+At local completion, retain the independent full unit/integration coverage gates and required lint, type, build, SSR and package checks. For browser-impacting work, run all Storybook render/play/accessibility checks plus affected E2E suites, including dependent compositions and retained Storybook boundaries. Use `npm run test:e2e:affected -- --base <git-ref>` with a base covering the branch work and inspect its `--dry-run` reasons. Explicit suite selection requires a stated ownership rationale. Scoped component CSS qualifies only when its consumers and cascade influence are known.
+
+Run complete local browser verification for shared tokens, generated/global styles, browser infrastructure, dependency/public-export configuration, or uncertain impact. Unknown ownership is a full fallback, never an empty pass. Required CI always runs the complete browser suite. A focused failure repair is followed by verification appropriate to the final change: affected E2E for known local scope, full browser verification for shared or uncertain scope. Do not rerun unrelated local E2E solely because a failure occurred; rerun failed required CI completely. Never reuse a result across relevant intervening edits.
+
+Report executed scope, fallback reasons, failures, unrun checks and whether complete CI is pending. A local affected pass is not complete repository verification or evidence that known unrelated failures disappeared. Keep focused tests on direct implementation imports; dedicated public-entrypoint/composed-consumer tests and package checks retain public API confidence. See [the test guide](../../tests/README.md#local-browser-completion) for commands and examples.
+
 ## Core principles
 
-For this repository's development loop, run an explicit test file without coverage to establish red and green, then use `npm run test:unit:affected -- --base <git-ref>` and `npm run test:integration:affected -- --base <git-ref>` during refactoring. Choose a comparison base covering the branch work and inspect selection reasons. Accept conservative full-project fallbacks when resources or dependencies cannot be classified; never equate an uncertain empty selection with a passing test. Before the commands exist, use explicit focused files while bootstrapping them.
-
-After implementation is complete, run required full verification with the unchanged independent unit/integration coverage gates and other required browser/build/package checks. Fix discovered failures using focused feedback, then repeat full verification before completion. Keep focused tests on direct implementation imports; dedicated public-entrypoint/composed-consumer tests and package checks retain public API confidence. See [the test guide](../../tests/README.md#affected-unit-and-integration-feedback) for commands, resource fallbacks and import responsibilities.
+Apply the following authoring rules to unit tests.
 
 1. **One behavior per test.** Each test verifies a single outcome of a single action. If the test name needs the word "and", split it.
 2. **Arrange, Act, Assert, always.** Every test has three visibly separated phases, in that order, each appearing once.
@@ -266,4 +292,4 @@ Before returning tests, check every item. Fix any "no" before submitting.
 - [ ] All data is synthetic: no real PII, exam data, hostnames, IPs or secrets.
 - [ ] Success path, boundaries, errors and security-relevant behavior are covered, or gaps are flagged.
 - [ ] Style, file layout and helpers match the project's existing conventions.
-- [ ] Each test has been run, and you have seen it fail when the behavior is broken.
+- [ ] Each test has been run; applicable regression reproduction or focused failure-probe evidence follows the development policy, and any verification gaps are reported accurately.

@@ -1,10 +1,11 @@
 import { expect, it } from 'vitest';
 import normal from '../../../playwright.config';
 import diagnostic from '../../../playwright.coverage.config';
+import components from '../../../playwright.components.config';
 
 it('enables collection and reporting only in the diagnostic configuration', () => {
   // arrange
-  const expected = [['list'], ['html', { open: 'never' }]];
+  const expected = [['list'], ['html', { open: 'never', outputFolder: 'playwright-report/storybook' }]];
 
   // act
   const reporters = normal.reporter;
@@ -16,15 +17,17 @@ it('enables collection and reporting only in the diagnostic configuration', () =
   expect(diagnostic.reporter).toContainEqual(['./tests/e2e/coverage/reporter.mjs']);
 });
 
-it('shares discovery, browser, server and failure diagnostics across modes', () => {
+it('includes both disjoint projects in complete diagnostics with unchanged failure evidence', () => {
   // arrange
-  const expected = { testDir: normal.testDir, testMatch: normal.testMatch, projects: normal.projects, webServer: normal.webServer };
+  const expected = ['chromium', 'components'];
 
   // act
-  const result = { testDir: diagnostic.testDir, testMatch: diagnostic.testMatch, projects: diagnostic.projects, webServer: diagnostic.webServer };
+  const result = diagnostic.projects?.map(project => project.name);
 
   // assert
   expect(result).toEqual(expected);
+  expect(diagnostic.projects?.map(project => project.testDir)).toEqual([normal.testDir, components.testDir]);
+  expect(diagnostic.webServer).toHaveLength(2);
   expect(diagnostic.use?.trace).toBe('retain-on-failure');
   expect(diagnostic.use?.screenshot).toBe('only-on-failure');
   expect(diagnostic.retries).toBe(0);

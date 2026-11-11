@@ -8,7 +8,8 @@ export default defineConfig<BrowserCoverageOptions>({
   testMatch: '**/*.spec.ts',
   forbidOnly: Boolean(process.env['CI']),
   retries: 0,
-  reporter: [['list'], ['html', { open: 'never' }]],
+  outputDir: './test-results/storybook',
+  reporter: [['list'], ['html', { open: 'never', outputFolder: 'playwright-report/storybook' }]],
   use: {
     baseURL,
     trace: 'retain-on-failure',

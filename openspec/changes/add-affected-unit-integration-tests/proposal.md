@@ -1,5 +1,7 @@
 # Proposal
 
+> Follow-up (2026-11-10): [Adopt flexible agent testing](../adopt-flexible-agent-testing/proposal.md) supersedes this proposal's universal TDD ordering with task-appropriate cadence selection. Specific red/green ordering applies when incremental TDD is selected. The pending workflow requirement is reconciled accordingly; affected-selection safeguards, final verification, completed tasks, and observed implementation evidence remain intact. The original proposal below records the initial scope.
+
 ## Why
 
 Repeated complete unit and integration runs slow the red-green-refactor cycle even when a change affects a small part of the library. Vitest already supports import-based selection, but filesystem dependencies and broad public-barrel imports require explicit safeguards before affected runs can be dependable development feedback.

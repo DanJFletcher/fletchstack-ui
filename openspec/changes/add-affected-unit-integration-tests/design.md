@@ -1,5 +1,7 @@
 # Design
 
+> Follow-up (2026-11-10): [Adopt flexible agent testing](../adopt-flexible-agent-testing/design.md) supersedes the universal cadence in decision 7 below. Its red/green sequence now applies when incremental TDD is selected; other supported cadences retain focused/affected feedback and complete verification. The pending workflow requirement is reconciled accordingly. This original design and its completed implementation evidence remain historical records, not a requirement to apply incremental TDD to every future behavior change.
+
 ## Context
 
 See [proposal](proposal.md) for motivation and [requirements](specs/affected-unit-integration-testing/spec.md) for the observable contract.

@@ -867,6 +867,38 @@
     "components-aspectratio--hidden": {
       "module": "tests/browser-harness/scenarios/AspectRatio.tsx",
       "export": "Hidden"
+    },
+    "components-heading--sizes": {
+      "module": "tests/browser-harness/scenarios/Heading.tsx",
+      "export": "Sizes"
+    },
+    "components-heading--scoped-overrides": {
+      "module": "tests/browser-harness/scenarios/Heading.tsx",
+      "export": "ScopedOverrides"
+    },
+    "components-heading--long-content": {
+      "module": "tests/browser-harness/scenarios/Heading.tsx",
+      "export": "LongContent"
+    },
+    "components-heading--hidden": {
+      "module": "tests/browser-harness/scenarios/Heading.tsx",
+      "export": "Hidden"
+    },
+    "components-text--sizes": {
+      "module": "tests/browser-harness/scenarios/Text.tsx",
+      "export": "Sizes"
+    },
+    "components-text--both-themes": {
+      "module": "tests/browser-harness/scenarios/Text.tsx",
+      "export": "BothThemes"
+    },
+    "components-text--scoped-overrides": {
+      "module": "tests/browser-harness/scenarios/Text.tsx",
+      "export": "ScopedOverrides"
+    },
+    "components-text--hidden": {
+      "module": "tests/browser-harness/scenarios/Text.tsx",
+      "export": "Hidden"
     }
   },
   "suites": [
@@ -1337,6 +1369,22 @@
         "components-field-error--playground",
         "components-field-error--inline",
         "components-field-error--both-themes"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "file": "tests/browser-harness/specs/typography/Typography.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "components-heading--sizes",
+        "components-text--sizes",
+        "components-heading--long-content",
+        "components-text--both-themes",
+        "components-heading--scoped-overrides",
+        "components-text--scoped-overrides",
+        "components-heading--hidden",
+        "components-text--hidden"
       ],
       "roots": [],
       "resources": []

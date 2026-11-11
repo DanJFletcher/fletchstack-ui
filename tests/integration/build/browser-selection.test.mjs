@@ -128,7 +128,7 @@ it.each([
 
 it.each([
   ['src/components/cluster/cluster.css', ['cluster/Cluster', 'section/Section', 'simple-grid/SimpleGrid']],
-  ['src/components/container/Container.tsx', ['aspect-ratio/AspectRatio', 'button-group/ButtonGroup', 'cluster/Cluster', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
+  ['src/components/container/Container.tsx', ['aspect-ratio/AspectRatio', 'button-group/ButtonGroup', 'cluster/Cluster', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack', 'typography/Typography']],
   ['src/components/separator/separator.css', ['separator/Separator']],
   ['src/components/checkbox/checkbox.css', ['checkbox/Checkbox', 'field/Field', 'form-group/FormGroup', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
   ['src/components/text-input/TextInput.tsx', ['cluster/Cluster', 'container/Container', 'field/Field', 'form-group/FormGroup', 'stack/Stack', 'text-input/TextInput']],
@@ -143,6 +143,10 @@ it.each([
   ['src/components/aspect-ratio/stories/landscape.svg', ['aspect-ratio/AspectRatio']],
   ['src/components/aspect-ratio/aspect-ratio.css', ['aspect-ratio/AspectRatio']],
   ['src/components/simple-grid/SimpleGrid.tsx', ['aspect-ratio/AspectRatio', 'section/Section', 'simple-grid/SimpleGrid']],
+  ['src/components/typography/Heading.tsx', ['button-group/ButtonGroup', 'code-block/CodeBlock', 'harness/lifecycle', 'typography/Typography']],
+  ['src/components/typography/Text.tsx', ['button-group/ButtonGroup', 'code-block/CodeBlock', 'harness/lifecycle', 'typography/Typography']],
+  ['src/components/typography/typography.css', ['button-group/ButtonGroup', 'code-block/CodeBlock', 'harness/lifecycle', 'typography/Typography']],
+  ['src/components/typography/stories/typography.stories.css', ['typography/Typography']],
 ])('includes composed consumers for %s without selecting unrelated harness families', (path, consumers) => {
   const ownership = discoverOwnership(process.cwd());
   const result = selectBrowserTests({ ...ownership, changes: [{ path, status: 'M' }] });
@@ -156,6 +160,13 @@ it.each(['FieldLabel', 'FieldDescription', 'FieldError'])('selects the shared at
   const result = selectBrowserTests({ ...ownership, changes: [{ path: `tests/browser-harness/scenarios/${name}.tsx`, status: 'M' }] });
   expect(result.mode).toBe('selected');
   expect(result.suites).toEqual([{ project: 'components', file: 'tests/browser-harness/specs/field/FieldAtoms.spec.ts' }]);
+});
+
+it.each(['Heading', 'Text'])('selects the shared typography suite for its %s scenario', name => {
+  const ownership = discoverOwnership(process.cwd());
+  const result = selectBrowserTests({ ...ownership, changes: [{ path: `tests/browser-harness/scenarios/${name}.tsx`, status: 'M' }] });
+  expect(result.mode).toBe('selected');
+  expect(result.suites).toEqual([{ project: 'components', file: 'tests/browser-harness/specs/typography/Typography.spec.ts' }]);
 });
 
 it.each(['tokens/themes.json', 'src/generated/tokens.css', 'playwright.config.ts', 'package-lock.json', 'src/index.ts', 'unknown-resource.svg'])('falls back for shared or unproven input %s', path => {

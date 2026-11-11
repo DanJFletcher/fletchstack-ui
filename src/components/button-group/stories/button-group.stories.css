@@ -1,0 +1,4 @@
+/* Measurement outlines and parent widths belong only to these examples. */
+.button-group-demo-wide { inline-size: min(100%, 600px); outline: 1px dashed var(--fs-text); }
+.button-group-demo-narrow { inline-size: min(100%, 240px); outline: 1px dashed var(--fs-text); }
+.button-group-demo-last-row { inline-size: 140px; outline: 1px dashed var(--fs-text); }

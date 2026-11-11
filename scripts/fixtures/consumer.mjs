@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createElement, version } from 'react';
 import { renderToString } from 'react-dom/server';
-import { Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
+import { ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['ArrowRightIcon', 'AspectRatio', 'Badge', 'Button', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'CloseIcon', 'Cluster', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'MoonIcon', 'PlusIcon', 'Radio', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Text', 'TextInput', 'Textarea']);
+assert.deepEqual(Object.keys(library).sort(), ['ArrowRightIcon', 'AspectRatio', 'Badge', 'Button', 'ButtonGroup', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'CloseIcon', 'Cluster', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'MoonIcon', 'PlusIcon', 'Radio', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Text', 'TextInput', 'Textarea']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const contentElement = createElement('div', null, createElement(Heading, { as: 'h1', size: 'page' }, 'Project'), createElement(Text, { tone: 'muted' }, 'Updated yesterday'), createElement(Text, { as: 'span', size: 'small' }, 'Inline'));
 const contentMarkup = renderToString(contentElement);
@@ -17,7 +17,7 @@ const html = renderToString(element);
 assert.match(html, /type="button"/);
 assert.match(html, /aria-label="Save settings"/);
 assert.equal(renderToString(element), html);
-for (const path of ['styles.css', 'tokens.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'field.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'cluster.css', 'simple-grid.css', 'aspect-ratio.css', 'section.css', 'typography.css']) {
+for (const path of ['styles.css', 'tokens.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'field.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'cluster.css', 'simple-grid.css', 'aspect-ratio.css', 'section.css', 'typography.css', 'button-group.css']) {
   const content = readFileSync(new URL(import.meta.resolve(`fletchstack-ui/${path}`)), 'utf8');
   assert.ok(content.length > 0);
   if (['styles.css', 'tokens.css'].includes(path)) {
@@ -148,3 +148,11 @@ assert.match(sectionMarkup, /aria-labelledby="topic"/);
 assert.doesNotMatch(sectionMarkup, /tabindex=|role=|spacing=/);
 assert.match(renderToString(createElement(Section, { as: 'div' }, 'Visual grouping')), /^<div/);
 assert.match(renderToString(createElement(Section)), /fs-section--spacing-default/);
+
+const actionGroup = createElement(ButtonGroup, { 'aria-label': 'Page actions', disabled: true, variant: 'secondary' }, createElement(Button, { disabled: false, type: 'submit', form: 'editor' }, 'Publish'));
+const actionMarkup = renderToString(actionGroup);
+assert.equal(renderToString(actionGroup), actionMarkup);
+assert.match(actionMarkup, /role="group"/);
+assert.match(actionMarkup, /disabled=""/);
+assert.match(actionMarkup, /fs-button--secondary/);
+assert.match(actionMarkup, /form="editor"/);

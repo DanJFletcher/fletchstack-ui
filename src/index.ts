@@ -1,3 +1,5 @@
+export { ButtonGroup } from './components/button-group/index.js';
+export type { ButtonGroupProps, ButtonGroupStyle } from './components/button-group/index.js';
 export { Textarea } from './components/textarea/index.js';
 export { Heading, Text } from './components/typography/index.js';
 export type { HeadingProps, HeadingStyle, TextProps, TextStyle } from './components/typography/index.js';

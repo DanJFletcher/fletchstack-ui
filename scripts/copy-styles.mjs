@@ -23,6 +23,7 @@ await copyFile('src/components/simple-grid/simple-grid.css', 'dist/simple-grid.c
 await copyFile('src/components/aspect-ratio/aspect-ratio.css', 'dist/aspect-ratio.css');
 await copyFile('src/components/section/section.css', 'dist/section.css');
 await copyFile('src/components/typography/typography.css', 'dist/typography.css');
+await copyFile('src/components/button-group/button-group.css', 'dist/button-group.css');
 const tokens = await readFile('dist/tokens.css', 'utf8');
 const field = await readFile('dist/field.css', 'utf8');
 const button = await readFile('dist/button.css', 'utf8');
@@ -46,4 +47,5 @@ const simpleGrid = await readFile('dist/simple-grid.css', 'utf8');
 const aspectRatio = await readFile('dist/aspect-ratio.css', 'utf8');
 const section = await readFile('dist/section.css', 'utf8');
 const typography = await readFile('dist/typography.css', 'utf8');
-await writeFile('dist/styles.css', `${tokens}\n${field}\n${button}\n${icon}\n${card}\n${select}\n${textInput}\n${checkbox}\n${formGroup}\n${textarea}\n${radio}\n${link}\n${switchStyles}\n${spinner}\n${badge}\n${separator}\n${container}\n${stack}\n${cluster}\n${simpleGrid}\n${aspectRatio}\n${section}\n${typography}`);
+const buttonGroup = await readFile('dist/button-group.css', 'utf8');
+await writeFile('dist/styles.css', `${tokens}\n${field}\n${button}\n${icon}\n${card}\n${select}\n${textInput}\n${checkbox}\n${formGroup}\n${textarea}\n${radio}\n${link}\n${switchStyles}\n${spinner}\n${badge}\n${separator}\n${container}\n${stack}\n${cluster}\n${simpleGrid}\n${aspectRatio}\n${section}\n${typography}\n${buttonGroup}`);

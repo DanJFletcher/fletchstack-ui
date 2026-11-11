@@ -328,3 +328,17 @@ export const invalidSectionElement = <Section as="article" />;
 export const invalidSectionResponsive = <Section spacing={{ mobile: 'compact' }} />;
 // @ts-expect-error Inline gutters belong to Container.
 export const invalidSectionGutters = <Section gutters />;
+
+import { ButtonGroup, type ButtonGroupProps, type ButtonGroupStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/button-group.css';
+const actionGroupRef = createRef<HTMLDivElement>();
+const actionGroupStyle: ButtonGroupStyle = { '--fs-space-gap-actions': '20px' };
+const actionGroupProps: ButtonGroupProps = { 'aria-label': 'Page actions', appearance: 'joined', orientation: 'horizontal', align: 'end', fullWidth: true, equalWidth: true, style: actionGroupStyle };
+export const actionsGroup = <ButtonGroup {...actionGroupProps} ref={actionGroupRef}><Button type="submit" form="editor">Publish</Button></ButtonGroup>;
+export const visibleActions = <ButtonGroup aria-labelledby="actions-heading"><Button>Preview</Button></ButtonGroup>;
+// @ts-expect-error A group requires an accessible name.
+export const unnamedActions = <ButtonGroup><Button>Save</Button></ButtonGroup>;
+// @ts-expect-error Joined is an appearance, not a Button variant.
+export const invalidGroupVariant = <ButtonGroup aria-label="Actions" variant="joined" />;
+// @ts-expect-error A group is not an interactive toolbar.
+export const invalidGroupRole = <ButtonGroup aria-label="Actions" role="toolbar" />;

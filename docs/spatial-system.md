@@ -235,3 +235,7 @@ Import tokens plus `cluster.css` and composed component styles, or combined `sty
 Compose Section → Container → Stack/SimpleGrid: Section owns block padding, Container owns width and gutters, child layouts own gaps and wrapping, and the parent owns any extra separation between sections. Adjacent default sections contribute both 64px edges (128px between content edges before child margins or parent gaps). Section preserves child margins and adds no surface, border, inline padding, clipping, heading or keyboard stop. Associate meaningful sections with visible headings; use `as="div"` for visual grouping.
 
 Responsive padding is an explicit consumer decision, with no built-in breakpoint. For example, apply `.project-section { --fs-section-padding-default: 64px; }` and override that role to 32px inside `@media (max-width:600px)`. Child layouts handle columns and text reflow. Ordinary native wrappers remain supported.
+
+## Named action groups
+
+Use [ButtonGroup](./button-group.md) when related Button actions need an accessible group name, shared defaults or joined edges. Its separated appearance uses the existing action gap. Cluster remains the general wrapping layout primitive; it adds no group semantics or child defaults. Parents own spacing around either wrapper.

@@ -2,6 +2,10 @@
 
 A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. Public components include `Button`, `Field` and its label/message atoms, `FormGroup`, `Checkbox`, `Select`, `TextInput`, `Textarea`, composable `Card` parts, `Icon`, and eight opt-in named icons.
 
+## ButtonGroup
+
+`ButtonGroup` names related Button actions, provides separated wrapping or joined edges, and preserves native button interactions. Child size and variant override group defaults; group disabled always wins. Load `button-group.css` and `button.css` with tokens, or combined styles. See the [ButtonGroup contract](docs/button-group.md).
+
 ## Typography
 
 `Heading` provides native h1–h6 semantics independently of page, section, and subheading visual sizes. `Text` provides paragraph or inline span content with lead, body, and small sizes and default or muted tones. Compose with Container for reading width and Stack for spacing. Import `typography.css` with tokens, or use combined styles. See the [Typography contract](docs/typography.md).

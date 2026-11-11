@@ -1,5 +1,15 @@
 # Verification evidence
 
+## ButtonGroup — 2026-11-10
+
+The [approved ButtonGroup contract](button-group.md) reuses Button and existing action-gap/geometry tokens without changing standalone Button. The initial focused defaults test failed because group size/variant were not applied; it passed after composition was added. Package verification also caught an extensionless declaration import that weakened the installed variant type; the final `.js` import restores NodeNext type resolution and the negative variant assertion passes.
+
+Final checks passed lint, both TypeScript configurations, 640 unit tests and 298 integration tests (each with independent 100% statement/branch/function/line coverage), 320 Storybook tests with axe failures enabled, library/static Storybook builds, built-package browser checks, installed exports/types/CSS/bundling and React 18/19 SSR verification, and all 371 standalone Chromium tests. Affected unit/integration development runs passed with conservative full fallback for shared exports/tooling changes. No coverage gates were changed.
+
+The 17 ButtonGroup browser cases verify both-theme seams and outer corners, vertical joins, live hidden edges, a single visible button, middle-button offset focus above neighbors, forced-color focus, RTL/source order, intrinsic wrapping in different parent widths, full/equal width and final rows, logical alignment, scoped gap resets, native submit/reset and keyboard interaction, and 320px reflow with 200% text and user spacing. Script-free SSR additionally receives real-browser joined CSS measurements; DOM tests cover group naming, defaults, disabled propagation, group/child refs and handlers, form association, unsupported children and standalone Button regression. Both themes and the focused middle join were visually inspected.
+
+Native `hidden` participates in edge calculations; arbitrary consumer `display:none` CSS does not. Unwrapped rows cannot fit arbitrarily many minimum targets into a tiny parent; use separated wrapping or vertical joins. Real screen-reader, Firefox and WebKit checks remain unverified.
+
 ## Typography — 2026-11-10
 
 Heading and Text follow the [approved content contract](typography.md). The initial token contract test failed on missing roles before implementation. Final verification passed lint, both TypeScript configurations, 620 unit tests and 286 integration tests (each with independent 100% statement/branch/function/line coverage), 303 Storybook browser tests with axe failures enabled, and all 354 standalone Chromium tests. Library and static Storybook builds, built-package browser checks, and installed package exports/types/styles/bundling/React 18 and 19 SSR checks passed. Affected-run dry runs conservatively selected full fallback because tokens, public exports and shared tooling changed.

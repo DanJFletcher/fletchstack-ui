@@ -1,6 +1,6 @@
 # Component organization
 
-Implementation ownership is independent of Storybook navigation. Use a kebab-case family under `src/components/` with PascalCase public modules, its CSS, an explicit public `index.ts`, focused `__tests__/`, and consumer-facing `stories/`. Compound Card parts stay together; Field and its standalone label/message primitives share the field family. Keep private helpers with their owner; shared runtime hooks belong in `src/internal/hooks/`.
+Implementation ownership is independent of Storybook navigation. Use a kebab-case family under `src/components/` with PascalCase public modules, its CSS, an explicit public `index.ts`, focused `__tests__/`, and consumer-facing `stories/`. ButtonGroup composes Button from its own button-group family. Compound Card parts stay together; Field and its standalone label/message primitives share the field family. Keep private helpers with their owner; shared runtime hooks belong in `src/internal/hooks/`.
 
 Unit tests opt into jsdom per file and explicitly import [DOM support](../tests/support/dom.ts). Node SSR/build/token tests must retain Node defaults. Component integration and E2E live centrally under `tests/{integration,e2e}/components/<family>/`; component hydration apps live beside their integration owner in `fixtures/`. Shared browser lifecycle, bundling, and token-project infrastructure stay central. Cross-family themes and real Storybook-manager journeys have their own central directories.
 

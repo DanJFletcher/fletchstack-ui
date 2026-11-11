@@ -1,0 +1,54 @@
+.fs-button-group {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: var(--fs-space-gap-actions);
+  align-items: stretch;
+  align-content: flex-start;
+  justify-content: flex-start;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  margin-inline: 0 auto;
+}
+.fs-button-group[hidden] { display: none; }
+.fs-button-group--align-center { margin-inline: auto; justify-content: center; }
+.fs-button-group--align-end { margin-inline: auto 0; justify-content: flex-end; }
+.fs-button-group--full-width { inline-size: 100%; }
+.fs-button-group--separated.fs-button-group--horizontal.fs-button-group--wrap { flex-wrap: wrap; }
+.fs-button-group--vertical { flex-direction: column; align-items: flex-start; justify-content: flex-start; }
+.fs-button-group--vertical.fs-button-group--align-center { align-items: center; }
+.fs-button-group--vertical.fs-button-group--align-end { align-items: flex-end; }
+.fs-button-group--vertical.fs-button-group--equal-width { align-items: stretch; }
+.fs-button-group--horizontal.fs-button-group--equal-width > .fs-button { flex: 1 1 0px; }
+.fs-button-group--joined { gap: 0; }
+.fs-button-group--joined > .fs-button { position: relative; border-radius: 0; }
+.fs-button-group--joined > .fs-button:focus-visible { z-index: 1; }
+
+/* Count only participating native Buttons, including after hidden updates. */
+.fs-button-group--joined.fs-button-group--horizontal > .fs-button:not([hidden]) ~ .fs-button:not([hidden]) {
+  margin-inline-start: calc(-1 * var(--fs-button-border-width));
+}
+.fs-button-group--joined.fs-button-group--horizontal > :nth-child(1 of .fs-button:not([hidden])) {
+  border-start-start-radius: var(--fs-button-radius);
+  border-end-start-radius: var(--fs-button-radius);
+}
+.fs-button-group--joined.fs-button-group--horizontal > :nth-last-child(1 of .fs-button:not([hidden])) {
+  border-start-end-radius: var(--fs-button-radius);
+  border-end-end-radius: var(--fs-button-radius);
+}
+.fs-button-group--joined.fs-button-group--vertical > .fs-button:not([hidden]) ~ .fs-button:not([hidden]) {
+  margin-block-start: calc(-1 * var(--fs-button-border-width));
+}
+.fs-button-group--joined.fs-button-group--vertical > :nth-child(1 of .fs-button:not([hidden])) {
+  border-start-start-radius: var(--fs-button-radius);
+  border-start-end-radius: var(--fs-button-radius);
+}
+.fs-button-group--joined.fs-button-group--vertical > :nth-last-child(1 of .fs-button:not([hidden])) {
+  border-end-start-radius: var(--fs-button-radius);
+  border-end-end-radius: var(--fs-button-radius);
+}
+
+/* Joined columns share a continuous outside boundary at their intrinsic width. */
+.fs-button-group--joined.fs-button-group--vertical > .fs-button { align-self: stretch; }

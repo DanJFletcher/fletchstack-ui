@@ -37,7 +37,8 @@
     "./simple-grid.css": "./dist/simple-grid.css",
     "./aspect-ratio.css": "./dist/aspect-ratio.css",
     "./section.css": "./dist/section.css",
-    "./typography.css": "./dist/typography.css"
+    "./typography.css": "./dist/typography.css",
+    "./button-group.css": "./dist/button-group.css"
   },
   "files": [
     "dist",

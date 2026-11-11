@@ -727,6 +727,78 @@
     "components-field-error--both-themes": {
       "module": "tests/browser-harness/scenarios/FieldError.tsx",
       "export": "BothThemes"
+    },
+    "components-card--playground": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "Playground"
+    },
+    "components-card--variants-and-padding": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "VariantsAndPadding"
+    },
+    "components-card--with-footer": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "WithFooter"
+    },
+    "components-card--with-media": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "WithMedia"
+    },
+    "components-card--reference-layouts": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "ReferenceLayouts"
+    },
+    "components-card--consumer-override": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "ConsumerOverride"
+    },
+    "components-card--both-themes": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "BothThemes"
+    },
+    "components-card--long-content": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "LongContent"
+    },
+    "components-card--luna-footer": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "LunaFooter"
+    },
+    "components-card--luna-media": {
+      "module": "tests/browser-harness/scenarios/Card.tsx",
+      "export": "LunaMedia"
+    },
+    "components-icon--playground": {
+      "module": "tests/browser-harness/scenarios/Icon.tsx",
+      "export": "Playground"
+    },
+    "components-icon--sizes": {
+      "module": "tests/browser-harness/scenarios/Icon.tsx",
+      "export": "Sizes"
+    },
+    "components-icon--composition": {
+      "module": "tests/browser-harness/scenarios/Icon.tsx",
+      "export": "Composition"
+    },
+    "components-icon--customization": {
+      "module": "tests/browser-harness/scenarios/Icon.tsx",
+      "export": "Customization"
+    },
+    "components-icon--custom-artwork": {
+      "module": "tests/browser-harness/scenarios/Icon.tsx",
+      "export": "CustomArtwork"
+    },
+    "components-icon--catalog": {
+      "module": "tests/browser-harness/scenarios/Icon.tsx",
+      "export": "Catalog"
+    },
+    "components-icon--accessibility": {
+      "module": "tests/browser-harness/scenarios/Icon.tsx",
+      "export": "Accessibility"
+    },
+    "components-icon--ref-access": {
+      "module": "tests/browser-harness/scenarios/Icon.tsx",
+      "export": "RefAccess"
     }
   },
   "suites": [
@@ -847,10 +919,22 @@
       "scenarios": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/card/Card.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/card/Card.spec.ts",
+      "scenarios": [
+        "components-card--with-media",
+        "components-card--long-content",
+        "components-card--consumer-override",
+        "components-card--playground",
+        "components-card--reference-layouts",
+        "components-card--variants-and-padding",
+        "components-card--both-themes",
+        "components-card--with-footer",
+        "components-card--luna-footer",
+        "components-card--luna-media"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "components",
@@ -951,10 +1035,20 @@
       "scenarios": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/icon/Icon.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/icon/Icon.spec.ts",
+      "scenarios": [
+        "components-icon--playground",
+        "components-icon--custom-artwork",
+        "components-icon--sizes",
+        "components-icon--catalog",
+        "components-icon--accessibility",
+        "components-icon--customization",
+        "components-icon--ref-access",
+        "components-icon--composition"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "chromium",

@@ -1,14 +1,14 @@
 import { expect, test } from '../../fixtures/test';
-import { openStory } from '../../fixtures/storybook';
+import { openScenario } from '../../fixtures/scenario';
 
 const names = ['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon'];
 const sizes = [{ name: 'small', pixels: '16px' }, { name: 'medium', pixels: '20px' }, { name: 'large', pixels: '24px' }];
 
-test('custom artwork uses the public wrapper and consumer coordinate space', async ({ page }) => {
-  await openStory(page, 'components-icon--playground');
+test('custom artwork uses the public wrapper and consumer coordinate space', async ({ page, mount }) => {
+  await openScenario(mount, 'components-icon--playground');
   await expect(page.getByRole('img', { name: 'Custom diamond' })).toHaveCSS('width', '20px');
 
-  await openStory(page, 'components-icon--custom-artwork');
+  await openScenario(mount, 'components-icon--custom-artwork');
   const artwork = page.getByRole('img', { name: 'Wide custom artwork' });
   await expect(artwork).toHaveAttribute('viewBox', '0 0 32 32');
   await expect(artwork).toHaveAttribute('fill', 'currentColor');
@@ -19,8 +19,8 @@ test('custom artwork uses the public wrapper and consumer coordinate space', asy
   await expect(artwork.locator('g > path')).toHaveAttribute('d', 'M4 4h24v24H4Z');
 });
 
-test('default dimensions and the three semantic sizes are explicit', async ({ page }) => {
-  await openStory(page, 'components-icon--sizes');
+test('default dimensions and the three semantic sizes are explicit', async ({ page, mount }) => {
+  await openScenario(mount, 'components-icon--sizes');
   await expect(page.getByRole('img', { name: 'Default size' })).toHaveCSS('width', '20px');
 
   for (const size of sizes) {
@@ -30,8 +30,8 @@ test('default dimensions and the three semantic sizes are explicit', async ({ pa
   }
 });
 
-test('the optional catalog presents every icon at each size in both themes', async ({ page }) => {
-  await openStory(page, 'components-icon--catalog');
+test('the optional catalog presents every icon at each size in both themes', async ({ page, mount }) => {
+  await openScenario(mount, 'components-icon--catalog');
 
   for (const theme of ['corporate', 'luna']) {
     const region = page.getByRole('region', { name: theme, exact: true });
@@ -49,8 +49,8 @@ test('the optional catalog presents every icon at each size in both themes', asy
   }
 });
 
-test('only a nonblank label exposes an accessible image', async ({ page }) => {
-  await openStory(page, 'components-icon--accessibility');
+test('only a nonblank label exposes an accessible image', async ({ page, mount }) => {
+  await openScenario(mount, 'components-icon--accessibility');
   await expect(page.getByRole('img')).toHaveCount(1);
   await expect(page.getByRole('img', { name: 'Night mode', exact: true })).toBeVisible();
 
@@ -61,8 +61,8 @@ test('only a nonblank label exposes an accessible image', async ({ page }) => {
   await expect(page.locator('svg[tabindex]')).toHaveCount(0);
 });
 
-test('semantic dimensions and stroke overrides remain local to their scope', async ({ page }) => {
-  await openStory(page, 'components-icon--customization');
+test('semantic dimensions and stroke overrides remain local to their scope', async ({ page, mount }) => {
+  await openScenario(mount, 'components-icon--customization');
   const scoped = page.getByRole('img', { name: 'Scoped moon' });
 
   await expect(scoped).toHaveCSS('width', '32px');
@@ -73,9 +73,10 @@ test('semantic dimensions and stroke overrides remain local to their scope', asy
   await expect(page.getByRole('img', { name: 'Unaffected sibling' })).toHaveCSS('width', '20px');
 });
 
-test('a named icon forwards its SVG ref and native attributes', async ({ page }) => {
-  await openStory(page, 'components-icon--ref-access');
+test('a named icon forwards its SVG ref and native attributes', async ({ page, mount }) => {
+  await openScenario(mount, 'components-icon--ref-access');
   const sun = page.getByRole('img', { name: 'Reference sun' });
+  await page.getByRole('button', { name: 'Inspect SVG ref' }).click();
 
   await expect(sun).toHaveClass(/reference-art/);
   await expect(sun).toHaveAttribute('data-source', 'named');
@@ -89,10 +90,12 @@ for (const theme of [
   { name: 'luna', text: 'rgb(17, 19, 41)', hover: 'rgb(215, 202, 255)', active: 'rgb(175, 149, 237)', disabled: 'rgb(184, 177, 205)' },
 ] as const) {
   test.describe(theme.name, () => {
-    test('decorative icons leave activation and keyboard focus on Button', async ({ page }) => {
-      await openStory(page, 'components-icon--composition', { theme: theme.name });
+    test('decorative icons leave activation and keyboard focus on Button', async ({ page, mount }) => {
+      await openScenario(mount, 'components-icon--composition', { theme: theme.name });
       const save = page.getByRole('button', { name: 'Save changes', exact: true });
       const close = page.getByRole('button', { name: 'Close dialog', exact: true });
+      await save.click();
+      await close.click();
       await expect(page.getByLabel('Activations')).toHaveText('2');
       await expect(page.getByRole('img')).toHaveCount(0);
 
@@ -106,8 +109,8 @@ for (const theme of [
       await expect(page.getByRole('button', { name: 'Saved', exact: true })).toBeDisabled();
     });
 
-    test('artwork inherits control colors through pointer and keyboard states', async ({ page }) => {
-      await openStory(page, 'components-icon--composition', { theme: theme.name });
+    test('artwork inherits control colors through pointer and keyboard states', async ({ page, mount }) => {
+      await openScenario(mount, 'components-icon--composition', { theme: theme.name });
       const save = page.getByRole('button', { name: 'Save changes', exact: true });
       const artwork = save.locator('svg');
       await expect(artwork).toHaveCSS('stroke', theme.text);
@@ -129,9 +132,9 @@ for (const theme of [
       await expect(page.getByRole('button', { name: 'Saved', exact: true }).locator('svg')).toHaveCSS('stroke', theme.disabled);
     });
 
-    test('fixed artwork leaves enlarged and spaced labels free to wrap', async ({ page }) => {
+    test('fixed artwork leaves enlarged and spaced labels free to wrap', async ({ page, mount }) => {
       await page.setViewportSize({ width: 320, height: 700 });
-      await openStory(page, 'components-icon--composition', { theme: theme.name });
+      await openScenario(mount, 'components-icon--composition', { theme: theme.name });
       await page.addStyleTag({ content: `
         html { font-size: 200%; }
         .fs-button { line-height: 1.5; letter-spacing: .12em; word-spacing: .16em; }

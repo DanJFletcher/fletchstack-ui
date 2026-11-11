@@ -60,9 +60,11 @@ it('selects direct and transitive Button consumers, while excluding unrelated ha
   expect(result.mode).toBe('selected');
   expect(result.suites.filter(suite => suite.project === 'components').map(suite => suite.file)).toEqual([
     'tests/browser-harness/specs/badge/Badge.spec.ts', 'tests/browser-harness/specs/button-group/ButtonGroup.spec.ts',
-    'tests/browser-harness/specs/button/Button.spec.ts', 'tests/browser-harness/specs/cluster/Cluster.spec.ts',
+    'tests/browser-harness/specs/button/Button.spec.ts', 'tests/browser-harness/specs/card/Card.spec.ts',
+    'tests/browser-harness/specs/cluster/Cluster.spec.ts',
     'tests/browser-harness/specs/code-block/CodeBlock.spec.ts', 'tests/browser-harness/specs/container/Container.spec.ts',
-    'tests/browser-harness/specs/harness/lifecycle.spec.ts', 'tests/browser-harness/specs/radio/Radio.spec.ts',
+    'tests/browser-harness/specs/harness/lifecycle.spec.ts', 'tests/browser-harness/specs/icon/Icon.spec.ts',
+    'tests/browser-harness/specs/radio/Radio.spec.ts',
     'tests/browser-harness/specs/section/Section.spec.ts',
     'tests/browser-harness/specs/separator/Separator.spec.ts', 'tests/browser-harness/specs/simple-grid/SimpleGrid.spec.ts',
     'tests/browser-harness/specs/spinner/Spinner.spec.ts',
@@ -81,6 +83,7 @@ it.each([
   ['TextInput', 'text-input'], ['Textarea', 'textarea'], ['Select', 'select'],
   ['Badge', 'badge'], ['Spinner', 'spinner'], ['ButtonGroup', 'button-group'], ['FormGroup', 'form-group'],
   ['Field', 'field'],
+  ['Card', 'card'], ['Icon', 'icon'],
 ])('selects only the %s suite for its private scenario edit', (name, family) => {
   const ownership = discoverOwnership(process.cwd());
   const result = selectBrowserTests({ ...ownership, changes: [{ path: `tests/browser-harness/scenarios/${name}.tsx`, status: 'M' }] });
@@ -99,6 +102,9 @@ it.each([
   ['src/components/spinner/Spinner.tsx', ['spinner/Spinner']],
   ['src/components/button-group/stories/button-group.stories.css', ['button-group/ButtonGroup']],
   ['src/components/field/stories/field-atoms.css', ['field/FieldAtoms']],
+  ['src/components/card/Card.tsx', ['card/Card', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid']],
+  ['src/components/card/stories/card.stories.css', ['card/Card']],
+  ['src/components/icon/named/MoonIcon.tsx', ['button/Button', 'harness/lifecycle', 'icon/Icon']],
 ])('includes composed consumers for %s without selecting unrelated harness families', (path, consumers) => {
   const ownership = discoverOwnership(process.cwd());
   const result = selectBrowserTests({ ...ownership, changes: [{ path, status: 'M' }] });

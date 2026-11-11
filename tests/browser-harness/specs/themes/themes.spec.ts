@@ -1,8 +1,8 @@
-import { expect, test } from '../fixtures/test';
-import { openStory } from '../fixtures/storybook';
+import { expect, test } from '../../fixtures/test';
+import { openScenario } from '../../fixtures/scenario';
 
-test('both themes coexist without sharing action colors', async ({ page }) => {
-  await openStory(page, 'components-button--both-themes');
+test('both themes coexist without sharing action colors', async ({ page, mount }) => {
+  await openScenario(mount, 'components-button--both-themes');
   const corporate = page.locator('section').filter({
     has: page.getByRole('heading', { name: 'Corporate', exact: true }),
   });

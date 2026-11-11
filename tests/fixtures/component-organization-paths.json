@@ -36,7 +36,7 @@
   "tests/e2e/components/Select.spec.ts": "tests/browser-harness/specs/select/Select.spec.ts",
   "tests/e2e/components/TextInput.spec.ts": "tests/browser-harness/specs/text-input/TextInput.spec.ts",
   "tests/e2e/components/Textarea.spec.ts": "tests/browser-harness/specs/textarea/Textarea.spec.ts",
-  "tests/e2e/components/themes.spec.ts": "tests/e2e/themes/themes.spec.ts",
+  "tests/e2e/components/themes.spec.ts": "tests/browser-harness/specs/themes/themes.spec.ts",
   "tests/integration/components/Button.hidden.test.ts": "tests/integration/components/button/Button.hidden.test.ts",
   "tests/integration/components/Button.hydration.test.ts": "tests/integration/components/button/Button.hydration.test.ts",
   "tests/integration/components/Card.ssr.test.tsx": "tests/integration/components/card/Card.ssr.test.tsx",

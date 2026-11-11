@@ -939,6 +939,26 @@
     "components-heading--native-focus": {
       "module": "tests/browser-harness/scenarios/Heading.tsx",
       "export": "NativeFocus"
+    },
+    "design-system-spatial-examples--scale": {
+      "module": "tests/browser-harness/scenarios/SpatialSystem.tsx",
+      "export": "Scale"
+    },
+    "design-system-spatial-examples--composition": {
+      "module": "tests/browser-harness/scenarios/SpatialSystem.tsx",
+      "export": "Composition"
+    },
+    "design-system-spatial-examples--scoped-overrides": {
+      "module": "tests/browser-harness/scenarios/SpatialSystem.tsx",
+      "export": "ScopedOverrides"
+    },
+    "design-system-spatial-examples--responsive-sections": {
+      "module": "tests/browser-harness/scenarios/SpatialSystem.tsx",
+      "export": "ResponsiveSections"
+    },
+    "components-button--both-themes": {
+      "module": "tests/browser-harness/scenarios/Themes.tsx",
+      "export": "BothThemes"
     }
   },
   "suites": [
@@ -1380,12 +1400,6 @@
       "scenarios": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/themes/themes.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
-    },
-    {
       "project": "components",
       "file": "tests/browser-harness/specs/field/FieldAtoms.spec.ts",
       "scenarios": [
@@ -1431,6 +1445,27 @@
         "components-link--download",
         "components-link--empty-destination",
         "components-link--unavailable"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "file": "tests/browser-harness/specs/spatial/SpatialSystem.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "design-system-spatial-examples--scale",
+        "design-system-spatial-examples--composition",
+        "design-system-spatial-examples--scoped-overrides",
+        "design-system-spatial-examples--responsive-sections"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "file": "tests/browser-harness/specs/themes/themes.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "components-button--both-themes"
       ],
       "roots": [],
       "resources": []

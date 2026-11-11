@@ -103,9 +103,11 @@ it('selects direct and transitive Button consumers, while excluding unrelated ha
     'tests/browser-harness/specs/radio/Radio.spec.ts',
     'tests/browser-harness/specs/section/Section.spec.ts',
     'tests/browser-harness/specs/separator/Separator.spec.ts', 'tests/browser-harness/specs/simple-grid/SimpleGrid.spec.ts',
+    'tests/browser-harness/specs/spatial/SpatialSystem.spec.ts',
     'tests/browser-harness/specs/spinner/Spinner.spec.ts',
     'tests/browser-harness/specs/stack/Stack.spec.ts', 'tests/browser-harness/specs/switch/Switch.spec.ts',
     'tests/browser-harness/specs/textarea/Textarea.spec.ts',
+    'tests/browser-harness/specs/themes/themes.spec.ts',
     'tests/browser-harness/specs/typography/Typography.spec.ts',
   ]);
   expect(result.suites.filter(suite => suite.project === 'chromium')).toEqual(ownership.inventory.filter(suite => suite.project === 'chromium'));
@@ -121,7 +123,7 @@ it.each([
   ['Badge', 'badge'], ['Spinner', 'spinner'], ['ButtonGroup', 'button-group'], ['FormGroup', 'form-group'],
   ['Field', 'field'],
   ['Card', 'card'], ['Icon', 'icon'],
-  ['AspectRatio', 'aspect-ratio'], ['Link', 'link'],
+  ['AspectRatio', 'aspect-ratio'], ['Link', 'link'], ['SpatialSystem', 'spatial'],
 ])('selects only the %s suite for its private scenario edit', (name, family) => {
   const ownership = repositoryOwnership;
   const result = selectBrowserTests({ ...ownership, changes: [{ path: `tests/browser-harness/scenarios/${name}.tsx`, status: 'M' }] });
@@ -149,6 +151,8 @@ it.each([
   ['src/components/typography/Heading.tsx', ['button-group/ButtonGroup', 'code-block/CodeBlock', 'harness/lifecycle', 'typography/Typography']],
   ['src/components/typography/Text.tsx', ['button-group/ButtonGroup', 'code-block/CodeBlock', 'harness/lifecycle', 'typography/Typography']],
   ['src/components/typography/typography.css', ['button-group/ButtonGroup', 'code-block/CodeBlock', 'harness/lifecycle', 'typography/Typography']],
+  ['stories/foundations/spatial.stories.css', ['spatial/SpatialSystem']],
+  ['src/components/icon/named/CheckIcon.tsx', ['badge/Badge', 'checkbox/Checkbox', 'field/Field', 'form-group/FormGroup', 'icon/Icon', 'section/Section', 'simple-grid/SimpleGrid', 'spatial/SpatialSystem', 'stack/Stack']],
   ['src/components/link/Link.tsx', ['link/Link', 'typography/Typography']],
   ['src/components/link/link.css', ['link/Link', 'typography/Typography']],
   ['src/components/icon/named/ArrowRightIcon.tsx', ['icon/Icon', 'link/Link']],
@@ -289,4 +293,10 @@ it.each([
 ])('rejects unproven native forwarding through %s', (_name, callback) => {
   const root = navigationFixture('export const view = <Destination href="#known" />;', callback);
   expect(dependencyGraph(['scenario.tsx'], root).unknown).toContain('Navigation.tsx: Document-relative or dynamic JSX resource');
+});
+
+it('selects only the theme suite for its private coexistence scenario', () => {
+  const result = selectBrowserTests({ ...repositoryOwnership, changes: [{ path: 'tests/browser-harness/scenarios/Themes.tsx', status: 'M' }] });
+  expect(result.mode).toBe('selected');
+  expect(result.suites).toEqual([{ project: 'components', file: 'tests/browser-harness/specs/themes/themes.spec.ts' }]);
 });

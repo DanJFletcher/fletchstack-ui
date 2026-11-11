@@ -1,5 +1,9 @@
 # Proposal
 
+## Follow-up: coverage timing (2026-11-11)
+
+[Defer coverage to final verification](../archive/2026-11-11-defer-coverage-to-final-verification/proposal.md) supersedes the original coverage-command defaults and blanket full-verification rerun wording. Ordinary unit/integration commands now disable coverage; explicit `:coverage` commands preserve independent final/CI gates. Development and repair feedback remain coverage-free, with failed or invalidated gates rerun at final readiness. The affected pending requirements were reconciled narrowly; original design rationale, completed tasks and historical execution evidence below remain records of the earlier implementation.
+
 ## Why
 
 Repository guidance currently requires incremental red-green-refactor for nearly every behavior change through several overlapping skills and checklists. The research reviewed in this session supports meaningful testing and reliable feedback but does not establish universal superiority of strict TDD, so agents should be able to choose a proportionate development cadence while retaining explicit behavioral contracts and verification.

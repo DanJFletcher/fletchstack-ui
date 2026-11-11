@@ -111,11 +111,15 @@ The [policy](../scripts/affected-policy.mjs) is deliberately conservative:
 
 Paths under E2E or documentation are not blanket-ignored: some unit/integration tests import helpers there or read files from disk. A new unsupported dependency pattern must gain a tested rule or retain the full fallback. These unit/integration selectors provide no export-aware graph or persistent cache. Browser selection uses the separate [harness ownership policy](browser-harness/README.md#affected-selection). See [unit/integration selection evidence](../docs/affected-test-verification.md) for its measured results and limitations.
 
-Affected unit/integration runs are coverage-free even in full-fallback mode and preserve prior reports. They are partial development feedback, not a replacement for the independent full unit/integration coverage gates. At local completion retain those gates and required lint/type/build/package/SSR checks, and follow the [browser completion policy](#local-browser-completion). Required CI stays complete.
+Affected unit/integration runs are coverage-free even in full-fallback mode and preserve prior reports. They are partial development feedback, not a replacement for the independent full unit/integration coverage gates. Ordinary full unit/integration runs also disable coverage. Scope and coverage collection are separate decisions.
+
+Follow the [shared execution policy](../.agents/guidelines/testing-guidelines.md#repository-test-execution): baseline, implementation, test authoring, debugging and refactoring stay coverage-free unless the user explicitly requests coverage. “Passing behavioral coverage” means passing tests of relevant outcomes, not collecting code coverage. Final verification starts after implementation, tests, cleanup and review of the whole agreed scope are finished. Individual task checkboxes, progress reports and intermediate commits do not trigger it; a separately requested implementation batch can have its own final handoff. If work is interrupted, report pending gates without claiming completion.
+
+At that final boundary, run `npm run test:unit:coverage` and `npm run test:integration:coverage` without test filters, retain required lint/type/build/package/SSR checks, and follow the [browser completion policy](#local-browser-completion). CI runs both complete coverage gates and all existing verification. Explicit early coverage requests do not make the resulting reports valid after relevant edits.
 
 For selected incremental TDD, add a new Button test, run that explicit file to observe a meaningful failure, implement it and rerun the file for green, then use affected feedback while refactoring. For a routine feature tested afterward, establish its API and accessibility contract, implement a coherent increment, add tests with expectations derived from that contract, and run those explicit files plus related affected checks. A first-run pass is valid final-behavior evidence; no artificial failure is required. Both approaches retain required full verification.
 
-If final full integration exposes a regression, reproduce it with its explicit test, fix it, and rerun that required full gate on the final state. Browser reruns follow the final repair's impact rather than automatically repeating every unrelated E2E suite. A conservative full fallback is expected when shared inputs change.
+If final integration exposes a regression, reproduce and repair it with coverage-free focused checks. Once the repair and review are finished, rerun failed or invalidated full coverage gates. An integration-only fixture repair with proven isolation can preserve a passing unit gate; shared production/configuration/dependency changes or uncertain impact require both. Test and setup edits can invalidate evidence too. A commit of verified content or unrelated planning prose does not force reruns. Report commands, scope, coverage mode, intervening relevant edits, failures and pending gates. Browser reruns follow the final repair's impact rather than automatically repeating every unrelated E2E suite.
 
 ## Local browser completion
 
@@ -140,25 +144,29 @@ The development policy and coordinated skills are repository-local customization
 Run commands from the repository root:
 
 ```sh
-npm run test:unit
-npm run test:integration
+npm run test:unit                  # development; coverage disabled
+npm run test:integration           # development; coverage disabled
+npm run test:unit:coverage         # full final unit coverage gate
+npm run test:integration:coverage  # full final integration coverage gate
 npm run test:storybook
 npm run test:e2e
 npm test
 ```
 
-Run a single file or feature without enforcing whole-suite coverage:
+The default unit/integration commands no longer collect coverage; callers relying on the former gates must migrate to the explicit `:coverage` commands. CI uses both coverage commands. Coverage-free runs preserve existing reports, which are historical evidence until their relevance to the current work is checked. Final coverage gates run without test filters.
+
+Run a single file or feature without collecting coverage:
 
 ```sh
-npx --no-install vitest run --project unit tests/unit/tokens/token-compiler.test.mjs
-npx --no-install vitest run --project unit src/components/button/__tests__/Button.test.tsx
-npx --no-install vitest run --project unit src/components/button/__tests__/Button.ssr.test.tsx
-npx --no-install vitest run --project integration tests/integration/components/button/Button.hydration.test.ts
-npx --no-install vitest run --project unit tests/unit/tokens
-npx --no-install vitest run --project integration tests/integration/components -t 'disabled'
+npm run test:unit -- tests/unit/tokens/token-compiler.test.mjs
+npm run test:unit -- src/components/button/__tests__/Button.test.tsx
+npm run test:unit -- src/components/button/__tests__/Button.ssr.test.tsx
+npm run test:integration -- tests/integration/components/button/Button.hydration.test.ts
+npm run test:unit -- tests/unit/tokens
+npm run test:integration -- tests/integration/components -t 'disabled'
 ```
 
-For Vitest watch mode, omit `run`. Install the browser once with `npx --no-install playwright install chromium` before running browser integration, Storybook, or E2E tests. Unit tests and filesystem-only integration tests do not launch a browser. No suite needs a manually started Storybook server; the E2E runner manages its own.
+For watch mode, use `npx --no-install vitest --project unit --coverage.enabled=false` (or the integration project). Install the browser once with `npx --no-install playwright install chromium` before running browser integration, Storybook, or E2E tests. Unit tests and filesystem-only integration tests do not launch a browser. No suite needs a manually started Storybook server; the E2E runner manages its own.
 
 ## Playwright E2E tests
 

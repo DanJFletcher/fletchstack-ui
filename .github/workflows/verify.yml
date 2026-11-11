@@ -15,8 +15,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run lint
       - run: npm run typecheck
-      - run: npm run test:unit
-      - run: npm run test:integration
+      - run: npm run test:unit:coverage
+      - run: npm run test:integration:coverage
       - run: npm run test:storybook
         env:
           STORYBOOK_DISABLE_TELEMETRY: '1'

@@ -10,8 +10,10 @@ Read the project's instructions and the code quality guideline at `.agents/guide
 ## Choose a mode
 
 - **Review.** Stay read-only. Trace public callers, relevant tests, and where the affected policy lives. For each finding, give the location, affected callers, concrete maintenance cost, a proportionate change, and the behavior to preserve. Rank findings by impact and confidence. Call out similar code that should stay separate when that distinction matters.
-- **Edit.** Keep the change within the agreed scope. Establish passing coverage for the affected public behavior before editing. If coverage is missing, add relevant characterization checks; if the baseline fails, report and resolve the gap before making the refactor. No artificial failing behavior is required.
+- **Edit.** Keep the change within the agreed scope. Establish passing tests for the affected public behavior before editing, without code coverage collection. If behavior is untested, add relevant characterization checks; if the baseline fails, report and resolve the gap before making the refactor. No artificial failing behavior is required.
 - **After a green implementation.** Consider whether a small cleanup would reduce a concrete maintenance cost. Handle routine cleanup inline. A read-only second opinion or a bounded delegated edit can help when independent review adds value. Leave the code alone when no useful cleanup is apparent.
+
+Follow the shared [execution policy](../../guidelines/testing-guidelines.md#repository-test-execution): baseline and refactoring feedback stay coverage-free, and both full coverage gates run only at final verification of the agreed implementation scope. A cleanup step or intermediate commit is not its own coverage gate.
 
 ## Make and verify a refactor
 

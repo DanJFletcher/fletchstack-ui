@@ -41,7 +41,7 @@ Choose resource ownership for the actual concurrency: tests, workers, retries, s
 
 Read [debugging and CI](references/debugging-and-ci.md) for failures, retries, traces, environment differences or execution configuration. Use failure evidence to choose a repair. Do not weaken assertions, suppress errors, silently skip coverage, raise retries/timeouts or rebaseline screenshots solely to obtain green. Report an actual product regression and change the product only within the requested scope.
 
-Run the focused test through the project's normal command and appropriate related coverage. Check concurrency or repeat a test a bounded number of times when the change or failure warrants it. A pass after retry remains flaky. Run the applicable type check separately; Playwright transpilation does not establish type correctness.
+Run the focused test through the project's normal command and relevant related suites. Follow the shared [execution policy](../../guidelines/testing-guidelines.md#repository-test-execution): development checks stay coverage-free, unit/integration code coverage gates wait for final verification, and browser coverage remains an explicit diagnostic. Check concurrency or repeat a test a bounded number of times when the change or failure warrants it. A pass after retry remains flaky. Run the applicable type check separately; Playwright transpilation does not establish type correctness.
 
 Use [specialized checks](references/specialized-checks.md) for visual comparisons, accessibility and keyboard/focus behavior, frames, files, dialogs or device emulation. State their limits: semantic locators or a successful scan do not certify accessibility, and emulation is not real-device verification.
 

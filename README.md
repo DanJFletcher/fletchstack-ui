@@ -240,8 +240,10 @@ npm run tokens             # validate sources; generate CSS and token reference
 npm run lint
 npm run typecheck
 npm test                   # unit tests, browser regressions, Storybook interactions and axe
-npm run test:unit           # unit suite only; enforces 100% coverage per production file
-npm run test:integration    # integration suite only; independently enforces the same 100% gate
+npm run test:unit           # full unit development feedback; coverage disabled
+npm run test:integration    # full integration development feedback; coverage disabled
+npm run test:unit:coverage  # final unit gate; 100% coverage per production file
+npm run test:integration:coverage # independent final integration coverage gate
 npm run test:unit:affected -- --base origin/main        # coverage-free related development feedback
 npm run test:integration:affected -- --base origin/main --dry-run  # explain selection without execution
 npm run test:storybook
@@ -262,7 +264,9 @@ Unit coverage uses V8 and requires **100% statements, branches, functions, and l
 
 The re-export-only [public entry point](src/index.ts) has no executable coverage counters. V8 displays 0% for that empty row; all executable code and the aggregate totals reach 100%.
 
-Run `npm run test:unit` or `npm run test:integration` to enforce the thresholds independently. The [unit report](coverage/unit/index.html) and [integration report](coverage/integration/index.html) have separate HTML and JSON outputs. CI runs both coverage gates separately from Storybook, so one suite cannot inflate another's result. Both suites use the same production-code scope; verification harnesses (`scripts/verify-*.mjs`), stories, examples, configuration, declarations, and generated assets are excluded. The re-export-only entry point remains included despite having no executable counters.
+Run `npm run test:unit:coverage` and `npm run test:integration:coverage` at final verification to enforce the thresholds independently. The [unit report](coverage/unit/index.html) and [integration report](coverage/integration/index.html) have separate HTML and JSON outputs. CI runs both coverage gates separately from Storybook, so one suite cannot inflate another's result. Both suites use the same production-code scope; verification harnesses (`scripts/verify-*.mjs`), stories, examples, configuration, declarations, and generated assets are excluded. The re-export-only entry point remains included despite having no executable counters.
+
+Command migration: `test:unit` and `test:integration` now disable coverage and preserve existing reports. Callers that relied on their former coverage gates must use the corresponding `:coverage` commands. During baseline checks, implementation, debugging and refactoring, use focused or affected tests without coverage, even when uncertain impact requires a full suite. Collect coverage after the agreed implementation scope, tests, cleanup and review are finished, unless the user explicitly requests it earlier. Follow the [shared execution policy](.agents/guidelines/testing-guidelines.md#repository-test-execution) for final failures and result validity; intermediate commits and task checkboxes are not final-verification boundaries.
 
 Integration tests exercise real JSON parsing, filesystem operations, token compilation, CSS generation, documentation output, and stylesheet packaging. Synthetic token projects use temporary directories that are removed after each test. A command-entry smoke test regenerates the repository's checked-in token CSS and reference and checks that they are unchanged. Token generation's callable operation accepts a project directory URL; the existing CLI still builds the repository's tokens.
 

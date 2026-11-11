@@ -94,7 +94,7 @@ Both commands SHALL support `--dry-run` to report the same selection policy with
 
 ### Requirement: Coverage and failure isolation
 
-Affected commands SHALL disable coverage collection in selected and full-fallback modes and preserve existing coverage artifacts. Existing full commands, independent per-file 100% gates, coverage scopes, and required CI verification MUST remain unchanged. Selected test failures and execution errors MUST yield a nonzero exit status.
+Affected commands SHALL disable coverage collection in selected and full-fallback modes and preserve existing coverage artifacts. Independent per-file 100% gates and scopes MUST remain unchanged through the explicit full `test:unit:coverage` and `test:integration:coverage` commands required by CI; default project commands SHALL disable coverage. Selected test failures and execution errors MUST yield a nonzero exit status.
 
 #### Scenario: Partial development pass
 - **WHEN** selected tests pass without executing the entire production inventory
@@ -121,7 +121,7 @@ Focused unit/integration tests and fixtures SHALL use direct implementation impo
 
 ### Requirement: Development and completion workflow
 
-When incremental TDD is selected under the repository's agent-testing-workflow policy, the TDD skill and applicable guidelines SHALL require a specific failing test for red, the same test for green, and affected unit/integration runs during refactoring. For every permitted cadence, required full verification MUST run after implementation. Failures MUST be repaired with focused feedback followed by repeated full verification before completion.
+Selected incremental TDD SHALL retain a specific failing test for red, the same test for green and affected feedback during refactoring. All cadences SHALL follow test-coverage-execution: coverage-free development and full independent coverage gates at final readiness of the agreed scope. Failures SHALL use coverage-free focused repair followed by failed or invalidated full gates when ready; unchanged valid results need not repeat. Other required checks SHALL remain mandatory.
 
 #### Scenario: Iterative TDD
 - **WHEN** an agent develops a behavior in red-green-refactor cycles
@@ -130,7 +130,7 @@ When incremental TDD is selected under the repository's agent-testing-workflow p
 
 #### Scenario: Final verification failure
 - **WHEN** complete verification exposes a regression outside the selected tests
-- **THEN** the agent fixes it, checks it with focused execution, and repeats required full verification before reporting completion
+- **THEN** the agent fixes it with coverage-free focused execution and, when ready, repeats failed or invalidated full gates before reporting completion
 
 ### Requirement: Measured selection validation
 

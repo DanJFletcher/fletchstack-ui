@@ -1,5 +1,9 @@
 # Design
 
+## Follow-up: coverage timing (2026-11-11)
+
+[Defer coverage to final verification](../archive/2026-11-11-defer-coverage-to-final-verification/proposal.md) supersedes the original coverage-command defaults and blanket full-verification rerun wording. Ordinary unit/integration commands now disable coverage; explicit `:coverage` commands preserve independent final/CI gates. Development and repair feedback remain coverage-free, with failed or invalidated gates rerun at final readiness. The affected pending requirements were reconciled narrowly; original design rationale, completed tasks and historical execution evidence below remain records of the earlier implementation.
+
 ## Context
 
 See [the proposal](proposal.md) for motivation and [the workflow specification](specs/agent-testing-workflow/spec.md) for the behavioral contract. This design is needed because policy activation, evidence rules, and execution guidance span several files.

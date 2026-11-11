@@ -93,7 +93,7 @@ Guidance SHALL require meaningful test execution but MUST NOT require observing 
 
 ### Requirement: Verification remains required
 
-All permitted cadences SHALL retain focused and affected development feedback, conservative selection safeguards, and the repository's required complete verification and independent coverage gates. Affected results MUST NOT be presented as complete verification. Final-verification failures SHALL be repaired with focused checks followed by required full verification on the final state.
+All cadences SHALL retain coverage-free focused/affected development feedback and conservative selection safeguards. Full independent coverage gates SHALL run at the final boundary defined by test-coverage-execution. Affected results MUST NOT be presented as complete verification. Final failures SHALL use coverage-free focused repair followed by failed or invalidated full gates when ready; unchanged valid results need not repeat. Other required checks SHALL remain mandatory.
 
 #### Scenario: Uncertain affected selection
 - **WHEN** an affected run cannot establish a safe precise selection
@@ -101,7 +101,7 @@ All permitted cadences SHALL retain focused and affected development feedback, c
 
 #### Scenario: Regression discovered at completion
 - **WHEN** final verification fails after focused tests passed
-- **THEN** the agent reproduces and repairs the failure using focused feedback and repeats required complete verification
+- **THEN** the agent reproduces and repairs the failure using coverage-free focused feedback and repeats failed or invalidated full gates at the next final-verification boundary
 - **AND** reports any remaining blocker rather than claiming a complete pass
 
 ### Requirement: Design review without mandatory delegation

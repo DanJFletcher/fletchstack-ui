@@ -1,5 +1,9 @@
 # Design
 
+## Follow-up: coverage timing (2026-11-11)
+
+[Defer coverage to final verification](../archive/2026-11-11-defer-coverage-to-final-verification/proposal.md) supersedes the original coverage-command defaults and blanket full-verification rerun wording. Ordinary unit/integration commands now disable coverage; explicit `:coverage` commands preserve independent final/CI gates. Development and repair feedback remain coverage-free, with failed or invalidated gates rerun at final readiness. The affected pending requirements were reconciled narrowly; original design rationale, completed tasks and historical execution evidence below remain records of the earlier implementation.
+
 > Follow-up (2026-11-10): [Adopt flexible agent testing](../adopt-flexible-agent-testing/design.md) supersedes the universal cadence in decision 7 below. Its red/green sequence now applies when incremental TDD is selected; other supported cadences retain focused/affected feedback and complete verification. The pending workflow requirement is reconciled accordingly. This original design and its completed implementation evidence remain historical records, not a requirement to apply incremental TDD to every future behavior change.
 
 ## Context

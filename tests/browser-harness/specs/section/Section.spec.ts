@@ -1,6 +1,6 @@
 import type { Locator } from '@playwright/test';
 import { expect, test } from '../../fixtures/test';
-import { openStory } from '../../fixtures/storybook';
+import { openScenario } from '../../fixtures/scenario';
 
 /**
  * Measure padding and actual content edges on a section with participating children.
@@ -17,8 +17,8 @@ async function geometry(section: Locator) {
 }
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} Section spacing presets pad both block edges`, async ({ page }) => {
-    await openStory(page, 'components-section--spacing-presets', { theme });
+  test(`${theme} Section spacing presets pad both block edges`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-section--spacing-presets', { theme });
     for (const [spacing, padding, height] of [['compact', 32, 84], ['default', 64, 148], ['spacious', 96, 212]] as const) {
       await test.step(`${theme} ${spacing} applies ${padding}px at both block edges`, async () => {
         expect(await geometry(page.getByTestId(`spacing-${spacing}`))).toMatchObject({ height, paddingStart: padding, paddingEnd: padding, inlineStart: 0, inlineEnd: 0, start: padding, end: padding });
@@ -26,9 +26,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     }
   });
 
-  test(`${theme} responsive overrides are scoped and the component has no built-in breakpoint`, async ({ page }) => {
+  test(`${theme} responsive overrides are scoped and the component has no built-in breakpoint`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 1000, height: 1000 });
-    await openStory(page, 'components-section--responsive', { theme });
+    await openScenario(mount, 'components-section--responsive', { theme });
     expect((await geometry(page.getByTestId('responsive-section'))).paddingStart).toBe(64);
     await page.setViewportSize({ width: 600, height: 1000 });
     expect((await geometry(page.getByTestId('responsive-section'))).paddingStart).toBe(32);
@@ -38,9 +38,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     expect((await geometry(page.getByTestId('responsive-section'))).paddingStart).toBe(64);
   });
 
-  test(`${theme} content grows and reflows at320px with enlarged text and user spacing`, async ({ page }) => {
+  test(`${theme} content grows and reflows at320px with enlarged text and user spacing`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 1000 });
-    await openStory(page, 'components-section--composition', { theme });
+    await openScenario(mount, 'components-section--composition', { theme });
     const section = page.getByTestId('composed-section');
     const before = await geometry(section);
     await page.addStyleTag({ content: 'html { font-size:200%; } * { line-height:1.5!important; letter-spacing:.12em!important; word-spacing:.16em!important; } p { margin-block-end:2em!important; }' });
@@ -55,8 +55,8 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-test('heading associations create native topics while div remains a visual wrapper', async ({ page }) => {
-  await openStory(page, 'components-section--semantics');
+test('heading associations create native topics while div remains a visual wrapper', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--semantics');
   const region = page.getByRole('region', { name: 'A meaningful topic' });
   await expect(region).toHaveAttribute('aria-labelledby', 'semantic-title');
   await expect(region.getByRole('heading', { name: 'A meaningful topic', level: 2 })).toBeVisible();
@@ -67,8 +67,8 @@ test('heading associations create native topics while div remains a visual wrapp
   await expect(region).not.toHaveAttribute('tabindex');
 });
 
-test('scoped padding inherits while other presets gaps and theme boundaries stay independent', async ({ page }) => {
-  await openStory(page, 'components-section--scoped-overrides');
+test('scoped padding inherits while other presets gaps and theme boundaries stay independent', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--scoped-overrides');
   expect(await geometry(page.getByTestId('scoped-section'))).toMatchObject({ paddingStart: 80, paddingEnd: 80, height: 180 });
   expect(await geometry(page.getByTestId('independent-preset'))).toMatchObject({ paddingStart: 32, paddingEnd: 32, height: 84 });
   expect(await geometry(page.getByTestId('reset-section'))).toEqual(await geometry(page.getByTestId('sibling-section')));
@@ -79,8 +79,8 @@ test('scoped padding inherits while other presets gaps and theme boundaries stay
   expect(await page.getByTestId('gap-independent-section').evaluate(element => getComputedStyle(element).getPropertyValue('--fs-layout-section-gap').trim())).toBe('12px');
 });
 
-test('adjacent sections contribute both padding edges without adding a parent gap', async ({ page }) => {
-  await openStory(page, 'components-section--adjacent');
+test('adjacent sections contribute both padding edges without adding a parent gap', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--adjacent');
   const first = await page.getByTestId('adjacent-first').locator(':scope > div').boundingBox();
   const second = await page.getByTestId('adjacent-second').locator(':scope > div').boundingBox();
   expect(second!.y - first!.y - first!.height).toBe(128);
@@ -88,20 +88,20 @@ test('adjacent sections contribute both padding edges without adding a parent ga
   expect((await geometry(page.getByTestId('adjacent-second'))).height).toBe(148);
 });
 
-test('consumer margins remain additive to selected padding', async ({ page }) => {
-  await openStory(page, 'components-section--child-margins');
+test('consumer margins remain additive to selected padding', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--child-margins');
   expect(await geometry(page.getByTestId('margin-section'))).toMatchObject({ height: 164, paddingStart: 64, paddingEnd: 64, start: 72, end: 72 });
 });
 
-test('nested sections independently own their padding without inserting sibling gaps', async ({ page }) => {
-  await openStory(page, 'components-section--nested');
+test('nested sections independently own their padding without inserting sibling gaps', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--nested');
   expect(await geometry(page.getByTestId('outer-section'))).toMatchObject({ height: 168, paddingStart: 32, paddingEnd: 32, start: 32, end: 32 });
   expect(await geometry(page.getByTestId('inner-section'))).toMatchObject({ height: 84, paddingStart: 32, paddingEnd: 32, start: 32, end: 32 });
 });
 
-test('native tab order skips the section and padded composition leaves focus clearance', async ({ page }) => {
+test('native tab order skips the section and padded composition leaves focus clearance', async ({ page, mount }) => {
   await page.setViewportSize({ width: 320, height: 1000 });
-  await openStory(page, 'components-section--native-focus');
+  await openScenario(mount, 'components-section--native-focus');
   await page.getByRole('button', { name: 'Before topic' }).focus();
   await page.keyboard.press('Tab');
   const open = page.getByRole('button', { name: 'Open project' });
@@ -117,9 +117,9 @@ test('native tab order skips the section and padded composition leaves focus cle
   await expect(page.getByTestId('focus-section')).not.toHaveAttribute('tabindex');
 });
 
-test('theme changes preserve geometry and Section has no surface or boundary', async ({ page }) => {
+test('theme changes preserve geometry and Section has no surface or boundary', async ({ page, mount }) => {
   await page.setViewportSize({ width: 1280, height: 1000 });
-  await openStory(page, 'components-section--both-themes');
+  await openScenario(mount, 'components-section--both-themes');
   expect(await geometry(page.getByTestId('theme-luna'))).toEqual(await geometry(page.getByTestId('theme-corporate')));
   await expect(page.getByTestId('theme-luna')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
   await expect(page.getByTestId('theme-luna')).toHaveCSS('border-width', '0px');
@@ -127,31 +127,31 @@ test('theme changes preserve geometry and Section has no surface or boundary', a
   await expect(page.getByTestId('theme-luna')).toHaveCSS('border-radius', '0px');
 });
 
-test('RTL keeps logical block padding without introducing inline gutters', async ({ page }) => {
-  await openStory(page, 'components-section--spacing-presets');
+test('RTL keeps logical block padding without introducing inline gutters', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--spacing-presets');
   await page.addStyleTag({ content: 'html { direction:rtl; }' });
   expect(await geometry(page.getByTestId('spacing-default'))).toMatchObject({ height: 148, paddingStart: 64, paddingEnd: 64, inlineStart: 0, inlineEnd: 0 });
 });
 
-test('vertical writing uses logical block edges instead of hard-coded top and bottom', async ({ page }) => {
-  await openStory(page, 'components-section--spacing-presets');
+test('vertical writing uses logical block edges instead of hard-coded top and bottom', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--spacing-presets');
   await page.addStyleTag({ content: '[data-testid="spacing-default"] { writing-mode:vertical-rl; inline-size:200px; }' });
   const padding = await page.getByTestId('spacing-default').evaluate(element => { const style = getComputedStyle(element); return { top: style.paddingTop, bottom: style.paddingBottom, left: style.paddingLeft, right: style.paddingRight }; });
   expect(padding).toEqual({ top: '0px', bottom: '0px', left: '64px', right: '64px' });
 });
 
-test('sections shrink inside flex and grid parents while parents own placement', async ({ page }) => {
-  await openStory(page, 'components-section--narrow-parents');
+test('sections shrink inside flex and grid parents while parents own placement', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--narrow-parents');
   expect(await geometry(page.getByTestId('flex-section'))).toMatchObject({ width: 200, height: 148, paddingStart: 64, paddingEnd: 64 });
   expect(await geometry(page.getByTestId('grid-section'))).toMatchObject({ width: 200, height: 148, paddingStart: 64, paddingEnd: 64 });
 });
 
-test('native padding styles take precedence over the selected preset', async ({ page }) => {
-  await openStory(page, 'components-section--native-style-override');
+test('native padding styles take precedence over the selected preset', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--native-style-override');
   expect(await geometry(page.getByTestId('style-section'))).toMatchObject({ height: 44, paddingStart: 12, paddingEnd: 12, inlineStart: 0, inlineEnd: 0 });
 });
 
-test('native hidden suppresses the region and its controls', async ({ page }) => {
-  await openStory(page, 'components-section--hidden');
+test('native hidden suppresses the region and its controls', async ({ page, mount }) => {
+  await openScenario(mount, 'components-section--hidden');
   await expect(page.locator('.fs-section')).toHaveCSS('display', 'none');
 });

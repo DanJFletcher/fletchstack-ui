@@ -1,5 +1,7 @@
 # Private browser scenarios
 
+Component coverage currently includes Button, Stack, CodeBlock, Cluster, Container, Section, SimpleGrid, Separator, Checkbox, Radio, Switch, TextInput, Textarea and Select. See the [pilot measurements](../../docs/component-harness-verification.md), [layout migration evidence](../../docs/layout-harness-migration.md), and [form-control migration](../../docs/forms-harness-migration.md) for preserved assertions and measured scope.
+
 Run `npm run test:e2e:components -- button --workers=3` for the Vite harness only, or `npm run test:e2e:storybook -- button` for retained Storybook delivery checks. The harness uses port 6008; retained Storybook uses 6007. Both use fresh contexts, zero retries and retained failure evidence. Reports and test output have separate project directories.
 
 ## Authoring

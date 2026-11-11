@@ -1,6 +1,6 @@
 import type { Locator } from '@playwright/test';
 import { expect, test } from '../../fixtures/test';
-import { openStory } from '../../fixtures/storybook';
+import { openScenario } from '../../fixtures/scenario';
 
 /**
  * Read visible direct-item rectangles relative to the Cluster's own border box.
@@ -18,8 +18,8 @@ async function items(cluster: Locator) {
 }
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} Cluster gap presets control both axes`, async ({ page }) => {
-    await openStory(page, 'components-cluster--gaps', { theme });
+  test(`${theme} Cluster gap presets control both axes`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-cluster--gaps', { theme });
     for (const [gap, pixels] of [['none', 0], ['actions', 12], ['related', 16]] as const) {
       await test.step(`${theme} ${gap} uses ${pixels}px on both row and column axes`, async () => {
         const boxes = await items(page.getByTestId(`gap-${gap}`));
@@ -29,9 +29,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     }
   });
 
-  test(`${theme} identical intrinsic actions wrap at a narrow parent in the same viewport`, async ({ page }) => {
+  test(`${theme} identical intrinsic actions wrap at a narrow parent in the same viewport`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
-    await openStory(page, 'components-cluster--wrapping', { theme });
+    await openScenario(mount, 'components-cluster--wrapping', { theme });
     const wide = await items(page.getByTestId('wrap-wide'));
     const narrow = await items(page.getByTestId('wrap-narrow'));
     expect(new Set(wide.map(box => box.y)).size).toBe(1);
@@ -45,9 +45,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(page.getByTestId('wrap-narrow')).toHaveCSS('flex-wrap', 'wrap');
   });
 
-  test(`${theme} supported long labels shrink and grow at 320px with enlarged text and spacing`, async ({ page }) => {
+  test(`${theme} supported long labels shrink and grow at 320px with enlarged text and spacing`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 1000 });
-    await openStory(page, 'components-cluster--long-labels', { theme });
+    await openScenario(mount, 'components-cluster--long-labels', { theme });
     const before = (await page.getByRole('button').first().boundingBox())!.height;
     await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
     const boxes = await items(page.getByTestId('long-cluster'));
@@ -60,8 +60,8 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-test('Cluster alignment presets control mixed heights', async ({ page }) => {
-  await openStory(page, 'components-cluster--alignments');
+test('Cluster alignment presets control mixed heights', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--alignments');
   for (const align of ['start', 'center', 'end'] as const) {
     await test.step(`${align} aligns mixed heights within a row`, async () => {
       const boxes = await items(page.getByTestId(`align-${align}`));
@@ -72,16 +72,16 @@ test('Cluster alignment presets control mixed heights', async ({ page }) => {
   }
 });
 
-test('baseline alignment shares the real baseline across mixed text sizes', async ({ page }) => {
-  await openStory(page, 'components-cluster--baseline');
+test('baseline alignment shares the real baseline across mixed text sizes', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--baseline');
   const positions = await page.locator('.cluster-baseline-marker').evaluateAll(elements => elements.map(element => element.getBoundingClientRect().top));
   expect(new Set(positions).size).toBe(1);
   const boxes = await items(page.getByTestId('baseline-cluster'));
   expect(boxes[1]!.height).toBeGreaterThan(boxes[0]!.height);
 });
 
-test('Cluster justification presets position wrapped rows', async ({ page }) => {
-  await openStory(page, 'components-cluster--justification');
+test('Cluster justification presets position wrapped rows', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--justification');
   for (const justify of ['start', 'center', 'end'] as const) {
     await test.step(`${justify} positions each wrapped row independently`, async () => {
       const boxes = await items(page.getByTestId(`justify-${justify}`));
@@ -93,8 +93,8 @@ test('Cluster justification presets position wrapped rows', async ({ page }) => 
 });
 
 for (const [justify, expected] of [['start', [140, 48, 140]], ['end', [92, 0, 0]]] as const) {
-  test(`RTL ${justify} justification respects inline direction on wrapped rows`, async ({ page }) => {
-    await openStory(page, 'components-cluster--justification');
+  test(`RTL ${justify} justification respects inline direction on wrapped rows`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-cluster--justification');
     await page.addStyleTag({ content: 'html { direction: rtl; }' });
     const boxes = await items(page.getByTestId(`justify-${justify}`));
     expect(boxes.map(box => box.x)).toEqual(expected);
@@ -102,8 +102,8 @@ for (const [justify, expected] of [['start', [140, 48, 140]], ['end', [92, 0, 0]
   });
 }
 
-test('default Cluster stays passive and transparent without inset or forced child growth', async ({ page }) => {
-  await openStory(page, 'components-cluster--playground');
+test('default Cluster stays passive and transparent without inset or forced child growth', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--playground');
   const cluster = page.getByTestId('default-cluster');
   await expect(cluster).toHaveCSS('align-items', 'center');
   expect((await items(cluster))[0]!.x).toBe(0);
@@ -117,8 +117,8 @@ test('default Cluster stays passive and transparent without inset or forced chil
   expect(await cluster.getByRole('button').evaluateAll(elements => elements.map(element => getComputedStyle(element).flexGrow))).toEqual(['0', '0', '0']);
 });
 
-test('hidden children leave no phantom item gaps', async ({ page }) => {
-  await openStory(page, 'components-cluster--hidden-children');
+test('hidden children leave no phantom item gaps', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--hidden-children');
   const boxes = await items(page.getByTestId('hidden-children'));
   expect(boxes.map(box => box.text)).toEqual(['First', 'Last']);
   expect(boxes[1]!.x - boxes[0]!.right).toBe(12);
@@ -126,23 +126,23 @@ test('hidden children leave no phantom item gaps', async ({ page }) => {
   await expect(page.getByText('Not displayed', { exact: true })).toBeHidden();
 });
 
-test('consumer margins remain additional to the Cluster gap', async ({ page }) => {
-  await openStory(page, 'components-cluster--consumer-margins');
+test('consumer margins remain additional to the Cluster gap', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--consumer-margins');
   const boxes = await items(page.getByTestId('margin-cluster'));
   expect(boxes[1]!.x - boxes[0]!.right).toBe(20);
   await expect(page.getByText('First', { exact: true })).toHaveCSS('margin-inline-end', '8px');
 });
 
-test('nested clusters independently own actions and related gaps', async ({ page }) => {
-  await openStory(page, 'components-cluster--nested');
+test('nested clusters independently own actions and related gaps', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--nested');
   const outer = await items(page.getByTestId('outer-cluster'));
   const inner = await items(page.getByTestId('inner-cluster'));
   expect(outer[1]!.x - outer[0]!.right).toBe(16);
   expect(inner[1]!.x - inner[0]!.right).toBe(12);
 });
 
-test('scoped gaps affect both axes while independent roles, nested themes and siblings retain defaults', async ({ page }) => {
-  await openStory(page, 'components-cluster--scoped-overrides');
+test('scoped gaps affect both axes while independent roles, nested themes and siblings retain defaults', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--scoped-overrides');
   for (const [id, gap] of [['scoped-cluster', '24px'], ['independent-cluster', '16px'], ['reset-cluster', '12px'], ['sibling-cluster', '12px']]) {
     await expect(page.getByTestId(id!)).toHaveCSS('row-gap', gap!);
     await expect(page.getByTestId(id!)).toHaveCSS('column-gap', gap!);
@@ -151,9 +151,9 @@ test('scoped gaps affect both axes while independent roles, nested themes and si
   expect(boxes[1]!.y - boxes[0]!.bottom).toBe(24);
 });
 
-test('consumer responsive gaps do not change Cluster direction or wrap behavior', async ({ page }) => {
+test('consumer responsive gaps do not change Cluster direction or wrap behavior', async ({ page, mount }) => {
   await page.setViewportSize({ width: 601, height: 900 });
-  await openStory(page, 'components-cluster--responsive-gap');
+  await openScenario(mount, 'components-cluster--responsive-gap');
   await expect(page.getByTestId('responsive-cluster')).toHaveCSS('gap', '12px');
   await page.setViewportSize({ width: 600, height: 900 });
   await expect(page.getByTestId('responsive-cluster')).toHaveCSS('gap', '24px');
@@ -161,17 +161,17 @@ test('consumer responsive gaps do not change Cluster direction or wrap behavior'
   await expect(page.getByTestId('responsive-cluster')).toHaveCSS('flex-wrap', 'wrap');
 });
 
-test('Cluster shrinks in flex/grid parents', async ({ page }) => {
-  await openStory(page, 'components-cluster--narrow-parents');
+test('Cluster shrinks in flex/grid parents', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--narrow-parents');
   await expect(page.getByTestId('flex-cluster')).toHaveCSS('width', '160px');
   await expect(page.getByTestId('grid-cluster')).toHaveCSS('width', '160px');
   await expect(page.getByTestId('flex-cluster')).toHaveCSS('min-width', '0px');
   await expect(page.getByTestId('grid-cluster')).toHaveCSS('min-width', '0px');
 });
 
-test('wrapped actions preserve native tab order, interaction and focus clearance inside Container', async ({ page }) => {
+test('wrapped actions preserve native tab order, interaction and focus clearance inside Container', async ({ page, mount }) => {
   await page.setViewportSize({ width: 320, height: 1000 });
-  await openStory(page, 'components-cluster--composition');
+  await openScenario(mount, 'components-cluster--composition');
   const cluster = page.getByTestId('project-actions');
   const buttons = cluster.getByRole('button');
   const tops = await buttons.evaluateAll(elements => elements.map(element => element.getBoundingClientRect().top));
@@ -199,8 +199,8 @@ test('wrapped actions preserve native tab order, interaction and focus clearance
   await expect(cluster).toHaveCSS('overflow', 'visible');
 });
 
-test('RTL action order remains native through wrapped rows', async ({ page }) => {
-  await openStory(page, 'components-cluster--right-to-left');
+test('RTL action order remains native through wrapped rows', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--right-to-left');
   const cluster = page.getByTestId('rtl-cluster');
   expect(await cluster.getByRole('button').allTextContents()).toEqual(['Save changes', 'Preview', 'Cancel']);
   await cluster.getByRole('button', { name: 'Save changes' }).focus();
@@ -210,8 +210,8 @@ test('RTL action order remains native through wrapped rows', async ({ page }) =>
   await expect(cluster.getByRole('button', { name: 'Cancel' })).toBeFocused();
 });
 
-test('both themes share gap and wrapping behavior without Cluster supplying a surface', async ({ page }) => {
-  await openStory(page, 'components-cluster--both-themes');
+test('both themes share gap and wrapping behavior without Cluster supplying a surface', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--both-themes');
   for (const theme of ['corporate', 'luna']) {
     const cluster = page.locator(`[data-theme="${theme}"].theme-panel .fs-cluster`);
     await expect(cluster).toHaveCSS('gap', '12px');
@@ -220,7 +220,7 @@ test('both themes share gap and wrapping behavior without Cluster supplying a su
   }
 });
 
-test('native hidden suppresses Cluster and its children', async ({ page }) => {
-  await openStory(page, 'components-cluster--hidden');
+test('native hidden suppresses Cluster and its children', async ({ page, mount }) => {
+  await openScenario(mount, 'components-cluster--hidden');
   await expect(page.locator('.fs-cluster')).toHaveCSS('display', 'none');
 });

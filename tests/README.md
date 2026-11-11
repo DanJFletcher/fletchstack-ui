@@ -191,10 +191,10 @@ E2E tests use fresh browser contexts, accessible locators and auto-waiting asser
 
 ```sh
 npm run test:e2e
-npm run test:e2e -- tests/e2e/components/select/Select.spec.ts
+npm run test:e2e -- tests/browser-harness/specs/select/Select.spec.ts
 npm run test:e2e:storybook -- --grep 'native keyboard'
 npm run test:e2e:coverage
-npm run test:e2e:coverage -- tests/e2e/components/select/Select.spec.ts
+npm run test:e2e:coverage -- tests/browser-harness/specs/select/Select.spec.ts
 ```
 
 The opt-in command includes both projects through [the diagnostic configuration](../playwright.coverage.config.ts), starts both servers, collects Chromium V8 data across navigation and writes HTML/JSON under `coverage/e2e/`. `diagnostic-summary.json` separately lists production, story/demo, preview and harness files with exact counters, invocation/filter information, selected projects/suites/tests, test status and report-generation time. Unloaded authored modules remain in the denominator. Reports describe execution measurement, not completion of the browser-behavior matrix.
@@ -203,7 +203,7 @@ Percentages are informational, including 0% for unloaded modules. Test failures,
 
 The diagnostic inventory includes authored browser JavaScript/TypeScript in [src/](../src/), [stories/](../stories/), [.storybook/](../.storybook/), [gallery/](browser-harness/gallery/) and [scenarios/](browser-harness/scenarios/). It excludes declarations, test/runner/fixture code, framework wrappers, dependencies and Node-only Storybook configuration. CSS and prose have no JavaScript counters. Independent production unit/integration scopes and 100% per-file thresholds remain unchanged.
 
-Complete CI requires all Storybook render/play/a11y checks, both complete browser projects, production gates and existing build/package checks. Affected selection is for local completion under the policy above. Its static scenario graph includes composed consumers; retained Storybook conservatively owns all authored source/story/runtime resources because the preview shares CSS and public-barrel imports. Missing ownership or unknown inputs trigger a complete fallback. See [selector limits](browser-harness/README.md#affected-selection) and [pilot measurements and fault probes](../docs/component-harness-verification.md). The separate manually dispatched diagnostic workflow remains on demand.
+Complete CI requires all Storybook render/play/a11y checks, both complete browser projects, production gates and existing build/package checks. Affected selection is for local completion under the policy above. Its static scenario graph includes composed consumers; retained Storybook conservatively owns all authored source/story/runtime resources because the preview shares CSS and public-barrel imports. Missing ownership or unknown inputs trigger a complete fallback. See [selector limits](browser-harness/README.md#affected-selection), [pilot measurements and fault probes](../docs/component-harness-verification.md), [the subsequent layout migration](../docs/layout-harness-migration.md), and [form-control migration](../docs/forms-harness-migration.md). The separate manually dispatched diagnostic workflow remains on demand.
 
 Exercise DOM-test cleanup with a reproducible shuffled order:
 

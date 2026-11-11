@@ -4,7 +4,7 @@ import catalog from '../catalog.json' with { type: 'json' };
 
 interface ScenarioOptions {
   theme?: 'corporate' | 'luna';
-  args?: Record<string, string | boolean>;
+  args?: Record<string, string | boolean | number>;
 }
 
 /**

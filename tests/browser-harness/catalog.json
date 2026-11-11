@@ -139,6 +139,410 @@
     "components-code-block--highlighted-markup": {
       "module": "tests/browser-harness/scenarios/CodeBlock.tsx",
       "export": "HighlightedMarkup"
+    },
+    "components-cluster--playground": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "Playground"
+    },
+    "components-cluster--gaps": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "Gaps"
+    },
+    "components-cluster--wrapping": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "Wrapping"
+    },
+    "components-cluster--alignments": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "Alignments"
+    },
+    "components-cluster--baseline": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "Baseline"
+    },
+    "components-cluster--justification": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "Justification"
+    },
+    "components-cluster--composition": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "Composition"
+    },
+    "components-cluster--both-themes": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "BothThemes"
+    },
+    "components-cluster--long-labels": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "LongLabels"
+    },
+    "components-cluster--hidden-children": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "HiddenChildren"
+    },
+    "components-cluster--nested": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "Nested"
+    },
+    "components-cluster--scoped-overrides": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "ScopedOverrides"
+    },
+    "components-cluster--right-to-left": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "RightToLeft"
+    },
+    "components-cluster--consumer-margins": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "ConsumerMargins"
+    },
+    "components-cluster--responsive-gap": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "ResponsiveGap"
+    },
+    "components-cluster--narrow-parents": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "NarrowParents"
+    },
+    "components-cluster--hidden": {
+      "module": "tests/browser-harness/scenarios/Cluster.tsx",
+      "export": "Hidden"
+    },
+    "components-container--playground": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "Playground"
+    },
+    "components-container--width-presets": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "WidthPresets"
+    },
+    "components-container--responsive-gutters": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "ResponsiveGutters"
+    },
+    "components-container--without-gutters": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "WithoutGutters"
+    },
+    "components-container--nesting": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "Nesting"
+    },
+    "components-container--token-overrides": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "TokenOverrides"
+    },
+    "components-container--composition": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "Composition"
+    },
+    "components-container--both-themes": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "BothThemes"
+    },
+    "components-container--narrow-parents": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "NarrowParents"
+    },
+    "components-container--hidden": {
+      "module": "tests/browser-harness/scenarios/Container.tsx",
+      "export": "Hidden"
+    },
+    "components-section--spacing-presets": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "SpacingPresets"
+    },
+    "components-section--composition": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "Composition"
+    },
+    "components-section--responsive": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "Responsive"
+    },
+    "components-section--both-themes": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "BothThemes"
+    },
+    "components-section--semantics": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "Semantics"
+    },
+    "components-section--scoped-overrides": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "ScopedOverrides"
+    },
+    "components-section--adjacent": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "Adjacent"
+    },
+    "components-section--child-margins": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "ChildMargins"
+    },
+    "components-section--nested": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "Nested"
+    },
+    "components-section--native-focus": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "NativeFocus"
+    },
+    "components-section--narrow-parents": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "NarrowParents"
+    },
+    "components-section--native-style-override": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "NativeStyleOverride"
+    },
+    "components-section--hidden": {
+      "module": "tests/browser-harness/scenarios/Section.tsx",
+      "export": "Hidden"
+    },
+    "components-simplegrid--reflow": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "Reflow"
+    },
+    "components-simplegrid--gaps": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "Gaps"
+    },
+    "components-simplegrid--sparse": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "Sparse"
+    },
+    "components-simplegrid--row-heights": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "RowHeights"
+    },
+    "components-simplegrid--composition": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "Composition"
+    },
+    "components-simplegrid--both-themes": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "BothThemes"
+    },
+    "components-simplegrid--customization": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "Customization"
+    },
+    "components-simplegrid--hidden-children": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "HiddenChildren"
+    },
+    "components-simplegrid--nested": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "Nested"
+    },
+    "components-simplegrid--right-to-left": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "RightToLeft"
+    },
+    "components-simplegrid--consumer-margins": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "ConsumerMargins"
+    },
+    "components-simplegrid--narrow-parents": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "NarrowParents"
+    },
+    "components-simplegrid--empty-and-single": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "EmptyAndSingle"
+    },
+    "components-simplegrid--hidden": {
+      "module": "tests/browser-harness/scenarios/SimpleGrid.tsx",
+      "export": "Hidden"
+    },
+    "components-separator--playground": {
+      "module": "tests/browser-harness/scenarios/Separator.tsx",
+      "export": "Playground"
+    },
+    "components-separator--semantic": {
+      "module": "tests/browser-harness/scenarios/Separator.tsx",
+      "export": "Semantic"
+    },
+    "components-separator--vertical": {
+      "module": "tests/browser-harness/scenarios/Separator.tsx",
+      "export": "Vertical"
+    },
+    "components-separator--composition": {
+      "module": "tests/browser-harness/scenarios/Separator.tsx",
+      "export": "Composition"
+    },
+    "components-separator--customization": {
+      "module": "tests/browser-harness/scenarios/Separator.tsx",
+      "export": "Customization"
+    },
+    "components-separator--hidden": {
+      "module": "tests/browser-harness/scenarios/Separator.tsx",
+      "export": "Hidden"
+    },
+    "components-separator--passive-semantics": {
+      "module": "tests/browser-harness/scenarios/Separator.tsx",
+      "export": "PassiveSemantics"
+    },
+    "components-checkbox--playground": {
+      "module": "tests/browser-harness/scenarios/Checkbox.tsx",
+      "export": "Playground"
+    },
+    "components-checkbox--checked": {
+      "module": "tests/browser-harness/scenarios/Checkbox.tsx",
+      "export": "Checked"
+    },
+    "components-checkbox--invalid": {
+      "module": "tests/browser-harness/scenarios/Checkbox.tsx",
+      "export": "Invalid"
+    },
+    "components-checkbox--group-selection": {
+      "module": "tests/browser-harness/scenarios/Checkbox.tsx",
+      "export": "GroupSelection"
+    },
+    "components-checkbox--keyboard": {
+      "module": "tests/browser-harness/scenarios/Checkbox.tsx",
+      "export": "Keyboard"
+    },
+    "components-checkbox--long-labels": {
+      "module": "tests/browser-harness/scenarios/Checkbox.tsx",
+      "export": "LongLabels"
+    },
+    "components-radio--playground": {
+      "module": "tests/browser-harness/scenarios/Radio.tsx",
+      "export": "Playground"
+    },
+    "components-radio--selected": {
+      "module": "tests/browser-harness/scenarios/Radio.tsx",
+      "export": "Selected"
+    },
+    "components-radio--group-selection": {
+      "module": "tests/browser-harness/scenarios/Radio.tsx",
+      "export": "GroupSelection"
+    },
+    "components-radio--native-form": {
+      "module": "tests/browser-harness/scenarios/Radio.tsx",
+      "export": "NativeForm"
+    },
+    "components-radio--both-themes": {
+      "module": "tests/browser-harness/scenarios/Radio.tsx",
+      "export": "BothThemes"
+    },
+    "components-radio--shared-error": {
+      "module": "tests/browser-harness/scenarios/Radio.tsx",
+      "export": "SharedError"
+    },
+    "components-radio--long-labels": {
+      "module": "tests/browser-harness/scenarios/Radio.tsx",
+      "export": "LongLabels"
+    },
+    "components-switch--playground": {
+      "module": "tests/browser-harness/scenarios/Switch.tsx",
+      "export": "Playground"
+    },
+    "components-switch--both-themes": {
+      "module": "tests/browser-harness/scenarios/Switch.tsx",
+      "export": "BothThemes"
+    },
+    "components-switch--keyboard": {
+      "module": "tests/browser-harness/scenarios/Switch.tsx",
+      "export": "Keyboard"
+    },
+    "components-switch--native-form": {
+      "module": "tests/browser-harness/scenarios/Switch.tsx",
+      "export": "NativeForm"
+    },
+    "components-switch--composition": {
+      "module": "tests/browser-harness/scenarios/Switch.tsx",
+      "export": "Composition"
+    },
+    "components-switch--disabled-group": {
+      "module": "tests/browser-harness/scenarios/Switch.tsx",
+      "export": "DisabledGroup"
+    },
+    "components-switch--customization": {
+      "module": "tests/browser-harness/scenarios/Switch.tsx",
+      "export": "Customization"
+    },
+    "components-switch--long-labels": {
+      "module": "tests/browser-harness/scenarios/Switch.tsx",
+      "export": "LongLabels"
+    },
+    "components-switch--right-to-left": {
+      "module": "tests/browser-harness/scenarios/Switch.tsx",
+      "export": "RightToLeft"
+    },
+    "components-textinput--playground": {
+      "module": "tests/browser-harness/scenarios/TextInput.tsx",
+      "export": "Playground"
+    },
+    "components-textinput--invalid": {
+      "module": "tests/browser-harness/scenarios/TextInput.tsx",
+      "export": "Invalid"
+    },
+    "components-textinput--keyboard-and-read-only": {
+      "module": "tests/browser-harness/scenarios/TextInput.tsx",
+      "export": "KeyboardAndReadOnly"
+    },
+    "components-textinput--descriptions": {
+      "module": "tests/browser-harness/scenarios/TextInput.tsx",
+      "export": "Descriptions"
+    },
+    "components-textinput--long-labels": {
+      "module": "tests/browser-harness/scenarios/TextInput.tsx",
+      "export": "LongLabels"
+    },
+    "components-textarea--playground": {
+      "module": "tests/browser-harness/scenarios/Textarea.tsx",
+      "export": "Playground"
+    },
+    "components-textarea--invalid": {
+      "module": "tests/browser-harness/scenarios/Textarea.tsx",
+      "export": "Invalid"
+    },
+    "components-textarea--read-only": {
+      "module": "tests/browser-harness/scenarios/Textarea.tsx",
+      "export": "ReadOnly"
+    },
+    "components-textarea--length-guidance": {
+      "module": "tests/browser-harness/scenarios/Textarea.tsx",
+      "export": "LengthGuidance"
+    },
+    "components-textarea--unlimited-count": {
+      "module": "tests/browser-harness/scenarios/Textarea.tsx",
+      "export": "UnlimitedCount"
+    },
+    "components-textarea--controlled": {
+      "module": "tests/browser-harness/scenarios/Textarea.tsx",
+      "export": "Controlled"
+    },
+    "components-textarea--native-form": {
+      "module": "tests/browser-harness/scenarios/Textarea.tsx",
+      "export": "NativeForm"
+    },
+    "components-textarea--reset-ownership": {
+      "module": "tests/browser-harness/scenarios/Textarea.tsx",
+      "export": "ResetOwnership"
+    },
+    "components-textarea--long-labels": {
+      "module": "tests/browser-harness/scenarios/Textarea.tsx",
+      "export": "LongLabels"
+    },
+    "components-select--selected": {
+      "module": "tests/browser-harness/scenarios/Select.tsx",
+      "export": "Selected"
+    },
+    "components-select--invalid": {
+      "module": "tests/browser-harness/scenarios/Select.tsx",
+      "export": "Invalid"
+    },
+    "components-select--groups-and-descriptions": {
+      "module": "tests/browser-harness/scenarios/Select.tsx",
+      "export": "GroupsAndDescriptions"
+    },
+    "components-select--long-labels": {
+      "module": "tests/browser-harness/scenarios/Select.tsx",
+      "export": "LongLabels"
     }
   },
   "suites": [
@@ -242,22 +646,61 @@
       "scenarios": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/checkbox/Checkbox.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/checkbox/Checkbox.spec.ts",
+      "scenarios": [
+        "components-checkbox--keyboard",
+        "components-checkbox--long-labels",
+        "components-checkbox--invalid",
+        "components-checkbox--group-selection",
+        "components-checkbox--playground",
+        "components-checkbox--checked"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/cluster/Cluster.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/cluster/Cluster.spec.ts",
+      "scenarios": [
+        "components-cluster--gaps",
+        "components-cluster--wrapping",
+        "components-cluster--long-labels",
+        "components-cluster--alignments",
+        "components-cluster--baseline",
+        "components-cluster--justification",
+        "components-cluster--playground",
+        "components-cluster--hidden-children",
+        "components-cluster--consumer-margins",
+        "components-cluster--nested",
+        "components-cluster--scoped-overrides",
+        "components-cluster--responsive-gap",
+        "components-cluster--narrow-parents",
+        "components-cluster--composition",
+        "components-cluster--right-to-left",
+        "components-cluster--both-themes",
+        "components-cluster--hidden"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/container/Container.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/container/Container.spec.ts",
+      "scenarios": [
+        "components-container--width-presets",
+        "components-container--responsive-gutters",
+        "components-container--without-gutters",
+        "components-container--composition",
+        "components-container--playground",
+        "components-container--nesting",
+        "components-container--token-overrides",
+        "components-container--narrow-parents",
+        "components-container--both-themes",
+        "components-container--hidden"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "chromium",
@@ -296,34 +739,89 @@
       "scenarios": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/radio/Radio.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/radio/Radio.spec.ts",
+      "scenarios": [
+        "components-radio--group-selection",
+        "components-radio--long-labels",
+        "components-radio--shared-error",
+        "components-radio--playground",
+        "components-radio--native-form",
+        "components-radio--selected",
+        "components-radio--both-themes"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/section/Section.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/section/Section.spec.ts",
+      "scenarios": [
+        "components-section--spacing-presets",
+        "components-section--responsive",
+        "components-section--composition",
+        "components-section--semantics",
+        "components-section--scoped-overrides",
+        "components-section--adjacent",
+        "components-section--child-margins",
+        "components-section--nested",
+        "components-section--native-focus",
+        "components-section--both-themes",
+        "components-section--narrow-parents",
+        "components-section--native-style-override",
+        "components-section--hidden"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/select/Select.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/select/Select.spec.ts",
+      "scenarios": [
+        "components-select--long-labels",
+        "components-select--invalid",
+        "components-select--groups-and-descriptions",
+        "components-select--selected"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/separator/Separator.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/separator/Separator.spec.ts",
+      "scenarios": [
+        "components-separator--semantic",
+        "components-separator--vertical",
+        "components-separator--composition",
+        "components-separator--playground",
+        "components-separator--customization",
+        "components-separator--hidden",
+        "components-separator--passive-semantics"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/simple-grid/SimpleGrid.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/simple-grid/SimpleGrid.spec.ts",
+      "scenarios": [
+        "components-simplegrid--reflow",
+        "components-simplegrid--gaps",
+        "components-simplegrid--composition",
+        "components-simplegrid--sparse",
+        "components-simplegrid--empty-and-single",
+        "components-simplegrid--row-heights",
+        "components-simplegrid--customization",
+        "components-simplegrid--hidden-children",
+        "components-simplegrid--nested",
+        "components-simplegrid--right-to-left",
+        "components-simplegrid--both-themes",
+        "components-simplegrid--consumer-margins",
+        "components-simplegrid--narrow-parents",
+        "components-simplegrid--hidden"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "chromium",
@@ -332,22 +830,51 @@
       "scenarios": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/switch/Switch.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/switch/Switch.spec.ts",
+      "scenarios": [
+        "components-switch--keyboard",
+        "components-switch--playground",
+        "components-switch--long-labels",
+        "components-switch--native-form",
+        "components-switch--right-to-left",
+        "components-switch--composition",
+        "components-switch--disabled-group",
+        "components-switch--both-themes",
+        "components-switch--customization"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/text-input/TextInput.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/text-input/TextInput.spec.ts",
+      "scenarios": [
+        "components-textinput--keyboard-and-read-only",
+        "components-textinput--long-labels",
+        "components-textinput--invalid",
+        "components-textinput--descriptions",
+        "components-textinput--playground"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/textarea/Textarea.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/textarea/Textarea.spec.ts",
+      "scenarios": [
+        "components-textarea--native-form",
+        "components-textarea--long-labels",
+        "components-textarea--invalid",
+        "components-textarea--playground",
+        "components-textarea--controlled",
+        "components-textarea--reset-ownership",
+        "components-textarea--unlimited-count",
+        "components-textarea--length-guidance",
+        "components-textarea--read-only"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "chromium",

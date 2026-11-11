@@ -1,6 +1,6 @@
 import type { Locator } from '@playwright/test';
 import { expect, test } from '../../fixtures/test';
-import { openStory } from '../../fixtures/storybook';
+import { openScenario } from '../../fixtures/scenario';
 
 /**
  * Read the rendered outer box and its available parent content width.
@@ -18,9 +18,9 @@ async function geometry(locator: Locator) {
 }
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} Container width presets include gutters and center`, async ({ page }) => {
+  test(`${theme} Container width presets include gutters and center`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 1800, height: 900 });
-    await openStory(page, 'components-container--width-presets', { theme });
+    await openScenario(mount, 'components-container--width-presets', { theme });
     for (const [size, width] of [['reading', 720], ['content', 1120], ['wide', 1440]] as const) {
       await test.step(`${theme} ${size} maximum includes gutters and centers within its parent`, async () => {
         const box = await geometry(page.getByTestId(`preset-${size}`));
@@ -34,9 +34,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     }
   });
 
-  test(`${theme} gutters change at exactly 600px while the outer box still fills its parent`, async ({ page }) => {
+  test(`${theme} gutters change at exactly 600px while the outer box still fills its parent`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 599, height: 900 });
-    await openStory(page, 'components-container--responsive-gutters', { theme });
+    await openScenario(mount, 'components-container--responsive-gutters', { theme });
     const container = page.getByTestId('responsive-container');
     await expect(container).toHaveCSS('padding-inline-start', '16px');
     await expect(container).toHaveCSS('padding-inline-end', '16px');
@@ -49,9 +49,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     expect(above.width).toBe(above.parent);
   });
 
-  test(`${theme} gutter opt-out preserves content maximum and centering`, async ({ page }) => {
+  test(`${theme} gutter opt-out preserves content maximum and centering`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 1800, height: 900 });
-    await openStory(page, 'components-container--without-gutters', { theme });
+    await openScenario(mount, 'components-container--without-gutters', { theme });
     const box = await geometry(page.getByTestId('without-gutters'));
     expect(box.width).toBe(1120);
     expect(box.start).toBe(box.end);
@@ -60,9 +60,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     expect(box.paddingEnd).toBe('0px');
   });
 
-  test(`${theme} representative content reflows at 320px with enlarged and spaced text`, async ({ page }) => {
+  test(`${theme} representative content reflows at 320px with enlarged and spaced text`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 1000 });
-    await openStory(page, 'components-container--composition', { theme });
+    await openScenario(mount, 'components-container--composition', { theme });
     await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
     await expect(page.getByRole('textbox', { name: 'Project name' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Save changes' })).toBeVisible();
@@ -73,9 +73,9 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-test('default Container stays a passive block without adding a surface, section role or vertical inset', async ({ page }) => {
+test('default Container stays a passive block without adding a surface, section role or vertical inset', async ({ page, mount }) => {
   await page.setViewportSize({ width: 1800, height: 900 });
-  await openStory(page, 'components-container--playground');
+  await openScenario(mount, 'components-container--playground');
   const container = page.locator('.fs-container');
   await expect(container).toHaveCSS('width', '1120px');
   await expect(container).toHaveCSS('display', 'block');
@@ -89,9 +89,9 @@ test('default Container stays a passive block without adding a surface, section 
   await expect(container).not.toHaveAttribute('role');
 });
 
-test('nested Containers avoid doubled gutters while retaining independent width constraints', async ({ page }) => {
+test('nested Containers avoid doubled gutters while retaining independent width constraints', async ({ page, mount }) => {
   await page.setViewportSize({ width: 1800, height: 900 });
-  await openStory(page, 'components-container--nesting');
+  await openScenario(mount, 'components-container--nesting');
   const inner = page.getByTestId('inner-container');
   await expect(page.getByTestId('outer-container')).toHaveCSS('width', '1120px');
   await expect(inner).toHaveCSS('width', '720px');
@@ -103,9 +103,9 @@ test('nested Containers avoid doubled gutters while retaining independent width 
   await expect(page.getByTestId('outer-container')).toHaveCSS('padding-inline-start', '16px');
 });
 
-test('scoped Container tokens inherit while nested explicit themes and siblings restore defaults', async ({ page }) => {
+test('scoped Container tokens inherit while nested explicit themes and siblings restore defaults', async ({ page, mount }) => {
   await page.setViewportSize({ width: 1800, height: 900 });
-  await openStory(page, 'components-container--token-overrides');
+  await openScenario(mount, 'components-container--token-overrides');
   await expect(page.getByTestId('scoped-container')).toHaveCSS('width', '800px');
   await expect(page.getByTestId('scoped-container')).toHaveCSS('padding-inline-start', '32px');
   await expect(page.getByTestId('reset-container')).toHaveCSS('max-width', '1120px');
@@ -117,8 +117,8 @@ test('scoped Container tokens inherit while nested explicit themes and siblings 
   await expect(page.getByTestId('reset-container')).toHaveCSS('padding-inline-start', '16px');
 });
 
-test('Container shrinks in narrow flex/grid parents with viewport-based gutters', async ({ page }) => {
-  await openStory(page, 'components-container--narrow-parents');
+test('Container shrinks in narrow flex/grid parents with viewport-based gutters', async ({ page, mount }) => {
+  await openScenario(mount, 'components-container--narrow-parents');
   await expect(page.getByTestId('flex-container')).toHaveCSS('width', '160px');
   await expect(page.getByTestId('grid-container')).toHaveCSS('width', '160px');
   await expect(page.getByTestId('flex-container')).toHaveCSS('min-width', '0px');
@@ -126,9 +126,9 @@ test('Container shrinks in narrow flex/grid parents with viewport-based gutters'
   await expect(page.getByTestId('flex-container')).toHaveCSS('padding-inline-start', '24px');
 });
 
-test('Container uses symmetric logical gutters and centering in RTL', async ({ page }) => {
+test('Container uses symmetric logical gutters and centering in RTL', async ({ page, mount }) => {
   await page.setViewportSize({ width: 1800, height: 900 });
-  await openStory(page, 'components-container--width-presets');
+  await openScenario(mount, 'components-container--width-presets');
   await page.addStyleTag({ content: 'html { direction: rtl; }' });
   const box = await geometry(page.getByTestId('preset-reading'));
   expect(box.width).toBe(720);
@@ -137,16 +137,16 @@ test('Container uses symmetric logical gutters and centering in RTL', async ({ p
   expect(box.paddingEnd).toBe('24px');
 });
 
-test('theme changes preserve Container geometry', async ({ page }) => {
-  await openStory(page, 'components-container--both-themes');
+test('theme changes preserve Container geometry', async ({ page, mount }) => {
+  await openScenario(mount, 'components-container--both-themes');
   const corporate = await geometry(page.locator('[data-theme="corporate"].theme-panel .fs-container'));
   const luna = await geometry(page.locator('[data-theme="luna"].theme-panel .fs-container'));
   expect(luna).toEqual(corporate);
 });
 
-test('Container preserves keyboard order and clears focus rings without clipping', async ({ page }) => {
+test('Container preserves keyboard order and clears focus rings without clipping', async ({ page, mount }) => {
   await page.setViewportSize({ width: 320, height: 1000 });
-  await openStory(page, 'components-container--composition');
+  await openScenario(mount, 'components-container--composition');
   await page.getByRole('textbox', { name: 'Project name' }).focus();
   await page.keyboard.press('Tab');
   const button = page.getByRole('button', { name: 'Save changes' });
@@ -166,7 +166,7 @@ test('Container preserves keyboard order and clears focus rings without clipping
   await expect(page.getByRole('button', { name: 'Cancel' })).toBeFocused();
 });
 
-test('native hidden suppresses Container and its children', async ({ page }) => {
-  await openStory(page, 'components-container--hidden');
+test('native hidden suppresses Container and its children', async ({ page, mount }) => {
+  await openScenario(mount, 'components-container--hidden');
   await expect(page.locator('.fs-container')).toHaveCSS('display', 'none');
 });

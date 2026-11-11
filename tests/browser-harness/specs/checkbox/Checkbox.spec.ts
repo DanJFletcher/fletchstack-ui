@@ -1,9 +1,9 @@
 import { expect, test } from '../../fixtures/test';
-import { openStory } from '../../fixtures/storybook';
+import { openScenario } from '../../fixtures/scenario';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} Checkbox uses native Space and Tab behavior`, async ({ page }) => {
-    await openStory(page, 'components-checkbox--keyboard', { theme });
+  test(`${theme} Checkbox uses native Space and Tab behavior`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-checkbox--keyboard', { theme });
     const email = page.getByRole('checkbox', { name: 'Email updates' });
     await email.focus();
     const initial = await email.isChecked();
@@ -18,9 +18,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(email).toBeChecked({ checked: initial });
   });
 
-  test(`${theme} Checkbox reflows enlarged labels and descriptions`, async ({ page }) => {
+  test(`${theme} Checkbox reflows enlarged labels and descriptions`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 900 });
-    await openStory(page, 'components-checkbox--long-labels', { theme });
+    await openScenario(mount, 'components-checkbox--long-labels', { theme });
     await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
     const checkbox = page.getByRole('checkbox');
 
@@ -31,8 +31,8 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(checkbox).toHaveCSS('width', '20px');
   });
 
-  test(`${theme} Checkbox keeps its invalid boundary on hover`, async ({ page }) => {
-    await openStory(page, 'components-checkbox--invalid', { theme });
+  test(`${theme} Checkbox keeps its invalid boundary on hover`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-checkbox--invalid', { theme });
     const checkbox = page.getByRole('checkbox', { name: 'Email updates' });
 
     await checkbox.hover();
@@ -41,8 +41,8 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-test('Select all reflects none, partial, and all child choices', async ({ page }) => {
-  await openStory(page, 'components-checkbox--group-selection');
+test('Select all reflects none, partial, and all child choices', async ({ page, mount }) => {
+  await openScenario(mount, 'components-checkbox--group-selection');
   const group = page.getByRole('group', { name: 'Notification channels' });
   const all = group.getByRole('checkbox', { name: 'Select all' });
   await expect(all).toBeChecked({ indeterminate: true });
@@ -58,8 +58,8 @@ test('Select all reflects none, partial, and all child choices', async ({ page }
   await expect(group.getByRole('checkbox', { checked: false })).toHaveCount(4);
 });
 
-test('Checkbox matches the reference control, target, and label gap', async ({ page }) => {
-  await openStory(page, 'components-checkbox--playground');
+test('Checkbox matches the reference control, target, and label gap', async ({ page, mount }) => {
+  await openScenario(mount, 'components-checkbox--playground');
 
   await expect(page.getByRole('checkbox')).toHaveCSS('width', '20px');
   await expect(page.getByRole('checkbox')).toHaveCSS('height', '20px');
@@ -69,8 +69,8 @@ test('Checkbox matches the reference control, target, and label gap', async ({ p
   await expect(page.getByRole('checkbox')).toBeChecked();
 });
 
-test('Checkbox marks retain system contrast when hovered in forced colors', async ({ page }) => {
-  await openStory(page, 'components-checkbox--checked');
+test('Checkbox marks retain system contrast when hovered in forced colors', async ({ page, mount }) => {
+  await openScenario(mount, 'components-checkbox--checked');
   await page.emulateMedia({ forcedColors: 'active' });
   const checkbox = page.getByRole('checkbox');
 

@@ -1,9 +1,9 @@
 import { expect, test } from '../../fixtures/test';
-import { openStory } from '../../fixtures/storybook';
+import { openScenario } from '../../fixtures/scenario';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} Radio arrows select exclusively and skip disabled options`, async ({ page }) => {
-    await openStory(page, 'components-radio--group-selection', { theme });
+  test(`${theme} Radio arrows select exclusively and skip disabled options`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-radio--group-selection', { theme });
     const standard = page.getByRole('radio', { name: 'Standard delivery' });
     const express = page.getByRole('radio', { name: 'Express delivery' });
     await standard.click();
@@ -23,9 +23,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(express).toBeChecked();
   });
 
-  test(`${theme} Radio reflows at 320px with enlarged and spaced text`, async ({ page }) => {
+  test(`${theme} Radio reflows at 320px with enlarged and spaced text`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 900 });
-    await openStory(page, 'components-radio--long-labels', { theme });
+    await openScenario(mount, 'components-radio--long-labels', { theme });
     await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
     await page.getByRole('radio').focus();
     await expect(page.getByRole('radio')).toBeFocused();
@@ -33,8 +33,8 @@ for (const theme of ['corporate', 'luna'] as const) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   });
 
-  test(`${theme} Radio keeps error and group message relationships`, async ({ page }) => {
-    await openStory(page, 'components-radio--shared-error', { theme });
+  test(`${theme} Radio keeps error and group message relationships`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-radio--shared-error', { theme });
     const input = page.getByRole('radio', { name: 'Standard delivery' });
     await input.hover();
     await expect(input).toHaveAccessibleDescription('Choose a delivery method.');
@@ -46,8 +46,8 @@ for (const theme of ['corporate', 'luna'] as const) {
   });
 }
 
-test('Radio matches circular geometry and its clickable target', async ({ page }) => {
-  await openStory(page, 'components-radio--playground');
+test('Radio matches circular geometry and its clickable target', async ({ page, mount }) => {
+  await openScenario(mount, 'components-radio--playground');
   const input = page.getByRole('radio');
   await expect(input).toHaveCSS('width', '20px');
   await expect(input).toHaveCSS('height', '20px');
@@ -58,8 +58,10 @@ test('Radio matches circular geometry and its clickable target', async ({ page }
   await expect(input).toBeChecked();
 });
 
-test('Radio native form submits external options and resets to defaults', async ({ page }) => {
-  await openStory(page, 'components-radio--native-form');
+test('Radio native form submits external options and resets to defaults', async ({ page, mount }) => {
+  await openScenario(mount, 'components-radio--native-form');
+  await page.getByRole('radio', { name: 'Collection' }).click();
+  await page.getByRole('button', { name: 'Save delivery' }).click();
   await expect(page.getByLabel('Submitted delivery')).toHaveText('collection');
   await page.getByRole('button', { name: 'Reset', exact: true }).click();
   await expect(page.getByRole('radio', { name: 'Standard delivery' })).toBeChecked();
@@ -67,8 +69,8 @@ test('Radio native form submits external options and resets to defaults', async 
   await expect(page.getByLabel('Submitted delivery')).toHaveText('standard');
 });
 
-test('Radio selected dot and focus remain visible in forced colors', async ({ page }) => {
-  await openStory(page, 'components-radio--selected');
+test('Radio selected dot and focus remain visible in forced colors', async ({ page, mount }) => {
+  await openScenario(mount, 'components-radio--selected');
   await page.emulateMedia({ forcedColors: 'active' });
   const input = page.getByRole('radio');
   await input.hover();
@@ -79,8 +81,8 @@ test('Radio selected dot and focus remain visible in forced colors', async ({ pa
   })).toBe(true);
 });
 
-test('Radio scoped themes remain independent', async ({ page }) => {
-  await openStory(page, 'components-radio--both-themes');
+test('Radio scoped themes remain independent', async ({ page, mount }) => {
+  await openScenario(mount, 'components-radio--both-themes');
   const corporate = page.locator('[data-theme="corporate"].theme-panel');
   const luna = page.locator('[data-theme="luna"].theme-panel');
   await corporate.getByRole('radio', { name: 'Express delivery' }).click();

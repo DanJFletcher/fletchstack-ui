@@ -59,12 +59,44 @@ it('selects direct and transitive Button consumers, while excluding unrelated ha
   const result = selectBrowserTests({ ...ownership, changes: [{ path: 'src/components/button/Button.tsx', status: 'M' }] });
   expect(result.mode).toBe('selected');
   expect(result.suites.filter(suite => suite.project === 'components').map(suite => suite.file)).toEqual([
-    'tests/browser-harness/specs/button/Button.spec.ts', 'tests/browser-harness/specs/code-block/CodeBlock.spec.ts',
-    'tests/browser-harness/specs/harness/lifecycle.spec.ts', 'tests/browser-harness/specs/stack/Stack.spec.ts',
+    'tests/browser-harness/specs/button/Button.spec.ts', 'tests/browser-harness/specs/cluster/Cluster.spec.ts',
+    'tests/browser-harness/specs/code-block/CodeBlock.spec.ts', 'tests/browser-harness/specs/container/Container.spec.ts',
+    'tests/browser-harness/specs/harness/lifecycle.spec.ts', 'tests/browser-harness/specs/radio/Radio.spec.ts',
+    'tests/browser-harness/specs/section/Section.spec.ts',
+    'tests/browser-harness/specs/separator/Separator.spec.ts', 'tests/browser-harness/specs/simple-grid/SimpleGrid.spec.ts',
+    'tests/browser-harness/specs/stack/Stack.spec.ts', 'tests/browser-harness/specs/switch/Switch.spec.ts',
+    'tests/browser-harness/specs/textarea/Textarea.spec.ts',
   ]);
   expect(result.suites.filter(suite => suite.project === 'chromium')).toEqual(ownership.inventory.filter(suite => suite.project === 'chromium'));
   const scoped = selectBrowserTests({ ...ownership, changes: [{ path: 'src/components/code-block/code-block.css', status: 'M' }] });
   expect(scoped.suites.filter(suite => suite.project === 'components').map(suite => suite.file)).toEqual(['tests/browser-harness/specs/code-block/CodeBlock.spec.ts', 'tests/browser-harness/specs/harness/lifecycle.spec.ts']);
+});
+
+it.each([
+  ['Cluster', 'cluster'], ['Container', 'container'], ['Section', 'section'],
+  ['SimpleGrid', 'simple-grid'], ['Separator', 'separator'],
+  ['Checkbox', 'checkbox'], ['Radio', 'radio'], ['Switch', 'switch'],
+  ['TextInput', 'text-input'], ['Textarea', 'textarea'], ['Select', 'select'],
+])('selects only the %s suite for its private scenario edit', (name, family) => {
+  const ownership = discoverOwnership(process.cwd());
+  const result = selectBrowserTests({ ...ownership, changes: [{ path: `tests/browser-harness/scenarios/${name}.tsx`, status: 'M' }] });
+  expect(result.mode).toBe('selected');
+  expect(result.suites).toEqual([{ project: 'components', file: `tests/browser-harness/specs/${family}/${name}.spec.ts` }]);
+});
+
+it.each([
+  ['src/components/cluster/cluster.css', ['cluster/Cluster', 'section/Section', 'simple-grid/SimpleGrid']],
+  ['src/components/container/Container.tsx', ['cluster/Cluster', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
+  ['src/components/separator/separator.css', ['separator/Separator']],
+  ['src/components/checkbox/checkbox.css', ['checkbox/Checkbox', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
+  ['src/components/text-input/TextInput.tsx', ['cluster/Cluster', 'container/Container', 'stack/Stack', 'text-input/TextInput']],
+  ['src/components/form-group/FormGroup.tsx', ['radio/Radio', 'stack/Stack', 'switch/Switch']],
+])('includes composed consumers for %s without selecting unrelated harness families', (path, consumers) => {
+  const ownership = discoverOwnership(process.cwd());
+  const result = selectBrowserTests({ ...ownership, changes: [{ path, status: 'M' }] });
+  expect(result.mode).toBe('selected');
+  expect(result.suites.filter(suite => suite.project === 'components').map(suite => suite.file)).toEqual(consumers.map(consumer => `tests/browser-harness/specs/${consumer}.spec.ts`));
+  expect(result.suites.filter(suite => suite.project === 'chromium')).toEqual(ownership.inventory.filter(suite => suite.project === 'chromium'));
 });
 
 it.each(['tokens/themes.json', 'src/generated/tokens.css', 'playwright.config.ts', 'package-lock.json', 'src/index.ts', 'unknown-resource.svg'])('falls back for shared or unproven input %s', path => {

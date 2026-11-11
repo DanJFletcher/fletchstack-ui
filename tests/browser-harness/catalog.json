@@ -959,6 +959,10 @@
     "components-button--both-themes": {
       "module": "tests/browser-harness/scenarios/Themes.tsx",
       "export": "BothThemes"
+    },
+    "components-icon--gallery": {
+      "module": "tests/browser-harness/scenarios/IconGallery.tsx",
+      "export": "Gallery"
     }
   },
   "suites": [
@@ -1466,6 +1470,15 @@
       "project": "components",
       "scenarios": [
         "components-button--both-themes"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "file": "tests/browser-harness/specs/icon/IconGallery.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "components-icon--gallery"
       ],
       "roots": [],
       "resources": []

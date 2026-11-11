@@ -1,6 +1,7 @@
 import { useId, useRef, useState } from 'react';
 import type { ChangeEventHandler, RefObject } from 'react';
-import { CloseIcon, Icon, type IconSize } from '../../../index';
+import { CloseIcon } from '../named/CloseIcon';
+import { Icon, type IconSize } from '../Icon';
 import { catalog } from './icon-catalog';
 
 type GalleryEntry = (typeof catalog)[number];

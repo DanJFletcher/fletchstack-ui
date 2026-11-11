@@ -122,7 +122,7 @@ it.each([
   ['TextInput', 'text-input'], ['Textarea', 'textarea'], ['Select', 'select'],
   ['Badge', 'badge'], ['Spinner', 'spinner'], ['ButtonGroup', 'button-group'], ['FormGroup', 'form-group'],
   ['Field', 'field'],
-  ['Card', 'card'], ['Icon', 'icon'],
+  ['Card', 'card'], ['Icon', 'icon'], ['IconGallery', 'icon'],
   ['AspectRatio', 'aspect-ratio'], ['Link', 'link'], ['SpatialSystem', 'spatial'],
 ])('selects only the %s suite for its private scenario edit', (name, family) => {
   const ownership = repositoryOwnership;
@@ -144,18 +144,21 @@ it.each([
   ['src/components/field/stories/field-atoms.css', ['field/FieldAtoms']],
   ['src/components/card/Card.tsx', ['aspect-ratio/AspectRatio', 'card/Card', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid']],
   ['src/components/card/stories/card.stories.css', ['card/Card']],
-  ['src/components/icon/named/MoonIcon.tsx', ['button/Button', 'harness/lifecycle', 'icon/Icon']],
+  ['src/components/icon/named/MoonIcon.tsx', ['button/Button', 'harness/lifecycle', 'icon/Icon', 'icon/IconGallery']],
   ['src/components/aspect-ratio/stories/landscape.svg', ['aspect-ratio/AspectRatio']],
   ['src/components/aspect-ratio/aspect-ratio.css', ['aspect-ratio/AspectRatio']],
   ['src/components/simple-grid/SimpleGrid.tsx', ['aspect-ratio/AspectRatio', 'section/Section', 'simple-grid/SimpleGrid']],
   ['src/components/typography/Heading.tsx', ['button-group/ButtonGroup', 'code-block/CodeBlock', 'harness/lifecycle', 'typography/Typography']],
   ['src/components/typography/Text.tsx', ['button-group/ButtonGroup', 'code-block/CodeBlock', 'harness/lifecycle', 'typography/Typography']],
   ['src/components/typography/typography.css', ['button-group/ButtonGroup', 'code-block/CodeBlock', 'harness/lifecycle', 'typography/Typography']],
+  ['src/components/icon/stories/icon-gallery.tsx', ['icon/IconGallery']],
+  ['src/components/icon/stories/icon-gallery.css', ['icon/IconGallery']],
+  ['src/components/icon/stories/icon-catalog.ts', ['icon/IconGallery']],
   ['stories/foundations/spatial.stories.css', ['spatial/SpatialSystem']],
-  ['src/components/icon/named/CheckIcon.tsx', ['badge/Badge', 'checkbox/Checkbox', 'field/Field', 'form-group/FormGroup', 'icon/Icon', 'section/Section', 'simple-grid/SimpleGrid', 'spatial/SpatialSystem', 'stack/Stack']],
+  ['src/components/icon/named/CheckIcon.tsx', ['badge/Badge', 'checkbox/Checkbox', 'field/Field', 'form-group/FormGroup', 'icon/Icon', 'icon/IconGallery', 'section/Section', 'simple-grid/SimpleGrid', 'spatial/SpatialSystem', 'stack/Stack']],
   ['src/components/link/Link.tsx', ['link/Link', 'typography/Typography']],
   ['src/components/link/link.css', ['link/Link', 'typography/Typography']],
-  ['src/components/icon/named/ArrowRightIcon.tsx', ['icon/Icon', 'link/Link']],
+  ['src/components/icon/named/ArrowRightIcon.tsx', ['icon/Icon', 'icon/IconGallery', 'link/Link']],
   ['src/components/typography/stories/typography.stories.css', ['typography/Typography']],
 ])('includes composed consumers for %s without selecting unrelated harness families', (path, consumers) => {
   const ownership = repositoryOwnership;

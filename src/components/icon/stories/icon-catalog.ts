@@ -1,5 +1,13 @@
 import type { ComponentType } from 'react';
-import { ArrowRightIcon, CheckIcon, ChevronDownIcon, CloseIcon, ExternalLinkIcon, MoonIcon, PlusIcon, SunIcon, type NamedIconProps } from '../../../index';
+import { ArrowRightIcon } from '../named/ArrowRightIcon';
+import { CheckIcon } from '../named/CheckIcon';
+import { ChevronDownIcon } from '../named/ChevronDownIcon';
+import { CloseIcon } from '../named/CloseIcon';
+import { ExternalLinkIcon } from '../named/ExternalLinkIcon';
+import { MoonIcon } from '../named/MoonIcon';
+import { PlusIcon } from '../named/PlusIcon';
+import { SunIcon } from '../named/SunIcon';
+import type { NamedIconProps } from '../Icon';
 
 interface CatalogEntry {
   name: string;

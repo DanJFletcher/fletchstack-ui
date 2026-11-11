@@ -963,6 +963,42 @@
     "components-icon--gallery": {
       "module": "tests/browser-harness/scenarios/IconGallery.tsx",
       "export": "Gallery"
+    },
+    "components-avatar--playground": {
+      "module": "tests/browser-harness/scenarios/Avatar.tsx",
+      "export": "Playground"
+    },
+    "components-avatar--photo": {
+      "module": "tests/browser-harness/scenarios/Avatar.tsx",
+      "export": "Photo"
+    },
+    "components-avatar--failed": {
+      "module": "tests/browser-harness/scenarios/Avatar.tsx",
+      "export": "Failed"
+    },
+    "components-avatar--sizes": {
+      "module": "tests/browser-harness/scenarios/Avatar.tsx",
+      "export": "Sizes"
+    },
+    "components-avatar--shapes": {
+      "module": "tests/browser-harness/scenarios/Avatar.tsx",
+      "export": "Shapes"
+    },
+    "components-avatar--composition": {
+      "module": "tests/browser-harness/scenarios/Avatar.tsx",
+      "export": "Composition"
+    },
+    "components-avatar--source-changes": {
+      "module": "tests/browser-harness/scenarios/Avatar.tsx",
+      "export": "SourceChanges"
+    },
+    "components-avatar--scopes": {
+      "module": "tests/browser-harness/scenarios/Avatar.tsx",
+      "export": "Scopes"
+    },
+    "components-avatar--keyboard": {
+      "module": "tests/browser-harness/scenarios/Avatar.tsx",
+      "export": "Keyboard"
     }
   },
   "suites": [
@@ -1479,6 +1515,23 @@
       "project": "components",
       "scenarios": [
         "components-icon--gallery"
+      ],
+      "roots": [],
+      "resources": []
+    },
+    {
+      "file": "tests/browser-harness/specs/avatar/Avatar.spec.ts",
+      "project": "components",
+      "scenarios": [
+        "components-avatar--playground",
+        "components-avatar--photo",
+        "components-avatar--failed",
+        "components-avatar--sizes",
+        "components-avatar--shapes",
+        "components-avatar--composition",
+        "components-avatar--source-changes",
+        "components-avatar--scopes",
+        "components-avatar--keyboard"
       ],
       "roots": [],
       "resources": []

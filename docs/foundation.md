@@ -135,3 +135,7 @@ The supplied AspectRatio pattern adds passive proportional geometry for images, 
 ## Section
 
 The supplied Section pattern adds semantic page regions with compact 32px, default 64px and spacious 96px block padding. Independent Section semantic roles reference existing primitives in both themes. Section stays transparent, supplies no inline gutters or child layout, and supports a div alternative for visual grouping. See the [Section contract](./section.md) and [spatial guide](./spatial-system.md).
+
+## Avatar pattern
+
+The supplied Avatar reference approves a passive identity image with photo/generated/custom-initial fallbacks, four fixed footprints and three shapes. The [Avatar contract](avatar.md) records image lifecycle, accessible naming/decorative use, semantic `avatar.*` roles, and parent-owned profile composition. These roles are independent of status badges and SVG icon sizing.

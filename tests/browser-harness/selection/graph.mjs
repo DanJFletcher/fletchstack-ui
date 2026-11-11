@@ -1,7 +1,7 @@
 import { readFileSync, existsSync, statSync } from 'node:fs';
 import { dirname, resolve, relative } from 'node:path';
 import ts from 'typescript';
-import { provenForwardedHrefs } from './forwarded-href.mjs';
+import { provenForwardedResources } from './forwarded-href.mjs';
 
 /**
  * Resolve local code and CSS resources without executing or transforming modules.
@@ -46,10 +46,10 @@ function codeImports(source, file) {
  **/
 function inspectJsxResource(node, ast, { unknown, forwarded }) {
   if (!ts.isJsxAttribute(node) || !['src', 'srcSet', 'poster', 'href'].includes(node.name.getText(ast))) { return; }
-  if (node.initializer && ts.isStringLiteral(node.initializer) && (/^(?:#|data:)/.test(node.initializer.text) || node.name.getText(ast) === 'href' && /^(?:$|https?:\/\/)/.test(node.initializer.text))) { return; }
+  if (node.initializer && ts.isStringLiteral(node.initializer) && (/^(?:#|data:)/.test(node.initializer.text) || ['href', 'src'].includes(node.name.getText(ast)) && /^(?:$|https?:\/\/)/.test(node.initializer.text))) { return; }
   const value = node.initializer && ts.isJsxExpression(node.initializer) ? node.initializer.expression : undefined;
   if (value && ts.isPropertyAccessExpression(value) && value.name.text === 'href' && isModuleUrl(value.expression, ast)) { return; }
-  if (node.name.getText(ast) === 'href' && node.parent.parent.tagName.getText(ast) === 'a' && value && ts.isIdentifier(value)) { forwarded.push(node.pos); return; }
+  if (value && ts.isIdentifier(value) && (node.name.getText(ast) === 'src' || node.name.getText(ast) === 'href' && node.parent.parent.tagName.getText(ast) === 'a')) { forwarded.push(node.pos); return; }
   unknown.push('Document-relative or dynamic JSX resource');
 }
 
@@ -107,7 +107,7 @@ export function dependencyGraph(entries, root) {
     unknown.push(...found.unknown.map(reason => `${relative(root, file)}: ${reason}`));
     for (const specifier of found.imports) { followImport({ specifier, file, root, queue, unknown, paths }); }
   }
-  const proven = provenForwardedHrefs([...files], pending);
+  const proven = provenForwardedResources([...files], pending);
   unknown.push(...pending.filter(({ file, position }) => !proven.has(`${file}:${position}`)).map(({ file }) => `${relative(root, file)}: Document-relative or dynamic JSX resource`));
   return { files: [...files].map(file => relative(root, file).replaceAll('\\', '/')).sort(), unknown, paths };
 }

@@ -122,7 +122,7 @@ it.each([
   ['TextInput', 'text-input'], ['Textarea', 'textarea'], ['Select', 'select'],
   ['Badge', 'badge'], ['Spinner', 'spinner'], ['ButtonGroup', 'button-group'], ['FormGroup', 'form-group'],
   ['Field', 'field'],
-  ['Card', 'card'], ['Icon', 'icon'], ['IconGallery', 'icon'],
+  ['Avatar', 'avatar'], ['Card', 'card'], ['Icon', 'icon'], ['IconGallery', 'icon'],
   ['AspectRatio', 'aspect-ratio'], ['Link', 'link'], ['SpatialSystem', 'spatial'],
 ])('selects only the %s suite for its private scenario edit', (name, family) => {
   const ownership = repositoryOwnership;
@@ -154,6 +154,9 @@ it.each([
   ['src/components/icon/stories/icon-gallery.tsx', ['icon/IconGallery']],
   ['src/components/icon/stories/icon-gallery.css', ['icon/IconGallery']],
   ['src/components/icon/stories/icon-catalog.ts', ['icon/IconGallery']],
+  ['src/components/avatar/Avatar.tsx', ['avatar/Avatar']],
+  ['src/components/avatar/avatar.css', ['avatar/Avatar']],
+  ['src/components/avatar/stories/portrait.svg', ['avatar/Avatar']],
   ['stories/foundations/spatial.stories.css', ['spatial/SpatialSystem']],
   ['src/components/icon/named/CheckIcon.tsx', ['badge/Badge', 'checkbox/Checkbox', 'field/Field', 'form-group/FormGroup', 'icon/Icon', 'icon/IconGallery', 'section/Section', 'simple-grid/SimpleGrid', 'spatial/SpatialSystem', 'stack/Stack']],
   ['src/components/link/Link.tsx', ['link/Link', 'typography/Typography']],
@@ -302,4 +305,73 @@ it('selects only the theme suite for its private coexistence scenario', () => {
   const result = selectBrowserTests({ ...repositoryOwnership, changes: [{ path: 'tests/browser-harness/scenarios/Themes.tsx', status: 'M' }] });
   expect(result.mode).toBe('selected');
   expect(result.suites).toEqual([{ project: 'components', file: 'tests/browser-harness/specs/themes/themes.spec.ts' }]);
+});
+
+/**
+ * Model a photo passing through a public forwardRef wrapper and a stateful helper.
+ **/
+function imageFixture(caller, helper = 'return <img src={src} />;', parameter = 'src') {
+  return fixture({
+    'scenario.tsx': `import { Portrait } from './Portrait'; ${caller}`,
+    'Portrait.tsx': `import { forwardRef } from 'react'; function Photo({ ${parameter} }) { ${helper} } export const Portrait = forwardRef(function Portrait({ src }, ref) { return <Photo src={src} />; });`,
+    'portrait.svg': '<svg/>',
+    'node_modules/react/package.json': '{}',
+  });
+}
+
+it.each(['<Portrait />', '<Portrait src="" />', '<Portrait src="data:image/svg+xml,photo" />', '<Portrait {...props} src="https://example.test/photo.png" />'])('proves bounded image forwarding for %s', jsx => {
+  const root = imageFixture(`export const view = ${jsx};`);
+  expect(dependencyGraph(['scenario.tsx'], root).unknown).toEqual([]);
+});
+
+it('follows a module-relative asset through two image-prop boundaries', () => {
+  const root = imageFixture('export const view = <Portrait src={new URL("./portrait.svg", import.meta.url).href} />;');
+  const graph = dependencyGraph(['scenario.tsx'], root);
+  expect(graph.unknown).toEqual([]);
+  expect(graph.files).toEqual(['Portrait.tsx', 'portrait.svg', 'scenario.tsx']);
+});
+
+it.each([
+  'export const view = <Portrait src={path} />;',
+  'export const view = <Portrait src="./portrait.svg" />;',
+  'export const view = <Portrait src="/portrait.svg" />;',
+  'export const view = <Portrait src="data:image/png,photo" {...props} />;',
+  'export const view = <Portrait {...props} />;',
+  'export const view = <Portrait src={new URL("./portrait.svg", location.href).href} />;',
+  'export const view = <Portrait src={undefined} />;',
+  'export const component = Portrait;',
+  'const Alias = Portrait; export const view = <Alias src="data:image/png,photo" />;',
+  'export { Portrait };',
+  'createElement(Portrait, { src: path });',
+])('keeps full fallback for unknown image ownership: %s', caller => {
+  const root = imageFixture(caller);
+  const graph = dependencyGraph(['scenario.tsx'], root);
+  expect(graph.unknown).toContain('Portrait.tsx: Document-relative or dynamic JSX resource');
+});
+
+it.each([
+  'src = "/unknown"; return <img src={src} />;',
+  'var src = "/unknown"; return <img src={src} />;',
+  'return <img src={transform(src)} />;',
+  'return <img src={src} {...props} />;',
+  'return (() => { const src = path; return <img src={src} />; })();',
+  'useComponent(Photo); return <img src={src} />;',
+])('rejects unsafe helper forwarding: %s', helper => {
+  const root = imageFixture('export const view = <Portrait src="data:image/png,photo" />;', helper);
+  expect(dependencyGraph(['scenario.tsx'], root).unknown).toContain('Portrait.tsx: Document-relative or dynamic JSX resource');
+});
+
+it('rejects default image paths even when the caller omits src', () => {
+  const root = imageFixture('export const view = <Portrait />;', 'return <img src={src} />;', 'src = "/unknown"');
+  expect(dependencyGraph(['scenario.tsx'], root).unknown).toContain('Portrait.tsx: Document-relative or dynamic JSX resource');
+});
+
+it('retains unresolved asset errors through proven forwarding', () => {
+  const root = imageFixture('export const view = <Portrait src={new URL("./missing.svg", import.meta.url).href} />;');
+  expect(dependencyGraph(['scenario.tsx'], root).unknown).toContain('Unresolved local resource: ./missing.svg from scenario.tsx');
+});
+
+it('does not accept a srcSet containing a relative candidate after an absolute URL', () => {
+  const root = fixture({ 'scenario.tsx': 'export const view = <img srcSet="https://example.test/photo.png 1x, ./other.png 2x" />;' });
+  expect(dependencyGraph(['scenario.tsx'], root).unknown).toContain('scenario.tsx: Document-relative or dynamic JSX resource');
 });

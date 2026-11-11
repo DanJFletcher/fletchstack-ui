@@ -1,3 +1,5 @@
+export { Avatar } from './components/avatar/index.js';
+export type { AvatarProps, AvatarSize, AvatarShape, AvatarStyle } from './components/avatar/index.js';
 export { CodeBlock } from './components/code-block/index.js';
 export type { CodeBlockProps, CodeBlockStyle } from './components/code-block/index.js';
 export { ButtonGroup } from './components/button-group/index.js';

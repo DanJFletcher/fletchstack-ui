@@ -39,7 +39,8 @@
     "./section.css": "./dist/section.css",
     "./typography.css": "./dist/typography.css",
     "./button-group.css": "./dist/button-group.css",
-    "./code-block.css": "./dist/code-block.css"
+    "./code-block.css": "./dist/code-block.css",
+    "./avatar.css": "./dist/avatar.css"
   },
   "files": [
     "dist",

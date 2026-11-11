@@ -430,6 +430,21 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-code-block-syntax-number` | Code syntax number foreground. | color |
 | `--fs-code-block-syntax-function` | Code syntax function foreground. | color |
 | `--fs-code-block-syntax-operator` | Code syntax operator foreground. | color |
+| `--fs-avatar-background` | Identity fallback fill. | color |
+| `--fs-avatar-text` | Contrasting identity initials. | color |
+| `--fs-avatar-size-small` | small identity footprint. | dimension |
+| `--fs-avatar-size-medium` | medium identity footprint. | dimension |
+| `--fs-avatar-size-large` | large identity footprint. | dimension |
+| `--fs-avatar-size-xlarge` | xlarge identity footprint. | dimension |
+| `--fs-avatar-radius-rounded` | Rounded identity corners. | dimension |
+| `--fs-avatar-radius-square` | Square identity corners. | dimension |
+| `--fs-avatar-outline-width` | Forced-color identity boundary. | dimension |
+| `--fs-avatar-font-family` | Identity font family. | fontFamily |
+| `--fs-avatar-font-weight` | Identity initials emphasis. | fontWeight |
+| `--fs-avatar-font-size-small` | small identity initials; capped to fit its footprint. | dimension |
+| `--fs-avatar-font-size-medium` | medium identity initials; capped to fit its footprint. | dimension |
+| `--fs-avatar-font-size-large` | large identity initials; capped to fit its footprint. | dimension |
+| `--fs-avatar-font-size-xlarge` | xlarge identity initials; capped to fit its footprint. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

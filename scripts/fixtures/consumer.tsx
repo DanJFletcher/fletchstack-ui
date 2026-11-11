@@ -356,3 +356,19 @@ export const invalidCodeChildren = <CodeBlock><strong>source</strong></CodeBlock
 export const invalidCodeHtml = <CodeBlock dangerouslySetInnerHTML={{ __html: 'source' }}>source</CodeBlock>;
 // @ts-expect-error Source is required.
 export const missingCodeSource = <CodeBlock />;
+
+import { Avatar, type AvatarProps, type AvatarStyle, type AvatarSize, type AvatarShape } from 'fletchstack-ui';
+import 'fletchstack-ui/avatar.css';
+const avatarSize: AvatarSize = 'xlarge';
+const avatarShape: AvatarShape = 'rounded';
+const avatarStyle: AvatarStyle = { '--fs-avatar-background': 'navy' };
+const avatarProps: AvatarProps = { name: 'Maya Chen', size: avatarSize, shape: avatarShape, style: avatarStyle };
+export const avatar = <Avatar {...avatarProps} ref={createRef<HTMLSpanElement>()} />;
+// @ts-expect-error Avatar is passive; the surrounding action owns focus.
+export const invalidAvatarFocus = <Avatar name="Maya Chen" tabIndex={0} />;
+// @ts-expect-error Avatar owns image semantics.
+export const invalidAvatarRole = <Avatar name="Maya Chen" role="button" />;
+// @ts-expect-error Avatar has no activation handlers.
+export const invalidAvatarAction = <Avatar name="Maya Chen" onClick={() => {}} />;
+// @ts-expect-error Avatar does not render arbitrary content.
+export const invalidAvatarChildren = <Avatar>content</Avatar>;

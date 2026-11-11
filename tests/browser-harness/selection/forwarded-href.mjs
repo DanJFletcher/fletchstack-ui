@@ -17,7 +17,7 @@ function walk(node, visit) {
 }
 
 /**
- * Admit only a direct destructured href parameter in a React forwardRef callback.
+ * Admit a direct destructured resource parameter; src also supports plain function components.
  * Assignments anywhere in the callback make this deliberately bounded proof fail.
  **/
 function forwardedComponent(attribute, checker) {
@@ -28,14 +28,20 @@ function forwardedComponent(attribute, checker) {
   if (symbol?.declarations?.length !== 1) { return; }
   const binding = symbol.valueDeclaration;
   if (!binding || !ts.isBindingElement(binding) || binding.initializer || binding.dotDotDotToken) { return; }
-  if ((binding.propertyName ?? binding.name).getText() !== 'href') { return; }
+  const resource = attribute.name.getText();
+  if ((binding.propertyName ?? binding.name).getText() !== resource) { return; }
   const parameter = binding.parent.parent;
   const callback = parameter.parent;
-  if (!ts.isParameter(parameter) || parameter.initializer || parameter.dotDotDotToken || callback.parameters?.[0] !== parameter || !ts.isFunctionExpression(callback)) { return; }
+  if (!ts.isParameter(parameter) || parameter.initializer || parameter.dotDotDotToken || callback.parameters?.[0] !== parameter) { return; }
+  if (resource === 'src' && ts.isFunctionDeclaration(callback) && callback.name && !hasMutation(callback, checker)) {
+    return { declaration: callback, symbol: checker.getSymbolAtLocation(callback.name), resource };
+  }
+  if (!ts.isFunctionExpression(callback)) { return; }
   const call = callback.parent;
   if (!ts.isCallExpression(call) || call.arguments[0] !== callback || !ts.isIdentifier(call.expression)) { return; }
   if (!isReactForwardRef(call.expression, checker)) { return; }
-  return immutableComponent(call, callback, checker);
+  const component = immutableComponent(call, callback, checker);
+  return component && { ...component, resource };
 }
 
 /**
@@ -53,6 +59,13 @@ function isReactForwardRef(expression, checker) {
 function immutableComponent(call, callback, checker) {
   const declaration = call.parent;
   if (!ts.isVariableDeclaration(declaration) || !(declaration.parent.flags & ts.NodeFlags.Const)) { return; }
+  return hasMutation(callback, checker) ? undefined : { declaration, symbol: checker.getSymbolAtLocation(declaration.name) };
+}
+
+/**
+ * Refuse writes or recursive function escapes inside a resource-forwarding component.
+ **/
+function hasMutation(callback, checker) {
   let unsafe = false;
   const callbackName = callback.name && checker.getSymbolAtLocation(callback.name);
   walk(callback, node => {
@@ -61,29 +74,45 @@ function immutableComponent(call, callback, checker) {
     if (ts.isForInStatement(node) || ts.isForOfStatement(node)) { unsafe = true; }
     if (callbackName && ts.isIdentifier(node) && node !== callback.name && checker.getSymbolAtLocation(node) === callbackName) { unsafe = true; }
   });
-  return unsafe ? undefined : { declaration, symbol: checker.getSymbolAtLocation(declaration.name) };
+  return unsafe;
 }
 
 /**
- * Prove the last href value at a JSX call site; a later spread can override it.
+ * Check the final resource prop after spreads, following only direct src forwarding.
  **/
-function literalDestination(element) {
+function literalDestination(element, resource, context) {
   let safe = true;
   for (const attribute of element.attributes.properties) {
     if (ts.isJsxSpreadAttribute(attribute)) { safe = false; }
-    else if (attribute.name.getText() === 'href') {
-      const value = attribute.initializer;
-      safe = Boolean(value && ts.isStringLiteral(value) && /^(?:$|#|data:|https?:\/\/)/.test(value.text));
-    }
+    else if (attribute.name.getText() === resource) { safe = provenValue(attribute, resource, context); }
   }
   return safe;
+}
+
+/**
+ * Accept literal destinations or module assets; computed values still fail closed.
+ **/
+function provenValue(attribute, resource, context) {
+  const value = attribute.initializer;
+  if (value && ts.isStringLiteral(value)) { return /^(?:$|#|data:|https?:\/\/)/.test(value.text); }
+  if (resource !== 'src' || !value || !ts.isJsxExpression(value) || !value.expression) { return false; }
+  const expression = value.expression;
+  if (ts.isPropertyAccessExpression(expression) && expression.name.text === 'href') {
+    const url = expression.expression;
+    return ts.isNewExpression(url) && url.expression.getText() === 'URL' && url.arguments?.length === 2
+      && ts.isStringLiteral(url.arguments[0]) && url.arguments[1].getText() === 'import.meta.url';
+  }
+  const component = ts.isIdentifier(expression) && forwardedComponent(attribute, context.checker);
+  return Boolean(component?.symbol && allUsesProven(component, context));
 }
 
 /**
  * Every component value use must be a JSX call with a proven destination.
  * Aliases, reexports, createElement and passing the component as data fail closed.
  **/
-function allUsesProven(component, sources, checker) {
+function allUsesProven(component, { sources, checker, seen = new Set() }) {
+  if (seen.has(component.symbol)) { return false; }
+  const context = { sources, checker, seen: new Set([...seen, component.symbol]) };
   const references = [];
   for (const source of sources) {
     walk(source, node => {
@@ -93,15 +122,15 @@ function allUsesProven(component, sources, checker) {
   }
   return references.length > 0 && references.every(node => {
     const parent = node.parent;
-    return (ts.isJsxSelfClosingElement(parent) || ts.isJsxOpeningElement(parent)) && parent.tagName === node && literalDestination(parent);
+    return (ts.isJsxSelfClosingElement(parent) || ts.isJsxOpeningElement(parent)) && parent.tagName === node && literalDestination(parent, component.resource, context);
   });
 }
 
 /**
- * Prove forwarded anchor hrefs across the closed scenario import graph.
+ * Prove forwarded anchor hrefs and image src chains across the closed scenario graph.
  * No library code is loaded; unsupported forwarding or caller syntax stays unknown.
  **/
-export function provenForwardedHrefs(files, pending) {
+export function provenForwardedResources(files, pending) {
   if (!pending.length) { return new Set(); }
   const program = forwardingProgram(files);
   const checker = program.getTypeChecker();
@@ -110,7 +139,7 @@ export function provenForwardedHrefs(files, pending) {
     walk(program.getSourceFile(file), node => {
       if (!ts.isJsxAttribute(node) || node.pos !== position) { return; }
       const component = forwardedComponent(node, checker);
-      if (component?.symbol && allUsesProven(component, program.getSourceFiles(), checker)) { proven.add(`${file}:${position}`); }
+      if (component?.symbol && allUsesProven(component, { sources: program.getSourceFiles(), checker })) { proven.add(`${file}:${position}`); }
     });
   }
   return proven;

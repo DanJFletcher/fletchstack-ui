@@ -20,7 +20,7 @@ test('the token command reproduces the checked-in CSS and reference', async () =
 test('the stylesheet command publishes separate and combined CSS exports', async ({ root }) => {
   // arrange
   await mkdir(new URL('src/generated', root), { recursive: true });
-  await Promise.all(['code-block', 'button-group', 'typography', 'section', 'aspect-ratio', 'simple-grid', 'cluster', 'stack', 'container', 'separator', 'badge', 'spinner', 'switch', 'link', 'radio', 'textarea', 'field', 'form-group', 'checkbox', 'select', 'text-input', 'button', 'card', 'icon'].map(family => mkdir(new URL(`src/components/${family}`, root), { recursive: true })));
+  await Promise.all(['avatar', 'code-block', 'button-group', 'typography', 'section', 'aspect-ratio', 'simple-grid', 'cluster', 'stack', 'container', 'separator', 'badge', 'spinner', 'switch', 'link', 'radio', 'textarea', 'field', 'form-group', 'checkbox', 'select', 'text-input', 'button', 'card', 'icon'].map(family => mkdir(new URL(`src/components/${family}`, root), { recursive: true })));
   await mkdir(new URL('dist', root));
   await writeFile(new URL('src/generated/tokens.css', root), ':root { --fs-text: black; }');
   await copyFile(new URL('../../../src/components/button/button.css', import.meta.url), new URL('src/components/button/button.css', root));
@@ -48,6 +48,8 @@ test('the stylesheet command publishes separate and combined CSS exports', async
   await copyFile(new URL('../../../src/components/typography/typography.css', import.meta.url), new URL('src/components/typography/typography.css', root));
   await copyFile(new URL('../../../src/components/button-group/button-group.css', import.meta.url), new URL('src/components/button-group/button-group.css', root));
   await copyFile(new URL('../../../src/components/code-block/code-block.css', import.meta.url), new URL('src/components/code-block/code-block.css', root));
+  await copyFile(new URL('../../../src/components/avatar/avatar.css', import.meta.url), new URL('src/components/avatar/avatar.css', root));
+  const avatar = await readFile(new URL('src/components/avatar/avatar.css', root), 'utf8');
   const codeBlock = await readFile(new URL('src/components/code-block/code-block.css', root), 'utf8');
   const buttonGroup = await readFile(new URL('src/components/button-group/button-group.css', root), 'utf8');
   const typography = await readFile(new URL('src/components/typography/typography.css', root), 'utf8');
@@ -83,6 +85,6 @@ test('the stylesheet command publishes separate and combined CSS exports', async
   }
 
   // assert
-  const result = await Promise.all(['tokens.css', 'field.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'cluster.css', 'simple-grid.css', 'aspect-ratio.css', 'section.css', 'typography.css', 'button-group.css', 'code-block.css', 'styles.css'].map(name => readFile(new URL(`dist/${name}`, root), 'utf8')));
-  expect(result).toEqual([':root { --fs-text: black; }', field, button, icon, card, select, textInput, checkbox, formGroup, textarea, radio, link, switchStyles, spinner, badge, separator, container, stack, cluster, simpleGrid, aspectRatio, section, typography, buttonGroup, codeBlock, `:root { --fs-text: black; }\n${field}\n${button}\n${icon}\n${card}\n${select}\n${textInput}\n${checkbox}\n${formGroup}\n${textarea}\n${radio}\n${link}\n${switchStyles}\n${spinner}\n${badge}\n${separator}\n${container}\n${stack}\n${cluster}\n${simpleGrid}\n${aspectRatio}\n${section}\n${typography}\n${buttonGroup}\n${codeBlock}`]);
+  const result = await Promise.all(['tokens.css', 'field.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'cluster.css', 'simple-grid.css', 'aspect-ratio.css', 'section.css', 'typography.css', 'button-group.css', 'code-block.css', 'avatar.css', 'styles.css'].map(name => readFile(new URL(`dist/${name}`, root), 'utf8')));
+  expect(result).toEqual([':root { --fs-text: black; }', field, button, icon, card, select, textInput, checkbox, formGroup, textarea, radio, link, switchStyles, spinner, badge, separator, container, stack, cluster, simpleGrid, aspectRatio, section, typography, buttonGroup, codeBlock, avatar, `:root { --fs-text: black; }\n${field}\n${button}\n${icon}\n${card}\n${select}\n${textInput}\n${checkbox}\n${formGroup}\n${textarea}\n${radio}\n${link}\n${switchStyles}\n${spinner}\n${badge}\n${separator}\n${container}\n${stack}\n${cluster}\n${simpleGrid}\n${aspectRatio}\n${section}\n${typography}\n${buttonGroup}\n${codeBlock}\n${avatar}`]);
 });

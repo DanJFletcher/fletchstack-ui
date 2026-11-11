@@ -2312,6 +2312,91 @@
           "$description": "Code syntax operator foreground."
         }
       }
+    },
+    "avatar": {
+      "background": {
+        "$type": "color",
+        "$value": "{primitive.disabled}",
+        "$description": "Identity fallback fill."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Contrasting identity initials."
+      },
+      "size": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{primitive.px24}",
+          "$description": "small identity footprint."
+        },
+        "medium": {
+          "$type": "dimension",
+          "$value": "{primitive.px32}",
+          "$description": "medium identity footprint."
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{primitive.px48}",
+          "$description": "large identity footprint."
+        },
+        "xlarge": {
+          "$type": "dimension",
+          "$value": "{primitive.px64}",
+          "$description": "xlarge identity footprint."
+        }
+      },
+      "radius": {
+        "rounded": {
+          "$type": "dimension",
+          "$value": "{primitive.px8}",
+          "$description": "Rounded identity corners."
+        },
+        "square": {
+          "$type": "dimension",
+          "$value": "{primitive.px0}",
+          "$description": "Square identity corners."
+        }
+      },
+      "outlineWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Forced-color identity boundary."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Identity font family."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.bold}",
+          "$description": "Identity initials emphasis."
+        },
+        "size": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{primitive.caption}",
+            "$description": "small identity initials; capped to fit its footprint."
+          },
+          "medium": {
+            "$type": "dimension",
+            "$value": "{primitive.small}",
+            "$description": "medium identity initials; capped to fit its footprint."
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{primitive.medium}",
+            "$description": "large identity initials; capped to fit its footprint."
+          },
+          "xlarge": {
+            "$type": "dimension",
+            "$value": "{primitive.heading}",
+            "$description": "xlarge identity initials; capped to fit its footprint."
+          }
+        }
+      }
     }
   }
 }

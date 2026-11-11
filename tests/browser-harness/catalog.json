@@ -667,6 +667,66 @@
     "components-formgroup--descriptions": {
       "module": "tests/browser-harness/scenarios/FormGroup.tsx",
       "export": "Descriptions"
+    },
+    "components-field--playground": {
+      "module": "tests/browser-harness/scenarios/Field.tsx",
+      "export": "Playground"
+    },
+    "components-field--states": {
+      "module": "tests/browser-harness/scenarios/Field.tsx",
+      "export": "States"
+    },
+    "components-field--standalone-primitives": {
+      "module": "tests/browser-harness/scenarios/Field.tsx",
+      "export": "StandalonePrimitives"
+    },
+    "components-field--customization": {
+      "module": "tests/browser-harness/scenarios/Field.tsx",
+      "export": "Customization"
+    },
+    "components-field--both-themes": {
+      "module": "tests/browser-harness/scenarios/Field.tsx",
+      "export": "BothThemes"
+    },
+    "components-field--inline-messages": {
+      "module": "tests/browser-harness/scenarios/Field.tsx",
+      "export": "InlineMessages"
+    },
+    "components-field--long-labels": {
+      "module": "tests/browser-harness/scenarios/Field.tsx",
+      "export": "LongLabels"
+    },
+    "components-field-label--playground": {
+      "module": "tests/browser-harness/scenarios/FieldLabel.tsx",
+      "export": "Playground"
+    },
+    "components-field-label--both-themes": {
+      "module": "tests/browser-harness/scenarios/FieldLabel.tsx",
+      "export": "BothThemes"
+    },
+    "components-field-description--playground": {
+      "module": "tests/browser-harness/scenarios/FieldDescription.tsx",
+      "export": "Playground"
+    },
+    "components-field-description--inline": {
+      "module": "tests/browser-harness/scenarios/FieldDescription.tsx",
+      "export": "Inline"
+    },
+    "components-field-description--both-themes": {
+      "module": "tests/browser-harness/scenarios/FieldDescription.tsx",
+      "export": "BothThemes"
+    },
+    "components-field-error--playground": {
+      "module": "tests/browser-harness/scenarios/FieldError.tsx",
+      "export": "Playground"
+    },
+    "components-field-error--inline": {
+      "module": "tests/browser-harness/scenarios/FieldError.tsx",
+      "export": "Inline"
+    },
+    "components-field-error--both-themes": {
+      "module": "tests/browser-harness/scenarios/FieldError.tsx",
+      "export": "BothThemes"
     }
   },
   "suites": [
@@ -850,10 +910,19 @@
       "resources": []
     },
     {
-      "project": "chromium",
-      "file": "tests/e2e/components/field/Field.spec.ts",
-      "scope": "storybook-runtime",
-      "scenarios": []
+      "project": "components",
+      "file": "tests/browser-harness/specs/field/Field.spec.ts",
+      "scenarios": [
+        "components-field--long-labels",
+        "components-field--states",
+        "components-field--both-themes",
+        "components-field--standalone-primitives",
+        "components-field--inline-messages",
+        "components-field--customization",
+        "components-field--playground"
+      ],
+      "roots": [],
+      "resources": []
     },
     {
       "project": "chromium",
@@ -1074,6 +1143,22 @@
       "file": "tests/e2e/themes/themes.spec.ts",
       "scope": "storybook-runtime",
       "scenarios": []
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/field/FieldAtoms.spec.ts",
+      "scenarios": [
+        "components-field-label--playground",
+        "components-field-label--both-themes",
+        "components-field-description--playground",
+        "components-field-description--inline",
+        "components-field-description--both-themes",
+        "components-field-error--playground",
+        "components-field-error--inline",
+        "components-field-error--both-themes"
+      ],
+      "roots": [],
+      "resources": []
     }
   ],
   "discovery": {

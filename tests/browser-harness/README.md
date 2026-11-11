@@ -1,12 +1,14 @@
 # Private browser scenarios
 
-Component coverage currently includes Button, Stack, CodeBlock, Cluster, Container, Section, SimpleGrid, Separator, Checkbox, Radio, Switch, TextInput, Textarea, Select, Badge, Spinner, ButtonGroup and FormGroup. See the [pilot measurements](../../docs/component-harness-verification.md), [layout migration evidence](../../docs/layout-harness-migration.md), [form-control migration](../../docs/forms-harness-migration.md), and [feedback/actions migration](../../docs/feedback-actions-harness-migration.md) for preserved assertions and measured scope.
+Component coverage currently includes Button, Stack, CodeBlock, Cluster, Container, Section, SimpleGrid, Separator, Checkbox, Radio, Switch, TextInput, Textarea, Select, Badge, Spinner, ButtonGroup, FormGroup, Field, FieldLabel, FieldDescription and FieldError. See the [pilot measurements](../../docs/component-harness-verification.md), [layout migration evidence](../../docs/layout-harness-migration.md), [form-control migration](../../docs/forms-harness-migration.md), [feedback/actions migration](../../docs/feedback-actions-harness-migration.md), and [Field migration](../../docs/field-harness-migration.md) for preserved assertions and measured scope.
 
 Run `npm run test:e2e:components -- button --workers=3` for the Vite harness only, or `npm run test:e2e:storybook -- button` for retained Storybook delivery checks. The harness uses port 6008; retained Storybook uses 6007. Both use fresh contexts, zero retries and retained failure evidence. Reports and test output have separate project directories.
 
 ## Authoring
 
 Add a lazy family module to [scenarios/](scenarios/), importing implementation modules and required CSS directly. Export `component`, `defaults`, and `scenarios`. Each scenario has optional `args`, `render` and `theme`; it must remain synchronous React rendering. Keep browser actions in the Playwright test. Do not import CSF modules, the public component barrel or the all-component stylesheet. Shared tokens and base showcase CSS are loaded once by the gallery.
+
+The gallery invokes a scenario's `render` callback before entering React rendering. Put hooks such as `useId` in a named React example component and return `<Example {...args} />` from the callback. See [FieldLabel](scenarios/FieldLabel.tsx) for a fixture with unique control IDs and both-theme rendering.
 
 Register IDs, module paths, exports and suite ownership in [catalog.json](catalog.json). Use [openScenario](fixtures/scenario.ts); the mount fixture also rejects any existing ID not declared by the current suite. Unknown IDs, imports and render errors reject mount. Mount resolves after React commit; tests use observable locator assertions for later asynchronous state. Uncaught page errors fail fixture teardown. `update` preserves component state; explicit `unmount` disposes effects. Each new mount navigates to a fresh document using Playwright's installed gallery contract.
 

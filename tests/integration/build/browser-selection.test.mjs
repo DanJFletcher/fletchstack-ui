@@ -80,6 +80,7 @@ it.each([
   ['Checkbox', 'checkbox'], ['Radio', 'radio'], ['Switch', 'switch'],
   ['TextInput', 'text-input'], ['Textarea', 'textarea'], ['Select', 'select'],
   ['Badge', 'badge'], ['Spinner', 'spinner'], ['ButtonGroup', 'button-group'], ['FormGroup', 'form-group'],
+  ['Field', 'field'],
 ])('selects only the %s suite for its private scenario edit', (name, family) => {
   const ownership = discoverOwnership(process.cwd());
   const result = selectBrowserTests({ ...ownership, changes: [{ path: `tests/browser-harness/scenarios/${name}.tsx`, status: 'M' }] });
@@ -91,18 +92,26 @@ it.each([
   ['src/components/cluster/cluster.css', ['cluster/Cluster', 'section/Section', 'simple-grid/SimpleGrid']],
   ['src/components/container/Container.tsx', ['button-group/ButtonGroup', 'cluster/Cluster', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
   ['src/components/separator/separator.css', ['separator/Separator']],
-  ['src/components/checkbox/checkbox.css', ['checkbox/Checkbox', 'form-group/FormGroup', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
-  ['src/components/text-input/TextInput.tsx', ['cluster/Cluster', 'container/Container', 'form-group/FormGroup', 'stack/Stack', 'text-input/TextInput']],
+  ['src/components/checkbox/checkbox.css', ['checkbox/Checkbox', 'field/Field', 'form-group/FormGroup', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack']],
+  ['src/components/text-input/TextInput.tsx', ['cluster/Cluster', 'container/Container', 'field/Field', 'form-group/FormGroup', 'stack/Stack', 'text-input/TextInput']],
   ['src/components/form-group/FormGroup.tsx', ['form-group/FormGroup', 'radio/Radio', 'stack/Stack', 'switch/Switch']],
   ['src/components/badge/badge.css', ['badge/Badge', 'cluster/Cluster', 'simple-grid/SimpleGrid']],
   ['src/components/spinner/Spinner.tsx', ['spinner/Spinner']],
   ['src/components/button-group/stories/button-group.stories.css', ['button-group/ButtonGroup']],
+  ['src/components/field/stories/field-atoms.css', ['field/FieldAtoms']],
 ])('includes composed consumers for %s without selecting unrelated harness families', (path, consumers) => {
   const ownership = discoverOwnership(process.cwd());
   const result = selectBrowserTests({ ...ownership, changes: [{ path, status: 'M' }] });
   expect(result.mode).toBe('selected');
   expect(result.suites.filter(suite => suite.project === 'components').map(suite => suite.file)).toEqual(consumers.map(consumer => `tests/browser-harness/specs/${consumer}.spec.ts`));
   expect(result.suites.filter(suite => suite.project === 'chromium')).toEqual(ownership.inventory.filter(suite => suite.project === 'chromium'));
+});
+
+it.each(['FieldLabel', 'FieldDescription', 'FieldError'])('selects the shared atom suite for its %s scenario', name => {
+  const ownership = discoverOwnership(process.cwd());
+  const result = selectBrowserTests({ ...ownership, changes: [{ path: `tests/browser-harness/scenarios/${name}.tsx`, status: 'M' }] });
+  expect(result.mode).toBe('selected');
+  expect(result.suites).toEqual([{ project: 'components', file: 'tests/browser-harness/specs/field/FieldAtoms.spec.ts' }]);
 });
 
 it.each(['tokens/themes.json', 'src/generated/tokens.css', 'playwright.config.ts', 'package-lock.json', 'src/index.ts', 'unknown-resource.svg'])('falls back for shared or unproven input %s', path => {

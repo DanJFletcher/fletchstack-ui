@@ -527,6 +527,8 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-chip-size-large-minimum` | large minimum chip height; grows with text. | dimension |
 | `--fs-chip-size-large-font` | large chip text size. | dimension |
 | `--fs-chip-size-large-padding` | large vertical label inset. | dimension |
+| `--fs-motion-duration-standard` | Standard disclosure size, opacity and chevron transition duration. | duration |
+| `--fs-motion-easing-standard` | Standard disclosure transition easing. | cubicBezier |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

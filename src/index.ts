@@ -67,3 +67,6 @@ export type { MultiSelectProps, MultiSelectStyle, MultiSelectOption } from './co
 
 export { Chip } from './components/chip/index.js';
 export type { ChipProps, ChipStyle } from './components/chip/index.js';
+
+export { Accordion } from './components/accordion/index.js';
+export type { AccordionProps, AccordionStyle, AccordionItem } from './components/accordion/index.js';

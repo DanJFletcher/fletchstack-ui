@@ -2845,6 +2845,22 @@
           }
         }
       }
+    },
+    "motion": {
+      "duration": {
+        "standard": {
+          "$type": "duration",
+          "$value": "{primitive.motionStandardDuration}",
+          "$description": "Standard disclosure size, opacity and chevron transition duration."
+        }
+      },
+      "easing": {
+        "standard": {
+          "$type": "cubicBezier",
+          "$value": "{primitive.motionStandardEasing}",
+          "$description": "Standard disclosure transition easing."
+        }
+      }
     }
   }
 }

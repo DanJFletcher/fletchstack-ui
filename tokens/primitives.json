@@ -842,6 +842,22 @@
     "bold": {
       "$type": "fontWeight",
       "$value": 700
+    },
+    "motionStandardDuration": {
+      "$type": "duration",
+      "$value": {
+        "value": 160,
+        "unit": "ms"
+      }
+    },
+    "motionStandardEasing": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.2,
+        0.8,
+        0.2,
+        1
+      ]
     }
   }
 }

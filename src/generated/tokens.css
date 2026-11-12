@@ -523,6 +523,8 @@
   --fs-chip-size-large-minimum: 40px;
   --fs-chip-size-large-font: 1rem;
   --fs-chip-size-large-padding: 8px;
+  --fs-motion-duration-standard: 160ms;
+  --fs-motion-easing-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 [data-theme="luna"] {
@@ -1049,4 +1051,6 @@
   --fs-chip-size-large-minimum: 40px;
   --fs-chip-size-large-font: 1rem;
   --fs-chip-size-large-padding: 8px;
+  --fs-motion-duration-standard: 160ms;
+  --fs-motion-easing-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
 }

@@ -428,3 +428,7 @@ Searchable multi-value fields with removable tags, native form values/reset, sel
 ## Chip
 
 Static content tags with optional controlled selection and an independent named removal action. Both themes support three sizes, disabled actions and wrapping labels. Load tokens and `chip.css`, or combined styles. See the [Chip contract](docs/chip.md).
+
+## Accordion
+
+Accessible FAQ disclosures with divided, outlined and surface variants, controlled or uncontrolled single/multiple expansion, native heading buttons and optional reduced-motion-aware panel transitions. Load tokens and `accordion.css`, or combined styles. See the [Accordion contract](docs/accordion.md).

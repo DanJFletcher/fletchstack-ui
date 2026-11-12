@@ -151,3 +151,7 @@ The linked MultiSelect reference and supplied image approve a searchable combobo
 ## Chip pattern
 
 The owner-linked Chip reference approves compact static content tags, controlled toggle selection, and independently named removal actions. The [Chip contract](chip.md) records sibling native buttons, parent-owned state/focus restoration, three sizes, wrapping and independent `chip.*` semantic roles in Corporate and Luna. Existing shared Check/Close artwork stays decorative.
+
+## Accordion pattern
+
+The one-page Accordion design and linked behavior reference approve divided, outlined and shared-surface disclosure groups. Existing semantic roles supply appearance. The [Accordion contract](accordion.md) records heading buttons, controlled/uncontrolled single or multiple expansion, mounted accessible panels and immediate-by-default behavior. Shared standard duration/easing tokens reproduce the reference for opt-in size/opacity transitions and honor reduced motion.

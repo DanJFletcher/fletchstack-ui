@@ -558,6 +558,28 @@
       "style": "src/components/chip/chip.css",
       "category": "Identity",
       "examples": "src/components/chip/stories/chip-examples.tsx"
+    },
+    {
+      "slug": "accordion",
+      "entry": "src/components/accordion/index.ts",
+      "exports": {
+        "runtime": [
+          "Accordion"
+        ],
+        "types": [
+          "AccordionProps",
+          "AccordionStyle",
+          "AccordionItem"
+        ]
+      },
+      "modules": [
+        "src/components/accordion/Accordion.tsx",
+        "src/components/accordion/types.ts",
+        "src/components/accordion/useAccordion.ts"
+      ],
+      "style": "src/components/accordion/accordion.css",
+      "category": "Feedback",
+      "examples": "src/components/accordion/stories/accordion-examples.tsx"
     }
   ],
   "internalModules": [

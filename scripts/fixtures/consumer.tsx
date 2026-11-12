@@ -410,3 +410,15 @@ export const invalidChipCallback = <Chip onSelect={() => {}}>Design</Chip>;
 export const invalidChipRemoval = <Chip onRemove={() => {}}>Design</Chip>;
 // @ts-expect-error A removal label must have a matching action.
 export const invalidChipLabel = <Chip removeLabel="Remove Design">Design</Chip>;
+
+import { Accordion, type AccordionItem, type AccordionProps } from 'fletchstack-ui';
+import 'fletchstack-ui/accordion.css';
+const accordionItems: readonly AccordionItem[] = [{ id: 'invite', title: 'Invite', content: <a href="#settings">Team settings</a> }];
+const accordionProps: AccordionProps = { items: accordionItems, multiple: true, headingLevel: 2, panelMotion: 'expand', openItems: ['invite'], onOpenItemsChange: ids => ids.join(',') };
+export const accordion = <Accordion {...accordionProps} ref={createRef<HTMLDivElement>()} style={{ '--fs-motion-duration-standard': '200ms' }} />;
+// @ts-expect-error Headings are HTML levels, not arbitrary strings.
+export const invalidAccordionHeading = <Accordion items={accordionItems} headingLevel={7} />;
+// @ts-expect-error Expansion uses arrays of stable IDs.
+export const invalidAccordionOpen = <Accordion items={accordionItems} openItems="invite" />;
+// @ts-expect-error Items own the rendered content.
+export const invalidAccordionChildren = <Accordion items={accordionItems}>Override</Accordion>;

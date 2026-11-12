@@ -1,0 +1,13 @@
+.accordion-demo { color: var(--fs-text); font-family: var(--fs-font-body); }
+.accordion-demo__eyebrow { max-inline-size: none; font-size: 1.25rem; }
+.accordion-demo h1 { font-size: 3.5rem; margin-block: 16px 32px; }
+.accordion-demo h2 { font-size: var(--fs-typography-heading-font-page); margin-block: 0 16px; }
+.accordion-demo__themes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.accordion-demo__panel { min-inline-size: 0; padding: 20px; border: 1px solid var(--fs-card-border); border-radius: var(--fs-card-radius); background: var(--fs-surface); color: var(--fs-text); }
+.accordion-demo__panel[data-theme="luna"] { background: var(--fs-surface); }
+.accordion-demo__variants { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-block-start: 48px; }
+.accordion-demo__variants > section { min-inline-size: 0; }
+.accordion-demo a { color: var(--fs-link-text); }
+@media (max-width: 600px) { .accordion-demo__themes, .accordion-demo__variants { grid-template-columns: 1fr; } }
+
+.accordion-demo .fs-accordion__content p { font: inherit; }

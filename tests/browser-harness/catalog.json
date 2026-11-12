@@ -1107,6 +1107,42 @@
     "components-chip--scopes": {
       "module": "tests/browser-harness/scenarios/Chip.tsx",
       "export": "Scopes"
+    },
+    "components-accordion--playground": {
+      "module": "tests/browser-harness/scenarios/Accordion.tsx",
+      "export": "Playground"
+    },
+    "components-accordion--composition": {
+      "module": "tests/browser-harness/scenarios/Accordion.tsx",
+      "export": "Composition"
+    },
+    "components-accordion--variants": {
+      "module": "tests/browser-harness/scenarios/Accordion.tsx",
+      "export": "Variants"
+    },
+    "components-accordion--multiple": {
+      "module": "tests/browser-harness/scenarios/Accordion.tsx",
+      "export": "Multiple"
+    },
+    "components-accordion--disabled": {
+      "module": "tests/browser-harness/scenarios/Accordion.tsx",
+      "export": "Disabled"
+    },
+    "components-accordion--controlled": {
+      "module": "tests/browser-harness/scenarios/Accordion.tsx",
+      "export": "Controlled"
+    },
+    "components-accordion--motion": {
+      "module": "tests/browser-harness/scenarios/Accordion.tsx",
+      "export": "Motion"
+    },
+    "components-accordion--long-title": {
+      "module": "tests/browser-harness/scenarios/Accordion.tsx",
+      "export": "LongTitle"
+    },
+    "components-accordion--instances": {
+      "module": "tests/browser-harness/scenarios/Accordion.tsx",
+      "export": "Instances"
     }
   },
   "suites": [
@@ -1687,6 +1723,21 @@
         "components-chip--disabled",
         "components-chip--form",
         "components-chip--scopes"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/accordion/Accordion.spec.ts",
+      "scenarios": [
+        "components-accordion--playground",
+        "components-accordion--composition",
+        "components-accordion--variants",
+        "components-accordion--multiple",
+        "components-accordion--disabled",
+        "components-accordion--controlled",
+        "components-accordion--motion",
+        "components-accordion--long-title",
+        "components-accordion--instances"
       ]
     }
   ],

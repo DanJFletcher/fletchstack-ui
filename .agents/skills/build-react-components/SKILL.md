@@ -5,6 +5,8 @@ description: Build or change atomic and composed React library components from a
 
 # Build React components with Storybook
 
+For this repository, follow the [component authoring recipe](../../../docs/component-authoring.md) for concern-specific references, mechanical setup, registration, and verification. Reuse established session context; inspect additional setup only when relevant inputs change. The scaffold prepares structure, while API decisions, semantic tokens, meaningful tests, and accessibility review remain authored work.
+
 From the project root, read `.agents/guidelines/component-library.md` and `.agents/guidelines/design-tokens.md` when present. If either is missing, follow this workflow and the project's existing instructions. AGI users can select the companion guidelines separately.
 
 1. **Find the approved pattern.** Locate its purpose, variants, states, and semantic tokens. If the project has no foundation, use `establish-design-system` if available, or ask where the team will record approved patterns and tokens. For a gap, explain the user need, what existing patterns cover, and the missing decision. Get that decision recorded before implementing the missing behavior or styling.

@@ -2,89 +2,40 @@ import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect } from 'vitest';
 import { test } from '../fixtures/token-project.mjs';
+import inventory from '../../../scripts/component-inventory.json' with { type: 'json' };
+import { publishStyles } from '../../../scripts/component-styles.mjs';
 
-test('the token command reproduces the checked-in CSS and reference', async () => {
-  // arrange
-  const stylesheet = new URL('../../../src/generated/tokens.css', import.meta.url);
-  const reference = new URL('../../../docs/tokens.md', import.meta.url);
-  const expected = await Promise.all([readFile(stylesheet, 'utf8'), readFile(reference, 'utf8')]);
-
-  // act
+test('the token command reproduces checked-in CSS and reference', async () => {
+  const paths = ['src/generated/tokens.css', 'docs/tokens.md'];
+  const expected = await Promise.all(paths.map(path => readFile(path, 'utf8')));
   await import('../../../scripts/build-tokens.mjs');
-
-  // assert
-  const result = await Promise.all([readFile(stylesheet, 'utf8'), readFile(reference, 'utf8')]);
-  expect(result).toEqual(expected);
+  expect(await Promise.all(paths.map(path => readFile(path, 'utf8')))).toEqual(expected);
 });
 
-test('the stylesheet command publishes separate and combined CSS exports', async ({ root }) => {
-  // arrange
-  await mkdir(new URL('src/generated', root), { recursive: true });
-  await Promise.all(['avatar', 'code-block', 'button-group', 'typography', 'section', 'aspect-ratio', 'simple-grid', 'cluster', 'stack', 'container', 'separator', 'badge', 'spinner', 'switch', 'link', 'radio', 'textarea', 'field', 'form-group', 'checkbox', 'select', 'text-input', 'button', 'card', 'icon'].map(family => mkdir(new URL(`src/components/${family}`, root), { recursive: true })));
+test('the stylesheet entrypoint publishes individual files and preserves combined order', async ({ root }) => {
+  const sources = ['src/generated/tokens.css', ...inventory.families.map(family => family.style)];
+  const expected = await Promise.all(sources.map(path => readFile(path, 'utf8')));
+  for (const source of sources) {
+    await mkdir(new URL(source.slice(0, source.lastIndexOf('/')), root), { recursive: true });
+    await copyFile(source, new URL(source, root));
+  }
   await mkdir(new URL('dist', root));
-  await writeFile(new URL('src/generated/tokens.css', root), ':root { --fs-text: black; }');
-  await copyFile(new URL('../../../src/components/button/button.css', import.meta.url), new URL('src/components/button/button.css', root));
-  await copyFile(new URL('../../../src/components/icon/icon.css', import.meta.url), new URL('src/components/icon/icon.css', root));
-  await copyFile(new URL('../../../src/components/card/card.css', import.meta.url), new URL('src/components/card/card.css', root));
-
-  await copyFile(new URL('../../../src/components/select/select.css', import.meta.url), new URL('src/components/select/select.css', root));
-  await copyFile(new URL('../../../src/components/text-input/text-input.css', import.meta.url), new URL('src/components/text-input/text-input.css', root));
-  await copyFile(new URL('../../../src/components/checkbox/checkbox.css', import.meta.url), new URL('src/components/checkbox/checkbox.css', root));
-  await copyFile(new URL('../../../src/components/form-group/form-group.css', import.meta.url), new URL('src/components/form-group/form-group.css', root));
-  await copyFile(new URL('../../../src/components/field/field.css', import.meta.url), new URL('src/components/field/field.css', root));
-  await copyFile(new URL('../../../src/components/textarea/textarea.css', import.meta.url), new URL('src/components/textarea/textarea.css', root));
-  await copyFile(new URL('../../../src/components/radio/radio.css', import.meta.url), new URL('src/components/radio/radio.css', root));
-  await copyFile(new URL('../../../src/components/link/link.css', import.meta.url), new URL('src/components/link/link.css', root));
-  await copyFile(new URL('../../../src/components/switch/switch.css', import.meta.url), new URL('src/components/switch/switch.css', root));
-  await copyFile(new URL('../../../src/components/spinner/spinner.css', import.meta.url), new URL('src/components/spinner/spinner.css', root));
-  await copyFile(new URL('../../../src/components/badge/badge.css', import.meta.url), new URL('src/components/badge/badge.css', root));
-  await copyFile(new URL('../../../src/components/separator/separator.css', import.meta.url), new URL('src/components/separator/separator.css', root));
-  await copyFile(new URL('../../../src/components/container/container.css', import.meta.url), new URL('src/components/container/container.css', root));
-  await copyFile(new URL('../../../src/components/stack/stack.css', import.meta.url), new URL('src/components/stack/stack.css', root));
-  await copyFile(new URL('../../../src/components/cluster/cluster.css', import.meta.url), new URL('src/components/cluster/cluster.css', root));
-  await copyFile(new URL('../../../src/components/simple-grid/simple-grid.css', import.meta.url), new URL('src/components/simple-grid/simple-grid.css', root));
-  await copyFile(new URL('../../../src/components/aspect-ratio/aspect-ratio.css', import.meta.url), new URL('src/components/aspect-ratio/aspect-ratio.css', root));
-  await copyFile(new URL('../../../src/components/section/section.css', import.meta.url), new URL('src/components/section/section.css', root));
-  await copyFile(new URL('../../../src/components/typography/typography.css', import.meta.url), new URL('src/components/typography/typography.css', root));
-  await copyFile(new URL('../../../src/components/button-group/button-group.css', import.meta.url), new URL('src/components/button-group/button-group.css', root));
-  await copyFile(new URL('../../../src/components/code-block/code-block.css', import.meta.url), new URL('src/components/code-block/code-block.css', root));
-  await copyFile(new URL('../../../src/components/avatar/avatar.css', import.meta.url), new URL('src/components/avatar/avatar.css', root));
-  const avatar = await readFile(new URL('src/components/avatar/avatar.css', root), 'utf8');
-  const codeBlock = await readFile(new URL('src/components/code-block/code-block.css', root), 'utf8');
-  const buttonGroup = await readFile(new URL('src/components/button-group/button-group.css', root), 'utf8');
-  const typography = await readFile(new URL('src/components/typography/typography.css', root), 'utf8');
-  const section = await readFile(new URL('src/components/section/section.css', root), 'utf8');
-  const aspectRatio = await readFile(new URL('src/components/aspect-ratio/aspect-ratio.css', root), 'utf8');
-  const simpleGrid = await readFile(new URL('src/components/simple-grid/simple-grid.css', root), 'utf8');
-  const cluster = await readFile(new URL('src/components/cluster/cluster.css', root), 'utf8');
-  const stack = await readFile(new URL('src/components/stack/stack.css', root), 'utf8');
-  const container = await readFile(new URL('src/components/container/container.css', root), 'utf8');
-  const separator = await readFile(new URL('src/components/separator/separator.css', root), 'utf8');
-  const badge = await readFile(new URL('src/components/badge/badge.css', root), 'utf8');
-  const spinner = await readFile(new URL('src/components/spinner/spinner.css', root), 'utf8');
-  const switchStyles = await readFile(new URL('src/components/switch/switch.css', root), 'utf8');
-  const link = await readFile(new URL('src/components/link/link.css', root), 'utf8');
-  const radio = await readFile(new URL('src/components/radio/radio.css', root), 'utf8');
-  const textarea = await readFile(new URL('src/components/textarea/textarea.css', root), 'utf8');
-  const field = await readFile(new URL('src/components/field/field.css', root), 'utf8');
-  const formGroup = await readFile(new URL('src/components/form-group/form-group.css', root), 'utf8');
-  const checkbox = await readFile(new URL('src/components/checkbox/checkbox.css', root), 'utf8');
-  const textInput = await readFile(new URL('src/components/text-input/text-input.css', root), 'utf8');
-  const select = await readFile(new URL('src/components/select/select.css', root), 'utf8');
-  const icon = await readFile(new URL('src/components/icon/icon.css', root), 'utf8');
-  const card = await readFile(new URL('src/components/card/card.css', root), 'utf8');
-  const button = await readFile(new URL('src/components/button/button.css', root), 'utf8');
-  const previousDirectory = process.cwd();
-
-  // act
+  const previous = process.cwd();
   try {
     process.chdir(fileURLToPath(root));
     await import('../../../scripts/copy-styles.mjs');
-  } finally {
-    process.chdir(previousDirectory);
-  }
+  } finally { process.chdir(previous); }
+  const result = await Promise.all(sources.map(path => readFile(new URL(`dist/${path.split('/').at(-1)}`, root), 'utf8')));
+  expect(result).toEqual(expected);
+  expect(await readFile(new URL('dist/styles.css', root), 'utf8')).toBe(expected.join('\n'));
+});
 
-  // assert
-  const result = await Promise.all(['tokens.css', 'field.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'cluster.css', 'simple-grid.css', 'aspect-ratio.css', 'section.css', 'typography.css', 'button-group.css', 'code-block.css', 'avatar.css', 'styles.css'].map(name => readFile(new URL(`dist/${name}`, root), 'utf8')));
-  expect(result).toEqual([':root { --fs-text: black; }', field, button, icon, card, select, textInput, checkbox, formGroup, textarea, radio, link, switchStyles, spinner, badge, separator, container, stack, cluster, simpleGrid, aspectRatio, section, typography, buttonGroup, codeBlock, avatar, `:root { --fs-text: black; }\n${field}\n${button}\n${icon}\n${card}\n${select}\n${textInput}\n${checkbox}\n${formGroup}\n${textarea}\n${radio}\n${link}\n${switchStyles}\n${spinner}\n${badge}\n${separator}\n${container}\n${stack}\n${cluster}\n${simpleGrid}\n${aspectRatio}\n${section}\n${typography}\n${buttonGroup}\n${codeBlock}\n${avatar}`]);
+test('families without CSS do not create a stylesheet entry', async ({ root }) => {
+  await mkdir(new URL('src/generated', root), { recursive: true });
+  await mkdir(new URL('dist', root));
+  await writeFile(new URL('src/generated/tokens.css', root), 'tokens');
+  const previous = process.cwd();
+  try { process.chdir(fileURLToPath(root)); await publishStyles([{}]); }
+  finally { process.chdir(previous); }
+  expect(await readFile(new URL('dist/styles.css', root), 'utf8')).toBe('tokens');
 });

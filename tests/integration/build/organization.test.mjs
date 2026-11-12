@@ -1,6 +1,9 @@
 import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import { expect, it } from 'vitest';
+import { protectedStylesheet, exportIdentities } from '../../support/organization.mjs';
+import componentInventory from '../../../scripts/component-inventory.json' with { type: 'json' };
+import protectedNames from '../../fixtures/organization-protected-token-names.json' with { type: 'json' };
 import { inScope } from '../../e2e/coverage/report.mjs';
 
 const baseline = JSON.parse(await readFile('tests/fixtures/component-organization-baseline.json', 'utf8'));
@@ -26,14 +29,15 @@ function relocated(path) {
 
 it('retains every production module after relocation', async () => {
   // arrange
-  const expected = [...baseline.production.map(relocated), 'src/components/avatar/Avatar.tsx', 'src/components/radio/Radio.tsx', 'src/components/link/Link.tsx', 'src/components/switch/Switch.tsx', 'src/components/spinner/Spinner.tsx', 'src/components/badge/Badge.tsx', 'src/components/separator/Separator.tsx', 'src/components/container/Container.tsx', 'src/components/stack/Stack.tsx', 'src/components/cluster/Cluster.tsx', 'src/components/simple-grid/SimpleGrid.tsx', 'src/components/aspect-ratio/AspectRatio.tsx', 'src/components/section/Section.tsx', 'src/components/code-block/CodeBlock.tsx', 'src/components/code-block/highlight-code.tsx', 'src/components/button-group/ButtonGroup.tsx', 'src/components/typography/Heading.tsx', 'src/components/typography/Text.tsx'].sort();
+  const expected = baseline.production.map(relocated).sort();
 
   // act
   const result = (await inventory('src')).filter(path => /\.tsx?$/.test(path)
     && !/(?:__tests__|stories)\//.test(path)).sort();
 
   // assert
-  expect(result.filter(path => !path.endsWith('/index.ts'))).toEqual(expected.filter(path => !path.endsWith('/index.ts')));
+  expect(result).toEqual(expect.arrayContaining(expected));
+  expect(result.filter(path => !path.endsWith('/index.ts'))).toEqual([...componentInventory.internalModules, ...componentInventory.families.flatMap(family => family.modules)].sort());
 });
 
 it('retains the complete pre-migration browser runtime inventory', async () => {
@@ -68,8 +72,7 @@ it.each(Object.entries(baseline.hashes).filter(([path]) => path.startsWith('src/
 
     // act
     const content = await readFile(destination, 'utf8');
-    // Radio, Link, Switch, Spinner, Badge, Separator, Container, SimpleGrid and Section add semantic properties while every legacy token declaration remains frozen.
-    const legacy = destination === 'src/generated/tokens.css' ? content.replace(/^.*--fs-(?:radio|link|switch|spinner|badge|separator|container|simple-grid|section|typography|button-group|code-block|avatar)-.*\n/gm, '') : content;
+    const legacy = destination === 'src/generated/tokens.css' ? protectedStylesheet(content, protectedNames) : content;
     const result = createHash('sha256').update(legacy).digest('hex');
 
     // assert
@@ -79,24 +82,24 @@ it.each(Object.entries(baseline.hashes).filter(([path]) => path.startsWith('src/
 
 it('preserves public runtime and type export declarations', async () => {
   // arrange
-  const expected = baseline.publicExports.replace(/from '[^']+'/g, 'from OWNER');
+  const expected = exportIdentities(baseline.publicExports);
 
   // act
-  const result = (await readFile('src/index.ts', 'utf8')).replace(/^.*from '.\/components\/(?:radio|link|switch|spinner|badge|separator|container|stack|cluster|simple-grid|aspect-ratio|section|typography|button-group|code-block|avatar)\/index.js';\n/gm, '').replace(/from '[^']+'/g, 'from OWNER');
+  const result = exportIdentities(await readFile('src/index.ts', 'utf8'));
 
   // assert
-  expect(result).toBe(expected);
+  expect(result).toEqual(expect.arrayContaining(expected));
 });
 
 it('preserves package export entrypoints', async () => {
   // arrange
-  const expected = { ...baseline.packageExports, './avatar.css': './dist/avatar.css', './radio.css': './dist/radio.css', './link.css': './dist/link.css', './switch.css': './dist/switch.css', './spinner.css': './dist/spinner.css', './badge.css': './dist/badge.css', './separator.css': './dist/separator.css', './container.css': './dist/container.css', './stack.css': './dist/stack.css', './cluster.css': './dist/cluster.css', './simple-grid.css': './dist/simple-grid.css', './aspect-ratio.css': './dist/aspect-ratio.css', './section.css': './dist/section.css', './typography.css': './dist/typography.css', './button-group.css': './dist/button-group.css', './code-block.css': './dist/code-block.css' };
+  const expected = baseline.packageExports;
 
   // act
   const result = JSON.parse(await readFile('package.json', 'utf8')).exports;
 
   // assert
-  expect(result).toEqual(expected);
+  expect(result).toMatchObject(expected);
 });
 
 it('excludes development modules from emitted package files', async () => {

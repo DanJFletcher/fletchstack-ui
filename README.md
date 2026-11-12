@@ -1,5 +1,7 @@
 # Fletchstack UI
 
+Adding a component? Follow the [component authoring recipe](docs/component-authoring.md) for references, scaffolding, integration, and verification.
+
 A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. Public components include `Button`, `Field` and its label/message atoms, `FormGroup`, `Checkbox`, `Select`, `TextInput`, `Textarea`, composable `Card` parts, `Icon`, and eight opt-in named icons.
 
 ## Avatar

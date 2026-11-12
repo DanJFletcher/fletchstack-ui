@@ -1,0 +1,503 @@
+{
+  "families": [
+    {
+      "slug": "field",
+      "entry": "src/components/field/index.ts",
+      "exports": {
+        "runtime": [
+          "Field",
+          "FieldLabel",
+          "FieldDescription",
+          "FieldError"
+        ],
+        "types": [
+          "FieldProps",
+          "FieldControlProps",
+          "FieldLabelProps",
+          "FieldMessageProps",
+          "FieldStyle"
+        ]
+      },
+      "modules": [
+        "src/components/field/Field.tsx",
+        "src/components/field/FieldPrimitives.tsx"
+      ],
+      "style": "src/components/field/field.css",
+      "category": "Forms"
+    },
+    {
+      "slug": "button",
+      "entry": "src/components/button/index.ts",
+      "exports": {
+        "runtime": [
+          "Button"
+        ],
+        "types": [
+          "ButtonProps",
+          "ButtonStyle"
+        ]
+      },
+      "modules": [
+        "src/components/button/Button.tsx"
+      ],
+      "style": "src/components/button/button.css",
+      "category": "Actions"
+    },
+    {
+      "slug": "icon",
+      "entry": "src/components/icon/index.ts",
+      "exports": {
+        "runtime": [
+          "Icon",
+          "MoonIcon",
+          "SunIcon",
+          "CheckIcon",
+          "CloseIcon",
+          "ChevronDownIcon",
+          "ArrowRightIcon",
+          "PlusIcon",
+          "ExternalLinkIcon"
+        ],
+        "types": [
+          "IconProps",
+          "IconSize",
+          "IconStyle",
+          "NamedIconProps"
+        ]
+      },
+      "modules": [
+        "src/components/icon/Icon.tsx",
+        "src/components/icon/named/ArrowRightIcon.tsx",
+        "src/components/icon/named/CheckIcon.tsx",
+        "src/components/icon/named/ChevronDownIcon.tsx",
+        "src/components/icon/named/CloseIcon.tsx",
+        "src/components/icon/named/ExternalLinkIcon.tsx",
+        "src/components/icon/named/MoonIcon.tsx",
+        "src/components/icon/named/PlusIcon.tsx",
+        "src/components/icon/named/SunIcon.tsx"
+      ],
+      "style": "src/components/icon/icon.css",
+      "category": "Visuals"
+    },
+    {
+      "slug": "card",
+      "entry": "src/components/card/index.ts",
+      "exports": {
+        "runtime": [
+          "Card",
+          "CardHeader",
+          "CardContent",
+          "CardFooter",
+          "CardMedia",
+          "CardTitle",
+          "CardDescription"
+        ],
+        "types": [
+          "CardProps",
+          "CardStyle",
+          "CardPartProps",
+          "CardFooterProps",
+          "CardTitleProps",
+          "CardDescriptionProps"
+        ]
+      },
+      "modules": [
+        "src/components/card/Card.tsx"
+      ],
+      "style": "src/components/card/card.css",
+      "category": "Surfaces"
+    },
+    {
+      "slug": "select",
+      "entry": "src/components/select/index.ts",
+      "exports": {
+        "runtime": [
+          "Select"
+        ],
+        "types": [
+          "SelectProps",
+          "SelectStyle"
+        ]
+      },
+      "modules": [
+        "src/components/select/Select.tsx"
+      ],
+      "style": "src/components/select/select.css",
+      "category": "Forms"
+    },
+    {
+      "slug": "text-input",
+      "entry": "src/components/text-input/index.ts",
+      "exports": {
+        "runtime": [
+          "TextInput"
+        ],
+        "types": [
+          "TextInputProps",
+          "TextInputStyle"
+        ]
+      },
+      "modules": [
+        "src/components/text-input/TextInput.tsx"
+      ],
+      "style": "src/components/text-input/text-input.css",
+      "category": "Forms"
+    },
+    {
+      "slug": "checkbox",
+      "entry": "src/components/checkbox/index.ts",
+      "exports": {
+        "runtime": [
+          "Checkbox"
+        ],
+        "types": [
+          "CheckboxProps",
+          "CheckboxStyle"
+        ]
+      },
+      "modules": [
+        "src/components/checkbox/Checkbox.tsx"
+      ],
+      "style": "src/components/checkbox/checkbox.css",
+      "category": "Forms"
+    },
+    {
+      "slug": "form-group",
+      "entry": "src/components/form-group/index.ts",
+      "exports": {
+        "runtime": [
+          "FormGroup"
+        ],
+        "types": [
+          "FormGroupProps",
+          "FormGroupStyle",
+          "FormGroupControlProps"
+        ]
+      },
+      "modules": [
+        "src/components/form-group/FormGroup.tsx"
+      ],
+      "style": "src/components/form-group/form-group.css",
+      "category": "Forms"
+    },
+    {
+      "slug": "textarea",
+      "entry": "src/components/textarea/index.ts",
+      "exports": {
+        "runtime": [
+          "Textarea"
+        ],
+        "types": [
+          "TextareaProps",
+          "TextareaStyle"
+        ]
+      },
+      "modules": [
+        "src/components/textarea/Textarea.tsx"
+      ],
+      "style": "src/components/textarea/textarea.css",
+      "category": "Forms"
+    },
+    {
+      "slug": "radio",
+      "entry": "src/components/radio/index.ts",
+      "exports": {
+        "runtime": [
+          "Radio"
+        ],
+        "types": [
+          "RadioProps",
+          "RadioStyle"
+        ]
+      },
+      "modules": [
+        "src/components/radio/Radio.tsx"
+      ],
+      "style": "src/components/radio/radio.css",
+      "category": "Forms"
+    },
+    {
+      "slug": "link",
+      "entry": "src/components/link/index.ts",
+      "exports": {
+        "runtime": [
+          "Link"
+        ],
+        "types": [
+          "LinkProps",
+          "LinkStyle"
+        ]
+      },
+      "modules": [
+        "src/components/link/Link.tsx"
+      ],
+      "style": "src/components/link/link.css",
+      "category": "Navigation"
+    },
+    {
+      "slug": "switch",
+      "entry": "src/components/switch/index.ts",
+      "exports": {
+        "runtime": [
+          "Switch"
+        ],
+        "types": [
+          "SwitchProps",
+          "SwitchStyle"
+        ]
+      },
+      "modules": [
+        "src/components/switch/Switch.tsx"
+      ],
+      "style": "src/components/switch/switch.css",
+      "category": "Forms"
+    },
+    {
+      "slug": "spinner",
+      "entry": "src/components/spinner/index.ts",
+      "exports": {
+        "runtime": [
+          "Spinner"
+        ],
+        "types": [
+          "SpinnerProps",
+          "SpinnerSize",
+          "SpinnerStyle"
+        ]
+      },
+      "modules": [
+        "src/components/spinner/Spinner.tsx"
+      ],
+      "style": "src/components/spinner/spinner.css",
+      "category": "Feedback"
+    },
+    {
+      "slug": "badge",
+      "entry": "src/components/badge/index.ts",
+      "exports": {
+        "runtime": [
+          "Badge"
+        ],
+        "types": [
+          "BadgeProps",
+          "BadgeStyle",
+          "BadgeTone"
+        ]
+      },
+      "modules": [
+        "src/components/badge/Badge.tsx"
+      ],
+      "style": "src/components/badge/badge.css",
+      "category": "Feedback"
+    },
+    {
+      "slug": "separator",
+      "entry": "src/components/separator/index.ts",
+      "exports": {
+        "runtime": [
+          "Separator"
+        ],
+        "types": [
+          "SeparatorProps",
+          "SeparatorStyle",
+          "SeparatorOrientation"
+        ]
+      },
+      "modules": [
+        "src/components/separator/Separator.tsx"
+      ],
+      "style": "src/components/separator/separator.css",
+      "category": "Layout"
+    },
+    {
+      "slug": "container",
+      "entry": "src/components/container/index.ts",
+      "exports": {
+        "runtime": [
+          "Container"
+        ],
+        "types": [
+          "ContainerProps",
+          "ContainerStyle"
+        ]
+      },
+      "modules": [
+        "src/components/container/Container.tsx"
+      ],
+      "style": "src/components/container/container.css",
+      "category": "Layout"
+    },
+    {
+      "slug": "stack",
+      "entry": "src/components/stack/index.ts",
+      "exports": {
+        "runtime": [
+          "Stack"
+        ],
+        "types": [
+          "StackProps",
+          "StackStyle"
+        ]
+      },
+      "modules": [
+        "src/components/stack/Stack.tsx"
+      ],
+      "style": "src/components/stack/stack.css",
+      "category": "Layout"
+    },
+    {
+      "slug": "cluster",
+      "entry": "src/components/cluster/index.ts",
+      "exports": {
+        "runtime": [
+          "Cluster"
+        ],
+        "types": [
+          "ClusterProps",
+          "ClusterStyle"
+        ]
+      },
+      "modules": [
+        "src/components/cluster/Cluster.tsx"
+      ],
+      "style": "src/components/cluster/cluster.css",
+      "category": "Layout"
+    },
+    {
+      "slug": "simple-grid",
+      "entry": "src/components/simple-grid/index.ts",
+      "exports": {
+        "runtime": [
+          "SimpleGrid"
+        ],
+        "types": [
+          "SimpleGridProps",
+          "SimpleGridStyle"
+        ]
+      },
+      "modules": [
+        "src/components/simple-grid/SimpleGrid.tsx"
+      ],
+      "style": "src/components/simple-grid/simple-grid.css",
+      "category": "Layout"
+    },
+    {
+      "slug": "aspect-ratio",
+      "entry": "src/components/aspect-ratio/index.ts",
+      "exports": {
+        "runtime": [
+          "AspectRatio"
+        ],
+        "types": [
+          "AspectRatioProps",
+          "AspectRatioStyle"
+        ]
+      },
+      "modules": [
+        "src/components/aspect-ratio/AspectRatio.tsx"
+      ],
+      "style": "src/components/aspect-ratio/aspect-ratio.css",
+      "category": "Layout"
+    },
+    {
+      "slug": "section",
+      "entry": "src/components/section/index.ts",
+      "exports": {
+        "runtime": [
+          "Section"
+        ],
+        "types": [
+          "SectionProps",
+          "SectionStyle"
+        ]
+      },
+      "modules": [
+        "src/components/section/Section.tsx"
+      ],
+      "style": "src/components/section/section.css",
+      "category": "Layout"
+    },
+    {
+      "slug": "typography",
+      "entry": "src/components/typography/index.ts",
+      "exports": {
+        "runtime": [
+          "Heading",
+          "Text"
+        ],
+        "types": [
+          "HeadingProps",
+          "HeadingStyle",
+          "TextProps",
+          "TextStyle"
+        ]
+      },
+      "modules": [
+        "src/components/typography/Heading.tsx",
+        "src/components/typography/Text.tsx"
+      ],
+      "style": "src/components/typography/typography.css",
+      "category": "Typography"
+    },
+    {
+      "slug": "button-group",
+      "entry": "src/components/button-group/index.ts",
+      "exports": {
+        "runtime": [
+          "ButtonGroup"
+        ],
+        "types": [
+          "ButtonGroupProps",
+          "ButtonGroupStyle"
+        ]
+      },
+      "modules": [
+        "src/components/button-group/ButtonGroup.tsx"
+      ],
+      "style": "src/components/button-group/button-group.css",
+      "category": "Actions"
+    },
+    {
+      "slug": "code-block",
+      "entry": "src/components/code-block/index.ts",
+      "exports": {
+        "runtime": [
+          "CodeBlock"
+        ],
+        "types": [
+          "CodeBlockProps",
+          "CodeBlockStyle"
+        ]
+      },
+      "modules": [
+        "src/components/code-block/CodeBlock.tsx",
+        "src/components/code-block/highlight-code.tsx"
+      ],
+      "style": "src/components/code-block/code-block.css",
+      "category": "Content"
+    },
+    {
+      "slug": "avatar",
+      "entry": "src/components/avatar/index.ts",
+      "exports": {
+        "runtime": [
+          "Avatar"
+        ],
+        "types": [
+          "AvatarProps",
+          "AvatarSize",
+          "AvatarShape",
+          "AvatarStyle"
+        ]
+      },
+      "modules": [
+        "src/components/avatar/Avatar.tsx"
+      ],
+      "style": "src/components/avatar/avatar.css",
+      "category": "Identity"
+    }
+  ],
+  "internalModules": [
+    "src/internal/hooks/useFieldAccessibility.ts"
+  ]
+}

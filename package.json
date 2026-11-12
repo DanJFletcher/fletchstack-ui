@@ -83,7 +83,9 @@
     "test:integration:affected": "node scripts/test-affected.mjs integration",
     "test:e2e:components": "playwright test --config=playwright.components.config.ts",
     "test:e2e:storybook": "playwright test --config=playwright.config.ts",
-    "test:e2e:affected": "node tests/browser-harness/affected.mjs"
+    "test:e2e:affected": "node tests/browser-harness/affected.mjs",
+    "component:new": "node scripts/component.mjs new",
+    "component:check": "node scripts/component.mjs check"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

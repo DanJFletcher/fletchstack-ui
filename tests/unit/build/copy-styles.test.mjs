@@ -1,101 +1,36 @@
 import { beforeEach, expect, it, vi } from 'vitest';
+import { publishStyles } from '../../../scripts/component-styles.mjs';
 
 const files = vi.hoisted(() => ({ copyFile: vi.fn(), readFile: vi.fn(), writeFile: vi.fn() }));
 vi.mock('node:fs/promises', () => files);
+beforeEach(() => { vi.resetAllMocks(); });
 
-beforeEach(() => {
-  vi.resetModules();
-  vi.resetAllMocks();
-  files.copyFile.mockResolvedValue(undefined);
-  files.readFile.mockResolvedValueOnce(':root { --fs-text: black; }').mockResolvedValueOnce('.fs-field { display: grid; }').mockResolvedValueOnce('.fs-button { color: var(--fs-text); }').mockResolvedValueOnce('.fs-icon { width: var(--fs-icon-size-medium); }').mockResolvedValueOnce('.fs-card { color: var(--fs-card-text); }').mockResolvedValueOnce('.fs-select { color: var(--fs-select-text); }').mockResolvedValueOnce('.fs-text-input { color: var(--fs-text-input-text); }').mockResolvedValueOnce('.fs-checkbox { color: var(--fs-checkbox-text); }');
-  files.readFile.mockResolvedValueOnce('.fs-form-group { display: block; }');
-  files.readFile.mockResolvedValueOnce('.fs-textarea { resize: vertical; }');
-  files.readFile.mockResolvedValueOnce('.fs-radio { appearance: none; }');
-  files.readFile.mockResolvedValueOnce('.fs-link { text-decoration-line: underline; }');
-  files.readFile.mockResolvedValueOnce('.fs-switch { appearance: none; }');
-  files.readFile.mockResolvedValueOnce('.fs-spinner { display: inline-flex; }');
-  files.readFile.mockResolvedValueOnce('.fs-badge { display: inline-flex; }');
-  files.readFile.mockResolvedValueOnce('.fs-separator { margin: 0; }');
-  files.readFile.mockResolvedValueOnce('.fs-container { box-sizing: border-box; }');
-  files.readFile.mockResolvedValueOnce('.fs-stack { display: flex; }');
-  files.readFile.mockResolvedValueOnce('.fs-cluster { flex-wrap: wrap; }');
-  files.readFile.mockResolvedValueOnce('.fs-simple-grid { display: grid; }');
-  files.readFile.mockResolvedValueOnce('.fs-aspect-ratio { position: relative; }');
-  files.readFile.mockResolvedValueOnce('.fs-section { padding-inline: 0; }');
-  files.readFile.mockResolvedValueOnce('.fs-heading { margin: 0; }');
-  files.readFile.mockResolvedValueOnce('.fs-button-group { display: flex; }');
-  files.readFile.mockResolvedValueOnce('.fs-code-block { white-space: pre; }');
-  files.readFile.mockResolvedValueOnce('.fs-avatar { display: inline-grid; }');
-  files.writeFile.mockResolvedValue(undefined);
-});
-
-it.each([
-  { source: 'src/components/avatar/avatar.css', destination: 'dist/avatar.css' },
-  { source: 'src/components/code-block/code-block.css', destination: 'dist/code-block.css' },
-  { source: 'src/components/button-group/button-group.css', destination: 'dist/button-group.css' },
-  { source: 'src/components/typography/typography.css', destination: 'dist/typography.css' },
-  { source: 'src/components/section/section.css', destination: 'dist/section.css' },
-  { source: 'src/components/aspect-ratio/aspect-ratio.css', destination: 'dist/aspect-ratio.css' },
-  { source: 'src/components/simple-grid/simple-grid.css', destination: 'dist/simple-grid.css' },
-  { source: 'src/components/cluster/cluster.css', destination: 'dist/cluster.css' },
-  { source: 'src/components/stack/stack.css', destination: 'dist/stack.css' },
-  { source: 'src/components/container/container.css', destination: 'dist/container.css' },
-  { source: 'src/components/separator/separator.css', destination: 'dist/separator.css' },
-  { source: 'src/components/badge/badge.css', destination: 'dist/badge.css' },
-  { source: 'src/components/spinner/spinner.css', destination: 'dist/spinner.css' },
-  { source: 'src/components/switch/switch.css', destination: 'dist/switch.css' },
-  { source: 'src/components/link/link.css', destination: 'dist/link.css' },
-  { source: 'src/components/radio/radio.css', destination: 'dist/radio.css' },
-  { source: 'src/generated/tokens.css', destination: 'dist/tokens.css' },
-  { source: 'src/components/field/field.css', destination: 'dist/field.css' },
-  { source: 'src/components/button/button.css', destination: 'dist/button.css' },
-  { source: 'src/components/icon/icon.css', destination: 'dist/icon.css' },
-  { source: 'src/components/card/card.css', destination: 'dist/card.css' },
-  { source: 'src/components/select/select.css', destination: 'dist/select.css' },
-  { source: 'src/components/text-input/text-input.css', destination: 'dist/text-input.css' },
-  { source: 'src/components/textarea/textarea.css', destination: 'dist/textarea.css' },
-  { source: 'src/components/form-group/form-group.css', destination: 'dist/form-group.css' },
-  { source: 'src/components/checkbox/checkbox.css', destination: 'dist/checkbox.css' },
-])('publishes $source at $destination', async ({ source, destination }) => {
-  // act
-  await import('../../../scripts/copy-styles.mjs');
-
-  // assert
-  expect(files.copyFile).toHaveBeenCalledWith(source, destination);
-});
-
-it('combines tokens before component styles in the public stylesheet', async () => {
+it('copies styles and combines tokens before the supplied component order', async () => {
   // arrange
-  const expected = ':root { --fs-text: black; }\n.fs-field { display: grid; }\n.fs-button { color: var(--fs-text); }\n.fs-icon { width: var(--fs-icon-size-medium); }\n.fs-card { color: var(--fs-card-text); }\n.fs-select { color: var(--fs-select-text); }\n.fs-text-input { color: var(--fs-text-input-text); }\n.fs-checkbox { color: var(--fs-checkbox-text); }\n.fs-form-group { display: block; }\n.fs-textarea { resize: vertical; }\n.fs-radio { appearance: none; }\n.fs-link { text-decoration-line: underline; }\n.fs-switch { appearance: none; }\n.fs-spinner { display: inline-flex; }\n.fs-badge { display: inline-flex; }\n.fs-separator { margin: 0; }\n.fs-container { box-sizing: border-box; }\n.fs-stack { display: flex; }\n.fs-cluster { flex-wrap: wrap; }\n.fs-simple-grid { display: grid; }\n.fs-aspect-ratio { position: relative; }\n.fs-section { padding-inline: 0; }\n.fs-heading { margin: 0; }\n.fs-button-group { display: flex; }\n.fs-code-block { white-space: pre; }\n.fs-avatar { display: inline-grid; }';
-
+  files.readFile.mockResolvedValueOnce('tokens').mockResolvedValueOnce('second').mockResolvedValueOnce('first');
+  const families = [{ style: 'src/second.css' }, {}, { style: 'src/first.css' }];
   // act
-  await import('../../../scripts/copy-styles.mjs');
-
+  await publishStyles(families);
   // assert
-  expect(files.writeFile).toHaveBeenCalledWith('dist/styles.css', expected);
+  expect(files.copyFile.mock.calls).toEqual([['src/generated/tokens.css', 'dist/tokens.css'], ['src/second.css', 'dist/second.css'], ['src/first.css', 'dist/first.css']]);
+  expect(files.writeFile).toHaveBeenCalledWith('dist/styles.css', 'tokens\nsecond\nfirst');
 });
 
-it('propagates missing source stylesheet errors', async () => {
+it.each(['copyFile', 'readFile', 'writeFile'])('propagates %s failure', async operation => {
   // arrange
-  const expected = new Error('Source stylesheet missing');
-  files.copyFile.mockRejectedValue(expected);
-
+  const expected = new Error('Disk unavailable');
+  files[operation].mockRejectedValue(expected);
   // act
-  const result = import('../../../scripts/copy-styles.mjs');
-
+  const result = publishStyles([]);
   // assert
   await expect(result).rejects.toBe(expected);
-  expect(files.writeFile).not.toHaveBeenCalled();
 });
 
-it('propagates combined stylesheet write errors', async () => {
+it('the entrypoint publishes the reviewed inventory', async () => {
   // arrange
-  const expected = new Error('Cannot write stylesheet');
-  files.writeFile.mockRejectedValue(expected);
-
+  const inventory = await import('../../../scripts/component-inventory.json');
   // act
-  const result = import('../../../scripts/copy-styles.mjs');
-
+  await import('../../../scripts/copy-styles.mjs');
   // assert
-  await expect(result).rejects.toBe(expected);
+  expect(files.copyFile.mock.calls.slice(1).map(call => call[0])).toEqual(inventory.default.families.map(family => family.style));
 });

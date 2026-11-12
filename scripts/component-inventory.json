@@ -515,6 +515,30 @@
       "style": "src/components/avatar-group/avatar-group.css",
       "category": "Identity",
       "examples": "src/components/avatar-group/stories/avatar-group-examples.tsx"
+    },
+    {
+      "slug": "multi-select",
+      "entry": "src/components/multi-select/index.ts",
+      "exports": {
+        "runtime": [
+          "MultiSelect"
+        ],
+        "types": [
+          "MultiSelectProps",
+          "MultiSelectStyle",
+          "MultiSelectOption"
+        ]
+      },
+      "modules": [
+        "src/components/multi-select/MultiSelect.tsx",
+        "src/components/multi-select/types.ts",
+        "src/components/multi-select/useMultiSelect.ts",
+        "src/components/multi-select/multiselect-policy.ts",
+        "src/components/multi-select/MultiSelectParts.tsx"
+      ],
+      "style": "src/components/multi-select/multi-select.css",
+      "category": "Forms",
+      "examples": "src/components/multi-select/stories/multi-select-examples.tsx"
     }
   ],
   "internalModules": [

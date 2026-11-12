@@ -143,3 +143,7 @@ The supplied Avatar reference approves a passive identity image with photo/gener
 ## AvatarGroup pattern
 
 The linked AvatarGroup reference and supplied image approve an ordered shared-Avatar stack with 32px default identities, 8px overlap and 2px separating rings. Native details/summary reveals hidden names, including a count-only case. The [AvatarGroup contract](avatar-group.md) records member ownership, localization, geometry, semantic `avatarGroup.*` roles, and verification boundaries.
+
+## MultiSelect pattern
+
+The linked MultiSelect reference and supplied image approve a searchable combobox with removable tags, label-filtered multiselectable options, limits, minimum validation and native form support. Independent `multiSelect.*` semantic roles cover surfaces, tags, active options, focus, disabled/error states and sizing in both themes. See the [MultiSelect contract](multi-select.md).

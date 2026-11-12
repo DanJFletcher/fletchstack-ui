@@ -385,3 +385,15 @@ export const unnamedAvatarGroup = <AvatarGroup members={[]} />;
 export const unkeyedAvatarGroup = <AvatarGroup label="Editors" members={[{ name: 'Alex Example' }]} />;
 // @ts-expect-error The group owns its content.
 export const invalidAvatarGroupChildren = <AvatarGroup label="Editors" members={[]}>Content</AvatarGroup>;
+
+import { MultiSelect, type MultiSelectOption, type MultiSelectProps } from 'fletchstack-ui';
+import 'fletchstack-ui/multi-select.css';
+const multiSelectOptions: readonly MultiSelectOption[] = [{ value: 'react', label: 'React' }];
+const multiSelectProps: MultiSelectProps = { label: 'Topics', options: multiSelectOptions, onValueChange: values => values.join(',') };
+export const multiSelect = <MultiSelect {...multiSelectProps} ref={createRef<HTMLInputElement>()} style={{ '--fs-multi-select-radius': '8px' }} />;
+// @ts-expect-error Selection owns the input value; native onChange would confuse query and selection.
+export const invalidMultiSelectChange = <MultiSelect {...multiSelectProps} onChange={() => {}} />;
+// @ts-expect-error The composite owns the accessible name.
+export const invalidMultiSelectName = <MultiSelect {...multiSelectProps} aria-label="Another name" />;
+// @ts-expect-error Multiple selections are strings, not a scalar input value.
+export const invalidMultiSelectValue = <MultiSelect {...multiSelectProps} value="react" />;

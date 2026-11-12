@@ -420,3 +420,7 @@ Optional proportional media frame, defaulting to 16:9 with positive numeric rati
 ## Section
 
 Optional native page topic with compact 32px, default 64px or spacious 96px block padding; use `as="div"` for a visual wrapper. Container owns width/gutters; child layouts and parent gaps remain independent. Load `section.css` plus tokens, or combined styles. See the [Section contract](docs/section.md).
+
+## MultiSelect
+
+Searchable multi-value fields with removable tags, native form values/reset, selection limits and keyboard navigation. Load tokens, `field.css` and `multi-select.css`, or combined styles. See the [MultiSelect contract](docs/multi-select.md).

@@ -1027,6 +1027,50 @@
     "components-avatar-group--scopes": {
       "module": "tests/browser-harness/scenarios/AvatarGroup.tsx",
       "export": "Scopes"
+    },
+    "components-multi-select--playground": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "Playground"
+    },
+    "components-multi-select--composition": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "Composition"
+    },
+    "components-multi-select--form": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "Form"
+    },
+    "components-multi-select--controlled": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "Controlled"
+    },
+    "components-multi-select--limit": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "Limit"
+    },
+    "components-multi-select--required": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "Required"
+    },
+    "components-multi-select--loading": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "Loading"
+    },
+    "components-multi-select--disabled": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "Disabled"
+    },
+    "components-multi-select--long-options": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "LongOptions"
+    },
+    "components-multi-select--long-list": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "LongList"
+    },
+    "components-multi-select--disabled-fieldset": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "DisabledFieldset"
     }
   },
   "suites": [
@@ -1575,6 +1619,23 @@
         "components-avatar-group--failed-photo",
         "components-avatar-group--long-names",
         "components-avatar-group--scopes"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/multi-select/MultiSelect.spec.ts",
+      "scenarios": [
+        "components-multi-select--playground",
+        "components-multi-select--composition",
+        "components-multi-select--form",
+        "components-multi-select--controlled",
+        "components-multi-select--limit",
+        "components-multi-select--required",
+        "components-multi-select--loading",
+        "components-multi-select--disabled",
+        "components-multi-select--long-options",
+        "components-multi-select--long-list",
+        "components-multi-select--disabled-fieldset"
       ]
     }
   ],

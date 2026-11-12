@@ -2497,6 +2497,185 @@
           "$description": "Space between control and focus ring."
         }
       }
+    },
+    "multiSelect": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "MultiSelect closed control and popup surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "MultiSelect field and control foreground."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.line}",
+        "$description": "MultiSelect helper and placeholder text."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.line}",
+        "$description": "MultiSelect default control boundary."
+      },
+      "hoverBorder": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "MultiSelect hovered enabled boundary."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorDay}",
+        "$description": "MultiSelect invalid boundary and error message."
+      },
+      "disabledSurface": {
+        "$type": "color",
+        "$value": "{primitive.disabled}",
+        "$description": "Disabled MultiSelect background."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.muted}",
+        "$description": "Disabled MultiSelect foreground."
+      },
+      "disabledBorder": {
+        "$type": "color",
+        "$value": "{primitive.line}",
+        "$description": "Disabled MultiSelect boundary."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "MultiSelect control corner radius."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "MultiSelect boundary thickness."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "MultiSelect label, control, and message separation."
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.blue}",
+          "$description": "MultiSelect keyboard focus indicator."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "MultiSelect focus outline thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px2}",
+          "$description": "MultiSelect focus outline offset."
+        }
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "MultiSelect label, control, and message family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "MultiSelect body size."
+        },
+        "message": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "MultiSelect supporting text size."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "MultiSelect label emphasis."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "MultiSelect text line height."
+        }
+      },
+      "size": {
+        "small": {
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px4}",
+            "$description": "small MultiSelect vertical padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px36}",
+            "$description": "small MultiSelect minimum control height."
+          }
+        },
+        "medium": {
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px8}",
+            "$description": "medium MultiSelect vertical padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px44}",
+            "$description": "medium MultiSelect minimum control height."
+          }
+        },
+        "large": {
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px12}",
+            "$description": "large MultiSelect vertical padding."
+          },
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px52}",
+            "$description": "large MultiSelect minimum control height."
+          }
+        }
+      },
+      "tagSurface": {
+        "$type": "color",
+        "$value": "{primitive.blueTint}",
+        "$description": "MultiSelected tag and active option background."
+      },
+      "tagRadius": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "MultiSelected tag corners."
+      },
+      "targetSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Minimum removal target size."
+      },
+      "popupHeight": {
+        "$type": "dimension",
+        "$value": "{primitive.px240}",
+        "$description": "Scrollable popup maximum height."
+      },
+      "queryWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px80}",
+        "$description": "Preferred minimum query width before wrapping."
+      },
+      "popupGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Space between the control and its popup."
+      },
+      "optionPadding": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Option and tag horizontal inset."
+      }
     }
   }
 }

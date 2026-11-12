@@ -61,3 +61,6 @@ export type { SectionProps, SectionStyle } from './components/section/index.js';
 
 export { AvatarGroup } from './components/avatar-group/index.js';
 export type { AvatarGroupProps, AvatarGroupStyle, AvatarGroupMember } from './components/avatar-group/index.js';
+
+export { MultiSelect } from './components/multi-select/index.js';
+export type { MultiSelectProps, MultiSelectStyle, MultiSelectOption } from './components/multi-select/index.js';

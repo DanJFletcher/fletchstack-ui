@@ -463,6 +463,39 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-avatar-group-focus-color` | Keyboard focus ring on the themed surface. | color |
 | `--fs-avatar-group-focus-width` | Focus ring thickness. | dimension |
 | `--fs-avatar-group-focus-offset` | Space between control and focus ring. | dimension |
+| `--fs-multi-select-surface` | MultiSelect closed control and popup surface. | color |
+| `--fs-multi-select-text` | MultiSelect field and control foreground. | color |
+| `--fs-multi-select-muted` | MultiSelect helper and placeholder text. | color |
+| `--fs-multi-select-border` | MultiSelect default control boundary. | color |
+| `--fs-multi-select-hover-border` | MultiSelect hovered enabled boundary. | color |
+| `--fs-multi-select-error` | MultiSelect invalid boundary and error message. | color |
+| `--fs-multi-select-disabled-surface` | Disabled MultiSelect background. | color |
+| `--fs-multi-select-disabled-text` | Disabled MultiSelect foreground. | color |
+| `--fs-multi-select-disabled-border` | Disabled MultiSelect boundary. | color |
+| `--fs-multi-select-radius` | MultiSelect control corner radius. | dimension |
+| `--fs-multi-select-border-width` | MultiSelect boundary thickness. | dimension |
+| `--fs-multi-select-gap` | MultiSelect label, control, and message separation. | dimension |
+| `--fs-multi-select-focus-color` | MultiSelect keyboard focus indicator. | color |
+| `--fs-multi-select-focus-width` | MultiSelect focus outline thickness. | dimension |
+| `--fs-multi-select-focus-offset` | MultiSelect focus outline offset. | dimension |
+| `--fs-multi-select-font-family` | MultiSelect label, control, and message family. | fontFamily |
+| `--fs-multi-select-font-size` | MultiSelect body size. | dimension |
+| `--fs-multi-select-font-message` | MultiSelect supporting text size. | dimension |
+| `--fs-multi-select-font-weight` | MultiSelect label emphasis. | fontWeight |
+| `--fs-multi-select-font-line-height` | MultiSelect text line height. | number |
+| `--fs-multi-select-size-small-padding` | small MultiSelect vertical padding. | dimension |
+| `--fs-multi-select-size-small-minimum` | small MultiSelect minimum control height. | dimension |
+| `--fs-multi-select-size-medium-padding` | medium MultiSelect vertical padding. | dimension |
+| `--fs-multi-select-size-medium-minimum` | medium MultiSelect minimum control height. | dimension |
+| `--fs-multi-select-size-large-padding` | large MultiSelect vertical padding. | dimension |
+| `--fs-multi-select-size-large-minimum` | large MultiSelect minimum control height. | dimension |
+| `--fs-multi-select-tag-surface` | MultiSelected tag and active option background. | color |
+| `--fs-multi-select-tag-radius` | MultiSelected tag corners. | dimension |
+| `--fs-multi-select-target-size` | Minimum removal target size. | dimension |
+| `--fs-multi-select-popup-height` | Scrollable popup maximum height. | dimension |
+| `--fs-multi-select-query-width` | Preferred minimum query width before wrapping. | dimension |
+| `--fs-multi-select-popup-gap` | Space between the control and its popup. | dimension |
+| `--fs-multi-select-option-padding` | Option and tag horizontal inset. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

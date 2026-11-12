@@ -539,6 +539,25 @@
       "style": "src/components/multi-select/multi-select.css",
       "category": "Forms",
       "examples": "src/components/multi-select/stories/multi-select-examples.tsx"
+    },
+    {
+      "slug": "chip",
+      "entry": "src/components/chip/index.ts",
+      "exports": {
+        "runtime": [
+          "Chip"
+        ],
+        "types": [
+          "ChipProps",
+          "ChipStyle"
+        ]
+      },
+      "modules": [
+        "src/components/chip/Chip.tsx"
+      ],
+      "style": "src/components/chip/chip.css",
+      "category": "Identity",
+      "examples": "src/components/chip/stories/chip-examples.tsx"
     }
   ],
   "internalModules": [

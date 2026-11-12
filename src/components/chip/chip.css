@@ -1,0 +1,31 @@
+.fs-chip {
+  box-sizing: border-box; display: inline-flex; align-items: center; gap: var(--fs-chip-gap);
+  min-inline-size: 0; max-inline-size: 100%; vertical-align: middle;
+  min-block-size: var(--fs-chip-size-medium-minimum);
+  border: var(--fs-chip-border-width) solid var(--fs-chip-border); border-radius: var(--fs-chip-radius);
+  background: var(--fs-chip-surface); color: var(--fs-chip-text);
+  font-family: var(--fs-chip-font-family); font-size: var(--fs-chip-size-medium-font); font-weight: var(--fs-chip-font-weight); line-height: var(--fs-chip-font-line-height);
+  --fs-chip-label-padding: var(--fs-chip-size-medium-padding);
+}
+.fs-chip[hidden] { display: none; }
+.fs-chip--small { min-block-size: var(--fs-chip-size-small-minimum); font-size: var(--fs-chip-size-small-font); --fs-chip-label-padding: var(--fs-chip-size-small-padding); }
+.fs-chip--large { min-block-size: var(--fs-chip-size-large-minimum); font-size: var(--fs-chip-size-large-font); --fs-chip-label-padding: var(--fs-chip-size-large-padding); }
+.fs-chip__label { display: block; min-inline-size: 0; overflow-wrap: anywhere; padding: var(--fs-chip-label-padding) var(--fs-chip-padding-inline); }
+.fs-chip button { box-sizing: border-box; border: 0; margin: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; border-radius: inherit; }
+.fs-chip__select { display: inline-flex; flex: 1 1 auto; align-items: center; gap: var(--fs-chip-gap); min-inline-size: 0; align-self: stretch; padding: 0; text-align: start; }
+.fs-chip__select:has(.fs-chip__icon) { padding-inline-start: var(--fs-chip-padding-inline); }
+.fs-chip__remove { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; min-inline-size: var(--fs-chip-remove-size); min-block-size: var(--fs-chip-remove-size); align-self: stretch; padding: 0; }
+.fs-chip__icon { display: inline-flex; flex-shrink: 0; }
+.fs-chip .fs-chip__icon > svg { inline-size: var(--fs-chip-icon-size); block-size: var(--fs-chip-icon-size); stroke-width: var(--fs-chip-icon-stroke); }
+.fs-chip:has(button:hover:not(:disabled)) { background: var(--fs-chip-hover-surface); }
+.fs-chip[data-selected="true"] { background: var(--fs-chip-selected-surface); color: var(--fs-chip-selected-text); }
+.fs-chip[data-selected="true"]:has(button:hover:not(:disabled)) { background: var(--fs-chip-selected-hover); }
+.fs-chip[data-disabled="true"] { background: var(--fs-chip-disabled-surface); color: var(--fs-chip-disabled-text); }
+.fs-chip button:disabled { cursor: not-allowed; }
+.fs-chip button:focus-visible { outline: var(--fs-chip-focus-width) solid var(--fs-chip-focus-color); outline-offset: var(--fs-chip-focus-offset); }
+@media (forced-colors: active) {
+  .fs-chip { background: Canvas; color: CanvasText; border-color: ButtonText; }
+  .fs-chip[data-selected="true"] { background: Highlight; color: HighlightText; }
+  .fs-chip[data-disabled="true"] { background: Canvas; color: GrayText; border-color: GrayText; }
+  .fs-chip button:focus-visible { outline-color: Highlight; }
+}

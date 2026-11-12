@@ -496,6 +496,37 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-multi-select-query-width` | Preferred minimum query width before wrapping. | dimension |
 | `--fs-multi-select-popup-gap` | Space between the control and its popup. | dimension |
 | `--fs-multi-select-option-padding` | Option and tag horizontal inset. | dimension |
+| `--fs-chip-surface` | Chip surface color. | color |
+| `--fs-chip-text` | Chip text color. | color |
+| `--fs-chip-border` | Chip border color. | color |
+| `--fs-chip-hover-surface` | Chip hoverSurface color. | color |
+| `--fs-chip-selected-surface` | Chip selectedSurface color. | color |
+| `--fs-chip-selected-text` | Chip selectedText color. | color |
+| `--fs-chip-selected-hover` | Chip selectedHover color. | color |
+| `--fs-chip-disabled-surface` | Chip disabledSurface color. | color |
+| `--fs-chip-disabled-text` | Chip disabledText color. | color |
+| `--fs-chip-radius` | Pill corners, independent of control height. | dimension |
+| `--fs-chip-border-width` | Chip outline thickness. | dimension |
+| `--fs-chip-gap` | Separation between label, selection mark and removal. | dimension |
+| `--fs-chip-padding-inline` | Label horizontal inset. | dimension |
+| `--fs-chip-icon-size` | Decorative action artwork dimensions. | dimension |
+| `--fs-chip-remove-size` | Minimum native remove target size. | dimension |
+| `--fs-chip-icon-stroke` | Decorative artwork stroke width. | number |
+| `--fs-chip-focus-color` | Chip keyboard focus color. | color |
+| `--fs-chip-focus-width` | Chip keyboard focus width. | dimension |
+| `--fs-chip-focus-offset` | Chip keyboard focus offset. | dimension |
+| `--fs-chip-font-family` | Chip text family. | fontFamily |
+| `--fs-chip-font-weight` | Chip text weight. | fontWeight |
+| `--fs-chip-font-line-height` | Chip text lineHeight. | number |
+| `--fs-chip-size-small-minimum` | small minimum chip height; grows with text. | dimension |
+| `--fs-chip-size-small-font` | small chip text size. | dimension |
+| `--fs-chip-size-small-padding` | small vertical label inset. | dimension |
+| `--fs-chip-size-medium-minimum` | medium minimum chip height; grows with text. | dimension |
+| `--fs-chip-size-medium-font` | medium chip text size. | dimension |
+| `--fs-chip-size-medium-padding` | medium vertical label inset. | dimension |
+| `--fs-chip-size-large-minimum` | large minimum chip height; grows with text. | dimension |
+| `--fs-chip-size-large-font` | large chip text size. | dimension |
+| `--fs-chip-size-large-padding` | large vertical label inset. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

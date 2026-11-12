@@ -147,3 +147,7 @@ The linked AvatarGroup reference and supplied image approve an ordered shared-Av
 ## MultiSelect pattern
 
 The linked MultiSelect reference and supplied image approve a searchable combobox with removable tags, label-filtered multiselectable options, limits, minimum validation and native form support. Independent `multiSelect.*` semantic roles cover surfaces, tags, active options, focus, disabled/error states and sizing in both themes. See the [MultiSelect contract](multi-select.md).
+
+## Chip pattern
+
+The owner-linked Chip reference approves compact static content tags, controlled toggle selection, and independently named removal actions. The [Chip contract](chip.md) records sibling native buttons, parent-owned state/focus restoration, three sizes, wrapping and independent `chip.*` semantic roles in Corporate and Luna. Existing shared Check/Close artwork stays decorative.

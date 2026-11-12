@@ -424,3 +424,7 @@ Optional native page topic with compact 32px, default 64px or spacious 96px bloc
 ## MultiSelect
 
 Searchable multi-value fields with removable tags, native form values/reset, selection limits and keyboard navigation. Load tokens, `field.css` and `multi-select.css`, or combined styles. See the [MultiSelect contract](docs/multi-select.md).
+
+## Chip
+
+Static content tags with optional controlled selection and an independent named removal action. Both themes support three sizes, disabled actions and wrapping labels. Load tokens and `chip.css`, or combined styles. See the [Chip contract](docs/chip.md).

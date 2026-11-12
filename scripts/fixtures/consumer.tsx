@@ -397,3 +397,16 @@ export const invalidMultiSelectChange = <MultiSelect {...multiSelectProps} onCha
 export const invalidMultiSelectName = <MultiSelect {...multiSelectProps} aria-label="Another name" />;
 // @ts-expect-error Multiple selections are strings, not a scalar input value.
 export const invalidMultiSelectValue = <MultiSelect {...multiSelectProps} value="react" />;
+
+import { Chip, type ChipProps } from 'fletchstack-ui';
+import 'fletchstack-ui/chip.css';
+const chipProps: ChipProps = { children: 'Design', selected: false, onSelect: selected => String(selected), onRemove: () => {}, removeLabel: 'Remove Design' };
+export const chip = <Chip {...chipProps} ref={createRef<HTMLSpanElement>()} style={{ '--fs-chip-radius': '4px' }} />;
+// @ts-expect-error Controlled selection requires a callback.
+export const invalidChipSelection = <Chip selected>Design</Chip>;
+// @ts-expect-error Selection callbacks require an explicit selected state.
+export const invalidChipCallback = <Chip onSelect={() => {}}>Design</Chip>;
+// @ts-expect-error Removal requires a localized accessible name.
+export const invalidChipRemoval = <Chip onRemove={() => {}}>Design</Chip>;
+// @ts-expect-error A removal label must have a matching action.
+export const invalidChipLabel = <Chip removeLabel="Remove Design">Design</Chip>;

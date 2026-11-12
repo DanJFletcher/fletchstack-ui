@@ -1071,6 +1071,42 @@
     "components-multi-select--disabled-fieldset": {
       "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
       "export": "DisabledFieldset"
+    },
+    "components-chip--playground": {
+      "module": "tests/browser-harness/scenarios/Chip.tsx",
+      "export": "Playground"
+    },
+    "components-chip--composition": {
+      "module": "tests/browser-harness/scenarios/Chip.tsx",
+      "export": "Composition"
+    },
+    "components-chip--filters": {
+      "module": "tests/browser-harness/scenarios/Chip.tsx",
+      "export": "Filters"
+    },
+    "components-chip--actions": {
+      "module": "tests/browser-harness/scenarios/Chip.tsx",
+      "export": "Actions"
+    },
+    "components-chip--sizes": {
+      "module": "tests/browser-harness/scenarios/Chip.tsx",
+      "export": "Sizes"
+    },
+    "components-chip--long-label": {
+      "module": "tests/browser-harness/scenarios/Chip.tsx",
+      "export": "LongLabel"
+    },
+    "components-chip--disabled": {
+      "module": "tests/browser-harness/scenarios/Chip.tsx",
+      "export": "Disabled"
+    },
+    "components-chip--form": {
+      "module": "tests/browser-harness/scenarios/Chip.tsx",
+      "export": "Form"
+    },
+    "components-chip--scopes": {
+      "module": "tests/browser-harness/scenarios/Chip.tsx",
+      "export": "Scopes"
     }
   },
   "suites": [
@@ -1636,6 +1672,21 @@
         "components-multi-select--long-options",
         "components-multi-select--long-list",
         "components-multi-select--disabled-fieldset"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/chip/Chip.spec.ts",
+      "scenarios": [
+        "components-chip--playground",
+        "components-chip--composition",
+        "components-chip--filters",
+        "components-chip--actions",
+        "components-chip--sizes",
+        "components-chip--long-label",
+        "components-chip--disabled",
+        "components-chip--form",
+        "components-chip--scopes"
       ]
     }
   ],

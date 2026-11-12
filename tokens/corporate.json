@@ -2676,6 +2676,175 @@
         "$value": "{primitive.px8}",
         "$description": "Option and tag horizontal inset."
       }
+    },
+    "chip": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.disabled}",
+        "$description": "Chip surface color."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Chip text color."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.line}",
+        "$description": "Chip border color."
+      },
+      "hoverSurface": {
+        "$type": "color",
+        "$value": "{primitive.blueTint}",
+        "$description": "Chip hoverSurface color."
+      },
+      "selectedSurface": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "Chip selectedSurface color."
+      },
+      "selectedText": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Chip selectedText color."
+      },
+      "selectedHover": {
+        "$type": "color",
+        "$value": "{primitive.blueHover}",
+        "$description": "Chip selectedHover color."
+      },
+      "disabledSurface": {
+        "$type": "color",
+        "$value": "{primitive.disabled}",
+        "$description": "Chip disabledSurface color."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.muted}",
+        "$description": "Chip disabledText color."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Pill corners, independent of control height."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Chip outline thickness."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Separation between label, selection mark and removal."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Label horizontal inset."
+      },
+      "iconSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Decorative action artwork dimensions."
+      },
+      "removeSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Minimum native remove target size."
+      },
+      "iconStroke": {
+        "$type": "number",
+        "$value": "{primitive.iconStroke}",
+        "$description": "Decorative artwork stroke width."
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.blue}",
+          "$description": "Chip keyboard focus color."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Chip keyboard focus width."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px2}",
+          "$description": "Chip keyboard focus offset."
+        }
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Chip text family."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.regular}",
+          "$description": "Chip text weight."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Chip text lineHeight."
+        }
+      },
+      "size": {
+        "small": {
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px24}",
+            "$description": "small minimum chip height; grows with text."
+          },
+          "font": {
+            "$type": "dimension",
+            "$value": "{primitive.extraSmall}",
+            "$description": "small chip text size."
+          },
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px0}",
+            "$description": "small vertical label inset."
+          }
+        },
+        "medium": {
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px32}",
+            "$description": "medium minimum chip height; grows with text."
+          },
+          "font": {
+            "$type": "dimension",
+            "$value": "{primitive.small}",
+            "$description": "medium chip text size."
+          },
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px4}",
+            "$description": "medium vertical label inset."
+          }
+        },
+        "large": {
+          "minimum": {
+            "$type": "dimension",
+            "$value": "{primitive.px40}",
+            "$description": "large minimum chip height; grows with text."
+          },
+          "font": {
+            "$type": "dimension",
+            "$value": "{primitive.medium}",
+            "$description": "large chip text size."
+          },
+          "padding": {
+            "$type": "dimension",
+            "$value": "{primitive.px8}",
+            "$description": "large vertical label inset."
+          }
+        }
+      }
     }
   }
 }

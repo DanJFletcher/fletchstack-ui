@@ -1,0 +1,12 @@
+.chip-demo { color: var(--fs-text); font-family: var(--fs-font-body); }
+.chip-demo__eyebrow { max-inline-size: none; border-block-end: 1px solid var(--fs-card-border); padding-block-end: 16px; font-weight: 700; }
+.chip-demo h1 { font-size: 3rem; margin-block: 16px; }
+.chip-demo h2 { font-size: 1.25rem; }
+.chip-demo__row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.chip-demo__themes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.chip-demo__panel { min-inline-size: 0; padding: 24px; background: var(--fs-surface); color: var(--fs-text); border: 1px solid var(--fs-card-border); border-radius: 6px; }
+.chip-demo__comparisons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-block-start: 1px solid var(--fs-card-border); padding-block: 16px; margin-block-start: 24px; }
+.chip-demo__comparisons > section { min-inline-size: 0; }
+.chip-demo output { display: block; margin-block-start: 12px; }
+.chip-demo__filter { border-block-start: 1px solid var(--fs-card-border); padding-block-start: 16px; }
+@media (max-width: 600px) { .chip-demo__themes, .chip-demo__comparisons { grid-template-columns: 1fr; } }

@@ -42,7 +42,8 @@
     "./code-block.css": "./dist/code-block.css",
     "./avatar.css": "./dist/avatar.css",
     "./avatar-group.css": "./dist/avatar-group.css",
-    "./multi-select.css": "./dist/multi-select.css"
+    "./multi-select.css": "./dist/multi-select.css",
+    "./chip.css": "./dist/chip.css"
   },
   "files": [
     "dist",

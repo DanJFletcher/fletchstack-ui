@@ -64,3 +64,6 @@ export type { AvatarGroupProps, AvatarGroupStyle, AvatarGroupMember } from './co
 
 export { MultiSelect } from './components/multi-select/index.js';
 export type { MultiSelectProps, MultiSelectStyle, MultiSelectOption } from './components/multi-select/index.js';
+
+export { Chip } from './components/chip/index.js';
+export type { ChipProps, ChipStyle } from './components/chip/index.js';

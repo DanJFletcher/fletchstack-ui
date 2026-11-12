@@ -180,7 +180,7 @@ it.each([
   ['src/components/avatar/avatar.css', ['avatar/Avatar']],
   ['src/components/avatar/stories/portrait.svg', ['avatar/Avatar']],
   ['stories/foundations/spatial.stories.css', ['spatial/SpatialSystem']],
-  ['src/components/icon/named/CheckIcon.tsx', ['badge/Badge', 'checkbox/Checkbox', 'field/Field', 'form-group/FormGroup', 'icon/Icon', 'icon/IconGallery', 'section/Section', 'simple-grid/SimpleGrid', 'spatial/SpatialSystem', 'stack/Stack']],
+  ['src/components/icon/named/CheckIcon.tsx', ['badge/Badge', 'checkbox/Checkbox', 'chip/Chip', 'field/Field', 'form-group/FormGroup', 'icon/Icon', 'icon/IconGallery', 'section/Section', 'simple-grid/SimpleGrid', 'spatial/SpatialSystem', 'stack/Stack']],
   ['src/components/link/Link.tsx', ['link/Link', 'typography/Typography']],
   ['src/components/link/link.css', ['link/Link', 'typography/Typography']],
   ['src/components/icon/named/ArrowRightIcon.tsx', ['icon/Icon', 'icon/IconGallery', 'link/Link']],

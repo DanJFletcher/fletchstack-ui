@@ -53,3 +53,7 @@ Button, Stack and CodeBlock use [private harness suites](browser-harness/specs/)
 - Keep distinct 320px, 200% root text and user text-spacing checks for each applicable CSS contract/composition. Passive layouts do not require activation tests, but their descendants' order and focus clearance do.
 - Reduced motion applies to animated components; forced colors applies to painted controls/indicators. Transparent layout wrappers do not add preference-specific paint, so their composed controls own those checks.
 - Browser coverage is execution evidence, not CSS coverage, screen-reader certification, or proof of this matrix. Chromium emulation does not establish cross-browser or real-OS accessibility behavior.
+
+## AvatarGroup
+
+The AvatarGroup harness owns ordered shared-Avatar geometry, both-theme overflow contrast, native summary Enter/Space and focus, hidden-name disclosure, count-only/small groups, failed photos, RTL, forced colors, nested theme reset and 320px enlarged/spaced-name reflow. Dedicated SSR browser checks retain disclosure before hydration; DOM/hydration tests own member input boundaries and accessible/native forwarding. Storybook retains its render/play/a11y and delivery boundaries.

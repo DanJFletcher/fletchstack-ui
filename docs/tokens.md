@@ -445,6 +445,24 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-avatar-font-size-medium` | medium identity initials; capped to fit its footprint. | dimension |
 | `--fs-avatar-font-size-large` | large identity initials; capped to fit its footprint. | dimension |
 | `--fs-avatar-font-size-xlarge` | xlarge identity initials; capped to fit its footprint. | dimension |
+| `--fs-avatar-group-overlap` | Overlap between ordered group identities. | dimension |
+| `--fs-avatar-group-ring-width` | Separating identity ring thickness. | dimension |
+| `--fs-avatar-group-ring-color` | Group identity separating surface. | color |
+| `--fs-avatar-group-overflow-background` | Overflow identity fill. | color |
+| `--fs-avatar-group-overflow-text` | Overflow count foreground. | color |
+| `--fs-avatar-group-viewport-inset` | Minimum disclosure clearance from viewport edges. | dimension |
+| `--fs-avatar-group-list-width` | Preferred disclosure list width. | dimension |
+| `--fs-avatar-group-list-gap` | Disclosure spacing and row artwork gap. | dimension |
+| `--fs-avatar-group-list-padding` | Disclosure row padding. | dimension |
+| `--fs-avatar-group-list-radius` | Disclosure corner radius. | dimension |
+| `--fs-avatar-group-list-border-width` | Disclosure row and panel boundary. | dimension |
+| `--fs-avatar-group-list-border` | Disclosure boundary paint. | color |
+| `--fs-avatar-group-list-background` | Disclosure surface. | color |
+| `--fs-avatar-group-list-text` | Disclosure names. | color |
+| `--fs-avatar-group-list-font-size` | Disclosure name size that follows user preferences. | dimension |
+| `--fs-avatar-group-focus-color` | Keyboard focus ring on the themed surface. | color |
+| `--fs-avatar-group-focus-width` | Focus ring thickness. | dimension |
+| `--fs-avatar-group-focus-offset` | Space between control and focus ring. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

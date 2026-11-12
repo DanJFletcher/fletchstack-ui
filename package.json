@@ -40,7 +40,8 @@
     "./typography.css": "./dist/typography.css",
     "./button-group.css": "./dist/button-group.css",
     "./code-block.css": "./dist/code-block.css",
-    "./avatar.css": "./dist/avatar.css"
+    "./avatar.css": "./dist/avatar.css",
+    "./avatar-group.css": "./dist/avatar-group.css"
   },
   "files": [
     "dist",

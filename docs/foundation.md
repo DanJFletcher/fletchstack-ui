@@ -139,3 +139,7 @@ The supplied Section pattern adds semantic page regions with compact 32px, defau
 ## Avatar pattern
 
 The supplied Avatar reference approves a passive identity image with photo/generated/custom-initial fallbacks, four fixed footprints and three shapes. The [Avatar contract](avatar.md) records image lifecycle, accessible naming/decorative use, semantic `avatar.*` roles, and parent-owned profile composition. These roles are independent of status badges and SVG icon sizing.
+
+## AvatarGroup pattern
+
+The linked AvatarGroup reference and supplied image approve an ordered shared-Avatar stack with 32px default identities, 8px overlap and 2px separating rings. Native details/summary reveals hidden names, including a count-only case. The [AvatarGroup contract](avatar-group.md) records member ownership, localization, geometry, semantic `avatarGroup.*` roles, and verification boundaries.

@@ -495,6 +495,26 @@
       ],
       "style": "src/components/avatar/avatar.css",
       "category": "Identity"
+    },
+    {
+      "slug": "avatar-group",
+      "entry": "src/components/avatar-group/index.ts",
+      "exports": {
+        "runtime": [
+          "AvatarGroup"
+        ],
+        "types": [
+          "AvatarGroupProps",
+          "AvatarGroupStyle",
+          "AvatarGroupMember"
+        ]
+      },
+      "modules": [
+        "src/components/avatar-group/AvatarGroup.tsx"
+      ],
+      "style": "src/components/avatar-group/avatar-group.css",
+      "category": "Identity",
+      "examples": "src/components/avatar-group/stories/avatar-group-examples.tsx"
     }
   ],
   "internalModules": [

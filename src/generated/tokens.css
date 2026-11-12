@@ -441,6 +441,24 @@
   --fs-avatar-font-size-medium: 0.875rem;
   --fs-avatar-font-size-large: 1rem;
   --fs-avatar-font-size-xlarge: 1.5rem;
+  --fs-avatar-group-overlap: 8px;
+  --fs-avatar-group-ring-width: 2px;
+  --fs-avatar-group-ring-color: rgb(255 255 255 / 1);
+  --fs-avatar-group-overflow-background: rgb(228 232 239 / 1);
+  --fs-avatar-group-overflow-text: rgb(23 35 56 / 1);
+  --fs-avatar-group-viewport-inset: 16px;
+  --fs-avatar-group-list-width: 240px;
+  --fs-avatar-group-list-gap: 8px;
+  --fs-avatar-group-list-padding: 4px;
+  --fs-avatar-group-list-radius: 4px;
+  --fs-avatar-group-list-border-width: 1px;
+  --fs-avatar-group-list-border: rgb(215 220 231 / 1);
+  --fs-avatar-group-list-background: rgb(255 255 255 / 1);
+  --fs-avatar-group-list-text: rgb(23 35 56 / 1);
+  --fs-avatar-group-list-font-size: 1rem;
+  --fs-avatar-group-focus-color: rgb(36 75 176 / 1);
+  --fs-avatar-group-focus-width: 3px;
+  --fs-avatar-group-focus-offset: 3px;
 }
 
 [data-theme="luna"] {
@@ -885,4 +903,22 @@
   --fs-avatar-font-size-medium: 0.875rem;
   --fs-avatar-font-size-large: 1rem;
   --fs-avatar-font-size-xlarge: 1.5rem;
+  --fs-avatar-group-overlap: 8px;
+  --fs-avatar-group-ring-width: 2px;
+  --fs-avatar-group-ring-color: rgb(244 239 255 / 1);
+  --fs-avatar-group-overflow-background: rgb(26 27 52 / 1);
+  --fs-avatar-group-overflow-text: rgb(244 239 255 / 1);
+  --fs-avatar-group-viewport-inset: 16px;
+  --fs-avatar-group-list-width: 240px;
+  --fs-avatar-group-list-gap: 8px;
+  --fs-avatar-group-list-padding: 4px;
+  --fs-avatar-group-list-radius: 4px;
+  --fs-avatar-group-list-border-width: 1px;
+  --fs-avatar-group-list-border: rgb(53 54 79 / 1);
+  --fs-avatar-group-list-background: rgb(17 19 41 / 1);
+  --fs-avatar-group-list-text: rgb(244 239 255 / 1);
+  --fs-avatar-group-list-font-size: 1rem;
+  --fs-avatar-group-focus-color: rgb(242 213 139 / 1);
+  --fs-avatar-group-focus-width: 3px;
+  --fs-avatar-group-focus-offset: 3px;
 }

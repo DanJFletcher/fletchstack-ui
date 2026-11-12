@@ -58,3 +58,6 @@ export { AspectRatio } from './components/aspect-ratio/index.js';
 export type { AspectRatioProps, AspectRatioStyle } from './components/aspect-ratio/index.js';
 export { Section } from './components/section/index.js';
 export type { SectionProps, SectionStyle } from './components/section/index.js';
+
+export { AvatarGroup } from './components/avatar-group/index.js';
+export type { AvatarGroupProps, AvatarGroupStyle, AvatarGroupMember } from './components/avatar-group/index.js';

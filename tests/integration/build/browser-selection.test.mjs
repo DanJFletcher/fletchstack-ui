@@ -7,8 +7,15 @@ import { selectBrowserTests } from '../../browser-harness/selection/policy.mjs';
 import { parseBrowserOptions } from '../../browser-harness/selection/options.mjs';
 import { discoverOwnership } from '../../browser-harness/selection/inventory.mjs';
 
-// Repository files stay unchanged in this suite; share only their read-only ownership snapshot.
-const repositoryOwnership = discoverOwnership(process.cwd());
+// Precise-selection cases use the proven repository subset as a controlled fixture.
+// The complete-inventory test below separately preserves conservative runtime fallback.
+const completeRepositoryOwnership = discoverOwnership(process.cwd());
+const provenSuites = completeRepositoryOwnership.inventory.filter(suite => completeRepositoryOwnership.graphs.get(suite.file)?.unknown.length === 0);
+const repositoryOwnership = {
+  ...completeRepositoryOwnership,
+  inventory: provenSuites,
+  graphs: new Map(provenSuites.map(suite => [suite.file, completeRepositoryOwnership.graphs.get(suite.file)])),
+};
 const roots = [];
 afterEach(() => { roots.splice(0).forEach(root => rmSync(root, { recursive: true, force: true })); });
 
@@ -24,6 +31,21 @@ function fixture(files) {
   }
   return root;
 }
+
+it('keeps complete fallback for member-driven resources in the actual repository inventory', () => {
+  const ownership = completeRepositoryOwnership;
+  const group = ownership.graphs.get('tests/browser-harness/specs/avatar-group/AvatarGroup.spec.ts');
+  expect(group.files).toContain('src/components/avatar-group/AvatarGroup.tsx');
+  expect(group.files).toContain('src/components/avatar/Avatar.tsx');
+  expect(group.files).toContain('src/components/avatar/stories/portrait.svg');
+  expect(group.unknown).toContain('src/components/avatar/Avatar.tsx: Document-relative or dynamic JSX resource');
+  for (const path of ['src/components/avatar-group/AvatarGroup.tsx', 'src/components/avatar/Avatar.tsx', 'src/components/button/Button.tsx']) {
+    const result = selectBrowserTests({ ...ownership, changes: [{ path, status: 'M' }] });
+    expect(result.mode).toBe('full-fallback');
+    expect(result.suites).toEqual(ownership.inventory);
+    expect(result.ownershipIssues).toContain('src/components/avatar/Avatar.tsx: Document-relative or dynamic JSX resource');
+  }
+});
 
 it('follows transitive reexports, literal dynamic imports, CSS imports and assets without executing source', () => {
   const root = fixture({

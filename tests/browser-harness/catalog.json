@@ -999,6 +999,34 @@
     "components-avatar--keyboard": {
       "module": "tests/browser-harness/scenarios/Avatar.tsx",
       "export": "Keyboard"
+    },
+    "components-avatar-group--playground": {
+      "module": "tests/browser-harness/scenarios/AvatarGroup.tsx",
+      "export": "Playground"
+    },
+    "components-avatar-group--composition": {
+      "module": "tests/browser-harness/scenarios/AvatarGroup.tsx",
+      "export": "Composition"
+    },
+    "components-avatar-group--sizes": {
+      "module": "tests/browser-harness/scenarios/AvatarGroup.tsx",
+      "export": "Sizes"
+    },
+    "components-avatar-group--small": {
+      "module": "tests/browser-harness/scenarios/AvatarGroup.tsx",
+      "export": "Small"
+    },
+    "components-avatar-group--failed-photo": {
+      "module": "tests/browser-harness/scenarios/AvatarGroup.tsx",
+      "export": "FailedPhoto"
+    },
+    "components-avatar-group--long-names": {
+      "module": "tests/browser-harness/scenarios/AvatarGroup.tsx",
+      "export": "LongNames"
+    },
+    "components-avatar-group--scopes": {
+      "module": "tests/browser-harness/scenarios/AvatarGroup.tsx",
+      "export": "Scopes"
     }
   },
   "suites": [
@@ -1535,6 +1563,19 @@
       ],
       "roots": [],
       "resources": []
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/avatar-group/AvatarGroup.spec.ts",
+      "scenarios": [
+        "components-avatar-group--playground",
+        "components-avatar-group--composition",
+        "components-avatar-group--sizes",
+        "components-avatar-group--small",
+        "components-avatar-group--failed-photo",
+        "components-avatar-group--long-names",
+        "components-avatar-group--scopes"
+      ]
     }
   ],
   "discovery": {

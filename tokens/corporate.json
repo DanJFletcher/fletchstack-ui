@@ -2397,6 +2397,106 @@
           }
         }
       }
+    },
+    "avatarGroup": {
+      "overlap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Overlap between ordered group identities."
+      },
+      "ringWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px2}",
+        "$description": "Separating identity ring thickness."
+      },
+      "ringColor": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Group identity separating surface."
+      },
+      "overflow": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.disabled}",
+          "$description": "Overflow identity fill."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.ink}",
+          "$description": "Overflow count foreground."
+        }
+      },
+      "viewportInset": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Minimum disclosure clearance from viewport edges."
+      },
+      "list": {
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px240}",
+          "$description": "Preferred disclosure list width."
+        },
+        "gap": {
+          "$type": "dimension",
+          "$value": "{primitive.px8}",
+          "$description": "Disclosure spacing and row artwork gap."
+        },
+        "padding": {
+          "$type": "dimension",
+          "$value": "{primitive.px4}",
+          "$description": "Disclosure row padding."
+        },
+        "radius": {
+          "$type": "dimension",
+          "$value": "{primitive.px4}",
+          "$description": "Disclosure corner radius."
+        },
+        "borderWidth": {
+          "$type": "dimension",
+          "$value": "{primitive.px1}",
+          "$description": "Disclosure row and panel boundary."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{primitive.galleryDayLine}",
+          "$description": "Disclosure boundary paint."
+        },
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.white}",
+          "$description": "Disclosure surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.ink}",
+          "$description": "Disclosure names."
+        },
+        "font": {
+          "size": {
+            "$type": "dimension",
+            "$value": "{primitive.medium}",
+            "$description": "Disclosure name size that follows user preferences."
+          }
+        }
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.blue}",
+          "$description": "Keyboard focus ring on the themed surface."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Focus ring thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Space between control and focus ring."
+        }
+      }
     }
   }
 }

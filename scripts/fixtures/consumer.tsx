@@ -372,3 +372,16 @@ export const invalidAvatarRole = <Avatar name="Maya Chen" role="button" />;
 export const invalidAvatarAction = <Avatar name="Maya Chen" onClick={() => {}} />;
 // @ts-expect-error Avatar does not render arbitrary content.
 export const invalidAvatarChildren = <Avatar>content</Avatar>;
+
+import { AvatarGroup, type AvatarGroupMember, type AvatarGroupProps, type AvatarGroupStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/avatar-group.css';
+const groupMember: AvatarGroupMember = { id: 'editor-1', name: 'Alex Example' };
+const avatarGroupStyle: AvatarGroupStyle = { '--fs-avatar-group-overlap': '4px' };
+const avatarGroupProps: AvatarGroupProps = { label: 'Editors', members: [groupMember], maxVisible: 0, size: 'large', style: avatarGroupStyle };
+export const avatarGroup = <AvatarGroup {...avatarGroupProps} ref={createRef<HTMLDivElement>()} />;
+// @ts-expect-error The group requires an accessible label.
+export const unnamedAvatarGroup = <AvatarGroup members={[]} />;
+// @ts-expect-error Group members require stable keys.
+export const unkeyedAvatarGroup = <AvatarGroup label="Editors" members={[{ name: 'Alex Example' }]} />;
+// @ts-expect-error The group owns its content.
+export const invalidAvatarGroupChildren = <AvatarGroup label="Editors" members={[]}>Content</AvatarGroup>;

@@ -4,6 +4,10 @@ Adding a component? Follow the [component authoring recipe](docs/component-autho
 
 A small, server-renderable React component library with two CSS themes: **Corporate** (default) and **Luna**. Public components include `Button`, `Field` and its label/message atoms, `FormGroup`, `Checkbox`, `Select`, `TextInput`, `Textarea`, composable `Card` parts, `Icon`, and eight opt-in named icons.
 
+## AvatarGroup
+
+`AvatarGroup` composes ordered Avatar identities with overlap, separating rings, and a native overflow disclosure. Set `maxVisible={0}` for a count-only group. See the [AvatarGroup contract](docs/avatar-group.md).
+
 ## Avatar
 
 `Avatar` displays a photo with generated or custom initials while loading or after failure. Four footprints (24/32/48/64px) and circle, rounded and square shapes preserve layout. Use `name` for an accessible identity, or `alt=""` beside a visible name. Import `avatar.css` with tokens, or combined styles. See the [Avatar contract](docs/avatar.md).

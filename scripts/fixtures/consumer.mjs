@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createElement, version } from 'react';
 import { renderToString } from 'react-dom/server';
-import { Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
+import { AvatarGroup, Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['ArrowRightIcon', 'AspectRatio', 'Avatar', 'Badge', 'Button', 'ButtonGroup', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'CloseIcon', 'Cluster', 'CodeBlock', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'MoonIcon', 'PlusIcon', 'Radio', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Text', 'TextInput', 'Textarea']);
+assert.deepEqual(Object.keys(library).sort(), ['ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'Button', 'ButtonGroup', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'CloseIcon', 'Cluster', 'CodeBlock', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'MoonIcon', 'PlusIcon', 'Radio', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Text', 'TextInput', 'Textarea']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const contentElement = createElement('div', null, createElement(Heading, { as: 'h1', size: 'page' }, 'Project'), createElement(Text, { tone: 'muted' }, 'Updated yesterday'), createElement(Text, { as: 'span', size: 'small' }, 'Inline'));
 const contentMarkup = renderToString(contentElement);
@@ -17,7 +17,7 @@ const html = renderToString(element);
 assert.match(html, /type="button"/);
 assert.match(html, /aria-label="Save settings"/);
 assert.equal(renderToString(element), html);
-for (const path of ['avatar.css', 'styles.css', 'tokens.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'field.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'cluster.css', 'simple-grid.css', 'aspect-ratio.css', 'section.css', 'typography.css', 'button-group.css', 'code-block.css']) {
+for (const path of ['avatar-group.css', 'avatar.css', 'styles.css', 'tokens.css', 'button.css', 'icon.css', 'card.css', 'select.css', 'text-input.css', 'checkbox.css', 'form-group.css', 'field.css', 'textarea.css', 'radio.css', 'link.css', 'switch.css', 'spinner.css', 'badge.css', 'separator.css', 'container.css', 'stack.css', 'cluster.css', 'simple-grid.css', 'aspect-ratio.css', 'section.css', 'typography.css', 'button-group.css', 'code-block.css']) {
   const content = readFileSync(new URL(import.meta.resolve(`fletchstack-ui/${path}`)), 'utf8');
   assert.ok(content.length > 0);
   if (['styles.css', 'tokens.css'].includes(path)) {
@@ -173,3 +173,8 @@ const avatarMarkup = renderToString(createElement(Avatar, { name: 'Maya Chen', s
 assert.match(avatarMarkup, /aria-label="Maya Chen"/);
 assert.match(avatarMarkup, />MC</);
 assert.equal(avatarMarkup, renderToString(createElement(Avatar, { name: 'Maya Chen', shape: 'rounded', size: 'large' })));
+
+const avatarGroupMarkup = renderToString(createElement(AvatarGroup, { label: 'Editors', members: [{ id: 'editor-1', name: 'Alex Example' }], maxVisible: 0 }));
+assert.match(avatarGroupMarkup, /<details/);
+assert.match(avatarGroupMarkup, /aria-label="Show 1 more member"/);
+assert.match(avatarGroupMarkup, /Alex Example/);

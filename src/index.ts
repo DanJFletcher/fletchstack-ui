@@ -85,3 +85,6 @@ export type { CalloutProps, CalloutStyle, CalloutTone } from './components/callo
 
 export { Menu } from './components/menu/index.js';
 export type { MenuProps, MenuStyle, MenuItem, MenuActionItem, MenuLinkItem, MenuSubmenuItem, MenuDividerItem, MenuSelectEvent } from './components/menu/index.js';
+
+export { Breadcrumbs } from './components/breadcrumbs/index.js';
+export type { BreadcrumbsProps, BreadcrumbsStyle, BreadcrumbItem, BreadcrumbAncestor, BreadcrumbCurrent } from './components/breadcrumbs/index.js';

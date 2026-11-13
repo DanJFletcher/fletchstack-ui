@@ -617,6 +617,14 @@
   --fs-menu-font-family: "Arial", "Helvetica", sans-serif;
   --fs-menu-font-size: 1rem;
   --fs-menu-font-line-height: 1.5;
+  --fs-breadcrumbs-separator: rgb(76 89 109 / 1);
+  --fs-breadcrumbs-gap: 8px;
+  --fs-breadcrumbs-current-weight: 700;
+  --fs-breadcrumbs-toggle-size: 24px;
+  --fs-breadcrumbs-toggle-padding-block: 0px;
+  --fs-breadcrumbs-toggle-padding-inline: 4px;
+  --fs-breadcrumbs-toggle-border-width: 1px;
+  --fs-breadcrumbs-toggle-hover: rgb(232 239 255 / 1);
 }
 
 [data-theme="luna"] {
@@ -1237,4 +1245,12 @@
   --fs-menu-font-family: "Arial", "Helvetica", sans-serif;
   --fs-menu-font-size: 1rem;
   --fs-menu-font-line-height: 1.5;
+  --fs-breadcrumbs-separator: rgb(184 177 205 / 1);
+  --fs-breadcrumbs-gap: 8px;
+  --fs-breadcrumbs-current-weight: 700;
+  --fs-breadcrumbs-toggle-size: 24px;
+  --fs-breadcrumbs-toggle-padding-block: 0px;
+  --fs-breadcrumbs-toggle-padding-inline: 4px;
+  --fs-breadcrumbs-toggle-border-width: 1px;
+  --fs-breadcrumbs-toggle-hover: rgb(41 36 66 / 1);
 }

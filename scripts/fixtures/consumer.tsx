@@ -498,3 +498,16 @@ export const invalidMenuBranch: MenuItem = { type: 'submenu', id: 'invalid', lab
 export const invalidMenuLeaf: MenuItem = { type: 'item', id: 'invalid', label: 'Invalid' };
 // @ts-expect-error Menus require a distinct accessible name for their panel.
 export const unnamedMenu = <Menu triggerLabel="Actions" items={menuItems} />;
+
+import { Breadcrumbs, type BreadcrumbsProps, type BreadcrumbsStyle, type BreadcrumbItem, type BreadcrumbAncestor, type BreadcrumbCurrent } from 'fletchstack-ui';
+import 'fletchstack-ui/breadcrumbs.css';
+const breadcrumbAncestor: BreadcrumbAncestor = { label: 'Home', href: '/home' };
+const breadcrumbCurrent: BreadcrumbCurrent = { label: 'Settings', current: true };
+const breadcrumbItems: BreadcrumbItem[] = [breadcrumbAncestor, breadcrumbCurrent];
+const breadcrumbsStyle: BreadcrumbsStyle = { '--fs-breadcrumbs-gap': '12px' };
+const breadcrumbsProps: BreadcrumbsProps = { items: breadcrumbItems, collapseAt: '48rem', 'aria-label': 'Project breadcrumb', style: breadcrumbsStyle };
+export const breadcrumbs = <Breadcrumbs {...breadcrumbsProps} ref={createRef<HTMLElement>()} />;
+// @ts-expect-error Ancestor items need a destination.
+export const invalidBreadcrumbAncestor: BreadcrumbItem = { label: 'Home' };
+// @ts-expect-error Current pages are plain text rather than links.
+export const invalidBreadcrumbCurrent: BreadcrumbItem = { label: 'Settings', current: true, href: '/settings' };

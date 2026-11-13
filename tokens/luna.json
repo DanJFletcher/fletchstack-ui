@@ -3347,6 +3347,48 @@
           "$description": "Menu lineHeight role approved by the Project actions design."
         }
       }
+    },
+    "breadcrumbs": {
+      "separator": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Breadcrumbs nightMuted role approved by the hierarchy design."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Breadcrumbs px8 role approved by the hierarchy design."
+      },
+      "currentWeight": {
+        "$type": "fontWeight",
+        "$value": "{primitive.bold}",
+        "$description": "Breadcrumbs bold role approved by the hierarchy design."
+      },
+      "toggleSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Breadcrumbs px24 role approved by the hierarchy design."
+      },
+      "togglePaddingBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px0}",
+        "$description": "Breadcrumbs px0 role approved by the hierarchy design."
+      },
+      "togglePaddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Breadcrumbs px4 role approved by the hierarchy design."
+      },
+      "toggleBorderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Breadcrumbs px1 role approved by the hierarchy design."
+      },
+      "toggleHover": {
+        "$type": "color",
+        "$value": "{primitive.violet}",
+        "$description": "Breadcrumbs violet role approved by the hierarchy design."
+      }
     }
   }
 }

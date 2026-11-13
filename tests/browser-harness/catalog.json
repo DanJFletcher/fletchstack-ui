@@ -1303,6 +1303,34 @@
     "components-menu--empty": {
       "module": "tests/browser-harness/scenarios/Menu.tsx",
       "export": "Empty"
+    },
+    "components-breadcrumbs--playground": {
+      "module": "tests/browser-harness/scenarios/Breadcrumbs.tsx",
+      "export": "Playground"
+    },
+    "components-breadcrumbs--composition": {
+      "module": "tests/browser-harness/scenarios/Breadcrumbs.tsx",
+      "export": "Composition"
+    },
+    "components-breadcrumbs--navigation": {
+      "module": "tests/browser-harness/scenarios/Breadcrumbs.tsx",
+      "export": "Navigation"
+    },
+    "components-breadcrumbs--custom": {
+      "module": "tests/browser-harness/scenarios/Breadcrumbs.tsx",
+      "export": "Custom"
+    },
+    "components-breadcrumbs--long-labels": {
+      "module": "tests/browser-harness/scenarios/Breadcrumbs.tsx",
+      "export": "LongLabels"
+    },
+    "components-breadcrumbs--two-items": {
+      "module": "tests/browser-harness/scenarios/Breadcrumbs.tsx",
+      "export": "TwoItems"
+    },
+    "components-breadcrumbs--overrides": {
+      "module": "tests/browser-harness/scenarios/Breadcrumbs.tsx",
+      "export": "Overrides"
     }
   },
   "suites": [
@@ -1974,6 +2002,19 @@
         "components-menu--controlled",
         "components-menu--keep-open",
         "components-menu--empty"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/breadcrumbs/Breadcrumbs.spec.ts",
+      "scenarios": [
+        "components-breadcrumbs--playground",
+        "components-breadcrumbs--composition",
+        "components-breadcrumbs--navigation",
+        "components-breadcrumbs--custom",
+        "components-breadcrumbs--long-labels",
+        "components-breadcrumbs--two-items",
+        "components-breadcrumbs--overrides"
       ]
     }
   ],

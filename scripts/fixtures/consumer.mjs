@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createElement, version } from 'react';
 import { renderToString } from 'react-dom/server';
-import { Menu, Callout, Table, createTableColumn, Combobox, Rating, Accordion, Chip, MultiSelect, AvatarGroup, Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
+import { Breadcrumbs, Menu, Callout, Table, createTableColumn, Combobox, Rating, Accordion, Chip, MultiSelect, AvatarGroup, Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'PlusIcon', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Text', 'TextInput', 'Textarea', 'createTableColumn']);
+assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'Breadcrumbs', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'PlusIcon', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Text', 'TextInput', 'Textarea', 'createTableColumn']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const contentElement = createElement('div', null, createElement(Heading, { as: 'h1', size: 'page' }, 'Project'), createElement(Text, { tone: 'muted' }, 'Updated yesterday'), createElement(Text, { as: 'span', size: 'small' }, 'Inline'));
 const contentMarkup = renderToString(contentElement);
@@ -228,3 +228,10 @@ assert.match(menuMarkup, /aria-haspopup="menu"/);
 assert.match(menuMarkup, /role="menu" aria-label="Project menu"/);
 assert.match(menuMarkup, /href="#guide"/);
 assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/menu.css')), 'utf8').includes('--fs-menu-surface'));
+
+const breadcrumbsMarkup = renderToString(createElement(Breadcrumbs, { items: [{ label: 'Home', href: '/home' }, { label: 'Settings', current: true }] }));
+assert.match(breadcrumbsMarkup, /<nav[^>]*aria-label="Breadcrumb"/);
+assert.match(breadcrumbsMarkup, /<ol/);
+assert.match(breadcrumbsMarkup, /href="\/home"/);
+assert.match(breadcrumbsMarkup, /aria-current="page">Settings/);
+assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/breadcrumbs.css')), 'utf8').includes('--fs-breadcrumbs-gap'));

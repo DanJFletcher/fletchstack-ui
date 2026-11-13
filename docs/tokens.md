@@ -621,6 +621,14 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-menu-font-family` | Menu sans role approved by the Project actions design. | fontFamily |
 | `--fs-menu-font-size` | Menu medium role approved by the Project actions design. | dimension |
 | `--fs-menu-font-line-height` | Menu lineHeight role approved by the Project actions design. | number |
+| `--fs-breadcrumbs-separator` | Breadcrumbs muted role approved by the hierarchy design. | color |
+| `--fs-breadcrumbs-gap` | Breadcrumbs px8 role approved by the hierarchy design. | dimension |
+| `--fs-breadcrumbs-current-weight` | Breadcrumbs bold role approved by the hierarchy design. | fontWeight |
+| `--fs-breadcrumbs-toggle-size` | Breadcrumbs px24 role approved by the hierarchy design. | dimension |
+| `--fs-breadcrumbs-toggle-padding-block` | Breadcrumbs px0 role approved by the hierarchy design. | dimension |
+| `--fs-breadcrumbs-toggle-padding-inline` | Breadcrumbs px4 role approved by the hierarchy design. | dimension |
+| `--fs-breadcrumbs-toggle-border-width` | Breadcrumbs px1 role approved by the hierarchy design. | dimension |
+| `--fs-breadcrumbs-toggle-hover` | Breadcrumbs blueTint role approved by the hierarchy design. | color |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

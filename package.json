@@ -49,7 +49,8 @@
     "./combobox.css": "./dist/combobox.css",
     "./table.css": "./dist/table.css",
     "./callout.css": "./dist/callout.css",
-    "./menu.css": "./dist/menu.css"
+    "./menu.css": "./dist/menu.css",
+    "./breadcrumbs.css": "./dist/breadcrumbs.css"
   },
   "files": [
     "dist",

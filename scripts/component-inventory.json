@@ -720,6 +720,31 @@
       "style": "src/components/menu/menu.css",
       "category": "Navigation",
       "examples": "src/components/menu/stories/menu-examples.tsx"
+    },
+    {
+      "slug": "breadcrumbs",
+      "entry": "src/components/breadcrumbs/index.ts",
+      "exports": {
+        "runtime": [
+          "Breadcrumbs"
+        ],
+        "types": [
+          "BreadcrumbsProps",
+          "BreadcrumbsStyle",
+          "BreadcrumbItem",
+          "BreadcrumbAncestor",
+          "BreadcrumbCurrent"
+        ]
+      },
+      "modules": [
+        "src/components/breadcrumbs/Breadcrumbs.tsx",
+        "src/components/breadcrumbs/types.ts",
+        "src/components/breadcrumbs/breadcrumbs-policy.ts",
+        "src/components/breadcrumbs/useBreadcrumbBreakpoint.ts"
+      ],
+      "style": "src/components/breadcrumbs/breadcrumbs.css",
+      "category": "Navigation",
+      "examples": "src/components/breadcrumbs/stories/breadcrumbs-examples.tsx"
     }
   ],
   "internalModules": [

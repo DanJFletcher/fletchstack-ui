@@ -1275,6 +1275,34 @@
     "components-callout--nested": {
       "module": "tests/browser-harness/scenarios/Callout.tsx",
       "export": "Nested"
+    },
+    "components-menu--playground": {
+      "module": "tests/browser-harness/scenarios/Menu.tsx",
+      "export": "Playground"
+    },
+    "components-menu--composition": {
+      "module": "tests/browser-harness/scenarios/Menu.tsx",
+      "export": "Composition"
+    },
+    "components-menu--project": {
+      "module": "tests/browser-harness/scenarios/Menu.tsx",
+      "export": "Project"
+    },
+    "components-menu--advanced": {
+      "module": "tests/browser-harness/scenarios/Menu.tsx",
+      "export": "Advanced"
+    },
+    "components-menu--controlled": {
+      "module": "tests/browser-harness/scenarios/Menu.tsx",
+      "export": "Controlled"
+    },
+    "components-menu--keep-open": {
+      "module": "tests/browser-harness/scenarios/Menu.tsx",
+      "export": "KeepOpen"
+    },
+    "components-menu--empty": {
+      "module": "tests/browser-harness/scenarios/Menu.tsx",
+      "export": "Empty"
     }
   },
   "suites": [
@@ -1933,6 +1961,19 @@
         "components-callout--overrides",
         "components-callout--body-only",
         "components-callout--nested"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/menu/Menu.spec.ts",
+      "scenarios": [
+        "components-menu--playground",
+        "components-menu--composition",
+        "components-menu--project",
+        "components-menu--advanced",
+        "components-menu--controlled",
+        "components-menu--keep-open",
+        "components-menu--empty"
       ]
     }
   ],

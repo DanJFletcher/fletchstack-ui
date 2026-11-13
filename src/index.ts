@@ -82,3 +82,6 @@ export type { TableProps, TableStyle, TableColumn, TableColumnFactory, TableSort
 
 export { Callout } from './components/callout/index.js';
 export type { CalloutProps, CalloutStyle, CalloutTone } from './components/callout/index.js';
+
+export { Menu } from './components/menu/index.js';
+export type { MenuProps, MenuStyle, MenuItem, MenuActionItem, MenuLinkItem, MenuSubmenuItem, MenuDividerItem, MenuSelectEvent } from './components/menu/index.js';

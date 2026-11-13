@@ -79,3 +79,7 @@ The [Table harness](browser-harness/specs/table/Table.spec.ts) owns both-theme f
 ## Callout
 
 Owner: `tests/browser-harness/specs/callout/Callout.spec.ts`. Persistent publishing guidance: native keyboard action, focus retention, no tone-driven announcement roles, readable colors in both themes, first-column alignment and wrapping at 320px with enlarged/spaced text, compact body-only content, scoped overrides, nested theme inheritance, and forced-colors boundaries. DOM/SSR/hydration contracts independently verify explicit roles, composable nodes, decorative icons and consumer-owned actions. Actual screen-reader speech remains a manual verification gap.
+
+## Menu
+
+Owner: `tests/browser-harness/specs/menu/Menu.spec.ts`. Named action-menu keyboard round trip and reopening in both themes; focus ring, boundary and typeahead navigation, recursive sibling switching, disabled skipping, native-link navigation, cancellation/controlled opening, Tab/Shift Tab continuation, outside dismissal, desktop alignment/viewport flipping, inline narrow reflow with enlarged/spaced text, native touch toggling and single leaf activation, live reduced motion and forced-colors boundaries. DOM and SSR/hydration contracts independently verify configurations, parent-controlled state, names, IDs and native attributes. Member-driven link destinations conservatively retain full affected-browser fallback where discovery cannot prove resource ownership. Manual screen-reader speech remains unverified.

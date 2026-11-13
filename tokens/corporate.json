@@ -3218,6 +3218,135 @@
           "$description": "Callout lineHeight typography."
         }
       }
+    },
+    "menu": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Menu white role approved by the Project actions design."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Menu ink role approved by the Project actions design."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryDayLine}",
+        "$description": "Menu galleryDayLine role approved by the Project actions design."
+      },
+      "expandedSurface": {
+        "$type": "color",
+        "$value": "{primitive.blueTint}",
+        "$description": "Menu blueTint role approved by the Project actions design."
+      },
+      "hoverSurface": {
+        "$type": "color",
+        "$value": "{primitive.blueTint}",
+        "$description": "Menu blueTint role approved by the Project actions design."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.muted}",
+        "$description": "Menu muted role approved by the Project actions design."
+      },
+      "focusColor": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "Menu blue role approved by the Project actions design."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px6}",
+        "$description": "Menu px6 role approved by the Project actions design."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Menu px1 role approved by the Project actions design."
+      },
+      "focusWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px2}",
+        "$description": "Menu px2 role approved by the Project actions design."
+      },
+      "focusInset": {
+        "$type": "dimension",
+        "$value": "{primitive.px3}",
+        "$description": "Menu px3 role approved by the Project actions design."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Menu px4 role approved by the Project actions design."
+      },
+      "itemBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Menu px8 role approved by the Project actions design."
+      },
+      "itemInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Menu px12 role approved by the Project actions design."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Menu px8 role approved by the Project actions design."
+      },
+      "panelGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Menu px4 role approved by the Project actions design."
+      },
+      "viewportInset": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Menu px8 role approved by the Project actions design."
+      },
+      "width": {
+        "$type": "dimension",
+        "$value": "{primitive.px200}",
+        "$description": "Menu px200 role approved by the Project actions design."
+      },
+      "indent": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Menu px16 role approved by the Project actions design."
+      },
+      "guideWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Menu px1 role approved by the Project actions design."
+      },
+      "iconSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Menu px20 role approved by the Project actions design."
+      },
+      "chevronSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px6}",
+        "$description": "Menu px6 role approved by the Project actions design."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Menu sans role approved by the Project actions design."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Menu medium role approved by the Project actions design."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Menu lineHeight role approved by the Project actions design."
+        }
+      }
     }
   }
 }

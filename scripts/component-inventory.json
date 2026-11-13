@@ -689,6 +689,37 @@
       "style": "src/components/callout/callout.css",
       "category": "Feedback",
       "examples": "src/components/callout/stories/callout-examples.tsx"
+    },
+    {
+      "slug": "menu",
+      "entry": "src/components/menu/index.ts",
+      "exports": {
+        "runtime": [
+          "Menu"
+        ],
+        "types": [
+          "MenuProps",
+          "MenuStyle",
+          "MenuItem",
+          "MenuActionItem",
+          "MenuLinkItem",
+          "MenuSubmenuItem",
+          "MenuDividerItem",
+          "MenuSelectEvent"
+        ]
+      },
+      "modules": [
+        "src/components/menu/Menu.tsx",
+        "src/components/menu/MenuLevel.tsx",
+        "src/components/menu/types.ts",
+        "src/components/menu/menu-policy.ts",
+        "src/components/menu/menu-keyboard.ts",
+        "src/components/menu/useMenu.ts",
+        "src/components/menu/useMenuPosition.ts"
+      ],
+      "style": "src/components/menu/menu.css",
+      "category": "Navigation",
+      "examples": "src/components/menu/stories/menu-examples.tsx"
     }
   ],
   "internalModules": [

@@ -9,3 +9,6 @@ html[data-fs-preview-motion="full"] .fs-accordion .fs-accordion__chevron { trans
 html[data-fs-preview-motion="full"] .fs-accordion--motion-expand .fs-accordion__panel { transition: grid-template-rows var(--fs-motion-duration-standard) var(--fs-motion-easing-standard), opacity var(--fs-motion-duration-standard) var(--fs-motion-easing-standard), visibility 0s linear var(--fs-motion-duration-standard); }
 html[data-fs-preview-motion="full"] .fs-accordion--motion-expand .fs-accordion__panel[aria-hidden="false"] { transition-delay: 0s; }
 html[data-fs-preview-motion="full"] .motion-sample { transition: transform var(--motion-example-duration, var(--fs-motion-duration-standard)) var(--motion-example-easing, var(--fs-motion-easing-standard)); }
+
+html[data-fs-preview-motion="reduced"] .fs-menu__panel { animation: none; }
+html[data-fs-preview-motion="full"] .fs-menu__panel { animation: fs-menu-appear var(--fs-motion-duration-fast) var(--fs-motion-easing-enter); }

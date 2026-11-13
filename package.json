@@ -48,7 +48,8 @@
     "./rating.css": "./dist/rating.css",
     "./combobox.css": "./dist/combobox.css",
     "./table.css": "./dist/table.css",
-    "./callout.css": "./dist/callout.css"
+    "./callout.css": "./dist/callout.css",
+    "./menu.css": "./dist/menu.css"
   },
   "files": [
     "dist",

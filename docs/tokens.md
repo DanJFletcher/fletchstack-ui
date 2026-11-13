@@ -596,6 +596,31 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-callout-font-weight` | Callout weight typography. | fontWeight |
 | `--fs-callout-font-title-weight` | Callout titleWeight typography. | fontWeight |
 | `--fs-callout-font-line-height` | Callout lineHeight typography. | number |
+| `--fs-menu-surface` | Menu white role approved by the Project actions design. | color |
+| `--fs-menu-text` | Menu ink role approved by the Project actions design. | color |
+| `--fs-menu-border` | Menu galleryDayLine role approved by the Project actions design. | color |
+| `--fs-menu-expanded-surface` | Menu blueTint role approved by the Project actions design. | color |
+| `--fs-menu-hover-surface` | Menu blueTint role approved by the Project actions design. | color |
+| `--fs-menu-disabled-text` | Menu muted role approved by the Project actions design. | color |
+| `--fs-menu-focus-color` | Menu blue role approved by the Project actions design. | color |
+| `--fs-menu-radius` | Menu px6 role approved by the Project actions design. | dimension |
+| `--fs-menu-border-width` | Menu px1 role approved by the Project actions design. | dimension |
+| `--fs-menu-focus-width` | Menu px2 role approved by the Project actions design. | dimension |
+| `--fs-menu-focus-inset` | Menu px3 role approved by the Project actions design. | dimension |
+| `--fs-menu-padding` | Menu px4 role approved by the Project actions design. | dimension |
+| `--fs-menu-item-block` | Menu px8 role approved by the Project actions design. | dimension |
+| `--fs-menu-item-inline` | Menu px12 role approved by the Project actions design. | dimension |
+| `--fs-menu-gap` | Menu px8 role approved by the Project actions design. | dimension |
+| `--fs-menu-panel-gap` | Menu px4 role approved by the Project actions design. | dimension |
+| `--fs-menu-viewport-inset` | Menu px8 role approved by the Project actions design. | dimension |
+| `--fs-menu-width` | Menu px200 role approved by the Project actions design. | dimension |
+| `--fs-menu-indent` | Menu px16 role approved by the Project actions design. | dimension |
+| `--fs-menu-guide-width` | Menu px1 role approved by the Project actions design. | dimension |
+| `--fs-menu-icon-size` | Menu px20 role approved by the Project actions design. | dimension |
+| `--fs-menu-chevron-size` | Menu px6 role approved by the Project actions design. | dimension |
+| `--fs-menu-font-family` | Menu sans role approved by the Project actions design. | fontFamily |
+| `--fs-menu-font-size` | Menu medium role approved by the Project actions design. | dimension |
+| `--fs-menu-font-line-height` | Menu lineHeight role approved by the Project actions design. | number |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

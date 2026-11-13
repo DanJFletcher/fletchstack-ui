@@ -481,3 +481,20 @@ export const callout = <Callout {...calloutProps} ref={createRef<HTMLDivElement>
 export const invalidCalloutRole = <Callout role="button">Message</Callout>;
 // @ts-expect-error Callout tones use error rather than danger.
 export const invalidCalloutTone = <Callout tone="danger">Message</Callout>;
+
+import { Menu, type MenuProps, type MenuStyle, type MenuItem, type MenuActionItem, type MenuLinkItem, type MenuSubmenuItem, type MenuDividerItem, type MenuSelectEvent } from 'fletchstack-ui';
+import 'fletchstack-ui/menu.css';
+const menuAction: MenuActionItem = { type: 'item', id: 'rename', label: 'Rename', onSelect: (event: MenuSelectEvent) => event.preventDefault() };
+const menuLink: MenuLinkItem = { type: 'item', id: 'guide', label: 'Guide', href: '#guide' };
+const menuBranch: MenuSubmenuItem = { type: 'submenu', id: 'export', label: 'Export', items: [menuAction, menuLink] };
+const menuDivider: MenuDividerItem = { type: 'divider', id: 'divider' };
+const menuItems: MenuItem[] = [menuAction, menuBranch, menuDivider, menuLink];
+const menuStyle: MenuStyle = { '--fs-menu-radius': '8px' };
+const menuProps: MenuProps = { triggerLabel: 'Project actions', menuLabel: 'Project actions', items: menuItems, style: menuStyle };
+export const menu = <Menu {...menuProps} ref={createRef<HTMLDivElement>()} />;
+// @ts-expect-error Submenu entries require children.
+export const invalidMenuBranch: MenuItem = { type: 'submenu', id: 'invalid', label: 'Invalid' };
+// @ts-expect-error Leaf actions require an action handler or href.
+export const invalidMenuLeaf: MenuItem = { type: 'item', id: 'invalid', label: 'Invalid' };
+// @ts-expect-error Menus require a distinct accessible name for their panel.
+export const unnamedMenu = <Menu triggerLabel="Actions" items={menuItems} />;

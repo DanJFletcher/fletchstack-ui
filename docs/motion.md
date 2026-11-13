@@ -52,3 +52,7 @@ Record the purpose, triggering state, timing/easing role, and reduced-motion alt
 Verify actual rotation/transition behavior as well as content and focus. Use observable state, retrying assertions, and animation state rather than fixed sleeps. A reduced-motion test must first establish that the ordinary mode can animate. For disclosure, open with the keyboard, follow a panel link, then collapse and verify Tab skips it immediately. Storybook toolbar checks belong at the served Storybook boundary; consumer behavior belongs in the component harness.
 
 Follow the existing [verification policy](../.agents/guidelines/testing-guidelines.md): development feedback stays coverage-free. Shared motion tokens and preview infrastructure require full local browser verification at completion, plus both full independent coverage gates and the existing build/package checks.
+
+## Menu panels
+
+Root and child Menu panels fade in with the shared fast duration and enter easing, indicating newly available actions without moving focus targets. Closing unmounts the branch immediately; no exit transition retains keyboard or accessibility-tree content. Live reduced-motion preferences disable the fade. Storybook Full/Reduced overrides include Menu panels and remain preview-only.

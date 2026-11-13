@@ -142,6 +142,37 @@ test('reduced motion makes panel size, opacity and chevron changes immediate', a
   await expect(trigger.locator('.fs-accordion__chevron')).toHaveCSS('transition-duration', '0s');
   await trigger.click();
   await expect(page.locator('.fs-accordion__panel').nth(1)).toHaveCSS('visibility', 'hidden');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(trigger.locator('.fs-accordion__chevron')).toHaveCSS('transition-duration', '0.16s');
+});
+
+test('rapid animated keyboard activation follows the latest state without exposing closed links', async ({ page, mount }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await openScenario(mount, 'components-accordion--motion');
+  await page.addStyleTag({ content: '.fs-accordion {--fs-motion-duration-standard:5s}' });
+  const trigger = page.getByRole('button', { name: 'How do I invite someone?' });
+  await trigger.focus();
+  await trigger.press('Enter');
+  const link = page.getByRole('link', { name: 'Team settings' });
+  await trigger.press('Tab');
+  await expect(link).toBeFocused();
+  await link.press('Enter');
+  await expect(page).toHaveURL(/#team-settings$/);
+  await link.press('Shift+Tab');
+  await trigger.press('Space');
+  await expect(trigger).toHaveCSS('outline-style', 'solid');
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('.fs-accordion__panel').nth(1)).toHaveAttribute('inert', '');
+  await trigger.press('Tab');
+  await expect(page.getByRole('button', { name: 'Can I change a role?' })).toBeFocused();
+  await trigger.press('Enter');
+  await trigger.press('Space');
+  await trigger.press('Enter');
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+  await expect(link).toHaveCount(1);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.getByRole('region')).toHaveCSS('opacity', '1');
+  await expect(page.getByRole('region').evaluate(element => element.getAnimations().length)).resolves.toBe(0);
 });
 
 test('forced colors retain a visible focused trigger and state', async ({ page, mount }) => {

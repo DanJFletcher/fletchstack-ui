@@ -23,3 +23,7 @@ Keep outer margin, sibling spacing, and placement in the parent layout. Use sema
 Use native elements that match the interaction where possible. Define accessible names, labels and descriptions, states, keyboard behavior, and visible focus. For interactive composites, define focus entry, movement, and restoration as applicable. Preserve these behaviors when adding slots or composing controls. [WAI keyboard interface guidance](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/)
 
 Default to WCAG 2.2 AA. Verify a component by itself and in a representative composition. Cover applicable states in Storybook and check keyboard operation, assistive technology, text enlargement, reflow, and user text-spacing overrides. Record manual evidence alongside automated results. [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+
+## Motion
+
+Follow the [motion foundation](../../docs/motion.md) for purposeful movement, shared roles, live reduced-motion handling and immediate semantic/focus behavior. Keep preview overrides confined to Storybook.

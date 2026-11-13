@@ -36,17 +36,25 @@ import '../stories/shared/stories.css';
 import '../src/components/icon/stories/icon-gallery.css';
 import '../stories/foundations/spatial.stories.css';
 
+import { applyMotionPreview, installMotionPreview } from './motion';
+import './motion.css';
+
 const preview: Preview = {
+  beforeAll: installMotionPreview,
+  loaders: [context => { applyMotionPreview(context); return {}; }],
   globalTypes: {
+    motion: { description: 'Preview motion (Storybook only)', toolbar: { icon: 'play', dynamicTitle: true, items: [
+      { value: 'system', title: 'System preference' }, { value: 'reduced', title: 'Reduced motion' }, { value: 'full', title: 'Full motion' },
+    ] } },
     theme: { description: 'Preview theme', toolbar: { icon: 'paintbrush', dynamicTitle: true, items: [
       { value: 'corporate', title: 'Corporate' }, { value: 'luna', title: 'Luna' },
     ] } },
   },
-  initialGlobals: { theme: 'corporate' },
+  initialGlobals: { theme: 'corporate', motion: 'system' },
   parameters: {
     layout: 'fullscreen',
     options: { storySort: { order: [
-      'Design System', ['Foundation', 'Tokens', 'Spatial System', 'Spatial Examples'],
+      'Design System', ['Foundation', 'Tokens', 'Spatial System', 'Spatial Examples', 'Motion', 'Motion Examples'],
       'Components', [
         'Identity', ['Avatar', ['Playground', 'Image Fallback', 'Sizes', 'Shapes', 'Both Themes', 'Composition', 'Source Changes', 'Customization', 'Hidden'], 'AvatarGroup', ['Docs', 'Playground', 'Composition'], 'Chip', ['Docs', 'Playground', 'Composition']],
         'Actions', ['ButtonGroup', ['Docs', 'Playground', 'Joined', 'Vertical Joins', 'Wrapping', 'Widths', 'Child Overrides', 'Disabled Actions', 'Visible Label', 'Composition', 'Both Themes'], 'Button', ['Docs', 'Playground', 'States', 'Interaction States', 'Checked', 'Selected', 'Filled', 'Indeterminate', 'Invalid', 'Disabled', 'Read Only', 'Variants', 'Variants And Sizes', 'Variants And Padding', 'Sizes', 'Composition', 'Content Patterns', 'Group Selection', 'Standalone Primitives', 'Native Children', 'With Footer', 'With Media', 'Reference Layouts', 'Customization', 'Consumer Override', 'Both Themes']],

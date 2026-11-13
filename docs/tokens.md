@@ -528,8 +528,13 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-chip-size-large-font` | large chip text size. | dimension |
 | `--fs-chip-size-large-padding` | large vertical label inset. | dimension |
 | `--fs-motion-duration-standard` | Standard disclosure size, opacity and chevron transition duration. | duration |
+| `--fs-motion-duration-fast` | Small state feedback. | duration |
+| `--fs-motion-duration-slow` | Larger deliberate transitions. | duration |
+| `--fs-motion-duration-spinner` | Base duration of one loading rotation; multiplied by spinner.rotationSeconds. | duration |
 | `--fs-motion-easing-standard` | Standard disclosure transition easing. | cubicBezier |
+| `--fs-motion-easing-enter` | Enter motion curve. | cubicBezier |
+| `--fs-motion-easing-exit` | Exit motion curve. | cubicBezier |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 
-Choose a role by its purpose rather than its current value. See the [Spatial system](spatial-system.md) for spacing, sizing, layout ownership, and compatibility guidance.
+Choose a role by its purpose rather than its current value. See the [Spatial system](spatial-system.md) for spacing, sizing, layout ownership, and compatibility guidance. See [Motion](motion.md) for timing, easing, preferences, and customization.

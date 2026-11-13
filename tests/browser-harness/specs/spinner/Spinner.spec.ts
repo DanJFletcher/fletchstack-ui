@@ -15,6 +15,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await expect(graphic).toHaveCSS('animation-name', 'none');
     await expect(status.getByText('Loading projects…')).toBeVisible();
+    await expect(graphic.evaluate(element => element.getAnimations().length)).resolves.toBe(0);
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await expect(graphic).toHaveCSS('animation-name', 'fs-spinner-rotate');
   });
 
   test(`${theme} Spinner inherits button color without duplicating its accessible name`, async ({ page, mount }) => {
@@ -34,6 +37,24 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(page.getByRole('status')).toBeVisible();
     await expect(page.getByRole('status').locator('svg')).toHaveCSS('width', '20px');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  });
+}
+
+for (const override of [
+  { name: 'legacy numeric', css: '--fs-spinner-rotation-seconds:2', duration: '2s' },
+  { name: 'shared duration', css: '--fs-motion-duration-spinner:500ms', duration: '0.5s' },
+  { name: 'combined', css: '--fs-motion-duration-spinner:500ms;--fs-spinner-rotation-seconds:2', duration: '1s' },
+]) {
+  test(`Spinner supports ${override.name} customization without bypassing reduced motion`, async ({ page, mount }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await openScenario(mount, 'components-spinner--playground');
+    await page.addStyleTag({ content: `.fs-spinner {${override.css}}` });
+    const graphic = page.getByRole('status').locator('svg');
+    await expect(graphic).toHaveCSS('animation-duration', override.duration);
+    // Preview markers cannot override real preference in a consumer harness.
+    await page.evaluate(() => { document.documentElement.dataset['fsPreviewMotion'] = 'full'; });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await expect(graphic).toHaveCSS('animation-name', 'none');
   });
 }
 

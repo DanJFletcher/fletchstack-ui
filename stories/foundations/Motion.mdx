@@ -1,0 +1,16 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import * as MotionExamples from './Motion.stories';
+import motion from '../../docs/motion.md?raw';
+
+<Meta title="Design System/Motion" />
+
+<Markdown>{motion.replace('[token reference](tokens.md)', '[token reference](./?path=/docs/design-system-tokens--docs)').replace('[verification policy](../.agents/guidelines/testing-guidelines.md)', 'verification policy (see repository testing guidelines)')}</Markdown>
+
+## Compare timing
+
+<Canvas of={MotionExamples.Durations} />
+<Canvas of={MotionExamples.Easings} />
+
+## Both themes and nested scopes
+
+<Canvas of={MotionExamples.Components} />

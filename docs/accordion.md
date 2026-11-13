@@ -37,3 +37,7 @@ Accordion directly uses the existing Corporate/Luna text, heading/body typograph
 DOM tests own callback/selection policy, attributes, refs, all heading levels, identity validation and persistent content. Integration tests hydrate real server markup, reject recovery errors and exercise those contracts. Node token tests independently validate motion values; generation integration verifies distributable CSS. Harness journeys own native keyboard/link behavior, focus, geometry, both-theme contrast, 320px enlarged/spaced reflow, forced/reduced motion, actual size/opacity transitions, inert exclusion during closing, and instance-unique relationships. Storybook render/play/axe covers the documented variants and states; its motion play waits for visible final opacity before scanning. Packed consumers verify public types/styles and React 18/19 SSR.
 
 The team FAQ composition was visually inspected at 1152px with Invite expanded in both themes and focus independently on the Corporate Join trigger. Spoken screen-reader output and non-Chromium browser behavior remain manually unverified.
+
+## Motion foundation
+
+See [motion](motion.md) for shared timing, preview modes and reduced motion. Panel motion remains opt-in. Focus, expanded state, and keyboard access update immediately, including during exit; rapid activation follows the latest state.

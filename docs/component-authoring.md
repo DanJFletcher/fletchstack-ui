@@ -52,3 +52,7 @@ Author detailed inputs/state behavior in DOM tests, SSR/hydration guarantees in 
 Follow the [test execution policy](../.agents/guidelines/testing-guidelines.md#repository-test-execution) and [test guide](../tests/README.md). Development feedback is coverage-free; both full independent coverage gates wait until implementation, tests, cleanup, and review are finished. Shared registration/token/export changes retain full browser fallback. A structural check is not behavioral verification or completion evidence.
 
 For the next real component, record setup duration, missed registrations/corrective edits, development verification time, final verification time, and unfinished work. Separate observations from estimates. A synthetic scaffold run does not establish a real-component speedup.
+
+## Motion patterns
+
+Consult the [motion foundation](motion.md) when introducing or changing motion. Record purpose, timing/easing roles and a reduced-motion alternative. Keep focus, semantic state and keyboard access immediate; test observable motion and final state without fixed sleeps. New JavaScript-driven automatic movement must follow live preference changes. Update Storybook preview support for every animated consumer. The existing verification cadence still applies.

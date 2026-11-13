@@ -16,6 +16,7 @@ export default defineConfig({
       { test: { name: 'integration', include: ['tests/integration/**/*.test.{ts,tsx,mjs}'] } },
       {
         plugins: [storybookTest({ configDir: '.storybook' })],
+        optimizeDeps: { include: ['storybook/internal/core-events'] },
         test: {
           name: 'storybook',
           browser: { enabled: true, headless: true, provider: playwright(), instances: [{ browser: 'chromium' }] },

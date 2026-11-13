@@ -1739,6 +1739,12 @@
         "components-accordion--long-title",
         "components-accordion--instances"
       ]
+    },
+    {
+      "project": "chromium",
+      "file": "tests/e2e/storybook/motion.spec.ts",
+      "scope": "storybook-runtime",
+      "scenarios": []
     }
   ],
   "discovery": {

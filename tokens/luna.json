@@ -2852,6 +2852,21 @@
           "$type": "duration",
           "$value": "{primitive.motionStandardDuration}",
           "$description": "Standard disclosure size, opacity and chevron transition duration."
+        },
+        "fast": {
+          "$type": "duration",
+          "$value": "{primitive.motionFastDuration}",
+          "$description": "Small state feedback."
+        },
+        "slow": {
+          "$type": "duration",
+          "$value": "{primitive.motionSlowDuration}",
+          "$description": "Larger deliberate transitions."
+        },
+        "spinner": {
+          "$type": "duration",
+          "$value": "{primitive.motionSpinnerDuration}",
+          "$description": "Base duration of one loading rotation; multiplied by spinner.rotationSeconds."
         }
       },
       "easing": {
@@ -2859,6 +2874,16 @@
           "$type": "cubicBezier",
           "$value": "{primitive.motionStandardEasing}",
           "$description": "Standard disclosure transition easing."
+        },
+        "enter": {
+          "$type": "cubicBezier",
+          "$value": "{primitive.motionEnterEasing}",
+          "$description": "Enter motion curve."
+        },
+        "exit": {
+          "$type": "cubicBezier",
+          "$value": "{primitive.motionExitEasing}",
+          "$description": "Exit motion curve."
         }
       }
     }

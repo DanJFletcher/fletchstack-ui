@@ -155,3 +155,7 @@ The owner-linked Chip reference approves compact static content tags, controlled
 ## Accordion pattern
 
 The one-page Accordion design and linked behavior reference approve divided, outlined and shared-surface disclosure groups. Existing semantic roles supply appearance. The [Accordion contract](accordion.md) records heading buttons, controlled/uncontrolled single or multiple expansion, mounted accessible panels and immediate-by-default behavior. Shared standard duration/easing tokens reproduce the reference for opt-in size/opacity transitions and honor reduced motion.
+
+## Motion
+
+Use the [motion foundation](motion.md) for shared timing, easing, reduced-motion behavior, and preview modes.

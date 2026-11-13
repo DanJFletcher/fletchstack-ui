@@ -35,3 +35,7 @@ Use CSS pixels for spatial dimensions such as gaps, padding, and radii. Reserve 
 Record the authoritative authoring source and the direction of each import or export. Check a representative sample for names, values, types, aliases, and any supported modes. Compare the results with the authoritative data before adopting the workflow.
 
 For the sample above, map the spacing primitive to a numeric Figma variable and preserve the semantic alias. Figma native import expects dimensions in `px`. A web font token of `1rem` can have a Figma preview value of `16px` if the team documents a 16px design reference. Preserve `1rem` in the authoritative web mapping so the preview number cannot silently replace it. Check the chosen tool's supported types before mapping composite typography. [Figma variable import and export](https://help.figma.com/hc/en-us/articles/15343816063383-Modes-for-variables/)
+
+## Motion roles
+
+Use the [motion foundation](../../docs/motion.md) for approved duration and easing roles. Keep duration and cubicBezier values typed, preserve existing customization, and verify theme parity.

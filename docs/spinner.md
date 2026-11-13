@@ -24,3 +24,7 @@ Full checks passed 388 unit tests, 155 integration tests, and 182 Storybook inte
 Browser journeys cover sizes, steady/reduced motion, inherited button color, decorative announcement suppression, one persistent status outside a busy region, removal on completion, keyboard focus exclusion, forced colors, native hidden behavior, and 320px reflow with enlarged/spaced text. Hidden behavior uses an explicit story because the original URL argument was not forwarded by Storybook; the rendered DOM had no hidden attribute. Real screen-reader announcement count/output and non-Chromium behavior remain unverified.
 
 The final complete Chromium suite passed all 324 tests with three workers. Every scoped production and Storybook module reached 100% statements, branches, functions, and lines; coverage thresholds and exclusions were unchanged. The explicit hidden-story check passed after the original URL-driven setup failed, and the full suite was rerun successfully afterward.
+
+## Shared motion
+
+Rotation uses `--fs-motion-duration-spinner` (1000ms) multiplied by the existing numeric `--fs-spinner-rotation-seconds` (1). Existing numeric overrides keep their seconds meaning with the default base. If both are changed, they multiply: 500ms × 2 = 1000ms. Reduced motion retains the static graphic and status. See [motion](motion.md).

@@ -431,3 +431,53 @@ export const rating = <Rating {...ratingProps} ref={createRef<HTMLDivElement>()}
 export const invalidRatingLabel = <Rating mode="input" />;
 // @ts-expect-error Rating only supports whole and half steps.
 export const invalidRatingStep = <Rating step={0.25} />;
+
+import { Combobox, type ComboboxProps, type ComboboxOption } from 'fletchstack-ui';
+import 'fletchstack-ui/combobox.css';
+const regionOptions: ComboboxOption[] = [{ value: 'gb', label: 'United Kingdom' }];
+const comboboxProps: ComboboxProps = { label: 'Region', options: regionOptions, defaultValue: 'gb', name: 'region' };
+export const combobox = <Combobox {...comboboxProps} ref={createRef<HTMLInputElement>()} style={{ '--fs-text-input-radius': '8px' }} />;
+// @ts-expect-error Combobox requires a visible label.
+export const missingComboboxLabel = <Combobox options={regionOptions} />;
+// @ts-expect-error A single selection is a string, never an array.
+export const invalidComboboxValue = <Combobox {...comboboxProps} value={['gb']} />;
+
+import { Table, createTableColumn, type TableColumn, type TableProps } from 'fletchstack-ui';
+import 'fletchstack-ui/table.css';
+interface UsageRow { id: string; seats: number; updated: Date }
+const usageColumn = createTableColumn<UsageRow>();
+const usageColumns: TableColumn<UsageRow>[] = [
+  usageColumn({ id: 'seats', header: 'Seats', accessor: 'seats', cell: ({ row, value }) => `${row.id}: ${value.toFixed(0)}` }),
+  usageColumn({ id: 'date', header: 'Updated', accessor: row => row.updated, cell: ({ value }) => value.toISOString() }),
+  usageColumn({ id: 'doubled', header: 'Doubled', accessor: row => row.seats * 2, cell: ({ value }) => value.toFixed(2) }),
+];
+const usageRows: UsageRow[] = [{ id: 'team', seats: 24, updated: new Date('2026-11-12') }];
+const tableProps: TableProps<UsageRow> = { rows: usageRows, columns: usageColumns, getRowKey: row => row.id, caption: 'Usage', classNames: { bodyRow: ({ row, selected }) => selected ? row.id : 'ordinary' }, styles: { cell: ({ row }) => ({ fontWeight: row.seats > 10 ? 700 : 400 }) } };
+export const table = <Table {...tableProps} style={{ '--fs-table-padding': '16px' }} />;
+export const inferredTable = <Table rows={usageRows} columns={[{ id: 'seats', header: 'Seats', accessor: row => row.seats, cell: ({ row }) => row.id }]} getRowKey={row => row.id} aria-label="Usage" />;
+// @ts-expect-error Property accessors must name a field on UsageRow.
+usageColumn({ id: 'bad', header: 'Bad', accessor: 'missing' });
+// @ts-expect-error A numeric accessor infers a numeric renderer value.
+usageColumn({ id: 'bad', header: 'Bad', accessor: 'seats', cell: ({ value }) => value.toUpperCase() });
+// @ts-expect-error Computed accessor rows retain UsageRow inference.
+usageColumn({ id: 'bad', header: 'Bad', accessor: row => row.missing });
+// @ts-expect-error Computed Date values retain their type in renderers.
+usageColumn({ id: 'bad', header: 'Bad', accessor: row => row.updated, cell: ({ value }) => value.toFixed(2) });
+// @ts-expect-error Table requires an accessible label or caption.
+export const unnamedTable = <Table rows={usageRows} columns={usageColumns} getRowKey={row => row.id} />;
+// @ts-expect-error Row context in direct columns is inferred from rows.
+export const badCellRow = <Table rows={usageRows} columns={[{ id: 'bad', header: 'Bad', cell: ({ row }) => row.missing }]} getRowKey={row => row.id} caption="Bad" />;
+
+// @ts-expect-error Direct renderer annotations cannot narrow an unknown accessor value unsafely.
+export const unsafeDirectColumn: TableColumn<UsageRow> = { id: 'unsafe', header: 'Unsafe', accessor: 'id', cell: ({ value }: { value: number }) => value.toFixed(2) };
+
+import { Callout, type CalloutProps, type CalloutTone, type CalloutStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/callout.css';
+const calloutTone: CalloutTone = 'warning';
+const calloutStyle: CalloutStyle = { '--fs-callout-radius': '8px' };
+const calloutProps: CalloutProps = { tone: calloutTone, title: <strong>Review publishing</strong>, role: 'note', children: 'Two pages need approval.', style: calloutStyle };
+export const callout = <Callout {...calloutProps} ref={createRef<HTMLDivElement>()} icon={<Icon><path d="M12 3v18" /></Icon>} action={<Button>Review pages</Button>} />;
+// @ts-expect-error Callout roles are explicitly chosen message semantics.
+export const invalidCalloutRole = <Callout role="button">Message</Callout>;
+// @ts-expect-error Callout tones use error rather than danger.
+export const invalidCalloutTone = <Callout tone="danger">Message</Callout>;

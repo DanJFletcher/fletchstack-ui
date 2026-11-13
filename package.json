@@ -45,7 +45,10 @@
     "./multi-select.css": "./dist/multi-select.css",
     "./chip.css": "./dist/chip.css",
     "./accordion.css": "./dist/accordion.css",
-    "./rating.css": "./dist/rating.css"
+    "./rating.css": "./dist/rating.css",
+    "./combobox.css": "./dist/combobox.css",
+    "./table.css": "./dist/table.css",
+    "./callout.css": "./dist/callout.css"
   },
   "files": [
     "dist",

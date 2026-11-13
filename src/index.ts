@@ -73,3 +73,12 @@ export type { AccordionProps, AccordionStyle, AccordionItem } from './components
 
 export { Rating } from './components/rating/index.js';
 export type { RatingProps, RatingStyle, RatingSymbol } from './components/rating/index.js';
+
+export { Combobox } from './components/combobox/index.js';
+export type { ComboboxProps, ComboboxStyle, ComboboxOption } from './components/combobox/index.js';
+
+export { Table, createTableColumn } from './components/table/index.js';
+export type { TableProps, TableStyle, TableColumn, TableColumnFactory, TableSort, TableSortValue, TableRowKey, TableRowContext, TableCellContext, TableFooterContext, TableStyles, TableClassNames } from './components/table/index.js';
+
+export { Callout } from './components/callout/index.js';
+export type { CalloutProps, CalloutStyle, CalloutTone } from './components/callout/index.js';

@@ -1175,6 +1175,106 @@
     "components-rating--instances": {
       "module": "tests/browser-harness/scenarios/Rating.tsx",
       "export": "Instances"
+    },
+    "components-combobox--playground": {
+      "module": "tests/browser-harness/scenarios/Combobox.tsx",
+      "export": "Playground"
+    },
+    "components-combobox--composition": {
+      "module": "tests/browser-harness/scenarios/Combobox.tsx",
+      "export": "Composition"
+    },
+    "components-combobox--form": {
+      "module": "tests/browser-harness/scenarios/Combobox.tsx",
+      "export": "Form"
+    },
+    "components-combobox--controlled": {
+      "module": "tests/browser-harness/scenarios/Combobox.tsx",
+      "export": "Controlled"
+    },
+    "components-combobox--loading": {
+      "module": "tests/browser-harness/scenarios/Combobox.tsx",
+      "export": "Loading"
+    },
+    "components-combobox--disabled-options": {
+      "module": "tests/browser-harness/scenarios/Combobox.tsx",
+      "export": "DisabledOptions"
+    },
+    "components-combobox--long-labels": {
+      "module": "tests/browser-harness/scenarios/Combobox.tsx",
+      "export": "LongLabels"
+    },
+    "components-table--playground": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "Playground"
+    },
+    "components-table--composition": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "Composition"
+    },
+    "components-table--inventory": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "Inventory"
+    },
+    "components-table--selection": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "Selection"
+    },
+    "components-table--controlled": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "Controlled"
+    },
+    "components-table--manual": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "Manual"
+    },
+    "components-table--sticky": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "Sticky"
+    },
+    "components-table--styling": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "Styling"
+    },
+    "components-table--states": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "States"
+    },
+    "components-table--compact": {
+      "module": "tests/browser-harness/scenarios/Table.tsx",
+      "export": "Compact"
+    },
+    "components-callout--playground": {
+      "module": "tests/browser-harness/scenarios/Callout.tsx",
+      "export": "Playground"
+    },
+    "components-callout--composition": {
+      "module": "tests/browser-harness/scenarios/Callout.tsx",
+      "export": "Composition"
+    },
+    "components-callout--tones": {
+      "module": "tests/browser-harness/scenarios/Callout.tsx",
+      "export": "Tones"
+    },
+    "components-callout--action": {
+      "module": "tests/browser-harness/scenarios/Callout.tsx",
+      "export": "Action"
+    },
+    "components-callout--narrow": {
+      "module": "tests/browser-harness/scenarios/Callout.tsx",
+      "export": "Narrow"
+    },
+    "components-callout--overrides": {
+      "module": "tests/browser-harness/scenarios/Callout.tsx",
+      "export": "Overrides"
+    },
+    "components-callout--body-only": {
+      "module": "tests/browser-harness/scenarios/Callout.tsx",
+      "export": "BodyOnly"
+    },
+    "components-callout--nested": {
+      "module": "tests/browser-harness/scenarios/Callout.tsx",
+      "export": "Nested"
     }
   },
   "suites": [
@@ -1790,6 +1890,49 @@
         "components-rating--narrow",
         "components-rating--required",
         "components-rating--instances"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/combobox/Combobox.spec.ts",
+      "scenarios": [
+        "components-combobox--playground",
+        "components-combobox--composition",
+        "components-combobox--form",
+        "components-combobox--controlled",
+        "components-combobox--loading",
+        "components-combobox--disabled-options",
+        "components-combobox--long-labels"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/table/Table.spec.ts",
+      "scenarios": [
+        "components-table--playground",
+        "components-table--composition",
+        "components-table--inventory",
+        "components-table--selection",
+        "components-table--controlled",
+        "components-table--manual",
+        "components-table--sticky",
+        "components-table--styling",
+        "components-table--states",
+        "components-table--compact"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/callout/Callout.spec.ts",
+      "scenarios": [
+        "components-callout--playground",
+        "components-callout--composition",
+        "components-callout--tones",
+        "components-callout--action",
+        "components-callout--narrow",
+        "components-callout--overrides",
+        "components-callout--body-only",
+        "components-callout--nested"
       ]
     }
   ],

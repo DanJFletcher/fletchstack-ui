@@ -1,0 +1,27 @@
+.fs-combobox { min-inline-size: 0; font-family: var(--fs-text-input-font-family); font-size: var(--fs-text-input-font-size); line-height: var(--fs-text-input-font-line-height); color: var(--fs-text-input-text); }
+.fs-combobox[hidden] { display: none; }
+.fs-combobox__anchor { position: relative; }
+.fs-combobox__control { display: flex; align-items: center; gap: var(--fs-text-input-gap); border: var(--fs-text-input-border-width) solid var(--fs-text-input-border); border-radius: var(--fs-text-input-radius); background: var(--fs-text-input-surface); padding: var(--fs-text-input-size-medium-padding) var(--fs-text-input-padding-inline); min-block-size: var(--fs-text-input-size-medium-minimum); box-sizing: border-box; }
+.fs-combobox--small .fs-combobox__control { padding-block: var(--fs-text-input-size-small-padding); min-block-size: var(--fs-text-input-size-small-minimum); }
+.fs-combobox--large .fs-combobox__control { padding-block: var(--fs-text-input-size-large-padding); min-block-size: var(--fs-text-input-size-large-minimum); }
+.fs-combobox__control:hover:not([data-disabled='true']) { border-color: var(--fs-text-input-hover-border); }
+.fs-combobox__control:has(.fs-combobox__input:focus-visible) { outline: var(--fs-text-input-focus-width) solid var(--fs-text-input-focus-color); outline-offset: var(--fs-text-input-focus-offset); }
+.fs-combobox__control[data-invalid='true'] { border-color: var(--fs-text-input-error); }
+.fs-combobox__control[data-disabled='true'] { background: var(--fs-text-input-disabled-surface); border-color: var(--fs-text-input-disabled-border); color: var(--fs-text-input-disabled-text); }
+.fs-combobox__text { flex: 1; min-inline-size: 0; }
+.fs-combobox .fs-field-label { display: block; font-size: var(--fs-text-input-font-message); color: var(--fs-text-input-placeholder); line-height: var(--fs-text-input-font-line-height); }
+.fs-combobox__input { display: block; inline-size: 100%; min-inline-size: 0; padding: 0; border: 0; outline: none; background: transparent; color: inherit; font: inherit; font-size: var(--fs-text-input-font-size); line-height: var(--fs-text-input-font-line-height); }
+.fs-combobox__input::placeholder { color: var(--fs-text-input-placeholder); }
+.fs-combobox__clear { display: inline-flex; align-items: center; justify-content: center; flex: none; min-inline-size: var(--fs-multi-select-target-size); min-block-size: var(--fs-multi-select-target-size); padding: 0; background: transparent; border: 0; color: inherit; cursor: pointer; }
+.fs-combobox__clear:focus-visible { outline: var(--fs-text-input-focus-width) solid var(--fs-text-input-focus-color); outline-offset: var(--fs-text-input-focus-offset); }
+.fs-combobox__clear:disabled { cursor: default; }
+.fs-combobox__popup { box-sizing: border-box; position: absolute; inset-inline: 0; inset-block-start: calc(100% + var(--fs-multi-select-popup-gap)); z-index: 10; max-block-size: var(--fs-multi-select-popup-height); overflow-y: auto; border: var(--fs-text-input-border-width) solid var(--fs-text-input-border); border-radius: var(--fs-text-input-radius); background: var(--fs-text-input-surface); color: var(--fs-text-input-text); }
+.fs-combobox__popup ul { list-style: none; padding: 0; margin: 0; }
+.fs-combobox__popup li { padding: var(--fs-multi-select-option-padding); padding-inline-start: var(--fs-text-input-padding-inline); border-inline-start: var(--fs-text-input-focus-width) solid transparent; overflow-wrap: anywhere; cursor: pointer; }
+.fs-combobox__popup li + li { border-block-start: var(--fs-text-input-border-width) solid var(--fs-text-input-border); }
+.fs-combobox__popup li[data-active='true'] { background: var(--fs-multi-select-tag-surface); border-inline-start-color: var(--fs-text-input-focus-color); }
+.fs-combobox__popup li[aria-disabled='true'] { color: var(--fs-text-input-disabled-text); cursor: default; }
+.fs-combobox__popup p { display: flex; align-items: center; gap: var(--fs-text-input-gap); margin: 0; padding: var(--fs-multi-select-option-padding); }
+.fs-combobox .fs-field-description, .fs-combobox .fs-field-error { margin-block: var(--fs-text-input-gap) 0; font-size: var(--fs-text-input-font-message); }
+.fs-combobox .fs-field-error { color: var(--fs-text-input-error); }
+@media (forced-colors: active) { .fs-combobox__popup li[data-active='true'] { border-inline-start-color: Highlight; outline: 1px solid Highlight; outline-offset: -1px; } }

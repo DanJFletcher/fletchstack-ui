@@ -543,6 +543,59 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-rating-size-lg` | Rating sizeLg role. | dimension |
 | `--fs-rating-target-size` | Rating targetSize role. | dimension |
 | `--fs-rating-gap` | Rating gap role. | dimension |
+| `--fs-table-surface` | Table surface role approved by the portfolio design. | color |
+| `--fs-table-text` | Table text role approved by the portfolio design. | color |
+| `--fs-table-muted` | Table muted role approved by the portfolio design. | color |
+| `--fs-table-border` | Table border role approved by the portfolio design. | color |
+| `--fs-table-header-surface` | Table headerSurface role approved by the portfolio design. | color |
+| `--fs-table-header-text` | Table headerText role approved by the portfolio design. | color |
+| `--fs-table-striped-surface` | Table stripedSurface role approved by the portfolio design. | color |
+| `--fs-table-row-hover` | Table rowHover role approved by the portfolio design. | color |
+| `--fs-table-row-selected` | Table rowSelected role approved by the portfolio design. | color |
+| `--fs-table-row-selected-fg` | Table rowSelectedFg role approved by the portfolio design. | color |
+| `--fs-table-row-selected-border` | Table rowSelectedBorder role approved by the portfolio design. | color |
+| `--fs-table-radius` | Table radius role approved by the portfolio design. | dimension |
+| `--fs-table-border-width` | Table borderWidth role approved by the portfolio design. | dimension |
+| `--fs-table-padding-inline` | Table paddingInline role approved by the portfolio design. | dimension |
+| `--fs-table-padding` | Table padding role approved by the portfolio design. | dimension |
+| `--fs-table-compact-padding` | Table compactPadding role approved by the portfolio design. | dimension |
+| `--fs-table-gap` | Table gap role approved by the portfolio design. | dimension |
+| `--fs-table-target-size` | Table targetSize role approved by the portfolio design. | dimension |
+| `--fs-table-font-family` | Table family typography. | fontFamily |
+| `--fs-table-font-size` | Table size typography. | dimension |
+| `--fs-table-font-weight` | Table weight typography. | fontWeight |
+| `--fs-table-font-line-height` | Table lineHeight typography. | number |
+| `--fs-table-focus-color` | Table keyboard focus color. | color |
+| `--fs-table-focus-width` | Table keyboard focus width. | dimension |
+| `--fs-table-focus-offset` | Table keyboard focus offset. | dimension |
+| `--fs-callout-info-surface` | Persistent info guidance surface. | color |
+| `--fs-callout-info-text` | Readable info guidance text. | color |
+| `--fs-callout-info-accent` | Leading accent and decorative info artwork. | color |
+| `--fs-callout-success-surface` | Persistent success guidance surface. | color |
+| `--fs-callout-success-text` | Readable success guidance text. | color |
+| `--fs-callout-success-accent` | Leading accent and decorative success artwork. | color |
+| `--fs-callout-warning-surface` | Persistent warning guidance surface. | color |
+| `--fs-callout-warning-text` | Readable warning guidance text. | color |
+| `--fs-callout-warning-accent` | Leading accent and decorative warning artwork. | color |
+| `--fs-callout-error-surface` | Persistent error guidance surface. | color |
+| `--fs-callout-error-text` | Readable error guidance text. | color |
+| `--fs-callout-error-accent` | Leading accent and decorative error artwork. | color |
+| `--fs-callout-neutral-surface` | Persistent neutral guidance surface. | color |
+| `--fs-callout-neutral-text` | Readable neutral guidance text. | color |
+| `--fs-callout-neutral-accent` | Leading accent and decorative neutral artwork. | color |
+| `--fs-callout-radius` | Callout radius approved by the publishing warning design. | dimension |
+| `--fs-callout-padding-block` | Callout paddingBlock approved by the publishing warning design. | dimension |
+| `--fs-callout-padding-inline` | Callout paddingInline approved by the publishing warning design. | dimension |
+| `--fs-callout-icon-gap` | Callout iconGap approved by the publishing warning design. | dimension |
+| `--fs-callout-content-gap` | Callout contentGap approved by the publishing warning design. | dimension |
+| `--fs-callout-border-width` | Callout borderWidth approved by the publishing warning design. | dimension |
+| `--fs-callout-accent-width` | Callout accentWidth approved by the publishing warning design. | dimension |
+| `--fs-callout-icon-size` | Callout iconSize approved by the publishing warning design. | dimension |
+| `--fs-callout-font-family` | Callout family typography. | fontFamily |
+| `--fs-callout-font-size` | Callout size typography. | dimension |
+| `--fs-callout-font-weight` | Callout weight typography. | fontWeight |
+| `--fs-callout-font-title-weight` | Callout titleWeight typography. | fontWeight |
+| `--fs-callout-font-line-height` | Callout lineHeight typography. | number |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

@@ -2933,6 +2933,291 @@
         "$value": "{primitive.px8}",
         "$description": "Rating gap role."
       }
+    },
+    "table": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Table surface role approved by the portfolio design."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Table text role approved by the portfolio design."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Table muted role approved by the portfolio design."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightLine}",
+        "$description": "Table border role approved by the portfolio design."
+      },
+      "headerSurface": {
+        "$type": "color",
+        "$value": "{primitive.infoNight}",
+        "$description": "Table headerSurface role approved by the portfolio design."
+      },
+      "headerText": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Table headerText role approved by the portfolio design."
+      },
+      "stripedSurface": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightPanel}",
+        "$description": "Table stripedSurface role approved by the portfolio design."
+      },
+      "rowHover": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightPanel}",
+        "$description": "Table rowHover role approved by the portfolio design."
+      },
+      "rowSelected": {
+        "$type": "color",
+        "$value": "{primitive.infoNight}",
+        "$description": "Table rowSelected role approved by the portfolio design."
+      },
+      "rowSelectedFg": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Table rowSelectedFg role approved by the portfolio design."
+      },
+      "rowSelectedBorder": {
+        "$type": "color",
+        "$value": "{primitive.gold}",
+        "$description": "Table rowSelectedBorder role approved by the portfolio design."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Table radius role approved by the portfolio design."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Table borderWidth role approved by the portfolio design."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Table paddingInline role approved by the portfolio design."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Table padding role approved by the portfolio design."
+      },
+      "compactPadding": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Table compactPadding role approved by the portfolio design."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Table gap role approved by the portfolio design."
+      },
+      "targetSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Table targetSize role approved by the portfolio design."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Table family typography."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Table size typography."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Table weight typography."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Table lineHeight typography."
+        }
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.gold}",
+          "$description": "Table keyboard focus color."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Table keyboard focus width."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px2}",
+          "$description": "Table keyboard focus offset."
+        }
+      }
+    },
+    "callout": {
+      "info": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.infoNight}",
+          "$description": "Persistent info guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable info guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.lavender}",
+          "$description": "Leading accent and decorative info artwork."
+        }
+      },
+      "success": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.greenNight}",
+          "$description": "Persistent success guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable success guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.greenPale}",
+          "$description": "Leading accent and decorative success artwork."
+        }
+      },
+      "warning": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.galleryNightPanel}",
+          "$description": "Persistent warning guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable warning guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.ratingGoldNight}",
+          "$description": "Leading accent and decorative warning artwork."
+        }
+      },
+      "error": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.redNight}",
+          "$description": "Persistent error guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable error guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.errorNight}",
+          "$description": "Leading accent and decorative error artwork."
+        }
+      },
+      "neutral": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.violet}",
+          "$description": "Persistent neutral guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable neutral guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.nightMuted}",
+          "$description": "Leading accent and decorative neutral artwork."
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px6}",
+        "$description": "Callout radius approved by the publishing warning design."
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Callout paddingBlock approved by the publishing warning design."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Callout paddingInline approved by the publishing warning design."
+      },
+      "iconGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Callout iconGap approved by the publishing warning design."
+      },
+      "contentGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Callout contentGap approved by the publishing warning design."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Callout borderWidth approved by the publishing warning design."
+      },
+      "accentWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px6}",
+        "$description": "Callout accentWidth approved by the publishing warning design."
+      },
+      "iconSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Callout iconSize approved by the publishing warning design."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Callout family typography."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Callout size typography."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.regular}",
+          "$description": "Callout weight typography."
+        },
+        "titleWeight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.bold}",
+          "$description": "Callout titleWeight typography."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Callout lineHeight typography."
+        }
+      }
     }
   }
 }

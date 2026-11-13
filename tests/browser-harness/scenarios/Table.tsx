@@ -1,0 +1,25 @@
+import { Table, type TableProps } from '../../../src/components/table/Table';
+import { portfolioProps, type Project, TableExample, InventoryTable, SelectionTable, ControlledTable, StickyTable, StyledTable, TableStates } from '../../../src/components/table/stories/table-examples';
+import type { Scenario } from '../gallery/types';
+import '../../../src/components/table/table.css';
+import '../../../src/components/table/stories/table.stories.css';
+import '../../../src/components/checkbox/checkbox.css';
+import '../../../src/components/field/field.css';
+import '../../../src/components/icon/icon.css';
+import '../../../src/components/text-input/text-input.css';
+import '../../../src/components/spinner/spinner.css';
+import '../../../src/components/badge/badge.css';
+
+const Playground: Scenario<TableProps<Project>> = {};
+const Composition: Scenario<TableProps<Project>> = { render: () => <TableExample /> };
+const Inventory: Scenario<TableProps<Project>> = { render: () => <InventoryTable /> };
+const Selection: Scenario<TableProps<Project>> = { render: () => <SelectionTable /> };
+const Controlled: Scenario<TableProps<Project>> = { render: () => <ControlledTable /> };
+const Manual: Scenario<TableProps<Project>> = { render: () => <ControlledTable manual /> };
+const Sticky: Scenario<TableProps<Project>> = { render: () => <StickyTable /> };
+const Styling: Scenario<TableProps<Project>> = { render: () => <StyledTable /> };
+const States: Scenario<TableProps<Project>> = { render: () => <TableStates /> };
+const Compact: Scenario<TableProps<Project>> = { args: { density: 'compact', striped: true, hover: true, borders: 'all', selectionMode: 'multiple', defaultSelectedRowKeys: ['beacon'], getSelectionLabel: row => `Select ${row.name}`, style: { '--fs-table-row-selected': 'var(--fs-badge-success-background)' } } };
+export const component = Table<Project>;
+export const defaults: TableProps<Project> = portfolioProps;
+export const scenarios = { Playground, Composition, Inventory, Selection, Controlled, Manual, Sticky, Styling, States, Compact };

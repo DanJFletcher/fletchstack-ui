@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createElement, version } from 'react';
 import { renderToString } from 'react-dom/server';
-import { Rating, Accordion, Chip, MultiSelect, AvatarGroup, Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
+import { Callout, Table, createTableColumn, Combobox, Rating, Accordion, Chip, MultiSelect, AvatarGroup, Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'Button', 'ButtonGroup', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'MoonIcon', 'MultiSelect', 'PlusIcon', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Text', 'TextInput', 'Textarea']);
+assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'MoonIcon', 'MultiSelect', 'PlusIcon', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Text', 'TextInput', 'Textarea', 'createTableColumn']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const contentElement = createElement('div', null, createElement(Heading, { as: 'h1', size: 'page' }, 'Project'), createElement(Text, { tone: 'muted' }, 'Updated yesterday'), createElement(Text, { as: 'span', size: 'small' }, 'Inline'));
 const contentMarkup = renderToString(contentElement);
@@ -204,3 +204,21 @@ assert.match(ratingMarkup, /type="radio"/);
 assert.match(ratingMarkup, /<input\b(?=[^>]*\bvalue="3\.5")(?=[^>]*\bchecked="")[^>]*>/);
 assert.equal(ratingMarkup, renderToString(ratingElement));
 assert.match(renderToString(createElement(Rating, { value: 4.5 })), /aria-label="4.5 out of 5 stars"/);
+
+const comboboxMarkup = renderToString(createElement(Combobox, { label: "Region", options: [{ value: "gb", label: "United Kingdom" }], name: "region", defaultValue: "gb" }));
+assert.match(comboboxMarkup, /role="combobox"/);
+assert.match(comboboxMarkup, /<input\b(?=[^>]*type="hidden")(?=[^>]*name="region")(?=[^>]*value="gb")[^>]*>/);
+
+const usageColumn = createTableColumn();
+const usageRows = [{ id: 'a', seats: 2 }, { id: 'b', seats: 10 }];
+const tableMarkup = renderToString(createElement(Table, { rows: usageRows, columns: [usageColumn({ id: 'seats', header: 'Seats', accessor: 'seats', sortable: true })], getRowKey: row => row.id, caption: 'Usage', defaultSort: { columnId: 'seats', direction: 'desc' } }));
+assert.match(tableMarkup, /<table/);
+assert.match(tableMarkup, /<caption[^>]*>Usage<\/caption>/);
+assert.match(tableMarkup, /aria-sort="descending"/);
+assert.ok(tableMarkup.indexOf('>10</td>') < tableMarkup.indexOf('>2</td>'));
+
+const calloutMarkup = renderToString(createElement(Callout, { tone: 'warning', title: 'Review before publishing', action: createElement(Button, null, 'Review pages') }, 'Two pages still need approval.'));
+assert.match(calloutMarkup, /fs-callout--warning/);
+assert.match(calloutMarkup, /Review pages/);
+assert.doesNotMatch(calloutMarkup, /role=|aria-live=/);
+assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/callout.css')), 'utf8').includes('--fs-callout-warning-surface'));

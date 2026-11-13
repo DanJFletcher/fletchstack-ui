@@ -604,6 +604,91 @@
       "style": "src/components/rating/rating.css",
       "category": "Content",
       "examples": "src/components/rating/stories/rating-examples.tsx"
+    },
+    {
+      "slug": "combobox",
+      "entry": "src/components/combobox/index.ts",
+      "exports": {
+        "runtime": [
+          "Combobox"
+        ],
+        "types": [
+          "ComboboxProps",
+          "ComboboxStyle",
+          "ComboboxOption"
+        ]
+      },
+      "modules": [
+        "src/components/combobox/Combobox.tsx",
+        "src/components/combobox/ComboboxPopup.tsx",
+        "src/components/combobox/types.ts",
+        "src/components/combobox/combobox-policy.ts",
+        "src/components/combobox/useCombobox.ts",
+        "src/components/combobox/useComboboxSelection.ts"
+      ],
+      "style": "src/components/combobox/combobox.css",
+      "category": "Forms",
+      "examples": "src/components/combobox/stories/combobox-examples.tsx"
+    },
+    {
+      "slug": "table",
+      "entry": "src/components/table/index.ts",
+      "exports": {
+        "runtime": [
+          "Table",
+          "createTableColumn"
+        ],
+        "types": [
+          "TableProps",
+          "TableStyle",
+          "TableColumn",
+          "TableColumnFactory",
+          "TableSort",
+          "TableSortValue",
+          "TableRowKey",
+          "TableRowContext",
+          "TableCellContext",
+          "TableFooterContext",
+          "TableStyles",
+          "TableClassNames"
+        ]
+      },
+      "modules": [
+        "src/components/table/Table.tsx",
+        "src/components/table/TableHead.tsx",
+        "src/components/table/TableBody.tsx",
+        "src/components/table/TableFooter.tsx",
+        "src/components/table/TableToolbar.tsx",
+        "src/components/table/TableSelection.tsx",
+        "src/components/table/types.ts",
+        "src/components/table/columns.ts",
+        "src/components/table/table-policy.ts",
+        "src/components/table/table-slots.ts",
+        "src/components/table/useTable.ts"
+      ],
+      "style": "src/components/table/table.css",
+      "category": "Data display",
+      "examples": "src/components/table/stories/table-examples.tsx"
+    },
+    {
+      "slug": "callout",
+      "entry": "src/components/callout/index.ts",
+      "exports": {
+        "runtime": [
+          "Callout"
+        ],
+        "types": [
+          "CalloutProps",
+          "CalloutStyle",
+          "CalloutTone"
+        ]
+      },
+      "modules": [
+        "src/components/callout/Callout.tsx"
+      ],
+      "style": "src/components/callout/callout.css",
+      "category": "Feedback",
+      "examples": "src/components/callout/stories/callout-examples.tsx"
     }
   ],
   "internalModules": [

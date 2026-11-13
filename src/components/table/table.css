@@ -1,0 +1,28 @@
+.fs-table { --_fs-table-padding: var(--fs-table-padding); min-inline-size: 0; max-inline-size: 100%; color: var(--fs-table-text); background: var(--fs-table-surface); font-family: var(--fs-table-font-family); font-size: var(--fs-table-font-size); line-height: var(--fs-table-font-line-height); }
+.fs-table[data-density='compact'] { --_fs-table-padding: var(--fs-table-compact-padding); }
+.fs-table__scroll { max-inline-size: 100%; overflow: auto; border-radius: var(--fs-table-radius); }
+.fs-table__scroll:focus-visible, .fs-table__sort:focus-visible { outline: var(--fs-table-focus-width) solid var(--fs-table-focus-color); outline-offset: var(--fs-table-focus-offset); }
+.fs-table > .fs-table__scroll > table { inline-size: 100%; border-collapse: separate; border-spacing: 0; color: inherit; font: inherit; }
+.fs-table > .fs-table__scroll > table > caption { padding-block: var(--fs-table-padding); text-align: start; font-weight: var(--fs-table-font-weight); }
+.fs-table__header-cell, .fs-table__cell, .fs-table__selection, .fs-table > .fs-table__scroll > table > tfoot > tr > td { box-sizing: border-box; padding: var(--_fs-table-padding) var(--fs-table-padding-inline); vertical-align: middle; border-block-end: var(--fs-table-border-width) solid var(--fs-table-border); }
+.fs-table__header-cell, .fs-table > .fs-table__scroll > table > thead > tr > .fs-table__selection { background: var(--fs-table-header-surface); color: var(--fs-table-header-text); font-weight: var(--fs-table-font-weight); }
+.fs-table__sort { display: inline-flex; align-items: center; justify-content: flex-start; gap: var(--fs-table-gap); min-block-size: var(--fs-table-target-size); padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; cursor: pointer; }
+.fs-table__header-cell[data-align='end'] .fs-table__sort { justify-content: flex-end; }
+.fs-table__header-cell[data-align='center'] .fs-table__sort { justify-content: center; }
+.fs-table__selection { inline-size: var(--fs-table-target-size); }
+.fs-table__selection .fs-checkbox__label { gap: 0; }
+.fs-table__selection .fs-checkbox { --fs-checkbox-selected-border: var(--fs-table-row-selected-border); --fs-checkbox-selected-hover-border: var(--fs-table-row-selected-border); --fs-checkbox-focus-color: var(--fs-table-focus-color); }
+.fs-table:where([data-striped='true']) > .fs-table__scroll > table > tbody > tr:where(:nth-child(even)) { background: var(--fs-table-striped-surface); }
+.fs-table:where([data-hover='true']) > .fs-table__scroll > table > tbody > tr:where(:hover) { background: var(--fs-table-row-hover); }
+.fs-table > .fs-table__scroll > table > tbody > tr[data-selected='true'] { background: var(--fs-table-row-selected); color: var(--fs-table-row-selected-fg); }
+.fs-table[data-borders='none'] > .fs-table__scroll > table > :is(thead, tbody, tfoot) > tr > :is(th, td) { border: 0; }
+.fs-table[data-borders='all'] > .fs-table__scroll > table { border-block-start: var(--fs-table-border-width) solid var(--fs-table-border); border-inline-start: var(--fs-table-border-width) solid var(--fs-table-border); }
+.fs-table[data-borders='all'] > .fs-table__scroll > table > :is(thead, tbody, tfoot) > tr > :is(th, td) { border-inline-end: var(--fs-table-border-width) solid var(--fs-table-border); }
+.fs-table[data-sticky='true'] > .fs-table__scroll > table > thead > tr > th { position: sticky; inset-block-start: 0; z-index: 1; }
+.fs-table > .fs-table__scroll > table > tfoot { font-weight: var(--fs-table-font-weight); }
+.fs-table__state { display: flex; align-items: center; gap: var(--fs-table-gap); color: var(--fs-table-muted); padding: var(--fs-table-padding); }
+.fs-table__sr-only { position: absolute; inline-size: 1px; block-size: 1px; padding: 0 !important; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (forced-colors: active) {
+  .fs-table > .fs-table__scroll > table > tbody > tr[data-selected='true'] { outline: 1px solid Highlight; outline-offset: -1px; }
+  .fs-table__scroll:focus-visible, .fs-table__sort:focus-visible { outline-color: Highlight; }
+}

@@ -2886,6 +2886,53 @@
           "$description": "Exit motion curve."
         }
       }
+    },
+    "rating": {
+      "fill": {
+        "$type": "color",
+        "$value": "{primitive.ratingGoldNight}",
+        "$description": "Rating fill role."
+      },
+      "outline": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Rating outline role."
+      },
+      "disabledFill": {
+        "$type": "color",
+        "$value": "{primitive.nightDisabled}",
+        "$description": "Rating disabledFill role."
+      },
+      "disabledOutline": {
+        "$type": "color",
+        "$value": "{primitive.nightMuted}",
+        "$description": "Rating disabledOutline role."
+      },
+      "sizeSm": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Rating sizeSm role."
+      },
+      "sizeMd": {
+        "$type": "dimension",
+        "$value": "{primitive.px32}",
+        "$description": "Rating sizeMd role."
+      },
+      "sizeLg": {
+        "$type": "dimension",
+        "$value": "{primitive.px48}",
+        "$description": "Rating sizeLg role."
+      },
+      "targetSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px48}",
+        "$description": "Rating targetSize role."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Rating gap role."
+      }
     }
   }
 }

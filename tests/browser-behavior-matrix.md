@@ -63,3 +63,7 @@ The AvatarGroup harness owns ordered shared-Avatar geometry, both-theme overflow
 ## Motion foundation
 
 The [Spinner harness](browser-harness/specs/spinner/Spinner.spec.ts) owns default, legacy/shared/combined timing, live system preferences, and consumer isolation from preview markers. The [Accordion harness](browser-harness/specs/accordion/Accordion.spec.ts) owns immediate semantic and focus changes, opt-in transitions, rapid activation and collapsed-link exclusion during exit. The [served Storybook checks](e2e/storybook/motion.spec.ts) own the six mode/preference combinations, Docs canvases, sibling/nested themes, toolbar/theme navigation and returning to System. Token contracts verify the approved defaults in both generated themes.
+
+## Rating
+
+The [Rating harness](browser-harness/specs/rating/Rating.spec.ts) owns both-theme fractional full-size clipping, native whole/half-step arrows and Tab, independent groups, pointer/keyboard 3.5 parity in artwork, naming and real submitted FormData, required native validation, disabled score retention, 20/32/48px symbol geometry, 320px enlarged/spaced ten-point reflow and forced-color focus/fill. DOM contracts own localization, controlled/uncontrolled changes, ref/native forwarding, form reset and validation relationships. Independent SSR/hydration tests retain native checked state before JavaScript and reject hydration recovery. Storybook owns render/play/a11y for the design-sheet composition, sizes, symbols and form states; package consumers retain public exports, types, styles and React 18/19 SSR.

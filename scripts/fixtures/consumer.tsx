@@ -422,3 +422,12 @@ export const invalidAccordionHeading = <Accordion items={accordionItems} heading
 export const invalidAccordionOpen = <Accordion items={accordionItems} openItems="invite" />;
 // @ts-expect-error Items own the rendered content.
 export const invalidAccordionChildren = <Accordion items={accordionItems}>Override</Accordion>;
+
+import { Rating, type RatingProps } from 'fletchstack-ui';
+import 'fletchstack-ui/rating.css';
+const ratingProps: RatingProps = { mode: 'input', label: 'Review', step: 0.5, defaultValue: 3.5, name: 'rating' };
+export const rating = <Rating {...ratingProps} ref={createRef<HTMLDivElement>()} style={{ '--fs-rating-fill': 'gold' }} />;
+// @ts-expect-error Input rating requires a visible label.
+export const invalidRatingLabel = <Rating mode="input" />;
+// @ts-expect-error Rating only supports whole and half steps.
+export const invalidRatingStep = <Rating step={0.25} />;

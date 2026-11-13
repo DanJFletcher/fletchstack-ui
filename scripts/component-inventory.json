@@ -580,6 +580,30 @@
       "style": "src/components/accordion/accordion.css",
       "category": "Feedback",
       "examples": "src/components/accordion/stories/accordion-examples.tsx"
+    },
+    {
+      "slug": "rating",
+      "entry": "src/components/rating/index.ts",
+      "exports": {
+        "runtime": [
+          "Rating"
+        ],
+        "types": [
+          "RatingProps",
+          "RatingStyle",
+          "RatingSymbol"
+        ]
+      },
+      "modules": [
+        "src/components/rating/Rating.tsx",
+        "src/components/rating/RatingSymbol.tsx",
+        "src/components/rating/useRating.ts",
+        "src/components/rating/rating-policy.ts",
+        "src/components/rating/types.ts"
+      ],
+      "style": "src/components/rating/rating.css",
+      "category": "Content",
+      "examples": "src/components/rating/stories/rating-examples.tsx"
     }
   ],
   "internalModules": [

@@ -534,6 +534,15 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-motion-easing-standard` | Standard disclosure transition easing. | cubicBezier |
 | `--fs-motion-easing-enter` | Enter motion curve. | cubicBezier |
 | `--fs-motion-easing-exit` | Exit motion curve. | cubicBezier |
+| `--fs-rating-fill` | Rating fill role. | color |
+| `--fs-rating-outline` | Rating outline role. | color |
+| `--fs-rating-disabled-fill` | Rating disabledFill role. | color |
+| `--fs-rating-disabled-outline` | Rating disabledOutline role. | color |
+| `--fs-rating-size-sm` | Rating sizeSm role. | dimension |
+| `--fs-rating-size-md` | Rating sizeMd role. | dimension |
+| `--fs-rating-size-lg` | Rating sizeLg role. | dimension |
+| `--fs-rating-target-size` | Rating targetSize role. | dimension |
+| `--fs-rating-gap` | Rating gap role. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

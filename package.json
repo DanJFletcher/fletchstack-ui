@@ -44,7 +44,8 @@
     "./avatar-group.css": "./dist/avatar-group.css",
     "./multi-select.css": "./dist/multi-select.css",
     "./chip.css": "./dist/chip.css",
-    "./accordion.css": "./dist/accordion.css"
+    "./accordion.css": "./dist/accordion.css",
+    "./rating.css": "./dist/rating.css"
   },
   "files": [
     "dist",

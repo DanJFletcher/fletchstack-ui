@@ -70,3 +70,6 @@ export type { ChipProps, ChipStyle } from './components/chip/index.js';
 
 export { Accordion } from './components/accordion/index.js';
 export type { AccordionProps, AccordionStyle, AccordionItem } from './components/accordion/index.js';
+
+export { Rating } from './components/rating/index.js';
+export type { RatingProps, RatingStyle, RatingSymbol } from './components/rating/index.js';

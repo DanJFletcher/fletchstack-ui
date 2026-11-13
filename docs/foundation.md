@@ -159,3 +159,7 @@ The one-page Accordion design and linked behavior reference approve divided, out
 ## Motion
 
 Use the [motion foundation](motion.md) for shared timing, easing, reduced-motion behavior, and preview modes.
+
+## Rating pattern
+
+The owner-supplied one-page Rating sheet and linked behavior reference approve fractional display and native whole/half-step input, with star, heart and thumbs artwork. The [Rating contract](rating.md) records stable clipping, visible labels, native validation, localization and disabled behavior. Rating fill/outline roles use Corporate gold and Luna orange with stable 20/32/48px symbols and 48px input cells (24px per half); existing field tokens supply typography, focus, errors and description styling. No motion is introduced.

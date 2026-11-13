@@ -1143,6 +1143,38 @@
     "components-accordion--instances": {
       "module": "tests/browser-harness/scenarios/Accordion.tsx",
       "export": "Instances"
+    },
+    "components-rating--playground": {
+      "module": "tests/browser-harness/scenarios/Rating.tsx",
+      "export": "Playground"
+    },
+    "components-rating--composition": {
+      "module": "tests/browser-harness/scenarios/Rating.tsx",
+      "export": "Composition"
+    },
+    "components-rating--input": {
+      "module": "tests/browser-harness/scenarios/Rating.tsx",
+      "export": "Input"
+    },
+    "components-rating--half-step-input": {
+      "module": "tests/browser-harness/scenarios/Rating.tsx",
+      "export": "HalfStepInput"
+    },
+    "components-rating--controlled": {
+      "module": "tests/browser-harness/scenarios/Rating.tsx",
+      "export": "Controlled"
+    },
+    "components-rating--narrow": {
+      "module": "tests/browser-harness/scenarios/Rating.tsx",
+      "export": "Narrow"
+    },
+    "components-rating--required": {
+      "module": "tests/browser-harness/scenarios/Rating.tsx",
+      "export": "Required"
+    },
+    "components-rating--instances": {
+      "module": "tests/browser-harness/scenarios/Rating.tsx",
+      "export": "Instances"
     }
   },
   "suites": [
@@ -1745,6 +1777,20 @@
       "file": "tests/e2e/storybook/motion.spec.ts",
       "scope": "storybook-runtime",
       "scenarios": []
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/rating/Rating.spec.ts",
+      "scenarios": [
+        "components-rating--playground",
+        "components-rating--composition",
+        "components-rating--input",
+        "components-rating--half-step-input",
+        "components-rating--controlled",
+        "components-rating--narrow",
+        "components-rating--required",
+        "components-rating--instances"
+      ]
     }
   ],
   "discovery": {

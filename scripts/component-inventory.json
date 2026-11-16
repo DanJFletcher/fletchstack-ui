@@ -56,7 +56,10 @@
           "ChevronDownIcon",
           "ArrowRightIcon",
           "PlusIcon",
-          "ExternalLinkIcon"
+          "ExternalLinkIcon",
+          "HomeIcon",
+          "InboxIcon",
+          "HelpIcon"
         ],
         "types": [
           "IconProps",
@@ -74,7 +77,10 @@
         "src/components/icon/named/ExternalLinkIcon.tsx",
         "src/components/icon/named/MoonIcon.tsx",
         "src/components/icon/named/PlusIcon.tsx",
-        "src/components/icon/named/SunIcon.tsx"
+        "src/components/icon/named/SunIcon.tsx",
+        "src/components/icon/named/HomeIcon.tsx",
+        "src/components/icon/named/InboxIcon.tsx",
+        "src/components/icon/named/HelpIcon.tsx"
       ],
       "style": "src/components/icon/icon.css",
       "category": "Visuals"
@@ -772,6 +778,64 @@
       "style": "src/components/navbar/navbar.css",
       "category": "Navigation",
       "examples": "src/components/navbar/stories/navbar-examples.tsx"
+    },
+    {
+      "slug": "bottom-navigation",
+      "entry": "src/components/bottom-navigation/index.ts",
+      "exports": {
+        "runtime": [
+          "BottomNavigation"
+        ],
+        "types": [
+          "BottomNavigationProps",
+          "BottomNavigationStyle",
+          "BottomNavigationItemProps"
+        ]
+      },
+      "modules": [
+        "src/components/bottom-navigation/BottomNavigation.tsx"
+      ],
+      "style": "src/components/bottom-navigation/bottom-navigation.css",
+      "category": "Navigation",
+      "examples": "src/components/bottom-navigation/stories/bottom-navigation-examples.tsx"
+    },
+    {
+      "slug": "app-shell",
+      "entry": "src/components/app-shell/index.ts",
+      "exports": {
+        "runtime": [
+          "AppShell"
+        ],
+        "types": [
+          "AppShellProps",
+          "AppShellStyle"
+        ]
+      },
+      "modules": [
+        "src/components/app-shell/AppShell.tsx"
+      ],
+      "style": "src/components/app-shell/app-shell.css",
+      "category": "Layout",
+      "examples": "src/components/app-shell/stories/app-shell-examples.tsx"
+    },
+    {
+      "slug": "app-content",
+      "entry": "src/components/app-content/index.ts",
+      "exports": {
+        "runtime": [
+          "AppContent"
+        ],
+        "types": [
+          "AppContentProps",
+          "AppContentStyle"
+        ]
+      },
+      "modules": [
+        "src/components/app-content/AppContent.tsx"
+      ],
+      "style": "src/components/app-content/app-content.css",
+      "category": "Layout",
+      "examples": "src/components/app-content/stories/app-content-examples.tsx"
     }
   ],
   "internalModules": [

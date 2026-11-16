@@ -522,3 +522,20 @@ const navbarProps: NavbarProps = { 'aria-label': 'Primary', defaultOpen: true, m
 export const navbar = <Navbar {...navbarProps} ref={createRef<HTMLElement>()} />;
 // @ts-expect-error Placement is an explicit bar or menu choice.
 export const invalidNavbarPlacement = <Navbar.Item mobilePlacement="sidebar">Docs</Navbar.Item>;
+
+import { BottomNavigation, AppShell, AppContent, HomeIcon, InboxIcon, HelpIcon, type BottomNavigationProps, type BottomNavigationItemProps, type BottomNavigationStyle, type AppShellProps, type AppShellStyle, type AppContentProps, type AppContentStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/bottom-navigation.css';
+import 'fletchstack-ui/app-shell.css';
+import 'fletchstack-ui/app-content.css';
+const bottomStyle: BottomNavigationStyle = { '--fs-bottom-navigation-safe-area-inset': '0px' };
+const bottomItem: BottomNavigationItemProps = { children: <a href="/help"><HelpIcon />Help</a> };
+const bottomProps: BottomNavigationProps = { 'aria-label': 'Primary', style: bottomStyle, children: <BottomNavigation.Item {...bottomItem} /> };
+const shellStyle: AppShellStyle = { '--fs-surface': 'white' };
+const shellProps: AppShellProps = { height: 'parent', style: shellStyle, children: 'Page' };
+const contentStyle: AppContentStyle = { padding: 16 };
+const contentProps: AppContentProps = { as: 'div', style: contentStyle, children: 'Page' };
+export const applicationShell = <AppShell {...shellProps} ref={createRef<HTMLDivElement>()}><AppContent {...contentProps} ref={createRef<HTMLElement>()} /><BottomNavigation {...bottomProps} ref={createRef<HTMLElement>()} /><HomeIcon /><InboxIcon /></AppShell>;
+// @ts-expect-error Navigation requires an accessible name.
+export const unnamedBottomNavigation = <BottomNavigation><BottomNavigation.Item><a href="/">Home</a></BottomNavigation.Item></BottomNavigation>;
+// @ts-expect-error Each destination accepts one element.
+export const multipleBottomLinks = <BottomNavigation.Item><a href="/">Home</a><a href="/help">Help</a></BottomNavigation.Item>;

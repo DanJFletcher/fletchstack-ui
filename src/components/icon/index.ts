@@ -8,3 +8,6 @@ export { ChevronDownIcon } from './named/ChevronDownIcon.js';
 export { ArrowRightIcon } from './named/ArrowRightIcon.js';
 export { PlusIcon } from './named/PlusIcon.js';
 export { ExternalLinkIcon } from './named/ExternalLinkIcon.js';
+export { HomeIcon } from './named/HomeIcon.js';
+export { InboxIcon } from './named/InboxIcon.js';
+export { HelpIcon } from './named/HelpIcon.js';

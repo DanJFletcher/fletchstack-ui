@@ -1,3 +1,6 @@
+import { HelpIcon } from '../../../src/components/icon/named/HelpIcon';
+import { InboxIcon } from '../../../src/components/icon/named/InboxIcon';
+import { HomeIcon } from '../../../src/components/icon/named/HomeIcon';
 import { useRef, useState } from 'react';
 import { ArrowRightIcon } from '../../../src/components/icon/named/ArrowRightIcon';
 import { Button } from '../../../src/components/button/Button';
@@ -15,6 +18,9 @@ import '../../../src/components/icon/icon.css';
 import '../../../src/components/button/button.css';
 
 const catalog = [
+  { name: 'HelpIcon', use: 'Help destination', Artwork: HelpIcon, keywords: ['help'] },
+  { name: 'InboxIcon', use: 'Inbox destination', Artwork: InboxIcon, keywords: ['inbox'] },
+  { name: 'HomeIcon', use: 'Home destination', Artwork: HomeIcon, keywords: ['home'] },
   { name: 'MoonIcon', use: 'Night mode', Artwork: MoonIcon, keywords: ['night', 'dark', 'theme'] },
   { name: 'SunIcon', use: 'Light mode', Artwork: SunIcon, keywords: ['day', 'light', 'theme'] },
   { name: 'CheckIcon', use: 'Success and confirmation', Artwork: CheckIcon, keywords: ['confirm', 'done', 'complete'] },

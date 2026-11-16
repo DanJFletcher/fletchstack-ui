@@ -1,7 +1,7 @@
 import { expect, test } from '../../fixtures/test';
 import { openScenario } from '../../fixtures/scenario';
 
-const names = ['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon'];
+const names = ['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon', 'HomeIcon', 'InboxIcon', 'HelpIcon'];
 const sizes = [{ name: 'small', pixels: '16px' }, { name: 'medium', pixels: '20px' }, { name: 'large', pixels: '24px' }];
 
 test('custom artwork uses the public wrapper and consumer coordinate space', async ({ page, mount }) => {
@@ -35,7 +35,7 @@ test('the optional catalog presents every icon at each size in both themes', asy
 
   for (const theme of ['corporate', 'luna']) {
     const region = page.getByRole('region', { name: theme, exact: true });
-    await expect(region.getByRole('img')).toHaveCount(24);
+    await expect(region.getByRole('img')).toHaveCount(33);
     for (const name of names) {
       await expect(region.getByRole('heading', { name, exact: true })).toBeVisible();
       for (const size of sizes) {

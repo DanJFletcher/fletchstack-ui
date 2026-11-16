@@ -163,3 +163,9 @@ Use the [motion foundation](motion.md) for shared timing, easing, reduced-motion
 ## Rating pattern
 
 The owner-supplied one-page Rating sheet and linked behavior reference approve fractional display and native whole/half-step input, with star, heart and thumbs artwork. The [Rating contract](rating.md) records stable clipping, visible labels, native validation, localization and disabled behavior. Rating fill/outline roles use Corporate gold and Luna orange with stable 20/32/48px symbols and 48px input cells (24px per half); existing field tokens supply typography, focus, errors and description styling. No motion is introduced.
+
+## Bottom destinations and application layout
+
+The bottom-navigation design approves equal-width destinations with decorative icons above visible labels, a rounded current-icon indicator and an independent full-link keyboard focus ring. Use semantic surface/text/divider/link-focus roles and dedicated current foreground/indicator roles; dimensions follow existing spacing/icon/radius primitives in both themes. Navigation owns internal target padding and the bottom safe-area inset. Parent layout owns placement.
+
+The complementary AppShell pattern uses persistent siblings around one direct AppContent scrolling region. Reserve intrinsic navigation height in normal flow rather than synchronizing fixed-position offsets and page padding. Viewport and definite-parent sizing are supported. See [BottomNavigation](./bottom-navigation.md), [AppShell](./app-shell.md), and [AppContent](./app-content.md).

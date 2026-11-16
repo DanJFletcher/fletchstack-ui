@@ -1,0 +1,20 @@
+// @vitest-environment jsdom
+import '../../../../tests/support/dom';
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { appLayoutContracts } from '../../../../tests/support/app-layout-contracts';
+
+describe('native component contract', () => appLayoutContracts(render));
+
+import { AppShell } from '../AppShell';
+
+it('preserves the native hidden attribute', () => {
+  // arrange
+  const given = <AppShell hidden><span>Hidden content</span></AppShell>;
+
+  // act
+  render(given);
+
+  // assert
+  expect(screen.getByText('Hidden content')).not.toBeVisible();
+});

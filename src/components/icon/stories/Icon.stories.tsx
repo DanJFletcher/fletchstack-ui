@@ -132,6 +132,6 @@ export const Gallery: Story = {
     await expect(canvas.getByText('No icons found. Try another term or clear the search.')).toBeVisible();
     await userEvent.click(canvas.getByRole('button', { name: 'Clear search' }));
     await expect(input).toHaveFocus();
-    await expect(canvas.getAllByRole('listitem')).toHaveLength(8);
+    await expect(canvas.getAllByRole('listitem')).toHaveLength(11);
   },
 };

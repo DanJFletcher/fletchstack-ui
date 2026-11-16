@@ -1,3 +1,6 @@
+import { HelpIcon } from '../named/HelpIcon';
+import { InboxIcon } from '../named/InboxIcon';
+import { HomeIcon } from '../named/HomeIcon';
 import type { ComponentType } from 'react';
 import { ArrowRightIcon } from '../named/ArrowRightIcon';
 import { CheckIcon } from '../named/CheckIcon';
@@ -25,4 +28,7 @@ export const catalog: readonly CatalogEntry[] = [
   { name: 'ArrowRightIcon', use: 'Continue or navigate forward', Artwork: ArrowRightIcon, keywords: ['next', 'forward', 'navigate'] },
   { name: 'PlusIcon', use: 'Add or create', Artwork: PlusIcon, keywords: ['add', 'create', 'new'] },
   { name: 'ExternalLinkIcon', use: 'External destination', Artwork: ExternalLinkIcon, keywords: ['external', 'link', 'open'] },
+  { name: 'HomeIcon', use: 'Home destination', Artwork: HomeIcon, keywords: ['home'] },
+  { name: 'InboxIcon', use: 'Inbox destination', Artwork: InboxIcon, keywords: ['inbox'] },
+  { name: 'HelpIcon', use: 'Help destination', Artwork: HelpIcon, keywords: ['help'] },
 ];

@@ -640,6 +640,21 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-navbar-compact-gap` | Navbar compactGap role approved by the persistent-action navigation design. | dimension |
 | `--fs-navbar-menu-gap` | Navbar menuGap role approved by the persistent-action navigation design. | dimension |
 | `--fs-navbar-collapse-width` | Navbar collapseWidth role approved by the persistent-action navigation design. | dimension |
+| `--fs-bottom-navigation-surface` | Bottom destination navigation surface approved by the navigation design. | color |
+| `--fs-bottom-navigation-text` | Bottom destination navigation text approved by the navigation design. | color |
+| `--fs-bottom-navigation-border` | Bottom destination navigation border approved by the navigation design. | color |
+| `--fs-bottom-navigation-current` | Bottom destination navigation current approved by the navigation design. | color |
+| `--fs-bottom-navigation-indicator` | Bottom destination navigation indicator approved by the navigation design. | color |
+| `--fs-bottom-navigation-padding-block` | Bottom destination navigation paddingBlock approved by the navigation design. | dimension |
+| `--fs-bottom-navigation-padding-inline` | Bottom destination navigation paddingInline approved by the navigation design. | dimension |
+| `--fs-bottom-navigation-gap` | Bottom destination navigation gap approved by the navigation design. | dimension |
+| `--fs-bottom-navigation-icon-size` | Bottom destination navigation iconSize approved by the navigation design. | dimension |
+| `--fs-bottom-navigation-indicator-width` | Bottom destination navigation indicatorWidth approved by the navigation design. | dimension |
+| `--fs-bottom-navigation-indicator-height` | Bottom destination navigation indicatorHeight approved by the navigation design. | dimension |
+| `--fs-bottom-navigation-indicator-radius` | Bottom destination navigation indicatorRadius approved by the navigation design. | dimension |
+| `--fs-bottom-navigation-current-weight` | Bottom destination navigation currentWeight approved by the navigation design. | fontWeight |
+| `--fs-bottom-navigation-border-width` | Bottom destination navigation borderWidth approved by the navigation design. | dimension |
+| `--fs-bottom-navigation-font-size` | Bottom destination navigation labelSize approved by the navigation design. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

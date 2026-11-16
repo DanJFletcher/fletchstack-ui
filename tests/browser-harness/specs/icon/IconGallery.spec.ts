@@ -2,7 +2,7 @@ import { expect, test } from '../../fixtures/test';
 import { openScenario } from '../../fixtures/scenario';
 import { contrast } from '../../../e2e/fixtures/contrast';
 
-const names = ['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon'];
+const names = ['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon', 'HomeIcon', 'InboxIcon', 'HelpIcon'];
 
 for (const theme of ['corporate', 'luna'] as const) {
   test.describe(`Icon gallery / ${theme}`, () => {
@@ -12,11 +12,11 @@ for (const theme of ['corporate', 'luna'] as const) {
       const results = page.getByRole('list', { name: 'Icon results' });
       const count = page.getByRole('status');
       await expect(results.getByRole('heading')).toHaveText(names);
-      await expect(count).toHaveText('8 icons');
+      await expect(count).toHaveText('11 icons');
       await expect(count).toHaveAttribute('aria-live', 'polite');
       const initialCardWidth = await results.getByRole('listitem').first().evaluate(card => card.getBoundingClientRect().width);
       await expect(results.getByRole('img')).toHaveCount(0);
-      await expect(results.locator('svg[aria-hidden="true"][focusable="false"]')).toHaveCount(8);
+      await expect(results.locator('svg[aria-hidden="true"][focusable="false"]')).toHaveCount(11);
       await expect(results.locator('button, a, [tabindex]')).toHaveCount(0);
 
       for (const example of [
@@ -25,7 +25,7 @@ for (const theme of ['corporate', 'luna'] as const) {
         { query: 'new', names: ['PlusIcon'], count: '1 icon' },
         { query: 'add', names: ['PlusIcon'], count: '1 icon' },
         { query: 'dismiss', names: ['CloseIcon'], count: '1 icon' },
-        { query: '   ', names, count: '8 icons' },
+        { query: '   ', names, count: '11 icons' },
         { query: '[', names: [], count: '0 icons' },
       ]) {
         await search.fill(example.query);
@@ -56,7 +56,7 @@ for (const theme of ['corporate', 'luna'] as const) {
         await page.keyboard.press('Enter');
         await expect(search).toBeFocused();
         await expect(search).toHaveValue('');
-        await expect(page.getByRole('status')).toHaveText('8 icons');
+        await expect(page.getByRole('status')).toHaveText('11 icons');
       }
       await expect(search).toHaveCSS('outline-style', 'solid');
       await expect(search).not.toHaveCSS('outline-width', '0px');
@@ -124,7 +124,7 @@ for (const theme of ['corporate', 'luna'] as const) {
       await expect(page.getByText('No icons found. Try another term or clear the search.')).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       await page.getByRole('button', { name: 'Clear search' }).click();
-      await expect(page.getByRole('listitem')).toHaveCount(8);
+      await expect(page.getByRole('listitem')).toHaveCount(11);
     });
   });
 }

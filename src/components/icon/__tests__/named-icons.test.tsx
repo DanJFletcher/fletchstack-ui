@@ -5,7 +5,7 @@ import { createRef } from 'react';
 import { expect, it } from 'vitest';
 import * as library from '../../../index';
 
-it.each(['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon'])('exports %s as optional named artwork', name => {
+it.each(['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon', 'HomeIcon', 'InboxIcon', 'HelpIcon'])('exports %s as optional named artwork', name => {
   // arrange
   const expected = name;
 
@@ -17,6 +17,9 @@ it.each(['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'Ar
 });
 
 const catalog = [
+  { name: 'Home', Component: library.HomeIcon, path: 'M3 10l9-7 9 7M5 9v12h5v-7h4v7h5V9' },
+  { name: 'Inbox', Component: library.InboxIcon, path: 'M4 4h16l3 14v3H1v-3L4 4Zm-2 13h6l2 3h4l2-3h6' },
+  { name: 'Help', Component: library.HelpIcon, path: 'M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4m.1 3h.01' },
   { name: 'Moon', Component: library.MoonIcon, path: 'M20.9 13.4A9 9 0 0 1 10.6 3.1 9 9 0 1 0 20.9 13.4Z' },
   { name: 'Sun', Component: library.SunIcon, path: 'M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42' },
   { name: 'Check', Component: library.CheckIcon, path: 'm5 12 4 4L19 6' },

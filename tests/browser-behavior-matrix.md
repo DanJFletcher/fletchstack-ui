@@ -91,3 +91,12 @@ Owner: `tests/browser-harness/specs/breadcrumbs/Breadcrumbs.spec.ts`. Both-theme
 ## Navbar
 
 Owner: `tests/browser-harness/specs/navbar/Navbar.spec.ts`. Both-theme locally stateful text/switch controls survive container-only resizing, close/reopen and widening while the CTA remains visible. Native Tab order matches each layout, Enter/Space toggles, Escape restores focus, nested link content navigates and dismisses, embedded controls remain open, controlled requests await parent acceptance, typed mapped/conditional/fragment items retain group order, all-visible items omit disclosure, instance overrides stay isolated and forced colors preserve focus/boundaries. Enlarged/spaced text reflows at 320px. DOM/SSR/hydration contracts independently verify forwarded attributes/refs, child refs and values, root handlers, per-instance relationships and unavailable hidden content. Actual screen-reader speech and physical-device behavior remain unverified.
+
+## Bottom navigation and app shell
+
+| Guarantee | Owner |
+| --- | --- |
+| Equal full-cell native links; distinct focus/current; both themes; scoped overrides; narrow and enlarged text | `tests/browser-harness/specs/bottom-navigation/BottomNavigation.spec.ts` |
+| Real router nested Inbox matching, native Help, Back/Forward, programmatic and modified activation | `tests/browser-harness/specs/bottom-navigation/BottomNavigation.spec.ts`; isolated `/navigation-demo/*` consumer |
+| Viewport and parent shell sizing; persistent header/bar; independently scrollable final content; wrapped labels and one safe-area inset | `tests/browser-harness/specs/app-shell/AppShell.spec.ts` |
+| Embedded content avoids nested main; keyboard focus scrolls final link into view | `tests/browser-harness/specs/app-content/AppContent.spec.ts` |

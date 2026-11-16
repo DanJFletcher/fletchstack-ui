@@ -3446,6 +3446,85 @@
         "$value": "{primitive.px720}",
         "$description": "Navbar collapseWidth role approved by the persistent-action navigation design."
       }
+    },
+    "bottomNavigation": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Bottom destination navigation surface approved by the navigation design."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.muted}",
+        "$description": "Bottom destination navigation text approved by the navigation design."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryDayLine}",
+        "$description": "Bottom destination navigation border approved by the navigation design."
+      },
+      "current": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "Bottom destination navigation current approved by the navigation design."
+      },
+      "indicator": {
+        "$type": "color",
+        "$value": "{primitive.blueTint}",
+        "$description": "Bottom destination navigation indicator approved by the navigation design."
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Bottom destination navigation paddingBlock approved by the navigation design."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Bottom destination navigation paddingInline approved by the navigation design."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Bottom destination navigation gap approved by the navigation design."
+      },
+      "iconSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Bottom destination navigation iconSize approved by the navigation design."
+      },
+      "indicatorWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px48}",
+        "$description": "Bottom destination navigation indicatorWidth approved by the navigation design."
+      },
+      "indicatorHeight": {
+        "$type": "dimension",
+        "$value": "{primitive.px32}",
+        "$description": "Bottom destination navigation indicatorHeight approved by the navigation design."
+      },
+      "indicatorRadius": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Bottom destination navigation indicatorRadius approved by the navigation design."
+      },
+      "currentWeight": {
+        "$type": "fontWeight",
+        "$value": "{primitive.bold}",
+        "$description": "Bottom destination navigation currentWeight approved by the navigation design."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Bottom destination navigation borderWidth approved by the navigation design."
+      },
+      "font": {
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Bottom destination navigation labelSize approved by the navigation design."
+        }
+      }
     }
   }
 }

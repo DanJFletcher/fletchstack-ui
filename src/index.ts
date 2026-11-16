@@ -91,3 +91,12 @@ export type { BreadcrumbsProps, BreadcrumbsStyle, BreadcrumbItem, BreadcrumbAnce
 
 export { Navbar } from './components/navbar/index.js';
 export type { NavbarProps, NavbarBrandProps, NavbarItemProps, NavbarMobilePlacement, NavbarStyle } from './components/navbar/index.js';
+export { HomeIcon } from './components/icon/index.js';
+export { InboxIcon } from './components/icon/index.js';
+export { HelpIcon } from './components/icon/index.js';
+export { BottomNavigation } from './components/bottom-navigation/index.js';
+export type { BottomNavigationProps, BottomNavigationStyle, BottomNavigationItemProps } from './components/bottom-navigation/index.js';
+export { AppShell } from './components/app-shell/index.js';
+export type { AppShellProps, AppShellStyle } from './components/app-shell/index.js';
+export { AppContent } from './components/app-content/index.js';
+export type { AppContentProps, AppContentStyle } from './components/app-content/index.js';

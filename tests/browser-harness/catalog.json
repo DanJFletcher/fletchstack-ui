@@ -1367,6 +1367,50 @@
     "components-multi-select--chevron-comparison": {
       "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
       "export": "ChevronComparison"
+    },
+    "components-bottom-navigation--playground": {
+      "module": "tests/browser-harness/scenarios/BottomNavigation.tsx",
+      "export": "Playground"
+    },
+    "components-bottom-navigation--composition": {
+      "module": "tests/browser-harness/scenarios/BottomNavigation.tsx",
+      "export": "Composition"
+    },
+    "components-bottom-navigation--changes": {
+      "module": "tests/browser-harness/scenarios/BottomNavigation.tsx",
+      "export": "Changes"
+    },
+    "components-bottom-navigation--long-labels": {
+      "module": "tests/browser-harness/scenarios/BottomNavigation.tsx",
+      "export": "LongLabels"
+    },
+    "components-bottom-navigation--overrides": {
+      "module": "tests/browser-harness/scenarios/BottomNavigation.tsx",
+      "export": "Overrides"
+    },
+    "components-bottom-navigation--routing": {
+      "module": "tests/browser-harness/scenarios/BottomNavigation.tsx",
+      "export": "Routing"
+    },
+    "components-bottom-navigation--shell": {
+      "module": "tests/browser-harness/scenarios/BottomNavigation.tsx",
+      "export": "Shell"
+    },
+    "components-bottom-navigation--safe-area": {
+      "module": "tests/browser-harness/scenarios/BottomNavigation.tsx",
+      "export": "SafeArea"
+    },
+    "components-bottom-navigation--viewport": {
+      "module": "tests/browser-harness/scenarios/BottomNavigation.tsx",
+      "export": "Viewport"
+    },
+    "components-app-shell--playground": {
+      "module": "tests/browser-harness/scenarios/AppShell.tsx",
+      "export": "Playground"
+    },
+    "components-app-content--playground": {
+      "module": "tests/browser-harness/scenarios/AppContent.tsx",
+      "export": "Playground"
     }
   },
   "suites": [
@@ -2066,6 +2110,35 @@
         "components-navbar--deferred",
         "components-navbar--resources",
         "components-navbar--overrides"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/bottom-navigation/BottomNavigation.spec.ts",
+      "scenarios": [
+        "components-bottom-navigation--playground",
+        "components-bottom-navigation--composition",
+        "components-bottom-navigation--changes",
+        "components-bottom-navigation--long-labels",
+        "components-bottom-navigation--overrides",
+        "components-bottom-navigation--routing"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/app-shell/AppShell.spec.ts",
+      "scenarios": [
+        "components-app-shell--playground",
+        "components-bottom-navigation--shell",
+        "components-bottom-navigation--safe-area",
+        "components-bottom-navigation--viewport"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/app-content/AppContent.spec.ts",
+      "scenarios": [
+        "components-app-content--playground"
       ]
     }
   ],

@@ -24,7 +24,7 @@ it.each([
   { given: 'new', expected: ['PlusIcon'] },
   { given: 'add', expected: ['PlusIcon'] },
   { given: 'dismiss', expected: ['CloseIcon'] },
-  { given: '   ', expected: ['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon'] },
+  { given: '   ', expected: ['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon', 'HomeIcon', 'InboxIcon', 'HelpIcon'] },
   { given: '[[', expected: [] }, // user-event escapes a literal opening bracket,
   { given: 'no-such-icon', expected: [] },
 ])('searches literal names, uses and keywords for "$given"', async ({ given, expected }) => {
@@ -48,7 +48,7 @@ it('announces the initial collection size politely', () => {
   render(given);
 
   // assert
-  expect(screen.getByRole('status')).toHaveTextContent(/^8 icons$/);
+  expect(screen.getByRole('status')).toHaveTextContent(/^11 icons$/);
   expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite');
 });
 
@@ -109,8 +109,8 @@ it.each(['moon', 'no-such-icon', ''])('restores the complete collection when cle
   // assert
   expect(input).toHaveValue('');
   expect(input).toHaveFocus();
-  expect(screen.getByRole('status')).toHaveTextContent('8 icons');
-  expect(screen.getAllByRole('listitem')).toHaveLength(8);
+  expect(screen.getByRole('status')).toHaveTextContent('11 icons');
+  expect(screen.getAllByRole('listitem')).toHaveLength(11);
 });
 
 it('returns focus to search after keyboard clearing', async () => {
@@ -126,7 +126,7 @@ it('returns focus to search after keyboard clearing', async () => {
 
   // assert
   expect(screen.getByRole('searchbox', { name: 'Search icons' })).toHaveFocus();
-  expect(screen.getByRole('status')).toHaveTextContent('8 icons');
+  expect(screen.getByRole('status')).toHaveTextContent('11 icons');
 });
 
 it('keeps cards free of actions and accessible image duplication', () => {
@@ -167,7 +167,7 @@ it('changes the artwork preview size without changing the collection', async () 
 
   // assert
   expect(screen.getByRole('radio', { name: '16 px' })).toBeChecked();
-  expect(screen.getByRole('list', { name: 'Icon results' }).querySelectorAll('svg.fs-icon--small')).toHaveLength(8);
+  expect(screen.getByRole('list', { name: 'Icon results' }).querySelectorAll('svg.fs-icon--small')).toHaveLength(11);
 });
 
 it('selects a local theme without changing the search results', async () => {
@@ -181,5 +181,5 @@ it('selects a local theme without changing the search results', async () => {
   // assert
   expect(screen.getByRole('combobox', { name: 'Theme' })).toHaveValue('luna');
   expect(screen.getByRole('list', { name: 'Icon results' }).closest('[data-theme]')).toHaveAttribute('data-theme', 'luna');
-  expect(screen.getByRole('status')).toHaveTextContent('8 icons');
+  expect(screen.getByRole('status')).toHaveTextContent('11 icons');
 });

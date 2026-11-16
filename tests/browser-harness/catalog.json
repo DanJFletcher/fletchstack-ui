@@ -1363,6 +1363,10 @@
     "components-navbar--overrides": {
       "module": "tests/browser-harness/scenarios/Navbar.tsx",
       "export": "Overrides"
+    },
+    "components-multi-select--chevron-comparison": {
+      "module": "tests/browser-harness/scenarios/MultiSelect.tsx",
+      "export": "ChevronComparison"
     }
   },
   "suites": [
@@ -1927,7 +1931,8 @@
         "components-multi-select--disabled",
         "components-multi-select--long-options",
         "components-multi-select--long-list",
-        "components-multi-select--disabled-fieldset"
+        "components-multi-select--disabled-fieldset",
+        "components-multi-select--chevron-comparison"
       ]
     },
     {

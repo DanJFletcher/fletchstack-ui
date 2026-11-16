@@ -1,5 +1,6 @@
 import { forwardRef, useImperativeHandle, type ComponentPropsWithoutRef, type ForwardRefExoticComponent, type RefAttributes } from 'react';
 import { Field } from '../field/Field.js';
+import { ChevronDownIcon } from '../icon/named/ChevronDownIcon.js';
 import { SelectionLimit, SelectionPopup, SelectionTags } from './MultiSelectParts.js';
 import { selectionKey, useMultiSelect } from './useMultiSelect.js';
 import type { MultiSelectProps } from './types.js';
@@ -39,7 +40,7 @@ export const MultiSelect: ForwardRefExoticComponent<MultiSelectProps & RefAttrib
     {control => <div className="fs-multi-select__anchor"><div className={['fs-multi-select__control', props.className].filter(Boolean).join(' ')} style={props.style} data-disabled={props.disabled} data-invalid={control['aria-invalid'] && control['aria-invalid'] !== 'false'}>
       <SelectionTags model={model} props={props} /><SearchControl model={model} props={{ ...props, 'aria-describedby': control['aria-describedby'], 'aria-invalid': control['aria-invalid'] }} />
       <span className="fs-multi-select__actions">{(props.allowClear ?? true) && model.choices.some(option => !option.disabled) && <button type="button" className="fs-multi-select__clear" aria-label={props.clearLabel ?? 'Clear selections'} disabled={props.disabled || props.readOnly} onClick={model.clear}>×</button>}
-      <span className="fs-multi-select__chevron" aria-hidden="true">⌄</span></span>
+      <span className="fs-multi-select__chevron" aria-hidden="true"><ChevronDownIcon /></span></span>
     </div><SelectionPopup model={model} props={props} /><SelectionLimit model={model} props={props} /></div>}
   </Field>;
 });

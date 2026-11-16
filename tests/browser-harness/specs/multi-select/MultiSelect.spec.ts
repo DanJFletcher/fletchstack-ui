@@ -3,6 +3,24 @@ import { openScenario } from '../../fixtures/scenario';
 import { contrast } from '../../../e2e/fixtures/contrast';
 
 for (const theme of ['corporate', 'luna'] as const) {
+  test(`${theme} chevron matches Select artwork, size and trailing inset at every field size`, async ({ page, mount }) => {
+    await openScenario(mount, 'components-multi-select--chevron-comparison', { theme });
+    for (const size of ['small', 'medium', 'large']) {
+      const single = page.getByRole('combobox', { name: `Single ${size}` }).locator('..');
+      const multiple = page.getByRole('combobox', { name: `Multiple ${size}` }).locator('..');
+      const expected = await single.locator('svg').evaluate(element => {
+        const rect = element.getBoundingClientRect(), control = element.parentElement!.previousElementSibling!.getBoundingClientRect(), paint = getComputedStyle(element);
+        return { path: element.querySelector('path')!.getAttribute('d'), width: rect.width, height: rect.height, inset: control.right - rect.right, stroke: paint.strokeWidth, color: paint.color };
+      });
+      await expect(multiple.locator('svg')).toHaveCount(1);
+      const result = await multiple.locator('svg').evaluate(element => {
+        const rect = element.getBoundingClientRect(), control = element.closest('.fs-multi-select__control')!.getBoundingClientRect(), paint = getComputedStyle(element);
+        return { path: element.querySelector('path')!.getAttribute('d'), width: rect.width, height: rect.height, inset: control.right - rect.right, stroke: paint.strokeWidth, color: paint.color };
+      });
+      expect(result).toEqual(expected);
+      await expect(multiple.locator('svg')).toHaveAttribute('aria-hidden', 'true');
+    }
+  });
   test(`${theme} searches, toggles and removes choices with keyboard focus retained`, async ({ page, mount }) => {
     await openScenario(mount, 'components-multi-select--playground', { theme });
     const input = page.getByRole('combobox', { name: 'Article topics' });

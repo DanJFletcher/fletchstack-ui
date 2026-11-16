@@ -7,7 +7,7 @@ import './multi-select.stories.css';
 const meta = {
   id: 'components-multi-select', title: 'Components/Forms/MultiSelect', component: MultiSelect, tags: ['autodocs'],
   args: { label: 'Article topics', options: topicOptions },
-  parameters: { a11y: { test: 'error' }, docs: { description: { component: 'Search and select multiple options. Focus stays in the input while arrows navigate the multiselectable listbox. Repeated hidden values support native forms. Import field.css and multi-select.css alongside tokens, or use styles.css.' } } },
+  parameters: { a11y: { test: 'error' }, docs: { description: { component: 'Search and select multiple options. Focus stays in the input while arrows navigate the multiselectable listbox. Repeated hidden values support native forms. Import field.css, icon.css and multi-select.css alongside tokens, or use styles.css. The decorative chevron shares Select’s artwork, sizing and trailing inset.' } } },
 } satisfies Meta<typeof MultiSelect>;
 export default meta;
 type Story = StoryObj<typeof meta>;

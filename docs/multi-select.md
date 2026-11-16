@@ -6,6 +6,7 @@ Search and choose several named values from a fixed set of options. Each selecti
 import { MultiSelect } from 'fletchstack-ui';
 import 'fletchstack-ui/tokens.css';
 import 'fletchstack-ui/field.css';
+import 'fletchstack-ui/icon.css';
 import 'fletchstack-ui/multi-select.css';
 
 <MultiSelect

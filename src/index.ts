@@ -88,3 +88,6 @@ export type { MenuProps, MenuStyle, MenuItem, MenuActionItem, MenuLinkItem, Menu
 
 export { Breadcrumbs } from './components/breadcrumbs/index.js';
 export type { BreadcrumbsProps, BreadcrumbsStyle, BreadcrumbItem, BreadcrumbAncestor, BreadcrumbCurrent } from './components/breadcrumbs/index.js';
+
+export { Navbar } from './components/navbar/index.js';
+export type { NavbarProps, NavbarBrandProps, NavbarItemProps, NavbarMobilePlacement, NavbarStyle } from './components/navbar/index.js';

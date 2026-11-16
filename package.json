@@ -50,7 +50,8 @@
     "./table.css": "./dist/table.css",
     "./callout.css": "./dist/callout.css",
     "./menu.css": "./dist/menu.css",
-    "./breadcrumbs.css": "./dist/breadcrumbs.css"
+    "./breadcrumbs.css": "./dist/breadcrumbs.css",
+    "./navbar.css": "./dist/navbar.css"
   },
   "files": [
     "dist",

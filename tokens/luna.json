@@ -3389,6 +3389,63 @@
         "$value": "{primitive.violet}",
         "$description": "Breadcrumbs violet role approved by the hierarchy design."
       }
+    },
+    "navbar": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.navy}",
+        "$description": "Navbar surface role approved by the persistent-action navigation design."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Navbar text role approved by the persistent-action navigation design."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightLine}",
+        "$description": "Navbar border role approved by the persistent-action navigation design."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Navbar borderWidth role approved by the persistent-action navigation design."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px6}",
+        "$description": "Navbar radius role approved by the persistent-action navigation design."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Navbar padding role approved by the persistent-action navigation design."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Navbar gap role approved by the persistent-action navigation design."
+      },
+      "itemGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Navbar itemGap role approved by the persistent-action navigation design."
+      },
+      "compactGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Navbar compactGap role approved by the persistent-action navigation design."
+      },
+      "menuGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Navbar menuGap role approved by the persistent-action navigation design."
+      },
+      "collapseWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px720}",
+        "$description": "Navbar collapseWidth role approved by the persistent-action navigation design."
+      }
     }
   }
 }

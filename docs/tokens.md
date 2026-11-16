@@ -629,6 +629,17 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-breadcrumbs-toggle-padding-inline` | Breadcrumbs px4 role approved by the hierarchy design. | dimension |
 | `--fs-breadcrumbs-toggle-border-width` | Breadcrumbs px1 role approved by the hierarchy design. | dimension |
 | `--fs-breadcrumbs-toggle-hover` | Breadcrumbs blueTint role approved by the hierarchy design. | color |
+| `--fs-navbar-surface` | Navbar surface role approved by the persistent-action navigation design. | color |
+| `--fs-navbar-text` | Navbar text role approved by the persistent-action navigation design. | color |
+| `--fs-navbar-border` | Navbar border role approved by the persistent-action navigation design. | color |
+| `--fs-navbar-border-width` | Navbar borderWidth role approved by the persistent-action navigation design. | dimension |
+| `--fs-navbar-radius` | Navbar radius role approved by the persistent-action navigation design. | dimension |
+| `--fs-navbar-padding` | Navbar padding role approved by the persistent-action navigation design. | dimension |
+| `--fs-navbar-gap` | Navbar gap role approved by the persistent-action navigation design. | dimension |
+| `--fs-navbar-item-gap` | Navbar itemGap role approved by the persistent-action navigation design. | dimension |
+| `--fs-navbar-compact-gap` | Navbar compactGap role approved by the persistent-action navigation design. | dimension |
+| `--fs-navbar-menu-gap` | Navbar menuGap role approved by the persistent-action navigation design. | dimension |
+| `--fs-navbar-collapse-width` | Navbar collapseWidth role approved by the persistent-action navigation design. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

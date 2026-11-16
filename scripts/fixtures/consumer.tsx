@@ -511,3 +511,14 @@ export const breadcrumbs = <Breadcrumbs {...breadcrumbsProps} ref={createRef<HTM
 export const invalidBreadcrumbAncestor: BreadcrumbItem = { label: 'Home' };
 // @ts-expect-error Current pages are plain text rather than links.
 export const invalidBreadcrumbCurrent: BreadcrumbItem = { label: 'Settings', current: true, href: '/settings' };
+
+import { Navbar, type NavbarProps, type NavbarStyle, type NavbarItemProps, type NavbarBrandProps, type NavbarMobilePlacement } from 'fletchstack-ui';
+import 'fletchstack-ui/navbar.css';
+const navbarStyle: NavbarStyle = { '--fs-navbar-gap': '16px' };
+const navbarBrand: NavbarBrandProps = { children: <a href="/">Home</a> };
+const navbarItem: NavbarItemProps = { children: <button type="button">Theme</button>, mobilePlacement: undefined };
+const navbarDestinations: { href: string; label: string; mobilePlacement?: NavbarMobilePlacement }[] = [{ href: '/docs', label: 'Docs' }, { href: '/support', label: 'Support', mobilePlacement: 'bar' }];
+const navbarProps: NavbarProps = { 'aria-label': 'Primary', defaultOpen: true, menuLabel: 'Browse', style: navbarStyle, children: <><Navbar.Brand {...navbarBrand} /><Navbar.Item {...navbarItem} />{navbarDestinations.map(({ href, label, mobilePlacement }) => <Navbar.Item key={href} mobilePlacement={mobilePlacement}><a href={href}>{label}</a></Navbar.Item>)}</> };
+export const navbar = <Navbar {...navbarProps} ref={createRef<HTMLElement>()} />;
+// @ts-expect-error Placement is an explicit bar or menu choice.
+export const invalidNavbarPlacement = <Navbar.Item mobilePlacement="sidebar">Docs</Navbar.Item>;

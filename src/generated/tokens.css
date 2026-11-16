@@ -625,6 +625,17 @@
   --fs-breadcrumbs-toggle-padding-inline: 4px;
   --fs-breadcrumbs-toggle-border-width: 1px;
   --fs-breadcrumbs-toggle-hover: rgb(232 239 255 / 1);
+  --fs-navbar-surface: rgb(255 255 255 / 1);
+  --fs-navbar-text: rgb(23 35 56 / 1);
+  --fs-navbar-border: rgb(215 220 231 / 1);
+  --fs-navbar-border-width: 1px;
+  --fs-navbar-radius: 6px;
+  --fs-navbar-padding: 16px;
+  --fs-navbar-gap: 24px;
+  --fs-navbar-item-gap: 24px;
+  --fs-navbar-compact-gap: 8px;
+  --fs-navbar-menu-gap: 16px;
+  --fs-navbar-collapse-width: 720px;
 }
 
 [data-theme="luna"] {
@@ -1253,4 +1264,15 @@
   --fs-breadcrumbs-toggle-padding-inline: 4px;
   --fs-breadcrumbs-toggle-border-width: 1px;
   --fs-breadcrumbs-toggle-hover: rgb(41 36 66 / 1);
+  --fs-navbar-surface: rgb(17 19 41 / 1);
+  --fs-navbar-text: rgb(244 239 255 / 1);
+  --fs-navbar-border: rgb(53 54 79 / 1);
+  --fs-navbar-border-width: 1px;
+  --fs-navbar-radius: 6px;
+  --fs-navbar-padding: 16px;
+  --fs-navbar-gap: 24px;
+  --fs-navbar-item-gap: 24px;
+  --fs-navbar-compact-gap: 8px;
+  --fs-navbar-menu-gap: 16px;
+  --fs-navbar-collapse-width: 720px;
 }

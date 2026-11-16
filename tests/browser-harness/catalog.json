@@ -1331,6 +1331,38 @@
     "components-breadcrumbs--overrides": {
       "module": "tests/browser-harness/scenarios/Breadcrumbs.tsx",
       "export": "Overrides"
+    },
+    "components-navbar--playground": {
+      "module": "tests/browser-harness/scenarios/Navbar.tsx",
+      "export": "Playground"
+    },
+    "components-navbar--composition": {
+      "module": "tests/browser-harness/scenarios/Navbar.tsx",
+      "export": "Composition"
+    },
+    "components-navbar--identity": {
+      "module": "tests/browser-harness/scenarios/Navbar.tsx",
+      "export": "Identity"
+    },
+    "components-navbar--all-visible": {
+      "module": "tests/browser-harness/scenarios/Navbar.tsx",
+      "export": "AllVisible"
+    },
+    "components-navbar--controlled": {
+      "module": "tests/browser-harness/scenarios/Navbar.tsx",
+      "export": "Controlled"
+    },
+    "components-navbar--deferred": {
+      "module": "tests/browser-harness/scenarios/Navbar.tsx",
+      "export": "Deferred"
+    },
+    "components-navbar--resources": {
+      "module": "tests/browser-harness/scenarios/Navbar.tsx",
+      "export": "Resources"
+    },
+    "components-navbar--overrides": {
+      "module": "tests/browser-harness/scenarios/Navbar.tsx",
+      "export": "Overrides"
     }
   },
   "suites": [
@@ -2015,6 +2047,20 @@
         "components-breadcrumbs--long-labels",
         "components-breadcrumbs--two-items",
         "components-breadcrumbs--overrides"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/navbar/Navbar.spec.ts",
+      "scenarios": [
+        "components-navbar--playground",
+        "components-navbar--composition",
+        "components-navbar--identity",
+        "components-navbar--all-visible",
+        "components-navbar--controlled",
+        "components-navbar--deferred",
+        "components-navbar--resources",
+        "components-navbar--overrides"
       ]
     }
   ],

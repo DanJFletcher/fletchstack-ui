@@ -745,6 +745,33 @@
       "style": "src/components/breadcrumbs/breadcrumbs.css",
       "category": "Navigation",
       "examples": "src/components/breadcrumbs/stories/breadcrumbs-examples.tsx"
+    },
+    {
+      "slug": "navbar",
+      "entry": "src/components/navbar/index.ts",
+      "exports": {
+        "runtime": [
+          "Navbar"
+        ],
+        "types": [
+          "NavbarProps",
+          "NavbarBrandProps",
+          "NavbarItemProps",
+          "NavbarMobilePlacement",
+          "NavbarStyle"
+        ]
+      },
+      "modules": [
+        "src/components/navbar/Navbar.tsx",
+        "src/components/navbar/NavbarSlots.tsx",
+        "src/components/navbar/types.ts",
+        "src/components/navbar/navbar-children.tsx",
+        "src/components/navbar/useNavbar.ts",
+        "src/components/navbar/useNavbarWidth.ts"
+      ],
+      "style": "src/components/navbar/navbar.css",
+      "category": "Navigation",
+      "examples": "src/components/navbar/stories/navbar-examples.tsx"
     }
   ],
   "internalModules": [

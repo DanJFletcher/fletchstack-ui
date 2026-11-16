@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { Breadcrumbs, Menu, Callout, Table, createTableColumn, Combobox, Rating, Accordion, Chip, MultiSelect, AvatarGroup, Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'Breadcrumbs', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'PlusIcon', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Text', 'TextInput', 'Textarea', 'createTableColumn']);
+assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'Breadcrumbs', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'Icon', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'Navbar', 'PlusIcon', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Text', 'TextInput', 'Textarea', 'createTableColumn']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const contentElement = createElement('div', null, createElement(Heading, { as: 'h1', size: 'page' }, 'Project'), createElement(Text, { tone: 'muted' }, 'Updated yesterday'), createElement(Text, { as: 'span', size: 'small' }, 'Inline'));
 const contentMarkup = renderToString(contentElement);
@@ -235,3 +235,11 @@ assert.match(breadcrumbsMarkup, /<ol/);
 assert.match(breadcrumbsMarkup, /href="\/home"/);
 assert.match(breadcrumbsMarkup, /aria-current="page">Settings/);
 assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/breadcrumbs.css')), 'utf8').includes('--fs-breadcrumbs-gap'));
+
+const { Navbar } = library;
+const navbarMarkup = renderToString(createElement(Navbar, { 'aria-label': 'Primary' }, createElement(Navbar.Brand, null, createElement('a', { href: '/' }, 'Home')), createElement(Navbar.Item, null, createElement('a', { href: '/docs' }, 'Docs')), createElement(Navbar.Item, { mobilePlacement: 'bar' }, createElement('a', { href: '/contact' }, 'Contact'))));
+assert.match(navbarMarkup, /<nav[^>]*aria-label="Primary"/);
+assert.match(navbarMarkup, /href="\/docs"/);
+assert.match(navbarMarkup, /href="\/contact"/);
+assert.match(navbarMarkup, /aria-controls="[^"]+-navbar-panel"/);
+assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/navbar.css')), 'utf8').includes('--fs-navbar-surface'));

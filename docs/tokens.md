@@ -671,6 +671,20 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-tabs-pill-radius` | Tabs pillRadius role approved by the in-view panel design. | dimension |
 | `--fs-tabs-weight` | Tabs weight role approved by the in-view panel design. | fontWeight |
 | `--fs-tabs-font-size` | Tab label typography. | dimension |
+| `--fs-dialog-surface` | Dialog surface for the approved native modal pattern. | color |
+| `--fs-dialog-text` | Dialog text for the approved native modal pattern. | color |
+| `--fs-dialog-muted` | Dialog muted for the approved native modal pattern. | color |
+| `--fs-dialog-border` | Dialog border for the approved native modal pattern. | color |
+| `--fs-dialog-backdrop` | Dialog backdrop for the approved native modal pattern. | color |
+| `--fs-dialog-radius` | Dialog radius for the approved native modal pattern. | dimension |
+| `--fs-dialog-padding` | Dialog padding for the approved native modal pattern. | dimension |
+| `--fs-dialog-gap` | Dialog gap for the approved native modal pattern. | dimension |
+| `--fs-dialog-viewport-inset` | Dialog viewportInset for the approved native modal pattern. | dimension |
+| `--fs-dialog-border-width` | Dialog borderWidth for the approved native modal pattern. | dimension |
+| `--fs-dialog-width-sm` | Dialog widthSm for the approved native modal pattern. | dimension |
+| `--fs-dialog-width-md` | Dialog widthMd for the approved native modal pattern. | dimension |
+| `--fs-dialog-width-lg` | Dialog widthLg for the approved native modal pattern. | dimension |
+| `--fs-dialog-shift` | Dialog shift for the approved native modal pattern. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

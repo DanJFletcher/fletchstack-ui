@@ -49,3 +49,20 @@ test('the Storybook toolbar switches the preview surface and component theme', a
     await expect(surface).toHaveAttribute('data-theme', 'corporate');
   });
 });
+
+test('Dialog documentation waits for explicit activation before opening a modal', async ({ page }) => {
+  await page.goto('/?path=/docs/components-dialog--docs');
+  const preview = page.frameLocator('#storybook-preview-iframe');
+  // Wait for the last inline example, rather than only the early docs heading.
+  await expect(preview.locator('#story--components-dialog--nested').getByRole('button', { name: 'Open parent' })).toBeAttached();
+  await expect(preview.locator('dialog:modal')).toHaveCount(0);
+
+  // The first trigger belongs to the primary interactive playground.
+  const trigger = preview.getByRole('button', { name: 'Open dialog', exact: true }).first();
+  await trigger.click();
+  await expect(preview.locator('dialog:modal')).toHaveCount(1);
+  await expect(preview.getByRole('dialog', { name: 'Confirm the changes?' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(preview.locator('dialog:modal')).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+});

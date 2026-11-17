@@ -1455,6 +1455,26 @@
     "components-tabs--overrides": {
       "module": "tests/browser-harness/scenarios/Tabs.tsx",
       "export": "Overrides"
+    },
+    "components-dialog--playground": {
+      "module": "tests/browser-harness/scenarios/Dialog.tsx",
+      "export": "Playground"
+    },
+    "components-dialog--composition": {
+      "module": "tests/browser-harness/scenarios/Dialog.tsx",
+      "export": "Composition"
+    },
+    "components-dialog--deferred": {
+      "module": "tests/browser-harness/scenarios/Dialog.tsx",
+      "export": "Deferred"
+    },
+    "components-dialog--overrides": {
+      "module": "tests/browser-harness/scenarios/Dialog.tsx",
+      "export": "Overrides"
+    },
+    "components-dialog--nested": {
+      "module": "tests/browser-harness/scenarios/Dialog.tsx",
+      "export": "Nested"
     }
   },
   "suites": [
@@ -2200,6 +2220,17 @@
         "components-tabs--full-width-overflow",
         "components-tabs--nested",
         "components-tabs--overrides"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/dialog/Dialog.spec.ts",
+      "scenarios": [
+        "components-dialog--playground",
+        "components-dialog--composition",
+        "components-dialog--deferred",
+        "components-dialog--overrides",
+        "components-dialog--nested"
       ]
     }
   ],

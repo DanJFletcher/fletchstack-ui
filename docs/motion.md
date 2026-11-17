@@ -56,3 +56,7 @@ Follow the existing [verification policy](../.agents/guidelines/testing-guidelin
 ## Menu panels
 
 Root and child Menu panels fade in with the shared fast duration and enter easing, indicating newly available actions without moving focus targets. Closing unmounts the branch immediately; no exit transition retains keyboard or accessibility-tree content. Live reduced-motion preferences disable the fade. Storybook Full/Reduced overrides include Menu panels and remain preview-only.
+
+## Dialog modal boundary
+
+Dialog uses standard duration with enter/exit easing for fade (default) or optional slide, and supports immediate `motion="none"`. The native modal remains present and accessible during a visual exit; its modal focus and inert background end together when native close completes. Native `method="dialog"` and imperative close bypass the exit. Live reduced motion cancels animation and completes close immediately. This modal-specific boundary differs from hidden disclosure content. Preview overrides affect only CSS; the component follows actual animation completion, including cancellation and rapid reopening.

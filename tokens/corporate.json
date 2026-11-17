@@ -3609,6 +3609,78 @@
           "$description": "Tab label typography."
         }
       }
+    },
+    "dialog": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Dialog surface for the approved native modal pattern."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Dialog text for the approved native modal pattern."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.muted}",
+        "$description": "Dialog muted for the approved native modal pattern."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryDayLine}",
+        "$description": "Dialog border for the approved native modal pattern."
+      },
+      "backdrop": {
+        "$type": "color",
+        "$value": "{primitive.dialogScrim}",
+        "$description": "Dialog backdrop for the approved native modal pattern."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Dialog radius for the approved native modal pattern."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Dialog padding for the approved native modal pattern."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Dialog gap for the approved native modal pattern."
+      },
+      "viewportInset": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Dialog viewportInset for the approved native modal pattern."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Dialog borderWidth for the approved native modal pattern."
+      },
+      "widthSm": {
+        "$type": "dimension",
+        "$value": "{primitive.px400}",
+        "$description": "Dialog widthSm for the approved native modal pattern."
+      },
+      "widthMd": {
+        "$type": "dimension",
+        "$value": "{primitive.px512}",
+        "$description": "Dialog widthMd for the approved native modal pattern."
+      },
+      "widthLg": {
+        "$type": "dimension",
+        "$value": "{primitive.px720}",
+        "$description": "Dialog widthLg for the approved native modal pattern."
+      },
+      "shift": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Dialog shift for the approved native modal pattern."
+      }
     }
   }
 }

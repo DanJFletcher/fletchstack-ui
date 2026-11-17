@@ -1,3 +1,4 @@
+import '../src/components/dialog/dialog.css';
 import '../src/components/tabs/tabs.css';
 import '../src/components/app-content/app-content.css';
 import '../src/components/app-shell/app-shell.css';
@@ -78,7 +79,7 @@ const preview: Preview = {
         'Typography', ['Heading', ['Docs', 'Playground', 'Sizes', 'Levels', 'Composition', 'Both Themes'], 'Text', ['Docs', 'Playground', 'Sizes', 'Tones', 'Inline', 'Both Themes']],
         'Navigation', ['BottomNavigation', ['Docs', 'Playground', 'Composition'], 'Link', ['Docs', 'Playground', 'States', 'Usage', 'Customization', 'Both Themes'], 'Menu', ['Docs', 'Playground', 'Composition'], 'Breadcrumbs', ['Docs', 'Playground', 'Composition'], 'Navbar', ['Docs', 'Playground', 'Composition'], 'Tabs', ['Docs', 'Playground', 'Composition']],
         'Surfaces', ['Card', ['Docs', 'Playground', 'States', 'Interaction States', 'Checked', 'Selected', 'Filled', 'Indeterminate', 'Invalid', 'Disabled', 'Read Only', 'Variants', 'Variants And Sizes', 'Variants And Padding', 'Sizes', 'Composition', 'Content Patterns', 'Group Selection', 'Standalone Primitives', 'Native Children', 'With Footer', 'With Media', 'Reference Layouts', 'Customization', 'Consumer Override', 'Both Themes']], 'Visuals', ['Icon', ['Docs', 'Playground', 'States', 'Interaction States', 'Checked', 'Selected', 'Filled', 'Indeterminate', 'Invalid', 'Disabled', 'Read Only', 'Variants', 'Variants And Sizes', 'Variants And Padding', 'Sizes', 'Composition', 'Content Patterns', 'Group Selection', 'Standalone Primitives', 'Native Children', 'With Footer', 'With Media', 'Reference Layouts', 'Customization', 'Consumer Override', 'Both Themes']],
-       'Data display', ['Table', ['Docs', 'Playground', 'Composition']]],
+       'Data display', ['Table', ['Docs', 'Playground', 'Composition']], 'Overlays', ['Dialog', ['Docs', 'Playground', 'Composition']]],
       'Patterns', ['Forms'],
     ] } },
     a11y: { test: 'error', options: { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] } } },

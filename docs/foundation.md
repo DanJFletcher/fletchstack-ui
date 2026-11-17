@@ -173,3 +173,9 @@ The complementary AppShell pattern uses persistent siblings around one direct Ap
 ## Tabs within one view
 
 The supplied Tabs design approves line and pills variants for related in-view panels. The default line/automatic pattern selects on focus; pills/manual demonstrates Activity focused while Overview remains selected. Both require distinct selected and focus indicators, disabled text, wrapping vertical labels, an independently scrolling horizontal list, and optional full-width distribution. Use text/surface/focus foundations with dedicated Tabs selection, pill, divider and spacing roles in Corporate and Luna. Panels change immediately and remain mounted while hidden; routing and lazy mounting are separate concerns.
+
+## Modal dialog
+
+The requested reference approves a controlled native modal with heading/description/body/footer slots, sm/md/lg widths, close button, Escape by default and configurable backdrop dismissal. The owner-requested library default dismisses on backdrop clicks; callers can opt out. Keep the DOM ancestry for inherited themes; the browser owns top-layer modality, focus containment, inert background and restoration. Surface/text/border roles follow Card, with a dedicated translucent backdrop, 12px radius, 24px content inset and 400/512/720px width roles. The consumer owns triggers and confirmation actions.
+
+Fade is the default entrance/exit; slide adds a small vertical offset and none is immediate. Shared standard enter/exit timing communicates opening/dismissal. Native modality and its focus remain active during the brief visual exit, then close together; native form/imperative close is immediate. This deliberately preserves a modal boundary rather than leaving its focus trapped in semantically hidden content. Live reduced motion removes the animation immediately.

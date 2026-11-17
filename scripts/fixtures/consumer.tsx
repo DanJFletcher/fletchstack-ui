@@ -553,3 +553,13 @@ export const unnamedTabs = <Tabs items={tabsItems} />;
 export const invalidTabsVariant = <Tabs label="Workspace" items={tabsItems} variant="boxed" />;
 // @ts-expect-error Tabs uses item-driven content.
 export const invalidTabsChildren = <Tabs label="Workspace" items={tabsItems}>Content</Tabs>;
+
+import { Dialog, type DialogProps, type DialogStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/dialog.css';
+const dialogStyle: DialogStyle = { '--fs-dialog-radius': '16px' };
+const dialogProps: DialogProps = { open: false, onOpenChange: (open: boolean) => console.log(open), heading: 'Review changes', description: 'Check the draft.', style: dialogStyle, footer: <button>Confirm</button> };
+export const reviewDialog = <Dialog {...dialogProps} ref={createRef<HTMLDialogElement>()} size="sm" motion="slide" headingLevel={3}>Draft content</Dialog>;
+// @ts-expect-error Dialog requires controlled state and change requests.
+export const uncontrolledDialog = <Dialog heading="Review" />;
+// @ts-expect-error Sizes are sm, md and lg.
+export const unsupportedDialogSize = <Dialog {...dialogProps} size="huge" />;

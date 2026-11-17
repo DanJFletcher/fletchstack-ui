@@ -55,7 +55,8 @@
     "./bottom-navigation.css": "./dist/bottom-navigation.css",
     "./app-shell.css": "./dist/app-shell.css",
     "./app-content.css": "./dist/app-content.css",
-    "./tabs.css": "./dist/tabs.css"
+    "./tabs.css": "./dist/tabs.css",
+    "./dialog.css": "./dist/dialog.css"
   },
   "files": [
     "dist",

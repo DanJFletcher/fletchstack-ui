@@ -861,6 +861,28 @@
       "style": "src/components/tabs/tabs.css",
       "category": "Navigation",
       "examples": "src/components/tabs/stories/tabs-examples.tsx"
+    },
+    {
+      "slug": "dialog",
+      "entry": "src/components/dialog/index.ts",
+      "exports": {
+        "runtime": [
+          "Dialog"
+        ],
+        "types": [
+          "DialogProps",
+          "DialogStyle"
+        ]
+      },
+      "modules": [
+        "src/components/dialog/Dialog.tsx",
+        "src/components/dialog/types.ts",
+        "src/components/dialog/useDialogModal.ts",
+        "src/components/dialog/dialog-events.ts"
+      ],
+      "style": "src/components/dialog/dialog.css",
+      "category": "Overlays",
+      "examples": "src/components/dialog/stories/dialog-examples.tsx"
     }
   ],
   "internalModules": [

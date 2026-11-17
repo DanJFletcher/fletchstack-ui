@@ -103,3 +103,6 @@ export type { AppContentProps, AppContentStyle } from './components/app-content/
 
 export { Tabs } from './components/tabs/index.js';
 export type { TabsProps, TabsItem, TabsStyle } from './components/tabs/index.js';
+
+export { Dialog } from './components/dialog/index.js';
+export type { DialogProps, DialogStyle } from './components/dialog/index.js';

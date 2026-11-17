@@ -563,3 +563,14 @@ export const reviewDialog = <Dialog {...dialogProps} ref={createRef<HTMLDialogEl
 export const uncontrolledDialog = <Dialog heading="Review" />;
 // @ts-expect-error Sizes are sm, md and lg.
 export const unsupportedDialogSize = <Dialog {...dialogProps} size="huge" />;
+
+import { Popover, type PopoverProps, type PopoverStyle, type PopoverSide, type PopoverAlign } from 'fletchstack-ui';
+import 'fletchstack-ui/popover.css';
+const popoverStyle: PopoverStyle = { '--fs-popover-radius': '16px' };
+const popoverSide: PopoverSide = 'bottom', popoverAlign: PopoverAlign = 'start';
+const popoverProps: PopoverProps = { triggerLabel: 'Details', side: popoverSide, align: popoverAlign, panelStyle: popoverStyle };
+export const detailPopover = <Popover {...popoverProps} ref={createRef<HTMLDivElement>()}>Details</Popover>;
+// @ts-expect-error A popover requires a named trigger.
+export const unnamedPopover = <Popover />;
+// @ts-expect-error Placement is a physical edge.
+export const invalidPopoverSide = <Popover {...popoverProps} side="diagonal" />;

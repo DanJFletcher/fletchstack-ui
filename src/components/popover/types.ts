@@ -1,0 +1,32 @@
+import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
+import type { ButtonProps } from '../button/Button.js';
+
+export type PopoverStyle = CSSProperties & { [token: `--fs-${string}`]: string | number | undefined };
+export type PopoverSide = 'top' | 'right' | 'bottom' | 'left';
+export type PopoverAlign = 'start' | 'center' | 'end';
+export type PopoverProps = Omit<ComponentPropsWithoutRef<'div'>, 'style' | 'dangerouslySetInnerHTML'> & {
+  triggerLabel: string;
+  trigger?: ReactNode;
+  triggerVariant?: ButtonProps['variant'];
+  triggerSize?: ButtonProps['size'];
+  heading?: ReactNode;
+  description?: ReactNode;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  side?: PopoverSide;
+  align?: PopoverAlign;
+  offset?: number;
+  collisionPadding?: number;
+  matchTriggerWidth?: boolean;
+  panelMaxWidth?: CSSProperties['maxWidth'];
+  autoFocus?: boolean;
+  closeOnEscape?: boolean;
+  closeOnOutsideClick?: boolean;
+  closeOnFocusOutside?: boolean;
+  showCloseButton?: boolean;
+  closeLabel?: string;
+  panelClassName?: string;
+  panelStyle?: PopoverStyle;
+  style?: PopoverStyle;
+};

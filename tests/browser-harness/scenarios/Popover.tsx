@@ -1,0 +1,21 @@
+import { PopoverDemo, PopoverExample, ControlledPopover, EdgePopover, PopoverInDialog, PopoverOverrides } from '../../../src/components/popover/stories/popover-examples';
+import type { PopoverProps } from '../../../src/components/popover/types';
+import type { Scenario } from '../gallery/types';
+import '../../../src/components/popover/popover.css';
+import '../../../src/components/button/button.css';
+import '../../../src/components/icon/icon.css';
+import '../../../src/components/dialog/dialog.css';
+import '../../../src/components/popover/stories/popover.stories.css';
+
+const Playground: Scenario<Partial<PopoverProps>> = {};
+const Composition: Scenario<Partial<PopoverProps>> = { render: () => <PopoverExample /> };
+const Controlled: Scenario<Partial<PopoverProps>> = { render: () => <ControlledPopover /> };
+const Edge: Scenario<Partial<PopoverProps>> = { render: () => <EdgePopover /> };
+const Nested: Scenario<Partial<PopoverProps>> = { render: () => <PopoverInDialog /> };
+const Overrides: Scenario<Partial<PopoverProps>> = { render: () => <PopoverOverrides /> };
+export const component = PopoverDemo;
+export const defaults = {};
+export const scenarios = { Playground, Composition, Controlled, Edge, Nested, Overrides };
+import '../../../src/components/field/field.css';
+import '../../../src/components/text-input/text-input.css';
+import '../../../src/components/link/link.css';

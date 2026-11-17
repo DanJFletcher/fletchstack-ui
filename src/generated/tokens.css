@@ -681,6 +681,17 @@
   --fs-dialog-width-md: 512px;
   --fs-dialog-width-lg: 720px;
   --fs-dialog-shift: 16px;
+  --fs-popover-surface: rgb(255 255 255 / 1);
+  --fs-popover-text: rgb(23 35 56 / 1);
+  --fs-popover-muted: rgb(76 89 109 / 1);
+  --fs-popover-border: rgb(82 100 126 / 1);
+  --fs-popover-radius: 8px;
+  --fs-popover-padding: 16px;
+  --fs-popover-gap: 8px;
+  --fs-popover-width: 400px;
+  --fs-popover-viewport-inset: 8px;
+  --fs-popover-offset: 8px;
+  --fs-popover-border-width: 1px;
 }
 
 [data-theme="luna"] {
@@ -1365,4 +1376,15 @@
   --fs-dialog-width-md: 512px;
   --fs-dialog-width-lg: 720px;
   --fs-dialog-shift: 16px;
+  --fs-popover-surface: rgb(17 19 41 / 1);
+  --fs-popover-text: rgb(244 239 255 / 1);
+  --fs-popover-muted: rgb(184 177 205 / 1);
+  --fs-popover-border: rgb(53 54 79 / 1);
+  --fs-popover-radius: 8px;
+  --fs-popover-padding: 16px;
+  --fs-popover-gap: 8px;
+  --fs-popover-width: 400px;
+  --fs-popover-viewport-inset: 8px;
+  --fs-popover-offset: 8px;
+  --fs-popover-border-width: 1px;
 }

@@ -685,6 +685,17 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-dialog-width-md` | Dialog widthMd for the approved native modal pattern. | dimension |
 | `--fs-dialog-width-lg` | Dialog widthLg for the approved native modal pattern. | dimension |
 | `--fs-dialog-shift` | Dialog shift for the approved native modal pattern. | dimension |
+| `--fs-popover-surface` | Popover surface for anchored non-modal content. | color |
+| `--fs-popover-text` | Popover text for anchored non-modal content. | color |
+| `--fs-popover-muted` | Popover muted for anchored non-modal content. | color |
+| `--fs-popover-border` | Popover border for anchored non-modal content. | color |
+| `--fs-popover-radius` | Popover radius for anchored non-modal content. | dimension |
+| `--fs-popover-padding` | Popover padding for anchored non-modal content. | dimension |
+| `--fs-popover-gap` | Popover gap for anchored non-modal content. | dimension |
+| `--fs-popover-width` | Popover width for anchored non-modal content. | dimension |
+| `--fs-popover-viewport-inset` | Popover viewportInset for anchored non-modal content. | dimension |
+| `--fs-popover-offset` | Popover offset for anchored non-modal content. | dimension |
+| `--fs-popover-border-width` | Popover borderWidth for anchored non-modal content. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

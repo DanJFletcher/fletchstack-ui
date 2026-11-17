@@ -3681,6 +3681,63 @@
         "$value": "{primitive.px16}",
         "$description": "Dialog shift for the approved native modal pattern."
       }
+    },
+    "popover": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Popover surface for anchored non-modal content."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Popover text for anchored non-modal content."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.muted}",
+        "$description": "Popover muted for anchored non-modal content."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.line}",
+        "$description": "Popover border for anchored non-modal content."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Popover radius for anchored non-modal content."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Popover padding for anchored non-modal content."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Popover gap for anchored non-modal content."
+      },
+      "width": {
+        "$type": "dimension",
+        "$value": "{primitive.px400}",
+        "$description": "Popover width for anchored non-modal content."
+      },
+      "viewportInset": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Popover viewportInset for anchored non-modal content."
+      },
+      "offset": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Popover offset for anchored non-modal content."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Popover borderWidth for anchored non-modal content."
+      }
     }
   }
 }

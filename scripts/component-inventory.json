@@ -883,6 +883,32 @@
       "style": "src/components/dialog/dialog.css",
       "category": "Overlays",
       "examples": "src/components/dialog/stories/dialog-examples.tsx"
+    },
+    {
+      "slug": "popover",
+      "entry": "src/components/popover/index.ts",
+      "exports": {
+        "runtime": [
+          "Popover"
+        ],
+        "types": [
+          "PopoverProps",
+          "PopoverStyle",
+          "PopoverSide",
+          "PopoverAlign"
+        ]
+      },
+      "modules": [
+        "src/components/popover/Popover.tsx",
+        "src/components/popover/types.ts",
+        "src/components/popover/position.ts",
+        "src/components/popover/usePopover.ts",
+        "src/components/popover/usePopoverPosition.ts",
+        "src/components/popover/usePopoverDismissal.ts"
+      ],
+      "style": "src/components/popover/popover.css",
+      "category": "Overlays",
+      "examples": "src/components/popover/stories/popover-examples.tsx"
     }
   ],
   "internalModules": [

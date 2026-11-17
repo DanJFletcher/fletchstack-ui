@@ -66,3 +66,16 @@ test('Dialog documentation waits for explicit activation before opening a modal'
   await expect(preview.locator('dialog:modal')).toHaveCount(0);
   await expect(trigger).toBeFocused();
 });
+
+ test('Popover documentation starts closed and opens only its activated example', async ({ page }) => {
+  await page.goto('/?path=/docs/components-popover--docs');
+  const preview = page.frameLocator('#storybook-preview-iframe');
+  await expect(preview.locator('#story--components-popover--scoped-panel-style').getByRole('button', { name: 'Custom panel' })).toBeAttached();
+  await expect(preview.locator('.fs-popover__panel:popover-open')).toHaveCount(0);
+  const trigger = preview.locator('#story--components-popover--playground').getByRole('button', { name: 'Project details' });
+  await trigger.click();
+  await expect(preview.locator('.fs-popover__panel:popover-open')).toHaveCount(1);
+  await page.keyboard.press('Escape');
+  await expect(preview.locator('.fs-popover__panel:popover-open')).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+});

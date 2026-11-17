@@ -18,3 +18,6 @@ html[data-fs-preview-motion="full"] .fs-dialog[data-motion="fade"][data-state="o
 html[data-fs-preview-motion="full"] .fs-dialog[data-motion="fade"][data-state="closing"] { animation: fs-dialog-fade-out var(--fs-motion-duration-standard) var(--fs-motion-easing-exit) both; }
 html[data-fs-preview-motion="full"] .fs-dialog[data-motion="slide"][data-state="open"] { animation: fs-dialog-slide-in var(--fs-motion-duration-standard) var(--fs-motion-easing-enter); }
 html[data-fs-preview-motion="full"] .fs-dialog[data-motion="slide"][data-state="closing"] { animation: fs-dialog-slide-out var(--fs-motion-duration-standard) var(--fs-motion-easing-exit) both; }
+
+html[data-fs-preview-motion="reduced"] .fs-popover__panel { animation: none; }
+html[data-fs-preview-motion="full"] .fs-popover__panel { animation: fs-popover-appear var(--fs-motion-duration-fast) var(--fs-motion-easing-enter); }

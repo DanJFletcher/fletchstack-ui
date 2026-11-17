@@ -106,3 +106,6 @@ export type { TabsProps, TabsItem, TabsStyle } from './components/tabs/index.js'
 
 export { Dialog } from './components/dialog/index.js';
 export type { DialogProps, DialogStyle } from './components/dialog/index.js';
+
+export { Popover } from './components/popover/index.js';
+export type { PopoverProps, PopoverStyle, PopoverSide, PopoverAlign } from './components/popover/index.js';

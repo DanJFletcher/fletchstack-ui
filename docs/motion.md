@@ -60,3 +60,5 @@ Root and child Menu panels fade in with the shared fast duration and enter easin
 ## Dialog modal boundary
 
 Dialog uses standard duration with enter/exit easing for fade (default) or optional slide, and supports immediate `motion="none"`. The native modal remains present and accessible during a visual exit; its modal focus and inert background end together when native close completes. Native `method="dialog"` and imperative close bypass the exit. Live reduced motion cancels animation and completes close immediately. This modal-specific boundary differs from hidden disclosure content. Preview overrides affect only CSS; the component follows actual animation completion, including cancellation and rapid reopening.
+
+Popover uses a fast entrance fade with enter easing. Closed panels leave the top layer and become hidden immediately; reduced motion removes the entrance animation. Position and focus update immediately.

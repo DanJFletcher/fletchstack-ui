@@ -1475,6 +1475,30 @@
     "components-dialog--nested": {
       "module": "tests/browser-harness/scenarios/Dialog.tsx",
       "export": "Nested"
+    },
+    "components-popover--playground": {
+      "module": "tests/browser-harness/scenarios/Popover.tsx",
+      "export": "Playground"
+    },
+    "components-popover--composition": {
+      "module": "tests/browser-harness/scenarios/Popover.tsx",
+      "export": "Composition"
+    },
+    "components-popover--controlled": {
+      "module": "tests/browser-harness/scenarios/Popover.tsx",
+      "export": "Controlled"
+    },
+    "components-popover--edge": {
+      "module": "tests/browser-harness/scenarios/Popover.tsx",
+      "export": "Edge"
+    },
+    "components-popover--nested": {
+      "module": "tests/browser-harness/scenarios/Popover.tsx",
+      "export": "Nested"
+    },
+    "components-popover--overrides": {
+      "module": "tests/browser-harness/scenarios/Popover.tsx",
+      "export": "Overrides"
     }
   },
   "suites": [
@@ -2231,6 +2255,18 @@
         "components-dialog--deferred",
         "components-dialog--overrides",
         "components-dialog--nested"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/popover/Popover.spec.ts",
+      "scenarios": [
+        "components-popover--playground",
+        "components-popover--composition",
+        "components-popover--controlled",
+        "components-popover--edge",
+        "components-popover--nested",
+        "components-popover--overrides"
       ]
     }
   ],

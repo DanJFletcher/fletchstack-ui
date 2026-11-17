@@ -836,6 +836,31 @@
       "style": "src/components/app-content/app-content.css",
       "category": "Layout",
       "examples": "src/components/app-content/stories/app-content-examples.tsx"
+    },
+    {
+      "slug": "tabs",
+      "entry": "src/components/tabs/index.ts",
+      "exports": {
+        "runtime": [
+          "Tabs"
+        ],
+        "types": [
+          "TabsProps",
+          "TabsItem",
+          "TabsStyle"
+        ]
+      },
+      "modules": [
+        "src/components/tabs/Tabs.tsx",
+        "src/components/tabs/types.ts",
+        "src/components/tabs/tabs-policy.ts",
+        "src/components/tabs/tabs-dom.ts",
+        "src/components/tabs/useTabsSelection.ts",
+        "src/components/tabs/useTabsFocus.ts"
+      ],
+      "style": "src/components/tabs/tabs.css",
+      "category": "Navigation",
+      "examples": "src/components/tabs/stories/tabs-examples.tsx"
     }
   ],
   "internalModules": [

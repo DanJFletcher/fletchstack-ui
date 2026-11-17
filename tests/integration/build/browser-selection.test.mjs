@@ -128,6 +128,7 @@ it('selects direct and transitive Button consumers, while excluding unrelated ha
     'tests/browser-harness/specs/spatial/SpatialSystem.spec.ts',
     'tests/browser-harness/specs/spinner/Spinner.spec.ts',
     'tests/browser-harness/specs/stack/Stack.spec.ts', 'tests/browser-harness/specs/switch/Switch.spec.ts',
+    'tests/browser-harness/specs/tabs/Tabs.spec.ts',
     'tests/browser-harness/specs/textarea/Textarea.spec.ts',
     'tests/browser-harness/specs/themes/themes.spec.ts',
     'tests/browser-harness/specs/typography/Typography.spec.ts',

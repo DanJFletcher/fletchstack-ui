@@ -539,3 +539,17 @@ export const applicationShell = <AppShell {...shellProps} ref={createRef<HTMLDiv
 export const unnamedBottomNavigation = <BottomNavigation><BottomNavigation.Item><a href="/">Home</a></BottomNavigation.Item></BottomNavigation>;
 // @ts-expect-error Each destination accepts one element.
 export const multipleBottomLinks = <BottomNavigation.Item><a href="/">Home</a><a href="/help">Help</a></BottomNavigation.Item>;
+
+import { Tabs, type TabsProps, type TabsItem, type TabsStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/tabs.css';
+const tabsItems: readonly TabsItem[] = [{ id: 'overview', label: 'Overview', content: <p>Overview content</p> }, { id: 'activity', label: 'Activity', content: <p>Activity content</p>, disabled: false }];
+const tabsStyle: TabsStyle = { '--fs-tabs-indicator-width': '4px' };
+const tabsProps: TabsProps = { label: 'Workspace', items: tabsItems, defaultValue: 'overview', style: tabsStyle };
+export const workspaceTabs = <Tabs {...tabsProps} ref={createRef<HTMLDivElement>()} />;
+export const controlledTabs = <Tabs label="Controlled workspace" items={tabsItems} value="activity" onValueChange={(id: string) => console.log(id)} variant="pills" orientation="vertical" activationMode="manual" fullWidth />;
+// @ts-expect-error A tablist needs an accessible label.
+export const unnamedTabs = <Tabs items={tabsItems} />;
+// @ts-expect-error Variants are line or pills.
+export const invalidTabsVariant = <Tabs label="Workspace" items={tabsItems} variant="boxed" />;
+// @ts-expect-error Tabs uses item-driven content.
+export const invalidTabsChildren = <Tabs label="Workspace" items={tabsItems}>Content</Tabs>;

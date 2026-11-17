@@ -100,3 +100,7 @@ Owner: `tests/browser-harness/specs/navbar/Navbar.spec.ts`. Both-theme locally s
 | Real router nested Inbox matching, native Help, Back/Forward, programmatic and modified activation | `tests/browser-harness/specs/bottom-navigation/BottomNavigation.spec.ts`; isolated `/navigation-demo/*` consumer |
 | Viewport and parent shell sizing; persistent header/bar; independently scrollable final content; wrapped labels and one safe-area inset | `tests/browser-harness/specs/app-shell/AppShell.spec.ts` |
 | Embedded content avoids nested main; keyboard focus scrolls final link into view | `tests/browser-harness/specs/app-content/AppContent.spec.ts` |
+
+## Tabs
+
+Owner: `tests/browser-harness/specs/tabs/Tabs.spec.ts`. Both-theme automatic/manual activation, independent focus/selection, enabled wrapping, RTL/vertical keys, native panel Tab order, persistent editable state across switching/reordering, delayed controlled requests, dynamic focus repair, nested ownership, overflow without ancestor scrolling, equal-width distribution, reduced motion, scoped tokens and nested theme inheritance. DOM and SSR/hydration contracts independently cover initialization/fallback, unique relationships, native props/refs and hidden content. Storybook owns the sheet and focused render/play/accessibility examples. Installed React 18/19 consumers verify public types, runtime exports, stylesheet distribution and deterministic SSR. Physical-device and screen-reader speech remain manual verification gaps.

@@ -1,0 +1,21 @@
+import { Tabs } from '../../../src/components/tabs/Tabs';
+import type { TabsProps } from '../../../src/components/tabs/types';
+import { ControlledTabs, DynamicTabs, NestedTabs, OverflowTabs, PersistentTabs, TabsExample, TabsOverrides, workspaceItems } from '../../../src/components/tabs/stories/tabs-examples';
+import type { Scenario } from '../gallery/types';
+import '../../../src/components/tabs/tabs.css';
+import '../../../src/components/tabs/stories/tabs.stories.css';
+
+const Playground: Scenario<TabsProps> = {};
+const Composition: Scenario<TabsProps> = { render: () => <TabsExample /> };
+const Manual: Scenario<TabsProps> = { args: { activationMode: 'manual', variant: 'pills' } };
+const Controlled: Scenario<TabsProps> = { render: () => <ControlledTabs /> };
+const Deferred: Scenario<TabsProps> = { render: () => <ControlledTabs deferred /> };
+const Dynamic: Scenario<TabsProps & { remove?: boolean; disable?: boolean; allDisabled?: boolean }> = { render: args => <DynamicTabs remove={Boolean(args['remove'])} disable={Boolean(args['disable'])} allDisabled={Boolean(args['allDisabled'])} /> };
+const Persistent: Scenario<TabsProps> = { render: () => <PersistentTabs /> };
+const Overflow: Scenario<TabsProps> = { render: () => <OverflowTabs /> };
+const FullWidthOverflow: Scenario<TabsProps> = { render: () => <OverflowTabs fullWidth /> };
+const Nested: Scenario<TabsProps> = { render: () => <NestedTabs /> };
+const Overrides: Scenario<TabsProps> = { render: () => <TabsOverrides /> };
+export const component = Tabs;
+export const defaults: TabsProps = { label: 'Workspace', items: workspaceItems };
+export const scenarios = { Playground, Composition, Manual, Controlled, Deferred, Dynamic, Persistent, Overflow, FullWidthOverflow, Nested, Overrides };

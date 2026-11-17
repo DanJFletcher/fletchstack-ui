@@ -655,6 +655,22 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-bottom-navigation-current-weight` | Bottom destination navigation currentWeight approved by the navigation design. | fontWeight |
 | `--fs-bottom-navigation-border-width` | Bottom destination navigation borderWidth approved by the navigation design. | dimension |
 | `--fs-bottom-navigation-font-size` | Bottom destination navigation labelSize approved by the navigation design. | dimension |
+| `--fs-tabs-text` | Tabs text role approved by the in-view panel design. | color |
+| `--fs-tabs-selected-text` | Tabs selectedText role approved by the in-view panel design. | color |
+| `--fs-tabs-disabled-text` | Tabs disabledText role approved by the in-view panel design. | color |
+| `--fs-tabs-indicator` | Tabs indicator role approved by the in-view panel design. | color |
+| `--fs-tabs-pill-surface` | Tabs pillSurface role approved by the in-view panel design. | color |
+| `--fs-tabs-hover-surface` | Tabs hoverSurface role approved by the in-view panel design. | color |
+| `--fs-tabs-divider` | Tabs divider role approved by the in-view panel design. | color |
+| `--fs-tabs-padding-block` | Tabs paddingBlock role approved by the in-view panel design. | dimension |
+| `--fs-tabs-padding-inline` | Tabs paddingInline role approved by the in-view panel design. | dimension |
+| `--fs-tabs-gap` | Tabs gap role approved by the in-view panel design. | dimension |
+| `--fs-tabs-panel-gap` | Tabs panelGap role approved by the in-view panel design. | dimension |
+| `--fs-tabs-indicator-width` | Tabs indicatorWidth role approved by the in-view panel design. | dimension |
+| `--fs-tabs-divider-width` | Tabs dividerWidth role approved by the in-view panel design. | dimension |
+| `--fs-tabs-pill-radius` | Tabs pillRadius role approved by the in-view panel design. | dimension |
+| `--fs-tabs-weight` | Tabs weight role approved by the in-view panel design. | fontWeight |
+| `--fs-tabs-font-size` | Tab label typography. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

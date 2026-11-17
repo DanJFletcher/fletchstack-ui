@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { Breadcrumbs, Menu, Callout, Table, createTableColumn, Combobox, Rating, Accordion, Chip, MultiSelect, AvatarGroup, Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'AppContent', 'AppShell', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'BottomNavigation', 'Breadcrumbs', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'HelpIcon', 'HomeIcon', 'Icon', 'InboxIcon', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'Navbar', 'PlusIcon', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Text', 'TextInput', 'Textarea', 'createTableColumn']);
+assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'AppContent', 'AppShell', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'BottomNavigation', 'Breadcrumbs', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'HelpIcon', 'HomeIcon', 'Icon', 'InboxIcon', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'Navbar', 'PlusIcon', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Tabs', 'Text', 'TextInput', 'Textarea', 'createTableColumn']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const contentElement = createElement('div', null, createElement(Heading, { as: 'h1', size: 'page' }, 'Project'), createElement(Text, { tone: 'muted' }, 'Updated yesterday'), createElement(Text, { as: 'span', size: 'small' }, 'Inline'));
 const contentMarkup = renderToString(contentElement);
@@ -254,3 +254,15 @@ assert.match(renderToString(createElement(InboxIcon)), /aria-hidden="true"/);
 for (const slug of ['bottom-navigation', 'app-shell', 'app-content']) {
   assert.ok(readFileSync(new URL(import.meta.resolve(`fletchstack-ui/${slug}.css`)), 'utf8').includes(`.fs-${slug}`));
 }
+
+const { Tabs } = library;
+const tabsElement = createElement(Tabs, { label: 'Workspace', defaultValue: 'activity', items: [
+  { id: 'overview', label: 'Overview', content: 'Overview content' },
+  { id: 'activity', label: 'Activity', content: 'Activity content' },
+] });
+const tabsMarkup = renderToString(tabsElement);
+assert.equal(tabsMarkup, renderToString(tabsElement));
+assert.match(tabsMarkup, /role="tablist" aria-label="Workspace"/);
+assert.match(tabsMarkup, /aria-controls="[^"]+-activity-panel" aria-selected="true"/);
+assert.match(tabsMarkup, /hidden="" tabindex="-1"/);
+assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/tabs.css')), 'utf8').includes('--fs-tabs-indicator'));

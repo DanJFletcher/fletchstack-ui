@@ -3525,6 +3525,90 @@
           "$description": "Bottom destination navigation labelSize approved by the navigation design."
         }
       }
+    },
+    "tabs": {
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Tabs text role approved by the in-view panel design."
+      },
+      "selectedText": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Tabs selectedText role approved by the in-view panel design."
+      },
+      "disabledText": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Tabs disabledText role approved by the in-view panel design."
+      },
+      "indicator": {
+        "$type": "color",
+        "$value": "{primitive.lavender}",
+        "$description": "Tabs indicator role approved by the in-view panel design."
+      },
+      "pillSurface": {
+        "$type": "color",
+        "$value": "{primitive.violet}",
+        "$description": "Tabs pillSurface role approved by the in-view panel design."
+      },
+      "hoverSurface": {
+        "$type": "color",
+        "$value": "{primitive.violet}",
+        "$description": "Tabs hoverSurface role approved by the in-view panel design."
+      },
+      "divider": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightLine}",
+        "$description": "Tabs divider role approved by the in-view panel design."
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Tabs paddingBlock role approved by the in-view panel design."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Tabs paddingInline role approved by the in-view panel design."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Tabs gap role approved by the in-view panel design."
+      },
+      "panelGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Tabs panelGap role approved by the in-view panel design."
+      },
+      "indicatorWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px3}",
+        "$description": "Tabs indicatorWidth role approved by the in-view panel design."
+      },
+      "dividerWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Tabs dividerWidth role approved by the in-view panel design."
+      },
+      "pillRadius": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Tabs pillRadius role approved by the in-view panel design."
+      },
+      "weight": {
+        "$type": "fontWeight",
+        "$value": "{primitive.semibold}",
+        "$description": "Tabs weight role approved by the in-view panel design."
+      },
+      "font": {
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Tab label typography."
+        }
+      }
     }
   }
 }

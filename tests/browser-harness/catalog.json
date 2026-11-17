@@ -1411,6 +1411,50 @@
     "components-app-content--playground": {
       "module": "tests/browser-harness/scenarios/AppContent.tsx",
       "export": "Playground"
+    },
+    "components-tabs--playground": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Playground"
+    },
+    "components-tabs--composition": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Composition"
+    },
+    "components-tabs--manual": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Manual"
+    },
+    "components-tabs--controlled": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Controlled"
+    },
+    "components-tabs--deferred": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Deferred"
+    },
+    "components-tabs--dynamic": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Dynamic"
+    },
+    "components-tabs--persistent": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Persistent"
+    },
+    "components-tabs--overflow": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Overflow"
+    },
+    "components-tabs--full-width-overflow": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "FullWidthOverflow"
+    },
+    "components-tabs--nested": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Nested"
+    },
+    "components-tabs--overrides": {
+      "module": "tests/browser-harness/scenarios/Tabs.tsx",
+      "export": "Overrides"
     }
   },
   "suites": [
@@ -2139,6 +2183,23 @@
       "file": "tests/browser-harness/specs/app-content/AppContent.spec.ts",
       "scenarios": [
         "components-app-content--playground"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/tabs/Tabs.spec.ts",
+      "scenarios": [
+        "components-tabs--playground",
+        "components-tabs--composition",
+        "components-tabs--manual",
+        "components-tabs--controlled",
+        "components-tabs--deferred",
+        "components-tabs--dynamic",
+        "components-tabs--persistent",
+        "components-tabs--overflow",
+        "components-tabs--full-width-overflow",
+        "components-tabs--nested",
+        "components-tabs--overrides"
       ]
     }
   ],

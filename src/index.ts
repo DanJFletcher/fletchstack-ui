@@ -100,3 +100,6 @@ export { AppShell } from './components/app-shell/index.js';
 export type { AppShellProps, AppShellStyle } from './components/app-shell/index.js';
 export { AppContent } from './components/app-content/index.js';
 export type { AppContentProps, AppContentStyle } from './components/app-content/index.js';
+
+export { Tabs } from './components/tabs/index.js';
+export type { TabsProps, TabsItem, TabsStyle } from './components/tabs/index.js';

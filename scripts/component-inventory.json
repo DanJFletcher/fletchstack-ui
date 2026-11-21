@@ -1012,6 +1012,29 @@
       "style": "src/components/data-table/data-table.css",
       "category": "Data display",
       "examples": "src/components/data-table/stories/data-table-examples.tsx"
+    },
+    {
+      "slug": "kbd",
+      "entry": "src/components/kbd/index.ts",
+      "exports": {
+        "runtime": [
+          "Kbd",
+          "KbdGroup"
+        ],
+        "types": [
+          "KbdProps",
+          "KbdStyle",
+          "KbdGroupProps",
+          "KbdGroupStyle"
+        ]
+      },
+      "modules": [
+        "src/components/kbd/Kbd.tsx",
+        "src/components/kbd/KbdGroup.tsx"
+      ],
+      "style": "src/components/kbd/kbd.css",
+      "category": "Typography",
+      "examples": "src/components/kbd/stories/kbd-examples.tsx"
     }
   ],
   "internalModules": [

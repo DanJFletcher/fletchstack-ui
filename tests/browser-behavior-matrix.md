@@ -128,3 +128,7 @@ Owner: [BounceCards browser suite](./browser-harness/specs/bounce-cards/BounceCa
 ## DataTable
 
 Owner: [DataTable browser tests](browser-harness/specs/data-table/DataTable.spec.ts). Both themes cover filter/sort/page ordering, mixed current-page selection and retained off-page keys, column visibility independent of search, controlled requests, record actions, loading/retry, another dataset and narrow enlarged layouts.
+
+## Kbd
+
+Owner: [Kbd browser tests](browser-harness/specs/kbd/Kbd.spec.ts). Verify both-theme keycap paint, native passive keyboard flow, surrounding button activation, tooltip and search descriptions, scoped overrides, explicit RTL ordering, hidden content, forced colors and enlarged narrow layouts.

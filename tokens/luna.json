@@ -3976,6 +3976,90 @@
         "$value": "{primitive.navy}",
         "$description": "BounceCards shadowColor."
       }
+    },
+    "kbd": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightPanel}",
+        "$description": "Keyboard keycap surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Keyboard input text and icons."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightLine}",
+        "$description": "Keycap boundary and subtle bottom edge."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Keycap boundary thickness."
+      },
+      "shadowOffset": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Static bottom keycap edge; no animation."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Keycap corner radius."
+      },
+      "minimumSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Minimum keycap dimensions; content can grow."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Horizontal keycap padding."
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px0}",
+        "$description": "Vertical keycap padding."
+      },
+      "iconSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Artwork within a keycap."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Related content within one keycap."
+      },
+      "groupGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Spacing between keys and separators in a shortcut."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.mono}",
+          "$description": "Keyboard keycap font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.extraSmall}",
+          "$description": "Keyboard hint size; follows user text preferences."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.semibold}",
+          "$description": "Keyboard label weight."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Unitless keyboard hint line height."
+        }
+      }
     }
   }
 }

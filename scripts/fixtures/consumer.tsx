@@ -634,3 +634,18 @@ export const invalidDataColumn = dataColumn({ id: 'missing', header: 'Missing', 
 export const invalidDataCell = dataColumn({ id: 'amount', header: 'Amount', accessor: 'amount', cell: ({ value }) => value.toUpperCase() });
 // @ts-expect-error Pagination indices are numeric.
 export const invalidDataPage = <DataTable {...dataProps} paginationState={{ pageIndex: 'first', pageSize: 3 }} />;
+
+import { Kbd, KbdGroup, type KbdProps, type KbdStyle, type KbdGroupProps, type KbdGroupStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/kbd.css';
+const keyStyle: KbdStyle = { '--fs-kbd-radius': '0px' };
+const keyProps: KbdProps = { children: 'Ctrl', style: keyStyle, title: 'Control' };
+const shortcutStyle: KbdGroupStyle = { '--fs-kbd-group-gap': '8px' };
+const shortcutProps: KbdGroupProps = { children: <><Kbd {...keyProps} /><Kbd>K</Kbd></>, style: shortcutStyle, dir: 'ltr' };
+export const keyboardHint = <KbdGroup {...shortcutProps} ref={createRef<HTMLElement>()} />;
+export const enterKey = <Kbd ref={createRef<HTMLElement>()}>Enter</Kbd>;
+// @ts-expect-error Keys require caller-supplied content.
+export const emptyKey = <Kbd />;
+// @ts-expect-error Native keyboard input does not expose a disabled control state.
+export const disabledKey = <Kbd disabled>Enter</Kbd>;
+// @ts-expect-error Group is a native keyboard element, not a button.
+export const buttonGroupHint = <KbdGroup type="button"><Kbd>Ctrl</Kbd></KbdGroup>;

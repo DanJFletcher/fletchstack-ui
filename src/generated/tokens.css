@@ -738,6 +738,22 @@
   --fs-bounce-cards-shadow-active-offset: 16px;
   --fs-bounce-cards-shadow-active-blur: 32px;
   --fs-bounce-cards-shadow-color: rgb(23 35 56 / 1);
+  --fs-kbd-surface: rgb(228 232 239 / 1);
+  --fs-kbd-text: rgb(23 35 56 / 1);
+  --fs-kbd-border: rgb(215 220 231 / 1);
+  --fs-kbd-border-width: 1px;
+  --fs-kbd-shadow-offset: 1px;
+  --fs-kbd-radius: 4px;
+  --fs-kbd-minimum-size: 20px;
+  --fs-kbd-padding-inline: 4px;
+  --fs-kbd-padding-block: 0px;
+  --fs-kbd-icon-size: 12px;
+  --fs-kbd-gap: 4px;
+  --fs-kbd-group-gap: 4px;
+  --fs-kbd-font-family: "ui-monospace", "SFMono-Regular", "Consolas", monospace;
+  --fs-kbd-font-size: 0.75rem;
+  --fs-kbd-font-weight: 600;
+  --fs-kbd-font-line-height: 1.5;
 }
 
 [data-theme="luna"] {
@@ -1479,4 +1495,20 @@
   --fs-bounce-cards-shadow-active-offset: 16px;
   --fs-bounce-cards-shadow-active-blur: 32px;
   --fs-bounce-cards-shadow-color: rgb(17 19 41 / 1);
+  --fs-kbd-surface: rgb(26 27 52 / 1);
+  --fs-kbd-text: rgb(244 239 255 / 1);
+  --fs-kbd-border: rgb(53 54 79 / 1);
+  --fs-kbd-border-width: 1px;
+  --fs-kbd-shadow-offset: 1px;
+  --fs-kbd-radius: 4px;
+  --fs-kbd-minimum-size: 20px;
+  --fs-kbd-padding-inline: 4px;
+  --fs-kbd-padding-block: 0px;
+  --fs-kbd-icon-size: 12px;
+  --fs-kbd-gap: 4px;
+  --fs-kbd-group-gap: 4px;
+  --fs-kbd-font-family: "ui-monospace", "SFMono-Regular", "Consolas", monospace;
+  --fs-kbd-font-size: 0.75rem;
+  --fs-kbd-font-weight: 600;
+  --fs-kbd-font-line-height: 1.5;
 }

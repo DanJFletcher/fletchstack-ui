@@ -742,6 +742,22 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-bounce-cards-shadow-active-offset` | BounceCards shadowActiveOffset. | dimension |
 | `--fs-bounce-cards-shadow-active-blur` | BounceCards shadowActiveBlur. | dimension |
 | `--fs-bounce-cards-shadow-color` | BounceCards shadowColor. | color |
+| `--fs-kbd-surface` | Keyboard keycap surface. | color |
+| `--fs-kbd-text` | Keyboard input text and icons. | color |
+| `--fs-kbd-border` | Keycap boundary and subtle bottom edge. | color |
+| `--fs-kbd-border-width` | Keycap boundary thickness. | dimension |
+| `--fs-kbd-shadow-offset` | Static bottom keycap edge; no animation. | dimension |
+| `--fs-kbd-radius` | Keycap corner radius. | dimension |
+| `--fs-kbd-minimum-size` | Minimum keycap dimensions; content can grow. | dimension |
+| `--fs-kbd-padding-inline` | Horizontal keycap padding. | dimension |
+| `--fs-kbd-padding-block` | Vertical keycap padding. | dimension |
+| `--fs-kbd-icon-size` | Artwork within a keycap. | dimension |
+| `--fs-kbd-gap` | Related content within one keycap. | dimension |
+| `--fs-kbd-group-gap` | Spacing between keys and separators in a shortcut. | dimension |
+| `--fs-kbd-font-family` | Keyboard keycap font family. | fontFamily |
+| `--fs-kbd-font-size` | Keyboard hint size; follows user text preferences. | dimension |
+| `--fs-kbd-font-weight` | Keyboard label weight. | fontWeight |
+| `--fs-kbd-font-line-height` | Unitless keyboard hint line height. | number |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

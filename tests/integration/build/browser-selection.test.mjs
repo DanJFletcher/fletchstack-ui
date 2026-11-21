@@ -123,6 +123,7 @@ it('selects direct and transitive Button consumers, while excluding unrelated ha
     'tests/browser-harness/specs/code-block/CodeBlock.spec.ts', 'tests/browser-harness/specs/container/Container.spec.ts',
     'tests/browser-harness/specs/dialog/Dialog.spec.ts',
     'tests/browser-harness/specs/harness/lifecycle.spec.ts', 'tests/browser-harness/specs/icon/Icon.spec.ts',
+    'tests/browser-harness/specs/kbd/Kbd.spec.ts',
     'tests/browser-harness/specs/popover/Popover.spec.ts',
     'tests/browser-harness/specs/radio/Radio.spec.ts',
     'tests/browser-harness/specs/section/Section.spec.ts',
@@ -162,7 +163,7 @@ it.each([
   ['src/components/container/Container.tsx', ['aspect-ratio/AspectRatio', 'button-group/ButtonGroup', 'cluster/Cluster', 'container/Container', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack', 'typography/Typography']],
   ['src/components/separator/separator.css', ['separator/Separator']],
   ['src/components/checkbox/checkbox.css', ['checkbox/Checkbox', 'field/Field', 'form-group/FormGroup', 'section/Section', 'simple-grid/SimpleGrid', 'stack/Stack', 'table/Table']],
-  ['src/components/text-input/TextInput.tsx', ['cluster/Cluster', 'container/Container', 'dialog/Dialog', 'field/Field', 'form-group/FormGroup', 'popover/Popover', 'stack/Stack', 'table/Table', 'text-input/TextInput']],
+  ['src/components/text-input/TextInput.tsx', ['cluster/Cluster', 'container/Container', 'dialog/Dialog', 'field/Field', 'form-group/FormGroup', 'kbd/Kbd', 'popover/Popover', 'stack/Stack', 'table/Table', 'text-input/TextInput']],
   ['src/components/form-group/FormGroup.tsx', ['form-group/FormGroup', 'radio/Radio', 'stack/Stack', 'switch/Switch']],
   ['src/components/badge/badge.css', ['badge/Badge', 'cluster/Cluster', 'simple-grid/SimpleGrid', 'table/Table']],
   ['src/components/spinner/Spinner.tsx', ['combobox/Combobox', 'spinner/Spinner', 'table/Table']],
@@ -187,7 +188,7 @@ it.each([
   ['src/components/icon/named/CheckIcon.tsx', ['badge/Badge', 'checkbox/Checkbox', 'chip/Chip', 'field/Field', 'form-group/FormGroup', 'icon/Icon', 'icon/IconGallery', 'section/Section', 'simple-grid/SimpleGrid', 'spatial/SpatialSystem', 'stack/Stack', 'table/Table']],
   ['src/components/link/Link.tsx', ['dialog/Dialog', 'link/Link', 'popover/Popover', 'typography/Typography']],
   ['src/components/link/link.css', ['dialog/Dialog', 'link/Link', 'popover/Popover', 'typography/Typography']],
-  ['src/components/icon/named/ArrowRightIcon.tsx', ['icon/Icon', 'icon/IconGallery', 'link/Link']],
+  ['src/components/icon/named/ArrowRightIcon.tsx', ['icon/Icon', 'icon/IconGallery', 'kbd/Kbd', 'link/Link']],
   ['src/components/typography/stories/typography.stories.css', ['typography/Typography']],
 ])('includes composed consumers for %s without selecting unrelated harness families', (path, consumers) => {
   const ownership = repositoryOwnership;

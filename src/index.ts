@@ -121,3 +121,6 @@ export type { BounceCardsProps, BounceCardsStyle, BounceCardsImage, BounceCardsP
 
 export { DataTable } from './components/data-table/index.js';
 export type { DataTableProps, DataTableStyle, DataTablePagination, DataTableFilters, DataTableFilterValue, DataTableColumnVisibility } from './components/data-table/index.js';
+
+export { Kbd, KbdGroup } from './components/kbd/index.js';
+export type { KbdProps, KbdStyle, KbdGroupProps, KbdGroupStyle } from './components/kbd/index.js';

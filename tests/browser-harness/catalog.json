@@ -1615,6 +1615,50 @@
     "components-data-table--retry": {
       "module": "tests/browser-harness/scenarios/DataTable.tsx",
       "export": "Retry"
+    },
+    "components-kbd--playground": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Playground"
+    },
+    "components-kbd--composition": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Composition"
+    },
+    "components-kbd--button": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Button"
+    },
+    "components-kbd--tooltip": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Tooltip"
+    },
+    "components-kbd--search": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Search"
+    },
+    "components-kbd--overrides": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Overrides"
+    },
+    "components-kbd--flow": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Flow"
+    },
+    "components-kbd--rtl": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Rtl"
+    },
+    "components-kbd--long": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Long"
+    },
+    "components-kbd--wrapping": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "Wrapping"
+    },
+    "components-kbd--hidden-group": {
+      "module": "tests/browser-harness/scenarios/Kbd.tsx",
+      "export": "HiddenGroup"
     }
   },
   "suites": [
@@ -2436,6 +2480,23 @@
         "components-data-table--controlled",
         "components-data-table--stock",
         "components-data-table--retry"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/kbd/Kbd.spec.ts",
+      "scenarios": [
+        "components-kbd--playground",
+        "components-kbd--composition",
+        "components-kbd--button",
+        "components-kbd--tooltip",
+        "components-kbd--search",
+        "components-kbd--overrides",
+        "components-kbd--flow",
+        "components-kbd--rtl",
+        "components-kbd--long",
+        "components-kbd--wrapping",
+        "components-kbd--hidden-group"
       ]
     }
   ],

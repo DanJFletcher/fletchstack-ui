@@ -33,6 +33,13 @@ function Controlled() {
  * Run the same observable menu contracts under client rendering and server hydration.
  **/
 export function menuContracts(mount: (element: ReactElement) => unknown) {
+  it('supports decorative trigger content with an independent accessible name', () => {
+    // arrange
+    // act
+    mount(<Menu triggerLabel="Actions for record one" menuLabel="Record one" trigger={<span aria-hidden="true">…</span>} items={[]} />);
+    // assert
+    expect(screen.getByRole('button', { name: 'Actions for record one' })).toHaveTextContent('…');
+  });
   it('starts collapsed behind a named native menu button', () => {
     // arrange
     // act

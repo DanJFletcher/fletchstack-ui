@@ -59,3 +59,25 @@ test('duration replay supports native keyboard activation without moving focus',
   await expect(replay).toHaveAttribute('aria-pressed', 'false');
   await expect(replay).toBeFocused();
 });
+
+for (const mode of ['system', 'reduced', 'full'] as const) {
+  test(`carousel respects ${mode} motion preview without enabling autoplay`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(`/?path=/story/components-carousel--auto-play&globals=motion:${mode}`);
+    const preview = page.frameLocator('#storybook-preview-iframe');
+    await expect(preview.getByRole('button', { name: 'Start slide rotation' })).toBeDisabled();
+    await expect(preview.locator('.fs-carousel__slide').first()).toHaveCSS('transition-duration', mode === 'full' ? '0.16s' : '0s');
+  });
+}
+
+for (const mode of ['system', 'reduced', 'full'] as const) {
+  test(`photo fan honors ${mode} Storybook motion preview`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(`/?path=/story/components-bounce-cards--playground&globals=motion:${mode}`);
+    const preview = page.frameLocator('#storybook-preview-iframe');
+    await expect(preview.locator('.fs-bounce-cards__card').first()).toHaveCSS('animation-name', mode === 'full' ? 'fs-bounce-cards-enter' : 'none');
+    await expect(preview.locator('.fs-bounce-cards__item').first()).toHaveCSS('transition-duration', mode === 'full' ? '0.32s' : '0s');
+    await preview.getByRole('button', { name: 'White lilies with red stamens' }).focus();
+    await expect(preview.locator('.fs-bounce-cards__card').first()).toHaveCSS('animation-name', 'none');
+  });
+}

@@ -79,3 +79,17 @@ test('Dialog documentation waits for explicit activation before opening a modal'
   await expect(preview.locator('.fs-popover__panel:popover-open')).toHaveCount(0);
   await expect(trigger).toBeFocused();
 });
+
+test('Tooltip documentation starts closed and describes only the focused trigger', async ({ page }) => {
+  await page.goto('/?path=/docs/components-tooltip--docs');
+  const preview = page.frameLocator('#storybook-preview-iframe');
+  await expect(preview.locator('#story--components-tooltip--long-content').getByRole('button', { name: 'More information' })).toBeAttached();
+  await expect(preview.locator('.fs-tooltip__content:popover-open')).toHaveCount(0);
+  const trigger = preview.locator('#story--components-tooltip--playground').getByRole('button', { name: 'More information' });
+  await trigger.focus();
+  await expect(preview.locator('.fs-tooltip__content:popover-open')).toHaveCount(1);
+  await expect(trigger).toHaveAccessibleDescription('Brief contextual help appears on hover or keyboard focus.');
+  await page.keyboard.press('Escape');
+  await expect(preview.locator('.fs-tooltip__content:popover-open')).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+});

@@ -574,3 +574,63 @@ export const detailPopover = <Popover {...popoverProps} ref={createRef<HTMLDivEl
 export const unnamedPopover = <Popover />;
 // @ts-expect-error Placement is a physical edge.
 export const invalidPopoverSide = <Popover {...popoverProps} side="diagonal" />;
+
+import { Tooltip, type TooltipProps, type TooltipStyle, type TooltipPlacement } from 'fletchstack-ui';
+import 'fletchstack-ui/tooltip.css';
+const tooltipStyle: TooltipStyle = { '--fs-tooltip-radius': '12px' };
+const tooltipPlacement: TooltipPlacement = 'top';
+const tooltipProps: TooltipProps = { content: 'Supplementary help', children: <button>Project help</button>, placement: tooltipPlacement, style: tooltipStyle };
+export const projectTooltip = <Tooltip {...tooltipProps} ref={createRef<HTMLSpanElement>()} />;
+// @ts-expect-error Tooltip requires a supplementary description.
+export const unnamedTooltip = <Tooltip><button>Help</button></Tooltip>;
+// @ts-expect-error Tooltip requires one element, not a string trigger.
+export const stringTooltip = <Tooltip content="Help">Help</Tooltip>;
+// @ts-expect-error Placement must be one of the supported edges.
+export const diagonalTooltip = <Tooltip {...tooltipProps} placement="diagonal" />;
+
+import { Carousel, type CarouselProps, type CarouselStyle, type CarouselSlide } from 'fletchstack-ui';
+import 'fletchstack-ui/carousel.css';
+const carouselSlides: readonly CarouselSlide[] = [{ id: 'first', content: <p>First story</p>, label: 'First' }];
+const carouselStyle: CarouselStyle = { '--fs-carousel-radius': '24px' };
+const carouselProps: CarouselProps = { label: 'Stories', slides: carouselSlides, style: carouselStyle };
+export const storiesCarousel = <Carousel {...carouselProps} ref={createRef<HTMLElement>()} index={0} onIndexChange={(index: number) => console.log(index)} />;
+// @ts-expect-error Carousel requires an accessible name.
+export const unnamedCarousel = <Carousel slides={carouselSlides} />;
+// @ts-expect-error Slides own content.
+export const invalidCarouselChildren = <Carousel {...carouselProps}>Content</Carousel>;
+// @ts-expect-error Only approved variants are supported.
+export const invalidCarouselVariant = <Carousel {...carouselProps} variant="dark" />;
+
+import { BounceCards, type BounceCardsProps, type BounceCardsStyle, type BounceCardsImage, type BounceCardsPosition } from 'fletchstack-ui';
+import 'fletchstack-ui/bounce-cards.css';
+const bounceImages: readonly BounceCardsImage[] = [{ id: 'landscape', src: '/landscape.jpg', alt: 'Mountain landscape' }];
+const bounceStyle: BounceCardsStyle = { '--fs-bounce-cards-radius': '8px' };
+const bouncePositions: readonly BounceCardsPosition[] = [{ x: 0, y: 0, rotation: 4 }];
+const bounceProps: BounceCardsProps = { images: bounceImages, style: bounceStyle, positions: bouncePositions };
+export const photoFan = <BounceCards {...bounceProps} ref={createRef<HTMLDivElement>()} onCardClick={(index, image) => console.log(index, image.src)} />;
+// @ts-expect-error Images are required.
+export const invalidBounceImages = <BounceCards />;
+// @ts-expect-error Card content comes from images.
+export const invalidBounceChildren = <BounceCards {...bounceProps}>Content</BounceCards>;
+// @ts-expect-error Position geometry is numeric.
+export const invalidBouncePosition = <BounceCards {...bounceProps} positions={[{ x: '20px', y: 0 }]} />;
+
+import { DataTable, type DataTableProps, type DataTablePagination, type DataTableFilters, type DataTableColumnVisibility, type DataTableFilterValue, type DataTableStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/data-table.css';
+const dataPage: DataTablePagination = { pageIndex: 0, pageSize: 3 };
+const dataFilterValue: DataTableFilterValue = true;
+const dataFilters: DataTableFilters = { enabled: dataFilterValue };
+const dataVisibility: DataTableColumnVisibility = { email: true };
+const dataStyle: DataTableStyle = { '--fs-table-radius': '8px' };
+const dataColumn = createTableColumn<{ id: string; amount: number }>();
+const dataColumns = [dataColumn({ id: 'amount', header: 'Amount', accessor: 'amount', hideable: false, filterOptions: [{ label: 'Ten', value: 10 }], cell: ({ value, row }) => `${row.id}: ${value.toFixed(2)}` })];
+const dataProps: DataTableProps<{ id: string; amount: number }> = { caption: 'Payments', rows: [{ id: 'payment-1', amount: 10 }], columns: dataColumns, getRowKey: row => row.id, filters: dataFilters, columnVisibility: dataVisibility, style: dataStyle };
+export const paginatedPayments = <DataTable {...dataProps} pagination defaultPagination={dataPage} />;
+// @ts-expect-error A semantic table needs a name.
+export const unnamedDataTable = <DataTable rows={[]} columns={dataColumns} getRowKey={() => 'id'} />;
+// @ts-expect-error Accessors use the inferred row type.
+export const invalidDataColumn = dataColumn({ id: 'missing', header: 'Missing', accessor: 'missing' });
+// @ts-expect-error Cell values retain the accessor's numeric type.
+export const invalidDataCell = dataColumn({ id: 'amount', header: 'Amount', accessor: 'amount', cell: ({ value }) => value.toUpperCase() });
+// @ts-expect-error Pagination indices are numeric.
+export const invalidDataPage = <DataTable {...dataProps} paginationState={{ pageIndex: 'first', pageSize: 3 }} />;

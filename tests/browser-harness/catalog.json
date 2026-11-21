@@ -1499,6 +1499,122 @@
     "components-popover--overrides": {
       "module": "tests/browser-harness/scenarios/Popover.tsx",
       "export": "Overrides"
+    },
+    "components-tooltip--playground": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Playground"
+    },
+    "components-tooltip--composition": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Composition"
+    },
+    "components-tooltip--placements": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Placements"
+    },
+    "components-tooltip--described": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Described"
+    },
+    "components-tooltip--icon": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Icon"
+    },
+    "components-tooltip--link": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Link"
+    },
+    "components-tooltip--clipped": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Clipped"
+    },
+    "components-tooltip--scrollable": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Scrollable"
+    },
+    "components-tooltip--overrides": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Overrides"
+    },
+    "components-tooltip--popover": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Popover"
+    },
+    "components-tooltip--dialog": {
+      "module": "tests/browser-harness/scenarios/Tooltip.tsx",
+      "export": "Dialog"
+    },
+    "components-carousel--playground": {
+      "module": "tests/browser-harness/scenarios/Carousel.tsx",
+      "export": "Playground"
+    },
+    "components-carousel--composition": {
+      "module": "tests/browser-harness/scenarios/Carousel.tsx",
+      "export": "Composition"
+    },
+    "components-carousel--controlled": {
+      "module": "tests/browser-harness/scenarios/Carousel.tsx",
+      "export": "Controlled"
+    },
+    "components-carousel--many": {
+      "module": "tests/browser-harness/scenarios/Carousel.tsx",
+      "export": "Many"
+    },
+    "components-carousel--reserved": {
+      "module": "tests/browser-harness/scenarios/Carousel.tsx",
+      "export": "Reserved"
+    },
+    "components-carousel--overrides": {
+      "module": "tests/browser-harness/scenarios/Carousel.tsx",
+      "export": "Overrides"
+    },
+    "components-bounce-cards--playground": {
+      "module": "tests/browser-harness/scenarios/BounceCards.tsx",
+      "export": "Playground"
+    },
+    "components-bounce-cards--composition": {
+      "module": "tests/browser-harness/scenarios/BounceCards.tsx",
+      "export": "Composition"
+    },
+    "components-bounce-cards--passive": {
+      "module": "tests/browser-harness/scenarios/BounceCards.tsx",
+      "export": "Passive"
+    },
+    "components-bounce-cards--dense": {
+      "module": "tests/browser-harness/scenarios/BounceCards.tsx",
+      "export": "Dense"
+    },
+    "components-bounce-cards--overrides": {
+      "module": "tests/browser-harness/scenarios/BounceCards.tsx",
+      "export": "Overrides"
+    },
+    "components-bounce-cards--reordered": {
+      "module": "tests/browser-harness/scenarios/BounceCards.tsx",
+      "export": "Reordered"
+    },
+    "components-bounce-cards--failed": {
+      "module": "tests/browser-harness/scenarios/BounceCards.tsx",
+      "export": "Failed"
+    },
+    "components-data-table--playground": {
+      "module": "tests/browser-harness/scenarios/DataTable.tsx",
+      "export": "Playground"
+    },
+    "components-data-table--composition": {
+      "module": "tests/browser-harness/scenarios/DataTable.tsx",
+      "export": "Composition"
+    },
+    "components-data-table--controlled": {
+      "module": "tests/browser-harness/scenarios/DataTable.tsx",
+      "export": "Controlled"
+    },
+    "components-data-table--stock": {
+      "module": "tests/browser-harness/scenarios/DataTable.tsx",
+      "export": "Stock"
+    },
+    "components-data-table--retry": {
+      "module": "tests/browser-harness/scenarios/DataTable.tsx",
+      "export": "Retry"
     }
   },
   "suites": [
@@ -2267,6 +2383,59 @@
         "components-popover--edge",
         "components-popover--nested",
         "components-popover--overrides"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/tooltip/Tooltip.spec.ts",
+      "scenarios": [
+        "components-tooltip--playground",
+        "components-tooltip--composition",
+        "components-tooltip--placements",
+        "components-tooltip--described",
+        "components-tooltip--icon",
+        "components-tooltip--link",
+        "components-tooltip--clipped",
+        "components-tooltip--scrollable",
+        "components-tooltip--overrides",
+        "components-tooltip--popover",
+        "components-tooltip--dialog"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/carousel/Carousel.spec.ts",
+      "scenarios": [
+        "components-carousel--playground",
+        "components-carousel--composition",
+        "components-carousel--controlled",
+        "components-carousel--many",
+        "components-carousel--reserved",
+        "components-carousel--overrides"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/bounce-cards/BounceCards.spec.ts",
+      "scenarios": [
+        "components-bounce-cards--playground",
+        "components-bounce-cards--composition",
+        "components-bounce-cards--passive",
+        "components-bounce-cards--dense",
+        "components-bounce-cards--overrides",
+        "components-bounce-cards--reordered",
+        "components-bounce-cards--failed"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/data-table/DataTable.spec.ts",
+      "scenarios": [
+        "components-data-table--playground",
+        "components-data-table--composition",
+        "components-data-table--controlled",
+        "components-data-table--stock",
+        "components-data-table--retry"
       ]
     }
   ],

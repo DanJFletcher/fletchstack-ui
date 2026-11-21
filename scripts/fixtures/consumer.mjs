@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { Breadcrumbs, Menu, Callout, Table, createTableColumn, Combobox, Rating, Accordion, Chip, MultiSelect, AvatarGroup, Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'AppContent', 'AppShell', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'BottomNavigation', 'Breadcrumbs', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'Dialog', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'HelpIcon', 'HomeIcon', 'Icon', 'InboxIcon', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'Navbar', 'PlusIcon', 'Popover', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Tabs', 'Text', 'TextInput', 'Textarea', 'createTableColumn']);
+assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'AppContent', 'AppShell', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'BottomNavigation', 'BounceCards', 'Breadcrumbs', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'Carousel', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'DataTable', 'Dialog', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'HelpIcon', 'HomeIcon', 'Icon', 'InboxIcon', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'Navbar', 'PlusIcon', 'Popover', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Tabs', 'Text', 'TextInput', 'Textarea', 'Tooltip', 'createTableColumn']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const contentElement = createElement('div', null, createElement(Heading, { as: 'h1', size: 'page' }, 'Project'), createElement(Text, { tone: 'muted' }, 'Updated yesterday'), createElement(Text, { as: 'span', size: 'small' }, 'Inline'));
 const contentMarkup = renderToString(contentElement);
@@ -284,3 +284,26 @@ assert.match(popoverMarkup, /aria-haspopup="dialog"/);
 assert.match(popoverMarkup, /popover="manual"/);
 assert.match(popoverMarkup, /hidden=""/);
 assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/popover.css')), 'utf8').includes('--fs-popover-surface'));
+
+const tooltipElement = createElement(library.Tooltip, { content: 'Additional guidance' }, createElement('button', { 'aria-describedby': 'existing' }, 'Project help'));
+const tooltipMarkup = renderToString(tooltipElement);
+assert.equal(tooltipMarkup, renderToString(tooltipElement));
+assert.match(tooltipMarkup, /aria-describedby="existing tooltip-/);
+assert.match(tooltipMarkup, /role="tooltip"/);
+assert.match(tooltipMarkup, /popover="manual"/);
+assert.match(tooltipMarkup, /hidden=""/);
+assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/tooltip.css')), 'utf8').includes('--fs-tooltip-surface'));
+
+const carouselMarkup = renderToString(createElement(library.Carousel, { label: 'Featured stories', slides: [{ id: 'first', content: 'First story' }] }));
+assert.match(carouselMarkup, /aria-roledescription="carousel"/);
+assert.match(carouselMarkup, /aria-label="Featured stories"/);
+assert.match(readFileSync(new URL(import.meta.resolve('fletchstack-ui/carousel.css')), 'utf8'), /fs-carousel__slide/);
+
+const bounceMarkup = renderToString(createElement(library.BounceCards, { images: [{ id: 'first', src: 'data:image/svg+xml,photo', alt: 'First photograph' }] }));
+assert.match(bounceMarkup, /aria-label="Photo cards"/);
+assert.match(bounceMarkup, /<img[^>]*alt="First photograph"/);
+assert.match(readFileSync(new URL(import.meta.resolve('fletchstack-ui/bounce-cards.css')), 'utf8'), /fs-bounce-cards-enter/);
+
+const dataTableMarkup = renderToString(createElement(library.DataTable, { caption: 'Payments', rows: [{ id: 'one' }, { id: 'two' }], columns: [{ id: 'id', header: 'ID', accessor: 'id' }], getRowKey: row => row.id, pagination: true, defaultPagination: { pageIndex: 1, pageSize: 1 } }));
+assert.ok(dataTableMarkup.includes('>two</td>'));
+assert.ok(!dataTableMarkup.includes('>one</td>'));

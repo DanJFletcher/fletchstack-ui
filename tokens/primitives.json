@@ -940,6 +940,13 @@
         ],
         "alpha": 0.56
       }
+    },
+    "px288": {
+      "$type": "dimension",
+      "$value": {
+        "value": 288,
+        "unit": "px"
+      }
     }
   }
 }

@@ -11,7 +11,7 @@ export type { MenuProps, MenuStyle, MenuItem, MenuActionItem, MenuLinkItem, Menu
  **/
 function menuAttributes(props: MenuProps): ComponentPropsWithoutRef<'div'> {
   const attributes = { ...props };
-  for (const key of ['triggerLabel', 'menuLabel', 'items', 'open', 'defaultOpen', 'onOpenChange', 'closeOnSelect', 'emptyMessage', 'className']) { Reflect.deleteProperty(attributes, key); }
+  for (const key of ['triggerLabel', 'trigger', 'menuLabel', 'items', 'open', 'defaultOpen', 'onOpenChange', 'closeOnSelect', 'emptyMessage', 'className']) { Reflect.deleteProperty(attributes, key); }
 
   return attributes;
 }
@@ -27,9 +27,9 @@ export const Menu: ForwardRefExoticComponent<MenuProps & RefAttributes<HTMLDivEl
   useImperativeHandle(ref, () => model.root.current!);
 
   return <div {...menuAttributes(props)} ref={model.root} className={['fs-menu', className].filter(Boolean).join(' ')}>
-    <Button ref={model.trigger} id={model.triggerId} variant="secondary" className="fs-menu__trigger" aria-haspopup="menu" aria-expanded={model.expanded}
+    <Button ref={model.trigger} id={model.triggerId} variant="secondary" className="fs-menu__trigger" aria-label={triggerLabel} aria-haspopup="menu" aria-expanded={model.expanded}
       aria-controls={model.expanded ? model.menuId([]) : undefined} onClick={() => model.change(!model.expanded)}
-      onKeyDown={event => menuTriggerKey(event, model)}>{triggerLabel}<span className="fs-menu__trigger-chevron" aria-hidden="true" /></Button>
+      onKeyDown={event => menuTriggerKey(event, model)}>{props.trigger ?? triggerLabel}<span className="fs-menu__trigger-chevron" aria-hidden="true" /></Button>
     {model.expanded && <MenuLevel model={model} items={items} path={[]} label={menuLabel} config={props} />}
   </div>;
 });

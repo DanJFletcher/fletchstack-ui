@@ -15,6 +15,10 @@ export interface TableColumn<T> {
   readonly accessor?: keyof T | ((row: T) => unknown);
   readonly cell?: (context: TableCellContext<T>) => ReactNode;
   footer?: ReactNode | ((context: TableFooterContext<T>) => ReactNode);
+  /** Optional client-side scalar choices used by DataTable. */
+  filterOptions?: readonly { label: string; value: string | number | boolean }[];
+  filterLabel?: string;
+  hideable?: boolean;
   hidden?: boolean; align?: 'start' | 'center' | 'end';
   width?: CSSProperties['width']; minWidth?: CSSProperties['minWidth']; maxWidth?: CSSProperties['maxWidth'];
   sortable?: boolean; sortValue?: (row: T) => TableSortValue; compare?: (a: T, b: T) => number;

@@ -696,6 +696,52 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-popover-viewport-inset` | Popover viewportInset for anchored non-modal content. | dimension |
 | `--fs-popover-offset` | Popover offset for anchored non-modal content. | dimension |
 | `--fs-popover-border-width` | Popover borderWidth for anchored non-modal content. | dimension |
+| `--fs-tooltip-surface` | Tooltip surface for supplementary contextual help. | color |
+| `--fs-tooltip-text` | Tooltip text for supplementary contextual help. | color |
+| `--fs-tooltip-border` | Tooltip border for supplementary contextual help. | color |
+| `--fs-tooltip-radius` | Tooltip radius for supplementary contextual help. | dimension |
+| `--fs-tooltip-padding-block` | Tooltip paddingBlock for supplementary contextual help. | dimension |
+| `--fs-tooltip-padding-inline` | Tooltip paddingInline for supplementary contextual help. | dimension |
+| `--fs-tooltip-max-width` | Tooltip maxWidth for supplementary contextual help. | dimension |
+| `--fs-tooltip-viewport-inset` | Tooltip viewportInset for supplementary contextual help. | dimension |
+| `--fs-tooltip-offset` | Tooltip offset for supplementary contextual help. | dimension |
+| `--fs-tooltip-border-width` | Tooltip borderWidth for supplementary contextual help. | dimension |
+| `--fs-tooltip-font-size` | Tooltip fontSize for supplementary contextual help. | dimension |
+| `--fs-carousel-surface` | Carousel surface. | color |
+| `--fs-carousel-text` | Carousel text. | color |
+| `--fs-carousel-border` | Carousel border. | color |
+| `--fs-carousel-tint` | Carousel tint. | color |
+| `--fs-carousel-accent` | Carousel accent. | color |
+| `--fs-carousel-radius` | Carousel radius. | dimension |
+| `--fs-carousel-padding` | Carousel padding. | dimension |
+| `--fs-carousel-gap` | Carousel gap. | dimension |
+| `--fs-carousel-control-size` | Carousel controlSize. | dimension |
+| `--fs-carousel-compact-target` | Carousel compactTarget. | dimension |
+| `--fs-carousel-dot-size` | Carousel dotSize. | dimension |
+| `--fs-carousel-dot-selected` | Carousel dotSelected. | dimension |
+| `--fs-carousel-control-radius` | Carousel controlRadius. | dimension |
+| `--fs-carousel-slide-radius` | Carousel slideRadius. | dimension |
+| `--fs-carousel-border-width` | Carousel borderWidth. | dimension |
+| `--fs-carousel-padding-small` | Carousel paddingSmall. | dimension |
+| `--fs-carousel-padding-large` | Carousel paddingLarge. | dimension |
+| `--fs-carousel-focus-width` | Carousel focusWidth. | dimension |
+| `--fs-carousel-focus-offset` | Carousel focusOffset. | dimension |
+| `--fs-carousel-focus` | Carousel focus. | color |
+| `--fs-bounce-cards-border` | BounceCards border. | color |
+| `--fs-bounce-cards-surface` | BounceCards surface. | color |
+| `--fs-bounce-cards-text` | BounceCards text. | color |
+| `--fs-bounce-cards-radius` | BounceCards radius. | dimension |
+| `--fs-bounce-cards-border-width` | BounceCards borderWidth. | dimension |
+| `--fs-bounce-cards-focus` | BounceCards focus. | color |
+| `--fs-bounce-cards-focus-width` | BounceCards focusWidth. | dimension |
+| `--fs-bounce-cards-focus-offset` | BounceCards focusOffset. | dimension |
+| `--fs-bounce-cards-fallback-padding` | BounceCards fallbackPadding. | dimension |
+| `--fs-bounce-cards-grid-gap` | BounceCards gridGap. | dimension |
+| `--fs-bounce-cards-shadow-offset` | BounceCards shadowOffset. | dimension |
+| `--fs-bounce-cards-shadow-blur` | BounceCards shadowBlur. | dimension |
+| `--fs-bounce-cards-shadow-active-offset` | BounceCards shadowActiveOffset. | dimension |
+| `--fs-bounce-cards-shadow-active-blur` | BounceCards shadowActiveBlur. | dimension |
+| `--fs-bounce-cards-shadow-color` | BounceCards shadowColor. | color |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

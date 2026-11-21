@@ -57,7 +57,11 @@
     "./app-content.css": "./dist/app-content.css",
     "./tabs.css": "./dist/tabs.css",
     "./dialog.css": "./dist/dialog.css",
-    "./popover.css": "./dist/popover.css"
+    "./popover.css": "./dist/popover.css",
+    "./tooltip.css": "./dist/tooltip.css",
+    "./carousel.css": "./dist/carousel.css",
+    "./bounce-cards.css": "./dist/bounce-cards.css",
+    "./data-table.css": "./dist/data-table.css"
   },
   "files": [
     "dist",

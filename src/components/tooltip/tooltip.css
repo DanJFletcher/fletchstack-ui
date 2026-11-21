@@ -1,0 +1,4 @@
+.fs-tooltip { display: inline-block; min-inline-size: 0; max-inline-size: 100%; }
+.fs-tooltip[hidden], .fs-tooltip__content[hidden] { display: none; }
+.fs-tooltip__content { box-sizing: border-box; position: fixed; inset: auto; margin: 0; inline-size: max-content; padding: var(--fs-tooltip-padding-block) var(--fs-tooltip-padding-inline); overflow: auto; overscroll-behavior: contain; border: var(--fs-tooltip-border-width) solid var(--fs-tooltip-border); border-radius: var(--fs-tooltip-radius); background: var(--fs-tooltip-surface); color: var(--fs-tooltip-text); font-family: var(--fs-font-body); font-size: var(--fs-tooltip-font-size); line-height: var(--fs-font-line-height); overflow-wrap: anywhere; }
+@media (forced-colors: active) { .fs-tooltip__content { border-color: CanvasText; } }

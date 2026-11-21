@@ -133,6 +133,7 @@ it('selects direct and transitive Button consumers, while excluding unrelated ha
     'tests/browser-harness/specs/tabs/Tabs.spec.ts',
     'tests/browser-harness/specs/textarea/Textarea.spec.ts',
     'tests/browser-harness/specs/themes/themes.spec.ts',
+    'tests/browser-harness/specs/tooltip/Tooltip.spec.ts',
     'tests/browser-harness/specs/typography/Typography.spec.ts',
   ]);
   expect(result.suites.filter(suite => suite.project === 'chromium')).toEqual(ownership.inventory.filter(suite => suite.project === 'chromium'));

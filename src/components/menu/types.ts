@@ -10,6 +10,8 @@ export interface MenuDividerItem { type: 'divider'; id: string }
 export type MenuItem = MenuActionItem | MenuLinkItem | MenuSubmenuItem | MenuDividerItem;
 export type MenuProps = Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'style' | 'dangerouslySetInnerHTML'> & {
   triggerLabel: string;
+  /** Optional visual trigger content; triggerLabel remains its accessible name. */
+  trigger?: ReactNode;
   menuLabel: string;
   items: readonly MenuItem[];
   open?: boolean;

@@ -909,9 +909,113 @@
       "style": "src/components/popover/popover.css",
       "category": "Overlays",
       "examples": "src/components/popover/stories/popover-examples.tsx"
+    },
+    {
+      "slug": "tooltip",
+      "entry": "src/components/tooltip/index.ts",
+      "exports": {
+        "runtime": [
+          "Tooltip"
+        ],
+        "types": [
+          "TooltipProps",
+          "TooltipStyle",
+          "TooltipPlacement"
+        ]
+      },
+      "modules": [
+        "src/components/tooltip/Tooltip.tsx",
+        "src/components/tooltip/types.ts",
+        "src/components/tooltip/useTooltipState.ts",
+        "src/components/tooltip/useTooltipLayer.ts",
+        "src/components/tooltip/useTooltipDismissal.ts",
+        "src/components/tooltip/position.ts"
+      ],
+      "style": "src/components/tooltip/tooltip.css",
+      "category": "Overlays",
+      "examples": "src/components/tooltip/stories/tooltip-examples.tsx"
+    },
+    {
+      "slug": "carousel",
+      "entry": "src/components/carousel/index.ts",
+      "exports": {
+        "runtime": [
+          "Carousel"
+        ],
+        "types": [
+          "CarouselProps",
+          "CarouselStyle",
+          "CarouselSlide"
+        ]
+      },
+      "modules": [
+        "src/components/carousel/types.ts",
+        "src/components/carousel/carousel-policy.ts",
+        "src/components/carousel/CarouselControls.tsx",
+        "src/components/carousel/interaction.ts",
+        "src/components/carousel/useCarousel.ts",
+        "src/components/carousel/Carousel.tsx"
+      ],
+      "style": "src/components/carousel/carousel.css",
+      "category": "Media",
+      "examples": "src/components/carousel/stories/carousel-examples.tsx"
+    },
+    {
+      "slug": "bounce-cards",
+      "entry": "src/components/bounce-cards/index.ts",
+      "exports": {
+        "runtime": [
+          "BounceCards"
+        ],
+        "types": [
+          "BounceCardsProps",
+          "BounceCardsStyle",
+          "BounceCardsImage",
+          "BounceCardsPosition"
+        ]
+      },
+      "modules": [
+        "src/components/bounce-cards/useFan.ts",
+        "src/components/bounce-cards/BounceCards.tsx",
+        "src/components/bounce-cards/geometry.ts",
+        "src/components/bounce-cards/FanCard.tsx",
+        "src/components/bounce-cards/types.ts"
+      ],
+      "style": "src/components/bounce-cards/bounce-cards.css",
+      "category": "Media",
+      "examples": "src/components/bounce-cards/stories/bounce-cards-examples.tsx"
+    },
+    {
+      "slug": "data-table",
+      "entry": "src/components/data-table/index.ts",
+      "exports": {
+        "runtime": [
+          "DataTable"
+        ],
+        "types": [
+          "DataTableProps",
+          "DataTableStyle",
+          "DataTablePagination",
+          "DataTableFilters",
+          "DataTableFilterValue",
+          "DataTableColumnVisibility"
+        ]
+      },
+      "modules": [
+        "src/components/data-table/DataTable.tsx",
+        "src/components/data-table/types.ts",
+        "src/components/data-table/policy.ts",
+        "src/components/data-table/useDataTable.ts",
+        "src/components/data-table/Toolbar.tsx",
+        "src/components/data-table/Footer.tsx"
+      ],
+      "style": "src/components/data-table/data-table.css",
+      "category": "Data display",
+      "examples": "src/components/data-table/stories/data-table-examples.tsx"
     }
   ],
   "internalModules": [
-    "src/internal/hooks/useFieldAccessibility.ts"
+    "src/internal/hooks/useFieldAccessibility.ts",
+    "src/internal/hooks/useReducedMotion.ts"
   ]
 }

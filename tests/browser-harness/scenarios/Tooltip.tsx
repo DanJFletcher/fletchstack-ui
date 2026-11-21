@@ -1,0 +1,25 @@
+import { ClippedTooltip, DescribedTooltip, IconTooltip, LinkTooltip, ScrollableTooltip, TooltipDemo, TooltipExample, TooltipInDialog, TooltipInPopover, TooltipOverrides, TooltipPlacements } from '../../../src/components/tooltip/stories/tooltip-examples';
+import type { TooltipProps } from '../../../src/components/tooltip/types';
+import type { Scenario } from '../gallery/types';
+import '../../../src/components/tooltip/tooltip.css';
+import '../../../src/components/button/button.css';
+import '../../../src/components/icon/icon.css';
+import '../../../src/components/popover/popover.css';
+import '../../../src/components/dialog/dialog.css';
+import '../../../src/components/tooltip/stories/tooltip.stories.css';
+
+type Props = Partial<Omit<TooltipProps, 'children'>>;
+const Playground: Scenario<Props> = {};
+const Composition: Scenario<Props> = { render: () => <TooltipExample /> };
+const Placements: Scenario<Props> = { render: () => <TooltipPlacements /> };
+const Described: Scenario<Props> = { render: () => <DescribedTooltip /> };
+const Icon: Scenario<Props> = { render: () => <IconTooltip /> };
+const Link: Scenario<Props> = { render: () => <LinkTooltip /> };
+const Clipped: Scenario<Props> = { render: () => <ClippedTooltip /> };
+const Scrollable: Scenario<Props> = { render: () => <ScrollableTooltip /> };
+const Overrides: Scenario<Props> = { render: () => <TooltipOverrides /> };
+const Popover: Scenario<Props> = { render: () => <TooltipInPopover /> };
+const Dialog: Scenario<Props> = { render: () => <TooltipInDialog /> };
+export const component = TooltipDemo;
+export const defaults = {};
+export const scenarios = { Playground, Composition, Placements, Described, Icon, Link, Clipped, Scrollable, Overrides, Popover, Dialog };

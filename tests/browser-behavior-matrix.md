@@ -112,3 +112,19 @@ Owner: `tests/browser-harness/specs/dialog/Dialog.spec.ts`. Native top-layer mod
 ## Popover
 
 Owner: [Popover browser suite](./browser-harness/specs/popover/Popover.spec.ts). Non-modal Tab/Escape/outside focus, persistent input, viewport flipping/clamping, theme inheritance, native Dialog composition, controlled requests, independent dismissal policies, scoped style, reduced motion, forced colors and narrow reflow with enlarged/spaced text. DOM and hydration contracts independently verify names, IDs, forwarded attributes/ref, optional slots and viewport sizing; pure policy cases cover every side/alignment and RTL. Installed React 18/19 consumers verify public types, exports, CSS and deterministic SSR. Storybook checks render/play/accessibility and closed-on-landing documentation. Screen-reader speech and physical-device behavior remain unverified.
+
+## Tooltip
+
+Owner: [Tooltip browser suite](./browser-harness/specs/tooltip/Tooltip.spec.ts). Hover/focus/touch visibility, hoverable content, Escape without moving focus, preserved trigger activation/descriptions, viewport edge flipping/clamping, transformed clipping, scrolling, theme inheritance and isolated overrides. Native Dialog/Popover composition and narrow enlarged/spaced text are browser guarantees. DOM/hydration contracts independently verify refs, handlers, IDs, timers and server-rendered descriptions. Screen-reader speech and physical devices remain manual gaps.
+
+## Carousel
+
+Owner: [Carousel browser suite](./browser-harness/specs/carousel/Carousel.spec.ts). Named region, boundary/loop navigation, retained inactive state, keyboard/RTL, touch swipe, controlled selection, live reduced-motion autoplay, themed/reflow controls and reserved frames.
+
+## BounceCards
+
+Owner: [BounceCards browser suite](./browser-harness/specs/bounce-cards/BounceCards.spec.ts). Reference photo fan, staggered overshoot, stable hover inspection, native keyboard/touch actions, live reduced motion, width-only resize and dense-grid fallback, theme/frame overrides. Keyboard inspection cancels entrance permanently; blur does not replay it. Screen-reader speech and physical devices remain manual gaps.
+
+## DataTable
+
+Owner: [DataTable browser tests](browser-harness/specs/data-table/DataTable.spec.ts). Both themes cover filter/sort/page ordering, mixed current-page selection and retained off-page keys, column visibility independent of search, controlled requests, record actions, loading/retry, another dataset and narrow enlarged layouts.

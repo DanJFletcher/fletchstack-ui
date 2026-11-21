@@ -109,3 +109,15 @@ export type { DialogProps, DialogStyle } from './components/dialog/index.js';
 
 export { Popover } from './components/popover/index.js';
 export type { PopoverProps, PopoverStyle, PopoverSide, PopoverAlign } from './components/popover/index.js';
+
+export { Tooltip } from './components/tooltip/index.js';
+export type { TooltipProps, TooltipStyle, TooltipPlacement } from './components/tooltip/index.js';
+
+export { Carousel } from './components/carousel/index.js';
+export type { CarouselProps, CarouselStyle, CarouselSlide } from './components/carousel/index.js';
+
+export { BounceCards } from './components/bounce-cards/index.js';
+export type { BounceCardsProps, BounceCardsStyle, BounceCardsImage, BounceCardsPosition } from './components/bounce-cards/index.js';
+
+export { DataTable } from './components/data-table/index.js';
+export type { DataTableProps, DataTableStyle, DataTablePagination, DataTableFilters, DataTableFilterValue, DataTableColumnVisibility } from './components/data-table/index.js';

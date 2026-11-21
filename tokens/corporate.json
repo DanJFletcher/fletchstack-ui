@@ -3738,6 +3738,244 @@
         "$value": "{primitive.px1}",
         "$description": "Popover borderWidth for anchored non-modal content."
       }
+    },
+    "tooltip": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Tooltip surface for supplementary contextual help."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Tooltip text for supplementary contextual help."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Tooltip border for supplementary contextual help."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px6}",
+        "$description": "Tooltip radius for supplementary contextual help."
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Tooltip paddingBlock for supplementary contextual help."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Tooltip paddingInline for supplementary contextual help."
+      },
+      "maxWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px288}",
+        "$description": "Tooltip maxWidth for supplementary contextual help."
+      },
+      "viewportInset": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Tooltip viewportInset for supplementary contextual help."
+      },
+      "offset": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Tooltip offset for supplementary contextual help."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Tooltip borderWidth for supplementary contextual help."
+      },
+      "font": {
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.small}",
+          "$description": "Tooltip fontSize for supplementary contextual help."
+        }
+      }
+    },
+    "carousel": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Carousel surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Carousel text."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.line}",
+        "$description": "Carousel border."
+      },
+      "tint": {
+        "$type": "color",
+        "$value": "{primitive.blueTint}",
+        "$description": "Carousel tint."
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "Carousel accent."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Carousel radius."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Carousel padding."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Carousel gap."
+      },
+      "controlSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px44}",
+        "$description": "Carousel controlSize."
+      },
+      "compactTarget": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Carousel compactTarget."
+      },
+      "dotSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Carousel dotSize."
+      },
+      "dotSelected": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Carousel dotSelected."
+      },
+      "controlRadius": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Carousel controlRadius."
+      },
+      "slideRadius": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Carousel slideRadius."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Carousel borderWidth."
+      },
+      "paddingSmall": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Carousel paddingSmall."
+      },
+      "paddingLarge": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Carousel paddingLarge."
+      },
+      "focusWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px2}",
+        "$description": "Carousel focusWidth."
+      },
+      "focusOffset": {
+        "$type": "dimension",
+        "$value": "{primitive.px2}",
+        "$description": "Carousel focusOffset."
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "Carousel focus."
+      }
+    },
+    "bounceCards": {
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "BounceCards border."
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.galleryDayPanel}",
+        "$description": "BounceCards surface."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "BounceCards text."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "BounceCards radius."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "BounceCards borderWidth."
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "BounceCards focus."
+      },
+      "focusWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px2}",
+        "$description": "BounceCards focusWidth."
+      },
+      "focusOffset": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "BounceCards focusOffset."
+      },
+      "fallbackPadding": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "BounceCards fallbackPadding."
+      },
+      "gridGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "BounceCards gridGap."
+      },
+      "shadowOffset": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "BounceCards shadowOffset."
+      },
+      "shadowBlur": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "BounceCards shadowBlur."
+      },
+      "shadowActiveOffset": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "BounceCards shadowActiveOffset."
+      },
+      "shadowActiveBlur": {
+        "$type": "dimension",
+        "$value": "{primitive.px32}",
+        "$description": "BounceCards shadowActiveBlur."
+      },
+      "shadowColor": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "BounceCards shadowColor."
+      }
     }
   }
 }

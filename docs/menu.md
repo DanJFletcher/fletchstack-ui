@@ -50,3 +50,5 @@ The wrapper and all panels inherit the enclosing theme, including nested Corpora
 Panels stay within the viewport with a semantic inset and scroll vertically if necessary. Long labels wrap rather than changing column relationships or clipping actions. At narrow viewports children use static flow with indentation and a guide; closed branches are unmounted immediately. No hover-only expansion or delayed closing is required for touch access.
 
 See [verification evidence](menu-verification.md) for executed checks, visual review and remaining manual accessibility limitations.
+
+`trigger` accepts optional visual React content (for example, a decorative ellipsis). `triggerLabel` remains the native button’s accessible name.

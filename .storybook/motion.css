@@ -21,3 +21,13 @@ html[data-fs-preview-motion="full"] .fs-dialog[data-motion="slide"][data-state="
 
 html[data-fs-preview-motion="reduced"] .fs-popover__panel { animation: none; }
 html[data-fs-preview-motion="full"] .fs-popover__panel { animation: fs-popover-appear var(--fs-motion-duration-fast) var(--fs-motion-easing-enter); }
+
+html[data-fs-preview-motion="reduced"] .fs-carousel .fs-carousel__slide { transition: none; }
+html[data-fs-preview-motion="full"] .fs-carousel .fs-carousel__slide { transition: transform var(--fs-motion-duration-standard) var(--fs-motion-easing-standard); }
+
+html[data-fs-preview-motion="reduced"] .fs-bounce-cards .fs-bounce-cards__card { animation: none; }
+html[data-fs-preview-motion="reduced"] .fs-bounce-cards .fs-bounce-cards__item { transition: none; }
+html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__card { animation: fs-bounce-cards-enter calc(var(--fs-motion-duration-slow) * 3) var(--fs-motion-easing-enter) var(--fan-delay) backwards; }
+html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item { transition: transform calc(var(--fs-motion-duration-standard) * 2) var(--fs-motion-easing-enter); }
+html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item[data-inspected="true"] .fs-bounce-cards__card { animation: none; }
+html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item:focus-within { transition: none; }

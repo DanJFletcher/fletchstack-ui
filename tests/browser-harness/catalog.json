@@ -1659,6 +1659,42 @@
     "components-kbd--hidden-group": {
       "module": "tests/browser-harness/scenarios/Kbd.tsx",
       "export": "HiddenGroup"
+    },
+    "components-item--playground": {
+      "module": "tests/browser-harness/scenarios/Item.tsx",
+      "export": "Playground"
+    },
+    "components-item--composition": {
+      "module": "tests/browser-harness/scenarios/Item.tsx",
+      "export": "Composition"
+    },
+    "components-item--actions": {
+      "module": "tests/browser-harness/scenarios/Item.tsx",
+      "export": "Actions"
+    },
+    "components-item--link": {
+      "module": "tests/browser-harness/scenarios/Item.tsx",
+      "export": "Link"
+    },
+    "components-item--long": {
+      "module": "tests/browser-harness/scenarios/Item.tsx",
+      "export": "Long"
+    },
+    "components-item--media": {
+      "module": "tests/browser-harness/scenarios/Item.tsx",
+      "export": "Media"
+    },
+    "components-item--overrides": {
+      "module": "tests/browser-harness/scenarios/Item.tsx",
+      "export": "Overrides"
+    },
+    "components-item--sizes": {
+      "module": "tests/browser-harness/scenarios/Item.tsx",
+      "export": "Sizes"
+    },
+    "components-item--variants": {
+      "module": "tests/browser-harness/scenarios/Item.tsx",
+      "export": "Variants"
     }
   },
   "suites": [
@@ -2497,6 +2533,21 @@
         "components-kbd--long",
         "components-kbd--wrapping",
         "components-kbd--hidden-group"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/item/Item.spec.ts",
+      "scenarios": [
+        "components-item--playground",
+        "components-item--composition",
+        "components-item--actions",
+        "components-item--link",
+        "components-item--long",
+        "components-item--media",
+        "components-item--overrides",
+        "components-item--sizes",
+        "components-item--variants"
       ]
     }
   ],

@@ -754,6 +754,27 @@
   --fs-kbd-font-size: 0.75rem;
   --fs-kbd-font-weight: 600;
   --fs-kbd-font-line-height: 1.5;
+  --fs-item-border-width: 1px;
+  --fs-item-text: rgb(23 35 56 / 1);
+  --fs-item-muted: rgb(82 100 126 / 1);
+  --fs-item-border: rgb(215 220 231 / 1);
+  --fs-item-radius: 4px;
+  --fs-item-font-family: "Arial", "Helvetica", sans-serif;
+  --fs-item-font-size: 1rem;
+  --fs-item-font-line-height: 1.5;
+  --fs-item-surface: rgb(244 246 251 / 1);
+  --fs-item-hover: rgb(232 239 255 / 1);
+  --fs-item-padding: 16px;
+  --fs-item-padding-small: 12px;
+  --fs-item-padding-xs: 8px;
+  --fs-item-gap: 12px;
+  --fs-item-content-gap: 4px;
+  --fs-item-media-size: 40px;
+  --fs-item-icon-size: 20px;
+  --fs-item-weight: 600;
+  --fs-item-focus-color: rgb(36 75 176 / 1);
+  --fs-item-focus-width: 3px;
+  --fs-item-focus-offset: 3px;
 }
 
 [data-theme="luna"] {
@@ -1511,4 +1532,25 @@
   --fs-kbd-font-size: 0.75rem;
   --fs-kbd-font-weight: 600;
   --fs-kbd-font-line-height: 1.5;
+  --fs-item-border-width: 1px;
+  --fs-item-text: rgb(244 239 255 / 1);
+  --fs-item-muted: rgb(182 179 206 / 1);
+  --fs-item-border: rgb(53 54 79 / 1);
+  --fs-item-radius: 12px;
+  --fs-item-font-family: "Arial", "Helvetica", sans-serif;
+  --fs-item-font-size: 1rem;
+  --fs-item-font-line-height: 1.5;
+  --fs-item-surface: rgb(26 27 52 / 1);
+  --fs-item-hover: rgb(41 36 66 / 1);
+  --fs-item-padding: 16px;
+  --fs-item-padding-small: 12px;
+  --fs-item-padding-xs: 8px;
+  --fs-item-gap: 12px;
+  --fs-item-content-gap: 4px;
+  --fs-item-media-size: 40px;
+  --fs-item-icon-size: 20px;
+  --fs-item-weight: 600;
+  --fs-item-focus-color: rgb(242 213 139 / 1);
+  --fs-item-focus-width: 3px;
+  --fs-item-focus-offset: 3px;
 }

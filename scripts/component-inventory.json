@@ -1035,6 +1035,40 @@
       "style": "src/components/kbd/kbd.css",
       "category": "Typography",
       "examples": "src/components/kbd/stories/kbd-examples.tsx"
+    },
+    {
+      "slug": "item",
+      "entry": "src/components/item/index.ts",
+      "exports": {
+        "runtime": [
+          "Item",
+          "ItemGroup",
+          "ItemMedia",
+          "ItemContent",
+          "ItemTitle",
+          "ItemDescription",
+          "ItemActions",
+          "ItemHeader",
+          "ItemFooter",
+          "ItemSeparator"
+        ],
+        "types": [
+          "ItemProps",
+          "ItemStyle",
+          "ItemVariant",
+          "ItemSize",
+          "ItemPartProps",
+          "ItemDescriptionProps",
+          "ItemMediaProps"
+        ]
+      },
+      "modules": [
+        "src/components/item/Item.tsx",
+        "src/components/item/ItemParts.tsx"
+      ],
+      "style": "src/components/item/item.css",
+      "category": "Data display",
+      "examples": "src/components/item/stories/item-examples.tsx"
     }
   ],
   "internalModules": [

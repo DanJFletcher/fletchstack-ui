@@ -4060,6 +4060,115 @@
           "$description": "Unitless keyboard hint line height."
         }
       }
+    },
+    "item": {
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Decorative item boundary thickness."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.pale}",
+        "$description": "Item primary text."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightMuted}",
+        "$description": "Item supporting text."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightLine}",
+        "$description": "Decorative item and footer border."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Item corner radius."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Item body and title font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Item body font size."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Item body line height."
+        }
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.galleryNightPanel}",
+        "$description": "Filled item surface."
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{primitive.violet}",
+        "$description": "Item media background."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Item padding."
+      },
+      "paddingSmall": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Item paddingSmall."
+      },
+      "paddingXs": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Item paddingXs."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Item gap."
+      },
+      "contentGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Item contentGap."
+      },
+      "mediaSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px40}",
+        "$description": "Item mediaSize."
+      },
+      "iconSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px20}",
+        "$description": "Item iconSize."
+      },
+      "weight": {
+        "$type": "fontWeight",
+        "$value": "{primitive.semibold}",
+        "$description": "Item title emphasis."
+      },
+      "focusColor": {
+        "$type": "color",
+        "$value": "{primitive.gold}",
+        "$description": "Item link keyboard focus outline."
+      },
+      "focusWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px3}",
+        "$description": "Item link focus outline thickness."
+      },
+      "focusOffset": {
+        "$type": "dimension",
+        "$value": "{primitive.px3}",
+        "$description": "Item link focus outline clearance."
+      }
     }
   }
 }

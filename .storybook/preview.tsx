@@ -1,3 +1,4 @@
+import '../src/components/item/item.css';
 import '../src/components/kbd/kbd.css';
 import '../src/components/data-table/data-table.css';
 import '../src/components/bounce-cards/bounce-cards.css';

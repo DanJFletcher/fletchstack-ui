@@ -649,3 +649,12 @@ export const emptyKey = <Kbd />;
 export const disabledKey = <Kbd disabled>Enter</Kbd>;
 // @ts-expect-error Group is a native keyboard element, not a button.
 export const buttonGroupHint = <KbdGroup type="button"><Kbd>Ctrl</Kbd></KbdGroup>;
+
+import { Item, ItemContent, ItemTitle, type ItemStyle } from 'fletchstack-ui';
+import 'fletchstack-ui/item.css';
+const itemStyle: ItemStyle = { '--fs-item-padding': '8px' };
+export const resourceItem = <Item as="a" href="/guide" style={itemStyle}><ItemContent><ItemTitle>Guide</ItemTitle></ItemContent></Item>;
+// @ts-expect-error Destination items require an href.
+export const missingItemDestination = <Item as="a">Missing</Item>;
+// @ts-expect-error Sizes are constrained.
+export const invalidItemSize = <Item size="huge" />;

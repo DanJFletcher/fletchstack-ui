@@ -62,7 +62,8 @@
     "./carousel.css": "./dist/carousel.css",
     "./bounce-cards.css": "./dist/bounce-cards.css",
     "./data-table.css": "./dist/data-table.css",
-    "./kbd.css": "./dist/kbd.css"
+    "./kbd.css": "./dist/kbd.css",
+    "./item.css": "./dist/item.css"
   },
   "files": [
     "dist",

@@ -758,6 +758,27 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-kbd-font-size` | Keyboard hint size; follows user text preferences. | dimension |
 | `--fs-kbd-font-weight` | Keyboard label weight. | fontWeight |
 | `--fs-kbd-font-line-height` | Unitless keyboard hint line height. | number |
+| `--fs-item-border-width` | Decorative item boundary thickness. | dimension |
+| `--fs-item-text` | Item primary text. | color |
+| `--fs-item-muted` | Item supporting text. | color |
+| `--fs-item-border` | Decorative item and footer border. | color |
+| `--fs-item-radius` | Item corner radius. | dimension |
+| `--fs-item-font-family` | Item body and title font family. | fontFamily |
+| `--fs-item-font-size` | Item body font size. | dimension |
+| `--fs-item-font-line-height` | Item body line height. | number |
+| `--fs-item-surface` | Filled item surface. | color |
+| `--fs-item-hover` | Item media background. | color |
+| `--fs-item-padding` | Item padding. | dimension |
+| `--fs-item-padding-small` | Item paddingSmall. | dimension |
+| `--fs-item-padding-xs` | Item paddingXs. | dimension |
+| `--fs-item-gap` | Item gap. | dimension |
+| `--fs-item-content-gap` | Item contentGap. | dimension |
+| `--fs-item-media-size` | Item mediaSize. | dimension |
+| `--fs-item-icon-size` | Item iconSize. | dimension |
+| `--fs-item-weight` | Item title emphasis. | fontWeight |
+| `--fs-item-focus-color` | Item link keyboard focus outline. | color |
+| `--fs-item-focus-width` | Item link focus outline thickness. | dimension |
+| `--fs-item-focus-offset` | Item link focus outline clearance. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

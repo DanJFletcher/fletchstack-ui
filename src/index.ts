@@ -124,3 +124,6 @@ export type { DataTableProps, DataTableStyle, DataTablePagination, DataTableFilt
 
 export { Kbd, KbdGroup } from './components/kbd/index.js';
 export type { KbdProps, KbdStyle, KbdGroupProps, KbdGroupStyle } from './components/kbd/index.js';
+
+export { Item, ItemGroup, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions, ItemHeader, ItemFooter, ItemSeparator } from './components/item/index.js';
+export type { ItemProps, ItemStyle, ItemVariant, ItemSize, ItemPartProps, ItemDescriptionProps, ItemMediaProps } from './components/item/index.js';

@@ -203,3 +203,7 @@ The supplied Payments design establishes a composed, client-side DataTable: reus
 ## Keyboard input hints
 
 The requested shadcn Kbd reference establishes small neutral keycaps for textual keyboard input and grouped shortcuts. Kbd renders a native kbd; KbdGroup renders an unboxed outer kbd containing individual keys in source order. Both are passive by default, without focus stops, shortcut listeners, automatic platform substitution or motion. Applications own command handling and aria-keyshortcuts on the actual control. Compact monospace text, subtle surface and border, a small bottom edge, minimum dimensions and a rounded rectangle distinguish keycaps from status pills. Theme-specific semantic kbd roles supply text, surface, border, spacing and typography; groups wrap and long labels can grow. Symbol examples include readable names as text, rather than relying on symbol pronunciation.
+
+## Item content rows
+
+Item follows the requested shadcn Item reference: passive, wrapping media/content/actions rows with default, outline and muted appearances and default, sm and xs density. Card remains the larger surface pattern; Item supplies compact rows and optional full-width header/footer regions. Native links use `as="a"` and `href`; separate actions stay in passive rows to avoid nested controls. Group supplies vertical layout without inventing list semantics. Consumers choose native list markup around rows when needed. Theme-specific item roles alias existing primitives, with no new palette or motion.

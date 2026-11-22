@@ -134,3 +134,7 @@ Owner: [DataTable browser tests](browser-harness/specs/data-table/DataTable.spec
 Owner: [Kbd browser tests](browser-harness/specs/kbd/Kbd.spec.ts). Verify both-theme keycap paint, native passive keyboard flow, surrounding button activation, tooltip and search descriptions, scoped overrides, explicit RTL ordering, hidden content, forced colors and enlarged narrow layouts.
 
 | Item | Native link focus and activation, embedded actions, themed rows, wrapping, scoped overrides and media | `tests/browser-harness/specs/item/Item.spec.ts` |
+
+| Progress | Measured fill, native control updates, indeterminate and live reduced motion, RTL, theme contrast, wrapping and overrides | `tests/browser-harness/specs/progress/Progress.spec.ts` |
+
+| Questionnaire | Native single/multiple/text answers, explicit Next/Skip/Submit, controlled drafts/navigation, pending/retry, reset and scoped shortcuts | Full keyboard flow, textarea newline, native radio arrows, pending locks, saved reset, theme inheritance, 320px enlarged and spaced text | `specs/questionnaire/Questionnaire.spec.ts` |

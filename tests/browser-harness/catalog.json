@@ -1695,6 +1695,70 @@
     "components-item--variants": {
       "module": "tests/browser-harness/scenarios/Item.tsx",
       "export": "Variants"
+    },
+    "components-progress--playground": {
+      "module": "tests/browser-harness/scenarios/Progress.tsx",
+      "export": "Playground"
+    },
+    "components-progress--composition": {
+      "module": "tests/browser-harness/scenarios/Progress.tsx",
+      "export": "Composition"
+    },
+    "components-progress--controlled": {
+      "module": "tests/browser-harness/scenarios/Progress.tsx",
+      "export": "Controlled"
+    },
+    "components-progress--indeterminate": {
+      "module": "tests/browser-harness/scenarios/Progress.tsx",
+      "export": "Indeterminate"
+    },
+    "components-progress--sizes": {
+      "module": "tests/browser-harness/scenarios/Progress.tsx",
+      "export": "Sizes"
+    },
+    "components-progress--overrides": {
+      "module": "tests/browser-harness/scenarios/Progress.tsx",
+      "export": "Overrides"
+    },
+    "components-progress--long": {
+      "module": "tests/browser-harness/scenarios/Progress.tsx",
+      "export": "Long"
+    },
+    "components-questionnaire--playground": {
+      "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
+      "export": "Playground"
+    },
+    "components-questionnaire--composition": {
+      "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
+      "export": "Composition"
+    },
+    "components-questionnaire--interactive": {
+      "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
+      "export": "Interactive"
+    },
+    "components-questionnaire--controlled": {
+      "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
+      "export": "Controlled"
+    },
+    "components-questionnaire--pending": {
+      "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
+      "export": "Pending"
+    },
+    "components-questionnaire--retry": {
+      "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
+      "export": "Retry"
+    },
+    "components-questionnaire--resume": {
+      "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
+      "export": "Resume"
+    },
+    "components-questionnaire--text": {
+      "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
+      "export": "Text"
+    },
+    "components-questionnaire--shortcuts": {
+      "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
+      "export": "Shortcuts"
     }
   },
   "suites": [
@@ -2548,6 +2612,34 @@
         "components-item--overrides",
         "components-item--sizes",
         "components-item--variants"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/progress/Progress.spec.ts",
+      "scenarios": [
+        "components-progress--playground",
+        "components-progress--composition",
+        "components-progress--controlled",
+        "components-progress--indeterminate",
+        "components-progress--sizes",
+        "components-progress--overrides",
+        "components-progress--long"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/questionnaire/Questionnaire.spec.ts",
+      "scenarios": [
+        "components-questionnaire--playground",
+        "components-questionnaire--composition",
+        "components-questionnaire--interactive",
+        "components-questionnaire--controlled",
+        "components-questionnaire--pending",
+        "components-questionnaire--retry",
+        "components-questionnaire--resume",
+        "components-questionnaire--text",
+        "components-questionnaire--shortcuts"
       ]
     }
   ],

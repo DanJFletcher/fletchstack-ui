@@ -127,3 +127,9 @@ export type { KbdProps, KbdStyle, KbdGroupProps, KbdGroupStyle } from './compone
 
 export { Item, ItemGroup, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions, ItemHeader, ItemFooter, ItemSeparator } from './components/item/index.js';
 export type { ItemProps, ItemStyle, ItemVariant, ItemSize, ItemPartProps, ItemDescriptionProps, ItemMediaProps } from './components/item/index.js';
+
+export { Progress } from './components/progress/index.js';
+export type { ProgressProps, ProgressStyle, ProgressSize } from './components/progress/index.js';
+
+export { Questionnaire } from './components/questionnaire/index.js';
+export type { QuestionnaireStyle, QuestionnaireOption, QuestionnaireTextField, QuestionnaireItem, QuestionnaireAnswer, QuestionnaireAnswers, QuestionnaireErrors, QuestionnaireLabels, QuestionnaireProps } from './components/questionnaire/index.js';

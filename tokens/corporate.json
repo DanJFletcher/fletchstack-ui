@@ -4169,6 +4169,202 @@
         "$value": "{primitive.px3}",
         "$description": "Item link focus outline clearance."
       }
+    },
+    "progress": {
+      "track": {
+        "$type": "color",
+        "$value": "{primitive.blueTint}",
+        "$description": "Progress track."
+      },
+      "indicator": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "Progress indicator."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Progress text."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Progress radius."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Progress gap."
+      },
+      "height": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{primitive.px4}",
+          "$description": "Small completion bar thickness."
+        },
+        "medium": {
+          "$type": "dimension",
+          "$value": "{primitive.px8}",
+          "$description": "Medium completion bar thickness."
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{primitive.px12}",
+          "$description": "Large completion bar thickness."
+        }
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Progress label and value font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Progress body font size."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Progress body line height."
+        }
+      }
+    },
+    "questionnaire": {
+      "surface": {
+        "$type": "color",
+        "$value": "{primitive.white}",
+        "$description": "Questionnaire surface."
+      },
+      "card": {
+        "$type": "color",
+        "$value": "{primitive.galleryDayPanel}",
+        "$description": "Questionnaire card."
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{primitive.blueTint}",
+        "$description": "Questionnaire selected."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{primitive.ink}",
+        "$description": "Questionnaire text."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{primitive.line}",
+        "$description": "Questionnaire muted."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{primitive.galleryDayLine}",
+        "$description": "Questionnaire border."
+      },
+      "selectedBorder": {
+        "$type": "color",
+        "$value": "{primitive.blue}",
+        "$description": "Questionnaire selectedBorder."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{primitive.disabled}",
+        "$description": "Questionnaire disabled."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{primitive.errorDay}",
+        "$description": "Questionnaire error."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Questionnaire padding."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Questionnaire gap."
+      },
+      "choiceGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Questionnaire choiceGap."
+      },
+      "choicePadding": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Questionnaire choicePadding."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Questionnaire radius."
+      },
+      "cardRadius": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Questionnaire cardRadius."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Questionnaire borderWidth."
+      },
+      "minHeight": {
+        "$type": "dimension",
+        "$value": "{primitive.px512}",
+        "$description": "Questionnaire minHeight."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Questionnaire body and title font family."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Questionnaire body font size."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Questionnaire body line height."
+        }
+      },
+      "title": {
+        "font": {
+          "size": {
+            "$type": "dimension",
+            "$value": "{primitive.large}",
+            "$description": "Question title size."
+          },
+          "weight": {
+            "$type": "fontWeight",
+            "$value": "{primitive.semibold}",
+            "$description": "Question title emphasis."
+          }
+        }
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.blue}",
+          "$description": "Link keyboard focus outline."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Link focus outline thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Link focus outline clearance."
+        }
+      }
     }
   }
 }

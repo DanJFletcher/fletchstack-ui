@@ -1,0 +1,36 @@
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
+import { Questionnaire } from '../Questionnaire';
+import { QuestionnaireComposition, QuestionnaireControlled, QuestionnaireExample, QuestionnairePending, QuestionnaireResume, QuestionnaireRetry } from './questionnaire-examples';
+import { feedbackItems, planningItems, shortcutItems } from './planning-items';
+import './questionnaire.stories.css';
+
+const meta = { id: 'components-questionnaire', title: 'Components/Forms/Questionnaire', component: Questionnaire, tags: ['autodocs'], args: { items: planningItems, onSubmit: () => {} }, parameters: { a11y: { test: 'error' }, docs: { description: { component: 'One question at a time, with native answer controls, explicit skip and final validation. items define single, multiple or text questions. answers/onAnswersChange and value/onValueChange control independent slices; defaults initialize only on mount. onSubmit receives a normalized snapshot and may return a promise. Pending saves lock controls; failures keep drafts and permit retry. Native form.reset restores initial defaults. Scoped optional letters/numbers never advance and pause in editable fields. The application owns persistence and success navigation. Import field, radio, checkbox, icon, text-input, textarea, button, kbd and questionnaire CSS plus tokens, or styles.css. See docs/questionnaire.md for the complete API, normalization and accessibility contract.' } } } } satisfies Meta<typeof Questionnaire>;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export const Playground: Story = {};
+export const Composition: Story = { render: () => <QuestionnaireComposition /> };
+export const Interactive: Story = { render: () => <QuestionnaireExample />, play: async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await userEvent.click(canvas.getByRole('radio', { name: 'Tool call timeline' }));
+  await userEvent.click(canvas.getByRole('button', { name: 'Next' }));
+  await userEvent.click(canvas.getByRole('button', { name: 'Skip' }));
+  await userEvent.click(canvas.getByRole('radio', { name: 'Start now' }));
+  await userEvent.click(canvas.getByRole('button', { name: 'Save plan' }));
+  await expect(canvas.getByText('Plan saved.')).toBeVisible();
+} };
+export const Controlled: Story = { render: () => <QuestionnaireControlled /> };
+export const Resume: Story = { render: () => <QuestionnaireResume /> };
+export const Pending: Story = { render: () => <QuestionnairePending /> };
+export const FailureRetry: Story = { render: () => <QuestionnaireRetry /> };
+export const TextOnly: Story = { args: { items: feedbackItems, labels: { submit: 'Send feedback' } } };
+export const Validation: Story = { args: { items: feedbackItems, validate: answers => answers['feedback']?.kind === 'text' && answers['feedback'].value.length < 10 ? { feedback: 'Please use at least 10 characters.' } : {} } };
+export const MultipleCustom: Story = { args: { items: [{ id: 'updates', type: 'multiple', title: 'What should updates include?', options: [{ value: 'progress', label: 'Progress' }, { value: 'decisions', label: 'Decisions' }], other: { label: 'Another update' } }] } };
+export const OptionalSkip: Story = { args: { items: [{ id: 'note', type: 'text', title: 'Anything else?', required: false, input: { label: 'Additional notes' } }] } };
+export const LetterShortcuts: Story = { args: { items: shortcutItems, shortcuts: 'letters' } };
+export const NumberShortcuts: Story = { args: { items: shortcutItems, shortcuts: 'numbers' } };
+export const LongLabels: Story = { args: { items: [{ id: 'long', type: 'single', title: 'How should the team approach a particularly detailed migration?', options: [{ value: 'long', label: 'PrepareACompleteWorkspaceMigrationWithoutClippingLongLocalizedLabels', description: 'Keep every description visible while preserving normal native keyboard behavior.' }], other: { label: 'Describe another migration strategy', multiline: true } }] } };
+export const Narrow: Story = { ...LongLabels, decorators: [Story => <div style={{ maxWidth: 300 }}><Story /></div>] };
+export const BothThemes: Story = { render: () => <div className="theme-grid">{(['corporate', 'luna'] as const).map(theme => <section className="theme-panel" key={theme} data-theme={theme}><h2>{theme}</h2><QuestionnaireExample /></section>)}</div> };
+export const Luna: Story = { globals: { theme: 'luna' }, render: () => <QuestionnaireComposition /> };
+export const Empty: Story = { args: { items: [] } };

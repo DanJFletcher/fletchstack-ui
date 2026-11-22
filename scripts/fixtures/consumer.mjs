@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { Breadcrumbs, Menu, Callout, Table, createTableColumn, Combobox, Rating, Accordion, Chip, MultiSelect, AvatarGroup, Avatar, CodeBlock, ButtonGroup, Heading, Text, Section, AspectRatio, Badge, Button, SimpleGrid, Cluster, Container, Stack, Separator, Checkbox, Field, FieldDescription, FieldError, FieldLabel, FormGroup, Icon, Link, MoonIcon, Radio, Select, Spinner, Switch, TextInput, Textarea } from 'fletchstack-ui';
 import * as library from 'fletchstack-ui';
 
-assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'AppContent', 'AppShell', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'BottomNavigation', 'BounceCards', 'Breadcrumbs', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'Carousel', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'DataTable', 'Dialog', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'HelpIcon', 'HomeIcon', 'Icon', 'InboxIcon', 'Item', 'ItemActions', 'ItemContent', 'ItemDescription', 'ItemFooter', 'ItemGroup', 'ItemHeader', 'ItemMedia', 'ItemSeparator', 'ItemTitle', 'Kbd', 'KbdGroup', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'Navbar', 'PlusIcon', 'Popover', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Tabs', 'Text', 'TextInput', 'Textarea', 'Tooltip', 'createTableColumn']);
+assert.deepEqual(Object.keys(library).sort(), ['Accordion', 'AppContent', 'AppShell', 'ArrowRightIcon', 'AspectRatio', 'Avatar', 'AvatarGroup', 'Badge', 'BottomNavigation', 'BounceCards', 'Breadcrumbs', 'Button', 'ButtonGroup', 'Callout', 'Card', 'CardContent', 'CardDescription', 'CardFooter', 'CardHeader', 'CardMedia', 'CardTitle', 'Carousel', 'CheckIcon', 'Checkbox', 'ChevronDownIcon', 'Chip', 'CloseIcon', 'Cluster', 'CodeBlock', 'Combobox', 'Container', 'DataTable', 'Dialog', 'ExternalLinkIcon', 'Field', 'FieldDescription', 'FieldError', 'FieldLabel', 'FormGroup', 'Heading', 'HelpIcon', 'HomeIcon', 'Icon', 'InboxIcon', 'Item', 'ItemActions', 'ItemContent', 'ItemDescription', 'ItemFooter', 'ItemGroup', 'ItemHeader', 'ItemMedia', 'ItemSeparator', 'ItemTitle', 'Kbd', 'KbdGroup', 'Link', 'Menu', 'MoonIcon', 'MultiSelect', 'Navbar', 'PlusIcon', 'Popover', 'Progress', 'Questionnaire', 'Radio', 'Rating', 'Section', 'Select', 'Separator', 'SimpleGrid', 'Spinner', 'Stack', 'SunIcon', 'Switch', 'Table', 'Tabs', 'Text', 'TextInput', 'Textarea', 'Tooltip', 'createTableColumn']);
 const element = createElement(Button, { variant: 'secondary', size: 'small', 'aria-label': 'Save settings' }, 'Save');
 const contentElement = createElement('div', null, createElement(Heading, { as: 'h1', size: 'page' }, 'Project'), createElement(Text, { tone: 'muted' }, 'Updated yesterday'), createElement(Text, { as: 'span', size: 'small' }, 'Inline'));
 const contentMarkup = renderToString(contentElement);
@@ -314,3 +314,14 @@ assert.equal(kbdMarkup, '<kbd class="fs-kbd-group"><kbd class="fs-kbd">Ctrl</kbd
 const itemMarkup = renderToString(createElement(library.Item, { as: 'a', href: '/guide' }, createElement(library.ItemTitle, null, 'Guide')));
 assert.match(itemMarkup, /<a href="\/guide" class="fs-item fs-item--default fs-item--size-default"/);
 assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/item.css')), 'utf8').includes('--fs-item-padding'));
+
+const progressMarkup = renderToString(createElement(library.Progress, { value: 3, max: 8, label: 'Files uploaded' }));
+assert.equal(progressMarkup, renderToString(createElement(library.Progress, { value: 3, max: 8, label: 'Files uploaded' })));
+assert.match(progressMarkup, /role="progressbar" aria-label="Files uploaded" aria-valuemin="0" aria-valuemax="8" aria-valuenow="3"/);
+assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/progress.css')), 'utf8').includes('--fs-progress-indicator'));
+
+const questionnaireMarkup = renderToString(createElement(library.Questionnaire, { 'aria-label': 'Plan work', items: [{ id: 'direction', type: 'single', title: 'Choose a direction', options: [{ value: 'build', label: 'Build' }] }], onSubmit: () => {} }));
+assert.match(questionnaireMarkup, /<form[^>]*aria-label="Plan work"/);
+assert.match(questionnaireMarkup, /<legend[^>]*>Choose a direction<\/legend>/);
+assert.match(questionnaireMarkup, /type="radio"/);
+assert.ok(readFileSync(new URL(import.meta.resolve('fletchstack-ui/questionnaire.css')), 'utf8').includes('--fs-questionnaire-surface'));

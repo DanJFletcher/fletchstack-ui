@@ -658,3 +658,35 @@ export const resourceItem = <Item as="a" href="/guide" style={itemStyle}><ItemCo
 export const missingItemDestination = <Item as="a">Missing</Item>;
 // @ts-expect-error Sizes are constrained.
 export const invalidItemSize = <Item size="huge" />;
+
+import { Progress, type ProgressProps, type ProgressStyle, type ProgressSize } from 'fletchstack-ui';
+import 'fletchstack-ui/progress.css';
+const progressStyle: ProgressStyle = { '--fs-progress-height': '12px' };
+const progressSize: ProgressSize = 'small';
+const progressProps: ProgressProps = { value: 3, max: 8, label: 'Files uploaded', size: progressSize, style: progressStyle, getValueLabel: (value, max) => `${value} of ${max} files` };
+export const uploadProgress = <Progress {...progressProps} ref={createRef<HTMLDivElement>()} />;
+export const unknownProgress = <Progress value={undefined} label="Preparing files" />;
+// @ts-expect-error Numeric completion excludes string values.
+export const invalidProgressValue = <Progress value="50" />;
+// @ts-expect-error Progress owns its numeric accessibility attributes.
+export const conflictingProgressValue = <Progress aria-valuenow={50} />;
+// @ts-expect-error Progress owns its visual content.
+export const invalidProgressChildren = <Progress>Other content</Progress>;
+
+import { Questionnaire, type QuestionnaireProps, type QuestionnaireItem, type QuestionnaireAnswers, type QuestionnaireStyle, type QuestionnaireOption, type QuestionnaireTextField, type QuestionnaireAnswer, type QuestionnaireErrors, type QuestionnaireLabels } from 'fletchstack-ui';
+import 'fletchstack-ui/questionnaire.css';
+const questionnaireOption: QuestionnaireOption = { value: 'build', label: 'Build' };
+const questionnaireInput: QuestionnaireTextField = { label: 'Other direction', maxLength: 100 };
+const questionnaireItems: readonly QuestionnaireItem[] = [{ id: 'direction', type: 'single', title: 'Choose a direction', options: [questionnaireOption], other: questionnaireInput }];
+const questionnaireAnswer: QuestionnaireAnswer = { kind: 'choice', values: ['build'] };
+const questionnaireAnswers: QuestionnaireAnswers = { direction: questionnaireAnswer };
+const questionnaireStyle: QuestionnaireStyle = { '--fs-questionnaire-padding': '24px' };
+const questionnaireLabels: Partial<QuestionnaireLabels> = { submit: 'Save plan' };
+const questionnaireProps: QuestionnaireProps = { items: questionnaireItems, defaultAnswers: questionnaireAnswers, style: questionnaireStyle, labels: questionnaireLabels, validate: (): QuestionnaireErrors => ({}), onSubmit: async answers => { void answers; } };
+export const planningQuestionnaire = <Questionnaire {...questionnaireProps} ref={createRef<HTMLFormElement>()} />;
+// @ts-expect-error Submission is an answer callback, not a native form event.
+export const invalidQuestionnaireSubmit = <Questionnaire items={questionnaireItems} onSubmit={(event: React.FormEvent<HTMLFormElement>) => event.preventDefault()} />;
+// @ts-expect-error Choice questions require options.
+export const missingQuestionnaireOptions: QuestionnaireItem = { id: 'missing', type: 'single', title: 'Choose' };
+// @ts-expect-error Questionnaire owns document submission behavior.
+export const invalidQuestionnaireAction = <Questionnaire {...questionnaireProps} action="/save" />;

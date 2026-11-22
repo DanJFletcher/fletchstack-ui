@@ -779,6 +779,42 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-item-focus-color` | Item link keyboard focus outline. | color |
 | `--fs-item-focus-width` | Item link focus outline thickness. | dimension |
 | `--fs-item-focus-offset` | Item link focus outline clearance. | dimension |
+| `--fs-progress-track` | Progress track. | color |
+| `--fs-progress-indicator` | Progress indicator. | color |
+| `--fs-progress-text` | Progress text. | color |
+| `--fs-progress-radius` | Progress radius. | dimension |
+| `--fs-progress-gap` | Progress gap. | dimension |
+| `--fs-progress-height-small` | Small completion bar thickness. | dimension |
+| `--fs-progress-height-medium` | Medium completion bar thickness. | dimension |
+| `--fs-progress-height-large` | Large completion bar thickness. | dimension |
+| `--fs-progress-font-family` | Progress label and value font family. | fontFamily |
+| `--fs-progress-font-size` | Progress body font size. | dimension |
+| `--fs-progress-font-line-height` | Progress body line height. | number |
+| `--fs-questionnaire-surface` | Questionnaire surface. | color |
+| `--fs-questionnaire-card` | Questionnaire card. | color |
+| `--fs-questionnaire-selected` | Questionnaire selected. | color |
+| `--fs-questionnaire-text` | Questionnaire text. | color |
+| `--fs-questionnaire-muted` | Questionnaire muted. | color |
+| `--fs-questionnaire-border` | Questionnaire border. | color |
+| `--fs-questionnaire-selected-border` | Questionnaire selectedBorder. | color |
+| `--fs-questionnaire-disabled` | Questionnaire disabled. | color |
+| `--fs-questionnaire-error` | Questionnaire error. | color |
+| `--fs-questionnaire-padding` | Questionnaire padding. | dimension |
+| `--fs-questionnaire-gap` | Questionnaire gap. | dimension |
+| `--fs-questionnaire-choice-gap` | Questionnaire choiceGap. | dimension |
+| `--fs-questionnaire-choice-padding` | Questionnaire choicePadding. | dimension |
+| `--fs-questionnaire-radius` | Questionnaire radius. | dimension |
+| `--fs-questionnaire-card-radius` | Questionnaire cardRadius. | dimension |
+| `--fs-questionnaire-border-width` | Questionnaire borderWidth. | dimension |
+| `--fs-questionnaire-min-height` | Questionnaire minHeight. | dimension |
+| `--fs-questionnaire-font-family` | Questionnaire body and title font family. | fontFamily |
+| `--fs-questionnaire-font-size` | Questionnaire body font size. | dimension |
+| `--fs-questionnaire-font-line-height` | Questionnaire body line height. | number |
+| `--fs-questionnaire-title-font-size` | Question title size. | dimension |
+| `--fs-questionnaire-title-font-weight` | Question title emphasis. | fontWeight |
+| `--fs-questionnaire-focus-color` | Link keyboard focus outline. | color |
+| `--fs-questionnaire-focus-width` | Link focus outline thickness. | dimension |
+| `--fs-questionnaire-focus-offset` | Link focus outline clearance. | dimension |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

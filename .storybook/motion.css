@@ -31,3 +31,7 @@ html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__card { an
 html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item { transition: transform calc(var(--fs-motion-duration-standard) * 2) var(--fs-motion-easing-enter); }
 html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item[data-inspected="true"] .fs-bounce-cards__card { animation: none; }
 html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item:focus-within { transition: none; }
+
+html[data-fs-preview-motion="reduced"] .fs-progress .fs-progress__indicator { animation: none; transition: none; }
+html[data-fs-preview-motion="full"] .fs-progress .fs-progress__indicator { transition: inline-size var(--fs-motion-duration-standard) var(--fs-motion-easing-standard); }
+html[data-fs-preview-motion="full"] .fs-progress[data-state="indeterminate"] .fs-progress__indicator { animation: fs-progress-loading calc(var(--fs-motion-duration-spinner) * 1.5) linear infinite; transition: none; }

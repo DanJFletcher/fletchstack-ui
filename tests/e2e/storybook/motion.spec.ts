@@ -81,3 +81,15 @@ for (const mode of ['system', 'reduced', 'full'] as const) {
     await expect(preview.locator('.fs-bounce-cards__card').first()).toHaveCSS('animation-name', 'none');
   });
 }
+
+for (const mode of ['system', 'reduced', 'full'] as const) {
+  test(`progress honors ${mode} Storybook motion preview`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(`/?path=/story/components-progress--indeterminate&globals=motion:${mode}`);
+    const preview = page.frameLocator('#storybook-preview-iframe');
+    await expect(preview.locator('.fs-progress__indicator')).toHaveCSS('animation-name', mode === 'full' ? 'fs-progress-loading' : 'none');
+    await expect(preview.getByRole('progressbar')).not.toHaveAttribute('aria-valuenow');
+    await page.goto(`/?path=/story/components-progress--playground&globals=motion:${mode}`);
+    await expect(preview.locator('.fs-progress__indicator')).toHaveCSS('transition-duration', mode === 'full' ? '0.16s' : '0s');
+  });
+}

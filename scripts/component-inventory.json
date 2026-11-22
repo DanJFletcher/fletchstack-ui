@@ -1069,6 +1069,67 @@
       "style": "src/components/item/item.css",
       "category": "Data display",
       "examples": "src/components/item/stories/item-examples.tsx"
+    },
+    {
+      "slug": "progress",
+      "entry": "src/components/progress/index.ts",
+      "exports": {
+        "runtime": [
+          "Progress"
+        ],
+        "types": [
+          "ProgressProps",
+          "ProgressStyle",
+          "ProgressSize"
+        ]
+      },
+      "modules": [
+        "src/components/progress/Progress.tsx"
+      ],
+      "style": "src/components/progress/progress.css",
+      "category": "Feedback",
+      "examples": "src/components/progress/stories/progress-examples.tsx"
+    },
+    {
+      "slug": "questionnaire",
+      "entry": "src/components/questionnaire/index.ts",
+      "exports": {
+        "runtime": [
+          "Questionnaire"
+        ],
+        "types": [
+          "QuestionnaireStyle",
+          "QuestionnaireOption",
+          "QuestionnaireTextField",
+          "QuestionnaireItem",
+          "QuestionnaireAnswer",
+          "QuestionnaireAnswers",
+          "QuestionnaireErrors",
+          "QuestionnaireLabels",
+          "QuestionnaireProps"
+        ]
+      },
+      "modules": [
+        "src/components/questionnaire/Questionnaire.tsx",
+        "src/components/questionnaire/QuestionnaireFields.tsx",
+        "src/components/questionnaire/QuestionnaireView.tsx",
+        "src/components/questionnaire/actions.ts",
+        "src/components/questionnaire/answers.ts",
+        "src/components/questionnaire/definitions.ts",
+        "src/components/questionnaire/focus.ts",
+        "src/components/questionnaire/labels.ts",
+        "src/components/questionnaire/model.ts",
+        "src/components/questionnaire/shortcuts.ts",
+        "src/components/questionnaire/types.ts",
+        "src/components/questionnaire/useQuestionnaire.ts",
+        "src/components/questionnaire/useQuestionnaireState.ts",
+        "src/components/questionnaire/useQuestionnaireSubmission.ts",
+        "src/components/questionnaire/useQuestionnaireValidation.ts",
+        "src/components/questionnaire/validation.ts"
+      ],
+      "style": "src/components/questionnaire/questionnaire.css",
+      "category": "Forms",
+      "examples": "src/components/questionnaire/stories/questionnaire-examples.tsx"
     }
   ],
   "internalModules": [

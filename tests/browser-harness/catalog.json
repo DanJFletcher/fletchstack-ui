@@ -1759,6 +1759,46 @@
     "components-questionnaire--shortcuts": {
       "module": "tests/browser-harness/scenarios/Questionnaire.tsx",
       "export": "Shortcuts"
+    },
+    "components-toast--playground": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "Playground"
+    },
+    "components-toast--composition": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "Composition"
+    },
+    "components-toast--controlled": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "Controlled"
+    },
+    "components-toast--timed": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "Timed"
+    },
+    "components-toast--interactive-queue": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "InteractiveQueue"
+    },
+    "components-toast--narrow": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "Narrow"
+    },
+    "components-toast--scoped-overrides": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "ScopedOverrides"
+    },
+    "components-toast--tones": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "Tones"
+    },
+    "components-toast--positions": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "Positions"
+    },
+    "components-toast--positioned-stack": {
+      "module": "tests/browser-harness/scenarios/Toast.tsx",
+      "export": "PositionedStack"
     }
   },
   "suites": [
@@ -2640,6 +2680,22 @@
         "components-questionnaire--resume",
         "components-questionnaire--text",
         "components-questionnaire--shortcuts"
+      ]
+    },
+    {
+      "project": "components",
+      "file": "tests/browser-harness/specs/toast/Toast.spec.ts",
+      "scenarios": [
+        "components-toast--playground",
+        "components-toast--composition",
+        "components-toast--controlled",
+        "components-toast--timed",
+        "components-toast--interactive-queue",
+        "components-toast--narrow",
+        "components-toast--scoped-overrides",
+        "components-toast--tones",
+        "components-toast--positions",
+        "components-toast--positioned-stack"
       ]
     }
   ],

@@ -138,3 +138,9 @@ Owner: [Kbd browser tests](browser-harness/specs/kbd/Kbd.spec.ts). Verify both-t
 | Progress | Measured fill, native control updates, indeterminate and live reduced motion, RTL, theme contrast, wrapping and overrides | `tests/browser-harness/specs/progress/Progress.spec.ts` |
 
 | Questionnaire | Native single/multiple/text answers, explicit Next/Skip/Submit, controlled drafts/navigation, pending/retry, reset and scoped shortcuts | Full keyboard flow, textarea newline, native radio arrows, pending locks, saved reset, theme inheritance, 320px enlarged and spaced text | `specs/questionnaire/Questionnaire.spec.ts` |
+
+## Toast
+
+Owner: [Toast browser suite](./browser-harness/specs/toast/Toast.spec.ts). Verifies focus-neutral opening, native Tab/Enter/Space actions, Escape and button dismissal with focus restoration, controlled visibility, bounded consumer-owned stacking, deterministic remaining-time pauses across pointer/focus interaction, inherited theme contrast, scoped overrides, forced colors, reduced-motion immediate removal, and 320px reflow with 200% text and spacing overrides. DOM/hydration contracts independently exercise background-tab pauses, initial/controlled state, refs, native props, announcement updates and timer cleanup. Static docs remain inline and silent; interactive notifications require activation. Installed React 18/19 consumers verify public types, exports, CSS and deterministic server output. Screen-reader speech and physical-device testing remain manual gaps.
+
+Toast position follow-up: the Toast browser suite owns standalone/stack placement at eight page edges, narrow centering, RTL logical/physical placement, directional entrance/reopening, and live reduced motion. Retained Storybook motion tests own preview overrides.

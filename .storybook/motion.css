@@ -35,3 +35,6 @@ html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item:focu
 html[data-fs-preview-motion="reduced"] .fs-progress .fs-progress__indicator { animation: none; transition: none; }
 html[data-fs-preview-motion="full"] .fs-progress .fs-progress__indicator { transition: inline-size var(--fs-motion-duration-standard) var(--fs-motion-easing-standard); }
 html[data-fs-preview-motion="full"] .fs-progress[data-state="indeterminate"] .fs-progress__indicator { animation: fs-progress-loading calc(var(--fs-motion-duration-spinner) * 1.5) linear infinite; transition: none; }
+
+html[data-fs-preview-motion="reduced"] .fs-toast { animation: none; }
+html[data-fs-preview-motion="full"] .fs-toast { animation: fs-toast-enter var(--fs-motion-duration-standard) var(--fs-motion-easing-enter) both; }

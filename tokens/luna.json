@@ -4365,6 +4365,204 @@
           "$description": "Link focus outline clearance."
         }
       }
+    },
+    "toast": {
+      "info": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.infoNight}",
+          "$description": "Notification info guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable info guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.lavender}",
+          "$description": "Leading accent and decorative info artwork."
+        }
+      },
+      "success": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.greenNight}",
+          "$description": "Notification success guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable success guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.greenPale}",
+          "$description": "Leading accent and decorative success artwork."
+        }
+      },
+      "warning": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.galleryNightPanel}",
+          "$description": "Notification warning guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable warning guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.ratingGoldNight}",
+          "$description": "Leading accent and decorative warning artwork."
+        }
+      },
+      "error": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.redNight}",
+          "$description": "Notification error guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable error guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.errorNight}",
+          "$description": "Leading accent and decorative error artwork."
+        }
+      },
+      "neutral": {
+        "surface": {
+          "$type": "color",
+          "$value": "{primitive.violet}",
+          "$description": "Notification neutral guidance surface."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{primitive.pale}",
+          "$description": "Readable neutral guidance text."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{primitive.nightMuted}",
+          "$description": "Leading accent and decorative neutral artwork."
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Notification corner radius."
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Toast paddingBlock for compact action feedback."
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "{primitive.px16}",
+        "$description": "Toast paddingInline for compact action feedback."
+      },
+      "iconGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px12}",
+        "$description": "Toast iconGap for compact action feedback."
+      },
+      "contentGap": {
+        "$type": "dimension",
+        "$value": "{primitive.px8}",
+        "$description": "Toast contentGap for compact action feedback."
+      },
+      "borderWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px1}",
+        "$description": "Toast borderWidth for compact action feedback."
+      },
+      "accentWidth": {
+        "$type": "dimension",
+        "$value": "{primitive.px4}",
+        "$description": "Notification leading accent."
+      },
+      "iconSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px24}",
+        "$description": "Toast iconSize for compact action feedback."
+      },
+      "font": {
+        "family": {
+          "$type": "fontFamily",
+          "$value": "{primitive.sans}",
+          "$description": "Toast family typography."
+        },
+        "size": {
+          "$type": "dimension",
+          "$value": "{primitive.medium}",
+          "$description": "Toast size typography."
+        },
+        "weight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.regular}",
+          "$description": "Toast weight typography."
+        },
+        "titleWeight": {
+          "$type": "fontWeight",
+          "$value": "{primitive.bold}",
+          "$description": "Toast titleWeight typography."
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{primitive.lineHeight}",
+          "$description": "Toast lineHeight typography."
+        }
+      },
+      "dismissSize": {
+        "$type": "dimension",
+        "$value": "{primitive.px32}",
+        "$description": "Dismiss button minimum target."
+      },
+      "focus": {
+        "color": {
+          "$type": "color",
+          "$value": "{primitive.gold}",
+          "$description": "Link keyboard focus outline."
+        },
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Link focus outline thickness."
+        },
+        "offset": {
+          "$type": "dimension",
+          "$value": "{primitive.px3}",
+          "$description": "Link focus outline clearance."
+        }
+      },
+      "viewport": {
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.px400}",
+          "$description": "Maximum stack width."
+        },
+        "inset": {
+          "$type": "dimension",
+          "$value": "{primitive.px16}",
+          "$description": "Minimum viewport edge clearance."
+        },
+        "gap": {
+          "$type": "dimension",
+          "$value": "{primitive.px12}",
+          "$description": "Space between notifications."
+        },
+        "layer": {
+          "$type": "number",
+          "$value": "{primitive.notificationLayer}",
+          "$description": "Nonmodal notification stacking level."
+        }
+      }
     }
   }
 }

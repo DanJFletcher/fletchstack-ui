@@ -947,6 +947,11 @@
         "value": 288,
         "unit": "px"
       }
+    },
+    "notificationLayer": {
+      "$type": "number",
+      "$value": 50,
+      "$description": "Nonmodal notification stack above page content."
     }
   }
 }

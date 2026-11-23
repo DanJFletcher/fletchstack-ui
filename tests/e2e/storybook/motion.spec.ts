@@ -93,3 +93,14 @@ for (const mode of ['system', 'reduced', 'full'] as const) {
     await expect(preview.locator('.fs-progress__indicator')).toHaveCSS('transition-duration', mode === 'full' ? '0.16s' : '0s');
   });
 }
+
+for (const mode of ['system', 'reduced', 'full'] as const) {
+  test(`toast honors ${mode} Storybook motion preview`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(`/?path=/story/components-toast--playground&globals=motion:${mode}`);
+    const preview = page.frameLocator('#storybook-preview-iframe');
+    await expect(preview.locator('.fs-toast')).toHaveCSS('animation-name', mode === 'full' ? 'fs-toast-enter' : 'none');
+    await preview.getByRole('button', { name: 'Dismiss notification' }).click();
+    await expect(preview.locator('.fs-toast')).toBeHidden();
+  });
+}

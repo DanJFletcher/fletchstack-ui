@@ -690,3 +690,22 @@ export const invalidQuestionnaireSubmit = <Questionnaire items={questionnaireIte
 export const missingQuestionnaireOptions: QuestionnaireItem = { id: 'missing', type: 'single', title: 'Choose' };
 // @ts-expect-error Questionnaire owns document submission behavior.
 export const invalidQuestionnaireAction = <Questionnaire {...questionnaireProps} action="/save" />;
+
+import { Toast, ToastViewport, type ToastProps, type ToastStyle, type ToastTone, type ToastAnnouncement, type ToastPosition, type ToastViewportProps } from 'fletchstack-ui';
+import 'fletchstack-ui/toast.css';
+const toastTone: ToastTone = 'success';
+const toastAnnouncement: ToastAnnouncement = 'polite';
+const toastPosition: ToastPosition = 'bottom-end';
+const toastStyle: ToastStyle = { '--fs-toast-radius': '12px' };
+const toastProps: ToastProps = { children: 'Saved.', title: 'Project saved', tone: toastTone, announcement: toastAnnouncement, duration: 5000, onOpenChange: open => { void open; }, style: toastStyle };
+const viewportProps: ToastViewportProps = { position: toastPosition, inline: true, 'aria-label': 'Updates' };
+export const notification = <ToastViewport {...viewportProps} ref={createRef<HTMLDivElement>()}><Toast {...toastProps} ref={createRef<HTMLDivElement>()} action={<Button>Undo</Button>} /></ToastViewport>;
+// @ts-expect-error Tone does not determine notification urgency.
+export const invalidToastTone = <Toast tone="alert">Message</Toast>;
+// @ts-expect-error Toast owns live-region semantics through announcement.
+export const invalidToastRole = <Toast role="alert">Message</Toast>;
+
+const toastPositions: ToastPosition[] = ['top', 'top-right', 'right', 'bottom-right', 'bottom', 'bottom-left', 'left', 'top-left', 'top-start', 'top-end', 'bottom-start', 'bottom-end'];
+export const positionedNotifications = toastPositions.map(position => <Toast key={position} position={position}>Saved</Toast>);
+// @ts-expect-error Only documented page positions are supported.
+export const invalidToastPosition = <Toast position="center">Saved</Toast>;

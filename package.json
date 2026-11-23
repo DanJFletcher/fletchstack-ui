@@ -65,7 +65,8 @@
     "./kbd.css": "./dist/kbd.css",
     "./item.css": "./dist/item.css",
     "./progress.css": "./dist/progress.css",
-    "./questionnaire.css": "./dist/questionnaire.css"
+    "./questionnaire.css": "./dist/questionnaire.css",
+    "./toast.css": "./dist/toast.css"
   },
   "files": [
     "dist",

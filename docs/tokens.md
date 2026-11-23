@@ -815,6 +815,42 @@ Generated from the Corporate contract; every theme supplies every property. Valu
 | `--fs-questionnaire-focus-color` | Link keyboard focus outline. | color |
 | `--fs-questionnaire-focus-width` | Link focus outline thickness. | dimension |
 | `--fs-questionnaire-focus-offset` | Link focus outline clearance. | dimension |
+| `--fs-toast-info-surface` | Notification info guidance surface. | color |
+| `--fs-toast-info-text` | Readable info guidance text. | color |
+| `--fs-toast-info-accent` | Leading accent and decorative info artwork. | color |
+| `--fs-toast-success-surface` | Notification success guidance surface. | color |
+| `--fs-toast-success-text` | Readable success guidance text. | color |
+| `--fs-toast-success-accent` | Leading accent and decorative success artwork. | color |
+| `--fs-toast-warning-surface` | Notification warning guidance surface. | color |
+| `--fs-toast-warning-text` | Readable warning guidance text. | color |
+| `--fs-toast-warning-accent` | Leading accent and decorative warning artwork. | color |
+| `--fs-toast-error-surface` | Notification error guidance surface. | color |
+| `--fs-toast-error-text` | Readable error guidance text. | color |
+| `--fs-toast-error-accent` | Leading accent and decorative error artwork. | color |
+| `--fs-toast-neutral-surface` | Notification neutral guidance surface. | color |
+| `--fs-toast-neutral-text` | Readable neutral guidance text. | color |
+| `--fs-toast-neutral-accent` | Leading accent and decorative neutral artwork. | color |
+| `--fs-toast-radius` | Notification corner radius. | dimension |
+| `--fs-toast-padding-block` | Toast paddingBlock for compact action feedback. | dimension |
+| `--fs-toast-padding-inline` | Toast paddingInline for compact action feedback. | dimension |
+| `--fs-toast-icon-gap` | Toast iconGap for compact action feedback. | dimension |
+| `--fs-toast-content-gap` | Toast contentGap for compact action feedback. | dimension |
+| `--fs-toast-border-width` | Toast borderWidth for compact action feedback. | dimension |
+| `--fs-toast-accent-width` | Notification leading accent. | dimension |
+| `--fs-toast-icon-size` | Toast iconSize for compact action feedback. | dimension |
+| `--fs-toast-font-family` | Toast family typography. | fontFamily |
+| `--fs-toast-font-size` | Toast size typography. | dimension |
+| `--fs-toast-font-weight` | Toast weight typography. | fontWeight |
+| `--fs-toast-font-title-weight` | Toast titleWeight typography. | fontWeight |
+| `--fs-toast-font-line-height` | Toast lineHeight typography. | number |
+| `--fs-toast-dismiss-size` | Dismiss button minimum target. | dimension |
+| `--fs-toast-focus-color` | Link keyboard focus outline. | color |
+| `--fs-toast-focus-width` | Link focus outline thickness. | dimension |
+| `--fs-toast-focus-offset` | Link focus outline clearance. | dimension |
+| `--fs-toast-viewport-width` | Maximum stack width. | dimension |
+| `--fs-toast-viewport-inset` | Minimum viewport edge clearance. | dimension |
+| `--fs-toast-viewport-gap` | Space between notifications. | dimension |
+| `--fs-toast-viewport-layer` | Nonmodal notification stacking level. | number |
 
 Override these properties on a containing element or on Button via style/className. Load override styles after the library. A nested explicit theme resets the contract. Do not use internal primitive names.
 

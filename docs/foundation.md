@@ -219,3 +219,7 @@ The supplied Questionnaire proposal and PDF establish a data-driven, one-questio
 ## Sequential questionnaires
 
 The supplied Questionnaire design and application contract establish a one-question form flow using native choice and text controls. Choices never auto-advance. Optional questions distinguish explicit skip from unanswered; Next validates the current question and Submit validates all. The component owns drafts, independent controlled navigation, error focus and guarded pending/retry states; the application owns persistence and success navigation. Corporate and Luna alias questionnaire surfaces, selected/disabled states, borders, typography, spacing and focus to existing primitives. Focus rings remain distinct from selection. No transition is introduced. See [Questionnaire](questionnaire.md) for the approved API, normalization and keyboard rules.
+
+## Toast notifications
+
+Toast reports action outcomes without taking focus. It reuses the five feedback tones with independent polite/assertive/off announcements. Persistent by default; opt-in timeouts pause for hover, focus, and background tabs. The requested position API supports eight physical page edges/corners plus logical start/end corners. A separate viewport owns stack placement, or a standalone toast can opt into fixed placement. Applications own queues and actions. Entrances fade and slide using standard duration and enter easing; reduced motion and dismissal are immediate. See [Toast](./toast.md) for the contract and timing guidance.

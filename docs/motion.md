@@ -68,3 +68,7 @@ Carousel translates slides with standard duration/easing. Inactive content becom
 BounceCards uses a one-time scale entrance lasting three slow durations, staggered by caller-supplied seconds. Overshoot is bounded by `bounciness`. Inspection moves use two standard durations and enter easing; native keyboard focus removes the entrance and position transition immediately. Live reduced motion removes both animations and transitions while preserving the photo fan, actions and focus. Storybook Full/Reduced modes cover these CSS effects without adding a consumer override.
 
 Progress updates its accessible value immediately and transitions measured fill with standard duration/easing. Unknown completion moves a segment using1.5 spinner durations with linear timing and logical inline positioning (including RTL). Live reduced motion removes the transition/animation while keeping a static centered segment and an unknown-value accessible description. Storybook Full/Reduced previews affect only these CSS effects.
+
+## Toast entrance
+
+Toast uses the standard duration and enter easing for a short fade and translation from its selected page edge. Travel is the semantic toast viewport inset. Unpositioned cards rise into their parent layout. Reduced motion removes the animation, including live changes. Dismissal and focus restoration are immediate. Storybook supports System, Reduced and Full previews; position examples start closed. See [Toast](./toast.md).

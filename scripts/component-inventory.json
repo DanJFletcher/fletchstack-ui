@@ -1130,6 +1130,35 @@
       "style": "src/components/questionnaire/questionnaire.css",
       "category": "Forms",
       "examples": "src/components/questionnaire/stories/questionnaire-examples.tsx"
+    },
+    {
+      "slug": "toast",
+      "entry": "src/components/toast/index.ts",
+      "exports": {
+        "runtime": [
+          "Toast",
+          "ToastViewport"
+        ],
+        "types": [
+          "ToastProps",
+          "ToastStyle",
+          "ToastTone",
+          "ToastAnnouncement",
+          "ToastPosition",
+          "ToastViewportProps"
+        ]
+      },
+      "modules": [
+        "src/components/toast/Toast.tsx",
+        "src/components/toast/ToastViewport.tsx",
+        "src/components/toast/ToastMessage.tsx",
+        "src/components/toast/useToast.ts",
+        "src/components/toast/timer.ts",
+        "src/components/toast/types.ts"
+      ],
+      "style": "src/components/toast/toast.css",
+      "category": "Feedback",
+      "examples": "src/components/toast/stories/toast-examples.tsx"
     }
   ],
   "internalModules": [

@@ -137,6 +137,7 @@ it('selects direct and transitive Button consumers, while excluding unrelated ha
     'tests/browser-harness/specs/tabs/Tabs.spec.ts',
     'tests/browser-harness/specs/textarea/Textarea.spec.ts',
     'tests/browser-harness/specs/themes/themes.spec.ts',
+    'tests/browser-harness/specs/toast/Toast.spec.ts',
     'tests/browser-harness/specs/tooltip/Tooltip.spec.ts',
     'tests/browser-harness/specs/typography/Typography.spec.ts',
   ]);
@@ -188,7 +189,7 @@ it.each([
   ['src/components/avatar/avatar.css', ['avatar/Avatar', 'item/Item']],
   ['src/components/avatar/stories/portrait.svg', ['avatar/Avatar']],
   ['stories/foundations/spatial.stories.css', ['spatial/SpatialSystem']],
-  ['src/components/icon/named/CheckIcon.tsx', ['badge/Badge', 'checkbox/Checkbox', 'chip/Chip', 'field/Field', 'form-group/FormGroup', 'icon/Icon', 'icon/IconGallery', 'questionnaire/Questionnaire', 'section/Section', 'simple-grid/SimpleGrid', 'spatial/SpatialSystem', 'stack/Stack', 'table/Table']],
+  ['src/components/icon/named/CheckIcon.tsx', ['badge/Badge', 'checkbox/Checkbox', 'chip/Chip', 'field/Field', 'form-group/FormGroup', 'icon/Icon', 'icon/IconGallery', 'questionnaire/Questionnaire', 'section/Section', 'simple-grid/SimpleGrid', 'spatial/SpatialSystem', 'stack/Stack', 'table/Table', 'toast/Toast']],
   ['src/components/link/Link.tsx', ['dialog/Dialog', 'link/Link', 'popover/Popover', 'typography/Typography']],
   ['src/components/link/link.css', ['dialog/Dialog', 'link/Link', 'popover/Popover', 'typography/Typography']],
   ['src/components/icon/named/ArrowRightIcon.tsx', ['icon/Icon', 'icon/IconGallery', 'kbd/Kbd', 'link/Link']],

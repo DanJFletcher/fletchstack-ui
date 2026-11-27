@@ -23,11 +23,11 @@ npm run test:e2e:storybook -- tests/e2e/components/aspect-ratio --workers=3
 npm run test:e2e:components -- tests/browser-harness/specs/aspect-ratio --workers=3
 ```
 
-| Measurement | Storybook | Harness |
-| --- | ---: | ---: |
-| Passing cases | 20 | 20 |
-| Command wall time | 26.08s | 8.46s |
-| Runner duration | 25.4s | 7.8s |
+| Measurement       | Storybook | Harness |
+| ----------------- | --------: | ------: |
+| Passing cases     |        20 |      20 |
+| Command wall time |    26.08s |   8.46s |
+| Runner duration   |     25.4s |    7.8s |
 
 Observed wall time fell **67.6% (3.08×)**. This is one before/after observation with existing caches and ordinary managed-server startup, not a median, cold-start benchmark or full-suite speedup claim. Logs are under ignored `.verification/aspect-ratio-migration/`.
 

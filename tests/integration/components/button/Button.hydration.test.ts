@@ -11,14 +11,23 @@ let css: string;
 
 beforeAll(async () => {
   script = await buildHydrationFixture();
-  css = await readFile(new URL('../../../../src/generated/tokens.css', import.meta.url), 'utf8') + await readFile(new URL('../../../../src/components/button/button.css', import.meta.url), 'utf8');
+  css =
+    (await readFile(new URL('../../../../src/generated/tokens.css', import.meta.url), 'utf8')) +
+    (await readFile(
+      new URL('../../../../src/components/button/button.css', import.meta.url),
+      'utf8',
+    ));
 });
 
 test.beforeEach(async ({ page, errors }) => {
   const markup = renderToString(createElement(ButtonApp));
-  await page.setContent(`<!doctype html><html lang="en"><head><style>${css}</style></head><body><div id="root">${markup}</div></body></html>`);
+  await page.setContent(
+    `<!doctype html><html lang="en"><head><style>${css}</style></head><body><div id="root">${markup}</div></body></html>`,
+  );
   await page.addScriptTag({ content: script });
-  if (errors.length > 0) { throw new Error(errors.join('\n')); }
+  if (errors.length > 0) {
+    throw new Error(errors.join('\n'));
+  }
   await page.locator('[data-hydrated="true"]').waitFor();
 });
 
@@ -81,7 +90,7 @@ test('an explicit reset Button restores a native field value', async ({ page }) 
 test('a disabled Button ignores pointer activation', async ({ page }) => {
   // arrange
   const button = page.getByRole('button', { name: 'Unavailable' });
-  const point = await button.evaluate(element => {
+  const point = await button.evaluate((element) => {
     const bounds = element.getBoundingClientRect();
     return { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 };
   });
@@ -102,7 +111,11 @@ test('Tab navigation skips a disabled Button', async ({ page }) => {
   await page.keyboard.press('Tab');
 
   // assert
-  expect(await page.getByRole('button', { name: 'Add item' }).evaluate(button => button === document.activeElement)).toBe(true);
+  expect(
+    await page
+      .getByRole('button', { name: 'Add item' })
+      .evaluate((button) => button === document.activeElement),
+  ).toBe(true);
 });
 
 test('a consumer can focus the native button through its forwarded ref', async ({ page }) => {
@@ -132,7 +145,7 @@ test('semantic style overrides survive hydration', async ({ page }) => {
   const button = page.locator('.consumer-action');
 
   // act
-  const result = await button.evaluate(element => getComputedStyle(element).borderRadius);
+  const result = await button.evaluate((element) => getComputedStyle(element).borderRadius);
 
   // assert
   expect(result).toBe('0px');
@@ -143,16 +156,23 @@ test.for([
   { theme: 'luna', color: 'rgb(242, 213, 139)' },
 ])('keyboard focus has a visible indicator in $theme', async ({ theme, color }, { page }) => {
   // arrange
-  await page.locator('html').evaluate((element, value) => { element.dataset['theme'] = value; }, theme);
+  await page.locator('html').evaluate((element, value) => {
+    element.dataset['theme'] = value;
+  }, theme);
   await page.getByLabel('Title').focus();
 
   // act
   await page.keyboard.press('Tab');
 
   // assert
-  const result = await page.getByRole('button', { name: 'Save draft' }).evaluate(button => {
+  const result = await page.getByRole('button', { name: 'Save draft' }).evaluate((button) => {
     const style = getComputedStyle(button);
-    return { visible: button.matches(':focus-visible'), width: style.outlineWidth, style: style.outlineStyle, color: style.outlineColor };
+    return {
+      visible: button.matches(':focus-visible'),
+      width: style.outlineWidth,
+      style: style.outlineStyle,
+      color: style.outlineColor,
+    };
   });
   expect(result).toEqual({ visible: true, width: '3px', style: 'solid', color });
 });

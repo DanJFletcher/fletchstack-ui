@@ -1,8 +1,13 @@
 import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
 
 export type NavbarMobilePlacement = 'bar' | 'menu';
-export type NavbarStyle = CSSProperties & { [token: `--fs-${string}`]: string | number | undefined };
-export type NavbarProps = Omit<ComponentPropsWithoutRef<'nav'>, 'children' | 'style' | 'dangerouslySetInnerHTML'> & {
+export type NavbarStyle = CSSProperties & {
+  [token: `--fs-${string}`]: string | number | undefined;
+};
+export type NavbarProps = Omit<
+  ComponentPropsWithoutRef<'nav'>,
+  'children' | 'style' | 'dangerouslySetInnerHTML'
+> & {
   children: ReactNode;
   style?: NavbarStyle;
   /** Label for the compact menu trigger. Defaults to "Menu". */

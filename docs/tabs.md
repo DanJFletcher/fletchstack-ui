@@ -11,21 +11,21 @@ const items: TabsItem[] = [
   { id: 'activity', label: 'Activity', content: <ActivityFeed /> },
   { id: 'settings', label: 'Settings', content: <Settings />, disabled: true },
 ];
-<Tabs label="Workspace" items={items} defaultValue="overview" />
+<Tabs label="Workspace" items={items} defaultValue="overview" />;
 ```
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| label | string; accessible name of the tablist | required |
-| items | readonly TabsItem[] | required |
-| value / defaultValue | item ID | first enabled item |
-| onValueChange | (id: string) => void | — |
-| variant | 'line' or 'pills' | 'line' |
-| orientation | 'horizontal' or 'vertical' | 'horizontal' |
-| activationMode | 'automatic' or 'manual' | 'automatic' |
-| fullWidth | boolean; distributes horizontal tabs when they fit | false |
-| style | TabsStyle; CSSProperties plus `--fs-*` overrides | — |
-| ref / native div props | HTMLDivElement / native attributes and handlers | forwarded |
+| Prop                   | Type                                               | Default            |
+| ---------------------- | -------------------------------------------------- | ------------------ |
+| label                  | string; accessible name of the tablist             | required           |
+| items                  | readonly TabsItem[]                                | required           |
+| value / defaultValue   | item ID                                            | first enabled item |
+| onValueChange          | (id: string) => void                               | —                  |
+| variant                | 'line' or 'pills'                                  | 'line'             |
+| orientation            | 'horizontal' or 'vertical'                         | 'horizontal'       |
+| activationMode         | 'automatic' or 'manual'                            | 'automatic'        |
+| fullWidth              | boolean; distributes horizontal tabs when they fit | false              |
+| style                  | TabsStyle; CSSProperties plus `--fs-*` overrides   | —                  |
+| ref / native div props | HTMLDivElement / native attributes and handlers    | forwarded          |
 
 Exports: Tabs, TabsProps, TabsItem, TabsStyle. An item has a unique nonempty `id`, visible `label: ReactNode`, `content: ReactNode`, and optional `disabled`. Labels must convey text and contain no interactive descendants. Decorative icons can accompany labels. `id` on the root remains consumer-owned; internal tab/panel relationships use stable per-instance IDs. Blank list names and duplicate/blank item IDs are rejected.
 

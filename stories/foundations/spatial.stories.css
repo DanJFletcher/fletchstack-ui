@@ -1,16 +1,61 @@
 /* Spatial documentation uses parent layout roles, not component-owned margins. */
-.spatial-demo, .spatial-demo * { min-inline-size: 0; box-sizing: border-box; }
-.spatial-demo { overflow-wrap: anywhere; }
-.spatial-stack { display: grid; gap: var(--fs-space-stack-group); }
-.spatial-demo h1, .spatial-demo h2, .spatial-demo p { margin: 0; }
-.spatial-panel { padding: var(--fs-space-inset-container); }
-.spatial-actions { display: flex; flex-wrap: wrap; gap: var(--fs-space-gap-actions); }
-.spatial-field { display: grid; gap: var(--fs-space-gap-label); justify-items: start; }
-.spatial-select { font: inherit; padding: var(--fs-space-inset); max-inline-size: 100%; }
-.spatial-scale { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--fs-space-gap-label); }
-.spatial-scale li { display: grid; grid-template-columns: max-content minmax(0, 1fr); align-items: center; gap: var(--fs-space-gap-related); }
-.spatial-scale meter { inline-size: 100%; }
-.spatial-responsive { display: grid; gap: var(--fs-layout-section-gap); }
+.spatial-demo,
+.spatial-demo * {
+  min-inline-size: 0;
+  box-sizing: border-box;
+}
+.spatial-demo {
+  overflow-wrap: anywhere;
+}
+.spatial-stack {
+  display: grid;
+  gap: var(--fs-space-stack-group);
+}
+.spatial-demo h1,
+.spatial-demo h2,
+.spatial-demo p {
+  margin: 0;
+}
+.spatial-panel {
+  padding: var(--fs-space-inset-container);
+}
+.spatial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fs-space-gap-actions);
+}
+.spatial-field {
+  display: grid;
+  gap: var(--fs-space-gap-label);
+  justify-items: start;
+}
+.spatial-select {
+  font: inherit;
+  padding: var(--fs-space-inset);
+  max-inline-size: 100%;
+}
+.spatial-scale {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--fs-space-gap-label);
+}
+.spatial-scale li {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: var(--fs-space-gap-related);
+}
+.spatial-scale meter {
+  inline-size: 100%;
+}
+.spatial-responsive {
+  display: grid;
+  gap: var(--fs-layout-section-gap);
+}
 @media (max-width: 600px) {
-  .spatial-responsive { --fs-layout-section-gap: 32px; }
+  .spatial-responsive {
+    --fs-layout-section-gap: 32px;
+  }
 }

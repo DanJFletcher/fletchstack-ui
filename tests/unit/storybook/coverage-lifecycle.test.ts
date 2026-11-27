@@ -57,7 +57,11 @@ it('still collects diagnostics after the test fails', async () => {
   const coverage = { startJSCoverage: vi.fn(), stopJSCoverage: vi.fn().mockResolvedValue(entries) };
 
   // act
-  const result = withBrowserCoverage(true, coverage, vi.fn().mockRejectedValue(new Error('assertion failed')));
+  const result = withBrowserCoverage(
+    true,
+    coverage,
+    vi.fn().mockRejectedValue(new Error('assertion failed')),
+  );
 
   // assert
   await expect(result).rejects.toThrow('assertion failed');
@@ -66,7 +70,10 @@ it('still collects diagnostics after the test fails', async () => {
 
 it('propagates a collection error', async () => {
   // arrange
-  const coverage = { startJSCoverage: vi.fn(), stopJSCoverage: vi.fn().mockRejectedValue(new Error('capture failed')) };
+  const coverage = {
+    startJSCoverage: vi.fn(),
+    stopJSCoverage: vi.fn().mockRejectedValue(new Error('capture failed')),
+  };
 
   // act
   const result = withBrowserCoverage(true, coverage, vi.fn());

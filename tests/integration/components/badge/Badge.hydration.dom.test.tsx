@@ -10,7 +10,18 @@ import { CheckIcon } from '../../../../src/components/icon/named/CheckIcon';
 it('hydrates a published badge with decorative artwork and native attributes intact', () => {
   // arrange
   const ref = createRef<HTMLSpanElement>();
-  const given = <Badge ref={ref} tone="success" className="custom" icon={<CheckIcon />} id="published" style={{ '--fs-badge-padding-inline': '12px' }}>Published</Badge>;
+  const given = (
+    <Badge
+      ref={ref}
+      tone="success"
+      className="custom"
+      icon={<CheckIcon />}
+      id="published"
+      style={{ '--fs-badge-padding-inline': '12px' }}
+    >
+      Published
+    </Badge>
+  );
   const container = document.createElement('div');
   container.innerHTML = renderToString(given);
   document.body.appendChild(container);
@@ -27,23 +38,32 @@ it('hydrates a published badge with decorative artwork and native attributes int
   expect(onRecoverableError).not.toHaveBeenCalled();
 });
 
-it.each(['neutral', 'info', 'success', 'warning', 'danger'] as const)('server renders the %s tone deterministically', tone => {
-  // arrange
-  const given = <Badge tone={tone}>{12}</Badge>;
-  const expected = renderToString(given);
+it.each(['neutral', 'info', 'success', 'warning', 'danger'] as const)(
+  'server renders the %s tone deterministically',
+  (tone) => {
+    // arrange
+    const given = <Badge tone={tone}>{12}</Badge>;
+    const expected = renderToString(given);
 
-  // act
-  const result = renderToString(given);
+    // act
+    const result = renderToString(given);
 
-  // assert
-  expect(result).toBe(expected);
-  expect(result).toContain(`fs-badge--${tone}`);
-  expect(result).toContain('>12<');
-});
+    // assert
+    expect(result).toBe(expected);
+    expect(result).toContain(`fs-badge--${tone}`);
+    expect(result).toContain('>12<');
+  },
+);
 
 it('keeps zero visible without introducing live, focus, or action semantics from untyped props', () => {
   // arrange
-  const given = { role: 'button', tabIndex: 0, 'aria-live': 'polite', onClick: vi.fn(), title: 'Unread count' } as unknown as BadgeProps;
+  const given = {
+    role: 'button',
+    tabIndex: 0,
+    'aria-live': 'polite',
+    onClick: vi.fn(),
+    title: 'Unread count',
+  } as unknown as BadgeProps;
 
   // act
   const result = renderToString(<Badge {...given}>{0}</Badge>);

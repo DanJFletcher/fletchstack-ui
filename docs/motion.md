@@ -4,23 +4,27 @@ Motion explains a state change, a relationship, or ongoing loading. It must not 
 
 ## Shared tokens
 
-| CSS token | Default | Use |
-| --- | --- | --- |
-| `--fs-motion-duration-fast` | 100ms | Small state feedback |
-| `--fs-motion-duration-standard` | 160ms | Typical disclosure and state movement |
-| `--fs-motion-duration-slow` | 240ms | Larger deliberate transitions |
-| `--fs-motion-duration-spinner` | 1000ms | Base duration of one loading rotation |
-| `--fs-motion-easing-standard` | cubic-bezier(0.2, 0.8, 0.2, 1) | General interface movement |
-| `--fs-motion-easing-enter` | cubic-bezier(0.2, 1, 0.3, 1) | Entering content |
-| `--fs-motion-easing-exit` | cubic-bezier(0.5, 0, 0.9, 0.3) | Leaving content |
+| CSS token                       | Default                        | Use                                   |
+| ------------------------------- | ------------------------------ | ------------------------------------- |
+| `--fs-motion-duration-fast`     | 100ms                          | Small state feedback                  |
+| `--fs-motion-duration-standard` | 160ms                          | Typical disclosure and state movement |
+| `--fs-motion-duration-slow`     | 240ms                          | Larger deliberate transitions         |
+| `--fs-motion-duration-spinner`  | 1000ms                         | Base duration of one loading rotation |
+| `--fs-motion-easing-standard`   | cubic-bezier(0.2, 0.8, 0.2, 1) | General interface movement            |
+| `--fs-motion-easing-enter`      | cubic-bezier(0.2, 1, 0.3, 1)   | Entering content                      |
+| `--fs-motion-easing-exit`       | cubic-bezier(0.5, 0, 0.9, 0.3) | Leaving content                       |
 
 Choose roles by purpose. Do not animate every state just because a token exists. Focus indication, activation feedback, ARIA state, and keyboard access change immediately. Spinner uses linear rotation rather than an enter/exit curve. Accordion keeps immediate panels by default; `panelMotion="expand"` opts into size and opacity transitions. Chevron rotation uses standard timing.
 
 Override semantic properties on a containing element or the component. Overrides inherit within that scope; an explicit nested theme resets the complete token contract. A sibling scope is unaffected. See the [token reference](tokens.md).
 
 ```css
-.compact-disclosures { --fs-motion-duration-standard: 100ms; }
-.slow-loading-indicator { --fs-motion-duration-spinner: 1500ms; }
+.compact-disclosures {
+  --fs-motion-duration-standard: 100ms;
+}
+.slow-loading-indicator {
+  --fs-motion-duration-spinner: 1500ms;
+}
 ```
 
 Spinner retains `--fs-spinner-rotation-seconds` (default `1`) for existing consumers. Effective duration is the shared spinner duration multiplied by this numeric value. With the default 1000ms base, `2` still means two seconds. Overriding the base to 500ms and the numeric value to `2` produces 1000ms. Prefer the shared duration for new customization.

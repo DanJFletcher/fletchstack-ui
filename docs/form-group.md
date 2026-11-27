@@ -5,12 +5,18 @@ Approved from the supplied Form Group reference: related controls share a visibl
 The default layout stacks controls with a 12px gap; `orientation="horizontal"` wraps them. Legend/context spacing is 8px. The parent supplies the proposed 24px between groups. The dashed boundaries in the anatomy reference are explanatory, so the component has no decorative border or background by default. Both themes use semantic text and error colors.
 
 ```tsx
-<FormGroup legend="Notification channels" description="Choose how to hear from us."
-  helperText="You can change these later." error={error}>
-  {controlProps => <>
-    <Checkbox {...controlProps} label="Email" name="channels" value="email" />
-    <Checkbox {...controlProps} label="SMS" name="channels" value="sms" />
-  </>}
+<FormGroup
+  legend="Notification channels"
+  description="Choose how to hear from us."
+  helperText="You can change these later."
+  error={error}
+>
+  {(controlProps) => (
+    <>
+      <Checkbox {...controlProps} label="Email" name="channels" value="email" />
+      <Checkbox {...controlProps} label="SMS" name="channels" value="sms" />
+    </>
+  )}
 </FormGroup>
 ```
 

@@ -1,22 +1,117 @@
-.fs-tabs { box-sizing: border-box; min-inline-size: 0; max-inline-size: 100%; color: var(--fs-text); font-family: var(--fs-font-body); font-size: var(--fs-font-size); line-height: var(--fs-font-line-height); }
-.fs-tabs[hidden], .fs-tabs__panel[hidden] { display: none; }
-.fs-tabs__list { display: flex; min-inline-size: 0; max-inline-size: 100%; gap: var(--fs-tabs-gap); overflow-x: auto; scrollbar-width: thin; }
-.fs-tabs__tab { appearance: none; box-sizing: border-box; position: relative; flex: 0 0 auto; margin: 0; border: 0; padding: var(--fs-tabs-padding-block) var(--fs-tabs-padding-inline); background: transparent; color: var(--fs-tabs-text); font-family: inherit; font-size: var(--fs-tabs-font-size); line-height: inherit; font-weight: var(--fs-tabs-weight); white-space: nowrap; cursor: pointer; }
-.fs-tabs__tab:not(:disabled):hover { background: var(--fs-tabs-hover-surface); }
-.fs-tabs__tab[aria-selected="true"] { color: var(--fs-tabs-selected-text); }
-.fs-tabs__tab:disabled { color: var(--fs-tabs-disabled-text); cursor: default; }
-.fs-tabs__tab:focus-visible, .fs-tabs__list:focus-visible, .fs-tabs__panel:focus-visible { outline: var(--fs-link-focus-width) solid var(--fs-link-focus-color); outline-offset: calc(-1 * var(--fs-link-focus-width)); }
-.fs-tabs--line > .fs-tabs__list { border-block-end: var(--fs-tabs-divider-width) solid var(--fs-tabs-divider); }
-.fs-tabs--line > .fs-tabs__list > .fs-tabs__tab[aria-selected="true"]::after { content: ''; position: absolute; inset-inline: 0; inset-block-end: 0; block-size: var(--fs-tabs-indicator-width); border-radius: var(--fs-tabs-indicator-width); background: var(--fs-tabs-indicator); }
-.fs-tabs--pills > .fs-tabs__list > .fs-tabs__tab { border-radius: var(--fs-tabs-pill-radius); }
-.fs-tabs--pills > .fs-tabs__list > .fs-tabs__tab[aria-selected="true"] { background: var(--fs-tabs-pill-surface); }
-.fs-tabs__panels { min-inline-size: 0; padding-block-start: var(--fs-tabs-panel-gap); }
-.fs-tabs__panel { min-inline-size: 0; overflow-wrap: anywhere; }
-.fs-tabs--full-width.fs-tabs--horizontal > .fs-tabs__list > .fs-tabs__tab { flex: 1 0 0; min-inline-size: max-content; }
-.fs-tabs--vertical { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: var(--fs-tabs-panel-gap); }
-.fs-tabs--vertical > .fs-tabs__list { flex-direction: column; overflow: visible; }
-.fs-tabs--vertical > .fs-tabs__list > .fs-tabs__tab { white-space: normal; overflow-wrap: anywhere; text-align: start; }
-.fs-tabs--vertical > .fs-tabs__panels { padding-block-start: 0; }
-.fs-tabs--line.fs-tabs--vertical > .fs-tabs__list { border-block-end: 0; border-inline-end: var(--fs-tabs-divider-width) solid var(--fs-tabs-divider); }
-.fs-tabs--line.fs-tabs--vertical > .fs-tabs__list > .fs-tabs__tab[aria-selected="true"]::after { inset-inline-start: auto; inset-inline-end: 0; inset-block: 0; inline-size: var(--fs-tabs-indicator-width); block-size: auto; }
-@media (forced-colors: active) { .fs-tabs__tab[aria-selected="true"] { border-block-end: var(--fs-tabs-indicator-width) solid Highlight; } }
+.fs-tabs {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  color: var(--fs-text);
+  font-family: var(--fs-font-body);
+  font-size: var(--fs-font-size);
+  line-height: var(--fs-font-line-height);
+}
+.fs-tabs[hidden],
+.fs-tabs__panel[hidden] {
+  display: none;
+}
+.fs-tabs__list {
+  display: flex;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  gap: var(--fs-tabs-gap);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.fs-tabs__tab {
+  appearance: none;
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 0;
+  padding: var(--fs-tabs-padding-block) var(--fs-tabs-padding-inline);
+  background: transparent;
+  color: var(--fs-tabs-text);
+  font-family: inherit;
+  font-size: var(--fs-tabs-font-size);
+  line-height: inherit;
+  font-weight: var(--fs-tabs-weight);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.fs-tabs__tab:not(:disabled):hover {
+  background: var(--fs-tabs-hover-surface);
+}
+.fs-tabs__tab[aria-selected='true'] {
+  color: var(--fs-tabs-selected-text);
+}
+.fs-tabs__tab:disabled {
+  color: var(--fs-tabs-disabled-text);
+  cursor: default;
+}
+.fs-tabs__tab:focus-visible,
+.fs-tabs__list:focus-visible,
+.fs-tabs__panel:focus-visible {
+  outline: var(--fs-link-focus-width) solid var(--fs-link-focus-color);
+  outline-offset: calc(-1 * var(--fs-link-focus-width));
+}
+.fs-tabs--line > .fs-tabs__list {
+  border-block-end: var(--fs-tabs-divider-width) solid var(--fs-tabs-divider);
+}
+.fs-tabs--line > .fs-tabs__list > .fs-tabs__tab[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: var(--fs-tabs-indicator-width);
+  border-radius: var(--fs-tabs-indicator-width);
+  background: var(--fs-tabs-indicator);
+}
+.fs-tabs--pills > .fs-tabs__list > .fs-tabs__tab {
+  border-radius: var(--fs-tabs-pill-radius);
+}
+.fs-tabs--pills > .fs-tabs__list > .fs-tabs__tab[aria-selected='true'] {
+  background: var(--fs-tabs-pill-surface);
+}
+.fs-tabs__panels {
+  min-inline-size: 0;
+  padding-block-start: var(--fs-tabs-panel-gap);
+}
+.fs-tabs__panel {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+.fs-tabs--full-width.fs-tabs--horizontal > .fs-tabs__list > .fs-tabs__tab {
+  flex: 1 0 0;
+  min-inline-size: max-content;
+}
+.fs-tabs--vertical {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: var(--fs-tabs-panel-gap);
+}
+.fs-tabs--vertical > .fs-tabs__list {
+  flex-direction: column;
+  overflow: visible;
+}
+.fs-tabs--vertical > .fs-tabs__list > .fs-tabs__tab {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: start;
+}
+.fs-tabs--vertical > .fs-tabs__panels {
+  padding-block-start: 0;
+}
+.fs-tabs--line.fs-tabs--vertical > .fs-tabs__list {
+  border-block-end: 0;
+  border-inline-end: var(--fs-tabs-divider-width) solid var(--fs-tabs-divider);
+}
+.fs-tabs--line.fs-tabs--vertical > .fs-tabs__list > .fs-tabs__tab[aria-selected='true']::after {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+  inset-block: 0;
+  inline-size: var(--fs-tabs-indicator-width);
+  block-size: auto;
+}
+@media (forced-colors: active) {
+  .fs-tabs__tab[aria-selected='true'] {
+    border-block-end: var(--fs-tabs-indicator-width) solid Highlight;
+  }
+}

@@ -29,7 +29,7 @@ it('defaults to visible loading text with polite atomic status semantics', () =>
   expect(screen.getByRole('status')).toHaveAttribute('aria-atomic', 'true');
 });
 
-it.each(['', '   '])('keeps meaningful status text for a blank label %j', label => {
+it.each(['', '   '])('keeps meaningful status text for a blank label %j', (label) => {
   // arrange
   const given = <Spinner label={label} />;
 
@@ -42,7 +42,12 @@ it.each(['', '   '])('keeps meaningful status text for a blank label %j', label 
 
 it('hides decorative duplicates from status announcements', () => {
   // arrange
-  const given = <button><Spinner decorative />Saving…</button>;
+  const given = (
+    <button>
+      <Spinner decorative />
+      Saving…
+    </button>
+  );
 
   // act
   render(given);
@@ -53,22 +58,32 @@ it('hides decorative duplicates from status announcements', () => {
   expect(screen.queryByText('Loading…')).not.toBeInTheDocument();
 });
 
-it.each(['small', 'medium', 'large'] as const)('exposes the %s size with unchanged status text', size => {
-  // arrange
-  const given = <Spinner size={size} label="Loading projects…" />;
+it.each(['small', 'medium', 'large'] as const)(
+  'exposes the %s size with unchanged status text',
+  (size) => {
+    // arrange
+    const given = <Spinner size={size} label="Loading projects…" />;
 
-  // act
-  render(given);
+    // act
+    render(given);
 
-  // assert
-  expect(screen.getByRole('status')).toHaveClass(`fs-spinner--${size}`);
-  expect(screen.getByRole('status')).toHaveTextContent('Loading projects…');
-});
+    // assert
+    expect(screen.getByRole('status')).toHaveClass(`fs-spinner--${size}`);
+    expect(screen.getByRole('status')).toHaveTextContent('Loading projects…');
+  },
+);
 
 it('forwards native span refs and scoped styling', () => {
   // arrange
   const ref = createRef<HTMLSpanElement>();
-  const given = <Spinner ref={ref} id="loading" className="custom" style={{ '--fs-spinner-label-gap': '12px' }} />;
+  const given = (
+    <Spinner
+      ref={ref}
+      id="loading"
+      className="custom"
+      style={{ '--fs-spinner-label-gap': '12px' }}
+    />
+  );
 
   // act
   render(given);
@@ -92,7 +107,20 @@ it('preserves hidden semantics for the complete widget', () => {
 
 it('keeps status and non-focusable semantics for untyped native overrides', () => {
   // arrange
-  const overrides = { role: 'progressbar', 'aria-valuenow': 40, 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuetext': '40 percent', 'aria-label': 'Other', 'aria-labelledby': 'other', 'aria-hidden': true, 'aria-live': 'assertive', 'aria-atomic': false, tabIndex: 0, contentEditable: true } as unknown as SpinnerProps;
+  const overrides = {
+    role: 'progressbar',
+    'aria-valuenow': 40,
+    'aria-valuemin': 0,
+    'aria-valuemax': 100,
+    'aria-valuetext': '40 percent',
+    'aria-label': 'Other',
+    'aria-labelledby': 'other',
+    'aria-hidden': true,
+    'aria-live': 'assertive',
+    'aria-atomic': false,
+    tabIndex: 0,
+    contentEditable: true,
+  } as unknown as SpinnerProps;
 
   // act
   render(<Spinner {...overrides} />);

@@ -3,14 +3,29 @@ import * as fs from 'node:fs';
 import { memoryFilesystem } from '../../support/component-memory.mjs';
 import { filesystemContracts } from '../../support/component-file-contracts.mjs';
 
-vi.mock('node:fs', () => ({ realpathSync: vi.fn(), existsSync: vi.fn(), lstatSync: vi.fn(), readdirSync: vi.fn(), readFileSync: vi.fn(), mkdirSync: vi.fn(), writeFileSync: vi.fn(), symlinkSync: vi.fn(), unlinkSync: vi.fn() }));
+vi.mock('node:fs', () => ({
+  realpathSync: vi.fn(),
+  existsSync: vi.fn(),
+  lstatSync: vi.fn(),
+  readdirSync: vi.fn(),
+  readFileSync: vi.fn(),
+  mkdirSync: vi.fn(),
+  writeFileSync: vi.fn(),
+  symlinkSync: vi.fn(),
+  unlinkSync: vi.fn(),
+}));
 
 describe('Filesystem boundary with in-memory doubles', () => {
-  filesystemContracts(() => {
-    const memory = memoryFilesystem();
-    for (const [name, implementation] of Object.entries(memory)) { vi.mocked(fs[name]).mockImplementation(implementation); }
-    return '/project';
-  }, () => {});
+  filesystemContracts(
+    () => {
+      const memory = memoryFilesystem();
+      for (const [name, implementation] of Object.entries(memory)) {
+        vi.mocked(fs[name]).mockImplementation(implementation);
+      }
+      return '/project';
+    },
+    () => {},
+  );
 });
 
 import { componentMain } from '../../../scripts/component-command.mjs';

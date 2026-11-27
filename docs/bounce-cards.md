@@ -11,31 +11,31 @@ const images: BounceCardsImage[] = [
   { id: 'mountain', src: '/mountain.jpg', alt: 'Clouds above a mountain ridge' },
   { id: 'forest', src: '/forest.jpg', alt: 'Sunlight through a pine forest' },
 ];
-<BounceCards images={images} onCardClick={(index, image) => openPhoto(image)} />
+<BounceCards images={images} onCardClick={(index, image) => openPhoto(image)} />;
 ```
 
-| Prop | Default | Purpose |
-| --- | --- | --- |
-| `images` | required | Readonly source strings or `{ id?, src, alt? }` objects. IDs default to the source; sources and IDs must be non-empty, IDs unique. Supply explicit IDs when repeating a source. |
-| `label` | Photo cards | Accessible group name. Native `aria-labelledby` can supply an external name. |
-| `containerWidth` | 900 | Maximum CSS pixel width; actual width never exceeds its parent. |
-| `containerHeight` | 400 | Preferred stage height before responsive scaling. |
-| `cardSize` | 200 | Nominal square size, at least 44px. |
-| `spread` | 85 | Horizontal distance between resting card centers, in CSS pixels. |
-| `rotation` | 10 | Maximum irregular tilt, in degrees. |
-| `arc` | 0 | Outer-card vertical displacement, in CSS pixels; may be negative. |
-| `pushDistance` | 160 | How far neighbors spread on either side, in CSS pixels. |
-| `hoverScale` | 1.06 | Inspected card scale, from 1 through 2. |
-| `bounciness` | 0.6 | Entrance overshoot from 0 through 1; 0 removes overshoot. |
-| `animationDelay` | 0.5 | Initial delay, in seconds. |
-| `animationStagger` | 0.06 | Additional entrance delay per card, in seconds. |
-| `enableHover` | true | Enable pointer inspection; keyboard focus always makes actions prominent. |
-| `shadow` | true | Show card depth shadows. |
-| `positions` | generated | Typed `{ x, y, rotation? }` positions replace individual generated slots; no transform-string parsing. |
-| `onCardClick` | unset | `(index, image) => void`; turns each card into a native button. |
-| `getCardLabel` | alt or Card N | `(index, image) => string` localizes action names. |
-| `emptyMessage` | No photos to display. | Empty collection message. |
-| `className`, `style`, native div props, ref | forwarded | Scoped styling, native handlers, IDs and external labeling. Ref receives the wrapper div. |
+| Prop                                        | Default               | Purpose                                                                                                                                                                         |
+| ------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `images`                                    | required              | Readonly source strings or `{ id?, src, alt? }` objects. IDs default to the source; sources and IDs must be non-empty, IDs unique. Supply explicit IDs when repeating a source. |
+| `label`                                     | Photo cards           | Accessible group name. Native `aria-labelledby` can supply an external name.                                                                                                    |
+| `containerWidth`                            | 900                   | Maximum CSS pixel width; actual width never exceeds its parent.                                                                                                                 |
+| `containerHeight`                           | 400                   | Preferred stage height before responsive scaling.                                                                                                                               |
+| `cardSize`                                  | 200                   | Nominal square size, at least 44px.                                                                                                                                             |
+| `spread`                                    | 85                    | Horizontal distance between resting card centers, in CSS pixels.                                                                                                                |
+| `rotation`                                  | 10                    | Maximum irregular tilt, in degrees.                                                                                                                                             |
+| `arc`                                       | 0                     | Outer-card vertical displacement, in CSS pixels; may be negative.                                                                                                               |
+| `pushDistance`                              | 160                   | How far neighbors spread on either side, in CSS pixels.                                                                                                                         |
+| `hoverScale`                                | 1.06                  | Inspected card scale, from 1 through 2.                                                                                                                                         |
+| `bounciness`                                | 0.6                   | Entrance overshoot from 0 through 1; 0 removes overshoot.                                                                                                                       |
+| `animationDelay`                            | 0.5                   | Initial delay, in seconds.                                                                                                                                                      |
+| `animationStagger`                          | 0.06                  | Additional entrance delay per card, in seconds.                                                                                                                                 |
+| `enableHover`                               | true                  | Enable pointer inspection; keyboard focus always makes actions prominent.                                                                                                       |
+| `shadow`                                    | true                  | Show card depth shadows.                                                                                                                                                        |
+| `positions`                                 | generated             | Typed `{ x, y, rotation? }` positions replace individual generated slots; no transform-string parsing.                                                                          |
+| `onCardClick`                               | unset                 | `(index, image) => void`; turns each card into a native button.                                                                                                                 |
+| `getCardLabel`                              | alt or Card N         | `(index, image) => string` localizes action names.                                                                                                                              |
+| `emptyMessage`                              | No photos to display. | Empty collection message.                                                                                                                                                       |
+| `className`, `style`, native div props, ref | forwarded             | Scoped styling, native handlers, IDs and external labeling. Ref receives the wrapper div.                                                                                       |
 
 Geometry must be finite; container dimensions are positive, spacing/delays non-negative, and scales/bounciness stay within the documented ranges. Stable IDs preserve card identity on reorder. Changing a source retries a previously failed resource. Failed photos retain their footprint and accessible description.
 

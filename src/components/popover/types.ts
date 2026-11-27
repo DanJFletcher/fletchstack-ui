@@ -1,10 +1,15 @@
 import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
 import type { ButtonProps } from '../button/Button.js';
 
-export type PopoverStyle = CSSProperties & { [token: `--fs-${string}`]: string | number | undefined };
+export type PopoverStyle = CSSProperties & {
+  [token: `--fs-${string}`]: string | number | undefined;
+};
 export type PopoverSide = 'top' | 'right' | 'bottom' | 'left';
 export type PopoverAlign = 'start' | 'center' | 'end';
-export type PopoverProps = Omit<ComponentPropsWithoutRef<'div'>, 'style' | 'dangerouslySetInnerHTML'> & {
+export type PopoverProps = Omit<
+  ComponentPropsWithoutRef<'div'>,
+  'style' | 'dangerouslySetInnerHTML'
+> & {
   triggerLabel: string;
   trigger?: ReactNode;
   triggerVariant?: ButtonProps['variant'];

@@ -1,7 +1,18 @@
 import { Questionnaire } from '../../../src/components/questionnaire/Questionnaire';
 import type { QuestionnaireProps } from '../../../src/components/questionnaire/types';
-import { QuestionnaireComposition, QuestionnaireControlled, QuestionnaireExample, QuestionnairePending, QuestionnaireResume, QuestionnaireRetry } from '../../../src/components/questionnaire/stories/questionnaire-examples';
-import { feedbackItems, planningItems, shortcutItems } from '../../../src/components/questionnaire/stories/planning-items';
+import {
+  QuestionnaireComposition,
+  QuestionnaireControlled,
+  QuestionnaireExample,
+  QuestionnairePending,
+  QuestionnaireResume,
+  QuestionnaireRetry,
+} from '../../../src/components/questionnaire/stories/questionnaire-examples';
+import {
+  feedbackItems,
+  planningItems,
+  shortcutItems,
+} from '../../../src/components/questionnaire/stories/planning-items';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/questionnaire/questionnaire.css';
 import '../../../src/components/questionnaire/stories/questionnaire.stories.css';
@@ -21,7 +32,19 @@ const Pending: Scenario<QuestionnaireProps> = { render: () => <QuestionnairePend
 const Retry: Scenario<QuestionnaireProps> = { render: () => <QuestionnaireRetry /> };
 const Resume: Scenario<QuestionnaireProps> = { render: () => <QuestionnaireResume /> };
 const Text: Scenario<QuestionnaireProps> = { args: { items: feedbackItems } };
-const Shortcuts: Scenario<QuestionnaireProps> = { args: { items: shortcutItems, shortcuts: 'letters' } };
+const Shortcuts: Scenario<QuestionnaireProps> = {
+  args: { items: shortcutItems, shortcuts: 'letters' },
+};
 export const component = Questionnaire;
 export const defaults: QuestionnaireProps = { items: planningItems, onSubmit: () => {} };
-export const scenarios = { Playground, Composition, Interactive, Controlled, Pending, Retry, Resume, Text, Shortcuts };
+export const scenarios = {
+  Playground,
+  Composition,
+  Interactive,
+  Controlled,
+  Pending,
+  Retry,
+  Resume,
+  Text,
+  Shortcuts,
+};

@@ -15,8 +15,12 @@ import { Button } from '../../../src/components/button/Button';
 async function buildThemeFixture() {
   const directory = await mkdtemp(join(tmpdir(), 'fletchstack-theme-test-'));
   try {
-    await cp(new URL('../../../scripts', import.meta.url), join(directory, 'scripts'), { recursive: true });
-    await cp(new URL('../../../tokens', import.meta.url), join(directory, 'tokens'), { recursive: true });
+    await cp(new URL('../../../scripts', import.meta.url), join(directory, 'scripts'), {
+      recursive: true,
+    });
+    await cp(new URL('../../../tokens', import.meta.url), join(directory, 'tokens'), {
+      recursive: true,
+    });
     await cp(join(directory, 'tokens/luna.json'), join(directory, 'tokens/brand.json'));
     await mkdir(join(directory, 'docs'));
     await promisify(execFile)(process.execPath, [join(directory, 'scripts/build-tokens.mjs')]);
@@ -29,22 +33,40 @@ async function buildThemeFixture() {
 let css: string;
 
 beforeAll(async () => {
-  css = await buildThemeFixture() + await readFile(new URL('../../../src/components/button/button.css', import.meta.url), 'utf8');
+  css =
+    (await buildThemeFixture()) +
+    (await readFile(new URL('../../../src/components/button/button.css', import.meta.url), 'utf8'));
 });
 
 test.for([
   { label: 'defaults to Corporate', attribute: '', expected: 'rgb(36, 75, 176)' },
-  { label: 'selects Corporate explicitly', attribute: 'data-theme="corporate"', expected: 'rgb(36, 75, 176)' },
-  { label: 'selects Luna explicitly', attribute: 'data-theme="luna"', expected: 'rgb(199, 181, 255)' },
-  { label: 'selects a custom theme sorted before Corporate', attribute: 'data-theme="brand"', expected: 'rgb(199, 181, 255)' },
+  {
+    label: 'selects Corporate explicitly',
+    attribute: 'data-theme="corporate"',
+    expected: 'rgb(36, 75, 176)',
+  },
+  {
+    label: 'selects Luna explicitly',
+    attribute: 'data-theme="luna"',
+    expected: 'rgb(199, 181, 255)',
+  },
+  {
+    label: 'selects a custom theme sorted before Corporate',
+    attribute: 'data-theme="brand"',
+    expected: 'rgb(199, 181, 255)',
+  },
 ])('the document root $label', async ({ attribute, expected }, { page }) => {
   // arrange
   const markup = renderToStaticMarkup(createElement(Button, null, 'Save'));
 
   // act
-  await page.setContent(`<!doctype html><html ${attribute}><head><style>${css}</style></head><body>${markup}</body></html>`);
+  await page.setContent(
+    `<!doctype html><html ${attribute}><head><style>${css}</style></head><body>${markup}</body></html>`,
+  );
 
   // assert
-  const result = await page.getByRole('button', { name: 'Save' }).evaluate(button => getComputedStyle(button).backgroundColor);
+  const result = await page
+    .getByRole('button', { name: 'Save' })
+    .evaluate((button) => getComputedStyle(button).backgroundColor);
   expect(result).toBe(expected);
 });

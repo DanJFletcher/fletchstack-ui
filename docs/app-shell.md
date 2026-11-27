@@ -5,17 +5,19 @@ A finite-height column layout around one **direct** [AppContent](./app-content.m
 ```tsx
 <AppShell>
   <header>Application header</header>
-  <AppContent><YourPage /></AppContent>
+  <AppContent>
+    <YourPage />
+  </AppContent>
   <BottomNavigation aria-label="Primary">{/* Destination items */}</BottomNavigation>
 </AppShell>
 ```
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| children | ReactNode | required |
-| height | 'viewport' or 'parent' | 'viewport' |
-| style | AppShellStyle: CSSProperties plus `--fs-*` overrides | — |
-| native div props and ref | HTMLDivElement | forwarded |
+| Prop                     | Type                                                 | Default    |
+| ------------------------ | ---------------------------------------------------- | ---------- |
+| children                 | ReactNode                                            | required   |
+| height                   | 'viewport' or 'parent'                               | 'viewport' |
+| style                    | AppShellStyle: CSSProperties plus `--fs-*` overrides | —          |
+| native div props and ref | HTMLDivElement                                       | forwarded  |
 
 Viewport mode uses dynamic viewport height with a 100vh fallback. Normalize the host page's default margin. Parent mode uses 100% of a **definite-height** parent, suitable for embedded app regions and Storybook frames. This is a fixed-size layout region, not a minimum-height document wrapper. Persistent siblings must fit the available height.
 
@@ -23,7 +25,12 @@ Viewport mode uses dynamic viewport height with a 100vh fallback. Normalize the 
 <div style={{ height: 480 }}>
   <AppShell height="parent">
     <AppContent as="div">{/* Long content */}</AppContent>
-    <BottomNavigation aria-label="Primary" style={{ '--fs-bottom-navigation-safe-area-inset': '0px' }}>{/* Items */}</BottomNavigation>
+    <BottomNavigation
+      aria-label="Primary"
+      style={{ '--fs-bottom-navigation-safe-area-inset': '0px' }}
+    >
+      {/* Items */}
+    </BottomNavigation>
   </AppShell>
 </div>
 ```

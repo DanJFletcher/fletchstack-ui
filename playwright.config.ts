@@ -17,7 +17,8 @@ export default defineConfig<BrowserCoverageOptions>({
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
-    command: 'npm run tokens && npx --no-install storybook dev --host 127.0.0.1 --port 6007 --ci --no-open --disable-telemetry',
+    command:
+      'npm run tokens && npx --no-install storybook dev --host 127.0.0.1 --port 6007 --ci --no-open --disable-telemetry',
     url: `${baseURL}/iframe.html`,
     reuseExistingServer: !process.env['CI'],
   },

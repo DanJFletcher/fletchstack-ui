@@ -7,8 +7,13 @@ The supplied Switch reference approves an immediate on/off setting with a stable
 Switch composes the existing field label and description primitives. IDs remain instance-specific across server rendering and hydration. External `aria-describedby` context is preserved. Native input classes/styles and wrapper classes/styles support scoped token customization. Parents own placement and sibling spacing. No new validation/error visual pattern is introduced; FormGroup can provide shared context through its render prop.
 
 ```tsx
-<Switch label="Email notifications" description="Receive updates about your projects."
-  name="notifications" value="email" defaultChecked />
+<Switch
+  label="Email notifications"
+  description="Receive updates about your projects."
+  name="notifications"
+  value="email"
+  defaultChecked
+/>
 ```
 
 Import `fletchstack-ui/styles.css`, or tokens.css + field.css + switch.css. Keep track/thumb contrast, focus clearance, and usable hit areas when customizing. Custom dimensions should preserve a thumb that fits inside the track.

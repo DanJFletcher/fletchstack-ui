@@ -3,8 +3,11 @@
 Anchored, non-modal supplementary content. Use Dialog for blocking decisions and Menu for action lists. Popover composes the library Button; it does not trap focus or block the page. Import `tokens.css`, `button.css`, `icon.css`, and `popover.css`, or the combined `styles.css`.
 
 ```tsx
-<Popover triggerLabel="Project details" heading="Project details"
-  description="A quick view of the current workspace.">
+<Popover
+  triggerLabel="Project details"
+  heading="Project details"
+  description="A quick view of the current workspace."
+>
   <p>Three drafts are ready for review.</p>
   <a href="/drafts">Review drafts</a>
 </Popover>
@@ -12,24 +15,24 @@ Anchored, non-modal supplementary content. Use Dialog for blocking decisions and
 
 ## API
 
-| Prop | Default | Purpose |
-| --- | --- | --- |
-| `triggerLabel` | required | Accessible name and default visible Button text |
-| `trigger` | label | Custom visible trigger content; compose icons here |
-| `triggerVariant`, `triggerSize` | `secondary`, `medium` | Existing Button variants and sizes |
-| `heading`, `description`, `children` | omitted | Panel heading, description and body |
-| `open`, `onOpenChange` | uncontrolled | Controlled state and interaction requests |
-| `defaultOpen` | `false` | Initial uncontrolled state |
-| `side` | `bottom` | Preferred `top`, `right`, `bottom` or `left` edge |
-| `align` | `start` | Logical `start`, `center` or `end` alignment |
-| `offset`, `collisionPadding` | theme tokens (8px) | Trigger gap and viewport inset in CSS pixels |
-| `panelMaxWidth` | theme width (400px) | CSS maximum width; numbers mean pixels |
-| `matchTriggerWidth` | `false` | Match the trigger width, constrained by the viewport |
-| `autoFocus` | `false` | Focus first enabled control, falling back to the panel |
-| `closeOnEscape`, `closeOnOutsideClick`, `closeOnFocusOutside` | `true` | Independent dismissal policies |
-| `showCloseButton`, `closeLabel` | `true`, `Close popover` | Optional explicit close action |
-| `panelClassName`, `panelStyle` | omitted | Scoped panel customization |
-| native div props, `style`, ref | forwarded | Wrapper attributes, scoped tokens and HTMLDivElement ref |
+| Prop                                                          | Default                 | Purpose                                                  |
+| ------------------------------------------------------------- | ----------------------- | -------------------------------------------------------- |
+| `triggerLabel`                                                | required                | Accessible name and default visible Button text          |
+| `trigger`                                                     | label                   | Custom visible trigger content; compose icons here       |
+| `triggerVariant`, `triggerSize`                               | `secondary`, `medium`   | Existing Button variants and sizes                       |
+| `heading`, `description`, `children`                          | omitted                 | Panel heading, description and body                      |
+| `open`, `onOpenChange`                                        | uncontrolled            | Controlled state and interaction requests                |
+| `defaultOpen`                                                 | `false`                 | Initial uncontrolled state                               |
+| `side`                                                        | `bottom`                | Preferred `top`, `right`, `bottom` or `left` edge        |
+| `align`                                                       | `start`                 | Logical `start`, `center` or `end` alignment             |
+| `offset`, `collisionPadding`                                  | theme tokens (8px)      | Trigger gap and viewport inset in CSS pixels             |
+| `panelMaxWidth`                                               | theme width (400px)     | CSS maximum width; numbers mean pixels                   |
+| `matchTriggerWidth`                                           | `false`                 | Match the trigger width, constrained by the viewport     |
+| `autoFocus`                                                   | `false`                 | Focus first enabled control, falling back to the panel   |
+| `closeOnEscape`, `closeOnOutsideClick`, `closeOnFocusOutside` | `true`                  | Independent dismissal policies                           |
+| `showCloseButton`, `closeLabel`                               | `true`, `Close popover` | Optional explicit close action                           |
+| `panelClassName`, `panelStyle`                                | omitted                 | Scoped panel customization                               |
+| native div props, `style`, ref                                | forwarded               | Wrapper attributes, scoped tokens and HTMLDivElement ref |
 
 A labeled non-modal `dialog` is connected to its native trigger through `aria-controls`, `aria-haspopup` and `aria-expanded`. Enter/Space activate the trigger. Tab follows normal source order; focus leaving closes by default. Escape and the close button return focus from inside the panel to the trigger. Outside activation and focus navigation retain their destination. Consumers can prevent Escape through the wrapper's `onKeyDown`. Controlled props remain authoritative until the parent accepts a change.
 

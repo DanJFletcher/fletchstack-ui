@@ -10,7 +10,24 @@ import { Link } from '../../../../src/components/link/Link';
 it('hydrates a new-tab link with stable description relationships', () => {
   // arrange
   const ref = createRef<HTMLAnchorElement>();
-  const given = <><p id="context">Reference material.</p><Link ref={ref} href="/docs" target="_blank" rel="author" aria-describedby="context" icon={<ArrowRightIcon />} variant="standalone" className="custom" style={{ '--fs-link-icon-gap': '12px' }}>Documentation</Link></>;
+  const given = (
+    <>
+      <p id="context">Reference material.</p>
+      <Link
+        ref={ref}
+        href="/docs"
+        target="_blank"
+        rel="author"
+        aria-describedby="context"
+        icon={<ArrowRightIcon />}
+        variant="standalone"
+        className="custom"
+        style={{ '--fs-link-icon-gap': '12px' }}
+      >
+        Documentation
+      </Link>
+    </>
+  );
   const container = document.createElement('div');
   container.innerHTML = renderToString(given);
   document.body.appendChild(container);
@@ -29,7 +46,11 @@ it('hydrates a new-tab link with stable description relationships', () => {
 
 it('server renders plain unavailable text without a keyboard stop', () => {
   // arrange
-  const given = <Link target="_blank" tabIndex={0}>Unavailable documentation</Link>;
+  const given = (
+    <Link target="_blank" tabIndex={0}>
+      Unavailable documentation
+    </Link>
+  );
 
   // act
   const result = renderToString(given);
@@ -40,7 +61,11 @@ it('server renders plain unavailable text without a keyboard stop', () => {
 
 it('preserves native destinations and same-tab targets through the package API', () => {
   // arrange
-  const given = <Link href="/docs" target="_self" rel="author">Documentation</Link>;
+  const given = (
+    <Link href="/docs" target="_self" rel="author">
+      Documentation
+    </Link>
+  );
 
   // act
   render(given);

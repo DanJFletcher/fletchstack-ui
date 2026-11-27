@@ -1,5 +1,15 @@
 import { Table, type TableProps } from '../../../src/components/table/Table';
-import { portfolioProps, type Project, TableExample, InventoryTable, SelectionTable, ControlledTable, StickyTable, StyledTable, TableStates } from '../../../src/components/table/stories/table-examples';
+import {
+  portfolioProps,
+  type Project,
+  TableExample,
+  InventoryTable,
+  SelectionTable,
+  ControlledTable,
+  StickyTable,
+  StyledTable,
+  TableStates,
+} from '../../../src/components/table/stories/table-examples';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/table/table.css';
 import '../../../src/components/table/stories/table.stories.css';
@@ -19,7 +29,29 @@ const Manual: Scenario<TableProps<Project>> = { render: () => <ControlledTable m
 const Sticky: Scenario<TableProps<Project>> = { render: () => <StickyTable /> };
 const Styling: Scenario<TableProps<Project>> = { render: () => <StyledTable /> };
 const States: Scenario<TableProps<Project>> = { render: () => <TableStates /> };
-const Compact: Scenario<TableProps<Project>> = { args: { density: 'compact', striped: true, hover: true, borders: 'all', selectionMode: 'multiple', defaultSelectedRowKeys: ['beacon'], getSelectionLabel: row => `Select ${row.name}`, style: { '--fs-table-row-selected': 'var(--fs-badge-success-background)' } } };
+const Compact: Scenario<TableProps<Project>> = {
+  args: {
+    density: 'compact',
+    striped: true,
+    hover: true,
+    borders: 'all',
+    selectionMode: 'multiple',
+    defaultSelectedRowKeys: ['beacon'],
+    getSelectionLabel: (row) => `Select ${row.name}`,
+    style: { '--fs-table-row-selected': 'var(--fs-badge-success-background)' },
+  },
+};
 export const component = Table<Project>;
 export const defaults: TableProps<Project> = portfolioProps;
-export const scenarios = { Playground, Composition, Inventory, Selection, Controlled, Manual, Sticky, Styling, States, Compact };
+export const scenarios = {
+  Playground,
+  Composition,
+  Inventory,
+  Selection,
+  Controlled,
+  Manual,
+  Sticky,
+  Styling,
+  States,
+  Compact,
+};

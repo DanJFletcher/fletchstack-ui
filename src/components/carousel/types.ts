@@ -1,8 +1,13 @@
 import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
 
 export type CarouselSlide = { id: string; content: ReactNode; label?: string };
-export type CarouselStyle = CSSProperties & { [token: `--fs-${string}`]: string | number | undefined };
-export type CarouselProps = Omit<ComponentPropsWithoutRef<'section'>, 'children' | 'style' | 'dangerouslySetInnerHTML' | 'onChange'> & {
+export type CarouselStyle = CSSProperties & {
+  [token: `--fs-${string}`]: string | number | undefined;
+};
+export type CarouselProps = Omit<
+  ComponentPropsWithoutRef<'section'>,
+  'children' | 'style' | 'dangerouslySetInnerHTML' | 'onChange'
+> & {
   children?: never;
   dangerouslySetInnerHTML?: never;
   label: string;

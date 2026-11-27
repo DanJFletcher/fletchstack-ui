@@ -4,11 +4,17 @@ import { render } from '@testing-library/react';
 import { renderToString } from 'react-dom/server';
 import { questionnaireContracts } from '../../../support/questionnaire-contracts';
 import { questionnairePolicyContracts } from '../../../support/questionnaire-policy-contracts';
-questionnaireContracts(element => {
+questionnaireContracts((element) => {
   const container = document.createElement('div');
   container.innerHTML = renderToString(element);
   document.body.appendChild(container);
-  return render(element, { container, hydrate: true, onRecoverableError: error => { throw error; } });
+  return render(element, {
+    container,
+    hydrate: true,
+    onRecoverableError: (error) => {
+      throw error;
+    },
+  });
 });
 questionnairePolicyContracts();
 
@@ -17,7 +23,20 @@ import { Questionnaire } from '../../../../src/components/questionnaire/Question
 it('exposes the initial native controls before hydration', () => {
   // arrange
   // act
-  const result = renderToString(<Questionnaire items={[{ id: 'one', type: 'single', title: 'Direction', options: [{ value: 'build', label: 'Build' }] }]} defaultAnswers={{ one: { kind: 'choice', values: ['build'] } }} onSubmit={() => {}} />);
+  const result = renderToString(
+    <Questionnaire
+      items={[
+        {
+          id: 'one',
+          type: 'single',
+          title: 'Direction',
+          options: [{ value: 'build', label: 'Build' }],
+        },
+      ]}
+      defaultAnswers={{ one: { kind: 'choice', values: ['build'] } }}
+      onSubmit={() => {}}
+    />,
+  );
   // assert
   expect(result).toContain('type="radio"');
   expect(result).toContain('checked=""');

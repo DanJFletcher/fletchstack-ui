@@ -10,10 +10,13 @@ import 'fletchstack-ui/styles.css';
   <Container>
     <Stack gap="group">
       <h2 id="projects-title">Built for your next project</h2>
-      <SimpleGrid><Card>First project</Card><Card>Second project</Card></SimpleGrid>
+      <SimpleGrid>
+        <Card>First project</Card>
+        <Card>Second project</Card>
+      </SimpleGrid>
     </Stack>
   </Container>
-</Section>
+</Section>;
 ```
 
 ## API and semantics
@@ -28,11 +31,11 @@ Section owns **block padding only**. It adds no inline padding, surface, border,
 
 Each padding preset consumes its independent semantic role:
 
-| Preset | CSS property | Default at each edge |
-| --- | --- | --- |
-| compact | `--fs-section-padding-compact` | 32px |
-| default | `--fs-section-padding-default` | 64px |
-| spacious | `--fs-section-padding-spacious` | 96px |
+| Preset   | CSS property                    | Default at each edge |
+| -------- | ------------------------------- | -------------------- |
+| compact  | `--fs-section-padding-compact`  | 32px                 |
+| default  | `--fs-section-padding-default`  | 64px                 |
+| spacious | `--fs-section-padding-spacious` | 96px                 |
 
 These roles reference existing raw dimensions directly. They are independent of `--fs-layout-section-gap`: inset and sibling separation can evolve separately despite both currently using 64px. Existing tokens and primitive values are preserved.
 
@@ -43,9 +46,13 @@ Adjacent default sections contribute **128px between content edges** before any 
 Section has no JavaScript layout, provider, measurement, layout effect or automatic breakpoint. Consumers can adjust the selected semantic role through scoped CSS. A nested explicit theme restores its own complete defaults, and sibling scopes remain independent.
 
 ```css
-.project-section { --fs-section-padding-default: 64px; }
+.project-section {
+  --fs-section-padding-default: 64px;
+}
 @media (max-width: 600px) {
-  .project-section { --fs-section-padding-default: 32px; }
+  .project-section {
+    --fs-section-padding-default: 32px;
+  }
 }
 ```
 

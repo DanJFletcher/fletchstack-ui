@@ -10,17 +10,24 @@ export function formatSelection(options, info, selection) {
   const lines = [
     `Affected ${options.project}: ${selection.mode} (coverage-free development feedback)`,
     `Base: ${info.base}; resolved: ${info.resolvedBase}; HEAD: ${info.head}; merge-base: ${info.mergeBase}`,
-    ...selection.reasons.map(item => `${item.status} ${JSON.stringify(item.path)}: ${item.reason}`),
-    ...selection.files.map(file => `  ${file}`),
+    ...selection.reasons.map(
+      (item) => `${item.status} ${JSON.stringify(item.path)}: ${item.reason}`,
+    ),
+    ...selection.files.map((file) => `  ${file}`),
   ];
-  if (selection.fallback) { lines.push(selection.fallback); }
+  if (selection.fallback) {
+    lines.push(selection.fallback);
+  }
   return lines.join('\n');
 }
 
 /**
  * Apply Git and resource policy, then execute or explain the requested project's tests.
  **/
-export async function affectedRun(argv, { cwd = process.cwd(), write = console.log, discover = discoverChanges, open = openVitest } = {}) {
+export async function affectedRun(
+  argv,
+  { cwd = process.cwd(), write = console.log, discover = discoverChanges, open = openVitest } = {},
+) {
   const options = parseOptions(argv);
   const info = discover(options.base, cwd);
   const runner = await open({ project: options.project, root: info.root, changes: info.changes });

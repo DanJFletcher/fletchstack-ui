@@ -4,10 +4,13 @@ import { createHash } from 'node:crypto';
  * Project generated CSS onto the independently frozen token identities, retaining selectors and order.
  **/
 export function protectedStylesheet(content, names) {
-  return content.split(/(?<=\n)/).filter(line => {
-    const declaration = line.match(/^\s*(--fs-[\w-]+):/);
-    return !declaration || names.includes(declaration[1]);
-  }).join('');
+  return content
+    .split(/(?<=\n)/)
+    .filter((line) => {
+      const declaration = line.match(/^\s*(--fs-[\w-]+):/);
+      return !declaration || names.includes(declaration[1]);
+    })
+    .join('');
 }
 
 /**
@@ -22,5 +25,6 @@ export function preservesStylesheet(content, names, hash) {
  **/
 export function exportIdentities(content) {
   return [...content.matchAll(/export (type )?\{([^}]+)\}/g)]
-    .flatMap(match => match[2].split(',').map(name => `${match[1] ?? ''}${name.trim()}`)).sort();
+    .flatMap((match) => match[2].split(',').map((name) => `${match[1] ?? ''}${name.trim()}`))
+    .sort();
 }

@@ -8,14 +8,25 @@ import { ToastViewport } from '../../src/components/toast/ToastViewport';
  * Exercise the notification contract independently through client rendering and hydration.
  **/
 export function toastContracts(render: (element: ReactElement) => RenderResult) {
-  afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); });
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
   it('preserves local action state when the position changes', () => {
     // arrange
-    const result = render(<Toast position="top" action={<input aria-label="Note" defaultValue="Initial" />}>Saved</Toast>);
+    const result = render(
+      <Toast position="top" action={<input aria-label="Note" defaultValue="Initial" />}>
+        Saved
+      </Toast>,
+    );
     fireEvent.change(result.getByRole('textbox'), { target: { value: 'Keep this note' } });
 
     // act
-    result.rerender(<Toast position="bottom-left" action={<input aria-label="Note" defaultValue="Initial" />}>Saved</Toast>);
+    result.rerender(
+      <Toast position="bottom-left" action={<input aria-label="Note" defaultValue="Initial" />}>
+        Saved
+      </Toast>,
+    );
 
     // assert
     expect(result.getByRole('textbox')).toHaveValue('Keep this note');
@@ -24,7 +35,11 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
   it('announces only the title and message politely by default', () => {
     // arrange
     // act
-    const result = render(<Toast title="Saved" icon={<span>Decorative</span>} action={<button>Undo</button>}>Project updated.</Toast>);
+    const result = render(
+      <Toast title="Saved" icon={<span>Decorative</span>} action={<button>Undo</button>}>
+        Project updated.
+      </Toast>,
+    );
 
     // assert
     expect(result.getByRole('status')).toHaveTextContent('Saved Project updated.');
@@ -71,7 +86,11 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
   it('preserves meaningful zero-valued slots', () => {
     // arrange
     // act
-    const result = render(<Toast title={0} action={0} icon={0}>{0}</Toast>);
+    const result = render(
+      <Toast title={0} action={0} icon={0}>
+        {0}
+      </Toast>,
+    );
 
     // assert
     expect(result.getByRole('status')).toHaveTextContent('0 0');
@@ -80,7 +99,11 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     it(`omits empty ${String(empty)} slots`, () => {
       // arrange
       // act
-      const result = render(<Toast title={empty} icon={empty} action={empty}>{empty}</Toast>);
+      const result = render(
+        <Toast title={empty} icon={empty} action={empty}>
+          {empty}
+        </Toast>,
+      );
 
       // assert
       expect(result.getByRole('status')).toBeEmptyDOMElement();
@@ -93,7 +116,18 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     const ref = createRef<HTMLDivElement>();
 
     // act
-    const result = render(<Toast ref={ref} id="notice" data-notice="saved" className="custom" dir="rtl" style={{ '--fs-toast-radius': '0px' }}>Saved</Toast>);
+    const result = render(
+      <Toast
+        ref={ref}
+        id="notice"
+        data-notice="saved"
+        className="custom"
+        dir="rtl"
+        style={{ '--fs-toast-radius': '0px' }}
+      >
+        Saved
+      </Toast>,
+    );
 
     // assert
     expect(ref.current).toBe(result.container.querySelector('#notice'));
@@ -105,7 +139,11 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
   it('dismisses through the labeled native close button', () => {
     // arrange
     const onOpenChange = vi.fn();
-    const result = render(<Toast onOpenChange={onOpenChange} dismissLabel="Dismiss saved message">Saved</Toast>);
+    const result = render(
+      <Toast onOpenChange={onOpenChange} dismissLabel="Dismiss saved message">
+        Saved
+      </Toast>,
+    );
 
     // act
     fireEvent.click(result.getByRole('button', { name: 'Dismiss saved message' }));
@@ -117,7 +155,11 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
   it('keeps a controlled notification visible until its parent accepts dismissal', () => {
     // arrange
     const onOpenChange = vi.fn();
-    const result = render(<Toast open onOpenChange={onOpenChange}>Saved</Toast>);
+    const result = render(
+      <Toast open onOpenChange={onOpenChange}>
+        Saved
+      </Toast>,
+    );
 
     // act
     fireEvent.click(result.getByRole('button'));
@@ -167,13 +209,28 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
   });
   it('returns focus to the outside trigger after keyboard dismissal', () => {
     // arrange
-    const result = render(<><button>Save</button><Toast defaultOpen={false}>Saved</Toast></>);
+    const result = render(
+      <>
+        <button>Save</button>
+        <Toast defaultOpen={false}>Saved</Toast>
+      </>,
+    );
     result.getByRole('button', { name: 'Save' }).focus();
-    result.rerender(<><button>Save</button><Toast open>Saved</Toast></>);
+    result.rerender(
+      <>
+        <button>Save</button>
+        <Toast open>Saved</Toast>
+      </>,
+    );
     act(() => result.getByRole('button', { name: 'Dismiss notification' }).focus());
 
     // act
-    result.rerender(<><button>Save</button><Toast open={false}>Saved</Toast></>);
+    result.rerender(
+      <>
+        <button>Save</button>
+        <Toast open={false}>Saved</Toast>
+      </>,
+    );
 
     // assert
     expect(result.getByRole('button', { name: 'Save' })).toHaveFocus();
@@ -190,7 +247,7 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
   });
   it('lets a consumer prevent Escape dismissal', () => {
     // arrange
-    const result = render(<Toast onKeyDown={event => event.preventDefault()}>Saved</Toast>);
+    const result = render(<Toast onKeyDown={(event) => event.preventDefault()}>Saved</Toast>);
 
     // act
     fireEvent.keyDown(result.getByRole('button'), { key: 'Escape' });
@@ -212,33 +269,56 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
   });
   it('does not steal focus on opening', () => {
     // arrange
-    const result = render(<><button>Continue editing</button><Toast open={false}>Saved</Toast></>);
+    const result = render(
+      <>
+        <button>Continue editing</button>
+        <Toast open={false}>Saved</Toast>
+      </>,
+    );
     result.getByRole('button').focus();
 
     // act
-    result.rerender(<><button>Continue editing</button><Toast open>Saved</Toast></>);
+    result.rerender(
+      <>
+        <button>Continue editing</button>
+        <Toast open>Saved</Toast>
+      </>,
+    );
 
     // assert
     expect(result.getByRole('button', { name: 'Continue editing' })).toHaveFocus();
   });
   it('does not restore focus after the user has already left the toast', () => {
     // arrange
-    const result = render(<><button>Next</button><Toast open>Saved</Toast></>);
+    const result = render(
+      <>
+        <button>Next</button>
+        <Toast open>Saved</Toast>
+      </>,
+    );
     act(() => result.getByRole('button', { name: 'Dismiss notification' }).focus());
     act(() => result.getByRole('button', { name: 'Next' }).focus());
 
     // act
-    result.rerender(<><button>Next</button><Toast open={false}>Saved</Toast></>);
+    result.rerender(
+      <>
+        <button>Next</button>
+        <Toast open={false}>Saved</Toast>
+      </>,
+    );
 
     // assert
     expect(result.getByRole('button', { name: 'Next' })).toHaveFocus();
   });
   it('does not focus a disconnected return target', () => {
     // arrange
-    const outside = document.createElement('button'); document.body.append(outside); outside.focus();
+    const outside = document.createElement('button');
+    document.body.append(outside);
+    outside.focus();
     const restore = vi.spyOn(outside, 'focus');
     const result = render(<Toast open>Saved</Toast>);
-    act(() => result.getByRole('button', { name: 'Dismiss notification' }).focus()); outside.remove();
+    act(() => result.getByRole('button', { name: 'Dismiss notification' }).focus());
+    outside.remove();
 
     // act
     result.rerender(<Toast open={false}>Saved</Toast>);
@@ -248,12 +328,24 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
   });
   it('keeps the body mounted across visibility changes', () => {
     // arrange
-    const result = render(<Toast open action={<input aria-label="Note" defaultValue="Initial" />}>Saved</Toast>);
+    const result = render(
+      <Toast open action={<input aria-label="Note" defaultValue="Initial" />}>
+        Saved
+      </Toast>,
+    );
     fireEvent.change(result.getByRole('textbox'), { target: { value: 'Edited' } });
-    result.rerender(<Toast open={false} action={<input aria-label="Note" defaultValue="Initial" />}>Saved</Toast>);
+    result.rerender(
+      <Toast open={false} action={<input aria-label="Note" defaultValue="Initial" />}>
+        Saved
+      </Toast>,
+    );
 
     // act
-    result.rerender(<Toast open action={<input aria-label="Note" defaultValue="Initial" />}>Saved</Toast>);
+    result.rerender(
+      <Toast open action={<input aria-label="Note" defaultValue="Initial" />}>
+        Saved
+      </Toast>,
+    );
 
     // assert
     expect(result.getByRole('textbox')).toHaveValue('Edited');
@@ -263,12 +355,27 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     const ref = createRef<HTMLDivElement>();
 
     // act
-    const result = render(<ToastViewport ref={ref} id="notifications" className="custom" inline position="top-start" style={{ '--fs-toast-viewport-gap': '20px' }}><Toast>Saved</Toast></ToastViewport>);
+    const result = render(
+      <ToastViewport
+        ref={ref}
+        id="notifications"
+        className="custom"
+        inline
+        position="top-start"
+        style={{ '--fs-toast-viewport-gap': '20px' }}
+      >
+        <Toast>Saved</Toast>
+      </ToastViewport>,
+    );
 
     // assert
     expect(ref.current).toBe(result.getByRole('region', { name: 'Notifications' }));
     expect(ref.current).toHaveAttribute('id', 'notifications');
-    expect(ref.current).toHaveClass('custom', 'fs-toast-viewport--inline', 'fs-toast-viewport--top-start');
+    expect(ref.current).toHaveClass(
+      'custom',
+      'fs-toast-viewport--inline',
+      'fs-toast-viewport--top-start',
+    );
   });
   it('allows a localized viewport name', () => {
     // arrange
@@ -276,14 +383,18 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     const result = render(<ToastViewport aria-label="Updates" />);
 
     // assert
-    expect(result.getByRole('region', { name: 'Updates' })).toHaveClass('fs-toast-viewport--bottom-end');
+    expect(result.getByRole('region', { name: 'Updates' })).toHaveClass(
+      'fs-toast-viewport--bottom-end',
+    );
   });
   describe('timing', () => {
     for (const duration of [undefined, 0, -1, NaN, Infinity]) {
       it(`keeps ${String(duration)} duration persistent`, () => {
         // arrange
         vi.useFakeTimers();
-        const result = render(<Toast {...(duration === undefined ? {} : { duration })}>Saved</Toast>);
+        const result = render(
+          <Toast {...(duration === undefined ? {} : { duration })}>Saved</Toast>,
+        );
 
         // act
         act(() => vi.advanceTimersByTime(60000));
@@ -307,7 +418,11 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
       // arrange
       vi.useFakeTimers();
       const onOpenChange = vi.fn();
-      const result = render(<Toast open duration={1000} onOpenChange={onOpenChange}>Saved</Toast>);
+      const result = render(
+        <Toast open duration={1000} onOpenChange={onOpenChange}>
+          Saved
+        </Toast>,
+      );
       act(() => vi.advanceTimersByTime(1000));
       fireEvent.pointerLeave(result.getByRole('button').closest('.fs-toast')!);
 
@@ -336,7 +451,9 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
       const result = render(<Toast duration={1000}>Saved</Toast>);
       act(() => vi.advanceTimersByTime(400));
       const card = result.getByRole('button').closest('.fs-toast')!;
-      fireEvent.pointerEnter(card); act(() => vi.advanceTimersByTime(5000)); fireEvent.pointerLeave(card);
+      fireEvent.pointerEnter(card);
+      act(() => vi.advanceTimersByTime(5000));
+      fireEvent.pointerLeave(card);
 
       // act
       act(() => vi.advanceTimersByTime(600));
@@ -347,9 +464,15 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     it('keeps a focused action available when the pointer leaves', () => {
       // arrange
       vi.useFakeTimers();
-      const result = render(<Toast duration={1000} action={<button>Undo</button>}>Saved</Toast>);
+      const result = render(
+        <Toast duration={1000} action={<button>Undo</button>}>
+          Saved
+        </Toast>,
+      );
       const button = result.getByRole('button', { name: 'Undo' });
-      fireEvent.pointerEnter(button.closest('.fs-toast')!); act(() => button.focus()); fireEvent.pointerLeave(button.closest('.fs-toast')!);
+      fireEvent.pointerEnter(button.closest('.fs-toast')!);
+      act(() => button.focus());
+      fireEvent.pointerLeave(button.closest('.fs-toast')!);
 
       // act
       act(() => vi.advanceTimersByTime(5000));
@@ -361,7 +484,11 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     it('keeps the timer paused while moving focus between internal controls', () => {
       // arrange
       vi.useFakeTimers();
-      const result = render(<Toast duration={1000} action={<button>Undo</button>}>Saved</Toast>);
+      const result = render(
+        <Toast duration={1000} action={<button>Undo</button>}>
+          Saved
+        </Toast>,
+      );
       act(() => result.getByRole('button', { name: 'Undo' }).focus());
       act(() => result.getByRole('button', { name: 'Dismiss notification' }).focus());
 
@@ -374,7 +501,12 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     it('resumes when focus moves outside', () => {
       // arrange
       vi.useFakeTimers();
-      const result = render(<><button>Outside</button><Toast duration={1000}>Saved</Toast></>);
+      const result = render(
+        <>
+          <button>Outside</button>
+          <Toast duration={1000}>Saved</Toast>
+        </>,
+      );
       act(() => result.getByRole('button', { name: 'Dismiss notification' }).focus());
       act(() => result.getByRole('button', { name: 'Outside' }).focus());
 
@@ -389,7 +521,8 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
       vi.useFakeTimers();
       const hidden = vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
       const result = render(<Toast duration={1000}>Saved</Toast>);
-      hidden.mockReturnValue(true); fireEvent(document, new Event('visibilitychange'));
+      hidden.mockReturnValue(true);
+      fireEvent(document, new Event('visibilitychange'));
 
       // act
       act(() => vi.advanceTimersByTime(5000));
@@ -399,7 +532,8 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     });
     it('starts paused when mounted into a background tab', () => {
       // arrange
-      vi.useFakeTimers(); vi.spyOn(document, 'hidden', 'get').mockReturnValue(true);
+      vi.useFakeTimers();
+      vi.spyOn(document, 'hidden', 'get').mockReturnValue(true);
       const result = render(<Toast duration={1000}>Saved</Toast>);
 
       // act
@@ -414,9 +548,11 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
       const hidden = vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
       const result = render(<Toast duration={1000}>Saved</Toast>);
       act(() => vi.advanceTimersByTime(400));
-      hidden.mockReturnValue(true); fireEvent(document, new Event('visibilitychange'));
+      hidden.mockReturnValue(true);
+      fireEvent(document, new Event('visibilitychange'));
       act(() => vi.advanceTimersByTime(5000));
-      hidden.mockReturnValue(false); fireEvent(document, new Event('visibilitychange'));
+      hidden.mockReturnValue(false);
+      fireEvent(document, new Event('visibilitychange'));
 
       // act
       act(() => vi.advanceTimersByTime(600));
@@ -427,10 +563,19 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     it('does not reset the lifetime when a callback changes', () => {
       // arrange
       vi.useFakeTimers();
-      const first = vi.fn(); const latest = vi.fn();
-      const result = render(<Toast duration={1000} onOpenChange={first}>Saved</Toast>);
+      const first = vi.fn();
+      const latest = vi.fn();
+      const result = render(
+        <Toast duration={1000} onOpenChange={first}>
+          Saved
+        </Toast>,
+      );
       act(() => vi.advanceTimersByTime(600));
-      result.rerender(<Toast duration={1000} onOpenChange={latest}>Saved</Toast>);
+      result.rerender(
+        <Toast duration={1000} onOpenChange={latest}>
+          Saved
+        </Toast>,
+      );
 
       // act
       act(() => vi.advanceTimersByTime(400));
@@ -494,9 +639,18 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     });
     it('cancels automatic dismissal when the component is hidden', () => {
       // arrange
-      vi.useFakeTimers(); const onOpenChange = vi.fn();
-      const result = render(<Toast duration={1000} onOpenChange={onOpenChange}>Saved</Toast>);
-      result.rerender(<Toast hidden duration={1000} onOpenChange={onOpenChange}>Saved</Toast>);
+      vi.useFakeTimers();
+      const onOpenChange = vi.fn();
+      const result = render(
+        <Toast duration={1000} onOpenChange={onOpenChange}>
+          Saved
+        </Toast>,
+      );
+      result.rerender(
+        <Toast hidden duration={1000} onOpenChange={onOpenChange}>
+          Saved
+        </Toast>,
+      );
 
       // act
       act(() => vi.advanceTimersByTime(5000));
@@ -508,7 +662,11 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
       // arrange
       vi.useFakeTimers();
       const onOpenChange = vi.fn();
-      const result = render(<Toast duration={1000} onOpenChange={onOpenChange}>Saved</Toast>);
+      const result = render(
+        <Toast duration={1000} onOpenChange={onOpenChange}>
+          Saved
+        </Toast>,
+      );
       result.unmount();
 
       // act
@@ -519,8 +677,15 @@ export function toastContracts(render: (element: ReactElement) => RenderResult) 
     });
     it('survives StrictMode effect setup and cleanup', () => {
       // arrange
-      vi.useFakeTimers(); const onOpenChange = vi.fn();
-      render(<StrictMode><Toast duration={1000} onOpenChange={onOpenChange}>Saved</Toast></StrictMode>);
+      vi.useFakeTimers();
+      const onOpenChange = vi.fn();
+      render(
+        <StrictMode>
+          <Toast duration={1000} onOpenChange={onOpenChange}>
+            Saved
+          </Toast>
+        </StrictMode>,
+      );
 
       // act
       act(() => vi.advanceTimersByTime(1000));

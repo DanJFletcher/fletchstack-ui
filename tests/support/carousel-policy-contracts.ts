@@ -1,11 +1,27 @@
 import { expect, it } from 'vitest';
-import { validateCarousel, clampIndex, nextIndex } from '../../src/components/carousel/carousel-policy';
+import {
+  validateCarousel,
+  clampIndex,
+  nextIndex,
+} from '../../src/components/carousel/carousel-policy';
 
 /**
  * Reject ambiguous public configuration consistently on server and client.
  **/
 export function carouselPolicyContracts(): void {
-  it.each([{ label: ' ', slides: [] }, { label: 'Stories', slides: [{ id: '', content: null }] }, { label: 'Stories', slides: [{ id: 'same', content: null }, { id: 'same', content: null }] }, { label: 'Stories', slides: [], frameAspectRatio: 0 }, { label: 'Stories', slides: [], frameAspectRatio: Infinity }])('rejects invalid configuration %#', props => {
+  it.each([
+    { label: ' ', slides: [] },
+    { label: 'Stories', slides: [{ id: '', content: null }] },
+    {
+      label: 'Stories',
+      slides: [
+        { id: 'same', content: null },
+        { id: 'same', content: null },
+      ],
+    },
+    { label: 'Stories', slides: [], frameAspectRatio: 0 },
+    { label: 'Stories', slides: [], frameAspectRatio: Infinity },
+  ])('rejects invalid configuration %#', (props) => {
     // arrange
     const given = props;
     // act

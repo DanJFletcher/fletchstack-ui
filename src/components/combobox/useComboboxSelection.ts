@@ -3,8 +3,13 @@ import type { ComboboxProps } from './types.js';
 import { validateCombobox } from './combobox-policy.js';
 
 export interface ComboboxSelection {
-  selected: string; query: string; filter: string;
-  edit: (query: string) => void; commit: (value: string) => void; escape: () => void; reset: () => void;
+  selected: string;
+  query: string;
+  filter: string;
+  edit: (query: string) => void;
+  commit: (value: string) => void;
+  escape: () => void;
+  reset: () => void;
 }
 
 /**
@@ -16,12 +21,38 @@ export function useComboboxSelection(props: ComboboxProps): ComboboxSelection {
   const [draft, setDraft] = useState<string | null>(null);
   const value = props.value ?? stored;
   validateCombobox(props.options, value);
-  useEffect(() => { if (value) { setDraft(null); } }, [value]);
-  const commit = (next: string) => { if (props.value === undefined) { setStored(next); } props.onValueChange?.(next); };
+  useEffect(() => {
+    if (value) {
+      setDraft(null);
+    }
+  }, [value]);
+  const commit = (next: string) => {
+    if (props.value === undefined) {
+      setStored(next);
+    }
+    props.onValueChange?.(next);
+  };
   const selected = draft === null ? value : '';
-  const query = draft ?? props.options.find(option => option.value === value)?.label ?? '';
+  const query = draft ?? props.options.find((option) => option.value === value)?.label ?? '';
 
-  return { selected, query, filter: draft ?? '', edit: text => { setDraft(text); if (selected) { commit(''); } },
-    commit: next => { setDraft(null); commit(next); }, escape: () => setDraft(selected ? null : ''),
-    reset: () => { setStored(initial.current); setDraft(null); } };
+  return {
+    selected,
+    query,
+    filter: draft ?? '',
+    edit: (text) => {
+      setDraft(text);
+      if (selected) {
+        commit('');
+      }
+    },
+    commit: (next) => {
+      setDraft(null);
+      commit(next);
+    },
+    escape: () => setDraft(selected ? null : ''),
+    reset: () => {
+      setStored(initial.current);
+      setDraft(null);
+    },
+  };
 }

@@ -1,11 +1,35 @@
 /* Consumer-only guides and content styling, never Section's appearance. */
-.section-demo .section-demo-copy { margin: 0; }
-.section-demo-heading { display: grid; gap: var(--fs-space-gap-label); text-align: center; }
-.section-demo-marker { block-size: 20px; background: var(--fs-card-border); }
-.section-demo-guide { outline: 1px dashed var(--fs-card-border); }
-.section-demo-flex { display: flex; inline-size: 300px; max-inline-size: 100%; }
-.section-demo-fixed { flex: 0 0 100px; }
-.section-demo-grid { display: grid; grid-template-columns: 100px 1fr; inline-size: 300px; max-inline-size: 100%; }
+.section-demo .section-demo-copy {
+  margin: 0;
+}
+.section-demo-heading {
+  display: grid;
+  gap: var(--fs-space-gap-label);
+  text-align: center;
+}
+.section-demo-marker {
+  block-size: 20px;
+  background: var(--fs-card-border);
+}
+.section-demo-guide {
+  outline: 1px dashed var(--fs-card-border);
+}
+.section-demo-flex {
+  display: flex;
+  inline-size: 300px;
+  max-inline-size: 100%;
+}
+.section-demo-fixed {
+  flex: 0 0 100px;
+}
+.section-demo-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  inline-size: 300px;
+  max-inline-size: 100%;
+}
 @media (max-width: 600px) {
-  .section-demo-responsive { --fs-section-padding-default: 32px; }
+  .section-demo-responsive {
+    --fs-section-padding-default: 32px;
+  }
 }

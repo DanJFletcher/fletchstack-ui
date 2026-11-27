@@ -30,13 +30,28 @@ it('describes the input with helper text', () => {
 
 it('links consumer, prefix, suffix, helper, and error descriptions', () => {
   // arrange
-  const given = <><p id="context">Project settings.</p><TextInput id="website" label="Website" aria-describedby="context" prefix="https://" suffix="/" helperText="Enter a domain." error="Enter a website." /></>;
+  const given = (
+    <>
+      <p id="context">Project settings.</p>
+      <TextInput
+        id="website"
+        label="Website"
+        aria-describedby="context"
+        prefix="https://"
+        suffix="/"
+        helperText="Enter a domain."
+        error="Enter a website."
+      />
+    </>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('textbox')).toHaveAccessibleDescription('Project settings. https:// / Enter a domain. Enter a website.');
+  expect(screen.getByRole('textbox')).toHaveAccessibleDescription(
+    'Project settings. https:// / Enter a domain. Enter a website.',
+  );
 });
 
 it('marks errors as invalid', () => {

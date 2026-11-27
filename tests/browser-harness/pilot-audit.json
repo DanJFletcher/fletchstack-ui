@@ -230,9 +230,7 @@
     "source": "tests/e2e/components/stack/Stack.spec.ts",
     "title": "'native hidden suppresses the complete Stack'",
     "owner": "tests/browser-harness/specs/stack/Stack.spec.ts",
-    "assertions": [
-      "await expect(page.locator('.fs-stack')).toHaveCSS('display', 'none');"
-    ]
+    "assertions": ["await expect(page.locator('.fs-stack')).toHaveCSS('display', 'none');"]
   },
   {
     "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
@@ -371,9 +369,7 @@
     "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",
     "title": "'native hidden removes code and controls from layout'",
     "owner": "tests/browser-harness/specs/code-block/CodeBlock.spec.ts",
-    "assertions": [
-      "await expect(page.locator('.fs-code-block')).toHaveCSS('display', 'none');"
-    ]
+    "assertions": ["await expect(page.locator('.fs-code-block')).toHaveCSS('display', 'none');"]
   },
   {
     "source": "tests/e2e/components/code-block/CodeBlock.spec.ts",

@@ -40,14 +40,14 @@ Add pinned direct development dependencies on `jsdom`, `@testing-library/user-ev
 
 Import `render`, `screen`, and where needed `within` from React Testing Library; it already exposes DOM Testing Library queries. Use `userEvent.setup()` inside interaction tests before rendering, await interactions, and prefer role/name queries. Use `findBy` or `waitFor` only for genuinely asynchronous outcomes, with actions outside retry callbacks. Keep production components and composed children real; a callback spy is acceptable when the callback is the public outcome.
 
-| Current concern | Planned verification |
-| --- | --- |
-| Label, explicit accessible name, decorative icon and label | Named button queries and accessible-name assertions; decorative content does not pollute the name |
-| Default, submit, reset, form association, hidden and disabled attributes | Native DOM properties/attributes and state matchers; real native behavior stays covered in Chromium |
-| Consumer class and style forwarding | Consumer class membership, explicit inline styles, and semantic custom-property values; no class-order or style-serialization checks |
-| Variant and size selection | Preserve existing selection cases with unordered class-membership checks for the CSS hooks that select their styling; these are rendering checks, not claims about visual appearance |
-| Handlers, disabled activation, ref access | Awaited user interactions, observable callback outcomes, and focusing the queried native button through its public ref |
-| Updates after initial rendering | `rerender` an enabled Button as disabled and verify its state and subsequent activation behavior in separate focused cases |
+| Current concern                                                          | Planned verification                                                                                                                                                                 |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Label, explicit accessible name, decorative icon and label               | Named button queries and accessible-name assertions; decorative content does not pollute the name                                                                                    |
+| Default, submit, reset, form association, hidden and disabled attributes | Native DOM properties/attributes and state matchers; real native behavior stays covered in Chromium                                                                                  |
+| Consumer class and style forwarding                                      | Consumer class membership, explicit inline styles, and semantic custom-property values; no class-order or style-serialization checks                                                 |
+| Variant and size selection                                               | Preserve existing selection cases with unordered class-membership checks for the CSS hooks that select their styling; these are rendering checks, not claims about visual appearance |
+| Handlers, disabled activation, ref access                                | Awaited user interactions, observable callback outcomes, and focusing the queried native button through its public ref                                                               |
+| Updates after initial rendering                                          | `rerender` an enabled Button as disabled and verify its state and subsequent activation behavior in separate focused cases                                                           |
 
 Do not replace string checks with large DOM snapshots, private React-state assertions, or repeated hand-built query helpers. Each case retains arrange/act/assert structure and one promised behavior. Cases that inspect styling hooks do so deliberately; user-facing queries still locate the element.
 

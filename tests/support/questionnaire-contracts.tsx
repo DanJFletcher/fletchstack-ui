@@ -5,7 +5,14 @@ import userEvent from '@testing-library/user-event';
 import { expect, it, vi } from 'vitest';
 import { Questionnaire } from '../../src/components/questionnaire/Questionnaire';
 import type { QuestionnaireProps } from '../../src/components/questionnaire/types';
-import { finalQuestion, multipleQuestion, questionnaireDraft, questionnaireItems, singleQuestion, textQuestion } from './questionnaire-fixtures';
+import {
+  finalQuestion,
+  multipleQuestion,
+  questionnaireDraft,
+  questionnaireItems,
+  singleQuestion,
+  textQuestion,
+} from './questionnaire-fixtures';
 
 type Mount = (element: ReactElement) => RenderResult;
 /**
@@ -22,7 +29,14 @@ export function questionnaireContracts(mount: Mount) {
     // arrange
     const given = createRef<HTMLFormElement>();
     // act
-    mount(fixture({ ref: given, id: 'planning', className: 'custom', 'aria-label': 'Plan work' } as Partial<QuestionnaireProps>));
+    mount(
+      fixture({
+        ref: given,
+        id: 'planning',
+        className: 'custom',
+        'aria-label': 'Plan work',
+      } as Partial<QuestionnaireProps>),
+    );
     // assert
     expect(given.current).toBe(screen.getByRole('form', { name: 'Plan work' }));
     expect(given.current).toHaveAttribute('id', 'planning');
@@ -31,9 +45,16 @@ export function questionnaireContracts(mount: Mount) {
   it('uses an external label without adding a competing accessible name', () => {
     // arrange
     // act
-    mount(<><h2 id="name">Project planning</h2>{fixture({ 'aria-labelledby': 'name' })}</>);
+    mount(
+      <>
+        <h2 id="name">Project planning</h2>
+        {fixture({ 'aria-labelledby': 'name' })}
+      </>,
+    );
     // assert
-    expect(screen.getByRole('form', { name: 'Project planning' })).not.toHaveAttribute('aria-label');
+    expect(screen.getByRole('form', { name: 'Project planning' })).not.toHaveAttribute(
+      'aria-label',
+    );
   });
   it('keeps inactive questions out of the accessibility tree', () => {
     // arrange
@@ -47,7 +68,8 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('does not advance when a single option is chosen', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture());
+    const user = userEvent.setup();
+    mount(fixture());
     // act
     await user.click(screen.getByRole('radio', { name: 'Alpha' }));
     // assert
@@ -56,7 +78,8 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('clears an exclusive option when nonblank custom text is entered', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ defaultAnswers: questionnaireDraft }));
+    const user = userEvent.setup();
+    mount(fixture({ defaultAnswers: questionnaireDraft }));
     // act
     await user.type(screen.getByRole('textbox', { name: 'Other feature' }), '  history  ');
     // assert
@@ -65,7 +88,10 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('clears exclusive custom text when an option is selected', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ defaultAnswers: { feature: { kind: 'choice', values: [], other: 'history' } } }));
+    const user = userEvent.setup();
+    mount(
+      fixture({ defaultAnswers: { feature: { kind: 'choice', values: [], other: 'history' } } }),
+    );
     // act
     await user.click(screen.getByRole('radio', { name: 'Beta' }));
     // assert
@@ -74,7 +100,8 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('does not clear an option merely by focusing the custom field', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ defaultAnswers: questionnaireDraft }));
+    const user = userEvent.setup();
+    mount(fixture({ defaultAnswers: questionnaireDraft }));
     // act
     await user.click(screen.getByRole('textbox'));
     // assert
@@ -82,18 +109,33 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('accumulates custom text alongside multiple choices in the normalized submission', async () => {
     // arrange
-    const user = userEvent.setup(); const submit = vi.fn();
-    mount(fixture({ items: [multipleQuestion], defaultAnswers: { updates: { kind: 'choice', values: ['p'] } }, onSubmit: submit }));
+    const user = userEvent.setup();
+    const submit = vi.fn();
+    mount(
+      fixture({
+        items: [multipleQuestion],
+        defaultAnswers: { updates: { kind: 'choice', values: ['p'] } },
+        onSubmit: submit,
+      }),
+    );
     await user.click(screen.getByRole('checkbox', { name: 'Decisions' }));
     await user.type(screen.getByRole('textbox'), '  context  ');
     // act
     await user.click(screen.getByRole('button', { name: 'Submit' }));
     // assert
-    expect(submit).toHaveBeenCalledWith({ updates: { kind: 'choice', values: ['p', 'd'], other: 'context' } });
+    expect(submit).toHaveBeenCalledWith({
+      updates: { kind: 'choice', values: ['p', 'd'], other: 'context' },
+    });
   });
   it('clears a multiple choice when its checked control is activated again', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ items: [multipleQuestion], defaultAnswers: { updates: { kind: 'choice', values: ['p'] } } }));
+    const user = userEvent.setup();
+    mount(
+      fixture({
+        items: [multipleQuestion],
+        defaultAnswers: { updates: { kind: 'choice', values: ['p'] } },
+      }),
+    );
     // act
     await user.click(screen.getByRole('checkbox', { name: 'Progress' }));
     // assert
@@ -101,7 +143,8 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('validates the current question and focuses its first enabled answer', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture());
+    const user = userEvent.setup();
+    mount(fixture());
     // act
     await user.click(screen.getByRole('button', { name: 'Next' }));
     // assert
@@ -110,7 +153,9 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('revalidates a displayed error as the answer changes', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture()); await user.click(screen.getByRole('button', { name: 'Next' }));
+    const user = userEvent.setup();
+    mount(fixture());
+    await user.click(screen.getByRole('button', { name: 'Next' }));
     // act
     await user.click(screen.getByRole('radio', { name: 'Alpha' }));
     // assert
@@ -118,7 +163,9 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('retains drafts when returning to an earlier question', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ defaultAnswers: questionnaireDraft })); await user.click(screen.getByRole('button', { name: 'Next' }));
+    const user = userEvent.setup();
+    mount(fixture({ defaultAnswers: questionnaireDraft }));
+    await user.click(screen.getByRole('button', { name: 'Next' }));
     // act
     await user.click(screen.getByRole('button', { name: 'Previous' }));
     // assert
@@ -127,7 +174,8 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('requires an optional question to be answered or explicitly skipped', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ items: [multipleQuestion] }));
+    const user = userEvent.setup();
+    mount(fixture({ items: [multipleQuestion] }));
     // act
     await user.click(screen.getByRole('button', { name: 'Submit' }));
     // assert
@@ -135,7 +183,11 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('records an explicit skip and clears the prior optional answer', async () => {
     // arrange
-    const user = userEvent.setup(); const submit = vi.fn(); mount(fixture({ items: [multipleQuestion], defaultAnswers: questionnaireDraft, onSubmit: submit }));
+    const user = userEvent.setup();
+    const submit = vi.fn();
+    mount(
+      fixture({ items: [multipleQuestion], defaultAnswers: questionnaireDraft, onSubmit: submit }),
+    );
     await user.click(screen.getByRole('button', { name: 'Skip' }));
     expect(submit).not.toHaveBeenCalled();
     // act
@@ -145,7 +197,8 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('advances after a nonfinal explicit skip', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ defaultValue: 'updates' }));
+    const user = userEvent.setup();
+    mount(fixture({ defaultValue: 'updates' }));
     // act
     await user.click(screen.getByRole('button', { name: 'Skip' }));
     // assert
@@ -153,7 +206,15 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('replaces a skipped answer when the user enters a new choice', async () => {
     // arrange
-    const user = userEvent.setup(); const submit = vi.fn(); mount(fixture({ items: [multipleQuestion], defaultAnswers: { updates: { kind: 'skipped' } }, onSubmit: submit }));
+    const user = userEvent.setup();
+    const submit = vi.fn();
+    mount(
+      fixture({
+        items: [multipleQuestion],
+        defaultAnswers: { updates: { kind: 'skipped' } },
+        onSubmit: submit,
+      }),
+    );
     await user.click(screen.getByRole('checkbox', { name: 'Progress' }));
     // act
     await user.click(screen.getByRole('button', { name: 'Submit' }));
@@ -162,7 +223,15 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('validates the complete flow before submitting a resumed final question', async () => {
     // arrange
-    const user = userEvent.setup(); const submit = vi.fn(); mount(fixture({ defaultValue: 'when', defaultAnswers: { when: { kind: 'choice', values: ['now'] } }, onSubmit: submit }));
+    const user = userEvent.setup();
+    const submit = vi.fn();
+    mount(
+      fixture({
+        defaultValue: 'when',
+        defaultAnswers: { when: { kind: 'choice', values: ['now'] } },
+        onSubmit: submit,
+      }),
+    );
     // act
     await user.click(screen.getByRole('button', { name: 'Submit' }));
     // assert
@@ -172,7 +241,10 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('only blocks Next for application errors on the current question', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ defaultAnswers: questionnaireDraft, validate: () => ({ when: 'Choose later.' }) }));
+    const user = userEvent.setup();
+    mount(
+      fixture({ defaultAnswers: questionnaireDraft, validate: () => ({ when: 'Choose later.' }) }),
+    );
     // act
     await user.click(screen.getByRole('button', { name: 'Next' }));
     // assert
@@ -180,7 +252,14 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('exposes application validation on the current text answer', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ items: [textQuestion], defaultAnswers: { feedback: { kind: 'text', value: 'short' } }, validate: () => ({ feedback: 'Please describe the change.' }) }));
+    const user = userEvent.setup();
+    mount(
+      fixture({
+        items: [textQuestion],
+        defaultAnswers: { feedback: { kind: 'text', value: 'short' } },
+        validate: () => ({ feedback: 'Please describe the change.' }),
+      }),
+    );
     // act
     await user.click(screen.getByRole('button', { name: 'Submit' }));
     // assert
@@ -189,7 +268,9 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('keeps controlled answers authoritative until the parent accepts a request', async () => {
     // arrange
-    const user = userEvent.setup(); const change = vi.fn(); mount(fixture({ answers: {}, onAnswersChange: change }));
+    const user = userEvent.setup();
+    const change = vi.fn();
+    mount(fixture({ answers: {}, onAnswersChange: change }));
     // act
     await user.click(screen.getByRole('radio', { name: 'Alpha' }));
     // assert
@@ -198,12 +279,18 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('does not move controlled navigation until the parent accepts its requested ID', async () => {
     // arrange
-    const user = userEvent.setup(); const change = vi.fn(); const view = mount(fixture({ value: 'feature', defaultAnswers: questionnaireDraft, onValueChange: change }));
+    const user = userEvent.setup();
+    const change = vi.fn();
+    const view = mount(
+      fixture({ value: 'feature', defaultAnswers: questionnaireDraft, onValueChange: change }),
+    );
     await user.click(screen.getByRole('button', { name: 'Next' }));
     expect(change).toHaveBeenCalledWith('updates');
     expect(screen.getByRole('group', { name: 'Choose a feature' })).toBeVisible();
     // act
-    view.rerender(fixture({ value: 'updates', defaultAnswers: questionnaireDraft, onValueChange: change }));
+    view.rerender(
+      fixture({ value: 'updates', defaultAnswers: questionnaireDraft, onValueChange: change }),
+    );
     // assert
     expect(screen.getByRole('group', { name: 'Choose updates' })).toHaveFocus();
   });
@@ -237,13 +324,21 @@ export function questionnaireContracts(mount: Mount) {
     // arrange
     const view = mount(fixture({ defaultAnswers: questionnaireDraft }));
     // act
-    view.rerender(fixture({ defaultValue: 'when', defaultAnswers: { feature: { kind: 'choice', values: ['b'] } } }));
+    view.rerender(
+      fixture({
+        defaultValue: 'when',
+        defaultAnswers: { feature: { kind: 'choice', values: ['b'] } },
+      }),
+    );
     // assert
     expect(screen.getByRole('radio', { name: 'Alpha' })).toBeChecked();
   });
   it('restores original defaults through the native reset method', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ defaultAnswers: questionnaireDraft })); await user.click(screen.getByRole('radio', { name: 'Beta' })); await user.click(screen.getByRole('button', { name: 'Next' }));
+    const user = userEvent.setup();
+    mount(fixture({ defaultAnswers: questionnaireDraft }));
+    await user.click(screen.getByRole('radio', { name: 'Beta' }));
+    await user.click(screen.getByRole('button', { name: 'Next' }));
     // act
     act(() => screen.getByRole<HTMLFormElement>('form').reset());
     // assert
@@ -251,7 +346,11 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('honors a consumer cancellation of reset', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ defaultAnswers: questionnaireDraft, onReset: event => event.preventDefault() })); await user.click(screen.getByRole('radio', { name: 'Beta' }));
+    const user = userEvent.setup();
+    mount(
+      fixture({ defaultAnswers: questionnaireDraft, onReset: (event) => event.preventDefault() }),
+    );
+    await user.click(screen.getByRole('radio', { name: 'Beta' }));
     // act
     act(() => screen.getByRole<HTMLFormElement>('form').reset());
     // assert
@@ -259,7 +358,17 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('requests controlled reset without overriding either controlled slice', () => {
     // arrange
-    const answers = vi.fn(); const value = vi.fn(); mount(fixture({ answers: questionnaireDraft, value: 'when', defaultValue: 'feature', onAnswersChange: answers, onValueChange: value }));
+    const answers = vi.fn();
+    const value = vi.fn();
+    mount(
+      fixture({
+        answers: questionnaireDraft,
+        value: 'when',
+        defaultValue: 'feature',
+        onAnswersChange: answers,
+        onValueChange: value,
+      }),
+    );
     // act
     act(() => screen.getByRole<HTMLFormElement>('form').reset());
     // assert
@@ -269,17 +378,30 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('submits an exact complete payload after explicit navigation', async () => {
     // arrange
-    const user = userEvent.setup(); const submit = vi.fn(); mount(fixture({ defaultAnswers: questionnaireDraft, defaultValue: 'when', onSubmit: submit }));
+    const user = userEvent.setup();
+    const submit = vi.fn();
+    mount(fixture({ defaultAnswers: questionnaireDraft, defaultValue: 'when', onSubmit: submit }));
     // act
     await user.click(screen.getByRole('button', { name: 'Submit' }));
     // assert
-    expect(submit).toHaveBeenCalledWith({ feature: { kind: 'choice', values: ['a'] }, updates: { kind: 'choice', values: ['p', 'd'] }, when: { kind: 'choice', values: ['now'] } });
+    expect(submit).toHaveBeenCalledWith({
+      feature: { kind: 'choice', values: ['a'] },
+      updates: { kind: 'choice', values: ['p', 'd'] },
+      when: { kind: 'choice', values: ['now'] },
+    });
   });
   it('locks controls and ignores repeated submission while a save is pending', async () => {
     // arrange
-    let resolve!: () => void; const submit = vi.fn(() => new Promise<void>(finish => { resolve = finish; }));
+    let resolve!: () => void;
+    const submit = vi.fn(
+      () =>
+        new Promise<void>((finish) => {
+          resolve = finish;
+        }),
+    );
     mount(fixture({ defaultValue: 'when', defaultAnswers: questionnaireDraft, onSubmit: submit }));
-    const form = screen.getByRole<HTMLFormElement>('form'); fireEvent.submit(form);
+    const form = screen.getByRole<HTMLFormElement>('form');
+    fireEvent.submit(form);
     // act
     fireEvent.submit(form);
     // assert
@@ -291,16 +413,34 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('guards synchronous reentrant submit callbacks', async () => {
     // arrange
-    const submit = vi.fn(() => { fireEvent.submit(screen.getByRole('form')); });
-    mount(fixture({ items: [finalQuestion], defaultAnswers: questionnaireDraft, onSubmit: submit }));
+    const submit = vi.fn(() => {
+      fireEvent.submit(screen.getByRole('form'));
+    });
+    mount(
+      fixture({ items: [finalQuestion], defaultAnswers: questionnaireDraft, onSubmit: submit }),
+    );
     // act
-    await act(async () => { fireEvent.submit(screen.getByRole('form')); });
+    await act(async () => {
+      fireEvent.submit(screen.getByRole('form'));
+    });
     // assert
     expect(submit).toHaveBeenCalledTimes(1);
   });
   it('prevents native reset while persistence is pending', async () => {
     // arrange
-    let resolve!: () => void; const reset = vi.fn(); mount(fixture({ defaultValue: 'when', defaultAnswers: questionnaireDraft, onReset: reset, onSubmit: () => new Promise<void>(finish => { resolve = finish; }) }));
+    let resolve!: () => void;
+    const reset = vi.fn();
+    mount(
+      fixture({
+        defaultValue: 'when',
+        defaultAnswers: questionnaireDraft,
+        onReset: reset,
+        onSubmit: () =>
+          new Promise<void>((finish) => {
+            resolve = finish;
+          }),
+      }),
+    );
     fireEvent.submit(screen.getByRole('form'));
     // act
     act(() => screen.getByRole<HTMLFormElement>('form').reset());
@@ -309,23 +449,51 @@ export function questionnaireContracts(mount: Mount) {
     expect(screen.getByRole('group', { name: 'When to begin?' })).toBeVisible();
     await act(async () => resolve());
   });
-  it.each([false, true])('keeps drafts after a failed save and permits an explicit retry (async=%s)', async asynchronous => {
+  it.each([false, true])(
+    'keeps drafts after a failed save and permits an explicit retry (async=%s)',
+    async (asynchronous) => {
+      // arrange
+      const user = userEvent.setup();
+      const submit = vi
+        .fn()
+        .mockImplementationOnce(() => {
+          if (asynchronous) {
+            return Promise.reject(new Error('private secret'));
+          }
+          throw new Error('private secret');
+        })
+        .mockResolvedValue(undefined);
+      mount(
+        fixture({ items: [finalQuestion], defaultAnswers: questionnaireDraft, onSubmit: submit }),
+      );
+      await user.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'Unable to save your answers. Please try again.',
+      );
+      expect(screen.queryByText('private secret')).not.toBeInTheDocument();
+      // act
+      await user.click(screen.getByRole('button', { name: 'Submit' }));
+      // assert
+      expect(submit).toHaveBeenCalledTimes(2);
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+      expect(screen.getByRole('radio', { name: 'Now' })).toBeChecked();
+    },
+  );
+  it.each([false, true])('ignores completion after unmount (reject=%s)', async (reject) => {
     // arrange
-    const user = userEvent.setup(); const submit = vi.fn().mockImplementationOnce(() => { if (asynchronous) { return Promise.reject(new Error('private secret')); } throw new Error('private secret'); }).mockResolvedValue(undefined);
-    mount(fixture({ items: [finalQuestion], defaultAnswers: questionnaireDraft, onSubmit: submit })); await user.click(screen.getByRole('button', { name: 'Submit' }));
-    expect(screen.getByRole('alert')).toHaveTextContent('Unable to save your answers. Please try again.');
-    expect(screen.queryByText('private secret')).not.toBeInTheDocument();
-    // act
-    await user.click(screen.getByRole('button', { name: 'Submit' }));
-    // assert
-    expect(submit).toHaveBeenCalledTimes(2);
-    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
-    expect(screen.getByRole('radio', { name: 'Now' })).toBeChecked();
-  });
-  it.each([false, true])('ignores completion after unmount (reject=%s)', async reject => {
-    // arrange
-    let finish!: () => void; const view = mount(fixture({ items: [finalQuestion], defaultAnswers: questionnaireDraft, onSubmit: () => new Promise<void>((resolve, fail) => { finish = reject ? () => fail(new Error('obsolete')) : resolve; }) }));
-    fireEvent.submit(screen.getByRole('form')); view.unmount();
+    let finish!: () => void;
+    const view = mount(
+      fixture({
+        items: [finalQuestion],
+        defaultAnswers: questionnaireDraft,
+        onSubmit: () =>
+          new Promise<void>((resolve, fail) => {
+            finish = reject ? () => fail(new Error('obsolete')) : resolve;
+          }),
+      }),
+    );
+    fireEvent.submit(screen.getByRole('form'));
+    view.unmount();
     // act
     await act(async () => finish());
     // assert
@@ -334,7 +502,12 @@ export function questionnaireContracts(mount: Mount) {
   it('uses instance-specific IDs and native radio names', () => {
     // arrange
     // act
-    mount(<>{fixture({ 'aria-label': 'First' })}{fixture({ 'aria-label': 'Second' })}</>);
+    mount(
+      <>
+        {fixture({ 'aria-label': 'First' })}
+        {fixture({ 'aria-label': 'Second' })}
+      </>,
+    );
     // assert
     const radios = screen.getAllByRole('radio', { name: 'Alpha' });
     expect(radios[0]!.id).not.toBe(radios[1]!.id);
@@ -342,7 +515,9 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('activates an enabled option through a scoped letter shortcut', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ shortcuts: 'letters' })); screen.getByRole('radio', { name: 'Alpha' }).focus();
+    const user = userEvent.setup();
+    mount(fixture({ shortcuts: 'letters' }));
+    screen.getByRole('radio', { name: 'Alpha' }).focus();
     // act
     await user.keyboard('b');
     // assert
@@ -351,16 +526,25 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('pauses shortcuts during text entry', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ shortcuts: 'numbers' }));
+    const user = userEvent.setup();
+    mount(fixture({ shortcuts: 'numbers' }));
     // act
     await user.type(screen.getByRole('textbox'), '1');
     // assert
     expect(screen.getByRole('textbox')).toHaveValue('1');
     expect(screen.getByRole('radio', { name: 'Alpha' })).not.toBeChecked();
   });
-  it.each([{ key: 'a', ctrlKey: true }, { key: 'a', metaKey: true }, { key: 'a', altKey: true }, { key: 'a', repeat: true }, { key: 'a', isComposing: true }, { key: 'z' }])('leaves excluded shortcut events untouched: %j', event => {
+  it.each([
+    { key: 'a', ctrlKey: true },
+    { key: 'a', metaKey: true },
+    { key: 'a', altKey: true },
+    { key: 'a', repeat: true },
+    { key: 'a', isComposing: true },
+    { key: 'z' },
+  ])('leaves excluded shortcut events untouched: %j', (event) => {
     // arrange
-    mount(fixture({ shortcuts: 'letters' })); const input = screen.getByRole('radio', { name: 'Alpha' });
+    mount(fixture({ shortcuts: 'letters' }));
+    const input = screen.getByRole('radio', { name: 'Alpha' });
     // act
     const result = fireEvent.keyDown(input, event);
     // assert
@@ -369,7 +553,8 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('honors a consumer key handler that prevents a shortcut', () => {
     // arrange
-    const handler = vi.fn(event => event.preventDefault()); mount(fixture({ shortcuts: 'letters', onKeyDown: handler }));
+    const handler = vi.fn((event) => event.preventDefault());
+    mount(fixture({ shortcuts: 'letters', onKeyDown: handler }));
     // act
     fireEvent.keyDown(screen.getByRole('radio', { name: 'Alpha' }), { key: 'a' });
     // assert
@@ -386,7 +571,21 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('renders single-line text-only questions with consumer labels', async () => {
     // arrange
-    const user = userEvent.setup(); const submit = vi.fn(); mount(fixture({ items: [{ id: 'name', type: 'text', title: 'Your name', input: { label: 'Name', placeholder: 'Name here' } }], onSubmit: submit }));
+    const user = userEvent.setup();
+    const submit = vi.fn();
+    mount(
+      fixture({
+        items: [
+          {
+            id: 'name',
+            type: 'text',
+            title: 'Your name',
+            input: { label: 'Name', placeholder: 'Name here' },
+          },
+        ],
+        onSubmit: submit,
+      }),
+    );
     await user.type(screen.getByRole('textbox', { name: 'Name' }), '  Example  ');
     // act
     await user.click(screen.getByRole('button', { name: 'Submit' }));
@@ -395,7 +594,10 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('clearing a custom single answer leaves the question unanswered', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ defaultAnswers: { feature: { kind: 'choice', values: [], other: 'history' } } }));
+    const user = userEvent.setup();
+    mount(
+      fixture({ defaultAnswers: { feature: { kind: 'choice', values: [], other: 'history' } } }),
+    );
     await user.clear(screen.getByRole('textbox'));
     // act
     await user.click(screen.getByRole('button', { name: 'Next' }));
@@ -404,7 +606,13 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('clearing a text-only draft leaves the question unanswered', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ items: [textQuestion], defaultAnswers: { feedback: { kind: 'text', value: 'feedback' } } }));
+    const user = userEvent.setup();
+    mount(
+      fixture({
+        items: [textQuestion],
+        defaultAnswers: { feedback: { kind: 'text', value: 'feedback' } },
+      }),
+    );
     await user.clear(screen.getByRole('textbox'));
     // act
     await user.click(screen.getByRole('button', { name: 'Submit' }));
@@ -413,7 +621,20 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('focuses custom-only questions when validation fails', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ items: [{ id: 'other', type: 'single', title: 'Your idea', options: [], other: { label: 'Idea' } }] }));
+    const user = userEvent.setup();
+    mount(
+      fixture({
+        items: [
+          {
+            id: 'other',
+            type: 'single',
+            title: 'Your idea',
+            options: [],
+            other: { label: 'Idea' },
+          },
+        ],
+      }),
+    );
     // act
     await user.click(screen.getByRole('button', { name: 'Submit' }));
     // assert
@@ -421,7 +642,15 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('waits for controlled navigation before focusing an earlier invalid answer', async () => {
     // arrange
-    const user = userEvent.setup(); const change = vi.fn(); const view = mount(fixture({ value: 'when', onValueChange: change, defaultAnswers: { when: { kind: 'choice', values: ['now'] } } }));
+    const user = userEvent.setup();
+    const change = vi.fn();
+    const view = mount(
+      fixture({
+        value: 'when',
+        onValueChange: change,
+        defaultAnswers: { when: { kind: 'choice', values: ['now'] } },
+      }),
+    );
     await user.click(screen.getByRole('button', { name: 'Submit' }));
     expect(change).toHaveBeenCalledWith('feature');
     expect(screen.getByRole('button', { name: 'Submit' })).toHaveFocus();
@@ -449,7 +678,8 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('never submits an empty questionnaire through a native submit event', () => {
     // arrange
-    const submit = vi.fn(); mount(fixture({ items: [], onSubmit: submit }));
+    const submit = vi.fn();
+    mount(fixture({ items: [], onSubmit: submit }));
     // act
     fireEvent.submit(screen.getByRole('form'));
     // assert
@@ -457,7 +687,15 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('honors a native capture handler that cancels submission', () => {
     // arrange
-    const submit = vi.fn(); mount(fixture({ items: [finalQuestion], defaultAnswers: questionnaireDraft, onSubmit: submit, onSubmitCapture: event => event.preventDefault() }));
+    const submit = vi.fn();
+    mount(
+      fixture({
+        items: [finalQuestion],
+        defaultAnswers: questionnaireDraft,
+        onSubmit: submit,
+        onSubmitCapture: (event) => event.preventDefault(),
+      }),
+    );
     // act
     fireEvent.submit(screen.getByRole('form'));
     // assert
@@ -465,7 +703,20 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('ignores choice shortcuts while a save is in flight', async () => {
     // arrange
-    let resolve!: () => void; const changes = vi.fn(); mount(fixture({ items: [finalQuestion], defaultAnswers: questionnaireDraft, shortcuts: 'letters', onAnswersChange: changes, onSubmit: () => new Promise<void>(finish => { resolve = finish; }) }));
+    let resolve!: () => void;
+    const changes = vi.fn();
+    mount(
+      fixture({
+        items: [finalQuestion],
+        defaultAnswers: questionnaireDraft,
+        shortcuts: 'letters',
+        onAnswersChange: changes,
+        onSubmit: () =>
+          new Promise<void>((finish) => {
+            resolve = finish;
+          }),
+      }),
+    );
     fireEvent.submit(screen.getByRole('form'));
     // act
     fireEvent.keyDown(screen.getByRole('form'), { key: 'b' });
@@ -475,7 +726,8 @@ export function questionnaireContracts(mount: Mount) {
   });
   it('allows custom text input to keep its newline when shortcuts are enabled', async () => {
     // arrange
-    const user = userEvent.setup(); mount(fixture({ items: [textQuestion], shortcuts: 'letters' }));
+    const user = userEvent.setup();
+    mount(fixture({ items: [textQuestion], shortcuts: 'letters' }));
     // act
     await user.type(screen.getByRole('textbox'), 'a{Enter}b');
     // assert
@@ -484,18 +736,33 @@ export function questionnaireContracts(mount: Mount) {
 
   it('leaves choices beyond the letter shortcut range accessible without a hint', () => {
     // arrange
-    const options = Array.from({ length: 27 }, (_, index) => ({ value: String(index), label: `Choice ${index}` }));
-    mount(fixture({ items: [{ id: 'many', type: 'single', title: 'Many choices', options }], shortcuts: 'letters' }));
+    const options = Array.from({ length: 27 }, (_, index) => ({
+      value: String(index),
+      label: `Choice ${index}`,
+    }));
+    mount(
+      fixture({
+        items: [{ id: 'many', type: 'single', title: 'Many choices', options }],
+        shortcuts: 'letters',
+      }),
+    );
     // act
-    const result = fireEvent.keyDown(screen.getByRole('radio', { name: 'Choice 26' }), { key: '?' });
+    const result = fireEvent.keyDown(screen.getByRole('radio', { name: 'Choice 26' }), {
+      key: '?',
+    });
     // assert
     expect(result).toBe(true);
     expect(screen.getByRole('radio', { name: 'Choice 26' })).not.toBeChecked();
-    expect(screen.getByRole('radio', { name: 'Choice 26' }).closest('label')).not.toHaveTextContent('AA');
+    expect(screen.getByRole('radio', { name: 'Choice 26' }).closest('label')).not.toHaveTextContent(
+      'AA',
+    );
   });
   it('keeps scoped shortcuts inactive in a contenteditable descendant', () => {
     // arrange
-    mount(fixture({ shortcuts: 'letters' })); const editable = document.createElement('span'); editable.setAttribute('contenteditable', 'true'); screen.getByRole('group').append(editable);
+    mount(fixture({ shortcuts: 'letters' }));
+    const editable = document.createElement('span');
+    editable.setAttribute('contenteditable', 'true');
+    screen.getByRole('group').append(editable);
     // act
     const result = fireEvent.keyDown(editable, { key: 'a' });
     // assert
@@ -503,15 +770,17 @@ export function questionnaireContracts(mount: Mount) {
     expect(screen.getByRole('radio', { name: 'Alpha' })).not.toBeChecked();
   });
 
-  it.each([{ defaultValue: 'updates' }, { value: 'updates' }])('keeps the replacement question active when surviving items later reorder: %j', navigation => {
-    // arrange
-    const view = mount(fixture(navigation));
-    view.rerender(fixture({ ...navigation, items: [singleQuestion, finalQuestion] }));
-    // act
-    view.rerender(fixture({ ...navigation, items: [finalQuestion, singleQuestion] }));
-    // assert
-    expect(screen.getByRole('group', { name: 'When to begin?' })).toBeVisible();
-    expect(screen.getByRole('status')).toHaveTextContent('Question 1 of 2');
-  });
-
+  it.each([{ defaultValue: 'updates' }, { value: 'updates' }])(
+    'keeps the replacement question active when surviving items later reorder: %j',
+    (navigation) => {
+      // arrange
+      const view = mount(fixture(navigation));
+      view.rerender(fixture({ ...navigation, items: [singleQuestion, finalQuestion] }));
+      // act
+      view.rerender(fixture({ ...navigation, items: [finalQuestion, singleQuestion] }));
+      // assert
+      expect(screen.getByRole('group', { name: 'When to begin?' })).toBeVisible();
+      expect(screen.getByRole('status')).toHaveTextContent('Question 1 of 2');
+    },
+  );
 }

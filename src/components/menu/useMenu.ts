@@ -2,14 +2,23 @@ import { useEffect, useId, useRef, useState, type RefObject } from 'react';
 import type { MenuProps } from './types.js';
 import { enabledItems, validateMenu, type MenuSearch } from './menu-policy.js';
 
-interface FocusRequest { id: string; last: boolean }
+interface FocusRequest {
+  id: string;
+  last: boolean;
+}
 
 export interface MenuModel {
-  root: RefObject<HTMLDivElement | null>; trigger: RefObject<HTMLButtonElement | null>;
-  expanded: boolean; branch: string[]; triggerId: string; search: RefObject<MenuSearch>;
-  menuId: (path: string[]) => string; itemId: (path: string[]) => string;
+  root: RefObject<HTMLDivElement | null>;
+  trigger: RefObject<HTMLButtonElement | null>;
+  expanded: boolean;
+  branch: string[];
+  triggerId: string;
+  search: RefObject<MenuSearch>;
+  menuId: (path: string[]) => string;
+  itemId: (path: string[]) => string;
   change: (open: boolean, restore?: boolean, last?: boolean) => void;
-  toggle: (path: string[], enter: boolean) => void; back: (path: string[]) => void;
+  toggle: (path: string[], enter: boolean) => void;
+  back: (path: string[]) => void;
 }
 
 /**
@@ -28,7 +37,10 @@ function useMenuFocus(model: MenuModel, pending: RefObject<FocusRequest | null>)
   useEffect(() => {
     if (model.expanded) {
       const request = pending.current;
-      if (request && document.getElementById(request.id)) { focusMenu(request.id, request.last); pending.current = null; }
+      if (request && document.getElementById(request.id)) {
+        focusMenu(request.id, request.last);
+        pending.current = null;
+      }
     }
   }, [model.expanded, model.branch, pending]);
 }
@@ -38,8 +50,14 @@ function useMenuFocus(model: MenuModel, pending: RefObject<FocusRequest | null>)
  **/
 function useOutsideMenu(model: MenuModel): void {
   useEffect(() => {
-    if (!model.expanded) { return; }
-    const outside = (event: PointerEvent) => { if (!model.root.current!.contains(event.target as Node)) { model.change(false); } };
+    if (!model.expanded) {
+      return;
+    }
+    const outside = (event: PointerEvent) => {
+      if (!model.root.current!.contains(event.target as Node)) {
+        model.change(false);
+      }
+    };
     document.addEventListener('pointerdown', outside);
     return () => document.removeEventListener('pointerdown', outside);
   }, [model.expanded, model.change, model.root]);
@@ -51,8 +69,11 @@ function useOutsideMenu(model: MenuModel): void {
 function useMenuIds(): Pick<MenuModel, 'triggerId' | 'menuId' | 'itemId'> {
   const id = useId();
 
-  return { triggerId: `${id}-trigger`, menuId: path => `${id}-menu-${encodeURIComponent(JSON.stringify(path))}`,
-    itemId: path => `${id}-item-${encodeURIComponent(JSON.stringify(path))}` };
+  return {
+    triggerId: `${id}-trigger`,
+    menuId: (path) => `${id}-menu-${encodeURIComponent(JSON.stringify(path))}`,
+    itemId: (path) => `${id}-item-${encodeURIComponent(JSON.stringify(path))}`,
+  };
 }
 
 /**
@@ -61,13 +82,23 @@ function useMenuIds(): Pick<MenuModel, 'triggerId' | 'menuId' | 'itemId'> {
 export function useMenu(props: MenuProps): MenuModel {
   validateMenu(props.items);
   const ids = useMenuIds();
-  const root = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null);
-  const [stored, setStored] = useState(props.defaultOpen ?? false), [branch, setBranch] = useState<string[]>([]);
-  const pending = useRef<FocusRequest | null>(null), search = useRef<MenuSearch>({ menu: '', text: '', time: 0 });
+  const root = useRef<HTMLDivElement>(null),
+    trigger = useRef<HTMLButtonElement>(null);
+  const [stored, setStored] = useState(props.defaultOpen ?? false),
+    [branch, setBranch] = useState<string[]>([]);
+  const pending = useRef<FocusRequest | null>(null),
+    search = useRef<MenuSearch>({ menu: '', text: '', time: 0 });
   const change = (open: boolean, restore = false, last = false) => {
-    if (props.open === undefined) { setStored(open); } props.onOpenChange?.(open);
+    if (props.open === undefined) {
+      setStored(open);
+    }
+    props.onOpenChange?.(open);
     search.current.text = '';
-    setBranch([]); pending.current = open ? { id: ids.menuId([]), last } : null; if (restore) { trigger.current!.focus(); }
+    setBranch([]);
+    pending.current = open ? { id: ids.menuId([]), last } : null;
+    if (restore) {
+      trigger.current!.focus();
+    }
   };
   const model = { root, trigger, expanded: props.open ?? stored, branch, ...ids, search, change };
 
@@ -77,15 +108,27 @@ export function useMenu(props: MenuProps): MenuModel {
 /**
  * Toggle a branch or return one level, restoring focus to the exact parent item.
  **/
-function useMenuBranches(model: Omit<MenuModel, 'toggle' | 'back'>, state: { setBranch: (path: string[]) => void; pending: RefObject<FocusRequest | null> }): MenuModel {
+function useMenuBranches(
+  model: Omit<MenuModel, 'toggle' | 'back'>,
+  state: { setBranch: (path: string[]) => void; pending: RefObject<FocusRequest | null> },
+): MenuModel {
   const toggle = (path: string[], enter: boolean) => {
     const expanded = model.branch[path.length - 1] === path.at(-1);
     state.setBranch(expanded && !enter ? path.slice(0, -1) : path);
-    if (!expanded || enter) { state.pending.current = { id: model.menuId(path), last: false }; }
+    if (!expanded || enter) {
+      state.pending.current = { id: model.menuId(path), last: false };
+    }
   };
-  const back = (path: string[]) => { state.setBranch(path.slice(0, -1)); document.getElementById(model.itemId(path))!.focus(); };
+  const back = (path: string[]) => {
+    state.setBranch(path.slice(0, -1));
+    document.getElementById(model.itemId(path))!.focus();
+  };
   const result = { ...model, toggle, back };
-  useEffect(() => { if (!model.expanded && model.branch.length) { state.setBranch([]); } }, [model.expanded, model.branch, state.setBranch]);
+  useEffect(() => {
+    if (!model.expanded && model.branch.length) {
+      state.setBranch([]);
+    }
+  }, [model.expanded, model.branch, state.setBranch]);
   useMenuFocus(result, state.pending);
   useOutsideMenu(result);
 

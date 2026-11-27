@@ -3,14 +3,19 @@ import { openScenario } from '../../fixtures/scenario';
 import { contrast } from '../../../e2e/fixtures/contrast';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} Switch keeps its label stable through native Space and Tab behavior`, async ({ page, mount }) => {
+  test(`${theme} Switch keeps its label stable through native Space and Tab behavior`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-switch--keyboard', { theme });
     const email = page.getByRole('switch', { name: 'Email notifications' });
     await email.focus();
     await page.keyboard.press('Space');
     await expect(email).toBeChecked();
     await page.keyboard.press('Space');
-    await expect(page.getByRole('switch', { name: 'Email notifications', checked: false })).toBeFocused();
+    await expect(
+      page.getByRole('switch', { name: 'Email notifications', checked: false }),
+    ).toBeFocused();
     await expect(email).toHaveCSS('outline-style', 'solid');
     await page.keyboard.press('Tab');
     await expect(page.getByRole('switch', { name: 'Push notifications' })).toBeFocused();
@@ -18,7 +23,10 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(email).toBeChecked();
   });
 
-  test(`${theme} Switch exposes state through thumb position and contrasting colors`, async ({ page, mount }) => {
+  test(`${theme} Switch exposes state through thumb position and contrasting colors`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-switch--playground', { theme });
     const input = page.getByRole('switch');
     await expect(input).toHaveCSS('width', '40px');
@@ -48,15 +56,23 @@ for (const theme of ['corporate', 'luna'] as const) {
   test(`${theme} Switch wraps enlarged and spaced labels at 320px`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 900 });
     await openScenario(mount, 'components-switch--long-labels', { theme });
-    await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
+    await page.addStyleTag({
+      content:
+        'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }',
+    });
     await page.getByRole('switch').focus();
     await expect(page.getByRole('switch')).toBeFocused();
     await expect(page.getByRole('switch')).toHaveCSS('width', '40px');
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
   });
 }
 
-test('Switch submits enabled on settings and resets externally owned controls', async ({ page, mount }) => {
+test('Switch submits enabled on settings and resets externally owned controls', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-switch--native-form');
   await page.getByRole('button', { name: 'Save settings' }).click();
   await expect(page.getByLabel('Submitted settings')).toHaveText('email');
@@ -68,7 +84,10 @@ test('Switch submits enabled on settings and resets externally owned controls', 
   await expect(page.getByRole('switch', { name: 'Push notifications' })).not.toBeChecked();
 });
 
-test('Switch uses logical thumb placement within right-to-left layouts', async ({ page, mount }) => {
+test('Switch uses logical thumb placement within right-to-left layouts', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-switch--right-to-left');
   const input = page.getByRole('switch');
   const off = await switchPaint(input);
@@ -78,9 +97,14 @@ test('Switch uses logical thumb placement within right-to-left layouts', async (
   await expect(input).toBeChecked();
 });
 
-test('Switch shares group context without changing its accessible name', async ({ page, mount }) => {
+test('Switch shares group context without changing its accessible name', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-switch--composition');
-  await expect(page.getByRole('switch', { name: 'Email notifications' })).toHaveAccessibleDescription('Control project updates. Receive updates about your projects.');
+  await expect(
+    page.getByRole('switch', { name: 'Email notifications' }),
+  ).toHaveAccessibleDescription('Control project updates. Receive updates about your projects.');
 });
 
 test('Switch honors native fieldset disabling for both states', async ({ page, mount }) => {
@@ -98,7 +122,10 @@ test('Switch honors native fieldset disabling for both states', async ({ page, m
   await expect(push).not.toBeChecked();
 });
 
-test('Switch retains position and distinguishable thumbs in forced colors', async ({ page, mount }) => {
+test('Switch retains position and distinguishable thumbs in forced colors', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-switch--playground');
   await page.emulateMedia({ forcedColors: 'active' });
   const input = page.getByRole('switch');
@@ -116,9 +143,15 @@ test('Switch keeps theme scopes independent', async ({ page, mount }) => {
   const luna = page.locator('[data-theme="luna"].theme-panel');
   await corporate.getByRole('switch', { name: 'Email notifications' }).click();
   await page.mouse.move(0, 0);
-  await expect(corporate.getByRole('switch', { name: 'Email notifications' })).toHaveCSS('background-color', 'rgb(36, 75, 176)');
+  await expect(corporate.getByRole('switch', { name: 'Email notifications' })).toHaveCSS(
+    'background-color',
+    'rgb(36, 75, 176)',
+  );
   await expect(luna.getByRole('switch', { name: 'Email notifications' })).not.toBeChecked();
-  await expect(luna.getByRole('switch', { name: 'Push notifications' })).toHaveCSS('background-color', 'rgb(199, 181, 255)');
+  await expect(luna.getByRole('switch', { name: 'Push notifications' })).toHaveCSS(
+    'background-color',
+    'rgb(199, 181, 255)',
+  );
 });
 
 test('Switch customization preserves its thumb within the wider track', async ({ page, mount }) => {
@@ -134,10 +167,18 @@ test('Switch customization preserves its thumb within the wider track', async ({
  * Read the rendered track and thumb paint without relying on component state internals.
  **/
 async function switchPaint(input: import('@playwright/test').Locator) {
-  return input.evaluate(element => {
+  return input.evaluate((element) => {
     const style = getComputedStyle(element);
     const thumb = getComputedStyle(element, '::before');
 
-    return { track: style.backgroundColor, surface: style.getPropertyValue('--fs-surface').trim(), focus: style.getPropertyValue('--fs-switch-focus-color').trim(), thumb: thumb.backgroundColor, left: Number.parseFloat(thumb.left), thumbWidth: thumb.width, thumbHeight: thumb.height };
+    return {
+      track: style.backgroundColor,
+      surface: style.getPropertyValue('--fs-surface').trim(),
+      focus: style.getPropertyValue('--fs-switch-focus-color').trim(),
+      thumb: thumb.backgroundColor,
+      left: Number.parseFloat(thumb.left),
+      thumbWidth: thumb.width,
+      thumbHeight: thumb.height,
+    };
   });
 }

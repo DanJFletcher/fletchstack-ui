@@ -10,7 +10,15 @@ import { Spinner } from '../../../../src/components/spinner/Spinner';
 it('hydrates loading text without introducing keyboard focus or duplicate status roles', () => {
   // arrange
   const ref = createRef<HTMLSpanElement>();
-  const given = <Spinner ref={ref} label="Loading projects…" size="large" className="custom" style={{ '--fs-spinner-label-gap': '12px' }} />;
+  const given = (
+    <Spinner
+      ref={ref}
+      label="Loading projects…"
+      size="large"
+      className="custom"
+      style={{ '--fs-spinner-label-gap': '12px' }}
+    />
+  );
   const container = document.createElement('div');
   container.innerHTML = renderToString(given);
   document.body.appendChild(container);
@@ -29,7 +37,12 @@ it('hydrates loading text without introducing keyboard focus or duplicate status
 
 it('keeps a loading button name free of decorative duplicate text', () => {
   // arrange
-  const given = <Button disabled aria-busy="true"><Spinner decorative size="small" />Saving…</Button>;
+  const given = (
+    <Button disabled aria-busy="true">
+      <Spinner decorative size="small" />
+      Saving…
+    </Button>
+  );
 
   // act
   render(given);

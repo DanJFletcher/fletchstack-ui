@@ -11,13 +11,13 @@ Date: 2026-11-10. Change: `simplify-browser-verification`. Measurements use the 
 
 ## Staged workload results
 
-| Stage | Tests | Result | Runner time |
-| --- | ---: | --- | ---: |
-| Complete original browser suite | 594 | Passed, including independent exact 100% browser gate | 648.95s |
-| Frozen first-removal batch | 578 | Passed, including the same exact 100% gate | 701.63s |
-| Complete focused suite | 346 | Passed, coverage-free | 280.47s |
-| Initial complete diagnostic suite | 346 | 345 passed; one served-navigation timing failure | 431.28s |
-| Complete diagnostic suite after readiness repair | 346 | Passed; informational coverage | 423.76s |
+| Stage                                            | Tests | Result                                                | Runner time |
+| ------------------------------------------------ | ----: | ----------------------------------------------------- | ----------: |
+| Complete original browser suite                  |   594 | Passed, including independent exact 100% browser gate |     648.95s |
+| Frozen first-removal batch                       |   578 | Passed, including the same exact 100% gate            |     701.63s |
+| Complete focused suite                           |   346 | Passed, coverage-free                                 |     280.47s |
+| Initial complete diagnostic suite                |   346 | 345 passed; one served-navigation timing failure      |     431.28s |
+| Complete diagnostic suite after readiness repair |   346 | Passed; informational coverage                        |     423.76s |
 
 The first batch removes four Select smoke cases and twelve Stack smoke cases already opened by focused assertions. It was verified using a frozen copy of the old fixture/reporter with its own cache/output, so ongoing configuration edits could not change the running gate. Some independent verification ran during this stage: its elapsed result is **not** a controlled speed comparison. It was slower despite fewer tests, illustrating why test counts do not establish a runtime improvement.
 
@@ -27,20 +27,19 @@ The historical Card readiness failure did not recur in either complete strict-ga
 
 The original five-case sample covers Select's controlled-story smoke and native typeahead, nested Stack geometry, Spinner motion preferences, and the default Container contract. Both pre-change and first-removal samples collect coverage but disable final coverage reporting to isolate the workload. Three repetitions use identical test filters and three workers.
 
-| Sample | Seconds, in execution order | Median |
-| --- | --- | ---: |
-| Original five cases | 9.034, 5.385, 5.447 | 5.447s |
-| Frozen first-removal five cases | 10.064, 7.088, 6.476 | 7.088s |
-| Four retained cases, collection disabled | 4.036, 4.168, 4.262 | 4.168s |
-| Same four cases, collection enabled | 6.349, 7.440, 6.127 | 6.349s |
-
+| Sample                                   | Seconds, in execution order | Median |
+| ---------------------------------------- | --------------------------- | -----: |
+| Original five cases                      | 9.034, 5.385, 5.447         | 5.447s |
+| Frozen first-removal five cases          | 10.064, 7.088, 6.476        | 7.088s |
+| Four retained cases, collection disabled | 4.036, 4.168, 4.262         | 4.168s |
+| Same four cases, collection enabled      | 6.349, 7.440, 6.127         | 6.349s |
 
 Final-code repetitions after the served-navigation repair (same four retained checks, same three-worker reporter overrides):
 
-| Mode | Seconds | Median |
-| --- | --- | ---: |
+| Mode                | Seconds             | Median |
+| ------------------- | ------------------- | -----: |
 | Collection disabled | 6.600, 4.423, 4.594 | 4.594s |
-| Collection enabled | 6.176, 6.304, 5.406 | 6.176s |
+| Collection enabled  | 6.176, 6.304, 5.406 | 6.176s |
 
 The four-case comparisons exclude the retired smoke case and run an identical retained workload, first without collection, then with the diagnostic fixture enabled. They use `--reporter=list,json`, excluding final Monocart report generation. The earlier pair differed by 2.181s and the final-code pair by 1.583s; neither is an estimate of full-suite savings. Ordering and cache effects remain possible; no universal multiplier is claimed.
 
@@ -74,17 +73,17 @@ See the required [behavior matrix](../tests/browser-behavior-matrix.md) and orig
 
 Each probe used a disposable browser page against the actual story: verify the owning assertion, inject a DOM/CSS/input fault, observe an assertion failure, reload to remove the fault, and verify it again. No component files were edited.
 
-| Probe | Injected fault | Result |
-| --- | --- | --- |
-| Field label association | Label targets a missing control ID | Detected; restored pass |
-| Native Select typeahead | Prevent the native keydown default action | Detected; restored pass |
-| Stack direct-child gap | Force the outer gap to zero | Detected; restored pass |
-| Container breakpoint | Force 16px gutter at 600px instead of 24px | Detected; restored pass |
-| RTL Stack alignment | Force end alignment for a start-aligned fixture | Detected; restored pass |
-| Focus clearance safety contract | Add overflow clipping to composed Stacks | Detected; restored pass |
-| Nested theme reset | Remove the explicit inner Corporate boundary | Detected; restored pass |
-| Reduced motion | Force animation despite reduced preference | Detected; restored pass |
-| Forced-color indicator | Reduce track opacity below its system-color contract | Detected; restored pass |
+| Probe                           | Injected fault                                       | Result                  |
+| ------------------------------- | ---------------------------------------------------- | ----------------------- |
+| Field label association         | Label targets a missing control ID                   | Detected; restored pass |
+| Native Select typeahead         | Prevent the native keydown default action            | Detected; restored pass |
+| Stack direct-child gap          | Force the outer gap to zero                          | Detected; restored pass |
+| Container breakpoint            | Force 16px gutter at 600px instead of 24px           | Detected; restored pass |
+| RTL Stack alignment             | Force end alignment for a start-aligned fixture      | Detected; restored pass |
+| Focus clearance safety contract | Add overflow clipping to composed Stacks             | Detected; restored pass |
+| Nested theme reset              | Remove the explicit inner Corporate boundary         | Detected; restored pass |
+| Reduced motion                  | Force animation despite reduced preference           | Detected; restored pass |
+| Forced-color indicator          | Reduce track opacity below its system-color contract | Detected; restored pass |
 
 The focus probe verifies the existing visible-outline/overflow safety assertions, not a pixel-level proof of every possible clipping case. Preference emulation is not a real-OS accessibility session.
 

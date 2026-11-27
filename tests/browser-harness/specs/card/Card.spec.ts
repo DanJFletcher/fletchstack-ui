@@ -20,18 +20,28 @@ for (const theme of ['corporate', 'luna'] as const) {
   test(`${theme} cards reflow at 320px with enlarged and spaced text`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 900 });
     await openScenario(mount, 'components-card--long-content', { theme });
-    await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
+    await page.addStyleTag({
+      content:
+        'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }',
+    });
 
-    await expect(page.getByRole('heading', { name: 'A very long title with room to wrap and grow' })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'A very long title with room to wrap and grow' }),
+    ).toBeVisible();
     const save = page.getByRole('button', { name: 'Save this collection for another day' });
     await save.focus();
     await expect(save).toBeFocused();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    expect(await save.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    expect(await save.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
   });
 }
 
-test('card token overrides customize geometry without changing other cards', async ({ page, mount }) => {
+test('card token overrides customize geometry without changing other cards', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-card--consumer-override');
   const title = page.getByRole('heading', { name: 'A foundation for every interface.' });
   await expect(title).toHaveCSS('font-size', '32px');
@@ -41,7 +51,16 @@ test('card token overrides customize geometry without changing other cards', asy
   await expect(page.locator('.fs-card')).toHaveCSS('border-radius', '4px');
 });
 
-for (const story of ['playground', 'consumer-override', 'reference-layouts', 'variants-and-padding', 'both-themes', 'with-footer', 'luna-footer', 'luna-media']) {
+for (const story of [
+  'playground',
+  'consumer-override',
+  'reference-layouts',
+  'variants-and-padding',
+  'both-themes',
+  'with-footer',
+  'luna-footer',
+  'luna-media',
+]) {
   test(`the ${story} composition renders its documented content`, async ({ page, mount }) => {
     await openScenario(mount, `components-card--${story}`);
     await expect(page.getByRole('heading', { level: 2 }).first()).toBeVisible();

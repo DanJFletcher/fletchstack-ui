@@ -1,4 +1,16 @@
-import { ClippedTooltip, DescribedTooltip, IconTooltip, LinkTooltip, ScrollableTooltip, TooltipDemo, TooltipExample, TooltipInDialog, TooltipInPopover, TooltipOverrides, TooltipPlacements } from '../../../src/components/tooltip/stories/tooltip-examples';
+import {
+  ClippedTooltip,
+  DescribedTooltip,
+  IconTooltip,
+  LinkTooltip,
+  ScrollableTooltip,
+  TooltipDemo,
+  TooltipExample,
+  TooltipInDialog,
+  TooltipInPopover,
+  TooltipOverrides,
+  TooltipPlacements,
+} from '../../../src/components/tooltip/stories/tooltip-examples';
 import type { TooltipProps } from '../../../src/components/tooltip/types';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/tooltip/tooltip.css';
@@ -22,4 +34,16 @@ const Popover: Scenario<Props> = { render: () => <TooltipInPopover /> };
 const Dialog: Scenario<Props> = { render: () => <TooltipInDialog /> };
 export const component = TooltipDemo;
 export const defaults = {};
-export const scenarios = { Playground, Composition, Placements, Described, Icon, Link, Clipped, Scrollable, Overrides, Popover, Dialog };
+export const scenarios = {
+  Playground,
+  Composition,
+  Placements,
+  Described,
+  Icon,
+  Link,
+  Clipped,
+  Scrollable,
+  Overrides,
+  Popover,
+  Dialog,
+};

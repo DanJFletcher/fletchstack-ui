@@ -1,7 +1,12 @@
 import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
 
-export type DialogStyle = CSSProperties & { [token: `--fs-${string}`]: string | number | undefined };
-export type DialogProps = Omit<ComponentPropsWithoutRef<'dialog'>, 'open' | 'style' | 'dangerouslySetInnerHTML'> & {
+export type DialogStyle = CSSProperties & {
+  [token: `--fs-${string}`]: string | number | undefined;
+};
+export type DialogProps = Omit<
+  ComponentPropsWithoutRef<'dialog'>,
+  'open' | 'style' | 'dangerouslySetInnerHTML'
+> & {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   heading?: ReactNode;

@@ -20,7 +20,7 @@ import 'fletchstack-ui/multi-select.css';
   defaultValue={['react']}
   maxSelections={3}
   helperText="Choose up to three topics."
-/>
+/>;
 ```
 
 Use `styles.css` instead of the three individual imports when including the whole library. Both Corporate and Luna themes support the same contract.

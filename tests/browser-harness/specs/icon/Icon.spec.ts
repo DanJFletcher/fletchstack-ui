@@ -1,10 +1,29 @@
 import { expect, test } from '../../fixtures/test';
 import { openScenario } from '../../fixtures/scenario';
 
-const names = ['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon', 'HomeIcon', 'InboxIcon', 'HelpIcon'];
-const sizes = [{ name: 'small', pixels: '16px' }, { name: 'medium', pixels: '20px' }, { name: 'large', pixels: '24px' }];
+const names = [
+  'MoonIcon',
+  'SunIcon',
+  'CheckIcon',
+  'CloseIcon',
+  'ChevronDownIcon',
+  'ArrowRightIcon',
+  'PlusIcon',
+  'ExternalLinkIcon',
+  'HomeIcon',
+  'InboxIcon',
+  'HelpIcon',
+];
+const sizes = [
+  { name: 'small', pixels: '16px' },
+  { name: 'medium', pixels: '20px' },
+  { name: 'large', pixels: '24px' },
+];
 
-test('custom artwork uses the public wrapper and consumer coordinate space', async ({ page, mount }) => {
+test('custom artwork uses the public wrapper and consumer coordinate space', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-icon--playground');
   await expect(page.getByRole('img', { name: 'Custom diamond' })).toHaveCSS('width', '20px');
 
@@ -30,7 +49,10 @@ test('default dimensions and the three semantic sizes are explicit', async ({ pa
   }
 });
 
-test('the optional catalog presents every icon at each size in both themes', async ({ page, mount }) => {
+test('the optional catalog presents every icon at each size in both themes', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-icon--catalog');
 
   for (const theme of ['corporate', 'luna']) {
@@ -61,7 +83,10 @@ test('only a nonblank label exposes an accessible image', async ({ page, mount }
   await expect(page.locator('svg[tabindex]')).toHaveCount(0);
 });
 
-test('semantic dimensions and stroke overrides remain local to their scope', async ({ page, mount }) => {
+test('semantic dimensions and stroke overrides remain local to their scope', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-icon--customization');
   const scoped = page.getByRole('img', { name: 'Scoped moon' });
 
@@ -69,7 +94,10 @@ test('semantic dimensions and stroke overrides remain local to their scope', asy
   await expect(scoped).toHaveCSS('stroke-width', '3px');
   await expect(page.getByRole('img', { name: 'Local square size' })).toHaveCSS('width', '36px');
   await expect(page.getByRole('img', { name: 'Nested theme reset' })).toHaveCSS('width', '20px');
-  await expect(page.getByRole('img', { name: 'Nested theme reset' })).toHaveCSS('stroke-width', '2px');
+  await expect(page.getByRole('img', { name: 'Nested theme reset' })).toHaveCSS(
+    'stroke-width',
+    '2px',
+  );
   await expect(page.getByRole('img', { name: 'Unaffected sibling' })).toHaveCSS('width', '20px');
 });
 
@@ -86,11 +114,26 @@ test('a named icon forwards its SVG ref and native attributes', async ({ page, m
 });
 
 for (const theme of [
-  { name: 'corporate', text: 'rgb(255, 255, 255)', hover: 'rgb(27, 60, 145)', active: 'rgb(20, 46, 115)', disabled: 'rgb(76, 89, 109)' },
-  { name: 'luna', text: 'rgb(17, 19, 41)', hover: 'rgb(215, 202, 255)', active: 'rgb(175, 149, 237)', disabled: 'rgb(184, 177, 205)' },
+  {
+    name: 'corporate',
+    text: 'rgb(255, 255, 255)',
+    hover: 'rgb(27, 60, 145)',
+    active: 'rgb(20, 46, 115)',
+    disabled: 'rgb(76, 89, 109)',
+  },
+  {
+    name: 'luna',
+    text: 'rgb(17, 19, 41)',
+    hover: 'rgb(215, 202, 255)',
+    active: 'rgb(175, 149, 237)',
+    disabled: 'rgb(184, 177, 205)',
+  },
 ] as const) {
   test.describe(theme.name, () => {
-    test('decorative icons leave activation and keyboard focus on Button', async ({ page, mount }) => {
+    test('decorative icons leave activation and keyboard focus on Button', async ({
+      page,
+      mount,
+    }) => {
       await openScenario(mount, 'components-icon--composition', { theme: theme.name });
       const save = page.getByRole('button', { name: 'Save changes', exact: true });
       const close = page.getByRole('button', { name: 'Close dialog', exact: true });
@@ -109,7 +152,10 @@ for (const theme of [
       await expect(page.getByRole('button', { name: 'Saved', exact: true })).toBeDisabled();
     });
 
-    test('artwork inherits control colors through pointer and keyboard states', async ({ page, mount }) => {
+    test('artwork inherits control colors through pointer and keyboard states', async ({
+      page,
+      mount,
+    }) => {
       await openScenario(mount, 'components-icon--composition', { theme: theme.name });
       const save = page.getByRole('button', { name: 'Save changes', exact: true });
       const artwork = save.locator('svg');
@@ -127,26 +173,42 @@ for (const theme of [
       const close = page.getByRole('button', { name: 'Close dialog' });
       await expect(close).toBeFocused();
       await expect(close).toHaveCSS('outline-style', 'solid');
-      const paint = await close.evaluate(element => ({ text: getComputedStyle(element).color, stroke: getComputedStyle(element.querySelector('svg')!).stroke }));
+      const paint = await close.evaluate((element) => ({
+        text: getComputedStyle(element).color,
+        stroke: getComputedStyle(element.querySelector('svg')!).stroke,
+      }));
       expect(paint.stroke).toBe(paint.text);
-      await expect(page.getByRole('button', { name: 'Saved', exact: true }).locator('svg')).toHaveCSS('stroke', theme.disabled);
+      await expect(
+        page.getByRole('button', { name: 'Saved', exact: true }).locator('svg'),
+      ).toHaveCSS('stroke', theme.disabled);
     });
 
-    test('fixed artwork leaves enlarged and spaced labels free to wrap', async ({ page, mount }) => {
+    test('fixed artwork leaves enlarged and spaced labels free to wrap', async ({
+      page,
+      mount,
+    }) => {
       await page.setViewportSize({ width: 320, height: 700 });
       await openScenario(mount, 'components-icon--composition', { theme: theme.name });
-      await page.addStyleTag({ content: `
+      await page.addStyleTag({
+        content: `
         html { font-size: 200%; }
         .fs-button { line-height: 1.5; letter-spacing: .12em; word-spacing: .16em; }
         p { margin-bottom: 2em; }
-      ` });
-      const button = page.getByRole('button', { name: 'Save all changes and return to your account settings' });
+      `,
+      });
+      const button = page.getByRole('button', {
+        name: 'Save all changes and return to your account settings',
+      });
 
       await expect(button).toHaveCSS('font-size', '32px');
       await expect(button.locator('svg')).toHaveCSS('width', '20px');
       await expect(button.locator('svg')).toHaveCSS('margin', '0px');
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-      expect(await button.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+      expect(await button.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(
+        true,
+      );
     });
   });
 }

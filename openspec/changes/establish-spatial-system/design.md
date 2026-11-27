@@ -23,6 +23,7 @@ Preferred space values are 0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, and 96px
 Carbon's component/parent ownership aligns with the current library. Atlassian's 8px base with fractional steps is viable but its percentage naming would add a convention without solving our semantic gaps. Spectrum's distinction between component and layout spacing is useful; separate scaling engines are premature. Preserve fletchstack-ui's px spatial values rather than adopting these systems' rem output wholesale. No rigid typography baseline grid is introduced.
 
 Research consulted during exploration:
+
 - [Carbon spacing](https://www.carbondesignsystem.com/building-blocks/foundations/spacing/overview)
 - [Atlassian spacing](https://atlassian.design/foundations/spacing)
 - [Spectrum spacing](https://spectrum.adobe.com/page/spacing/)
@@ -37,14 +38,14 @@ Publish an audit table for every existing spatial semantic role: category, value
 
 ### 3. Add only six shared spacing roles initially
 
-| Semantic path | Public CSS property | Initial value | Intended use |
-| --- | --- | --- | --- |
-| space.gap.label | --fs-space-gap-label | 8px | Closely associated label/control content |
-| space.gap.actions | --fs-space-gap-actions | 12px | Sibling actions in a wrapping parent |
-| space.gap.related | --fs-space-gap-related | 16px | Related siblings needing more separation |
-| space.stack-group | --fs-space-stack-group | 24px | Separation between related content groups |
-| space.inset-container | --fs-space-inset-container | 24px | Default content-container padding |
-| layout.section.gap | --fs-layout-section-gap | 64px | Separation between major website sections |
+| Semantic path         | Public CSS property        | Initial value | Intended use                              |
+| --------------------- | -------------------------- | ------------- | ----------------------------------------- |
+| space.gap.label       | --fs-space-gap-label       | 8px           | Closely associated label/control content  |
+| space.gap.actions     | --fs-space-gap-actions     | 12px          | Sibling actions in a wrapping parent      |
+| space.gap.related     | --fs-space-gap-related     | 16px          | Related siblings needing more separation  |
+| space.stack-group     | --fs-space-stack-group     | 24px          | Separation between related content groups |
+| space.inset-container | --fs-space-inset-container | 24px          | Default content-container padding         |
+| layout.section.gap    | --fs-layout-section-gap    | 64px          | Separation between major website sections |
 
 Every role references its raw primitive directly in both themes. Do not make component roles alias these semantic roles; component semantics remain peers with independent intent. Existing space.stack and space.inset are token leaves, so use sibling keys `stack-group` and `inset-container` under space rather than inserting children inside those leaves. The resulting public CSS names remain --fs-space-stack-group and --fs-space-inset-container. Tests must verify that neither legacy leaf nor new role is lost by flattening. This is a source-path compatibility constraint, not a third layer.
 
@@ -52,12 +53,12 @@ Use literal expected public names/values in tests. Keep existing inline/stack/in
 
 ### 4. Correct three observed gallery couplings with additive roles
 
-| New semantic role | Default | Replacement |
-| --- | --- | --- |
-| gallery.search.paddingInline | 36px | Search padding-inline borrowing controlHeight |
-| gallery.search.paddingBlock | 8px | Explicit independent search block padding |
-| gallery.headingGap | 16px | Heading separation calculated as inset minus compactInset |
-| gallery.previewInset | 1px | Preview-group padding borrowing borderWidth |
+| New semantic role            | Default | Replacement                                               |
+| ---------------------------- | ------- | --------------------------------------------------------- |
+| gallery.search.paddingInline | 36px    | Search padding-inline borrowing controlHeight             |
+| gallery.search.paddingBlock  | 8px     | Explicit independent search block padding                 |
+| gallery.headingGap           | 16px    | Heading separation calculated as inset minus compactInset |
+| gallery.previewInset         | 1px     | Preview-group padding borrowing borderWidth               |
 
 Retain the rest of the gallery contract and existing controlHeight, borderWidth, inset and compactInset names/defaults. The new padding roles preserve the existing box geometry but intentionally stop height overrides from changing padding. Likewise, border/inset overrides cease affecting the unrelated values in this table. The migration guide must name these behavior corrections; do not claim every incidental old coupling is preserved. The 1px role documents edge compensation. Derived sizing that actually depends on border-box geometry, such as inner target height minus border and inset allowances, can stay calculated with rationale. For the preview group, replace the old controlHeight - 4*borderWidth relationship with controlHeight - 2*borderWidth - 2*previewInset, so minimum sizing follows the actual border box after decoupling padding.
 

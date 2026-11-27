@@ -41,7 +41,7 @@ npm install /path/to/fletchstack-ui-0.0.1.tgz
 import { Button } from 'fletchstack-ui';
 import 'fletchstack-ui/styles.css';
 
-<Button onClick={() => console.log('Saved')}>Save changes</Button>
+<Button onClick={() => console.log('Saved')}>Save changes</Button>;
 ```
 
 Import the combined stylesheet once in your app entry or layout. Alternatively import `fletchstack-ui/tokens.css` followed by `fletchstack-ui/button.css`. JavaScript deliberately does not import CSS, so Node server rendering needs no CSS loader. CSS exports are marked as side effects for bundlers. No provider, browser storage, theme effect, external font, or browser global is required by the library.
@@ -80,34 +80,39 @@ Corporate and Luna share independent `--fs-select-*` tokens. Native popup stylin
 
 Compose `CardHeader`, `CardContent`, `CardMedia`, `CardTitle`, `CardDescription`, and `CardFooter` inside `Card`. All parts are optional and accept native attributes, refs, className, and typed style overrides.
 
-| Prop | Options / default | Purpose |
-| --- | --- | --- |
-| `variant` | `outlined` (default), `filled`, `plain` | Surface treatment |
-| `padding` | `none`, `small`, `medium` (default), `large` | Internal region padding |
-| `orientation` | `vertical` (default), `horizontal` | Stacked or intrinsically wrapping media/content layout |
-| `as` | `div` (default), `article`, `section` | Document semantics; provide a name where appropriate |
+| Prop          | Options / default                            | Purpose                                                |
+| ------------- | -------------------------------------------- | ------------------------------------------------------ |
+| `variant`     | `outlined` (default), `filled`, `plain`      | Surface treatment                                      |
+| `padding`     | `none`, `small`, `medium` (default), `large` | Internal region padding                                |
+| `orientation` | `vertical` (default), `horizontal`           | Stacked or intrinsically wrapping media/content layout |
+| `as`          | `div` (default), `article`, `section`        | Document semantics; provide a name where appropriate   |
 
 `CardTitle` supports `as="h1"` through `"h6"` or `"p"`; `CardFooter divided` adds a rule. Cards are passive surfaces: place native links, disclosures, or Button inside for interaction. Customize the `--fs-card-*` tokens to adjust colors, typography, media width, spacing, and shape. The combined stylesheet includes Card; separate-style consumers import `fletchstack-ui/card.css` after tokens. See the [full contract and example](docs/card.md), or **Components / Card** in Storybook for the supplied reference layouts and theme examples.
 
 ## Button contract
 
-| Prop | Options / default | Purpose |
-| --- | --- | --- |
-| `variant` | `primary` (default), `secondary`, `ghost` | Main action, alternative, low-emphasis action |
-| `size` | `small`, `medium` (default), `large` | Padding, minimum target size, relative label size |
-| `type` | `button` (default), `submit`, `reset` | Explicit native form behavior |
-| `disabled` | Native boolean | Prevents activation and removes the button from tab order |
-| `ref` | `HTMLButtonElement` | Native focus and DOM access |
-| `className`, `style` | Native customization; style also accepts `--fs-*` | Scoped semantic overrides |
+| Prop                 | Options / default                                 | Purpose                                                   |
+| -------------------- | ------------------------------------------------- | --------------------------------------------------------- |
+| `variant`            | `primary` (default), `secondary`, `ghost`         | Main action, alternative, low-emphasis action             |
+| `size`               | `small`, `medium` (default), `large`              | Padding, minimum target size, relative label size         |
+| `type`               | `button` (default), `submit`, `reset`             | Explicit native form behavior                             |
+| `disabled`           | Native boolean                                    | Prevents activation and removes the button from tab order |
+| `ref`                | `HTMLButtonElement`                               | Native focus and DOM access                               |
+| `className`, `style` | Native customization; style also accepts `--fs-*` | Scoped semantic overrides                                 |
 
 All other native button attributes, ARIA attributes, children, and event handlers pass through. Use visible label text, or an accessible name for an icon-only control. Decorative icons should have `aria-hidden="true"`; SVGs should also use `focusable="false"`.
 
 ```tsx
 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--fs-space-inline)' }}>
-  <Button type="submit"><span aria-hidden="true">✓</span><span>Save changes</span></Button>
+  <Button type="submit">
+    <span aria-hidden="true">✓</span>
+    <span>Save changes</span>
+  </Button>
   <Button variant="secondary">Cancel</Button>
   <Button variant="ghost">Learn more</Button>
-  <Button variant="secondary" aria-label="Close dialog"><span aria-hidden="true">×</span></Button>
+  <Button variant="secondary" aria-label="Close dialog">
+    <span aria-hidden="true">×</span>
+  </Button>
 </div>
 ```
 
@@ -118,7 +123,7 @@ Button owns its padding and label/icon gap. Parents own external spacing and pla
 Corporate is applied at `:root:not([data-theme])`. Set the stable attribute on a document or any containing element. An explicit document theme takes precedence regardless of theme filename ordering. A theme attribute sets tokens; use the surface/text roles to paint a region.
 
 ```html
-<html data-theme="corporate">
+<html data-theme="corporate"></html>
 ```
 
 ```tsx
@@ -126,7 +131,9 @@ Corporate is applied at `:root:not([data-theme])`. Set the stable attribute on a
   <Button>Corporate action</Button>
   <section className="theme-surface" data-theme="luna">
     <Button>Luna action</Button>
-    <div className="theme-surface" data-theme="corporate"><Button>Nested Corporate</Button></div>
+    <div className="theme-surface" data-theme="corporate">
+      <Button>Nested Corporate</Button>
+    </div>
   </section>
 </div>
 ```
@@ -184,7 +191,10 @@ export default function SettingsPage() {
   return (
     <main data-theme="corporate">
       <h1>Settings</h1>
-      <Button onClick={() => window.alert('Saved')}><CheckIcon /><span>Save changes</span></Button>
+      <Button onClick={() => window.alert('Saved')}>
+        <CheckIcon />
+        <span>Save changes</span>
+      </Button>
     </main>
   );
 }
@@ -230,7 +240,12 @@ import { Button, CheckIcon } from 'fletchstack-ui';
 
 export default function SaveAction() {
   const [saved, setSaved] = useState(false);
-  return <Button disabled={saved} onClick={() => setSaved(true)}><CheckIcon /><span>{saved ? 'Saved' : 'Save changes'}</span></Button>;
+  return (
+    <Button disabled={saved} onClick={() => setSaved(true)}>
+      <CheckIcon />
+      <span>{saved ? 'Saved' : 'Save changes'}</span>
+    </Button>
+  );
 }
 ```
 
@@ -248,6 +263,8 @@ npx playwright install chromium
 npm run storybook          # http://localhost:6006; Corporate/Luna toolbar
 npm run tokens             # validate sources; generate CSS and token reference
 npm run lint
+npm run format             # format supported authored files with Prettier
+npm run format:check       # check formatting without writing files
 npm run typecheck
 npm test                   # unit tests, browser regressions, Storybook interactions and axe
 npm run test:unit           # full unit development feedback; coverage disabled
@@ -281,6 +298,14 @@ Command migration: `test:unit` and `test:integration` now disable coverage and p
 Integration tests exercise real JSON parsing, filesystem operations, token compilation, CSS generation, documentation output, and stylesheet packaging. Synthetic token projects use temporary directories that are removed after each test. A command-entry smoke test regenerates the repository's checked-in token CSS and reference and checks that they are unchanged. Token generation's callable operation accepts a project directory URL; the existing CLI still builds the repository's tokens.
 
 Chromium integration tests verify hidden and disabled behavior, theme selection, server rendering followed by React hydration, keyboard activation, form submission/reset, forwarded refs, accessible icon composition, semantic overrides, and visible focus in both themes. Coverage measures JavaScript/TypeScript execution in the Vitest process, including server rendering; the separately bundled browser fixture validates client behavior but does not contribute to those counters. CSS behavior is asserted in the browser, not measured by JavaScript coverage. Storybook interaction and accessibility tests remain necessary even with 100% unit and integration coverage.
+
+### Formatting and linting
+
+Prettier owns formatting; ESLint checks code quality. Run `npm run format` to format supported authored files, or `npm run format:check` to check them without writing. To format only the files you are editing, run `npx --no-install prettier --write path/to/file.tsx`.
+
+[.prettierrc.json](.prettierrc.json) uses single quotes, a 100-column print width, and LF line endings, with other Prettier defaults. [.prettierignore](.prettierignore) excludes generated outputs, the npm lockfile, and managed agent customizations. Prettier also respects [.gitignore](.gitignore). Astro files require a separate Prettier plugin and are not included in this setup.
+
+Install the recommended Prettier and ESLint VS Code extensions. [Workspace settings](.vscode/settings.json) make Prettier the default formatter, format on save, and run ESLint fixes on explicit saves. ESLint's formatter is disabled. [eslint.config.js](eslint.config.js) places `eslint-config-prettier/flat` last to disable conflicting formatting rules; keep it after any future rule presets. Formatting runs separately from ESLint, without `eslint-plugin-prettier`.
 
 ### TypeScript strictness
 
@@ -323,26 +348,26 @@ import 'fletchstack-ui/styles.css';
 
 Omit `label` for decoration. Omitted, empty, and whitespace-only labels produce `aria-hidden="true"`. A nonblank label is trimmed and exposes `role="img"` with that accessible name. SVGs stay non-focusable; name an icon-only Button on the Button itself. Icon owns role, naming/focus attributes, and width/height, so these are excluded from its native SVG props and stripped from untyped inputs. Compatible native SVG attributes, handlers, SVG refs, className, and style pass through. Consumer artwork must avoid focusable descendants and conflicting title-based naming; consumers own unique IDs used by their artwork.
 
-| Prop | Contract |
-| --- | --- |
-| `children` | Consumer SVG artwork; available on Icon only |
-| `viewBox` | Defaults to `0 0 24 24`; customizable on Icon only |
-| `size` | `small` 16px, `medium` 20px (default), `large` 24px |
-| `label` | Optional accessible image name; omit for decoration |
-| `ref` | Native `SVGSVGElement` access |
-| `className`, `style` | SVG customization and public semantic overrides |
+| Prop                 | Contract                                            |
+| -------------------- | --------------------------------------------------- |
+| `children`           | Consumer SVG artwork; available on Icon only        |
+| `viewBox`            | Defaults to `0 0 24 24`; customizable on Icon only  |
+| `size`               | `small` 16px, `medium` 20px (default), `large` 24px |
+| `label`              | Optional accessible image name; omit for decoration |
+| `ref`                | Native `SVGSVGElement` access                       |
+| `className`, `style` | SVG customization and public semantic overrides     |
 
 All named artwork uses a shared 24×24 outline convention with round caps/joins. Each export composes Icon, supports the same size/label/ref/customization contract, and owns its artwork and viewBox. Import only what you need; unused artwork is removable from production bundles. There is no runtime name registry or icon collection dependency.
 
-| Export | Intended use |
-| --- | --- |
-| `MoonIcon` | Night mode and celestial accents |
-| `SunIcon` | Light mode |
-| `CheckIcon` | Success and confirmation |
-| `CloseIcon` | Dismiss or cancel |
-| `ChevronDownIcon` | Expand a section or menu |
-| `ArrowRightIcon` | Continue or navigate forward |
-| `PlusIcon` | Add or create |
+| Export             | Intended use                     |
+| ------------------ | -------------------------------- |
+| `MoonIcon`         | Night mode and celestial accents |
+| `SunIcon`          | Light mode                       |
+| `CheckIcon`        | Success and confirmation         |
+| `CloseIcon`        | Dismiss or cancel                |
+| `ChevronDownIcon`  | Expand a section or menu         |
+| `ArrowRightIcon`   | Continue or navigate forward     |
+| `PlusIcon`         | Add or create                    |
 | `ExternalLinkIcon` | Indicate an external destination |
 
 For selective CSS, import `fletchstack-ui/tokens.css` then `fletchstack-ui/icon.css`, adding `button.css` when composing Button. Combined `styles.css` includes all three. JavaScript imports no styles or browser globals, so SSR needs no CSS loader. Corporate and Luna share icon geometry; icons inherit the context's semantic color, including Button interaction states.
@@ -352,7 +377,10 @@ const brandIconStyle: IconStyle = {
   '--fs-icon-size-medium': '28px',
   '--fs-icon-stroke-width': 3,
 };
-<div style={brandIconStyle}><MoonIcon /><SunIcon label="Daytime" /></div>
+<div style={brandIconStyle}>
+  <MoonIcon />
+  <SunIcon label="Daytime" />
+</div>;
 ```
 
 Public tokens are `--fs-icon-size-small`, `--fs-icon-size-medium`, `--fs-icon-size-large`, and `--fs-icon-stroke-width`. Dimensions use fixed CSS pixels; text enlargement does not double the artwork. Stroke width is unitless SVG user units and scales with the viewBox. Scoped overrides inherit until a nested explicit theme resets them. Keep icon/text contrast appropriate to the containing surface when overriding colors.

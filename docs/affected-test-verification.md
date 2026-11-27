@@ -11,9 +11,9 @@ Focused tests and fixture apps changed imports in 45 existing files. A compariso
 The initial complete coverage-free runs passed 544 unit and 234 integration tests with three workers; JSON runner spans were approximately 8.00s and 17.07s. Those runs precede the new tooling/public-contract tests and are not identical workloads to the final suites.
 
 | Changed implementation | Initial unit / 37 files | Final unit / 44 files | Initial integration / 43 files | Final integration / 47 files |
-| --- | ---: | ---: | ---: | ---: |
-| Button | 14 | 8 | 33 | 7 |
-| Field | 15 | 9 | 31 | 7 |
+| ---------------------- | ----------------------: | --------------------: | -----------------------------: | ---------------------------: |
+| Button                 |                      14 |                     8 |                             33 |                            7 |
+| Field                  |                      15 |                     9 |                             31 |                            7 |
 
 Field still selects Select, TextInput and Textarea. Button still reaches genuine Card/Icon/fixture compositions. Public-consumer and catalog contracts intentionally remain broad. A shared accessibility-hook probe selected 12 unit files.
 
@@ -21,12 +21,12 @@ Field still selects Select, TextInput and Textarea. Button still reaches genuine
 
 Environment: macOS arm64, Node 22.23.4, Vitest 4.1.12, installed Chromium, three workers, coverage disabled, fixed Button implementation input. This quiet pair ran without concurrent verification commands. Both passes use the same final test inventory, including new public-contract suites. The before pass temporarily restored the original import-only snapshots; `finally` restored all current files before the after pass. Both passed.
 
-| Project / imports | Selected files | Context/discovery | Execution | Sum |
-| --- | ---: | ---: | ---: | ---: |
-| Unit / original barrels | 15 | 1.982s | 4.703s | 6.685s |
-| Unit / focused direct imports | 8 | 1.552s | 2.631s | 4.183s |
-| Integration / original barrels | 34 | 0.359s | 14.463s | 14.822s |
-| Integration / focused direct imports | 7 | 0.178s | 4.993s | 5.172s |
+| Project / imports                    | Selected files | Context/discovery | Execution |     Sum |
+| ------------------------------------ | -------------: | ----------------: | --------: | ------: |
+| Unit / original barrels              |             15 |            1.982s |    4.703s |  6.685s |
+| Unit / focused direct imports        |              8 |            1.552s |    2.631s |  4.183s |
+| Integration / original barrels       |             34 |            0.359s |   14.463s | 14.822s |
+| Integration / focused direct imports |              7 |            0.178s |    4.993s |  5.172s |
 
 Context/discovery includes Vitest context creation and graph discovery. Execution includes the selected run and reporting. The sum excludes Node/module-import startup, Git discovery and final context close. Disk caches were retained and before precedes after. This is one bounded pair, not a statistical guarantee or an estimate of complete CI savings. An earlier pair overlapped other checks and is retained only as scratch evidence. The 15/34 original-barrel counts include the new public-contract suites in both passes, explaining their difference from the initial 14/33 discovery counts.
 
@@ -38,18 +38,18 @@ Observed red: the first parser test expected `{ project, base, dryRun }` but rec
 
 Each disposable fault below was detected by an owning test verified to be in the computed selection, then restored in `finally`. Full-fallback probes execute the owning file as a bounded sensitivity check; complete final suites independently verify the restored state.
 
-| Input | Fault / safeguard | Selection | Result |
-| --- | --- | --- | --- |
-| Public exports | Remove Button export | Dedicated unit and composed-consumer tests | Failed, restored |
-| Button | Default to submit | 8 unit files | DOM owner failed, restored |
-| Field | Break label target | 9 unit files | Select owner failed, restored |
-| CSS | Display hidden Buttons | Full integration | Native hidden owner failed, restored |
-| Shared token | Change 16px primitive to 17px | Full unit | Spatial contract failed, restored |
-| Hydration entry | Target a missing root | Full integration | Hydration setup failed, restored |
-| Shared hook | Suppress error invalid state | 12 unit files | Select owner failed, restored |
-| Edited test | Append a deliberate failure | One unit file | Failed, restored |
-| Untracked test | Add a deliberate failure | New unit file | Failed, removed |
-| Unknown resource | No classified owners | Full integration | Did not claim empty success |
+| Input            | Fault / safeguard             | Selection                                  | Result                               |
+| ---------------- | ----------------------------- | ------------------------------------------ | ------------------------------------ |
+| Public exports   | Remove Button export          | Dedicated unit and composed-consumer tests | Failed, restored                     |
+| Button           | Default to submit             | 8 unit files                               | DOM owner failed, restored           |
+| Field            | Break label target            | 9 unit files                               | Select owner failed, restored        |
+| CSS              | Display hidden Buttons        | Full integration                           | Native hidden owner failed, restored |
+| Shared token     | Change 16px primitive to 17px | Full unit                                  | Spatial contract failed, restored    |
+| Hydration entry  | Target a missing root         | Full integration                           | Hydration setup failed, restored     |
+| Shared hook      | Suppress error invalid state  | 12 unit files                              | Select owner failed, restored        |
+| Edited test      | Append a deliberate failure   | One unit file                              | Failed, restored                     |
+| Untracked test   | Add a deliberate failure      | New unit file                              | Failed, removed                      |
+| Unknown resource | No classified owners          | Full integration                           | Did not claim empty success          |
 
 Temporary Git repositories cover branch/local unions, cancelling edits, nonignored untracked files, spaces, overlapping rename/deletion, missing refs, unrelated histories and non-Git errors. Operational failures remain errors.
 

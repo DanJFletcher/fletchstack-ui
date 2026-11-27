@@ -1,4 +1,5 @@
-.fs-heading, .fs-text {
+.fs-heading,
+.fs-text {
   min-inline-size: 0;
   margin: 0;
   overflow-wrap: anywhere;
@@ -10,9 +11,15 @@
   font-weight: var(--fs-typography-heading-weight);
   line-height: var(--fs-typography-heading-line-height);
 }
-.fs-heading--page { font-size: var(--fs-typography-heading-font-page); }
-.fs-heading--section { font-size: var(--fs-typography-heading-font-section); }
-.fs-heading--subheading { font-size: var(--fs-typography-heading-font-subheading); }
+.fs-heading--page {
+  font-size: var(--fs-typography-heading-font-page);
+}
+.fs-heading--section {
+  font-size: var(--fs-typography-heading-font-section);
+}
+.fs-heading--subheading {
+  font-size: var(--fs-typography-heading-font-subheading);
+}
 
 .fs-text {
   color: var(--fs-typography-text-color);
@@ -20,7 +27,15 @@
   font-weight: var(--fs-typography-text-weight);
   line-height: var(--fs-typography-text-line-height);
 }
-.fs-text--lead { font-size: var(--fs-typography-text-font-lead); }
-.fs-text--body { font-size: var(--fs-typography-text-font-body); }
-.fs-text--small { font-size: var(--fs-typography-text-font-small); }
-.fs-text--muted { color: var(--fs-typography-text-muted); }
+.fs-text--lead {
+  font-size: var(--fs-typography-text-font-lead);
+}
+.fs-text--body {
+  font-size: var(--fs-typography-text-font-body);
+}
+.fs-text--small {
+  font-size: var(--fs-typography-text-font-small);
+}
+.fs-text--muted {
+  color: var(--fs-typography-text-muted);
+}

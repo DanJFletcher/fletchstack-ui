@@ -11,7 +11,29 @@ import type { QuestionnaireProps } from './types.js';
  **/
 function formAttributes(props: QuestionnaireProps) {
   const attributes = { ...props };
-  for (const name of ['items', 'answers', 'defaultAnswers', 'onAnswersChange', 'value', 'defaultValue', 'onValueChange', 'shortcuts', 'labels', 'validate', 'onSubmit', 'onReset', 'onKeyDown', 'className', 'children', 'dangerouslySetInnerHTML', 'action', 'method', 'encType', 'target', 'noValidate']) {
+  for (const name of [
+    'items',
+    'answers',
+    'defaultAnswers',
+    'onAnswersChange',
+    'value',
+    'defaultValue',
+    'onValueChange',
+    'shortcuts',
+    'labels',
+    'validate',
+    'onSubmit',
+    'onReset',
+    'onKeyDown',
+    'className',
+    'children',
+    'dangerouslySetInnerHTML',
+    'action',
+    'method',
+    'encType',
+    'target',
+    'noValidate',
+  ]) {
     Reflect.deleteProperty(attributes, name);
   }
 
@@ -21,15 +43,34 @@ function formAttributes(props: QuestionnaireProps) {
 /**
  * Coordinate a sequential questionnaire while the application owns persistence and the success destination.
  **/
-export const Questionnaire: ForwardRefExoticComponent<QuestionnaireProps & RefAttributes<HTMLFormElement>> = /* @__PURE__ */ forwardRef<HTMLFormElement, QuestionnaireProps>(function Questionnaire(props, ref) {
-  checkItems(props.items);
-  const model = useQuestionnaire(props);
-  const attributes = formAttributes(props);
-  const name = props['aria-labelledby'] ? undefined : props['aria-label'] ?? 'Questionnaire';
+export const Questionnaire: ForwardRefExoticComponent<
+  QuestionnaireProps & RefAttributes<HTMLFormElement>
+> = /* @__PURE__ */ forwardRef<HTMLFormElement, QuestionnaireProps>(
+  function Questionnaire(props, ref) {
+    checkItems(props.items);
+    const model = useQuestionnaire(props);
+    const attributes = formAttributes(props);
+    const name = props['aria-labelledby'] ? undefined : (props['aria-label'] ?? 'Questionnaire');
 
-  return <form {...attributes} ref={ref} noValidate aria-label={name} aria-busy={model.submission.pending} className={['fs-questionnaire', props.className].filter(Boolean).join(' ')}
-    onSubmit={event => submitQuestionnaire(event, model)} onReset={event => resetQuestionnaire(event, model)}
-    onKeyDown={event => { props.onKeyDown?.(event); if (!model.submission.running.current) { activateShortcut(event, props.shortcuts ?? 'none', model.fieldset.current); } }}>
-    <QuestionnaireView model={model} />
-  </form>;
-});
+    return (
+      <form
+        {...attributes}
+        ref={ref}
+        noValidate
+        aria-label={name}
+        aria-busy={model.submission.pending}
+        className={['fs-questionnaire', props.className].filter(Boolean).join(' ')}
+        onSubmit={(event) => submitQuestionnaire(event, model)}
+        onReset={(event) => resetQuestionnaire(event, model)}
+        onKeyDown={(event) => {
+          props.onKeyDown?.(event);
+          if (!model.submission.running.current) {
+            activateShortcut(event, props.shortcuts ?? 'none', model.fieldset.current);
+          }
+        }}
+      >
+        <QuestionnaireView model={model} />
+      </form>
+    );
+  },
+);

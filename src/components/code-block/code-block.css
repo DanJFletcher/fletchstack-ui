@@ -19,27 +19,45 @@
   padding-block: var(--fs-code-block-header-padding);
   padding-inline: var(--fs-code-block-inset);
   border-block-end: var(--fs-code-block-border-width) solid var(--fs-code-block-border);
-  border-start-start-radius: max(0px, calc(var(--fs-code-block-radius) - var(--fs-code-block-border-width)));
-  border-start-end-radius: max(0px, calc(var(--fs-code-block-radius) - var(--fs-code-block-border-width)));
+  border-start-start-radius: max(
+    0px,
+    calc(var(--fs-code-block-radius) - var(--fs-code-block-border-width))
+  );
+  border-start-end-radius: max(
+    0px,
+    calc(var(--fs-code-block-radius) - var(--fs-code-block-border-width))
+  );
   background: var(--fs-code-block-header-surface);
   overflow-wrap: anywhere;
 }
-.fs-code-block__filename, .fs-code-block__language { min-inline-size: 0; max-inline-size: 100%; }
-.fs-code-block__filename { flex: 1 1 auto; font-weight: var(--fs-code-block-label-weight); }
-.fs-code-block__language { color: var(--fs-code-block-muted); margin-inline-start: auto; }
-.fs-code-block__header > .fs-code-block__copy:only-child { margin-inline-start: auto; }
-.fs-code-block__copy[data-copy-state="idle"],
-.fs-code-block__copy[data-copy-state="pending"] {
+.fs-code-block__filename,
+.fs-code-block__language {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+.fs-code-block__filename {
+  flex: 1 1 auto;
+  font-weight: var(--fs-code-block-label-weight);
+}
+.fs-code-block__language {
+  color: var(--fs-code-block-muted);
+  margin-inline-start: auto;
+}
+.fs-code-block__header > .fs-code-block__copy:only-child {
+  margin-inline-start: auto;
+}
+.fs-code-block__copy[data-copy-state='idle'],
+.fs-code-block__copy[data-copy-state='pending'] {
   background: var(--fs-code-block-copy-surface);
   color: var(--fs-code-block-copy-text);
   border-color: var(--fs-code-block-copy-border);
 }
-.fs-code-block__copy[data-copy-state="success"] {
+.fs-code-block__copy[data-copy-state='success'] {
   background: var(--fs-code-block-success-surface);
   color: var(--fs-code-block-success-text);
   border-color: var(--fs-code-block-success-border);
 }
-.fs-code-block__copy[data-copy-state="error"] {
+.fs-code-block__copy[data-copy-state='error'] {
   background: var(--fs-code-block-error-surface);
   color: var(--fs-code-block-error);
   border-color: var(--fs-code-block-error);
@@ -60,14 +78,25 @@
   font-weight: var(--fs-code-block-font-weight);
   line-height: var(--fs-code-block-font-line-height);
 }
-.fs-code-block__viewport > code { font: inherit; }
-.fs-code-block--wrap > .fs-code-block__viewport { white-space: pre-wrap; overflow-wrap: anywhere; }
+.fs-code-block__viewport > code {
+  font: inherit;
+}
+.fs-code-block--wrap > .fs-code-block__viewport {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .fs-code-block__viewport:focus-visible {
   outline: var(--fs-code-block-focus-width) solid var(--fs-code-block-focus-color);
   outline-offset: var(--fs-code-block-focus-offset);
 }
-.fs-code-block__feedback { margin: 0; }
-.fs-code-block__feedback--error { padding: var(--fs-code-block-inset); color: var(--fs-code-block-error); overflow-wrap: anywhere; }
+.fs-code-block__feedback {
+  margin: 0;
+}
+.fs-code-block__feedback--error {
+  padding: var(--fs-code-block-inset);
+  color: var(--fs-code-block-error);
+  overflow-wrap: anywhere;
+}
 /* Only the announcement text is visually hidden; no focusable content is clipped. */
 .fs-code-block__feedback:not(.fs-code-block__feedback--error) {
   position: absolute;
@@ -84,29 +113,59 @@
 .fs-code-block__viewport .token.comment,
 .fs-code-block__viewport .token.prolog,
 .fs-code-block__viewport .token.doctype,
-.fs-code-block__viewport .token.cdata { color: var(--fs-code-block-syntax-comment); }
+.fs-code-block__viewport .token.cdata {
+  color: var(--fs-code-block-syntax-comment);
+}
 .fs-code-block__viewport .token.keyword,
 .fs-code-block__viewport .token.tag,
-.fs-code-block__viewport .token.atrule { color: var(--fs-code-block-syntax-keyword); }
+.fs-code-block__viewport .token.atrule {
+  color: var(--fs-code-block-syntax-keyword);
+}
 .fs-code-block__viewport .token.string,
 .fs-code-block__viewport .token.char,
 .fs-code-block__viewport .token.attr-value,
-.fs-code-block__viewport .token.regex { color: var(--fs-code-block-syntax-string); }
+.fs-code-block__viewport .token.regex {
+  color: var(--fs-code-block-syntax-string);
+}
 .fs-code-block__viewport .token.number,
 .fs-code-block__viewport .token.boolean,
-.fs-code-block__viewport .token.constant { color: var(--fs-code-block-syntax-number); }
+.fs-code-block__viewport .token.constant {
+  color: var(--fs-code-block-syntax-number);
+}
 .fs-code-block__viewport .token.function,
 .fs-code-block__viewport .token.class-name,
 .fs-code-block__viewport .token.property,
 .fs-code-block__viewport .token.selector,
-.fs-code-block__viewport .token.attr-name { color: var(--fs-code-block-syntax-function); }
+.fs-code-block__viewport .token.attr-name {
+  color: var(--fs-code-block-syntax-function);
+}
 .fs-code-block__viewport .token.operator,
-.fs-code-block__viewport .token.punctuation { color: var(--fs-code-block-syntax-operator); }
+.fs-code-block__viewport .token.punctuation {
+  color: var(--fs-code-block-syntax-operator);
+}
 @media (forced-colors: active) {
-  .fs-code-block { border-color: CanvasText; background: Canvas; color: CanvasText; }
-  .fs-code-block__header { border-color: CanvasText; background: Canvas; }
-  .fs-code-block__viewport .token { color: CanvasText; }
-  .fs-code-block__language, .fs-code-block__feedback--error { color: CanvasText; }
-  .fs-code-block__viewport:focus-visible { outline-color: Highlight; }
-  .fs-code-block__copy[data-copy-state] { background: ButtonFace; color: ButtonText; border-color: ButtonText; }
+  .fs-code-block {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+  .fs-code-block__header {
+    border-color: CanvasText;
+    background: Canvas;
+  }
+  .fs-code-block__viewport .token {
+    color: CanvasText;
+  }
+  .fs-code-block__language,
+  .fs-code-block__feedback--error {
+    color: CanvasText;
+  }
+  .fs-code-block__viewport:focus-visible {
+    outline-color: Highlight;
+  }
+  .fs-code-block__copy[data-copy-state] {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
 }

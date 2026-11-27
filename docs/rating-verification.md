@@ -4,19 +4,19 @@ Verified locally on 2026-11-12 (America/Toronto). The [Rating contract](rating.m
 
 ## Final results
 
-| Check | Result |
-| --- | --- |
-| Structural check | `npm run component:check -- Rating` passed |
-| Lint and typecheck | Passed, including declaration generation constraints |
-| Unit coverage gate | 992 tests / 64 files passed; 23.93s runner time |
-| Integration coverage gate | 797 tests / 70 files passed; 340.18s runner time with one worker |
-| Coverage | Each full gate independently reached 100% statements, branches, functions and lines, including per-file thresholds |
-| Complete E2E | 461 component tests (3.0m) and 36 retained Storybook tests (2.3m), all passed with one worker |
-| All Storybook render/play/accessibility checks | 412 tests / 36 files passed; 32.56s runner time |
-| Library build and browser consumer checks | Passed; existing contrast, interaction, reflow, enlargement and text-spacing checks retained |
-| Installed package | Exports, types, individual/combined CSS, bundling and deterministic React 18/19 SSR passed |
-| Storybook build | Passed; existing non-blocking chunk-size advisory |
-| Whitespace check | `git diff --check` passed |
+| Check                                          | Result                                                                                                             |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Structural check                               | `npm run component:check -- Rating` passed                                                                         |
+| Lint and typecheck                             | Passed, including declaration generation constraints                                                               |
+| Unit coverage gate                             | 992 tests / 64 files passed; 23.93s runner time                                                                    |
+| Integration coverage gate                      | 797 tests / 70 files passed; 340.18s runner time with one worker                                                   |
+| Coverage                                       | Each full gate independently reached 100% statements, branches, functions and lines, including per-file thresholds |
+| Complete E2E                                   | 461 component tests (3.0m) and 36 retained Storybook tests (2.3m), all passed with one worker                      |
+| All Storybook render/play/accessibility checks | 412 tests / 36 files passed; 32.56s runner time                                                                    |
+| Library build and browser consumer checks      | Passed; existing contrast, interaction, reflow, enlargement and text-spacing checks retained                       |
+| Installed package                              | Exports, types, individual/combined CSS, bundling and deterministic React 18/19 SSR passed                         |
+| Storybook build                                | Passed; existing non-blocking chunk-size advisory                                                                  |
+| Whitespace check                               | `git diff --check` passed                                                                                          |
 
 Shared theme tokens, generated styles and public registrations required complete local browser verification. Development and repair checks were coverage-free; only the final unit/integration gates collected coverage. E2E and Storybook checks remained coverage-free. No test assertions, retries, timeouts or coverage thresholds were weakened.
 

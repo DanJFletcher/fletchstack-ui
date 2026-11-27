@@ -4,15 +4,15 @@ Verified November 12, 2026. The approved [component contract](combobox.md) follo
 
 ## Final checks
 
-| Command | Result | Observed duration |
-| --- | --- | --- |
-| `npm run test:unit:coverage -- --maxWorkers=2` | 65 files, 1,049 tests; 100% statements, branches, functions and lines | 54.51s |
-| `npm run test:integration:coverage -- --maxWorkers=1` | 71 files, 854 tests; independent 100% coverage gate | 93.52s |
-| `npm run test:e2e -- --workers=1` | 470 harness tests plus 36 retained Storybook boundary tests, all passing | 4.2m + 1.8m |
-| `npm run test:storybook` | 37 files, 426 render/play/accessibility checks passing | 22.87s |
-| `npm run build-storybook` | Passed | Vite build 6.74s; total not separately measured |
-| `npm run verify:package` | Build, packed exports/types/styles, bundling and deterministic React 18.3.1 / React 19 SSR passed | Not separately measured |
-| `npm run lint`, `npm run typecheck`, `npm run component:check -- Combobox`, `git diff --check` | Passed | Not separately measured |
+| Command                                                                                        | Result                                                                                            | Observed duration                               |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `npm run test:unit:coverage -- --maxWorkers=2`                                                 | 65 files, 1,049 tests; 100% statements, branches, functions and lines                             | 54.51s                                          |
+| `npm run test:integration:coverage -- --maxWorkers=1`                                          | 71 files, 854 tests; independent 100% coverage gate                                               | 93.52s                                          |
+| `npm run test:e2e -- --workers=1`                                                              | 470 harness tests plus 36 retained Storybook boundary tests, all passing                          | 4.2m + 1.8m                                     |
+| `npm run test:storybook`                                                                       | 37 files, 426 render/play/accessibility checks passing                                            | 22.87s                                          |
+| `npm run build-storybook`                                                                      | Passed                                                                                            | Vite build 6.74s; total not separately measured |
+| `npm run verify:package`                                                                       | Build, packed exports/types/styles, bundling and deterministic React 18.3.1 / React 19 SSR passed | Not separately measured                         |
+| `npm run lint`, `npm run typecheck`, `npm run component:check -- Combobox`, `git diff --check` | Passed                                                                                            | Not separately measured                         |
 
 Coverage stayed disabled during implementation, test authoring and repair. The two unfiltered independent coverage gates ran at final verification. Full browser verification was retained because the change touches public-export configuration and global Storybook preview registration. Browser runs did not collect code coverage. Remote required CI has not been run.
 

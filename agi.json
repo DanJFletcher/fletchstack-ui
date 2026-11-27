@@ -1,16 +1,8 @@
 {
   "version": 1,
-  "targets": [
-    "codex",
-    "copilot"
-  ],
+  "targets": ["codex", "copilot"],
   "selection": {
-    "guidelines": [
-      "code-quality",
-      "testing-guidelines",
-      "component-library",
-      "design-tokens"
-    ],
+    "guidelines": ["code-quality", "testing-guidelines", "component-library", "design-tokens"],
     "skills": [
       "tdd",
       "typescript-refactor",
@@ -19,10 +11,7 @@
       "react-testing-library",
       "playwright-e2e"
     ],
-    "agents": [
-      "research",
-      "refactorer"
-    ]
+    "agents": ["research", "refactorer"]
   },
   "outputs": {
     "AGENTS.md": {

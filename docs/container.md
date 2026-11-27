@@ -6,11 +6,11 @@ The owner-supplied Container design and request approve this optional passive la
 
 `Container` renders a native div. `size` is `reading`, `content` (default), or `wide`. `gutters` is boolean and defaults to true. Native div attributes, children, className, a forwarded HTMLDivElement ref, and typed `ContainerStyle` overrides are supported. There is no polymorphic element, breakpoint object, provider, viewport script, or hydration requirement.
 
-| Preset | Maximum outer width |
-| --- | --- |
-| reading | 720px |
-| content | 1120px |
-| wide | 1440px |
+| Preset  | Maximum outer width |
+| ------- | ------------------- |
+| reading | 720px               |
+| content | 1120px              |
+| wide    | 1440px              |
 
 Width is 100% of the parent's available inline space up to the maximum. Border-box sizing includes gutter padding within that maximum; logical auto margins center it. `min-inline-size: 0` allows shrinking within flex/grid parents. Gutters are 16px below a 600px viewport and 24px at and above it, even when the parent itself is narrow. `gutters={false}` removes only inline padding. Use it when nesting inside a parent that already supplies the required inset.
 
@@ -26,7 +26,7 @@ import 'fletchstack-ui/container.css';
     <h2 id="overview">Project overview</h2>
     <div className="project-grid">{/* Children supply the layout. */}</div>
   </Container>
-</section>
+</section>;
 ```
 
 Corporate and Luna share identical layout defaults. Override `--fs-container-max-width-reading`, `--fs-container-max-width-content`, `--fs-container-max-width-wide`, `--fs-container-gutter-small`, or `--fs-container-gutter-large` on a scope or in `ContainerStyle`. Explicit nested themes redeclare all roles, restoring their defaults. A token override on the same element takes normal CSS cascade precedence. The 600px viewport query is fixed CSS behavior, not a token or runtime breakpoint API.

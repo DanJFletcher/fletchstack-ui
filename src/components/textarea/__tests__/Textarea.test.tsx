@@ -12,7 +12,14 @@ import { Textarea } from '../Textarea';
 function ControlledTextarea() {
   const [value, setValue] = useState('');
 
-  return <Textarea label="Description" value={value} onChange={event => setValue(event.target.value)} showCount />;
+  return (
+    <Textarea
+      label="Description"
+      value={value}
+      onChange={(event) => setValue(event.target.value)}
+      showCount
+    />
+  );
 }
 
 it('preserves consumer-controlled multiline edits with the counter enabled', async () => {
@@ -41,13 +48,26 @@ it('names the native multiline control with a visible label', () => {
 
 it('keeps consumer context alongside helper text and errors', () => {
   // arrange
-  const given = <><p id="context">Project settings.</p><Textarea id="description" label="Description" aria-describedby="context" helperText="Describe the goals." error="Enter a description." /></>;
+  const given = (
+    <>
+      <p id="context">Project settings.</p>
+      <Textarea
+        id="description"
+        label="Description"
+        aria-describedby="context"
+        helperText="Describe the goals."
+        error="Enter a description."
+      />
+    </>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('textbox')).toHaveAccessibleDescription('Project settings. Describe the goals. Enter a description.');
+  expect(screen.getByRole('textbox')).toHaveAccessibleDescription(
+    'Project settings. Describe the goals. Enter a description.',
+  );
 });
 
 it('gives an error precedence over an explicit valid state', () => {
@@ -153,7 +173,12 @@ it('uses the current native value when defaultValue changes after editing', asyn
 it('restores the default count after a native form reset', async () => {
   // arrange
   const user = userEvent.setup();
-  render(<form><Textarea label="Description" defaultValue="First" showCount /><button type="reset">Reset</button></form>);
+  render(
+    <form>
+      <Textarea label="Description" defaultValue="First" showCount />
+      <button type="reset">Reset</button>
+    </form>,
+  );
   await user.type(screen.getByRole('textbox'), '!');
 
   // act
@@ -167,7 +192,12 @@ it('restores the default count after a native form reset', async () => {
 it('preserves the count when a consumer cancels form reset', async () => {
   // arrange
   const user = userEvent.setup();
-  render(<form onReset={event => event.preventDefault()}><Textarea label="Description" defaultValue="First" showCount /><button type="reset">Reset</button></form>);
+  render(
+    <form onReset={(event) => event.preventDefault()}>
+      <Textarea label="Description" defaultValue="First" showCount />
+      <button type="reset">Reset</button>
+    </form>,
+  );
   await user.type(screen.getByRole('textbox'), '!');
 
   // act
@@ -180,11 +210,18 @@ it('preserves the count when a consumer cancels form reset', async () => {
 
 it('cleans up a reset observer when the textarea unmounts during reset', async () => {
   // arrange
-  const { unmount } = render(<form onReset={() => unmount()}><Textarea label="Description" showCount /><button type="reset">Reset</button></form>);
+  const { unmount } = render(
+    <form onReset={() => unmount()}>
+      <Textarea label="Description" showCount />
+      <button type="reset">Reset</button>
+    </form>,
+  );
   const form = screen.getByRole('textbox').closest('form')!;
 
   // act
-  await act(async () => { form.reset(); });
+  await act(async () => {
+    form.reset();
+  });
 
   // assert
   expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
@@ -193,9 +230,25 @@ it('cleans up a reset observer when the textarea unmounts during reset', async (
 it('observes a newly assigned external form owner', async () => {
   // arrange
   const user = userEvent.setup();
-  const { rerender } = render(<><form id="first" /><form id="second"><button type="reset">Reset second</button></form><Textarea label="Description" form="first" defaultValue="First" showCount /></>);
+  const { rerender } = render(
+    <>
+      <form id="first" />
+      <form id="second">
+        <button type="reset">Reset second</button>
+      </form>
+      <Textarea label="Description" form="first" defaultValue="First" showCount />
+    </>,
+  );
   await user.type(screen.getByRole('textbox'), '!');
-  rerender(<><form id="first" /><form id="second"><button type="reset">Reset second</button></form><Textarea label="Description" form="second" defaultValue="First" showCount /></>);
+  rerender(
+    <>
+      <form id="first" />
+      <form id="second">
+        <button type="reset">Reset second</button>
+      </form>
+      <Textarea label="Description" form="second" defaultValue="First" showCount />
+    </>,
+  );
 
   // act
   await user.click(screen.getByRole('button', { name: 'Reset second' }));
@@ -218,7 +271,11 @@ it('does not change a read-only value', async () => {
 
 it('preserves native disabled semantics', () => {
   // arrange
-  const given = <fieldset disabled><Textarea label="Description" /></fieldset>;
+  const given = (
+    <fieldset disabled>
+      <Textarea label="Description" />
+    </fieldset>
+  );
 
   // act
   render(given);
@@ -229,7 +286,16 @@ it('preserves native disabled semantics', () => {
 
 it('supports wrapper and control customization independently', () => {
   // arrange
-  const given = <Textarea label="Description" wrapperClassName="custom-wrapper" className="custom-control" wrapperStyle={{ '--fs-textarea-radius': '24px' }} style={{ resize: 'none' }} rows={8} />;
+  const given = (
+    <Textarea
+      label="Description"
+      wrapperClassName="custom-wrapper"
+      className="custom-control"
+      wrapperStyle={{ '--fs-textarea-radius': '24px' }}
+      style={{ resize: 'none' }}
+      rows={8}
+    />
+  );
 
   // act
   render(given);

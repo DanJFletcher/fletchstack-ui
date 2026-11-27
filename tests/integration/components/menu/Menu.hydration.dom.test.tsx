@@ -16,7 +16,13 @@ function hydrate(element: ReactElement) {
   container.innerHTML = renderToString(element);
   document.body.appendChild(container);
 
-  return render(element, { container, hydrate: true, onRecoverableError: error => { throw error; } });
+  return render(element, {
+    container,
+    hydrate: true,
+    onRecoverableError: (error) => {
+      throw error;
+    },
+  });
 }
 
 describe('server hydration', () => {
@@ -25,7 +31,14 @@ describe('server hydration', () => {
   menuTriggerContracts(hydrate);
 });
 it('server renders native links and named menu semantics', () => {
-  const result = renderToString(<Menu triggerLabel="Actions" menuLabel="Project menu" defaultOpen items={[{ type: 'item', id: 'guide', label: 'Guide', href: '#guide' }]} />);
+  const result = renderToString(
+    <Menu
+      triggerLabel="Actions"
+      menuLabel="Project menu"
+      defaultOpen
+      items={[{ type: 'item', id: 'guide', label: 'Guide', href: '#guide' }]}
+    />,
+  );
   expect(result).toContain('role="menu" aria-label="Project menu"');
   expect(result).toContain('href="#guide"');
 });

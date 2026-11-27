@@ -65,47 +65,78 @@ it('updates consumer-controlled state through native changes', async () => {
   expect(screen.getByRole('switch', { name: 'Notifications' })).toBeChecked();
 });
 
-it.each([false, true])('preserves a disabled setting with initial checked state %s', async checked => {
-  // arrange
-  const user = userEvent.setup();
-  const onChange = vi.fn();
-  render(<Switch label="Notifications" disabled defaultChecked={checked} onChange={onChange} />);
+it.each([false, true])(
+  'preserves a disabled setting with initial checked state %s',
+  async (checked) => {
+    // arrange
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Switch label="Notifications" disabled defaultChecked={checked} onChange={onChange} />);
 
-  // act
-  await user.click(screen.getByText('Notifications'));
+    // act
+    await user.click(screen.getByText('Notifications'));
 
-  // assert
-  expect(screen.getByRole('switch')).toHaveProperty('checked', checked);
-  expect(onChange).not.toHaveBeenCalled();
-});
+    // assert
+    expect(screen.getByRole('switch')).toHaveProperty('checked', checked);
+    expect(onChange).not.toHaveBeenCalled();
+  },
+);
 
 it('links local description after existing context without changing its name', () => {
   // arrange
-  const given = <><p id="context">Project settings.</p><Switch label="Notifications" id="notifications" description="Receive project updates." aria-describedby="context" /></>;
+  const given = (
+    <>
+      <p id="context">Project settings.</p>
+      <Switch
+        label="Notifications"
+        id="notifications"
+        description="Receive project updates."
+        aria-describedby="context"
+      />
+    </>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('switch', { name: 'Notifications' })).toHaveAccessibleDescription('Project settings. Receive project updates.');
+  expect(screen.getByRole('switch', { name: 'Notifications' })).toHaveAccessibleDescription(
+    'Project settings. Receive project updates.',
+  );
 });
 
 it('keeps descriptions instance-specific', () => {
   // arrange
-  const given = <><Switch label="Email" description="Email updates." /><Switch label="Push" description="Push updates." /></>;
+  const given = (
+    <>
+      <Switch label="Email" description="Email updates." />
+      <Switch label="Push" description="Push updates." />
+    </>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('switch', { name: 'Email' })).toHaveAccessibleDescription('Email updates.');
+  expect(screen.getByRole('switch', { name: 'Email' })).toHaveAccessibleDescription(
+    'Email updates.',
+  );
   expect(screen.getByRole('switch', { name: 'Push' })).toHaveAccessibleDescription('Push updates.');
 });
 
 it('forwards native refs and scoped consumer styles', () => {
   // arrange
   const ref = createRef<HTMLInputElement>();
-  const given = <Switch ref={ref} label="Notifications" className="custom" wrapperClassName="custom-wrapper" style={{ '--fs-switch-thumb-size': '18px' }} wrapperStyle={{ '--fs-switch-label-gap': '12px' }} />;
+  const given = (
+    <Switch
+      ref={ref}
+      label="Notifications"
+      className="custom"
+      wrapperClassName="custom-wrapper"
+      style={{ '--fs-switch-thumb-size': '18px' }}
+      wrapperStyle={{ '--fs-switch-label-gap': '12px' }}
+    />
+  );
 
   // act
   const { container } = render(given);
@@ -135,5 +166,11 @@ it('hides its complete label and description when hidden', () => {
 function ControlledSwitch() {
   const [checked, setChecked] = useState(false);
 
-  return <Switch label="Notifications" checked={checked} onChange={event => setChecked(event.target.checked)} />;
+  return (
+    <Switch
+      label="Notifications"
+      checked={checked}
+      onChange={(event) => setChecked(event.target.checked)}
+    />
+  );
 }

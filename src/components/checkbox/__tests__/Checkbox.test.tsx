@@ -25,18 +25,33 @@ it('keeps description text out of the accessible name', () => {
   render(given);
 
   // assert
-  expect(screen.getByRole('checkbox', { name: 'Email updates' })).toHaveAccessibleDescription('Receive product news and tips.');
+  expect(screen.getByRole('checkbox', { name: 'Email updates' })).toHaveAccessibleDescription(
+    'Receive product news and tips.',
+  );
 });
 
 it('preserves consumer context alongside descriptions and errors', () => {
   // arrange
-  const given = <><p id="context">Notification settings.</p><Checkbox id="email" label="Email updates" aria-describedby="context" description="Receive product news." error="Choose a channel." /></>;
+  const given = (
+    <>
+      <p id="context">Notification settings.</p>
+      <Checkbox
+        id="email"
+        label="Email updates"
+        aria-describedby="context"
+        description="Receive product news."
+        error="Choose a channel."
+      />
+    </>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('checkbox')).toHaveAccessibleDescription('Notification settings. Receive product news. Choose a channel.');
+  expect(screen.getByRole('checkbox')).toHaveAccessibleDescription(
+    'Notification settings. Receive product news. Choose a channel.',
+  );
 });
 
 it('marks validation errors as invalid', () => {

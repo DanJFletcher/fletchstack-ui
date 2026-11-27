@@ -11,13 +11,17 @@ function trackDismissFocus(element: HTMLDivElement): () => void {
   let focused = false;
   const track = (event: FocusEvent) => {
     focused = element.contains(event.target as Node);
-    if (!focused) { outside = event.target as HTMLElement; }
+    if (!focused) {
+      outside = event.target as HTMLElement;
+    }
   };
   document.addEventListener('focusin', track);
 
   return () => {
     document.removeEventListener('focusin', track);
-    if (focused && outside.isConnected) { outside.focus(); }
+    if (focused && outside.isConnected) {
+      outside.focus();
+    }
   };
 }
 
@@ -26,7 +30,9 @@ function trackDismissFocus(element: HTMLDivElement): () => void {
  **/
 function useDismissFocus(element: RefObject<HTMLDivElement | null>, open: boolean): void {
   useEffect(() => {
-    if (!open) { return; }
+    if (!open) {
+      return;
+    }
     return trackDismissFocus(element.current!);
   }, [open, element]);
 }
@@ -34,13 +40,20 @@ function useDismissFocus(element: RefObject<HTMLDivElement | null>, open: boolea
 /**
  * Keep controlled visibility authoritative and notify the consumer for dismissal requests.
  **/
-export function useToast(props: { open: boolean | undefined; defaultOpen: boolean | undefined; onOpenChange: ToastProps['onOpenChange']; hidden: boolean | undefined }): ToastState {
+export function useToast(props: {
+  open: boolean | undefined;
+  defaultOpen: boolean | undefined;
+  onOpenChange: ToastProps['onOpenChange'];
+  hidden: boolean | undefined;
+}): ToastState {
   const [local, setLocal] = useState(props.defaultOpen ?? true);
   const element = useRef<HTMLDivElement>(null);
   const open = (props.open ?? local) && !props.hidden;
   useDismissFocus(element, open);
   const dismiss = () => {
-    if (props.open === undefined) { setLocal(false); }
+    if (props.open === undefined) {
+      setLocal(false);
+    }
     props.onOpenChange?.(false);
   };
 

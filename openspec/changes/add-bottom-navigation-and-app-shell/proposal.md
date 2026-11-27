@@ -14,10 +14,12 @@ Applications need a compact destination bar that works equally with native ancho
 ## Capabilities
 
 ### New Capabilities
+
 - `bottom-navigation`: Named navigation containing consumer-owned links, semantic current styling, native interaction, public types, and documented examples.
 - `app-shell-layout`: Viewport or parent-sized app layout with persistent sibling regions and a scrolling content region, including bottom-navigation composition guidance.
 
 ### Modified Capabilities
+
 None. Existing browser and coverage policies remain unchanged.
 
 ## Impact

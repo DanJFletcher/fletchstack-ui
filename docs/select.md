@@ -14,13 +14,20 @@ The field owns its label/control/message spacing and chevron clearance; the pare
 import { Select } from 'fletchstack-ui';
 import 'fletchstack-ui/styles.css';
 
-<Select label="Workspace" name="workspace" placeholder="Choose a workspace"
-  helperText="Choose where your project lives." required>
+<Select
+  label="Workspace"
+  name="workspace"
+  placeholder="Choose a workspace"
+  helperText="Choose where your project lives."
+  required
+>
   <option value="personal">Personal</option>
   <option value="design">Design team</option>
   <option value="engineering">Engineering</option>
-  <option value="archived" disabled>Archived</option>
-</Select>
+  <option value="archived" disabled>
+    Archived
+  </option>
+</Select>;
 ```
 
 For separate styles import tokens.css, select.css, and icon.css (Select composes ChevronDownIcon). Preserve native accessible naming, target size, and contrast when customizing. Real screen-reader and cross-platform native-popup review supplement automated checks.

@@ -20,22 +20,58 @@ beforeEach(async () => {
   await mkdir(join(root, 'coverage'));
   await writeFile(join(root, 'coverage', 'sentinel'), 'preserve');
   await writeFile(join(root, '.gitignore'), 'node_modules/\ncoverage/\n');
-  await writeFile(join(root, 'vitest.config.mjs'), "export default {test:{projects:[{test:{name:'unit',include:['unit/*.test.mjs']}},{test:{name:'integration',include:['integration/*.test.mjs']}}],coverage:{enabled:true,reporter:['json']}}}");
+  await writeFile(
+    join(root, 'vitest.config.mjs'),
+    "export default {test:{projects:[{test:{name:'unit',include:['unit/*.test.mjs']}},{test:{name:'integration',include:['integration/*.test.mjs']}}],coverage:{enabled:true,reporter:['json']}}}",
+  );
   await writeFile(join(root, 'source.js'), 'export const value = 1;');
-  await writeFile(join(root, 'unit', 'sample.test.mjs'), "import {it,expect} from 'vitest';import {value} from '../source.js';it('sample',()=>expect(value).toBe(1));");
-  await writeFile(join(root, 'integration', 'other.test.mjs'), "import {it,expect} from 'vitest';it('other',()=>expect(1).toBe(1));");
+  await writeFile(
+    join(root, 'unit', 'sample.test.mjs'),
+    "import {it,expect} from 'vitest';import {value} from '../source.js';it('sample',()=>expect(value).toBe(1));",
+  );
+  await writeFile(
+    join(root, 'integration', 'other.test.mjs'),
+    "import {it,expect} from 'vitest';it('other',()=>expect(1).toBe(1));",
+  );
   gitOutput(['init', '-q'], root);
   gitOutput(['add', '.'], root);
-  gitOutput(['-c', 'user.name=Test', '-c', 'user.email=test@example.test', '-c', 'commit.gpgsign=false', 'commit', '-qm', 'baseline'], root);
+  gitOutput(
+    [
+      '-c',
+      'user.name=Test',
+      '-c',
+      'user.email=test@example.test',
+      '-c',
+      'commit.gpgsign=false',
+      'commit',
+      '-qm',
+      'baseline',
+    ],
+    root,
+  );
 });
-afterEach(async () => { await rm(root, { recursive: true, force: true }); vi.restoreAllMocks(); });
+afterEach(async () => {
+  await rm(root, { recursive: true, force: true });
+  vi.restoreAllMocks();
+});
 
 it('discovers import owners using installed Vitest without executing module bodies', async () => {
   // arrange
-  await writeFile(join(root, 'unit', 'sample.test.mjs'), "import {value} from '../source.js';throw new Error('must not execute during discovery: '+value);");
+  await writeFile(
+    join(root, 'unit', 'sample.test.mjs'),
+    "import {value} from '../source.js';throw new Error('must not execute during discovery: '+value);",
+  );
 
   // act
-  const runner = await openVitest({ project: 'unit', root, changes: [{ path: 'source.js', status: 'M' }, { path: 'unit/sample.test.mjs', status: 'M' }, { path: 'gone.js', status: 'D' }] });
+  const runner = await openVitest({
+    project: 'unit',
+    root,
+    changes: [
+      { path: 'source.js', status: 'M' },
+      { path: 'unit/sample.test.mjs', status: 'M' },
+      { path: 'gone.js', status: 'D' },
+    ],
+  });
   await runner.close();
 
   // assert
@@ -50,7 +86,9 @@ it('runs the real CLI with selected tests and leaves coverage artifacts untouche
   const before = await stat(join(root, 'coverage', 'sentinel'));
 
   // act
-  const result = await promisify(execFile)(process.execPath, [cli, 'unit', '--base', 'HEAD'], { cwd: root });
+  const result = await promisify(execFile)(process.execPath, [cli, 'unit', '--base', 'HEAD'], {
+    cwd: root,
+  });
 
   // assert
   expect(result.stdout).toContain('Affected unit: selected');
@@ -61,12 +99,21 @@ it('runs the real CLI with selected tests and leaves coverage artifacts untouche
 
 it('reports a deterministic dry run without executing a throwing test', async () => {
   // arrange
-  await writeFile(join(root, 'unit', 'sample.test.mjs'), "throw new Error('dry run executed a test');");
+  await writeFile(
+    join(root, 'unit', 'sample.test.mjs'),
+    "throw new Error('dry run executed a test');",
+  );
   const output = [];
 
   // act
-  await affectedRun(['unit', '--base', 'HEAD', '--dry-run'], { cwd: root, write: line => output.push(line) });
-  await affectedRun(['unit', '--base', 'HEAD', '--dry-run'], { cwd: root, write: line => output.push(line) });
+  await affectedRun(['unit', '--base', 'HEAD', '--dry-run'], {
+    cwd: root,
+    write: (line) => output.push(line),
+  });
+  await affectedRun(['unit', '--base', 'HEAD', '--dry-run'], {
+    cwd: root,
+    write: (line) => output.push(line),
+  });
 
   // assert
   expect(output[0]).toBe(output[1]);
@@ -81,18 +128,27 @@ it('propagates a real selected assertion failure', async () => {
   const act = promisify(execFile)(process.execPath, [cli, 'unit', '--base', 'HEAD'], { cwd: root });
 
   // assert
-  await expect(act).rejects.toMatchObject({ code: 1, stdout: expect.stringContaining('Affected unit: selected') });
+  await expect(act).rejects.toMatchObject({
+    code: 1,
+    stdout: expect.stringContaining('Affected unit: selected'),
+  });
 });
 
 it('propagates a real selected setup failure', async () => {
   // arrange
-  await writeFile(join(root, 'unit', 'sample.test.mjs'), "import {it,beforeAll} from 'vitest';beforeAll(()=>{throw new Error('setup failed')});it('sample',()=>{});");
+  await writeFile(
+    join(root, 'unit', 'sample.test.mjs'),
+    "import {it,beforeAll} from 'vitest';beforeAll(()=>{throw new Error('setup failed')});it('sample',()=>{});",
+  );
 
   // act
   const act = promisify(execFile)(process.execPath, [cli, 'unit', '--base', 'HEAD'], { cwd: root });
 
   // assert
-  await expect(act).rejects.toMatchObject({ code: 1, stderr: expect.stringContaining('setup failed') });
+  await expect(act).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining('setup failed'),
+  });
 });
 
 it('executes a missing-history full fallback without enabling configured coverage', async () => {
@@ -100,7 +156,10 @@ it('executes a missing-history full fallback without enabling configured coverag
   const output = [];
 
   // act
-  const result = await affectedRun(['integration', '--base', 'absent'], { cwd: root, write: line => output.push(line) });
+  const result = await affectedRun(['integration', '--base', 'absent'], {
+    cwd: root,
+    write: (line) => output.push(line),
+  });
 
   // assert
   expect(result).toBe(0);
@@ -158,14 +217,26 @@ it('returns command errors without claiming empty selection', async () => {
 });
 
 it.each([
-  ['SIGINT', 130], ['SIGTERM', 143],
+  ['SIGINT', 130],
+  ['SIGTERM', 143],
 ])('preserves %s cancellation through the runner boundary', async (signal, expected) => {
   // arrange
   const signals = new EventEmitter();
-  const ctx = { standalone: async () => {}, cancelCurrentRun: vi.fn(), runTestSpecifications: async () => { signals.emit(signal); return { testModules: [], unhandledErrors: [] }; } };
+  const ctx = {
+    standalone: async () => {},
+    cancelCurrentRun: vi.fn(),
+    runTestSpecifications: async () => {
+      signals.emit(signal);
+      return { testModules: [], unhandledErrors: [] };
+    },
+  };
 
   // act
-  const result = await runSelected(ctx, { specs: [{ moduleId: join(root, 'a.test.mjs') }], files: ['a.test.mjs'], root }, signals);
+  const result = await runSelected(
+    ctx,
+    { specs: [{ moduleId: join(root, 'a.test.mjs') }], files: ['a.test.mjs'], root },
+    signals,
+  );
 
   // assert
   expect(result).toBe(expected);
@@ -182,7 +253,11 @@ it.each([
   const ctx = { standalone: async () => {}, runTestSpecifications: async () => outcome };
 
   // act
-  const result = await runSelected(ctx, { specs: [{ moduleId: join(root, 'a.test.mjs') }], files: ['a.test.mjs'], root });
+  const result = await runSelected(ctx, {
+    specs: [{ moduleId: join(root, 'a.test.mjs') }],
+    files: ['a.test.mjs'],
+    root,
+  });
 
   // assert
   expect(result).toBe(expected);
@@ -200,11 +275,16 @@ it('rejects empty exact execution', async () => {
 });
 
 it.each([
-  ['tokens/luna.json', 'unit', 'M', true], ['src/components/button/button.css', 'integration', 'M', true],
-  ['src/components/button/button.css', 'unit', 'M', false], ['src/index.ts', 'unit', 'M', true],
-  ['docs/spatial-system.md', 'integration', 'M', true], ['unknown.asset', 'unit', 'M', true],
-  ['src/Button.tsx', 'unit', 'D', true], ['tests/integration/a.test.ts', 'unit', 'M', false],
-  ['tests/unit/new.test.ts', 'integration', '?', true], ['openspec/changes/a/proposal.md', 'unit', '?', false],
+  ['tokens/luna.json', 'unit', 'M', true],
+  ['src/components/button/button.css', 'integration', 'M', true],
+  ['src/components/button/button.css', 'unit', 'M', false],
+  ['src/index.ts', 'unit', 'M', true],
+  ['docs/spatial-system.md', 'integration', 'M', true],
+  ['unknown.asset', 'unit', 'M', true],
+  ['src/Button.tsx', 'unit', 'D', true],
+  ['tests/integration/a.test.ts', 'unit', 'M', false],
+  ['tests/unit/new.test.ts', 'integration', '?', true],
+  ['openspec/changes/a/proposal.md', 'unit', '?', false],
 ])('classifies runtime input %s in %s', (path, project, status, expected) => {
   // arrange
   const given = { path, status };
@@ -218,7 +298,13 @@ it.each([
 
 it('retains import-dependent tests in the requested project', () => {
   // arrange
-  const given = { project: 'unit', changes: [{ path: 'src/Field.tsx', status: 'M' }], inventory: ['select.test.ts', 'input.test.ts'], owners: new Map([['src/Field.tsx', ['select.test.ts', 'input.test.ts']]]), fallback: null };
+  const given = {
+    project: 'unit',
+    changes: [{ path: 'src/Field.tsx', status: 'M' }],
+    inventory: ['select.test.ts', 'input.test.ts'],
+    owners: new Map([['src/Field.tsx', ['select.test.ts', 'input.test.ts']]]),
+    fallback: null,
+  };
 
   // act
   const result = selectTests(given);
@@ -229,7 +315,13 @@ it('retains import-dependent tests in the requested project', () => {
 
 it('does not suppress owner discovery for a planning path imported as runtime data', () => {
   // arrange
-  const given = { project: 'unit', changes: [{ path: 'openspec/example.md', status: 'M' }], inventory: ['a.test.ts'], owners: new Map([['openspec/example.md', ['a.test.ts']]]), fallback: null };
+  const given = {
+    project: 'unit',
+    changes: [{ path: 'openspec/example.md', status: 'M' }],
+    inventory: ['a.test.ts'],
+    owners: new Map([['openspec/example.md', ['a.test.ts']]]),
+    fallback: null,
+  };
 
   // act
   const result = selectTests(given);
@@ -240,7 +332,13 @@ it('does not suppress owner discovery for a planning path imported as runtime da
 
 it('falls back when an owner map does not classify a runtime path', () => {
   // arrange
-  const given = { project: 'unit', changes: [{ path: 'unknown.ts', status: 'M' }], inventory: ['a.test.ts'], owners: new Map(), fallback: null };
+  const given = {
+    project: 'unit',
+    changes: [{ path: 'unknown.ts', status: 'M' }],
+    inventory: ['a.test.ts'],
+    owners: new Map(),
+    fallback: null,
+  };
 
   // act
   const result = selectTests(given);

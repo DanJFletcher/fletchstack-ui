@@ -3,19 +3,36 @@ import '../../../../tests/support/dom';
 import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { describe, expect, it } from 'vitest';
-import { Card, CardHeader, CardMedia, CardContent, CardTitle, CardDescription, CardFooter } from '../Card';
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from '../Card';
 import { Button } from '../../button/Button';
 
 describe('Card', () => {
   it('exposes a consumer-named article with composed content', () => {
     // arrange
-    const given = <Card as="article" aria-labelledby="title"><CardContent><CardTitle id="title">Collection</CardTitle><CardDescription>Shared components</CardDescription></CardContent></Card>;
+    const given = (
+      <Card as="article" aria-labelledby="title">
+        <CardContent>
+          <CardTitle id="title">Collection</CardTitle>
+          <CardDescription>Shared components</CardDescription>
+        </CardContent>
+      </Card>
+    );
 
     // act
     render(given);
 
     // assert
-    expect(screen.getByRole('article', { name: 'Collection' })).toHaveTextContent('Shared components');
+    expect(screen.getByRole('article', { name: 'Collection' })).toHaveTextContent(
+      'Shared components',
+    );
   });
 
   it('supports the heading level required by the surrounding document', () => {
@@ -31,7 +48,13 @@ describe('Card', () => {
 
   it('keeps actions in its footer accessible', () => {
     // arrange
-    const given = <Card><CardFooter divided><Button>Save collection</Button></CardFooter></Card>;
+    const given = (
+      <Card>
+        <CardFooter divided>
+          <Button>Save collection</Button>
+        </CardFooter>
+      </Card>
+    );
 
     // act
     render(given);
@@ -54,7 +77,13 @@ describe('Card', () => {
 
   it('preserves consumer media alternative text', () => {
     // arrange
-    const given = <Card><CardMedia><img src="/collection.svg" alt="Collection preview" /></CardMedia></Card>;
+    const given = (
+      <Card>
+        <CardMedia>
+          <img src="/collection.svg" alt="Collection preview" />
+        </CardMedia>
+      </Card>
+    );
 
     // act
     render(given);
@@ -65,7 +94,14 @@ describe('Card', () => {
 
   it('keeps a header and footer optional around arbitrary content', () => {
     // arrange
-    const given = <Card><CardHeader><CardTitle>Collection</CardTitle></CardHeader><CardFooter>Two themes</CardFooter></Card>;
+    const given = (
+      <Card>
+        <CardHeader>
+          <CardTitle>Collection</CardTitle>
+        </CardHeader>
+        <CardFooter>Two themes</CardFooter>
+      </Card>
+    );
 
     // act
     render(given);

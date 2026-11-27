@@ -1,5 +1,12 @@
 import { DataTable } from '../../../src/components/data-table/DataTable';
-import { paymentProps, type Payment, DataTableExample, ControlledDataTable, StockDataTable, RetryDataTable } from '../../../src/components/data-table/stories/data-table-examples';
+import {
+  paymentProps,
+  type Payment,
+  DataTableExample,
+  ControlledDataTable,
+  StockDataTable,
+  RetryDataTable,
+} from '../../../src/components/data-table/stories/data-table-examples';
 import type { DataTableProps } from '../../../src/components/data-table/types';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/data-table/data-table.css';

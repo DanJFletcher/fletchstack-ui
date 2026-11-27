@@ -1,2 +1,4 @@
 /* This width belongs to the demonstration parent, not CodeBlock. */
-.code-block-demo-narrow { inline-size: min(100%, 320px); }
+.code-block-demo-narrow {
+  inline-size: min(100%, 320px);
+}

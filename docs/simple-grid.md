@@ -8,10 +8,18 @@ import 'fletchstack-ui/styles.css';
 
 <Container>
   <SimpleGrid gap="group">
-    <Card><CardContent><CardTitle>First project</CardTitle></CardContent></Card>
-    <Card><CardContent><CardTitle>Second project</CardTitle></CardContent></Card>
+    <Card>
+      <CardContent>
+        <CardTitle>First project</CardTitle>
+      </CardContent>
+    </Card>
+    <Card>
+      <CardContent>
+        <CardTitle>Second project</CardTitle>
+      </CardContent>
+    </Card>
   </SimpleGrid>
-</Container>
+</Container>;
 ```
 
 ## API and ownership
@@ -36,7 +44,9 @@ Both themes share layout values. The component-specific semantic role `--fs-simp
   --fs-space-gap-related: 24px;
 }
 @media (max-width: 600px) {
-  .compact-collection { --fs-space-gap-related: 16px; }
+  .compact-collection {
+    --fs-space-gap-related: 16px;
+  }
 }
 ```
 

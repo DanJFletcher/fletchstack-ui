@@ -21,11 +21,11 @@ npm run test:e2e:storybook -- tests/e2e/components/card/Card.spec.ts tests/e2e/c
 npm run test:e2e:components -- tests/browser-harness/specs/card/Card.spec.ts tests/browser-harness/specs/icon/Icon.spec.ts --workers=3
 ```
 
-| Measurement | Storybook | Harness |
-| --- | ---: | ---: |
-| Passing cases | 24 | 24 |
-| Command wall time | 21.22s | 7.99s |
-| Runner duration | 20.5s | 7.4s |
+| Measurement       | Storybook | Harness |
+| ----------------- | --------: | ------: |
+| Passing cases     |        24 |      24 |
+| Command wall time |    21.22s |   7.99s |
+| Runner duration   |     20.5s |    7.4s |
 
 Observed wall time fell **62.3% (2.66×)**. This is one before/after observation with existing caches and ordinary managed-server startup, not a median, cold-start benchmark or full-suite speedup claim. Logs are under ignored `.verification/card-icon-migration/`.
 

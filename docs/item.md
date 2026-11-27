@@ -3,35 +3,48 @@
 A compact, composable content row inspired by [shadcn Item](https://ui.shadcn.com/docs/components/base/item). Use Card for larger surfaces and form fields for labeled inputs. Item registers no keyboard handlers, selection state, live region or motion.
 
 ```tsx
-import { Item, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions, Button, InboxIcon } from 'fletchstack-ui';
+import {
+  Item,
+  ItemMedia,
+  ItemContent,
+  ItemTitle,
+  ItemDescription,
+  ItemActions,
+  Button,
+  InboxIcon,
+} from 'fletchstack-ui';
 import 'fletchstack-ui/tokens.css';
 import 'fletchstack-ui/item.css';
 import 'fletchstack-ui/button.css';
 import 'fletchstack-ui/icon.css';
 
 <Item variant="outline">
-  <ItemMedia variant="icon"><InboxIcon /></ItemMedia>
+  <ItemMedia variant="icon">
+    <InboxIcon />
+  </ItemMedia>
   <ItemContent>
     <ItemTitle>Workspace invitation</ItemTitle>
     <ItemDescription>Maya invited you to Atlas.</ItemDescription>
   </ItemContent>
-  <ItemActions><Button onClick={review}>Review</Button></ItemActions>
-</Item>
+  <ItemActions>
+    <Button onClick={review}>Review</Button>
+  </ItemActions>
+</Item>;
 ```
 
 ## Public API
 
-| Export | Props and defaults | Native element |
-| --- | --- | --- |
-| Item | `variant="default"` (`default`, `outline`, `muted`); `size="default"` (`default`, `sm`, `xs`); `as="div"` or `as="a"` with required `href` | div or a |
-| ItemGroup | Native div props; vertical arrangement only | div |
-| ItemMedia | `variant="default"` (`default`, `icon`, `image`, `avatar`); caller-owned media and alternative text | div |
-| ItemContent | Growing content column | div |
-| ItemTitle | Emphasized text; consumers may supply their own heading | div |
-| ItemDescription | Supporting text; do not place block content inside it | p |
-| ItemActions | Wrapping action region | div |
-| ItemHeader, ItemFooter | Full-width wrapping introductory and trailing regions | div |
-| ItemSeparator | Decorative rule, hidden from assistive technology | div |
+| Export                 | Props and defaults                                                                                                                         | Native element |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------- |
+| Item                   | `variant="default"` (`default`, `outline`, `muted`); `size="default"` (`default`, `sm`, `xs`); `as="div"` or `as="a"` with required `href` | div or a       |
+| ItemGroup              | Native div props; vertical arrangement only                                                                                                | div            |
+| ItemMedia              | `variant="default"` (`default`, `icon`, `image`, `avatar`); caller-owned media and alternative text                                        | div            |
+| ItemContent            | Growing content column                                                                                                                     | div            |
+| ItemTitle              | Emphasized text; consumers may supply their own heading                                                                                    | div            |
+| ItemDescription        | Supporting text; do not place block content inside it                                                                                      | p              |
+| ItemActions            | Wrapping action region                                                                                                                     | div            |
+| ItemHeader, ItemFooter | Full-width wrapping introductory and trailing regions                                                                                      | div            |
+| ItemSeparator          | Decorative rule, hidden from assistive technology                                                                                          | div            |
 
 All parts forward native props, handlers, className, style and refs. Item forwards an HTMLElement ref, description an HTMLParagraphElement ref, and other regions an HTMLDivElement ref. Exported types: ItemProps, ItemVariant, ItemSize, ItemStyle, ItemPartProps, ItemMediaProps and ItemDescriptionProps. ItemStyle extends CSSProperties with scoped `--fs-*` overrides. Import combined styles.css instead of split styles when preferred.
 
@@ -39,7 +52,10 @@ All parts forward native props, handlers, className, style and refs. Item forwar
 
 ```tsx
 <Item as="a" href="/guide">
-  <ItemContent><ItemTitle>Read the guide</ItemTitle><ItemDescription>Get started.</ItemDescription></ItemContent>
+  <ItemContent>
+    <ItemTitle>Read the guide</ItemTitle>
+    <ItemDescription>Get started.</ItemDescription>
+  </ItemContent>
 </Item>
 ```
 

@@ -1,2 +1,9 @@
-.fs-app-content { box-sizing: border-box; min-block-size: 0; min-inline-size: 0; overflow: auto; }
-.fs-app-content[hidden] { display: none; }
+.fs-app-content {
+  box-sizing: border-box;
+  min-block-size: 0;
+  min-inline-size: 0;
+  overflow: auto;
+}
+.fs-app-content[hidden] {
+  display: none;
+}

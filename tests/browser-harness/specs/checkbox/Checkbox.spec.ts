@@ -21,13 +21,18 @@ for (const theme of ['corporate', 'luna'] as const) {
   test(`${theme} Checkbox reflows enlarged labels and descriptions`, async ({ page, mount }) => {
     await page.setViewportSize({ width: 320, height: 900 });
     await openScenario(mount, 'components-checkbox--long-labels', { theme });
-    await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
+    await page.addStyleTag({
+      content:
+        'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }',
+    });
     const checkbox = page.getByRole('checkbox');
 
     await checkbox.focus();
 
     await expect(checkbox).toBeFocused();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
     await expect(checkbox).toHaveCSS('width', '20px');
   });
 
@@ -37,7 +42,10 @@ for (const theme of ['corporate', 'luna'] as const) {
 
     await checkbox.hover();
 
-    await expect(checkbox).toHaveCSS('border-color', theme === 'corporate' ? 'rgb(180, 35, 24)' : 'rgb(255, 180, 171)');
+    await expect(checkbox).toHaveCSS(
+      'border-color',
+      theme === 'corporate' ? 'rgb(180, 35, 24)' : 'rgb(255, 180, 171)',
+    );
   });
 }
 
@@ -69,14 +77,17 @@ test('Checkbox matches the reference control, target, and label gap', async ({ p
   await expect(page.getByRole('checkbox')).toBeChecked();
 });
 
-test('Checkbox marks retain system contrast when hovered in forced colors', async ({ page, mount }) => {
+test('Checkbox marks retain system contrast when hovered in forced colors', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-checkbox--checked');
   await page.emulateMedia({ forcedColors: 'active' });
   const checkbox = page.getByRole('checkbox');
 
   await checkbox.hover();
 
-  const result = await checkbox.evaluate(element => {
+  const result = await checkbox.evaluate((element) => {
     const probe = document.createElement('span');
     probe.style.backgroundColor = 'Highlight';
     document.body.appendChild(probe);

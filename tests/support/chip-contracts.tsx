@@ -30,22 +30,42 @@ export function chipContracts(mount: (element: ReactElement) => unknown) {
     it('accepts noninteractive rich label content', () => {
       // arrange
       // act
-      mount(<Chip><strong>Design</strong> systems</Chip>);
+      mount(
+        <Chip>
+          <strong>Design</strong> systems
+        </Chip>,
+      );
       // assert
       expect(screen.getByText('Design').tagName).toBe('STRONG');
     });
-    it.each(['small', 'medium', 'large'] as const)('forwards %s sizing and native customization', size => {
-      // arrange
-      const ref = createRef<HTMLSpanElement>();
-      // act
-      mount(<Chip size={size} ref={ref} id="topic" title="Content topic" className="consumer" style={{ '--fs-chip-radius': '4px' }} aria-describedby="help" lang="fr">Design</Chip>);
-      // assert
-      expect(ref.current).toHaveClass('fs-chip', `fs-chip--${size}`, 'consumer');
-      expect(ref.current).toHaveAttribute('title', 'Content topic');
-      expect(ref.current).toHaveAttribute('aria-describedby', 'help');
-      expect(ref.current).toHaveStyle('--fs-chip-radius: 4px');
-      expect(ref.current).toHaveAttribute('lang', 'fr');
-    });
+    it.each(['small', 'medium', 'large'] as const)(
+      'forwards %s sizing and native customization',
+      (size) => {
+        // arrange
+        const ref = createRef<HTMLSpanElement>();
+        // act
+        mount(
+          <Chip
+            size={size}
+            ref={ref}
+            id="topic"
+            title="Content topic"
+            className="consumer"
+            style={{ '--fs-chip-radius': '4px' }}
+            aria-describedby="help"
+            lang="fr"
+          >
+            Design
+          </Chip>,
+        );
+        // assert
+        expect(ref.current).toHaveClass('fs-chip', `fs-chip--${size}`, 'consumer');
+        expect(ref.current).toHaveAttribute('title', 'Content topic');
+        expect(ref.current).toHaveAttribute('aria-describedby', 'help');
+        expect(ref.current).toHaveStyle('--fs-chip-radius: 4px');
+        expect(ref.current).toHaveAttribute('lang', 'fr');
+      },
+    );
     it('uses medium sizing when omitted', () => {
       // arrange
       const ref = createRef<HTMLSpanElement>();
@@ -54,29 +74,55 @@ export function chipContracts(mount: (element: ReactElement) => unknown) {
       // assert
       expect(ref.current).toHaveClass('fs-chip--medium');
     });
-    it.each([{ selected: false, expected: true }, { selected: true, expected: false }])('requests $expected from selected=$selected', ({ selected, expected }) => {
+    it.each([
+      { selected: false, expected: true },
+      { selected: true, expected: false },
+    ])('requests $expected from selected=$selected', ({ selected, expected }) => {
       // arrange
       const onSelect = vi.fn();
-      mount(<Chip selected={selected} onSelect={onSelect}>Design</Chip>);
+      mount(
+        <Chip selected={selected} onSelect={onSelect}>
+          Design
+        </Chip>,
+      );
       // act
       fireEvent.click(screen.getByRole('button', { name: 'Design' }));
       // assert
       expect(onSelect).toHaveBeenCalledWith(expected);
-      expect(screen.getByRole('button', { name: 'Design' })).toHaveAttribute('aria-pressed', String(selected));
+      expect(screen.getByRole('button', { name: 'Design' })).toHaveAttribute(
+        'aria-pressed',
+        String(selected),
+      );
     });
     it('keeps the selection mark decorative', () => {
       // arrange
       // act
-      mount(<Chip selected onSelect={() => {}}>Design</Chip>);
+      mount(
+        <Chip selected onSelect={() => {}}>
+          Design
+        </Chip>,
+      );
       // assert
-      expect(screen.getByRole('button', { name: 'Design' })).toHaveAttribute('aria-pressed', 'true');
+      expect(screen.getByRole('button', { name: 'Design' })).toHaveAttribute(
+        'aria-pressed',
+        'true',
+      );
       expect(screen.queryByRole('img')).not.toBeInTheDocument();
     });
     it('requests removal without selecting', () => {
       // arrange
       const onSelect = vi.fn();
       const onRemove = vi.fn();
-      mount(<Chip selected={false} onSelect={onSelect} onRemove={onRemove} removeLabel="Supprimer Design">Design</Chip>);
+      mount(
+        <Chip
+          selected={false}
+          onSelect={onSelect}
+          onRemove={onRemove}
+          removeLabel="Supprimer Design"
+        >
+          Design
+        </Chip>,
+      );
       // act
       fireEvent.click(screen.getByRole('button', { name: 'Supprimer Design' }));
       // assert
@@ -86,7 +132,11 @@ export function chipContracts(mount: (element: ReactElement) => unknown) {
     it('selects without requesting removal', () => {
       // arrange
       const onRemove = vi.fn();
-      mount(<Chip selected={false} onSelect={() => {}} onRemove={onRemove} removeLabel="Remove Design">Design</Chip>);
+      mount(
+        <Chip selected={false} onSelect={() => {}} onRemove={onRemove} removeLabel="Remove Design">
+          Design
+        </Chip>,
+      );
       // act
       fireEvent.click(screen.getByRole('button', { name: 'Design' }));
       // assert
@@ -95,15 +145,28 @@ export function chipContracts(mount: (element: ReactElement) => unknown) {
     it('renders action buttons as siblings with safe form defaults', () => {
       // arrange
       // act
-      mount(<Chip selected={false} onSelect={() => {}} onRemove={() => {}} removeLabel="Remove Design">Design</Chip>);
+      mount(
+        <Chip selected={false} onSelect={() => {}} onRemove={() => {}} removeLabel="Remove Design">
+          Design
+        </Chip>,
+      );
       // assert
-      expect(screen.getByRole('button', { name: 'Design' }).parentElement).toBe(screen.getByRole('button', { name: 'Remove Design' }).parentElement);
-      expect(screen.getByRole('button', { name: 'Remove Design' })).toHaveAttribute('type', 'button');
+      expect(screen.getByRole('button', { name: 'Design' }).parentElement).toBe(
+        screen.getByRole('button', { name: 'Remove Design' }).parentElement,
+      );
+      expect(screen.getByRole('button', { name: 'Remove Design' })).toHaveAttribute(
+        'type',
+        'button',
+      );
       expect(screen.getByRole('button', { name: 'Design' })).toHaveAttribute('type', 'button');
     });
     it('lets the parent own whether a removable chip stays mounted', () => {
       // arrange
-      mount(<Chip onRemove={() => {}} removeLabel="Remove Design">Design</Chip>);
+      mount(
+        <Chip onRemove={() => {}} removeLabel="Remove Design">
+          Design
+        </Chip>,
+      );
       // act
       fireEvent.click(screen.getByRole('button', { name: 'Remove Design' }));
       // assert
@@ -113,7 +176,11 @@ export function chipContracts(mount: (element: ReactElement) => unknown) {
       // arrange
       const onSelect = vi.fn();
       const onRemove = vi.fn();
-      mount(<Chip disabled selected onSelect={onSelect} onRemove={onRemove} removeLabel="Remove Design">Design</Chip>);
+      mount(
+        <Chip disabled selected onSelect={onSelect} onRemove={onRemove} removeLabel="Remove Design">
+          Design
+        </Chip>,
+      );
       // act
       fireEvent.click(screen.getByRole('button', { name: 'Design' }));
       fireEvent.click(screen.getByRole('button', { name: 'Remove Design' }));
@@ -136,13 +203,19 @@ export function chipContracts(mount: (element: ReactElement) => unknown) {
       // arrange
       const ref = createRef<HTMLSpanElement>();
       // act
-      mount(<Chip hidden ref={ref}>Design</Chip>);
+      mount(
+        <Chip hidden ref={ref}>
+          Design
+        </Chip>,
+      );
       // assert
       expect(ref.current).toHaveAttribute('hidden');
     });
     it('preserves its label against untyped raw markup', () => {
       // arrange
-      const unsafe = { dangerouslySetInnerHTML: { __html: 'Wrong content' } } as unknown as ChipProps;
+      const unsafe = {
+        dangerouslySetInnerHTML: { __html: 'Wrong content' },
+      } as unknown as ChipProps;
       // act
       mount(<Chip {...unsafe}>Design</Chip>);
       // assert
@@ -150,9 +223,13 @@ export function chipContracts(mount: (element: ReactElement) => unknown) {
       expect(screen.queryByText('Wrong content')).not.toBeInTheDocument();
     });
     it.each([
-      { selected: true }, { selected: false }, { onSelect: () => {} },
-      { onRemove: () => {} }, { removeLabel: 'Remove tag' }, { onRemove: () => {}, removeLabel: '  ' },
-    ])('rejects incomplete action configuration $0', props => {
+      { selected: true },
+      { selected: false },
+      { onSelect: () => {} },
+      { onRemove: () => {} },
+      { removeLabel: 'Remove tag' },
+      { onRemove: () => {}, removeLabel: '  ' },
+    ])('rejects incomplete action configuration $0', (props) => {
       // arrange
       const unsafe = props as unknown as ChipProps;
       // act

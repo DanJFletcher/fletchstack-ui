@@ -2,7 +2,10 @@ import { expect, test } from '../../fixtures/test';
 import { openScenario } from '../../fixtures/scenario';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} supports the full keyboard flow without automatic advancement`, async ({ page, mount }) => {
+  test(`${theme} supports the full keyboard flow without automatic advancement`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-questionnaire--interactive', { theme });
     await page.keyboard.press('Tab');
     const timeline = page.getByRole('radio', { name: 'Tool call timeline' });
@@ -13,7 +16,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(timeline.locator('..')).toHaveCSS('outline-style', 'solid');
     await page.getByRole('textbox', { name: 'Another feature' }).focus();
     await page.keyboard.press('Enter');
-    await expect(page.getByRole('group', { name: 'What should every progress update include?' })).toBeFocused();
+    await expect(
+      page.getByRole('group', { name: 'What should every progress update include?' }),
+    ).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(page.getByRole('checkbox', { name: 'Progress' })).toBeFocused();
     await page.keyboard.press('Space');
@@ -23,15 +28,26 @@ for (const theme of ['corporate', 'luna'] as const) {
     await page.getByRole('button', { name: 'Save plan' }).click();
     await expect(page.getByText('Plan saved.')).toBeVisible();
   });
-  test(`${theme} reflows long text at 320px with enlarged typography and spacing`, async ({ page, mount }) => {
+  test(`${theme} reflows long text at 320px with enlarged typography and spacing`, async ({
+    page,
+    mount,
+  }) => {
     await page.setViewportSize({ width: 320, height: 900 });
     await openScenario(mount, 'components-questionnaire--playground', { theme });
-    await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }' });
+    await page.addStyleTag({
+      content:
+        'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }',
+    });
     await expect(page.getByRole('button', { name: 'Next' })).toBeVisible();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
   });
 }
-test('native radio arrows select within one step and shortcuts pause inside custom fields', async ({ page, mount }) => {
+test('native radio arrows select within one step and shortcuts pause inside custom fields', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-questionnaire--shortcuts');
   await page.keyboard.press('Tab');
   const first = page.getByRole('radio', { name: 'Build components' });
@@ -47,7 +63,10 @@ test('native radio arrows select within one step and shortcuts pause inside cust
   await expect(second).not.toBeChecked();
   await expect(page.getByRole('textbox')).toHaveValue('b');
 });
-test('Enter in a multiline answer preserves the question and inserts a newline', async ({ page, mount }) => {
+test('Enter in a multiline answer preserves the question and inserts a newline', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-questionnaire--text');
   const text = page.getByRole('textbox', { name: 'Your feedback' });
   await text.fill('First line');
@@ -56,20 +75,28 @@ test('Enter in a multiline answer preserves the question and inserts a newline',
   await expect(text).toHaveValue('First line\nSecond line');
   await expect(page.getByRole('button', { name: 'Submit' })).toBeVisible();
 });
-test('pending persistence locks navigation, then rejection retains drafts for retry', async ({ page, mount }) => {
+test('pending persistence locks navigation, then rejection retains drafts for retry', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-questionnaire--pending');
   await page.getByRole('button', { name: 'Save plan' }).dblclick();
   await expect(page.getByRole('form')).toHaveAttribute('aria-busy', 'true');
   await expect(page.getByRole('button', { name: 'Previous' })).toBeDisabled();
   await expect(page.getByRole('radio', { name: 'Start now' })).toBeDisabled();
   await page.getByRole('button', { name: 'Reject save' }).click();
-  await expect(page.getByRole('alert')).toHaveText('Unable to save your answers. Please try again.');
+  await expect(page.getByRole('alert')).toHaveText(
+    'Unable to save your answers. Please try again.',
+  );
   await expect(page.getByRole('radio', { name: 'Start now' })).toBeChecked();
   await page.getByRole('button', { name: 'Save plan' }).click();
   await page.getByRole('button', { name: 'Resolve save' }).click();
   await expect(page.getByText('Plan saved.')).toBeVisible();
 });
-test('controlled consumer accepts changes while explicit skip advances only one question', async ({ page, mount }) => {
+test('controlled consumer accepts changes while explicit skip advances only one question', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-questionnaire--controlled');
   await page.getByRole('radio', { name: 'Approval checkpoints' }).check();
   await page.getByRole('button', { name: 'Next' }).click();
@@ -88,9 +115,15 @@ test('native reset restores the saved checkpoint and original answers', async ({
 });
 test('independent reference checkpoints inherit the enclosing theme', async ({ page, mount }) => {
   await openScenario(mount, 'components-questionnaire--composition');
-  const corporate = await page.getByRole('form').first().evaluate(node => getComputedStyle(node).backgroundColor);
+  const corporate = await page
+    .getByRole('form')
+    .first()
+    .evaluate((node) => getComputedStyle(node).backgroundColor);
   await openScenario(mount, 'components-questionnaire--composition', { theme: 'luna' });
-  const luna = await page.getByRole('form').first().evaluate(node => getComputedStyle(node).backgroundColor);
+  const luna = await page
+    .getByRole('form')
+    .first()
+    .evaluate((node) => getComputedStyle(node).backgroundColor);
   expect(luna).not.toBe(corporate);
   await expect(page.getByRole('form')).toHaveCount(3);
 });

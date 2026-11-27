@@ -9,9 +9,13 @@ import 'fletchstack-ui/accordion.css';
 
 const items: AccordionItem[] = [
   { id: 'join', title: 'Who can join?', content: 'Anyone invited to your team.' },
-  { id: 'invite', title: 'How do I invite someone?', content: <a href="#settings">Team settings</a> },
+  {
+    id: 'invite',
+    title: 'How do I invite someone?',
+    content: <a href="#settings">Team settings</a>,
+  },
 ];
-<Accordion items={items} label="Team FAQ" defaultOpenItems={['invite']} headingLevel={3} />
+<Accordion items={items} label="Team FAQ" defaultOpenItems={['invite']} headingLevel={3} />;
 ```
 
 Use `styles.css` instead of individual CSS imports when including the whole library. Existing ChevronDown artwork is sized/stroked by Accordion's scoped CSS; separate icon CSS is unnecessary.

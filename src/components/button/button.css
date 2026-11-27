@@ -20,9 +20,14 @@
 }
 
 /* Preserve native hiding, including browser-managed hidden states. */
-.fs-button:not([hidden]) { display: inline-flex; }
+.fs-button:not([hidden]) {
+  display: inline-flex;
+}
 
-.fs-button > * { min-inline-size: 0; max-inline-size: 100%; }
+.fs-button > * {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
 
 .fs-button:focus-visible {
   outline: var(--fs-button-focus-width) solid var(--fs-button-focus-color);
@@ -115,7 +120,14 @@
 }
 
 @media (forced-colors: active) {
-  .fs-button { border-color: ButtonText; }
-  .fs-button:disabled { color: GrayText; border-color: GrayText; }
-  .fs-button:focus-visible { outline-color: Highlight; }
+  .fs-button {
+    border-color: ButtonText;
+  }
+  .fs-button:disabled {
+    color: GrayText;
+    border-color: GrayText;
+  }
+  .fs-button:focus-visible {
+    outline-color: Highlight;
+  }
 }

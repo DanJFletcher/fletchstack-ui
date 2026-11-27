@@ -13,7 +13,13 @@ describe('focus-safe placement', tooltipPositionContracts);
 describe('Tooltip', () => tooltipContracts(render));
 it('rejects a Fragment that cannot receive the description relationship', () => {
   // arrange
-  const element = <Tooltip content="Help"><><button>Help</button></></Tooltip>;
+  const element = (
+    <Tooltip content="Help">
+      <>
+        <button>Help</button>
+      </>
+    </Tooltip>
+  );
 
   // act
   const act = () => renderToString(element);

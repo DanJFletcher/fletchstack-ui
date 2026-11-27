@@ -20,11 +20,11 @@ Accepted specs are empty. Related completed changes remain unarchived, including
 
 Use these script contracts:
 
-| Command | Invocation |
-| --- | --- |
-| `test:unit` | `vitest run --project unit --coverage.enabled=false` |
-| `test:integration` | `vitest run --project integration --coverage.enabled=false` |
-| `test:unit:coverage` | `vitest run --project unit --coverage --coverage.reportsDirectory=coverage/unit` |
+| Command                     | Invocation                                                                                     |
+| --------------------------- | ---------------------------------------------------------------------------------------------- |
+| `test:unit`                 | `vitest run --project unit --coverage.enabled=false`                                           |
+| `test:integration`          | `vitest run --project integration --coverage.enabled=false`                                    |
+| `test:unit:coverage`        | `vitest run --project unit --coverage --coverage.reportsDirectory=coverage/unit`               |
 | `test:integration:coverage` | `vitest run --project integration --coverage --coverage.reportsDirectory=coverage/integration` |
 
 Switch CI to both explicit coverage commands in the same implementation increment. Preserve the existing affected commands and generic `npm test` behavior. Keep command forwarding for file filters and worker options; final-gate instructions require the complete project, without filters. No custom argument wrapper is necessary.

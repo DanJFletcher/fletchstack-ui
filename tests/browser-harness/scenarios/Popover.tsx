@@ -1,4 +1,11 @@
-import { PopoverDemo, PopoverExample, ControlledPopover, EdgePopover, PopoverInDialog, PopoverOverrides } from '../../../src/components/popover/stories/popover-examples';
+import {
+  PopoverDemo,
+  PopoverExample,
+  ControlledPopover,
+  EdgePopover,
+  PopoverInDialog,
+  PopoverOverrides,
+} from '../../../src/components/popover/stories/popover-examples';
 import type { PopoverProps } from '../../../src/components/popover/types';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/popover/popover.css';

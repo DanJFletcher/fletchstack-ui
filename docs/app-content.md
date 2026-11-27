@@ -4,17 +4,19 @@ The independently scrolling content region of [AppShell](./app-shell.md). Use on
 
 ```tsx
 <AppShell>
-  <AppContent><YourPage /></AppContent>
+  <AppContent>
+    <YourPage />
+  </AppContent>
   <BottomNavigation aria-label="Primary">{/* Destination items */}</BottomNavigation>
 </AppShell>
 ```
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| children | ReactNode | required |
-| as | 'main' or 'div' | 'main' |
-| style | AppContentStyle: CSSProperties plus `--fs-*` overrides | — |
-| native props and ref | HTMLElement | forwarded |
+| Prop                 | Type                                                   | Default   |
+| -------------------- | ------------------------------------------------------ | --------- |
+| children             | ReactNode                                              | required  |
+| as                   | 'main' or 'div'                                        | 'main'    |
+| style                | AppContentStyle: CSSProperties plus `--fs-*` overrides | —         |
+| native props and ref | HTMLElement                                            | forwarded |
 
 The default is the page's main landmark. Choose `as="div"` inside an existing main landmark, including Storybook's preview. The component owns overflow and zero minimum sizing, but no default content padding. Use Container, Section, or native layout inside it for spacing.
 

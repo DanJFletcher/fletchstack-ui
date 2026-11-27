@@ -6,7 +6,16 @@ import { Tabs } from '../../src/components/tabs/Tabs';
 import type { TabsItem } from '../../src/components/tabs/types';
 
 export const tabItems: TabsItem[] = [
-  { id: 'overview', label: 'Overview', content: <><h2>Workspace overview</h2><input aria-label="Draft" defaultValue="Initial" /></> },
+  {
+    id: 'overview',
+    label: 'Overview',
+    content: (
+      <>
+        <h2>Workspace overview</h2>
+        <input aria-label="Draft" defaultValue="Initial" />
+      </>
+    ),
+  },
   { id: 'activity', label: 'Activity', content: <a href="#activity">Read activity</a> },
   { id: 'settings', label: 'Settings', content: 'Settings panel', disabled: true },
 ];
@@ -27,7 +36,17 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
     const ref = createRef<HTMLDivElement>();
 
     // act
-    render(<Tabs ref={ref} label="Workspace" items={tabItems} id="workspace" className="custom" data-testid="root" style={{ '--fs-tabs-gap': '12px' }} />);
+    render(
+      <Tabs
+        ref={ref}
+        label="Workspace"
+        items={tabItems}
+        id="workspace"
+        className="custom"
+        data-testid="root"
+        style={{ '--fs-tabs-gap': '12px' }}
+      />,
+    );
 
     // assert
     expect(ref.current).toBe(screen.getByTestId('root'));
@@ -44,14 +63,19 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
     render(given);
 
     // assert
-    expect(within(screen.getByRole('tablist', { name: 'Workspace' })).getAllByRole('tab')).toHaveLength(3);
+    expect(
+      within(screen.getByRole('tablist', { name: 'Workspace' })).getAllByRole('tab'),
+    ).toHaveLength(3);
     expect(currentTab()).toHaveTextContent('Overview');
     expect(screen.getByRole('tab', { name: 'Settings' })).toBeDisabled();
   });
 
-  it.each([{ defaultValue: 'activity', expected: 'Activity' }, { defaultValue: 'unavailable', expected: 'Overview' }, { defaultValue: 'settings', expected: 'Overview' }])('resolves default selection $defaultValue', ({ defaultValue, expected }) => {
+  it.each([
+    { defaultValue: 'activity', expected: 'Activity' },
+    { defaultValue: 'unavailable', expected: 'Overview' },
+    { defaultValue: 'settings', expected: 'Overview' },
+  ])('resolves default selection $defaultValue', ({ defaultValue, expected }) => {
     // arrange
-
 
     // act
     render(<Tabs label="Workspace" items={tabItems} defaultValue={defaultValue} />);
@@ -62,8 +86,11 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
 
   it('requests one change from a controlled pointer activation', async () => {
     // arrange
-    const user = userEvent.setup(), onValueChange = vi.fn();
-    render(<Tabs label="Workspace" items={tabItems} value="overview" onValueChange={onValueChange} />);
+    const user = userEvent.setup(),
+      onValueChange = vi.fn();
+    render(
+      <Tabs label="Workspace" items={tabItems} value="overview" onValueChange={onValueChange} />,
+    );
 
     // act
     await user.click(screen.getByRole('tab', { name: 'Activity' }));
@@ -88,7 +115,8 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
 
   it('ignores disabled and already-selected pointer activation', async () => {
     // arrange
-    const user = userEvent.setup(), onValueChange = vi.fn();
+    const user = userEvent.setup(),
+      onValueChange = vi.fn();
     render(<Tabs label="Workspace" items={tabItems} onValueChange={onValueChange} />);
     await user.click(screen.getByRole('tab', { name: 'Overview' }));
 
@@ -114,8 +142,16 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
 
   it('keeps manual arrow focus separate from selection', async () => {
     // arrange
-    const user = userEvent.setup(), onValueChange = vi.fn();
-    render(<Tabs label="Workspace" items={tabItems} activationMode="manual" onValueChange={onValueChange} />);
+    const user = userEvent.setup(),
+      onValueChange = vi.fn();
+    render(
+      <Tabs
+        label="Workspace"
+        items={tabItems}
+        activationMode="manual"
+        onValueChange={onValueChange}
+      />,
+    );
     await user.tab();
 
     // act
@@ -127,10 +163,19 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
     expect(onValueChange).not.toHaveBeenCalled();
   });
 
-  it.each(['{Enter}', ' '])('commits manual keyboard activation with %s once', async key => {
+  it.each(['{Enter}', ' '])('commits manual keyboard activation with %s once', async (key) => {
     // arrange
-    const user = userEvent.setup(), onValueChange = vi.fn();
-    render(<Tabs label="Workspace" items={tabItems} value="overview" activationMode="manual" onValueChange={onValueChange} />);
+    const user = userEvent.setup(),
+      onValueChange = vi.fn();
+    render(
+      <Tabs
+        label="Workspace"
+        items={tabItems}
+        value="overview"
+        activationMode="manual"
+        onValueChange={onValueChange}
+      />,
+    );
     await user.tab();
     await user.keyboard('{ArrowRight}');
 
@@ -173,8 +218,21 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
   it('settles uncontrolled fallback without reviving a reintroduced ID', () => {
     // arrange
     const onValueChange = vi.fn();
-    const view = render(<Tabs label="Workspace" items={tabItems} defaultValue="activity" onValueChange={onValueChange} />);
-    view.rerender(<Tabs label="Workspace" items={tabItems.filter(item => item.id !== 'activity')} onValueChange={onValueChange} />);
+    const view = render(
+      <Tabs
+        label="Workspace"
+        items={tabItems}
+        defaultValue="activity"
+        onValueChange={onValueChange}
+      />,
+    );
+    view.rerender(
+      <Tabs
+        label="Workspace"
+        items={tabItems.filter((item) => item.id !== 'activity')}
+        onValueChange={onValueChange}
+      />,
+    );
 
     // act
     view.rerender(<Tabs label="Workspace" items={tabItems} onValueChange={onValueChange} />);
@@ -187,31 +245,48 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
   it('restores controlled authority when a disabled selected ID becomes enabled', () => {
     // arrange
     const onValueChange = vi.fn();
-    const view = render(<Tabs label="Workspace" items={tabItems} value="settings" onValueChange={onValueChange} />);
+    const view = render(
+      <Tabs label="Workspace" items={tabItems} value="settings" onValueChange={onValueChange} />,
+    );
 
     // act
-    view.rerender(<Tabs label="Workspace" items={tabItems.map(item => ({ ...item, disabled: false }))} value="settings" onValueChange={onValueChange} />);
+    view.rerender(
+      <Tabs
+        label="Workspace"
+        items={tabItems.map((item) => ({ ...item, disabled: false }))}
+        value="settings"
+        onValueChange={onValueChange}
+      />,
+    );
 
     // assert
     expect(currentTab()).toHaveTextContent('Settings');
     expect(onValueChange).not.toHaveBeenCalled();
   });
 
-  it.each([{ items: [] }, { items: tabItems.map(item => ({ ...item, disabled: true })) }])('shows no selected panel without enabled items', ({ items }) => {
-    // arrange
-    const given = <Tabs label="Workspace" items={items} />;
+  it.each([{ items: [] }, { items: tabItems.map((item) => ({ ...item, disabled: true })) }])(
+    'shows no selected panel without enabled items',
+    ({ items }) => {
+      // arrange
+      const given = <Tabs label="Workspace" items={items} />;
 
-    // act
-    render(given);
+      // act
+      render(given);
 
-    // assert
-    expect(screen.queryByRole('tab', { selected: true })).not.toBeInTheDocument();
-    expect(screen.queryByRole('tabpanel')).not.toBeInTheDocument();
-  });
+      // assert
+      expect(screen.queryByRole('tab', { selected: true })).not.toBeInTheDocument();
+      expect(screen.queryByRole('tabpanel')).not.toBeInTheDocument();
+    },
+  );
 
   it('keeps generated relationships separate across instances', () => {
     // arrange
-    const given = <><Tabs label="First" items={tabItems} /><Tabs label="Second" items={tabItems} /></>;
+    const given = (
+      <>
+        <Tabs label="First" items={tabItems} />
+        <Tabs label="Second" items={tabItems} />
+      </>
+    );
 
     // act
     render(given);
@@ -219,12 +294,16 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
     // assert
     const tabs = screen.getAllByRole('tab', { name: 'Overview' });
     expect(tabs[0]?.id).not.toBe(tabs[1]?.id);
-    expect(document.getElementById(tabs[0]!.getAttribute('aria-controls')!)).toHaveAttribute('aria-labelledby', tabs[0]!.id);
+    expect(document.getElementById(tabs[0]!.getAttribute('aria-controls')!)).toHaveAttribute(
+      'aria-labelledby',
+      tabs[0]!.id,
+    );
   });
 
   it('preserves a consumer root handler', async () => {
     // arrange
-    const user = userEvent.setup(), onClick = vi.fn();
+    const user = userEvent.setup(),
+      onClick = vi.fn();
     render(<Tabs label="Workspace" items={tabItems} onClick={onClick} />);
 
     // act
@@ -268,11 +347,21 @@ export function tabsContracts(render: (element: ReactElement) => RenderResult) {
 
   it('leaves focus in an unrelated control after a background fallback', () => {
     // arrange
-    const view = render(<><input aria-label="Elsewhere" /><Tabs label="Workspace" items={tabItems} defaultValue="activity" /></>);
+    const view = render(
+      <>
+        <input aria-label="Elsewhere" />
+        <Tabs label="Workspace" items={tabItems} defaultValue="activity" />
+      </>,
+    );
     act(() => screen.getByRole('textbox', { name: 'Elsewhere' }).focus());
 
     // act
-    view.rerender(<><input aria-label="Elsewhere" /><Tabs label="Workspace" items={tabItems.filter(item => item.id !== 'activity')} /></>);
+    view.rerender(
+      <>
+        <input aria-label="Elsewhere" />
+        <Tabs label="Workspace" items={tabItems.filter((item) => item.id !== 'activity')} />
+      </>,
+    );
 
     // assert
     expect(screen.getByRole('textbox', { name: 'Elsewhere' })).toHaveFocus();

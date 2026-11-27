@@ -3,7 +3,7 @@ import '../../../../tests/support/dom';
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import { multiSelectContracts } from '../../../../tests/support/multi-select-contracts';
-describe('fresh client rendering', () => multiSelectContracts(element => render(element)));
+describe('fresh client rendering', () => multiSelectContracts((element) => render(element)));
 
 import { MultiSelect } from '../index';
 import { renderToString } from 'react-dom/server';

@@ -2,7 +2,10 @@ import { expect, test } from '../../fixtures/test';
 import { openScenario } from '../../fixtures/scenario';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} Spinner rotates steadily and stops under reduced motion while retaining text`, async ({ page, mount }) => {
+  test(`${theme} Spinner rotates steadily and stops under reduced motion while retaining text`, async ({
+    page,
+    mount,
+  }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await openScenario(mount, 'components-spinner--playground', { theme });
     const status = page.getByRole('status');
@@ -15,58 +18,93 @@ for (const theme of ['corporate', 'luna'] as const) {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await expect(graphic).toHaveCSS('animation-name', 'none');
     await expect(status.getByText('Loading projects…')).toBeVisible();
-    await expect(graphic.evaluate(element => element.getAnimations().length)).resolves.toBe(0);
+    await expect(graphic.evaluate((element) => element.getAnimations().length)).resolves.toBe(0);
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await expect(graphic).toHaveCSS('animation-name', 'fs-spinner-rotate');
   });
 
-  test(`${theme} Spinner inherits button color without duplicating its accessible name`, async ({ page, mount }) => {
+  test(`${theme} Spinner inherits button color without duplicating its accessible name`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-spinner--decorative', { theme });
     const button = page.getByRole('button', { name: 'Saving…' });
     await expect(page.getByRole('status')).toHaveCount(0);
-    const paint = await button.evaluate(element => ({ text: getComputedStyle(element).color, artwork: getComputedStyle(element.querySelector('svg')!).stroke }));
+    const paint = await button.evaluate((element) => ({
+      text: getComputedStyle(element).color,
+      artwork: getComputedStyle(element.querySelector('svg')!).stroke,
+    }));
     expect(paint.artwork).toBe(paint.text);
     await expect(button.locator('svg')).toHaveAttribute('aria-hidden', 'true');
     await expect(button).toHaveAttribute('aria-busy', 'true');
   });
 
-  test(`${theme} Spinner reflows enlarged and spaced status text at 320px`, async ({ page, mount }) => {
+  test(`${theme} Spinner reflows enlarged and spaced status text at 320px`, async ({
+    page,
+    mount,
+  }) => {
     await page.setViewportSize({ width: 320, height: 900 });
     await openScenario(mount, 'components-spinner--long-label', { theme });
-    await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
+    await page.addStyleTag({
+      content:
+        'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }',
+    });
     await expect(page.getByRole('status')).toBeVisible();
     await expect(page.getByRole('status').locator('svg')).toHaveCSS('width', '20px');
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
   });
 }
 
 for (const override of [
   { name: 'legacy numeric', css: '--fs-spinner-rotation-seconds:2', duration: '2s' },
   { name: 'shared duration', css: '--fs-motion-duration-spinner:500ms', duration: '0.5s' },
-  { name: 'combined', css: '--fs-motion-duration-spinner:500ms;--fs-spinner-rotation-seconds:2', duration: '1s' },
+  {
+    name: 'combined',
+    css: '--fs-motion-duration-spinner:500ms;--fs-spinner-rotation-seconds:2',
+    duration: '1s',
+  },
 ]) {
-  test(`Spinner supports ${override.name} customization without bypassing reduced motion`, async ({ page, mount }) => {
+  test(`Spinner supports ${override.name} customization without bypassing reduced motion`, async ({
+    page,
+    mount,
+  }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await openScenario(mount, 'components-spinner--playground');
     await page.addStyleTag({ content: `.fs-spinner {${override.css}}` });
     const graphic = page.getByRole('status').locator('svg');
     await expect(graphic).toHaveCSS('animation-duration', override.duration);
     // Preview markers cannot override real preference in a consumer harness.
-    await page.evaluate(() => { document.documentElement.dataset['fsPreviewMotion'] = 'full'; });
+    await page.evaluate(() => {
+      document.documentElement.dataset['fsPreviewMotion'] = 'full';
+    });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await expect(graphic).toHaveCSS('animation-name', 'none');
   });
 }
 
-test('Spinner renders 16, 20, and 24px artwork without adding status duplicates', async ({ page, mount }) => {
+test('Spinner renders 16, 20, and 24px artwork without adding status duplicates', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-spinner--sizes');
   await expect(page.getByRole('status')).toHaveCount(0);
-  await expect(page.getByRole('heading', { name: 'small', exact: true }).locator('..').locator('svg')).toHaveCSS('width', '16px');
-  await expect(page.getByRole('heading', { name: 'medium', exact: true }).locator('..').locator('svg')).toHaveCSS('width', '20px');
-  await expect(page.getByRole('heading', { name: 'large', exact: true }).locator('..').locator('svg')).toHaveCSS('width', '24px');
+  await expect(
+    page.getByRole('heading', { name: 'small', exact: true }).locator('..').locator('svg'),
+  ).toHaveCSS('width', '16px');
+  await expect(
+    page.getByRole('heading', { name: 'medium', exact: true }).locator('..').locator('svg'),
+  ).toHaveCSS('width', '20px');
+  await expect(
+    page.getByRole('heading', { name: 'large', exact: true }).locator('..').locator('svg'),
+  ).toHaveCSS('width', '24px');
 });
 
-test('Spinner removal follows pending state with one persistent region announcement', async ({ page, mount }) => {
+test('Spinner removal follows pending state with one persistent region announcement', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-spinner--content-region');
   const region = page.getByRole('region', { name: 'Activity', exact: true });
   await expect(page.getByRole('status')).toHaveCount(1);
@@ -80,7 +118,10 @@ test('Spinner removal follows pending state with one persistent region announcem
   await expect(page.getByRole('button', { name: 'Reload activity' })).toBeEnabled();
 });
 
-test('Spinner adds no keyboard focus stop while adjacent actions remain usable', async ({ page, mount }) => {
+test('Spinner adds no keyboard focus stop while adjacent actions remain usable', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-spinner--content-region');
   await page.getByRole('button', { name: 'Complete loading' }).focus();
   await page.keyboard.press('Tab');
@@ -90,7 +131,10 @@ test('Spinner adds no keyboard focus stop while adjacent actions remain usable',
   await expect(page.locator('.fs-spinner svg')).toHaveAttribute('focusable', 'false');
 });
 
-test('Spinner retains a visible static arc and status in forced colors', async ({ page, mount }) => {
+test('Spinner retains a visible static arc and status in forced colors', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-spinner--playground');
   await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
   await expect(page.getByRole('status')).toBeVisible();
@@ -98,7 +142,10 @@ test('Spinner retains a visible static arc and status in forced colors', async (
   await expect(page.locator('.fs-spinner__track')).toHaveCSS('opacity', '1');
 });
 
-test('Spinner honors native hidden semantics despite its inline flex layout', async ({ page, mount }) => {
+test('Spinner honors native hidden semantics despite its inline flex layout', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-spinner--hidden');
   await expect(page.getByRole('status')).toHaveCount(0);
   await expect(page.locator('.fs-spinner')).toHaveCSS('display', 'none');

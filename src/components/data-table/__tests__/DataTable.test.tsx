@@ -8,7 +8,14 @@ dataTableContracts(render);
 it('keeps a named table without a visible caption', () => {
   // arrange
   // act
-  const result = render(<DataTable aria-label="Transactions" rows={[]} columns={[{ id: 'id', header: 'ID' }]} getRowKey={() => 'id'} />);
+  const result = render(
+    <DataTable
+      aria-label="Transactions"
+      rows={[]}
+      columns={[{ id: 'id', header: 'ID' }]}
+      getRowKey={() => 'id'}
+    />,
+  );
   // assert
   expect(result.getByRole('table', { name: 'Transactions' })).toBeVisible();
 });

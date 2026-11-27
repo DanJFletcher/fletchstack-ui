@@ -13,7 +13,9 @@ export function createTableColumn<T>(): TableColumnFactory<T> {
  * Read an underlying value independently of display formatting or selection state.
  **/
 export function columnValue<T>(column: TableColumn<T>, row: T): unknown {
-  if (typeof column.accessor === 'function') { return column.accessor(row); }
+  if (typeof column.accessor === 'function') {
+    return column.accessor(row);
+  }
   return column.accessor === undefined ? undefined : row[column.accessor];
 }
 

@@ -15,27 +15,103 @@ import '../../../src/components/icon/icon.css';
 function InboxExample() {
   const [count, setCount] = useState(12);
 
-  return <section className="stack" aria-label="Inbox example"><Button onClick={() => setCount(value => value + 1)}>Receive message</Button><p role="status" aria-live="polite" aria-atomic="true">Unread messages: <Badge>{count}</Badge></p><Button variant="secondary" onClick={() => setCount(0)}>Mark all read</Button></section>;
+  return (
+    <section className="stack" aria-label="Inbox example">
+      <Button onClick={() => setCount((value) => value + 1)}>Receive message</Button>
+      <p role="status" aria-live="polite" aria-atomic="true">
+        Unread messages: <Badge>{count}</Badge>
+      </p>
+      <Button variant="secondary" onClick={() => setCount(0)}>
+        Mark all read
+      </Button>
+    </section>
+  );
 }
 
 /**
  * Present the five semantic tones with meaningful visible labels.
  **/
 function ToneExamples() {
-  return <div className="actions"><Badge>Draft</Badge><Badge tone="info">New</Badge><Badge tone="success" icon={<CheckIcon />}>Published</Badge><Badge tone="warning" icon={<Icon><path d="m12 3 10 18H2Z" /><path d="M12 9v4m0 3v1" /></Icon>}>Pending</Badge><Badge tone="danger" icon={<Icon><circle cx="12" cy="12" r="9" /><path d="M12 7v6m0 3v1" /></Icon>}>Failed</Badge></div>;
+  return (
+    <div className="actions">
+      <Badge>Draft</Badge>
+      <Badge tone="info">New</Badge>
+      <Badge tone="success" icon={<CheckIcon />}>
+        Published
+      </Badge>
+      <Badge
+        tone="warning"
+        icon={
+          <Icon>
+            <path d="m12 3 10 18H2Z" />
+            <path d="M12 9v4m0 3v1" />
+          </Icon>
+        }
+      >
+        Pending
+      </Badge>
+      <Badge
+        tone="danger"
+        icon={
+          <Icon>
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v6m0 3v1" />
+          </Icon>
+        }
+      >
+        Failed
+      </Badge>
+    </div>
+  );
 }
 
 const Tones: Scenario<BadgeProps> = { render: () => <ToneExamples /> };
 
 const Count: Scenario<BadgeProps> = { render: () => <InboxExample /> };
 
-const Customization: Scenario<BadgeProps> = { args: { tone: 'success', children: 'Published', icon: <CheckIcon />, className: 'custom-badge', style: { '--fs-badge-padding-inline': '12px', '--fs-badge-icon-size': '16px' } } };
+const Customization: Scenario<BadgeProps> = {
+  args: {
+    tone: 'success',
+    children: 'Published',
+    icon: <CheckIcon />,
+    className: 'custom-badge',
+    style: { '--fs-badge-padding-inline': '12px', '--fs-badge-icon-size': '16px' },
+  },
+};
 
-const LongLabel: Scenario<BadgeProps> = { args: { tone: 'warning', children: 'WaitingForApprovalFromEverySharedWorkspaceInThisProject', icon: <CheckIcon /> } };
+const LongLabel: Scenario<BadgeProps> = {
+  args: {
+    tone: 'warning',
+    children: 'WaitingForApprovalFromEverySharedWorkspaceInThisProject',
+    icon: <CheckIcon />,
+  },
+};
 
-const Hidden: Scenario<BadgeProps> = { args: { hidden: true }, render: args => <div><p>The native hidden attribute suppresses this badge.</p><Badge {...args} /></div> };
+const Hidden: Scenario<BadgeProps> = {
+  args: { hidden: true },
+  render: (args) => (
+    <div>
+      <p>The native hidden attribute suppresses this badge.</p>
+      <Badge {...args} />
+    </div>
+  ),
+};
 
-const PassiveSemantics: Scenario<BadgeProps> = { render: () => <Badge {...({ role: 'button', tabIndex: 0, 'aria-live': 'polite', onClick: 'ignored', title: 'Imported status' } as unknown as BadgeProps)}>Imported status</Badge> };
+const PassiveSemantics: Scenario<BadgeProps> = {
+  render: () => (
+    <Badge
+      {...({
+        role: 'button',
+        tabIndex: 0,
+        'aria-live': 'polite',
+        onClick: 'ignored',
+        title: 'Imported status',
+      } as unknown as BadgeProps)}
+    >
+      Imported status
+    </Badge>
+  ),
+};
 
 export const component = Badge;
 export const defaults: BadgeProps = { children: 'Draft' };

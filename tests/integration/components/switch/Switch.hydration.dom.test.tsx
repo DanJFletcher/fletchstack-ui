@@ -23,7 +23,9 @@ it('hydrates a controlled setting and retains its stable name after toggling', a
 
   // assert
   expect(screen.getByRole('switch', { name: 'Notifications' })).toBeChecked();
-  expect(screen.getByRole('switch')).toHaveAccessibleDescription('Project settings. Receive updates.');
+  expect(screen.getByRole('switch')).toHaveAccessibleDescription(
+    'Project settings. Receive updates.',
+  );
   expect(onRecoverableError).not.toHaveBeenCalled();
 });
 
@@ -31,7 +33,13 @@ it('resets native settings to their initial successful form values', async () =>
   // arrange
   const user = userEvent.setup();
   const form = createRef<HTMLFormElement>();
-  render(<form ref={form}><Switch label="Email" name="notifications" value="email" defaultChecked /><Switch label="Push" name="notifications" value="push" /><Switch label="Unavailable" name="notifications" value="disabled" disabled defaultChecked /></form>);
+  render(
+    <form ref={form}>
+      <Switch label="Email" name="notifications" value="email" defaultChecked />
+      <Switch label="Push" name="notifications" value="push" />
+      <Switch label="Unavailable" name="notifications" value="disabled" disabled defaultChecked />
+    </form>,
+  );
   await user.click(screen.getByRole('switch', { name: 'Push' }));
 
   // act
@@ -44,7 +52,18 @@ it('resets native settings to their initial successful form values', async () =>
 it('exposes the native input ref through the package API', () => {
   // arrange
   const ref = createRef<HTMLInputElement>();
-  const given = <Switch ref={ref} id="notifications" label="Notifications" description="Receive updates." className="custom" wrapperClassName="wrapper" wrapperStyle={{ '--fs-switch-label-gap': '12px' }} style={{ '--fs-switch-track-width': '48px' }} />;
+  const given = (
+    <Switch
+      ref={ref}
+      id="notifications"
+      label="Notifications"
+      description="Receive updates."
+      className="custom"
+      wrapperClassName="wrapper"
+      wrapperStyle={{ '--fs-switch-label-gap': '12px' }}
+      style={{ '--fs-switch-track-width': '48px' }}
+    />
+  );
 
   // act
   render(given);
@@ -75,5 +94,17 @@ it('server renders a disabled hidden on-state without client state synchronizati
 function ControlledSetting() {
   const [checked, setChecked] = useState(false);
 
-  return <FormGroup legend="Settings" description="Project settings.">{control => <Switch {...control} label="Notifications" description="Receive updates." checked={checked} onChange={event => setChecked(event.target.checked)} />}</FormGroup>;
+  return (
+    <FormGroup legend="Settings" description="Project settings.">
+      {(control) => (
+        <Switch
+          {...control}
+          label="Notifications"
+          description="Receive updates."
+          checked={checked}
+          onChange={(event) => setChecked(event.target.checked)}
+        />
+      )}
+    </FormGroup>
+  );
 }

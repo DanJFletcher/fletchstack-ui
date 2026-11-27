@@ -24,11 +24,11 @@ npm run test:e2e:storybook -- tests/e2e/components/field --grep-invert 'document
 npm run test:e2e:components -- tests/browser-harness/specs/field --workers=3
 ```
 
-| Measurement | Storybook | Harness |
-| --- | ---: | ---: |
-| Passing cases | 19 | 19 |
-| Command wall time | 16.61s | 6.51s |
-| Runner duration | 15.9s | 5.9s |
+| Measurement       | Storybook | Harness |
+| ----------------- | --------: | ------: |
+| Passing cases     |        19 |      19 |
+| Command wall time |    16.61s |   6.51s |
+| Runner duration   |     15.9s |    5.9s |
 
 Observed wall time fell **60.8% (2.55×)**. This is one before/after observation with existing caches and ordinary managed-server startup, not a median, cold-start benchmark or full-suite speedup claim. The retained documentation cases are excluded from both measurements. Logs are under ignored `.verification/field-migration/`.
 

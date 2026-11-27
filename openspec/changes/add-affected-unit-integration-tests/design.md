@@ -43,16 +43,16 @@ The installed native `--changed` already covers common branch/staged/modified/un
 
 Keep classification in one small policy module next to the runner. Combine native dependency selection, directly changed discovered tests, and resource/fallback rules. Apply supported import selection before treating a path as irrelevant; even coverage helpers or documentation can be imported or read by unit/integration tests.
 
-| Input | Unit command | Integration command |
-| --- | --- | --- |
-| Ordinary implementation/test/helper imports | Vitest-related files plus changed tests | Same |
-| Component CSS | No additional unit tests unless dependencies require them | Complete project |
-| Token inputs, generated token CSS/reference, token/build tooling | Complete project | Complete project |
-| Vitest/Vite/TypeScript configuration, dependency manifests/lockfiles, public root/family barrels, selector/policy | Complete project | Complete project |
-| Hydration fixture entry reached by URL, browser-build resources | Declared dependency selection or fallback if uncertain | Explicit family ownership where simple; otherwise complete project |
-| Known integration filesystem inputs: component stories, organization fixtures, source/test inventories, copy-style sources, theme resources | Related files or fallback if uncertain | Complete project unless a tested narrower rule proves ownership |
-| Runtime deletion/rename, unsupported/unclassified resource, unexplained zero owners | Complete project | Complete project |
-| Explicitly unrelated planning prose | Safely empty if no other inputs select tests | Same |
+| Input                                                                                                                                       | Unit command                                              | Integration command                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------ |
+| Ordinary implementation/test/helper imports                                                                                                 | Vitest-related files plus changed tests                   | Same                                                               |
+| Component CSS                                                                                                                               | No additional unit tests unless dependencies require them | Complete project                                                   |
+| Token inputs, generated token CSS/reference, token/build tooling                                                                            | Complete project                                          | Complete project                                                   |
+| Vitest/Vite/TypeScript configuration, dependency manifests/lockfiles, public root/family barrels, selector/policy                           | Complete project                                          | Complete project                                                   |
+| Hydration fixture entry reached by URL, browser-build resources                                                                             | Declared dependency selection or fallback if uncertain    | Explicit family ownership where simple; otherwise complete project |
+| Known integration filesystem inputs: component stories, organization fixtures, source/test inventories, copy-style sources, theme resources | Related files or fallback if uncertain                    | Complete project unless a tested narrower rule proves ownership    |
+| Runtime deletion/rename, unsupported/unclassified resource, unexplained zero owners                                                         | Complete project                                          | Complete project                                                   |
+| Explicitly unrelated planning prose                                                                                                         | Safely empty if no other inputs select tests              | Same                                                               |
 
 Do not globally ignore `docs/`, `stories/`, `tests/e2e/`, `.github/`, or fixtures: actual tests read some of them. Keep the irrelevant allowlist narrow. Unknown paths default to complete execution of the requested project. New fixture patterns must add a policy rule or retain that fallback. A CSS-only unit selection can be safely empty because unit tests do not resolve appearance; report that the integration command is its verification owner.
 

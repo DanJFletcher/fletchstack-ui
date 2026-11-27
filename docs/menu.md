@@ -16,26 +16,37 @@ import 'fletchstack-ui/styles.css';
 
 const items: MenuItem[] = [
   { type: 'item', id: 'rename', label: 'Rename', onSelect: () => renameProject() },
-  { type: 'submenu', id: 'export', label: 'Export', items: [
-    { type: 'item', id: 'pdf', label: 'Download PDF', href: '/exports/project.pdf' },
-    { type: 'item', id: 'csv', label: 'Download CSV', onSelect: () => downloadCsv() },
-  ] },
+  {
+    type: 'submenu',
+    id: 'export',
+    label: 'Export',
+    items: [
+      { type: 'item', id: 'pdf', label: 'Download PDF', href: '/exports/project.pdf' },
+      { type: 'item', id: 'csv', label: 'Download CSV', onSelect: () => downloadCsv() },
+    ],
+  },
   { type: 'divider', id: 'divider' },
-  { type: 'item', id: 'archive', label: 'Archive', disabled: true, onSelect: () => archiveProject() },
+  {
+    type: 'item',
+    id: 'archive',
+    label: 'Archive',
+    disabled: true,
+    onSelect: () => archiveProject(),
+  },
 ];
 <Menu triggerLabel="Project actions" menuLabel="Project actions" items={items} />;
 ```
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| triggerLabel / menuLabel | visible trigger text / accessible panel name, both strings | required |
-| items | readonly MenuItem[] | required |
-| open / onOpenChange | controlled boolean / requested expansion callback | uncontrolled |
-| defaultOpen | boolean | false |
-| closeOnSelect | boolean | true |
-| emptyMessage | ReactNode; displayed as a disabled, non-focusable menu item | No actions available. |
-| className / style | root class / MenuStyle (CSSProperties and --fs-* hooks) | omitted |
-| ref | HTMLDivElement | omitted |
+| Prop                     | Type                                                        | Default               |
+| ------------------------ | ----------------------------------------------------------- | --------------------- |
+| triggerLabel / menuLabel | visible trigger text / accessible panel name, both strings  | required              |
+| items                    | readonly MenuItem[]                                         | required              |
+| open / onOpenChange      | controlled boolean / requested expansion callback           | uncontrolled          |
+| defaultOpen              | boolean                                                     | false                 |
+| closeOnSelect            | boolean                                                     | true                  |
+| emptyMessage             | ReactNode; displayed as a disabled, non-focusable menu item | No actions available. |
+| className / style        | root class / MenuStyle (CSSProperties and --fs-* hooks)     | omitted               |
+| ref                      | HTMLDivElement                                              | omitted               |
 
 `MenuItem` discriminates on `type`: item, submenu or divider. `MenuActionItem` requires onSelect; `MenuLinkItem` requires href and supports optional onSelect, target and rel. `MenuSubmenuItem` requires its recursive items; `MenuDividerItem` requires only its type and ID. Item labels are visible strings; optional icon nodes are decorative and must not contain controls. Actions, links and submenu triggers support disabled. Empty IDs, duplicate sibling IDs and blank item labels throw; IDs may repeat in separate sibling sets.
 

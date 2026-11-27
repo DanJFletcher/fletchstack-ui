@@ -20,26 +20,28 @@ const destinations: Destination[] = [
 ];
 
 <Navbar aria-label="Primary">
-  <Navbar.Brand><a href="/">FletchStack</a></Navbar.Brand>
+  <Navbar.Brand>
+    <a href="/">FletchStack</a>
+  </Navbar.Brand>
   {destinations.map(({ href, label, mobilePlacement }) => (
     <Navbar.Item key={href} mobilePlacement={mobilePlacement}>
       <a href={href}>{label}</a>
     </Navbar.Item>
   ))}
-</Navbar>
+</Navbar>;
 ```
 
-| API | Type/default | Responsibility |
-| --- | --- | --- |
-| `Navbar.children` | Required `ReactNode` | Brand/Item slots, mapped arrays, conditional children and fragments. |
-| `Navbar.menuLabel` | `string`, `"Menu"` | Visible and accessible trigger label in both open states. |
-| `Navbar.open` | Optional `boolean` | Controlled state; changes only after the parent supplies it. |
-| `Navbar.defaultOpen` | `boolean`, `false` | Initial uncontrolled state. |
-| `Navbar.onOpenChange` | `(open: boolean) => void` | An interaction requests expansion or dismissal. |
-| `Navbar.style` | `NavbarStyle` | Native CSS properties and scoped `--fs-*` overrides. |
-| `Navbar.Brand.children` | Required `ReactNode` | Optional persistent brand, supplied by the consumer. |
-| `Navbar.Item.children` | Required `ReactNode` | Consumer-owned link, control or content. |
-| `Navbar.Item.mobilePlacement` | `"bar" \| "menu"`, `"menu"` | Compact placement; explicit `undefined` also defaults to menu. |
+| API                           | Type/default                | Responsibility                                                       |
+| ----------------------------- | --------------------------- | -------------------------------------------------------------------- |
+| `Navbar.children`             | Required `ReactNode`        | Brand/Item slots, mapped arrays, conditional children and fragments. |
+| `Navbar.menuLabel`            | `string`, `"Menu"`          | Visible and accessible trigger label in both open states.            |
+| `Navbar.open`                 | Optional `boolean`          | Controlled state; changes only after the parent supplies it.         |
+| `Navbar.defaultOpen`          | `boolean`, `false`          | Initial uncontrolled state.                                          |
+| `Navbar.onOpenChange`         | `(open: boolean) => void`   | An interaction requests expansion or dismissal.                      |
+| `Navbar.style`                | `NavbarStyle`               | Native CSS properties and scoped `--fs-*` overrides.                 |
+| `Navbar.Brand.children`       | Required `ReactNode`        | Optional persistent brand, supplied by the consumer.                 |
+| `Navbar.Item.children`        | Required `ReactNode`        | Consumer-owned link, control or content.                             |
+| `Navbar.Item.mobilePlacement` | `"bar" \| "menu"`, `"menu"` | Compact placement; explicit `undefined` also defaults to menu.       |
 
 The root forwards its ref as `HTMLElement` to the native nav and forwards native attributes, including `id`, `className`, `aria-label`, `aria-labelledby`, `hidden`, and event handlers. Supply a meaningful navigation name. Children, styles and `dangerouslySetInnerHTML` follow the requested public restrictions. Exported types are `NavbarProps`, `NavbarBrandProps`, `NavbarItemProps`, `NavbarMobilePlacement` and `NavbarStyle`.
 
@@ -51,13 +53,21 @@ Brand/Item are placement slots; they do not inject link attributes, clone child 
 const [open, setOpen] = useState(false);
 
 <Navbar aria-label="Workspace" open={open} onOpenChange={setOpen}>
-  <Navbar.Item><ThemeToggle /></Navbar.Item>
   <Navbar.Item>
-    <button type="button" onClick={() => { selectWorkspace('studio'); setOpen(false); }}>
+    <ThemeToggle />
+  </Navbar.Item>
+  <Navbar.Item>
+    <button
+      type="button"
+      onClick={() => {
+        selectWorkspace('studio');
+        setOpen(false);
+      }}
+    >
       Switch to Studio
     </button>
   </Navbar.Item>
-</Navbar>
+</Navbar>;
 ```
 
 The same keyed groups stay siblings of the same React parent. Wide order is brand, menu items, bar items; compact order is brand, bar items, trigger, disclosure. Reordering whole groups updates DOM/Tab order without reparenting the items inside them. Both local React state and native input state survive. Container changes repair focus when an active control would otherwise be hidden or its group is moved.

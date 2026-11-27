@@ -1,12 +1,55 @@
 /* Card reference compositions: consumer-owned artwork and metadata layout. */
-.card-demo { max-inline-size: 1000px; margin-inline: auto; }
-.card-demo__eyebrow, .card-demo__metadata { display: flex; align-items: center; flex-wrap: wrap; gap: var(--fs-space-inline); color: var(--fs-card-muted); }
-.card-demo__eyebrow svg { color: var(--fs-card-text); }
-.card-demo__metadata { gap: var(--fs-space-stack); }
-.card-demo__media:not([hidden]) { display: grid; place-items: center; padding: var(--fs-card-padding-large); min-block-size: var(--fs-card-media-width); }
-.card-demo__art { display: grid; place-items: center; padding: var(--fs-card-padding-medium); border: var(--fs-card-border-width) solid var(--fs-card-border); border-radius: var(--fs-card-radius); background: var(--fs-card-surface); color: var(--fs-card-text); transform: rotate(-8deg); }
-.card-demo__art svg { width: var(--fs-space-stack); height: var(--fs-space-stack); }
-.card-demo__details { inline-size: 100%; }
-.card-demo__details summary { cursor: pointer; color: var(--fs-card-text); font-weight: var(--fs-card-title-font-weight); padding-block: var(--fs-space-gap-label); }
-.card-demo__details summary:focus-visible { outline: var(--fs-button-focus-width) solid var(--fs-button-focus-color); outline-offset: var(--fs-button-focus-offset); }
-.card-demo__details p { margin-block-start: var(--fs-card-gap); }
+.card-demo {
+  max-inline-size: 1000px;
+  margin-inline: auto;
+}
+.card-demo__eyebrow,
+.card-demo__metadata {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--fs-space-inline);
+  color: var(--fs-card-muted);
+}
+.card-demo__eyebrow svg {
+  color: var(--fs-card-text);
+}
+.card-demo__metadata {
+  gap: var(--fs-space-stack);
+}
+.card-demo__media:not([hidden]) {
+  display: grid;
+  place-items: center;
+  padding: var(--fs-card-padding-large);
+  min-block-size: var(--fs-card-media-width);
+}
+.card-demo__art {
+  display: grid;
+  place-items: center;
+  padding: var(--fs-card-padding-medium);
+  border: var(--fs-card-border-width) solid var(--fs-card-border);
+  border-radius: var(--fs-card-radius);
+  background: var(--fs-card-surface);
+  color: var(--fs-card-text);
+  transform: rotate(-8deg);
+}
+.card-demo__art svg {
+  width: var(--fs-space-stack);
+  height: var(--fs-space-stack);
+}
+.card-demo__details {
+  inline-size: 100%;
+}
+.card-demo__details summary {
+  cursor: pointer;
+  color: var(--fs-card-text);
+  font-weight: var(--fs-card-title-font-weight);
+  padding-block: var(--fs-space-gap-label);
+}
+.card-demo__details summary:focus-visible {
+  outline: var(--fs-button-focus-width) solid var(--fs-button-focus-color);
+  outline-offset: var(--fs-button-focus-offset);
+}
+.card-demo__details p {
+  margin-block-start: var(--fs-card-gap);
+}

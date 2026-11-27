@@ -8,8 +8,13 @@
   line-height: var(--fs-textarea-font-line-height);
   overflow-wrap: anywhere;
 }
-.fs-textarea-field:not([hidden]) { display: grid; gap: var(--fs-textarea-gap); }
-.fs-textarea-field__label { font-weight: var(--fs-textarea-font-weight); }
+.fs-textarea-field:not([hidden]) {
+  display: grid;
+  gap: var(--fs-textarea-gap);
+}
+.fs-textarea-field__label {
+  font-weight: var(--fs-textarea-font-weight);
+}
 .fs-textarea {
   appearance: none;
   box-sizing: border-box;
@@ -27,22 +32,76 @@
   padding: var(--fs-textarea-padding-block) var(--fs-textarea-padding-inline);
   resize: vertical;
 }
-.fs-textarea::placeholder { color: var(--fs-textarea-placeholder); opacity: 1; }
-.fs-textarea:hover:not(:disabled) { border-color: var(--fs-textarea-hover-border); }
-.fs-textarea-field .fs-textarea:where([aria-invalid="true"], [aria-invalid="grammar"], [aria-invalid="spelling"]):not(:disabled) { border-color: var(--fs-textarea-error); }
-.fs-textarea:focus-visible { outline: var(--fs-textarea-focus-width) solid var(--fs-textarea-focus-color); outline-offset: var(--fs-textarea-focus-offset); }
-.fs-textarea:disabled { background: var(--fs-textarea-disabled-surface); border-color: var(--fs-textarea-disabled-border); color: var(--fs-textarea-disabled-text); cursor: not-allowed; resize: none; opacity: 1; }
-.fs-textarea:disabled::placeholder { color: var(--fs-textarea-disabled-text); }
+.fs-textarea::placeholder {
+  color: var(--fs-textarea-placeholder);
+  opacity: 1;
+}
+.fs-textarea:hover:not(:disabled) {
+  border-color: var(--fs-textarea-hover-border);
+}
+.fs-textarea-field
+  .fs-textarea:where(
+    [aria-invalid='true'],
+    [aria-invalid='grammar'],
+    [aria-invalid='spelling']
+  ):not(:disabled) {
+  border-color: var(--fs-textarea-error);
+}
+.fs-textarea:focus-visible {
+  outline: var(--fs-textarea-focus-width) solid var(--fs-textarea-focus-color);
+  outline-offset: var(--fs-textarea-focus-offset);
+}
+.fs-textarea:disabled {
+  background: var(--fs-textarea-disabled-surface);
+  border-color: var(--fs-textarea-disabled-border);
+  color: var(--fs-textarea-disabled-text);
+  cursor: not-allowed;
+  resize: none;
+  opacity: 1;
+}
+.fs-textarea:disabled::placeholder {
+  color: var(--fs-textarea-disabled-text);
+}
 .fs-textarea-field .fs-textarea-field__helper,
 .fs-textarea-field .fs-textarea-field__error,
-.fs-textarea__count { margin: 0; max-inline-size: none; font-size: var(--fs-textarea-font-message); line-height: inherit; }
-.fs-textarea-field__helper, .fs-textarea__count { color: var(--fs-textarea-muted); }
-.fs-textarea-field__error { color: var(--fs-textarea-error); }
-.fs-textarea__count { text-align: end; }
+.fs-textarea__count {
+  margin: 0;
+  max-inline-size: none;
+  font-size: var(--fs-textarea-font-message);
+  line-height: inherit;
+}
+.fs-textarea-field__helper,
+.fs-textarea__count {
+  color: var(--fs-textarea-muted);
+}
+.fs-textarea-field__error {
+  color: var(--fs-textarea-error);
+}
+.fs-textarea__count {
+  text-align: end;
+}
 @media (forced-colors: active) {
-  .fs-textarea { background: Field; color: FieldText; border-color: ButtonText; }
-  .fs-textarea-field .fs-textarea:where([aria-invalid="true"], [aria-invalid="grammar"], [aria-invalid="spelling"]):not(:disabled) { border-color: ButtonText; }
-  .fs-textarea:disabled { color: GrayText; border-color: GrayText; }
-  .fs-textarea:focus-visible { outline-color: Highlight; }
-  .fs-textarea-field__error { color: CanvasText; }
+  .fs-textarea {
+    background: Field;
+    color: FieldText;
+    border-color: ButtonText;
+  }
+  .fs-textarea-field
+    .fs-textarea:where(
+      [aria-invalid='true'],
+      [aria-invalid='grammar'],
+      [aria-invalid='spelling']
+    ):not(:disabled) {
+    border-color: ButtonText;
+  }
+  .fs-textarea:disabled {
+    color: GrayText;
+    border-color: GrayText;
+  }
+  .fs-textarea:focus-visible {
+    outline-color: Highlight;
+  }
+  .fs-textarea-field__error {
+    color: CanvasText;
+  }
 }

@@ -15,7 +15,14 @@ afterEach(cleanup);
 function ControlledTextarea() {
   const [value, setValue] = useState('First');
 
-  return <Textarea label="Description" value={value} onChange={event => setValue(event.target.value)} showCount />;
+  return (
+    <Textarea
+      label="Description"
+      value={value}
+      onChange={(event) => setValue(event.target.value)}
+      showCount
+    />
+  );
 }
 
 it('preserves controlled editing after hydrating a server-rendered counter', async () => {
@@ -57,26 +64,46 @@ it('hydrates a native textarea and updates its server-rendered count', async () 
 it.each([
   { canceled: false, expected: '5' },
   { canceled: true, expected: '6' },
-])('keeps the native reset count at $expected when canceled=$canceled', async ({ canceled, expected }) => {
-  // arrange
-  const user = userEvent.setup();
-  render(<form onReset={event => { if (canceled) { event.preventDefault(); } }}><Textarea label="Description" defaultValue="First" showCount /><button type="reset">Reset</button></form>);
-  await user.type(screen.getByRole('textbox'), '!');
+])(
+  'keeps the native reset count at $expected when canceled=$canceled',
+  async ({ canceled, expected }) => {
+    // arrange
+    const user = userEvent.setup();
+    render(
+      <form
+        onReset={(event) => {
+          if (canceled) {
+            event.preventDefault();
+          }
+        }}
+      >
+        <Textarea label="Description" defaultValue="First" showCount />
+        <button type="reset">Reset</button>
+      </form>,
+    );
+    await user.type(screen.getByRole('textbox'), '!');
 
-  // act
-  await user.click(screen.getByRole('button'));
+    // act
+    await user.click(screen.getByRole('button'));
 
-  // assert
-  expect(screen.getByRole('textbox')).toHaveAccessibleDescription(expected);
-});
+    // assert
+    expect(screen.getByRole('textbox')).toHaveAccessibleDescription(expected);
+  },
+);
 
 it('cleans up pending reset observations when removed', async () => {
   // arrange
-  const { unmount } = render(<form onReset={() => unmount()}><Textarea label="Description" showCount /></form>);
+  const { unmount } = render(
+    <form onReset={() => unmount()}>
+      <Textarea label="Description" showCount />
+    </form>,
+  );
   const form = screen.getByRole('textbox').closest('form')!;
 
   // act
-  await act(async () => { form.reset(); });
+  await act(async () => {
+    form.reset();
+  });
 
   // assert
   expect(screen.queryByRole('textbox')).not.toBeInTheDocument();

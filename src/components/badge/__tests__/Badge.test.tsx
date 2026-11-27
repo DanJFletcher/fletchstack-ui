@@ -17,18 +17,21 @@ it('hides optional artwork from assistive technology while retaining the status 
   expect(screen.queryByRole('img', { name: 'Check' })).not.toBeInTheDocument();
 });
 
-it.each(['neutral', 'info', 'success', 'warning', 'danger'] as const)('supports the %s semantic tone', tone => {
-  // arrange
-  const given = <Badge tone={tone}>Status</Badge>;
+it.each(['neutral', 'info', 'success', 'warning', 'danger'] as const)(
+  'supports the %s semantic tone',
+  (tone) => {
+    // arrange
+    const given = <Badge tone={tone}>Status</Badge>;
 
-  // act
-  const result = render(given);
+    // act
+    const result = render(given);
 
-  // assert
-  expect(result.container.firstElementChild).toHaveClass(`fs-badge--${tone}`);
-});
+    // assert
+    expect(result.container.firstElementChild).toHaveClass(`fs-badge--${tone}`);
+  },
+);
 
-it.each([0, 12, 1000000])('preserves the exact count %s', count => {
+it.each([0, 12, 1000000])('preserves the exact count %s', (count) => {
   // arrange
   const given = <Badge>{count}</Badge>;
   const expected = String(count);
@@ -69,7 +72,18 @@ it('preserves native hidden semantics', () => {
 it('forwards a native span ref with consumer attributes', () => {
   // arrange
   const ref = createRef<HTMLSpanElement>();
-  const given = <Badge ref={ref} id="draft" title="Not yet published" className="custom" style={{ '--fs-badge-padding-inline': '12px' }} aria-describedby="hint">Draft</Badge>;
+  const given = (
+    <Badge
+      ref={ref}
+      id="draft"
+      title="Not yet published"
+      className="custom"
+      style={{ '--fs-badge-padding-inline': '12px' }}
+      aria-describedby="hint"
+    >
+      Draft
+    </Badge>
+  );
 
   // act
   const result = render(given);
@@ -83,7 +97,19 @@ it('forwards a native span ref with consumer attributes', () => {
   expect(ref.current?.style.getPropertyValue('--fs-badge-padding-inline')).toBe('12px');
 });
 
-it.each(['role', 'tabIndex', 'contentEditable', 'aria-live', 'aria-atomic', 'aria-hidden', 'aria-label', 'aria-labelledby', 'dangerouslySetInnerHTML', 'onClick', 'onKeyDown'])('rejects the passive-semantics override %s from untyped consumers', name => {
+it.each([
+  'role',
+  'tabIndex',
+  'contentEditable',
+  'aria-live',
+  'aria-atomic',
+  'aria-hidden',
+  'aria-label',
+  'aria-labelledby',
+  'dangerouslySetInnerHTML',
+  'onClick',
+  'onKeyDown',
+])('rejects the passive-semantics override %s from untyped consumers', (name) => {
   // arrange
   const given = { [name]: 'override' } as unknown as BadgeProps;
 

@@ -6,25 +6,36 @@ test('design foundation links to tokens and a working override example', async (
 
   await test.step('Read the design foundation', async () => {
     await page.goto('/?path=/docs/design-system-foundation--docs');
-    await expect(preview.getByRole('heading', { name: /Initial design foundation$/ })).toBeVisible();
+    await expect(
+      preview.getByRole('heading', { name: /Initial design foundation$/ }),
+    ).toBeVisible();
   });
 
   await test.step('Follow the public token reference', async () => {
-    await preview.getByRole('link', { name: 'Explore the public semantic token reference →' }).click();
+    await preview
+      .getByRole('link', { name: 'Explore the public semantic token reference →' })
+      .click();
     await expect(page).toHaveURL(/\/\?path=\/docs\/design-system-tokens--docs/);
     await expect(preview.getByRole('heading', { name: /Public semantic tokens$/ })).toBeVisible();
-    await expect(preview.getByRole('table')).toContainText('--fs-button-primary-default-background');
+    await expect(preview.getByRole('table')).toContainText(
+      '--fs-button-primary-default-background',
+    );
   });
 
   await test.step('See the tokens applied to a component', async () => {
     const [frame] = await Promise.all([
-      page.waitForEvent('framenavigated', { predicate: frame => new URL(frame.url()).searchParams.get('id') === 'components-button--consumer-override' }),
+      page.waitForEvent('framenavigated', {
+        predicate: (frame) =>
+          new URL(frame.url()).searchParams.get('id') === 'components-button--consumer-override',
+      }),
       preview.getByRole('link', { name: 'See semantic overrides on Button →' }).click(),
     ]);
     await expect(page).toHaveURL(/\/\?path=\/story\/components-button--consumer-override/);
     await waitForStory(frame);
-    await expect(preview.getByRole('button', { name: 'Forest brand action' }))
-      .toHaveCSS('background-color', 'rgb(20, 98, 61)');
+    await expect(preview.getByRole('button', { name: 'Forest brand action' })).toHaveCSS(
+      'background-color',
+      'rgb(20, 98, 61)',
+    );
   });
 });
 
@@ -50,11 +61,17 @@ test('the Storybook toolbar switches the preview surface and component theme', a
   });
 });
 
-test('Dialog documentation waits for explicit activation before opening a modal', async ({ page }) => {
+test('Dialog documentation waits for explicit activation before opening a modal', async ({
+  page,
+}) => {
   await page.goto('/?path=/docs/components-dialog--docs');
   const preview = page.frameLocator('#storybook-preview-iframe');
   // Wait for the last inline example, rather than only the early docs heading.
-  await expect(preview.locator('#story--components-dialog--nested').getByRole('button', { name: 'Open parent' })).toBeAttached();
+  await expect(
+    preview
+      .locator('#story--components-dialog--nested')
+      .getByRole('button', { name: 'Open parent' }),
+  ).toBeAttached();
   await expect(preview.locator('dialog:modal')).toHaveCount(0);
 
   // The first trigger belongs to the primary interactive playground.
@@ -67,12 +84,20 @@ test('Dialog documentation waits for explicit activation before opening a modal'
   await expect(trigger).toBeFocused();
 });
 
- test('Popover documentation starts closed and opens only its activated example', async ({ page }) => {
+test('Popover documentation starts closed and opens only its activated example', async ({
+  page,
+}) => {
   await page.goto('/?path=/docs/components-popover--docs');
   const preview = page.frameLocator('#storybook-preview-iframe');
-  await expect(preview.locator('#story--components-popover--scoped-panel-style').getByRole('button', { name: 'Custom panel' })).toBeAttached();
+  await expect(
+    preview
+      .locator('#story--components-popover--scoped-panel-style')
+      .getByRole('button', { name: 'Custom panel' }),
+  ).toBeAttached();
   await expect(preview.locator('.fs-popover__panel:popover-open')).toHaveCount(0);
-  const trigger = preview.locator('#story--components-popover--playground').getByRole('button', { name: 'Project details' });
+  const trigger = preview
+    .locator('#story--components-popover--playground')
+    .getByRole('button', { name: 'Project details' });
   await trigger.click();
   await expect(preview.locator('.fs-popover__panel:popover-open')).toHaveCount(1);
   await page.keyboard.press('Escape');
@@ -80,15 +105,25 @@ test('Dialog documentation waits for explicit activation before opening a modal'
   await expect(trigger).toBeFocused();
 });
 
-test('Tooltip documentation starts closed and describes only the focused trigger', async ({ page }) => {
+test('Tooltip documentation starts closed and describes only the focused trigger', async ({
+  page,
+}) => {
   await page.goto('/?path=/docs/components-tooltip--docs');
   const preview = page.frameLocator('#storybook-preview-iframe');
-  await expect(preview.locator('#story--components-tooltip--long-content').getByRole('button', { name: 'More information' })).toBeAttached();
+  await expect(
+    preview
+      .locator('#story--components-tooltip--long-content')
+      .getByRole('button', { name: 'More information' }),
+  ).toBeAttached();
   await expect(preview.locator('.fs-tooltip__content:popover-open')).toHaveCount(0);
-  const trigger = preview.locator('#story--components-tooltip--playground').getByRole('button', { name: 'More information' });
+  const trigger = preview
+    .locator('#story--components-tooltip--playground')
+    .getByRole('button', { name: 'More information' });
   await trigger.focus();
   await expect(preview.locator('.fs-tooltip__content:popover-open')).toHaveCount(1);
-  await expect(trigger).toHaveAccessibleDescription('Brief contextual help appears on hover or keyboard focus.');
+  await expect(trigger).toHaveAccessibleDescription(
+    'Brief contextual help appears on hover or keyboard focus.',
+  );
   await page.keyboard.press('Escape');
   await expect(preview.locator('.fs-tooltip__content:popover-open')).toHaveCount(0);
   await expect(trigger).toBeFocused();

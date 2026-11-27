@@ -6,29 +6,53 @@ import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
 import { Stack } from '../../../../src/components/stack/Stack';
 
-it.each(['none', 'related', 'group', 'section'] as const)('hydrates the %s relationship with native attributes and a div ref', gap => {
-  // arrange
-  const ref = createRef<HTMLDivElement>();
-  const given = <Stack gap={gap} align="start" ref={ref} id="settings" className="custom" style={{ '--fs-space-gap-related': '32px' }} data-testid="layout"><button>First</button><button>Second</button></Stack>;
-  const container = document.createElement('div');
-  container.innerHTML = renderToString(given);
-  document.body.appendChild(container);
-  const onRecoverableError = vi.fn();
+it.each(['none', 'related', 'group', 'section'] as const)(
+  'hydrates the %s relationship with native attributes and a div ref',
+  (gap) => {
+    // arrange
+    const ref = createRef<HTMLDivElement>();
+    const given = (
+      <Stack
+        gap={gap}
+        align="start"
+        ref={ref}
+        id="settings"
+        className="custom"
+        style={{ '--fs-space-gap-related': '32px' }}
+        data-testid="layout"
+      >
+        <button>First</button>
+        <button>Second</button>
+      </Stack>
+    );
+    const container = document.createElement('div');
+    container.innerHTML = renderToString(given);
+    document.body.appendChild(container);
+    const onRecoverableError = vi.fn();
 
-  // act
-  render(given, { container, hydrate: true, onRecoverableError });
+    // act
+    render(given, { container, hydrate: true, onRecoverableError });
 
-  // assert
-  expect(ref.current).toBe(screen.getByTestId('layout'));
-  expect(ref.current).toHaveAttribute('id', 'settings');
-  expect(ref.current).toHaveClass('custom', `fs-stack--gap-${gap}`);
-  expect(screen.getAllByRole('button').map(button => button.textContent)).toEqual(['First', 'Second']);
-  expect(onRecoverableError).not.toHaveBeenCalled();
-});
+    // assert
+    expect(ref.current).toBe(screen.getByTestId('layout'));
+    expect(ref.current).toHaveAttribute('id', 'settings');
+    expect(ref.current).toHaveClass('custom', `fs-stack--gap-${gap}`);
+    expect(screen.getAllByRole('button').map((button) => button.textContent)).toEqual([
+      'First',
+      'Second',
+    ]);
+    expect(onRecoverableError).not.toHaveBeenCalled();
+  },
+);
 
 it('server renders deterministic defaults without adding semantics or spacer nodes', () => {
   // arrange
-  const given = <Stack><p>First</p><p>Second</p></Stack>;
+  const given = (
+    <Stack>
+      <p>First</p>
+      <p>Second</p>
+    </Stack>
+  );
   const expected = renderToString(given);
 
   // act

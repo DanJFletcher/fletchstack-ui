@@ -6,14 +6,14 @@ This extends the [layout migration](layout-harness-migration.md) with Checkbox, 
 
 All 60 browser cases move to [the component harness](../tests/browser-harness/specs/). A one-time TypeScript syntax-tree comparison verified that all 143 assertion statements remain identical, and all 40 scenario render/args definitions, defaults and retained helpers match their source stories. Scenarios import implementation modules and required CSS directly. Textarea's relevant example helpers are copied into its private scenario module, keeping the source graph independent of CSF and public barrels.
 
-| Family | Harness owner | Preserved boundary |
-| --- | --- | --- |
-| Checkbox | [Checkbox](../tests/browser-harness/specs/checkbox/Checkbox.spec.ts) | Native Space/Tab, label activation, mixed selection, error hover, forced colors and reflow |
-| Radio | [Radio](../tests/browser-harness/specs/radio/Radio.spec.ts) | Arrow selection, disabled skipping, native validation, external form ownership/reset and theme scopes |
-| Switch | [Switch](../tests/browser-harness/specs/switch/Switch.spec.ts) | Stable names, native toggling/forms, thumb geometry/contrast, RTL, fieldset disabling and forced colors |
-| TextInput | [TextInput](../tests/browser-harness/specs/text-input/TextInput.spec.ts) | Read-only selection, keyboard editing, linked descriptions, adornments, validation and sizing |
-| Textarea | [Textarea](../tests/browser-harness/specs/textarea/Textarea.spec.ts) | Native multiline editing/resize, controlled counters, submission/reset/canceled reset, external ownership, maxLength and read-only selection |
-| Select | [Select](../tests/browser-harness/specs/select/Select.spec.ts) | Native typeahead/focus, message relationships, validation boundaries and reflow |
+| Family    | Harness owner                                                            | Preserved boundary                                                                                                                           |
+| --------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Checkbox  | [Checkbox](../tests/browser-harness/specs/checkbox/Checkbox.spec.ts)     | Native Space/Tab, label activation, mixed selection, error hover, forced colors and reflow                                                   |
+| Radio     | [Radio](../tests/browser-harness/specs/radio/Radio.spec.ts)              | Arrow selection, disabled skipping, native validation, external form ownership/reset and theme scopes                                        |
+| Switch    | [Switch](../tests/browser-harness/specs/switch/Switch.spec.ts)           | Stable names, native toggling/forms, thumb geometry/contrast, RTL, fieldset disabling and forced colors                                      |
+| TextInput | [TextInput](../tests/browser-harness/specs/text-input/TextInput.spec.ts) | Read-only selection, keyboard editing, linked descriptions, adornments, validation and sizing                                                |
+| Textarea  | [Textarea](../tests/browser-harness/specs/textarea/Textarea.spec.ts)     | Native multiline editing/resize, controlled counters, submission/reset/canceled reset, external ownership, maxLength and read-only selection |
+| Select    | [Select](../tests/browser-harness/specs/select/Select.spec.ts)           | Native typeahead/focus, message relationships, validation boundaries and reflow                                                              |
 
 Storybook play functions still run through the unchanged Storybook test project. The harness does not execute them. Three previously implicit prerequisites are now explicit browser actions: Space turns on the Switch before its existing toggle assertion; selecting Collection and submitting the Radio form establishes the existing submitted-value assertion; clicking Use suggested summary establishes Textarea's controlled value. Checkbox tests start from their authored unchecked/mixed state and retain assertions covering both toggle states and none/partial/all selection. Other interactions already establish their own required state.
 
@@ -25,11 +25,11 @@ The [organization relocation map](../tests/fixtures/component-organization-paths
 
 The same 60 cases ran on the same machine with Chromium, three workers, zero retries, retained failure evidence and ordinary coverage-disabled configuration. No other test workload ran concurrently with either measurement. Commands used `npm run test:e2e:storybook` before and `npm run test:e2e:components` after, with the six explicit suite directories and `--workers=3`.
 
-| Measurement | Storybook | Harness |
-| --- | ---: | ---: |
-| Passing cases | 60 | 60 |
-| Command wall time | 44.11s | 11.08s |
-| Runner duration | 43.3s | 10.4s |
+| Measurement       | Storybook | Harness |
+| ----------------- | --------: | ------: |
+| Passing cases     |        60 |      60 |
+| Command wall time |    44.11s |  11.08s |
+| Runner duration   |     43.3s |   10.4s |
 
 Observed wall time fell **74.9% (3.98×)**. This is one before/after observation with existing caches and ordinary managed-server startup, not a median, cold-start benchmark or full-suite speedup claim. Logs are under ignored `.verification/forms-migration/`.
 

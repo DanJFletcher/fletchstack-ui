@@ -14,7 +14,12 @@ function previewPath(story: string, options: StoryOptions) {
     query.set('globals', `theme:${options.theme}`);
   }
   if (options.args) {
-    query.set('args', Object.entries(options.args).map(([name, value]) => `${name}:${value}`).join(';'));
+    query.set(
+      'args',
+      Object.entries(options.args)
+        .map(([name, value]) => `${name}:${value}`)
+        .join(';'),
+    );
   }
 
   return `/iframe.html?${query}`;
@@ -26,12 +31,18 @@ function previewPath(story: string, options: StoryOptions) {
 export async function waitForStory(preview: Page | Frame) {
   await expect(preview.locator('main.showcase')).toBeVisible();
 
-  await expect.poll(() => preview.evaluate(() => {
-    const previewWindow = window as Window & {
-      __STORYBOOK_PREVIEW__?: { channel: { last(event: string): [{ status: string }] | undefined } };
-    };
-    return previewWindow.__STORYBOOK_PREVIEW__?.channel.last('storyFinished')?.[0].status;
-  })).toBe('success');
+  await expect
+    .poll(() =>
+      preview.evaluate(() => {
+        const previewWindow = window as Window & {
+          __STORYBOOK_PREVIEW__?: {
+            channel: { last(event: string): [{ status: string }] | undefined };
+          };
+        };
+        return previewWindow.__STORYBOOK_PREVIEW__?.channel.last('storyFinished')?.[0].status;
+      }),
+    )
+    .toBe('success');
 }
 
 /**

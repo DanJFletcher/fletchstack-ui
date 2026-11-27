@@ -20,16 +20,16 @@ Add Gallery to the existing Components/Icon CSF module, at `components-icon--gal
 
 Initial keyword suggestions:
 
-| Export | Keywords in addition to name/use |
-| --- | --- |
-| MoonIcon | night, dark, theme |
-| SunIcon | day, light, theme |
-| CheckIcon | confirm, done, complete |
-| CloseIcon | dismiss, cancel, remove |
-| ChevronDownIcon | down, expand, dropdown |
-| ArrowRightIcon | next, forward, navigate |
-| PlusIcon | add, create, new |
-| ExternalLinkIcon | external, link, open |
+| Export           | Keywords in addition to name/use |
+| ---------------- | -------------------------------- |
+| MoonIcon         | night, dark, theme               |
+| SunIcon          | day, light, theme                |
+| CheckIcon        | confirm, done, complete          |
+| CloseIcon        | dismiss, cancel, remove          |
+| ChevronDownIcon  | down, expand, dropdown           |
+| ArrowRightIcon   | next, forward, navigate          |
+| PlusIcon         | add, create, new                 |
+| ExternalLinkIcon | external, link, open             |
 
 A focused catalog integrity test compares story entries against current public named-icon exports so additions cannot silently disappear from discovery. Metadata is intentionally explicit: deriving names from module introspection would not supply meaningful intended uses or synonyms. This is a documentation catalog, not a runtime registry.
 

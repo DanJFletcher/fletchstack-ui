@@ -11,5 +11,9 @@ export function useBreadcrumbBreakpoint(collapseAt: string): boolean {
     return () => media.removeEventListener('change', changed);
   };
 
-  return useSyncExternalStore(subscribe, () => window.matchMedia(query).matches, () => false);
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(query).matches,
+    () => false,
+  );
 }

@@ -12,20 +12,67 @@ import '../../../src/components/button/button.css';
 function ActivityExample() {
   const [pending, setPending] = useState(true);
 
-  return <div className="stack"><div role="status" aria-live="polite" aria-atomic="true" className="actions">{pending && <Spinner decorative />}{pending ? 'Loading activity…' : 'Activity loaded.'}</div><section aria-label="Activity" aria-busy={pending}><h2>Project activity</h2><p>{pending ? 'Activity is being refreshed.' : 'Your project activity is up to date.'}</p></section><div className="actions"><Button disabled={!pending} onClick={() => setPending(false)}>Complete loading</Button><Button disabled={pending} onClick={() => setPending(true)} variant="secondary">Reload activity</Button></div></div>;
+  return (
+    <div className="stack">
+      <div role="status" aria-live="polite" aria-atomic="true" className="actions">
+        {pending && <Spinner decorative />}
+        {pending ? 'Loading activity…' : 'Activity loaded.'}
+      </div>
+      <section aria-label="Activity" aria-busy={pending}>
+        <h2>Project activity</h2>
+        <p>{pending ? 'Activity is being refreshed.' : 'Your project activity is up to date.'}</p>
+      </section>
+      <div className="actions">
+        <Button disabled={!pending} onClick={() => setPending(false)}>
+          Complete loading
+        </Button>
+        <Button disabled={pending} onClick={() => setPending(true)} variant="secondary">
+          Reload activity
+        </Button>
+      </div>
+    </div>
+  );
 }
 
-const Playground: Scenario<SpinnerProps> = {  };
+const Playground: Scenario<SpinnerProps> = {};
 
-const Sizes: Scenario<SpinnerProps> = { render: () => <div className="theme-grid">{(['small', 'medium', 'large'] as const).map(size => <section key={size} className="stack"><h2>{size}</h2><Spinner size={size} decorative /></section>)}</div> };
+const Sizes: Scenario<SpinnerProps> = {
+  render: () => (
+    <div className="theme-grid">
+      {(['small', 'medium', 'large'] as const).map((size) => (
+        <section key={size} className="stack">
+          <h2>{size}</h2>
+          <Spinner size={size} decorative />
+        </section>
+      ))}
+    </div>
+  ),
+};
 
-const Decorative: Scenario<SpinnerProps> = { render: () => <Button disabled aria-busy="true"><Spinner decorative size="small" />Saving…</Button> };
+const Decorative: Scenario<SpinnerProps> = {
+  render: () => (
+    <Button disabled aria-busy="true">
+      <Spinner decorative size="small" />
+      Saving…
+    </Button>
+  ),
+};
 
 const ContentRegion: Scenario<SpinnerProps> = { render: () => <ActivityExample /> };
 
-const LongLabel: Scenario<SpinnerProps> = { args: { label: 'LoadingProjectActivityForEverySharedWorkspaceAndComponentInThisLibrary…' } };
+const LongLabel: Scenario<SpinnerProps> = {
+  args: { label: 'LoadingProjectActivityForEverySharedWorkspaceAndComponentInThisLibrary…' },
+};
 
-const Hidden: Scenario<SpinnerProps> = { args: { hidden: true }, render: args => <div><p>The native hidden attribute suppresses the complete loading widget.</p><Spinner {...args} /></div> };
+const Hidden: Scenario<SpinnerProps> = {
+  args: { hidden: true },
+  render: (args) => (
+    <div>
+      <p>The native hidden attribute suppresses the complete loading widget.</p>
+      <Spinner {...args} />
+    </div>
+  ),
+};
 
 export const component = Spinner;
 export const defaults: SpinnerProps = { label: 'Loading projects…' };

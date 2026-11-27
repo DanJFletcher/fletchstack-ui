@@ -6,7 +6,9 @@ import primitives from '../../../tokens/primitives.json' with { type: 'json' };
 import { buildTokens } from '../../../scripts/token-build.mjs';
 import { test, writeProject } from '../fixtures/token-project.mjs';
 
-test('publishes Table header/selection roles in both themes with stable comfortable and compact padding', async ({ root }) => {
+test('publishes Table header/selection roles in both themes with stable comfortable and compact padding', async ({
+  root,
+}) => {
   await writeProject(root, { ...primitives, ...corporate }, { 'luna.json': luna });
   await buildTokens(root);
   const result = await readFile(new URL('src/generated/tokens.css', root), 'utf8');

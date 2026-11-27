@@ -5,11 +5,17 @@ import { renderToString } from 'react-dom/server';
 import { expect, it } from 'vitest';
 import { toastContracts } from '../../../support/toast-contracts';
 import { Toast } from '../../../../src/components/toast/Toast';
-toastContracts(element => {
+toastContracts((element) => {
   const container = document.createElement('div');
   container.innerHTML = renderToString(element);
   document.body.appendChild(container);
-  return render(element, { container, hydrate: true, onRecoverableError: error => { throw error; } });
+  return render(element, {
+    container,
+    hydrate: true,
+    onRecoverableError: (error) => {
+      throw error;
+    },
+  });
 });
 it('renders readable server content with an initially empty live region', () => {
   // arrange

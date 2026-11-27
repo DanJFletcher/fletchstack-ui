@@ -13,21 +13,32 @@ it('defaults to a section-sized native level-two heading', () => {
   render(given);
 
   // assert
-  expect(screen.getByRole('heading', { level: 2, name: 'Notifications' })).toHaveClass('fs-heading--section');
+  expect(screen.getByRole('heading', { level: 2, name: 'Notifications' })).toHaveClass(
+    'fs-heading--section',
+  );
 });
 
-it.each(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const)('keeps %s semantics independent of page sizing', as => {
-  // arrange
-  const given = <Heading as={as} size="page">Project settings</Heading>;
+it.each(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const)(
+  'keeps %s semantics independent of page sizing',
+  (as) => {
+    // arrange
+    const given = (
+      <Heading as={as} size="page">
+        Project settings
+      </Heading>
+    );
 
-  // act
-  render(given);
+    // act
+    render(given);
 
-  // assert
-  expect(screen.getByRole('heading', { level: Number(as.slice(1)), name: 'Project settings' })).toHaveClass('fs-heading--page');
-});
+    // assert
+    expect(
+      screen.getByRole('heading', { level: Number(as.slice(1)), name: 'Project settings' }),
+    ).toHaveClass('fs-heading--page');
+  },
+);
 
-it.each(['page', 'section', 'subheading'] as const)('supports the %s visual role', size => {
+it.each(['page', 'section', 'subheading'] as const)('supports the %s visual role', (size) => {
   // arrange
   const given = <Heading size={size}>Project</Heading>;
 
@@ -42,7 +53,11 @@ it('forwards native attributes, a heading ref and consumer styles', () => {
   // arrange
   const ref = createRef<HTMLHeadingElement>();
   const style: HeadingStyle = { '--fs-typography-heading-font-page': '3rem', color: 'red' };
-  const given = <Heading as="h1" id="project" title="Details" className="consumer" style={style} ref={ref}>Project</Heading>;
+  const given = (
+    <Heading as="h1" id="project" title="Details" className="consumer" style={style} ref={ref}>
+      Project
+    </Heading>
+  );
 
   // act
   render(given);

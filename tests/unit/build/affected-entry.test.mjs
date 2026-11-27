@@ -1,7 +1,9 @@
 import { expect, it, vi } from 'vitest';
 import { affectedMain } from '../../../scripts/affected-run.mjs';
 
-vi.mock('../../../scripts/affected-run.mjs', () => ({ affectedMain: vi.fn().mockResolvedValue(0) }));
+vi.mock('../../../scripts/affected-run.mjs', () => ({
+  affectedMain: vi.fn().mockResolvedValue(0),
+}));
 
 it('forwards CLI arguments and propagates the command status', async () => {
   // arrange

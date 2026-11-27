@@ -6,11 +6,11 @@ The owner-provided Cluster design and request approve this optional passive hori
 
 `Cluster` renders a native div and supports native attributes, children, className, a forwarded HTMLDivElement ref and typed `ClusterStyle` overrides. Defaults are `gap="actions"`, `align="center"`, and `justify="start"`.
 
-| Prop | Options | Meaning |
-| --- | --- | --- |
-| gap | none, actions, related | Zero, `--fs-space-gap-actions` (12px), or `--fs-space-gap-related` (16px), directly on both axes |
-| align | start, center, end, baseline | Cross-axis alignment within each row |
-| justify | start, center, end | Position each row within available inline space |
+| Prop    | Options                      | Meaning                                                                                          |
+| ------- | ---------------------------- | ------------------------------------------------------------------------------------------------ |
+| gap     | none, actions, related       | Zero, `--fs-space-gap-actions` (12px), or `--fs-space-gap-related` (16px), directly on both axes |
+| align   | start, center, end, baseline | Cross-axis alignment within each row                                                             |
+| justify | start, center, end           | Position each row within available inline space                                                  |
 
 Start/end follow writing direction: in horizontal RTL, start justification begins at the right; row cross-axis start/end remain block start/end. Baseline aligns mixed typography on a common text baseline. DOM, reading and keyboard order are preserved. Native Tab moves through children in their source order, including across wrapped rows.
 
@@ -36,10 +36,13 @@ import 'fletchstack-ui/styles.css';
   <section aria-labelledby="project">
     <Stack gap="group">
       <h2 id="project">Project overview</h2>
-      <Cluster><Button>Save changes</Button><Button variant="secondary">Preview</Button></Cluster>
+      <Cluster>
+        <Button>Save changes</Button>
+        <Button variant="secondary">Preview</Button>
+      </Cluster>
     </Stack>
   </section>
-</Container>
+</Container>;
 ```
 
 Import combined styles or tokens.css plus cluster.css and the composed components' styles. Library JavaScript imports no stylesheet and needs no browser global, provider, layout effect or hydration for CSS layout. Storybook: Components → Layout → Cluster. All outlines, measurement blocks and fixed demo widths/heights belong to example CSS; Cluster itself has no guides or surface.

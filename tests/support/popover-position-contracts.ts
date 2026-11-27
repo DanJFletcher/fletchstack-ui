@@ -1,7 +1,17 @@
 import { expect, it } from 'vitest';
 import { placePopover, type Placement } from '../../src/components/popover/position';
 
-const base: Placement = { anchor: { left: 100, top: 100, right: 180, bottom: 140, width: 80, height: 40 }, width: 60, height: 30, viewport: { left: 0, top: 0, width: 500, height: 400 }, side: 'bottom', align: 'start', offset: 8, padding: 8, rtl: false };
+const base: Placement = {
+  anchor: { left: 100, top: 100, right: 180, bottom: 140, width: 80, height: 40 },
+  width: 60,
+  height: 30,
+  viewport: { left: 0, top: 0, width: 500, height: 400 },
+  side: 'bottom',
+  align: 'start',
+  offset: 8,
+  padding: 8,
+  rtl: false,
+};
 
 /**
  * Check independently worked-out coordinates for each edge and logical alignment.
@@ -22,7 +32,8 @@ export function popoverPositionContracts() {
     { side: 'right', align: 'end', left: 188, top: 110 },
   ] as const)('places a $side panel with $align alignment', ({ side, align, left, top }) => {
     // arrange
-    const given = { ...base, side, align }, expected = { side, left, top };
+    const given = { ...base, side, align },
+      expected = { side, left, top };
 
     // act
     const result = placePopover(given);
@@ -31,10 +42,13 @@ export function popoverPositionContracts() {
     expect(result).toEqual(expected);
   });
   it.each([
-    { align: 'start', left: 120 }, { align: 'end', left: 100 }, { align: 'center', left: 110 },
+    { align: 'start', left: 120 },
+    { align: 'end', left: 100 },
+    { align: 'center', left: 110 },
   ] as const)('mirrors logical $align alignment in RTL', ({ align, left }) => {
     // arrange
-    const given = { ...base, align, rtl: true }, expected = { side: 'bottom', left, top: 148 };
+    const given = { ...base, align, rtl: true },
+      expected = { side: 'bottom', left, top: 148 };
 
     // act
     const result = placePopover(given);
@@ -55,7 +69,11 @@ export function popoverPositionContracts() {
   });
   it('clamps an oversized panel when neither side offers more room', () => {
     // arrange
-    const given = { ...base, height: 600, viewport: { left: 20, top: 40, width: 100, height: 200 } };
+    const given = {
+      ...base,
+      height: 600,
+      viewport: { left: 20, top: 40, width: 100, height: 200 },
+    };
     const expected = { side: 'bottom', left: 52, top: 48 };
 
     // act
@@ -66,7 +84,11 @@ export function popoverPositionContracts() {
   });
   it('flips a right panel left at the viewport edge', () => {
     // arrange
-    const given = { ...base, side: 'right' as const, anchor: { ...base.anchor, left: 450, right: 530 } };
+    const given = {
+      ...base,
+      side: 'right' as const,
+      anchor: { ...base.anchor, left: 450, right: 530 },
+    };
     const expected = { side: 'left', left: 382, top: 100 };
 
     // act

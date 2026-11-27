@@ -18,10 +18,10 @@ Selection checks cover private spatial scenario changes, scoped demo CSS and Che
 
 Both runs used Chromium, three workers, zero retries, ordinary coverage-free execution and managed-server startup, with no concurrent test workload. Existing caches were retained.
 
-| Same 17 cases | Storybook | Harness |
-| --- | ---: | ---: |
-| Command wall time | 23.62s | 8.31s |
-| Playwright duration | 22.2s | 7.3s |
+| Same 17 cases       | Storybook | Harness |
+| ------------------- | --------: | ------: |
+| Command wall time   |    23.62s |   8.31s |
+| Playwright duration |     22.2s |    7.3s |
 
 The observed wall time fell 64.8% (2.84×). This is one before/after observation, not a cold-start benchmark, repeat-run median or full-suite speedup claim.
 

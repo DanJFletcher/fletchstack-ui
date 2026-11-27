@@ -51,11 +51,9 @@ export type QuestionnaireAnswer =
       kind: 'skipped';
     };
 
-export type QuestionnaireAnswers =
-  Readonly<Partial<Record<string, QuestionnaireAnswer>>>;
+export type QuestionnaireAnswers = Readonly<Partial<Record<string, QuestionnaireAnswer>>>;
 
-export type QuestionnaireErrors =
-  Readonly<Partial<Record<string, string>>>;
+export type QuestionnaireErrors = Readonly<Partial<Record<string, string>>>;
 
 export type QuestionnaireLabels = {
   previous: string;

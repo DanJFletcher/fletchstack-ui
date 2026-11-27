@@ -1644,10 +1644,7 @@
       "module": "tests/browser-harness/scenarios/Kbd.tsx",
       "export": "Flow"
     },
-    "components-kbd--rtl": {
-      "module": "tests/browser-harness/scenarios/Kbd.tsx",
-      "export": "Rtl"
-    },
+    "components-kbd--rtl": { "module": "tests/browser-harness/scenarios/Kbd.tsx", "export": "Rtl" },
     "components-kbd--long": {
       "module": "tests/browser-harness/scenarios/Kbd.tsx",
       "export": "Long"
@@ -1864,10 +1861,7 @@
     {
       "file": "tests/browser-harness/specs/harness/lifecycle.spec.ts",
       "project": "components",
-      "scenarios": [
-        "components-button--playground",
-        "components-code-block--playground"
-      ],
+      "scenarios": ["components-button--playground", "components-code-block--playground"],
       "roots": [],
       "resources": []
     },
@@ -2304,18 +2298,14 @@
     {
       "file": "tests/browser-harness/specs/themes/themes.spec.ts",
       "project": "components",
-      "scenarios": [
-        "components-button--both-themes"
-      ],
+      "scenarios": ["components-button--both-themes"],
       "roots": [],
       "resources": []
     },
     {
       "file": "tests/browser-harness/specs/icon/IconGallery.spec.ts",
       "project": "components",
-      "scenarios": [
-        "components-icon--gallery"
-      ],
+      "scenarios": ["components-icon--gallery"],
       "roots": [],
       "resources": []
     },
@@ -2525,9 +2515,7 @@
     {
       "project": "components",
       "file": "tests/browser-harness/specs/app-content/AppContent.spec.ts",
-      "scenarios": [
-        "components-app-content--playground"
-      ]
+      "scenarios": ["components-app-content--playground"]
     },
     {
       "project": "components",
@@ -2700,7 +2688,7 @@
     }
   ],
   "discovery": {
-    "playwright.config.ts": "1ad329baf96f0f23d4859f7c983db53978a84f5efa500cafb0839c2d9c325bb6",
-    "playwright.components.config.ts": "af508ca48bc348d1effd5ad87fc0d729e73be2b8c1c619e40671bae28aca6cfd"
+    "playwright.config.ts": "a50784ea342bbbca39afa6c0862b8ee785d35df0bbd6c2d35888a912894ed14b",
+    "playwright.components.config.ts": "5257b871bc700146ce39fb034b1ed4c5d63a181ea716897dc04e1d53cb7c2844"
   }
 }

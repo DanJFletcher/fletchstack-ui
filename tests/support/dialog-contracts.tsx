@@ -23,7 +23,17 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
     const ref = createRef<HTMLDialogElement>();
 
     // act
-    render(<Dialog ref={ref} open onOpenChange={vi.fn()} heading="Review" id="review" className="instance" style={{ '--fs-dialog-radius': '20px' }} />);
+    render(
+      <Dialog
+        ref={ref}
+        open
+        onOpenChange={vi.fn()}
+        heading="Review"
+        id="review"
+        className="instance"
+        style={{ '--fs-dialog-radius': '20px' }}
+      />,
+    );
 
     // assert
     expect(ref.current).toBe(screen.getByRole('dialog', { name: 'Review' }));
@@ -33,40 +43,74 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
   });
   it('associates heading and composed description with unique IDs', () => {
     // arrange
-    const props = { open: true, onOpenChange: vi.fn(), heading: 'Review', description: 'Check the draft', headingLevel: 3 as const };
+    const props = {
+      open: true,
+      onOpenChange: vi.fn(),
+      heading: 'Review',
+      description: 'Check the draft',
+      headingLevel: 3 as const,
+    };
 
     // act
-    render(<><p id="hint">Additional context</p><Dialog {...props} aria-describedby="hint" /><Dialog {...props} /></>);
+    render(
+      <>
+        <p id="hint">Additional context</p>
+        <Dialog {...props} aria-describedby="hint" />
+        <Dialog {...props} />
+      </>,
+    );
 
     // assert
     const dialogs = screen.getAllByRole('dialog');
     expect(dialogs[0]).toHaveAccessibleDescription('Additional context Check the draft');
-    expect(dialogs[0]?.getAttribute('aria-labelledby')).not.toBe(dialogs[1]?.getAttribute('aria-labelledby'));
+    expect(dialogs[0]?.getAttribute('aria-labelledby')).not.toBe(
+      dialogs[1]?.getAttribute('aria-labelledby'),
+    );
     expect(screen.getAllByRole('heading', { level: 3 })).toHaveLength(2);
   });
   it('honors an explicit accessible name without generating a heading reference', () => {
     // arrange
-    const props = { open: true, onOpenChange: vi.fn(), heading: 'Visible heading', 'aria-label': 'Custom name' };
+    const props = {
+      open: true,
+      onOpenChange: vi.fn(),
+      heading: 'Visible heading',
+      'aria-label': 'Custom name',
+    };
 
     // act
     render(<Dialog {...props} />);
 
     // assert
-    expect(screen.getByRole('dialog', { name: 'Custom name' })).not.toHaveAttribute('aria-labelledby');
+    expect(screen.getByRole('dialog', { name: 'Custom name' })).not.toHaveAttribute(
+      'aria-labelledby',
+    );
   });
   it('preserves an explicit labelledby reference', () => {
     // arrange
     const props = { open: true, onOpenChange: vi.fn(), heading: 'Visible heading' };
 
     // act
-    render(<><h1 id="external">External name</h1><Dialog {...props} aria-labelledby="external" /></>);
+    render(
+      <>
+        <h1 id="external">External name</h1>
+        <Dialog {...props} aria-labelledby="external" />
+      </>,
+    );
 
     // assert
-    expect(screen.getByRole('dialog', { name: 'External name' })).toHaveAttribute('aria-labelledby', 'external');
+    expect(screen.getByRole('dialog', { name: 'External name' })).toHaveAttribute(
+      'aria-labelledby',
+      'external',
+    );
   });
   it('omits absent slots', () => {
     // arrange
-    const props = { open: true, onOpenChange: vi.fn(), showCloseButton: false, 'aria-label': 'Empty' };
+    const props = {
+      open: true,
+      onOpenChange: vi.fn(),
+      showCloseButton: false,
+      'aria-label': 'Empty',
+    };
 
     // act
     render(<Dialog {...props} />);
@@ -76,28 +120,51 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
   });
   it('associates a description without a heading', () => {
     // arrange
-    const props = { open: true, onOpenChange: vi.fn(), description: 'Supporting context', 'aria-label': 'Review', showCloseButton: false };
+    const props = {
+      open: true,
+      onOpenChange: vi.fn(),
+      description: 'Supporting context',
+      'aria-label': 'Review',
+      showCloseButton: false,
+    };
 
     // act
     render(<Dialog {...props}>Draft content</Dialog>);
 
     // assert
-    expect(screen.getByRole('dialog', { name: 'Review' })).toHaveAccessibleDescription('Supporting context');
+    expect(screen.getByRole('dialog', { name: 'Review' })).toHaveAccessibleDescription(
+      'Supporting context',
+    );
   });
   it('renders rich footer content', () => {
     // arrange
-    const props = { open: true, onOpenChange: vi.fn(), heading: 'Review', footer: <a href="#confirm">Confirm changes</a> };
+    const props = {
+      open: true,
+      onOpenChange: vi.fn(),
+      heading: 'Review',
+      footer: <a href="#confirm">Confirm changes</a>,
+    };
 
     // act
-    render(<Dialog {...props}><p>Draft content</p></Dialog>);
+    render(
+      <Dialog {...props}>
+        <p>Draft content</p>
+      </Dialog>,
+    );
 
     // assert
-    expect(screen.getByRole('link', { name: 'Confirm changes' })).toHaveAttribute('href', '#confirm');
+    expect(screen.getByRole('link', { name: 'Confirm changes' })).toHaveAttribute(
+      'href',
+      '#confirm',
+    );
   });
   it('requests dismissal without closing a controlled dialog prematurely', async () => {
     // arrange
-    const onOpenChange = vi.fn(), user = userEvent.setup();
-    render(<Dialog open heading="Review" onOpenChange={onOpenChange} closeLabel="Dismiss review" />);
+    const onOpenChange = vi.fn(),
+      user = userEvent.setup();
+    render(
+      <Dialog open heading="Review" onOpenChange={onOpenChange} closeLabel="Dismiss review" />,
+    );
 
     // act
     await user.click(screen.getByRole('button', { name: 'Dismiss review' }));
@@ -106,13 +173,33 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
     expect(onOpenChange).toHaveBeenCalledExactlyOnceWith(false);
     expect(screen.getByRole('dialog')).toHaveAttribute('open');
   });
-  it.each([{ blocked: false, veto: false, requests: 1 }, { blocked: true, veto: false, requests: 0 }, { blocked: false, veto: true, requests: 0 }])('coordinates native Escape cancellation: %j', ({ blocked, veto, requests }) => {
+  it.each([
+    { blocked: false, veto: false, requests: 1 },
+    { blocked: true, veto: false, requests: 0 },
+    { blocked: false, veto: true, requests: 0 },
+  ])('coordinates native Escape cancellation: %j', ({ blocked, veto, requests }) => {
     // arrange
-    const onOpenChange = vi.fn(), onCancel = vi.fn(event => { if (veto) { event.preventDefault(); } });
-    render(<Dialog open heading="Review" onOpenChange={onOpenChange} closeOnEscape={!blocked} onCancel={onCancel} />);
+    const onOpenChange = vi.fn(),
+      onCancel = vi.fn((event) => {
+        if (veto) {
+          event.preventDefault();
+        }
+      });
+    render(
+      <Dialog
+        open
+        heading="Review"
+        onOpenChange={onOpenChange}
+        closeOnEscape={!blocked}
+        onCancel={onCancel}
+      />,
+    );
 
     // act
-    const nativeAllowed = fireEvent(screen.getByRole('dialog'), new Event('cancel', { cancelable: true }));
+    const nativeAllowed = fireEvent(
+      screen.getByRole('dialog'),
+      new Event('cancel', { cancelable: true }),
+    );
 
     // assert
     expect(nativeAllowed).toBe(false);
@@ -144,7 +231,11 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
     // assert
     expect(onOpenChange).toHaveBeenCalledExactlyOnceWith(false);
   });
-  it.each([{ x: 101, y: 10 }, { x: 10, y: -1 }, { x: 10, y: 101 }])('recognizes each backdrop boundary: %j', ({ x, y }) => {
+  it.each([
+    { x: 101, y: 10 },
+    { x: 10, y: -1 },
+    { x: 10, y: 101 },
+  ])('recognizes each backdrop boundary: %j', ({ x, y }) => {
     // arrange
     const onOpenChange = vi.fn();
     render(<Dialog open heading="Review" onOpenChange={onOpenChange} closeOnBackdropClick />);
@@ -160,8 +251,12 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
   });
   it('reports an imperative native close once', () => {
     // arrange
-    const ref = createRef<HTMLDialogElement>(), onOpenChange = vi.fn(), onClose = vi.fn();
-    render(<Dialog ref={ref} open onOpenChange={onOpenChange} onClose={onClose} heading="Review" />);
+    const ref = createRef<HTMLDialogElement>(),
+      onOpenChange = vi.fn(),
+      onClose = vi.fn();
+    render(
+      <Dialog ref={ref} open onOpenChange={onOpenChange} onClose={onClose} heading="Review" />,
+    );
 
     // act
     act(() => ref.current!.close());
@@ -188,26 +283,49 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
     { enabled: true, cancel: true, start: -1, end: -1, requests: 0 },
     { enabled: true, cancel: false, start: 10, end: -1, requests: 0 },
     { enabled: true, cancel: false, start: 10, end: 10, requests: 0 },
-  ])('dismisses only an uncancelled gesture entirely on the enabled backdrop: %j', ({ enabled, cancel, start, end, requests }) => {
-    // arrange
-    const onOpenChange = vi.fn(), onClick = vi.fn(event => { if (cancel) { event.preventDefault(); } }), onPointerDown = vi.fn();
-    render(<Dialog open heading="Review" onOpenChange={onOpenChange} closeOnBackdropClick={enabled} onClick={onClick} onPointerDown={onPointerDown} />);
-    const dialog = screen.getByRole('dialog');
-    dialog.getBoundingClientRect = () => new DOMRect(0, 0, 100, 100);
-    fireEvent.pointerDown(dialog, { clientX: start, clientY: 10 });
+  ])(
+    'dismisses only an uncancelled gesture entirely on the enabled backdrop: %j',
+    ({ enabled, cancel, start, end, requests }) => {
+      // arrange
+      const onOpenChange = vi.fn(),
+        onClick = vi.fn((event) => {
+          if (cancel) {
+            event.preventDefault();
+          }
+        }),
+        onPointerDown = vi.fn();
+      render(
+        <Dialog
+          open
+          heading="Review"
+          onOpenChange={onOpenChange}
+          closeOnBackdropClick={enabled}
+          onClick={onClick}
+          onPointerDown={onPointerDown}
+        />,
+      );
+      const dialog = screen.getByRole('dialog');
+      dialog.getBoundingClientRect = () => new DOMRect(0, 0, 100, 100);
+      fireEvent.pointerDown(dialog, { clientX: start, clientY: 10 });
 
-    // act
-    fireEvent.click(dialog, { clientX: end, clientY: 10 });
+      // act
+      fireEvent.click(dialog, { clientX: end, clientY: 10 });
 
-    // assert
-    expect(onOpenChange).toHaveBeenCalledTimes(requests);
-    expect(onClick).toHaveBeenCalledOnce();
-    expect(onPointerDown).toHaveBeenCalledOnce();
-  });
+      // assert
+      expect(onOpenChange).toHaveBeenCalledTimes(requests);
+      expect(onClick).toHaveBeenCalledOnce();
+      expect(onPointerDown).toHaveBeenCalledOnce();
+    },
+  );
   it('ignores clicks on content descendants', async () => {
     // arrange
-    const onOpenChange = vi.fn(), user = userEvent.setup();
-    render(<Dialog open heading="Review" onOpenChange={onOpenChange} closeOnBackdropClick><button>Action</button></Dialog>);
+    const onOpenChange = vi.fn(),
+      user = userEvent.setup();
+    render(
+      <Dialog open heading="Review" onOpenChange={onOpenChange} closeOnBackdropClick>
+        <button>Action</button>
+      </Dialog>,
+    );
 
     // act
     await user.click(screen.getByRole('button', { name: 'Action' }));
@@ -218,7 +336,9 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
   it('waits for the modal exit before native close', async () => {
     // arrange
     let finish!: () => void;
-    const finished = new Promise<void>(resolve => { finish = resolve; });
+    const finished = new Promise<void>((resolve) => {
+      finish = resolve;
+    });
     const props = { heading: 'Review', onOpenChange: vi.fn() };
     const view = render(<Dialog {...props} open />);
     const dialog = screen.getByRole('dialog') as HTMLDialogElement;
@@ -227,7 +347,10 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
     expect(dialog.open).toBe(true);
 
     // act
-    await act(async () => { finish(); await finished; });
+    await act(async () => {
+      finish();
+      await finished;
+    });
 
     // assert
     expect(dialog.open).toBe(false);
@@ -235,7 +358,9 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
   it('cancels a pending exit when the parent reopens', async () => {
     // arrange
     let finish!: () => void;
-    const finished = new Promise<void>(resolve => { finish = resolve; });
+    const finished = new Promise<void>((resolve) => {
+      finish = resolve;
+    });
     const props = { heading: 'Review', onOpenChange: vi.fn(), motion: 'slide' as const };
     const view = render(<Dialog {...props} open />);
     const dialog = screen.getByRole('dialog') as HTMLDialogElement;
@@ -244,7 +369,10 @@ export function dialogContracts(render: (element: ReactElement) => RenderResult)
     view.rerender(<Dialog {...props} open />);
 
     // act
-    await act(async () => { finish(); await finished; });
+    await act(async () => {
+      finish();
+      await finished;
+    });
 
     // assert
     expect(dialog.open).toBe(true);

@@ -15,7 +15,10 @@ for (const atom of atoms) {
     const examples = preview.locator('.field-atom-demo');
     await examples.nth(1).getByText('Project name', { exact: true }).click();
     await expect(examples.nth(1).getByRole('textbox')).toBeFocused();
-    await preview.getByRole('link', { name: 'Explore composed Field', exact: true }).first().click();
+    await preview
+      .getByRole('link', { name: 'Explore composed Field', exact: true })
+      .first()
+      .click();
     await expect(page).toHaveURL(/path=\/docs\/components-field--docs/);
     await expect(preview.getByRole('heading', { name: 'Field', exact: true })).toBeVisible();
   });

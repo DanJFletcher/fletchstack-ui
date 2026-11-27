@@ -4,7 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { Combobox } from '../../src/components/combobox/Combobox';
 
-const options = [{ value: 'gb', label: 'United Kingdom' }, { value: 'closed', label: 'Unavailable', disabled: true }, { value: 'us', label: 'United States' }, { value: 'ca', label: 'Canada' }];
+const options = [
+  { value: 'gb', label: 'United Kingdom' },
+  { value: 'closed', label: 'Unavailable', disabled: true },
+  { value: 'us', label: 'United States' },
+  { value: 'ca', label: 'Canada' },
+];
 const base = { label: 'Region', options };
 
 /**
@@ -25,28 +30,38 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('opens all choices on focus', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />);
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
 
       // act
       await user.tab();
 
       // assert
       expect(screen.getAllByRole('option')).toHaveLength(4);
-      expect(screen.getByRole('listbox', { name: 'Region' })).toHaveAttribute('id', screen.getByRole('combobox').getAttribute('aria-controls'));
+      expect(screen.getByRole('listbox', { name: 'Region' })).toHaveAttribute(
+        'id',
+        screen.getByRole('combobox').getAttribute('aria-controls'),
+      );
     });
     it('filters visible labels case insensitively', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />);
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
 
       // act
       await user.type(screen.getByRole('combobox'), 'UNI');
 
       // assert
-      expect(screen.getAllByRole('option').map(option => option.textContent)).toEqual(['United Kingdom', 'United States']);
+      expect(screen.getAllByRole('option').map((option) => option.textContent)).toEqual([
+        'United Kingdom',
+        'United States',
+      ]);
     });
     it('commits a pointer choice as its full label while retaining focus', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.click(screen.getByRole('option', { name: 'United Kingdom' }));
@@ -58,7 +73,11 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('submits the selected identity instead of the visible label', () => {
       // arrange
-      mount(<form aria-label="Regions"><Combobox {...base} name="region" defaultValue="gb" /></form>);
+      mount(
+        <form aria-label="Regions">
+          <Combobox {...base} name="region" defaultValue="gb" />
+        </form>,
+      );
 
       // act
       const result = new FormData(screen.getByRole('form') as HTMLFormElement).get('region');
@@ -68,7 +87,12 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('removes the successful form entry immediately when editing', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<form aria-label="Regions"><Combobox {...base} name="region" defaultValue="gb" /></form>);
+      const user = userEvent.setup();
+      mount(
+        <form aria-label="Regions">
+          <Combobox {...base} name="region" defaultValue="gb" />
+        </form>,
+      );
 
       // act
       await user.type(screen.getByRole('combobox'), 'x');
@@ -78,13 +102,16 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('clears the selection with a localized button and restores input focus', async () => {
       // arrange
-      const user = userEvent.setup(); const change = vi.fn(); mount(<Combobox {...base} defaultValue="gb" clearLabel="Effacer" onValueChange={change} />);
+      const user = userEvent.setup();
+      const change = vi.fn();
+      mount(<Combobox {...base} defaultValue="gb" clearLabel="Effacer" onValueChange={change} />);
 
       // act
       await user.click(screen.getByRole('button', { name: 'Effacer' }));
 
       // assert
-      expect(screen.getByRole('combobox')).toHaveValue(''); expect(screen.getByRole('combobox')).toHaveFocus();
+      expect(screen.getByRole('combobox')).toHaveValue('');
+      expect(screen.getByRole('combobox')).toHaveFocus();
       expect(change).toHaveBeenCalledExactlyOnceWith('');
     });
     it('can suppress the clear action', () => {
@@ -98,7 +125,9 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('keeps the clear action in normal keyboard tab order', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} defaultValue="gb" />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} defaultValue="gb" />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.tab();
@@ -109,18 +138,32 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('does not commit when moving the highlight', async () => {
       // arrange
-      const user = userEvent.setup(); const change = vi.fn(); mount(<Combobox {...base} value="gb" onValueChange={change} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      const change = vi.fn();
+      mount(<Combobox {...base} value="gb" onValueChange={change} />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.keyboard('{ArrowDown}');
 
       // assert
-      expect(change).not.toHaveBeenCalled(); expect(screen.getByRole('combobox')).toHaveValue('United Kingdom');
-      expect(screen.getByRole('combobox')).toHaveAttribute('aria-activedescendant', screen.getByRole('option', { name: 'United States' }).id);
+      expect(change).not.toHaveBeenCalled();
+      expect(screen.getByRole('combobox')).toHaveValue('United Kingdom');
+      expect(screen.getByRole('combobox')).toHaveAttribute(
+        'aria-activedescendant',
+        screen.getByRole('option', { name: 'United States' }).id,
+      );
     });
-    it.each([['{End}{Enter}', 'Canada'], ['{End}{Home}{Enter}', 'United Kingdom'], ['{ArrowDown}{Enter}', 'United States'], ['{ArrowUp}{Enter}', 'Canada']])('commits keyboard sequence %s', async (keys, label) => {
+    it.each([
+      ['{End}{Enter}', 'Canada'],
+      ['{End}{Home}{Enter}', 'United Kingdom'],
+      ['{ArrowDown}{Enter}', 'United States'],
+      ['{ArrowUp}{Enter}', 'Canada'],
+    ])('commits keyboard sequence %s', async (keys, label) => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.keyboard(keys);
@@ -130,7 +173,10 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('opens a closed popup at the last choice with ArrowUp', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />); await user.click(screen.getByRole('combobox')); await user.keyboard('{Escape}');
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
+      await user.click(screen.getByRole('combobox'));
+      await user.keyboard('{Escape}');
 
       // act
       await user.keyboard('{ArrowUp}{Enter}');
@@ -140,17 +186,23 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('restores the committed label on Escape after highlighting', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} defaultValue="gb" />); await user.click(screen.getByRole('combobox')); await user.keyboard('{End}');
+      const user = userEvent.setup();
+      mount(<Combobox {...base} defaultValue="gb" />);
+      await user.click(screen.getByRole('combobox'));
+      await user.keyboard('{End}');
 
       // act
       await user.keyboard('{Escape}');
 
       // assert
-      expect(screen.getByRole('combobox')).toHaveValue('United Kingdom'); expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+      expect(screen.getByRole('combobox')).toHaveValue('United Kingdom');
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
     });
     it('discards an uncommitted query on Escape without restoring a cleared selection', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} defaultValue="gb" />); await user.type(screen.getByRole('combobox'), 'x');
+      const user = userEvent.setup();
+      mount(<Combobox {...base} defaultValue="gb" />);
+      await user.type(screen.getByRole('combobox'), 'x');
 
       // act
       await user.keyboard('{Escape}');
@@ -160,17 +212,32 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('closes on Tab without preventing normal form navigation', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<><Combobox {...base} /><button>Next</button></>); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(
+        <>
+          <Combobox {...base} />
+          <button>Next</button>
+        </>,
+      );
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.tab();
 
       // assert
-      expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus(); expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus();
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
     });
     it('closes when clicking elsewhere', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<><Combobox {...base} /><button>Outside</button></>); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(
+        <>
+          <Combobox {...base} />
+          <button>Outside</button>
+        </>,
+      );
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.click(screen.getByRole('button', { name: 'Outside' }));
@@ -180,68 +247,111 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('refuses disabled pointer choices', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.click(screen.getByRole('option', { name: 'Unavailable' }));
 
       // assert
-      expect(screen.getByRole('combobox')).toHaveValue(''); expect(screen.getByRole('option', { name: 'Unavailable' })).toHaveAttribute('aria-disabled', 'true');
+      expect(screen.getByRole('combobox')).toHaveValue('');
+      expect(screen.getByRole('option', { name: 'Unavailable' })).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
     });
     it('tracks the enabled row under the pointer without committing', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       fireEvent.mouseMove(screen.getByRole('option', { name: 'Canada' }));
 
       // assert
-      expect(screen.getByRole('combobox')).toHaveAttribute('aria-activedescendant', screen.getByRole('option', { name: 'Canada' }).id); expect(screen.getByRole('combobox')).toHaveValue('');
+      expect(screen.getByRole('combobox')).toHaveAttribute(
+        'aria-activedescendant',
+        screen.getByRole('option', { name: 'Canada' }).id,
+      );
+      expect(screen.getByRole('combobox')).toHaveValue('');
     });
     it('does not highlight a disabled row on pointer movement', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       fireEvent.mouseMove(screen.getByRole('option', { name: 'Unavailable' }));
 
       // assert
-      expect(screen.getByRole('combobox')).toHaveAttribute('aria-activedescendant', screen.getByRole('option', { name: 'United Kingdom' }).id);
+      expect(screen.getByRole('combobox')).toHaveAttribute(
+        'aria-activedescendant',
+        screen.getByRole('option', { name: 'United Kingdom' }).id,
+      );
     });
-    it.each([{ loading: true }, { loading: true, loadingMessage: 'Fetching regions' }])('announces loading once without selectable rows: %j', async extra => {
-      // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} {...extra} />);
+    it.each([{ loading: true }, { loading: true, loadingMessage: 'Fetching regions' }])(
+      'announces loading once without selectable rows: %j',
+      async (extra) => {
+        // arrange
+        const user = userEvent.setup();
+        mount(<Combobox {...base} {...extra} />);
 
-      // act
-      await user.click(screen.getByRole('combobox'));
+        // act
+        await user.click(screen.getByRole('combobox'));
 
-      // assert
-      expect(screen.getAllByRole('status')).toHaveLength(1); expect(screen.getByRole('status')).toHaveTextContent(extra.loadingMessage ?? 'Loading options…');
-      expect(screen.queryByRole('option')).not.toBeInTheDocument(); expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-activedescendant');
-    });
-    it.each([{}, { noResultsMessage: 'Nothing found' }])('announces no results after filtering: %j', async extra => {
-      // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} {...extra} />);
+        // assert
+        expect(screen.getAllByRole('status')).toHaveLength(1);
+        expect(screen.getByRole('status')).toHaveTextContent(
+          extra.loadingMessage ?? 'Loading options…',
+        );
+        expect(screen.queryByRole('option')).not.toBeInTheDocument();
+        expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-activedescendant');
+      },
+    );
+    it.each([{}, { noResultsMessage: 'Nothing found' }])(
+      'announces no results after filtering: %j',
+      async (extra) => {
+        // arrange
+        const user = userEvent.setup();
+        mount(<Combobox {...base} {...extra} />);
 
-      // act
-      await user.type(screen.getByRole('combobox'), 'xyz{ArrowDown}{Enter}');
+        // act
+        await user.type(screen.getByRole('combobox'), 'xyz{ArrowDown}{Enter}');
 
-      // assert
-      expect(screen.getByRole('status')).toHaveTextContent(extra.noResultsMessage ?? 'No matching options.'); expect(screen.getByRole('combobox')).toHaveValue('xyz');
-    });
+        // assert
+        expect(screen.getByRole('status')).toHaveTextContent(
+          extra.noResultsMessage ?? 'No matching options.',
+        );
+        expect(screen.getByRole('combobox')).toHaveValue('xyz');
+      },
+    );
     it('supports custom filtering and ordering by option values', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} filterOptions={(items, query) => items.filter(option => option.value.startsWith(query)).reverse()} />);
+      const user = userEvent.setup();
+      mount(
+        <Combobox
+          {...base}
+          filterOptions={(items, query) =>
+            items.filter((option) => option.value.startsWith(query)).reverse()
+          }
+        />,
+      );
 
       // act
       await user.type(screen.getByRole('combobox'), 'g');
 
       // assert
-      expect(screen.getAllByRole('option').map(option => option.textContent)).toEqual(['United Kingdom']);
+      expect(screen.getAllByRole('option').map((option) => option.textContent)).toEqual([
+        'United Kingdom',
+      ]);
     });
     it('requires an explicit option choice even when the typed text matches its label', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} required />);
+      const user = userEvent.setup();
+      mount(<Combobox {...base} required />);
 
       // act
       await user.type(screen.getByRole('combobox'), 'United Kingdom');
@@ -251,7 +361,9 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('becomes valid after selecting a required option', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} required />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} required />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.keyboard('{Enter}');
@@ -263,10 +375,24 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
       // arrange
 
       // act
-      mount(<><p id="context">Account region</p><Combobox {...base} id="region" description="Choose your region" error="Choose a region" aria-describedby="context" /></>);
+      mount(
+        <>
+          <p id="context">Account region</p>
+          <Combobox
+            {...base}
+            id="region"
+            description="Choose your region"
+            error="Choose a region"
+            aria-describedby="context"
+          />
+        </>,
+      );
 
       // assert
-      expect(screen.getByRole('combobox')).toHaveAccessibleDescription('Account region Choose your region Choose a region'); expect(screen.getByRole('combobox')).toHaveAttribute('aria-invalid', 'true');
+      expect(screen.getByRole('combobox')).toHaveAccessibleDescription(
+        'Account region Choose your region Choose a region',
+      );
+      expect(screen.getByRole('combobox')).toHaveAttribute('aria-invalid', 'true');
     });
     it('supports invalid paint without creating a native validation message', () => {
       // arrange
@@ -275,31 +401,40 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
       mount(<Combobox {...base} invalid />);
 
       // assert
-      expect(screen.getByRole('combobox')).toHaveAttribute('aria-invalid', 'true'); expect((screen.getByRole('combobox') as HTMLInputElement).validationMessage).toBe('');
+      expect(screen.getByRole('combobox')).toHaveAttribute('aria-invalid', 'true');
+      expect((screen.getByRole('combobox') as HTMLInputElement).validationMessage).toBe('');
     });
     it('retains a disabled score without allowing interaction', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} defaultValue="gb" disabled />);
+      const user = userEvent.setup();
+      mount(<Combobox {...base} defaultValue="gb" disabled />);
 
       // act
       await user.click(screen.getByRole('combobox'));
 
       // assert
-      expect(screen.getByRole('combobox')).toHaveValue('United Kingdom'); expect(screen.getByRole('combobox')).toBeDisabled(); expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+      expect(screen.getByRole('combobox')).toHaveValue('United Kingdom');
+      expect(screen.getByRole('combobox')).toBeDisabled();
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
     });
     it('keeps readonly fields closed on keyboard interaction', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} defaultValue="gb" readOnly />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} defaultValue="gb" readOnly />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.keyboard('{ArrowDown}{Enter}');
 
       // assert
-      expect(screen.queryByRole('listbox')).not.toBeInTheDocument(); expect(screen.getByRole('combobox')).toHaveValue('United Kingdom');
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+      expect(screen.getByRole('combobox')).toHaveValue('United Kingdom');
     });
     it('honors a prevented consumer key event', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} onKeyDown={event => event.preventDefault()} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} onKeyDown={(event) => event.preventDefault()} />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.keyboard('{Enter}');
@@ -309,7 +444,9 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('does not commit during IME composition', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       fireEvent.keyDown(screen.getByRole('combobox'), { key: 'Enter', isComposing: true });
@@ -319,7 +456,9 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('updates from a controlled parent', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Controlled />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Controlled />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.click(screen.getByRole('option', { name: 'Canada' }));
@@ -329,7 +468,9 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('keeps controlled selection authoritative when a parent rejects a new choice', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} value="gb" />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} value="gb" />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.click(screen.getByRole('option', { name: 'Canada' }));
@@ -339,7 +480,12 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('removes controlled submission immediately even before the parent acknowledges editing', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<form aria-label="Regions"><Combobox {...base} name="region" value="gb" /></form>);
+      const user = userEvent.setup();
+      mount(
+        <form aria-label="Regions">
+          <Combobox {...base} name="region" value="gb" />
+        </form>,
+      );
 
       // act
       await user.type(screen.getByRole('combobox'), 'x');
@@ -349,7 +495,14 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('resets uncontrolled selection to its initial identity', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<form aria-label="Regions"><Combobox {...base} defaultValue="gb" /><button type="reset">Reset</button></form>); await user.type(screen.getByRole('combobox'), 'x');
+      const user = userEvent.setup();
+      mount(
+        <form aria-label="Regions">
+          <Combobox {...base} defaultValue="gb" />
+          <button type="reset">Reset</button>
+        </form>,
+      );
+      await user.type(screen.getByRole('combobox'), 'x');
 
       // act
       await user.click(screen.getByRole('button', { name: 'Reset' }));
@@ -359,7 +512,14 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('respects canceled form reset', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<form onReset={event => event.preventDefault()}><Combobox {...base} defaultValue="gb" /><button type="reset">Reset</button></form>); await user.type(screen.getByRole('combobox'), 'x');
+      const user = userEvent.setup();
+      mount(
+        <form onReset={(event) => event.preventDefault()}>
+          <Combobox {...base} defaultValue="gb" />
+          <button type="reset">Reset</button>
+        </form>,
+      );
+      await user.type(screen.getByRole('combobox'), 'x');
 
       // act
       await user.click(screen.getByRole('button', { name: 'Reset' }));
@@ -369,7 +529,12 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('associates external form values by form id', () => {
       // arrange
-      mount(<><form id="regions" aria-label="Regions" /><Combobox {...base} name="region" form="regions" defaultValue="ca" /></>);
+      mount(
+        <>
+          <form id="regions" aria-label="Regions" />
+          <Combobox {...base} name="region" form="regions" defaultValue="ca" />
+        </>,
+      );
 
       // act
       const result = new FormData(screen.getByRole('form') as HTMLFormElement).get('region');
@@ -379,7 +544,8 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('forwards a native input ref', () => {
       // arrange
-      const ref = createRef<HTMLInputElement>(); mount(<Combobox {...base} ref={ref} />);
+      const ref = createRef<HTMLInputElement>();
+      mount(<Combobox {...base} ref={ref} />);
 
       // act
       act(() => ref.current!.focus());
@@ -389,7 +555,15 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('uses distinct list and option ids for multiple instances', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<><Combobox {...base} label="First" /><Combobox {...base} label="Second" /></>); await user.click(screen.getByRole('combobox', { name: 'First' })); const first = screen.getByRole('option', { name: 'Canada' }).id;
+      const user = userEvent.setup();
+      mount(
+        <>
+          <Combobox {...base} label="First" />
+          <Combobox {...base} label="Second" />
+        </>,
+      );
+      await user.click(screen.getByRole('combobox', { name: 'First' }));
+      const first = screen.getByRole('option', { name: 'Canada' }).id;
 
       // act
       await user.click(screen.getByRole('combobox', { name: 'Second' }));
@@ -399,7 +573,8 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('clears controlled selection when the parent accepts an edit', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Controlled />);
+      const user = userEvent.setup();
+      mount(<Controlled />);
 
       // act
       await user.type(screen.getByRole('combobox'), 'x');
@@ -409,7 +584,14 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('keeps controlled authority during a native form reset', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<form><Combobox {...base} value="ca" defaultValue="gb" /><button type="reset">Reset</button></form>); await user.type(screen.getByRole('combobox'), 'x');
+      const user = userEvent.setup();
+      mount(
+        <form>
+          <Combobox {...base} value="ca" defaultValue="gb" />
+          <button type="reset">Reset</button>
+        </form>,
+      );
+      await user.type(screen.getByRole('combobox'), 'x');
 
       // act
       await user.click(screen.getByRole('button', { name: 'Reset' }));
@@ -419,7 +601,15 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('resets an unanswered field to empty after a selection', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<form><Combobox {...base} /><button type="reset">Reset</button></form>); await user.click(screen.getByRole('combobox')); await user.keyboard('{Enter}');
+      const user = userEvent.setup();
+      mount(
+        <form>
+          <Combobox {...base} />
+          <button type="reset">Reset</button>
+        </form>,
+      );
+      await user.click(screen.getByRole('combobox'));
+      await user.keyboard('{Enter}');
 
       // act
       await user.click(screen.getByRole('button', { name: 'Reset' }));
@@ -429,17 +619,27 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('keeps an all-disabled list unselected on Enter', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} options={[{ value: 'closed', label: 'Unavailable', disabled: true }]} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(
+        <Combobox
+          {...base}
+          options={[{ value: 'closed', label: 'Unavailable', disabled: true }]}
+        />,
+      );
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.keyboard('{ArrowDown}{Enter}');
 
       // assert
-      expect(screen.getByRole('combobox')).toHaveValue(''); expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-activedescendant');
+      expect(screen.getByRole('combobox')).toHaveValue('');
+      expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-activedescendant');
     });
     it('does not allow a custom filter to replace disabled canonical data', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} filterOptions={() => [{ value: 'closed', label: 'Changed' }]} />); await user.click(screen.getByRole('combobox'));
+      const user = userEvent.setup();
+      mount(<Combobox {...base} filterOptions={() => [{ value: 'closed', label: 'Changed' }]} />);
+      await user.click(screen.getByRole('combobox'));
 
       // act
       await user.click(screen.getByRole('option', { name: 'Unavailable' }));
@@ -449,7 +649,9 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('notifies a consumer when the native search input receives focus', async () => {
       // arrange
-      const user = userEvent.setup(); const focus = vi.fn(); mount(<Combobox {...base} onFocus={focus} />);
+      const user = userEvent.setup();
+      const focus = vi.fn();
+      mount(<Combobox {...base} onFocus={focus} />);
 
       // act
       await user.tab();
@@ -459,8 +661,11 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
     });
     it('scrolls a keyboard target into the popup viewport when scrolling is supported', async () => {
       // arrange
-      const user = userEvent.setup(); mount(<Combobox {...base} />); await user.click(screen.getByRole('combobox'));
-      const scroll = vi.fn(); screen.getByRole('option', { name: 'Canada' }).scrollIntoView = scroll;
+      const user = userEvent.setup();
+      mount(<Combobox {...base} />);
+      await user.click(screen.getByRole('combobox'));
+      const scroll = vi.fn();
+      screen.getByRole('option', { name: 'Canada' }).scrollIntoView = scroll;
 
       // act
       await user.keyboard('{End}');
@@ -468,7 +673,14 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
       // assert
       expect(scroll).toHaveBeenCalledExactlyOnceWith({ block: 'nearest' });
     });
-    it.each([{ options: [{ value: '', label: 'Empty' }] }, { options: [{ value: 'a', label: ' ' }] }, { options: [options[0]!, options[0]!] }, { value: 'missing' }, { filterOptions: () => [{ value: 'missing', label: 'Missing' }] }, { filterOptions: () => [options[0]!, options[0]!] }])('rejects ambiguous option data: %j', extra => {
+    it.each([
+      { options: [{ value: '', label: 'Empty' }] },
+      { options: [{ value: 'a', label: ' ' }] },
+      { options: [options[0]!, options[0]!] },
+      { value: 'missing' },
+      { filterOptions: () => [{ value: 'missing', label: 'Missing' }] },
+      { filterOptions: () => [options[0]!, options[0]!] },
+    ])('rejects ambiguous option data: %j', (extra) => {
       // arrange
       const error = vi.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -476,7 +688,8 @@ export function comboboxContracts(mount: (element: ReactElement) => unknown) {
       const result = () => mount(<Combobox {...base} {...extra} />);
 
       // assert
-      expect(result).toThrow(); error.mockRestore();
+      expect(result).toThrow();
+      error.mockRestore();
     });
   });
 }

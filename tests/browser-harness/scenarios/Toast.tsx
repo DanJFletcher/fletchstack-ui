@@ -1,5 +1,14 @@
 import { Toast, type ToastProps } from '../../../src/components/toast/Toast';
-import { ControlledToast, PositionedToast, NarrowToast, TimedToast, ToastExample, ToastOverrides, ToastQueue, ToastTones } from '../../../src/components/toast/stories/toast-examples';
+import {
+  ControlledToast,
+  PositionedToast,
+  NarrowToast,
+  TimedToast,
+  ToastExample,
+  ToastOverrides,
+  ToastQueue,
+  ToastTones,
+} from '../../../src/components/toast/stories/toast-examples';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/toast/toast.css';
 import '../../../src/components/icon/icon.css';
@@ -15,5 +24,19 @@ const Tones: Scenario<ToastProps> = { render: () => <ToastTones /> };
 const Positions: Scenario<ToastProps> = { render: () => <PositionedToast /> };
 const PositionedStack: Scenario<ToastProps> = { render: () => <PositionedToast stacked /> };
 export const component = Toast;
-export const defaults: ToastProps = { title: 'Changes saved', children: 'Your team can see the latest version.' };
-export const scenarios = { Playground, Composition, Controlled, Timed, InteractiveQueue, Narrow, ScopedOverrides, Tones, Positions, PositionedStack };
+export const defaults: ToastProps = {
+  title: 'Changes saved',
+  children: 'Your team can see the latest version.',
+};
+export const scenarios = {
+  Playground,
+  Composition,
+  Controlled,
+  Timed,
+  InteractiveQueue,
+  Narrow,
+  ScopedOverrides,
+  Tones,
+  Positions,
+  PositionedStack,
+};

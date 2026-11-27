@@ -1,40 +1,114 @@
 /* Inspection overrides only. This stylesheet is never part of library styles. */
-html[data-fs-preview-motion="reduced"] .fs-spinner .fs-spinner__graphic { animation: none; }
-html[data-fs-preview-motion="reduced"] .fs-accordion .fs-accordion__panel,
-html[data-fs-preview-motion="reduced"] .fs-accordion .fs-accordion__chevron,
-html[data-fs-preview-motion="reduced"] .motion-sample { transition: none; }
+html[data-fs-preview-motion='reduced'] .fs-spinner .fs-spinner__graphic {
+  animation: none;
+}
+html[data-fs-preview-motion='reduced'] .fs-accordion .fs-accordion__panel,
+html[data-fs-preview-motion='reduced'] .fs-accordion .fs-accordion__chevron,
+html[data-fs-preview-motion='reduced'] .motion-sample {
+  transition: none;
+}
 
-html[data-fs-preview-motion="full"] .fs-spinner .fs-spinner__graphic { animation: fs-spinner-rotate calc(var(--fs-motion-duration-spinner) * var(--fs-spinner-rotation-seconds)) linear infinite; }
-html[data-fs-preview-motion="full"] .fs-accordion .fs-accordion__chevron { transition: transform var(--fs-motion-duration-standard) var(--fs-motion-easing-standard); }
-html[data-fs-preview-motion="full"] .fs-accordion--motion-expand .fs-accordion__panel { transition: grid-template-rows var(--fs-motion-duration-standard) var(--fs-motion-easing-standard), opacity var(--fs-motion-duration-standard) var(--fs-motion-easing-standard), visibility 0s linear var(--fs-motion-duration-standard); }
-html[data-fs-preview-motion="full"] .fs-accordion--motion-expand .fs-accordion__panel[aria-hidden="false"] { transition-delay: 0s; }
-html[data-fs-preview-motion="full"] .motion-sample { transition: transform var(--motion-example-duration, var(--fs-motion-duration-standard)) var(--motion-example-easing, var(--fs-motion-easing-standard)); }
+html[data-fs-preview-motion='full'] .fs-spinner .fs-spinner__graphic {
+  animation: fs-spinner-rotate
+    calc(var(--fs-motion-duration-spinner) * var(--fs-spinner-rotation-seconds)) linear infinite;
+}
+html[data-fs-preview-motion='full'] .fs-accordion .fs-accordion__chevron {
+  transition: transform var(--fs-motion-duration-standard) var(--fs-motion-easing-standard);
+}
+html[data-fs-preview-motion='full'] .fs-accordion--motion-expand .fs-accordion__panel {
+  transition:
+    grid-template-rows var(--fs-motion-duration-standard) var(--fs-motion-easing-standard),
+    opacity var(--fs-motion-duration-standard) var(--fs-motion-easing-standard),
+    visibility 0s linear var(--fs-motion-duration-standard);
+}
+html[data-fs-preview-motion='full']
+  .fs-accordion--motion-expand
+  .fs-accordion__panel[aria-hidden='false'] {
+  transition-delay: 0s;
+}
+html[data-fs-preview-motion='full'] .motion-sample {
+  transition: transform var(--motion-example-duration, var(--fs-motion-duration-standard))
+    var(--motion-example-easing, var(--fs-motion-easing-standard));
+}
 
-html[data-fs-preview-motion="reduced"] .fs-menu__panel { animation: none; }
-html[data-fs-preview-motion="full"] .fs-menu__panel { animation: fs-menu-appear var(--fs-motion-duration-fast) var(--fs-motion-easing-enter); }
+html[data-fs-preview-motion='reduced'] .fs-menu__panel {
+  animation: none;
+}
+html[data-fs-preview-motion='full'] .fs-menu__panel {
+  animation: fs-menu-appear var(--fs-motion-duration-fast) var(--fs-motion-easing-enter);
+}
 
-html[data-fs-preview-motion="reduced"] .fs-dialog[data-motion] { animation: none; }
-html[data-fs-preview-motion="full"] .fs-dialog[data-motion="fade"][data-state="open"] { animation: fs-dialog-fade-in var(--fs-motion-duration-standard) var(--fs-motion-easing-enter); }
-html[data-fs-preview-motion="full"] .fs-dialog[data-motion="fade"][data-state="closing"] { animation: fs-dialog-fade-out var(--fs-motion-duration-standard) var(--fs-motion-easing-exit) both; }
-html[data-fs-preview-motion="full"] .fs-dialog[data-motion="slide"][data-state="open"] { animation: fs-dialog-slide-in var(--fs-motion-duration-standard) var(--fs-motion-easing-enter); }
-html[data-fs-preview-motion="full"] .fs-dialog[data-motion="slide"][data-state="closing"] { animation: fs-dialog-slide-out var(--fs-motion-duration-standard) var(--fs-motion-easing-exit) both; }
+html[data-fs-preview-motion='reduced'] .fs-dialog[data-motion] {
+  animation: none;
+}
+html[data-fs-preview-motion='full'] .fs-dialog[data-motion='fade'][data-state='open'] {
+  animation: fs-dialog-fade-in var(--fs-motion-duration-standard) var(--fs-motion-easing-enter);
+}
+html[data-fs-preview-motion='full'] .fs-dialog[data-motion='fade'][data-state='closing'] {
+  animation: fs-dialog-fade-out var(--fs-motion-duration-standard) var(--fs-motion-easing-exit) both;
+}
+html[data-fs-preview-motion='full'] .fs-dialog[data-motion='slide'][data-state='open'] {
+  animation: fs-dialog-slide-in var(--fs-motion-duration-standard) var(--fs-motion-easing-enter);
+}
+html[data-fs-preview-motion='full'] .fs-dialog[data-motion='slide'][data-state='closing'] {
+  animation: fs-dialog-slide-out var(--fs-motion-duration-standard) var(--fs-motion-easing-exit)
+    both;
+}
 
-html[data-fs-preview-motion="reduced"] .fs-popover__panel { animation: none; }
-html[data-fs-preview-motion="full"] .fs-popover__panel { animation: fs-popover-appear var(--fs-motion-duration-fast) var(--fs-motion-easing-enter); }
+html[data-fs-preview-motion='reduced'] .fs-popover__panel {
+  animation: none;
+}
+html[data-fs-preview-motion='full'] .fs-popover__panel {
+  animation: fs-popover-appear var(--fs-motion-duration-fast) var(--fs-motion-easing-enter);
+}
 
-html[data-fs-preview-motion="reduced"] .fs-carousel .fs-carousel__slide { transition: none; }
-html[data-fs-preview-motion="full"] .fs-carousel .fs-carousel__slide { transition: transform var(--fs-motion-duration-standard) var(--fs-motion-easing-standard); }
+html[data-fs-preview-motion='reduced'] .fs-carousel .fs-carousel__slide {
+  transition: none;
+}
+html[data-fs-preview-motion='full'] .fs-carousel .fs-carousel__slide {
+  transition: transform var(--fs-motion-duration-standard) var(--fs-motion-easing-standard);
+}
 
-html[data-fs-preview-motion="reduced"] .fs-bounce-cards .fs-bounce-cards__card { animation: none; }
-html[data-fs-preview-motion="reduced"] .fs-bounce-cards .fs-bounce-cards__item { transition: none; }
-html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__card { animation: fs-bounce-cards-enter calc(var(--fs-motion-duration-slow) * 3) var(--fs-motion-easing-enter) var(--fan-delay) backwards; }
-html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item { transition: transform calc(var(--fs-motion-duration-standard) * 2) var(--fs-motion-easing-enter); }
-html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item[data-inspected="true"] .fs-bounce-cards__card { animation: none; }
-html[data-fs-preview-motion="full"] .fs-bounce-cards .fs-bounce-cards__item:focus-within { transition: none; }
+html[data-fs-preview-motion='reduced'] .fs-bounce-cards .fs-bounce-cards__card {
+  animation: none;
+}
+html[data-fs-preview-motion='reduced'] .fs-bounce-cards .fs-bounce-cards__item {
+  transition: none;
+}
+html[data-fs-preview-motion='full'] .fs-bounce-cards .fs-bounce-cards__card {
+  animation: fs-bounce-cards-enter calc(var(--fs-motion-duration-slow) * 3)
+    var(--fs-motion-easing-enter) var(--fan-delay) backwards;
+}
+html[data-fs-preview-motion='full'] .fs-bounce-cards .fs-bounce-cards__item {
+  transition: transform calc(var(--fs-motion-duration-standard) * 2) var(--fs-motion-easing-enter);
+}
+html[data-fs-preview-motion='full']
+  .fs-bounce-cards
+  .fs-bounce-cards__item[data-inspected='true']
+  .fs-bounce-cards__card {
+  animation: none;
+}
+html[data-fs-preview-motion='full'] .fs-bounce-cards .fs-bounce-cards__item:focus-within {
+  transition: none;
+}
 
-html[data-fs-preview-motion="reduced"] .fs-progress .fs-progress__indicator { animation: none; transition: none; }
-html[data-fs-preview-motion="full"] .fs-progress .fs-progress__indicator { transition: inline-size var(--fs-motion-duration-standard) var(--fs-motion-easing-standard); }
-html[data-fs-preview-motion="full"] .fs-progress[data-state="indeterminate"] .fs-progress__indicator { animation: fs-progress-loading calc(var(--fs-motion-duration-spinner) * 1.5) linear infinite; transition: none; }
+html[data-fs-preview-motion='reduced'] .fs-progress .fs-progress__indicator {
+  animation: none;
+  transition: none;
+}
+html[data-fs-preview-motion='full'] .fs-progress .fs-progress__indicator {
+  transition: inline-size var(--fs-motion-duration-standard) var(--fs-motion-easing-standard);
+}
+html[data-fs-preview-motion='full']
+  .fs-progress[data-state='indeterminate']
+  .fs-progress__indicator {
+  animation: fs-progress-loading calc(var(--fs-motion-duration-spinner) * 1.5) linear infinite;
+  transition: none;
+}
 
-html[data-fs-preview-motion="reduced"] .fs-toast { animation: none; }
-html[data-fs-preview-motion="full"] .fs-toast { animation: fs-toast-enter var(--fs-motion-duration-standard) var(--fs-motion-easing-enter) both; }
+html[data-fs-preview-motion='reduced'] .fs-toast {
+  animation: none;
+}
+html[data-fs-preview-motion='full'] .fs-toast {
+  animation: fs-toast-enter var(--fs-motion-duration-standard) var(--fs-motion-easing-enter) both;
+}

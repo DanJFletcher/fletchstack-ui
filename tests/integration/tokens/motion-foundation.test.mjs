@@ -13,12 +13,16 @@ test('publishes all approved motion roles in each real theme', async ({ root }) 
 
   const css = await readFile(new URL('src/generated/tokens.css', root), 'utf8');
   for (const declaration of [
-    '--fs-motion-duration-fast: 100ms;', '--fs-motion-duration-standard: 160ms;',
-    '--fs-motion-duration-slow: 240ms;', '--fs-motion-duration-spinner: 1000ms;',
+    '--fs-motion-duration-fast: 100ms;',
+    '--fs-motion-duration-standard: 160ms;',
+    '--fs-motion-duration-slow: 240ms;',
+    '--fs-motion-duration-spinner: 1000ms;',
     '--fs-motion-easing-standard: cubic-bezier(0.2, 0.8, 0.2, 1);',
     '--fs-motion-easing-enter: cubic-bezier(0.2, 1, 0.3, 1);',
     '--fs-motion-easing-exit: cubic-bezier(0.5, 0, 0.9, 0.3);',
-  ]) { expect(css.split(declaration)).toHaveLength(3); }
+  ]) {
+    expect(css.split(declaration)).toHaveLength(3);
+  }
   const reference = await readFile(new URL('docs/tokens.md', root), 'utf8');
   expect(reference).toContain('--fs-motion-duration-spinner');
 });

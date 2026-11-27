@@ -33,7 +33,10 @@ it.each([
 it.each([
   ['/gallery/main.tsx?t=1', 'tests/browser-harness/gallery/main.tsx'],
   ['scenarios/CodeBlock.tsx', 'tests/browser-harness/scenarios/CodeBlock.tsx'],
-  ['/absolute/repo/tests/browser-harness/scenarios/Button.tsx', 'tests/browser-harness/scenarios/Button.tsx'],
+  [
+    '/absolute/repo/tests/browser-harness/scenarios/Button.tsx',
+    'tests/browser-harness/scenarios/Button.tsx',
+  ],
   ['/absolute/repo/src/components/button/Button.tsx', 'src/components/button/Button.tsx'],
 ])('normalizes %s without losing harness identity', (given, expected) => {
   // act

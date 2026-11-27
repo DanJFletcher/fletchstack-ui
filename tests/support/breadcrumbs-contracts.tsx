@@ -7,7 +7,12 @@ import { Breadcrumbs } from '../../src/components/breadcrumbs/Breadcrumbs';
 import type { BreadcrumbItem } from '../../src/components/breadcrumbs/types';
 import { breadcrumbViewport } from './breadcrumbs-viewport';
 
-const items: BreadcrumbItem[] = [{ label: 'Home', href: '/home' }, { label: 'Projects', href: '/projects' }, { label: 'Atlas', href: '/projects/atlas' }, { label: 'Settings', current: true }];
+const items: BreadcrumbItem[] = [
+  { label: 'Home', href: '/home' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Atlas', href: '/projects/atlas' },
+  { label: 'Settings', current: true },
+];
 
 /**
  * Verify semantic navigation, native disclosure and viewport changes under rendering or hydration.
@@ -23,7 +28,12 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
     // assert
     expect(screen.getByRole('navigation', { name: 'Breadcrumb' }).tagName).toBe('NAV');
     expect(screen.getByRole('list').tagName).toBe('OL');
-    expect(screen.getAllByRole('listitem').map(item => item.textContent)).toEqual(['Home', '/Projects', '/Atlas', '/Settings']);
+    expect(screen.getAllByRole('listitem').map((item) => item.textContent)).toEqual([
+      'Home',
+      '/Projects',
+      '/Atlas',
+      '/Settings',
+    ]);
   });
   it('uses the caller’s accessible navigation name', () => {
     // arrange
@@ -39,7 +49,11 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
     mount(<Breadcrumbs items={items} />);
 
     // assert
-    expect(screen.getAllByRole('link').map(link => link.getAttribute('href'))).toEqual(['/home', '/projects', '/projects/atlas']);
+    expect(screen.getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([
+      '/home',
+      '/projects',
+      '/projects/atlas',
+    ]);
   });
   it('marks the current page as text instead of a link', () => {
     // arrange
@@ -56,7 +70,9 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
     mount(<Breadcrumbs items={items} />);
 
     // assert
-    expect(screen.getAllByText('/').map(separator => separator.getAttribute('aria-hidden'))).toEqual(['true', 'true', 'true']);
+    expect(
+      screen.getAllByText('/').map((separator) => separator.getAttribute('aria-hidden')),
+    ).toEqual(['true', 'true', 'true']);
   });
   it('collapses only intermediate links at the narrow breakpoint', () => {
     // arrange
@@ -66,8 +82,11 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
     mount(<Breadcrumbs items={items} />);
 
     // assert
-    expect(screen.getAllByRole('link').map(link => link.textContent)).toEqual(['Home']);
-    expect(screen.getByRole('button', { name: 'Show 2 hidden breadcrumb levels' })).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.getAllByRole('link').map((link) => link.textContent)).toEqual(['Home']);
+    expect(screen.getByRole('button', { name: 'Show 2 hidden breadcrumb levels' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
     expect(screen.getByText('Settings')).toBeVisible();
   });
   it('uses the singular disclosure label for one intermediate level', () => {
@@ -80,21 +99,28 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
     // assert
     expect(screen.getByRole('button', { name: 'Show 1 hidden breadcrumb level' })).toBeVisible();
   });
-  it.each(['{Enter}', ' '])('%s expands the intermediate links without moving focus', async key => {
-    // arrange
-    const user = userEvent.setup();
-    breadcrumbViewport(true);
-    mount(<Breadcrumbs items={items} />);
-    screen.getByRole('button').focus();
+  it.each(['{Enter}', ' '])(
+    '%s expands the intermediate links without moving focus',
+    async (key) => {
+      // arrange
+      const user = userEvent.setup();
+      breadcrumbViewport(true);
+      mount(<Breadcrumbs items={items} />);
+      screen.getByRole('button').focus();
 
-    // act
-    await user.keyboard(key);
+      // act
+      await user.keyboard(key);
 
-    // assert
-    expect(screen.getByRole('button', { name: 'Hide intermediate levels' })).toHaveFocus();
-    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getAllByRole('link').map(link => link.textContent)).toEqual(['Home', 'Projects', 'Atlas']);
-  });
+      // assert
+      expect(screen.getByRole('button', { name: 'Hide intermediate levels' })).toHaveFocus();
+      expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+      expect(screen.getAllByRole('link').map((link) => link.textContent)).toEqual([
+        'Home',
+        'Projects',
+        'Atlas',
+      ]);
+    },
+  );
   it('expanded links follow the disclosure in Tab order', async () => {
     // arrange
     const user = userEvent.setup();
@@ -130,7 +156,11 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
     viewport.change(false);
 
     // assert
-    expect(screen.getAllByRole('link').map(link => link.textContent)).toEqual(['Home', 'Projects', 'Atlas']);
+    expect(screen.getAllByRole('link').map((link) => link.textContent)).toEqual([
+      'Home',
+      'Projects',
+      'Atlas',
+    ]);
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
   it('resizing down collapses an untouched trail', () => {
@@ -146,7 +176,7 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
   });
   it('a custom collapseAt controls the subscribed viewport width', () => {
     // arrange
-    breadcrumbViewport(query => query === '(max-width: 56rem)');
+    breadcrumbViewport((query) => query === '(max-width: 56rem)');
 
     // act
     mount(<Breadcrumbs items={items} collapseAt="56rem" />);
@@ -183,7 +213,11 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
     breadcrumbViewport(true);
 
     // act
-    mount(<form><Breadcrumbs items={items} /></form>);
+    mount(
+      <form>
+        <Breadcrumbs items={items} />
+      </form>,
+    );
 
     // assert
     expect(screen.getByRole('button')).toHaveAttribute('type', 'button');
@@ -191,20 +225,38 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
   it('preserves each instance’s independent expansion', () => {
     // arrange
     breadcrumbViewport(true);
-    mount(<><Breadcrumbs items={items} aria-label="First hierarchy" /><Breadcrumbs items={items} aria-label="Second hierarchy" /></>);
+    mount(
+      <>
+        <Breadcrumbs items={items} aria-label="First hierarchy" />
+        <Breadcrumbs items={items} aria-label="Second hierarchy" />
+      </>,
+    );
 
     // act
-    fireEvent.click(within(screen.getByRole('navigation', { name: 'First hierarchy' })).getByRole('button'));
+    fireEvent.click(
+      within(screen.getByRole('navigation', { name: 'First hierarchy' })).getByRole('button'),
+    );
 
     // assert
-    expect(within(screen.getByRole('navigation', { name: 'Second hierarchy' })).queryByRole('link', { name: 'Projects' })).not.toBeInTheDocument();
+    expect(
+      within(screen.getByRole('navigation', { name: 'Second hierarchy' })).queryByRole('link', {
+        name: 'Projects',
+      }),
+    ).not.toBeInTheDocument();
   });
   it('forwards the native ref and per-instance styles', () => {
     // arrange
     const ref = createRef<HTMLElement>();
 
     // act
-    mount(<Breadcrumbs ref={ref} className="project-hierarchy" items={items} style={{ '--fs-breadcrumbs-gap': '12px' }} />);
+    mount(
+      <Breadcrumbs
+        ref={ref}
+        className="project-hierarchy"
+        items={items}
+        style={{ '--fs-breadcrumbs-gap': '12px' }}
+      />,
+    );
 
     // assert
     expect(ref.current).toHaveClass('project-hierarchy');
@@ -224,10 +276,28 @@ export function breadcrumbsContracts(mount: (element: ReactElement) => unknown) 
   it.each([
     { given: [], name: 'empty trail' },
     { given: [{ label: 'Home', href: '/home' }], name: 'missing current page' },
-    { given: [{ label: 'Home', current: true }, { label: 'Settings', current: true }], name: 'multiple current pages' },
+    {
+      given: [
+        { label: 'Home', current: true },
+        { label: 'Settings', current: true },
+      ],
+      name: 'multiple current pages',
+    },
     { given: [{ label: ' ', current: true }], name: 'blank current label' },
-    { given: [{ label: ' ', href: '/home' }, { label: 'Settings', current: true }], name: 'blank ancestor label' },
-    { given: [{ label: 'Home', href: '' }, { label: 'Settings', current: true }], name: 'empty ancestor destination' },
+    {
+      given: [
+        { label: ' ', href: '/home' },
+        { label: 'Settings', current: true },
+      ],
+      name: 'blank ancestor label',
+    },
+    {
+      given: [
+        { label: 'Home', href: '' },
+        { label: 'Settings', current: true },
+      ],
+      name: 'empty ancestor destination',
+    },
   ])('rejects a $name', ({ given }) => {
     // arrange
     const items = given as BreadcrumbItem[];

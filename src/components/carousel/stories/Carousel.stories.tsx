@@ -1,37 +1,95 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { Carousel } from '../Carousel';
-import { CarouselDemo, CarouselExample, CarouselOverrides, ControlledCarousel, ManySlides, ReservedCarousel, featuredSlides } from './carousel-examples';
+import {
+  CarouselDemo,
+  CarouselExample,
+  CarouselOverrides,
+  ControlledCarousel,
+  ManySlides,
+  ReservedCarousel,
+  featuredSlides,
+} from './carousel-examples';
 import docs from '../../../../docs/carousel.md?raw';
 import './carousel.stories.css';
 
-const meta = { id: 'components-carousel', title: 'Components/Media/Carousel', component: Carousel, tags: ['autodocs'], args: { label: 'Featured stories', slides: featuredSlides }, argTypes: { slides: { control: false }, variant: { options: ['surface', 'outlined', 'subtle', 'accent'], control: 'select' }, size: { options: ['sm', 'md', 'lg'], control: 'select' } }, parameters: { a11y: { test: 'error' }, docs: { description: { component: docs } } } } satisfies Meta<typeof Carousel>;
+const meta = {
+  id: 'components-carousel',
+  title: 'Components/Media/Carousel',
+  component: Carousel,
+  tags: ['autodocs'],
+  args: { label: 'Featured stories', slides: featuredSlides },
+  argTypes: {
+    slides: { control: false },
+    variant: { options: ['surface', 'outlined', 'subtle', 'accent'], control: 'select' },
+    size: { options: ['sm', 'md', 'lg'], control: 'select' },
+  },
+  parameters: { a11y: { test: 'error' }, docs: { description: { component: docs } } },
+} satisfies Meta<typeof Carousel>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Playground: Story = {};
 export const Composition: Story = { render: () => <CarouselExample /> };
-export const KeyboardNavigation: Story = { play: async ({ canvasElement }) => {
-  const canvas = within(canvasElement), carousel = canvas.getByRole('region', { name: 'Featured stories' });
-  carousel.focus(); await userEvent.keyboard('{ArrowRight}');
-  await expect(canvas.getByRole('group', { name: 'Build your flow, 2 of 3' })).toBeVisible();
-  await expect(canvas.queryByRole('link', { name: 'Explore focus' })).not.toBeInTheDocument();
-  await userEvent.keyboard('{Home}');
-  await expect(canvas.getByRole('group', { name: 'Find your focus, 1 of 3' })).toBeVisible();
-} };
+export const KeyboardNavigation: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement),
+      carousel = canvas.getByRole('region', { name: 'Featured stories' });
+    carousel.focus();
+    await userEvent.keyboard('{ArrowRight}');
+    await expect(canvas.getByRole('group', { name: 'Build your flow, 2 of 3' })).toBeVisible();
+    await expect(canvas.queryByRole('link', { name: 'Explore focus' })).not.toBeInTheDocument();
+    await userEvent.keyboard('{Home}');
+    await expect(canvas.getByRole('group', { name: 'Find your focus, 1 of 3' })).toBeVisible();
+  },
+};
 export const AutoPlay: Story = { args: { autoPlay: true, loop: true, autoPlayInterval: 5000 } };
 export const Looping: Story = { args: { loop: true } };
 export const Fraction: Story = { args: { indicators: 'fraction' } };
 export const WithoutArrows: Story = { args: { showControls: false } };
 export const WithoutIndicators: Story = { args: { indicators: 'none' } };
 export const OverlayControls: Story = { args: { controlsPosition: 'overlay' } };
-export const FullBleedOverlay: Story = { args: { controlsPosition: 'overlay', overlaySafeArea: false } };
+export const FullBleedOverlay: Story = {
+  args: { controlsPosition: 'overlay', overlaySafeArea: false },
+};
 export const CompactTargets: Story = { args: { indicatorTargetSize: 'compact' } };
-export const NarrowGallery: Story = { render: () => <div className="carousel-demo__narrow"><ManySlides /></div> };
+export const NarrowGallery: Story = {
+  render: () => (
+    <div className="carousel-demo__narrow">
+      <ManySlides />
+    </div>
+  ),
+};
 export const FrameAspectRatio: Story = { render: () => <ReservedCarousel /> };
-export const Variants: Story = { render: () => <div className="carousel-demo">{(['surface', 'outlined', 'subtle', 'accent'] as const).map(variant => <CarouselDemo key={variant} label={`${variant} stories`} variant={variant} />)}</div> };
-export const Sizes: Story = { render: () => <div className="carousel-demo">{(['sm', 'md', 'lg'] as const).map(size => <CarouselDemo key={size} label={`${size} stories`} size={size} />)}</div> };
+export const Variants: Story = {
+  render: () => (
+    <div className="carousel-demo">
+      {(['surface', 'outlined', 'subtle', 'accent'] as const).map((variant) => (
+        <CarouselDemo key={variant} label={`${variant} stories`} variant={variant} />
+      ))}
+    </div>
+  ),
+};
+export const Sizes: Story = {
+  render: () => (
+    <div className="carousel-demo">
+      {(['sm', 'md', 'lg'] as const).map((size) => (
+        <CarouselDemo key={size} label={`${size} stories`} size={size} />
+      ))}
+    </div>
+  ),
+};
 export const Controlled: Story = { render: () => <ControlledCarousel /> };
-export const LocalizedLabels: Story = { args: { label: 'Histoires', previousLabel: 'Précédente', nextLabel: 'Suivante', getSlideLabel: (index, total) => `Histoire ${index + 1} sur ${total}`, getIndicatorLabel: index => `Afficher ${index + 1}` } };
+export const LocalizedLabels: Story = {
+  args: {
+    label: 'Histoires',
+    previousLabel: 'Précédente',
+    nextLabel: 'Suivante',
+    getSlideLabel: (index, total) => `Histoire ${index + 1} sur ${total}`,
+    getIndicatorLabel: (index) => `Afficher ${index + 1}`,
+  },
+};
 export const ScopedOverrides: Story = { render: () => <CarouselOverrides /> };
-export const Empty: Story = { args: { slides: [], emptyMessage: 'There are no featured stories right now.' } };
+export const Empty: Story = {
+  args: { slides: [], emptyMessage: 'There are no featured stories right now.' },
+};
 export const SingleSlide: Story = { args: { slides: featuredSlides.slice(0, 1) } };

@@ -22,15 +22,15 @@ See [proposal](proposal.md) for motivation and the [motion contract](specs/motio
 
 Add typed primitives and direct semantic aliases in both themes:
 
-| Semantic CSS property | Initial value | Role |
-| --- | --- | --- |
-| `--fs-motion-duration-fast` | 100ms | Small state feedback |
-| `--fs-motion-duration-standard` | 160ms | Typical disclosure/state movement; existing value |
-| `--fs-motion-duration-slow` | 240ms | Larger deliberate transitions |
-| `--fs-motion-duration-spinner` | 1000ms | One loading rotation; preserves current Spinner |
-| `--fs-motion-easing-standard` | cubic-bezier(0.2, 0.8, 0.2, 1) | General state changes; existing value |
-| `--fs-motion-easing-enter` | cubic-bezier(0.2, 1, 0.3, 1) | Entering content |
-| `--fs-motion-easing-exit` | cubic-bezier(0.5, 0, 0.9, 0.3) | Leaving content |
+| Semantic CSS property           | Initial value                  | Role                                              |
+| ------------------------------- | ------------------------------ | ------------------------------------------------- |
+| `--fs-motion-duration-fast`     | 100ms                          | Small state feedback                              |
+| `--fs-motion-duration-standard` | 160ms                          | Typical disclosure/state movement; existing value |
+| `--fs-motion-duration-slow`     | 240ms                          | Larger deliberate transitions                     |
+| `--fs-motion-duration-spinner`  | 1000ms                         | One loading rotation; preserves current Spinner   |
+| `--fs-motion-easing-standard`   | cubic-bezier(0.2, 0.8, 0.2, 1) | General state changes; existing value             |
+| `--fs-motion-easing-enter`      | cubic-bezier(0.2, 1, 0.3, 1)   | Entering content                                  |
+| `--fs-motion-easing-exit`       | cubic-bezier(0.5, 0, 0.9, 0.3) | Leaving content                                   |
 
 Corporate and Luna start identical. Distinct semantic roles permit later approved divergence. Keep Spinner linear; enter/exit easing is demonstrated in foundation examples without changing Accordion's existing curve. Do not add a distance scale without an approved moving-component use case.
 

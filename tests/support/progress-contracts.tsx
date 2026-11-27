@@ -29,7 +29,12 @@ export function progressContracts(render: (element: ReactElement) => RenderResul
     expect(result.getByRole('progressbar', { name: 'Progress' })).toBeInTheDocument();
     expect(result.queryByText('50%')).toBeNull();
   });
-  for (const [value, expected] of [[-10, '0'], [150, '100'], [0, '0'], [100, '100']] as const) {
+  for (const [value, expected] of [
+    [-10, '0'],
+    [150, '100'],
+    [0, '0'],
+    [100, '100'],
+  ] as const) {
     it(`normalizes ${value} to ${expected} measured completion`, () => {
       // arrange
       // act
@@ -74,7 +79,14 @@ export function progressContracts(render: (element: ReactElement) => RenderResul
   it('formats both visual and accessible completion text', () => {
     // arrange
     // act
-    const result = render(<Progress value={3} max={8} showValue getValueLabel={(value, max) => `${value} of ${max} files`} />);
+    const result = render(
+      <Progress
+        value={3}
+        max={8}
+        showValue
+        getValueLabel={(value, max) => `${value} of ${max} files`}
+      />,
+    );
 
     // assert
     expect(result.getByRole('progressbar')).toHaveAttribute('aria-valuetext', '3 of 8 files');
@@ -91,10 +103,15 @@ export function progressContracts(render: (element: ReactElement) => RenderResul
   it('allows a separate accessible value description', () => {
     // arrange
     // act
-    const result = render(<Progress value={50} showValue aria-valuetext="Half the files uploaded" />);
+    const result = render(
+      <Progress value={50} showValue aria-valuetext="Half the files uploaded" />,
+    );
 
     // assert
-    expect(result.getByRole('progressbar')).toHaveAttribute('aria-valuetext', 'Half the files uploaded');
+    expect(result.getByRole('progressbar')).toHaveAttribute(
+      'aria-valuetext',
+      'Half the files uploaded',
+    );
     expect(result.getByText('50%')).toBeInTheDocument();
   });
   it('uses an explicit accessible name instead of visible label text', () => {
@@ -108,25 +125,41 @@ export function progressContracts(render: (element: ReactElement) => RenderResul
   it('prioritizes an external label relationship', () => {
     // arrange
     // act
-    const result = render(<><h2 id="task">Project upload</h2><Progress value={20} label="Upload" aria-label="Ignored" aria-labelledby="task" /></>);
+    const result = render(
+      <>
+        <h2 id="task">Project upload</h2>
+        <Progress value={20} label="Upload" aria-label="Ignored" aria-labelledby="task" />
+      </>,
+    );
 
     // assert
-    expect(result.getByRole('progressbar', { name: 'Project upload' })).not.toHaveAttribute('aria-label');
+    expect(result.getByRole('progressbar', { name: 'Project upload' })).not.toHaveAttribute(
+      'aria-label',
+    );
   });
   it('associates an external description with the progressbar', () => {
     // arrange
     // act
-    const result = render(<><p id="details">Please keep this tab open.</p><Progress value={20} aria-describedby="details" /></>);
+    const result = render(
+      <>
+        <p id="details">Please keep this tab open.</p>
+        <Progress value={20} aria-describedby="details" />
+      </>,
+    );
 
     // assert
-    expect(result.getByRole('progressbar')).toHaveAccessibleDescription('Please keep this tab open.');
+    expect(result.getByRole('progressbar')).toHaveAccessibleDescription(
+      'Please keep this tab open.',
+    );
   });
   it('forwards the root ref and native attributes', () => {
     // arrange
     const ref = createRef<HTMLDivElement>();
 
     // act
-    const result = render(<Progress value={20} ref={ref} id="upload" dir="rtl" data-task="upload" />);
+    const result = render(
+      <Progress value={20} ref={ref} id="upload" dir="rtl" data-task="upload" />,
+    );
 
     // assert
     expect(ref.current).toBe(result.getByRole('progressbar'));
@@ -137,11 +170,20 @@ export function progressContracts(render: (element: ReactElement) => RenderResul
   it('preserves local styles and consumer classes', () => {
     // arrange
     // act
-    const result = render(<Progress value={20} className="custom" size="small" style={{ '--fs-progress-height': '16px' }} />);
+    const result = render(
+      <Progress
+        value={20}
+        className="custom"
+        size="small"
+        style={{ '--fs-progress-height': '16px' }}
+      />,
+    );
 
     // assert
     expect(result.getByRole('progressbar')).toHaveClass('custom', 'fs-progress--small');
-    expect(result.getByRole('progressbar').style.getPropertyValue('--fs-progress-height')).toBe('16px');
+    expect(result.getByRole('progressbar').style.getPropertyValue('--fs-progress-height')).toBe(
+      '16px',
+    );
   });
   it('removes hidden progress from the accessibility tree', () => {
     // arrange
@@ -164,7 +206,13 @@ export function progressContracts(render: (element: ReactElement) => RenderResul
   it('keeps passive progress out of the normal Tab sequence', async () => {
     // arrange
     const user = userEvent.setup();
-    const result = render(<><button>Before</button><Progress value={20} /><button>After</button></>);
+    const result = render(
+      <>
+        <button>Before</button>
+        <Progress value={20} />
+        <button>After</button>
+      </>,
+    );
     result.getByRole('button', { name: 'Before' }).focus();
 
     // act

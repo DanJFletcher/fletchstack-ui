@@ -7,7 +7,11 @@ import { Cluster, type ClusterStyle } from '../Cluster';
 
 it('preserves native description relationships on the layout wrapper', () => {
   // arrange
-  const given = <Cluster id="actions" aria-describedby="hint" data-testid="layout"><button>Save</button></Cluster>;
+  const given = (
+    <Cluster id="actions" aria-describedby="hint" data-testid="layout">
+      <button>Save</button>
+    </Cluster>
+  );
 
   // act
   render(given);
@@ -25,10 +29,14 @@ it('defaults to actions gap, center alignment and start justification', () => {
   render(given);
 
   // assert
-  expect(screen.getByTestId('layout')).toHaveClass('fs-cluster--gap-actions', 'fs-cluster--align-center', 'fs-cluster--justify-start');
+  expect(screen.getByTestId('layout')).toHaveClass(
+    'fs-cluster--gap-actions',
+    'fs-cluster--align-center',
+    'fs-cluster--justify-start',
+  );
 });
 
-it.each(['none', 'actions', 'related'] as const)('supports the %s gap', gap => {
+it.each(['none', 'actions', 'related'] as const)('supports the %s gap', (gap) => {
   // arrange
   const given = <Cluster gap={gap} data-testid="layout" />;
 
@@ -39,7 +47,7 @@ it.each(['none', 'actions', 'related'] as const)('supports the %s gap', gap => {
   expect(screen.getByTestId('layout')).toHaveClass(`fs-cluster--gap-${gap}`);
 });
 
-it.each(['start', 'center', 'end', 'baseline'] as const)('supports %s alignment', align => {
+it.each(['start', 'center', 'end', 'baseline'] as const)('supports %s alignment', (align) => {
   // arrange
   const given = <Cluster align={align} data-testid="layout" />;
 
@@ -50,7 +58,7 @@ it.each(['start', 'center', 'end', 'baseline'] as const)('supports %s alignment'
   expect(screen.getByTestId('layout')).toHaveClass(`fs-cluster--align-${align}`);
 });
 
-it.each(['start', 'center', 'end'] as const)('supports %s justification', justify => {
+it.each(['start', 'center', 'end'] as const)('supports %s justification', (justify) => {
   // arrange
   const given = <Cluster justify={justify} data-testid="layout" />;
 
@@ -84,24 +92,38 @@ it('preserves consumer classes and typed styles', () => {
 
   // assert
   expect(screen.getByTestId('layout')).toHaveClass('consumer');
-  expect(screen.getByTestId('layout').style.getPropertyValue('--fs-space-gap-actions')).toBe('24px');
+  expect(screen.getByTestId('layout').style.getPropertyValue('--fs-space-gap-actions')).toBe(
+    '24px',
+  );
   expect(screen.getByTestId('layout')).toHaveStyle({ color: 'rgb(255, 0, 0)' });
 });
 
 it('preserves native child order', () => {
   // arrange
-  const given = <Cluster><button>First</button><button>Second</button></Cluster>;
+  const given = (
+    <Cluster>
+      <button>First</button>
+      <button>Second</button>
+    </Cluster>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getAllByRole('button').map(button => button.textContent)).toEqual(['First', 'Second']);
+  expect(screen.getAllByRole('button').map((button) => button.textContent)).toEqual([
+    'First',
+    'Second',
+  ]);
 });
 
 it('honors native hidden behavior', () => {
   // arrange
-  const given = <Cluster hidden><button>Save</button></Cluster>;
+  const given = (
+    <Cluster hidden>
+      <button>Save</button>
+    </Cluster>
+  );
 
   // act
   render(given);
@@ -112,7 +134,11 @@ it('honors native hidden behavior', () => {
 
 it('adds no group, toolbar or focus semantics', () => {
   // arrange
-  const given = <Cluster data-testid="layout"><button>Save</button></Cluster>;
+  const given = (
+    <Cluster data-testid="layout">
+      <button>Save</button>
+    </Cluster>
+  );
 
   // act
   render(given);

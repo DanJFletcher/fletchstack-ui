@@ -3,7 +3,10 @@ import { expect, it, vi } from 'vitest';
 import { executeSelection, runProject } from '../../browser-harness/selection/execute.mjs';
 import { completeOptions } from '../../browser-harness/selection/complete-options.mjs';
 
-const suites = [{ project: 'components', file: 'tests/a (copy).spec.ts' }, { project: 'chromium', file: 'tests/b.spec.ts' }];
+const suites = [
+  { project: 'components', file: 'tests/a (copy).spec.ts' },
+  { project: 'chromium', file: 'tests/b.spec.ts' },
+];
 
 it('continues mixed selections after failure and preserves the nonzero result', async () => {
   // arrange
@@ -60,12 +63,25 @@ it('escapes filenames in the shell-free runner invocation', async () => {
   const launch = vi.fn(() => child);
 
   // act
-  const pending = runProject({ root: '/repo', project: 'components', files: [suites[0].file] }, launch);
+  const pending = runProject(
+    { root: '/repo', project: 'components', files: [suites[0].file] },
+    launch,
+  );
   child.emit('exit', 0, null);
   await pending;
 
   // assert
-  expect(launch).toHaveBeenCalledWith(process.execPath, ['/repo/node_modules/@playwright/test/cli.js', 'test', '--config', 'playwright.components.config.ts', 'tests/a \\(copy\\)\\.spec\\.ts$'], { cwd: '/repo', stdio: 'inherit' });
+  expect(launch).toHaveBeenCalledWith(
+    process.execPath,
+    [
+      '/repo/node_modules/@playwright/test/cli.js',
+      'test',
+      '--config',
+      'playwright.components.config.ts',
+      'tests/a \\(copy\\)\\.spec\\.ts$',
+    ],
+    { cwd: '/repo', stdio: 'inherit' },
+  );
 });
 
 it('maps a killed child to interruption failure', async () => {
@@ -98,7 +114,10 @@ it('propagates launch errors and removes signal handlers', async () => {
 it('routes complete-command file filters before starting servers and preserves shared options', () => {
   // arrange
   const given = ['tests/b', '--workers=3', '--grep', 'native'];
-  const expected = { suites: [{ project: 'chromium', file: 'tests/b.spec.ts' }], args: ['--workers=3', '--grep', 'native'] };
+  const expected = {
+    suites: [{ project: 'chromium', file: 'tests/b.spec.ts' }],
+    args: ['--workers=3', '--grep', 'native'],
+  };
 
   // act
   const result = completeOptions(given, suites);

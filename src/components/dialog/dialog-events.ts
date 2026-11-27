@@ -7,7 +7,13 @@ import type { DialogProps } from './types.js';
 export function outsideDialog(event: MouseEvent<HTMLDialogElement>): boolean {
   const box = event.currentTarget.getBoundingClientRect();
 
-  return event.target === event.currentTarget && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom);
+  return (
+    event.target === event.currentTarget &&
+    (event.clientX < box.left ||
+      event.clientX > box.right ||
+      event.clientY < box.top ||
+      event.clientY > box.bottom)
+  );
 }
 
 /**
@@ -17,7 +23,9 @@ function cancelDialog(props: DialogProps, event: SyntheticEvent<HTMLDialogElemen
   props.onCancel?.(event);
   const veto = event.defaultPrevented;
   event.preventDefault();
-  if (!veto && props.closeOnEscape !== false) { props.onOpenChange(false); }
+  if (!veto && props.closeOnEscape !== false) {
+    props.onOpenChange(false);
+  }
 }
 
 /**
@@ -25,20 +33,39 @@ function cancelDialog(props: DialogProps, event: SyntheticEvent<HTMLDialogElemen
  **/
 function closedDialog(props: DialogProps, event: SyntheticEvent<HTMLDialogElement>): void {
   props.onClose?.(event);
-  if (props.open) { props.onOpenChange(false); }
+  if (props.open) {
+    props.onOpenChange(false);
+  }
 }
 
 /**
  * Preserve native handlers and distinguish an entire backdrop gesture from panel interaction.
  **/
-export function useDialogEvents(props: DialogProps): Required<Pick<DialogProps, 'onCancel' | 'onClose' | 'onClick' | 'onPointerDown'>> {
+export function useDialogEvents(
+  props: DialogProps,
+): Required<Pick<DialogProps, 'onCancel' | 'onClose' | 'onClick' | 'onPointerDown'>> {
   const backdropStart = useRef(false);
-  const onPointerDown = (event: PointerEvent<HTMLDialogElement>) => { backdropStart.current = outsideDialog(event); props.onPointerDown?.(event); };
+  const onPointerDown = (event: PointerEvent<HTMLDialogElement>) => {
+    backdropStart.current = outsideDialog(event);
+    props.onPointerDown?.(event);
+  };
   const onClick = (event: MouseEvent<HTMLDialogElement>) => {
     props.onClick?.(event);
-    if (!event.defaultPrevented && props.closeOnBackdropClick !== false && backdropStart.current && outsideDialog(event)) { props.onOpenChange(false); }
+    if (
+      !event.defaultPrevented &&
+      props.closeOnBackdropClick !== false &&
+      backdropStart.current &&
+      outsideDialog(event)
+    ) {
+      props.onOpenChange(false);
+    }
     backdropStart.current = false;
   };
 
-  return { onCancel: event => cancelDialog(props, event), onClose: event => closedDialog(props, event), onClick, onPointerDown };
+  return {
+    onCancel: (event) => cancelDialog(props, event),
+    onClose: (event) => closedDialog(props, event),
+    onClick,
+    onPointerDown,
+  };
 }

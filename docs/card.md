@@ -27,7 +27,7 @@ import 'fletchstack-ui/styles.css';
     <span>Keep it for later</span>
     <Button>Save collection</Button>
   </CardFooter>
-</Card>
+</Card>;
 ```
 
 For separate styles, import `tokens.css`, `card.css`, and the stylesheets of any composed controls. All parts are optional and may contain arbitrary React children. Component class names use the `fs-card` prefix; prefer semantic tokens for visual customization and className/style for consumer layout.

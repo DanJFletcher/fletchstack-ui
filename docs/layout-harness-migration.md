@@ -8,13 +8,13 @@ Counts and measurements below describe this batch. The subsequent [form-control 
 
 All 86 cases from the five original suites move to [the harness suites](../tests/browser-harness/specs/). A one-time comparison against `d8712c1` verified that the complete test files are identical after normalizing only fixture imports, fixture arguments, `openStory(page, …)` to `openScenario(mount, …)`, and the Separator contrast-helper import path. No assertions, test titles, viewports, preferences, retries or timeouts changed. The committed baseline remains the audit source; test text is not frozen for future maintenance.
 
-| Family | Source at `d8712c1` | Current owner |
-| --- | --- | --- |
-| Cluster | `tests/e2e/components/cluster/Cluster.spec.ts` | [Cluster](../tests/browser-harness/specs/cluster/Cluster.spec.ts) |
-| Container | `tests/e2e/components/container/Container.spec.ts` | [Container](../tests/browser-harness/specs/container/Container.spec.ts) |
-| Section | `tests/e2e/components/section/Section.spec.ts` | [Section](../tests/browser-harness/specs/section/Section.spec.ts) |
+| Family     | Source at `d8712c1`                                   | Current owner                                                               |
+| ---------- | ----------------------------------------------------- | --------------------------------------------------------------------------- |
+| Cluster    | `tests/e2e/components/cluster/Cluster.spec.ts`        | [Cluster](../tests/browser-harness/specs/cluster/Cluster.spec.ts)           |
+| Container  | `tests/e2e/components/container/Container.spec.ts`    | [Container](../tests/browser-harness/specs/container/Container.spec.ts)     |
+| Section    | `tests/e2e/components/section/Section.spec.ts`        | [Section](../tests/browser-harness/specs/section/Section.spec.ts)           |
 | SimpleGrid | `tests/e2e/components/simple-grid/SimpleGrid.spec.ts` | [SimpleGrid](../tests/browser-harness/specs/simple-grid/SimpleGrid.spec.ts) |
-| Separator | `tests/e2e/components/separator/Separator.spec.ts` | [Separator](../tests/browser-harness/specs/separator/Separator.spec.ts) |
+| Separator  | `tests/e2e/components/separator/Separator.spec.ts`    | [Separator](../tests/browser-harness/specs/separator/Separator.spec.ts)     |
 
 Private scenario modules retain the relevant story render trees and defaults, with direct implementation imports and explicitly required component/demo CSS. A one-time TypeScript syntax-tree comparison confirmed identical render/args expressions for all 61 migrated scenarios, along with identical defaults and helper implementations. They do not import CSF or execute story play functions. The original stories and their render/play/accessibility checks remain intact. The [behavior matrix](../tests/browser-behavior-matrix.md) retains responsive sizing, real geometry, native focus, theme boundaries, RTL, enlarged/spaced text, forced colors and distinct SSR/package/Storybook ownership.
 
@@ -22,11 +22,11 @@ Private scenario modules retain the relevant story render trees and defaults, wi
 
 One matched before/after invocation ran without other test workloads, on the same checkout and machine with Chromium, three workers, zero retries, failure traces/screenshots, and ordinary coverage-disabled configuration. Commands used `npm run test:e2e:storybook` before and `npm run test:e2e:components` after, with explicit paths to the same five families and `--workers=3`.
 
-| Measurement | Storybook | Harness |
-| --- | ---: | ---: |
-| Passing cases | 86 | 86 |
-| Command wall time (`/usr/bin/time -p`) | 111.80s | 18.12s |
-| Runner duration | 1.8m | 17.4s |
+| Measurement                            | Storybook | Harness |
+| -------------------------------------- | --------: | ------: |
+| Passing cases                          |        86 |      86 |
+| Command wall time (`/usr/bin/time -p`) |   111.80s |  18.12s |
+| Runner duration                        |      1.8m |   17.4s |
 
 The harness reduced observed command wall time by **83.8% (6.17×)** for this workload. This is a single-run observation, not a median or a full-suite speedup claim. It uses ordinary managed-server startup and existing disk caches, not controlled cold-cache startup measurements. Keep the migration: equivalent assertions passed with substantially lower local cost. Scratch logs are under ignored `.verification/layout-migration/`.
 

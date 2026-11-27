@@ -4,13 +4,13 @@ Verified on 2026-11-16 for [Dialog](./dialog.md), inspired by the [reference Sto
 
 ## Results
 
-| Scope | Mode | Result | Runner duration |
-| --- | --- | --- | --- |
-| Full unit suite, 2 workers | coverage enabled | 1,410 passed; all four coverage metrics 100% | 70.08 seconds |
-| Full integration suite, 1 worker | coverage enabled | 1,187 passed; all four coverage metrics 100% | 109.29 seconds |
-| Full component browser suite, 2 workers | coverage disabled | 588 passed | 2.6 minutes |
-| Full retained Storybook browser suite, 1 worker | coverage disabled | 36 passed | 1.7 minutes |
-| Full Storybook render/play/accessibility | coverage disabled | 527 passed | 52.11 seconds |
+| Scope                                           | Mode              | Result                                       | Runner duration |
+| ----------------------------------------------- | ----------------- | -------------------------------------------- | --------------- |
+| Full unit suite, 2 workers                      | coverage enabled  | 1,410 passed; all four coverage metrics 100% | 70.08 seconds   |
+| Full integration suite, 1 worker                | coverage enabled  | 1,187 passed; all four coverage metrics 100% | 109.29 seconds  |
+| Full component browser suite, 2 workers         | coverage disabled | 588 passed                                   | 2.6 minutes     |
+| Full retained Storybook browser suite, 1 worker | coverage disabled | 36 passed                                    | 1.7 minutes     |
+| Full Storybook render/play/accessibility        | coverage disabled | 527 passed                                   | 52.11 seconds   |
 
 Lint, both TypeScript configurations, component structural checks, token generation, whitespace checks, Storybook production build, library build/browser verification and installed-package verification passed. Installed React 18.3.1 and 19.3.1 consumers verify public exports/types, negative type cases, standalone and aggregate CSS, deterministic closed SSR and tree shaking. No runtime dependencies were added.
 

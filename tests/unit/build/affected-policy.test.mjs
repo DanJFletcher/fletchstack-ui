@@ -25,7 +25,7 @@ it.each([
   expect(result.full).toBe(expected);
 });
 
-it.each(['D', 'R100', 'C100'])('falls back for changed dependency status %s', status => {
+it.each(['D', 'R100', 'C100'])('falls back for changed dependency status %s', (status) => {
   // arrange
   const given = { path: 'src/old.ts', status };
 
@@ -49,13 +49,37 @@ it('checks the integration filesystem inventory for an untracked source', () => 
 
 it.each([
   [[], new Map(), null, 'safely-empty', []],
-  [[{ path: 'src/Button.tsx', status: 'M' }], new Map([['src/Button.tsx', ['a.test.ts']]]), null, 'selected', ['a.test.ts']],
-  [[{ path: 'unknown.ts', status: 'M' }], new Map(), null, 'full-fallback', ['a.test.ts', 'b.test.ts']],
+  [
+    [{ path: 'src/Button.tsx', status: 'M' }],
+    new Map([['src/Button.tsx', ['a.test.ts']]]),
+    null,
+    'selected',
+    ['a.test.ts'],
+  ],
+  [
+    [{ path: 'unknown.ts', status: 'M' }],
+    new Map(),
+    null,
+    'full-fallback',
+    ['a.test.ts', 'b.test.ts'],
+  ],
   [[], new Map(), 'History unavailable', 'full-fallback', ['a.test.ts', 'b.test.ts']],
-  [[{ path: 'openspec/p.md', status: 'M' }], new Map([['openspec/p.md', ['a.test.ts']]]), null, 'full-fallback', ['a.test.ts', 'b.test.ts']],
+  [
+    [{ path: 'openspec/p.md', status: 'M' }],
+    new Map([['openspec/p.md', ['a.test.ts']]]),
+    null,
+    'full-fallback',
+    ['a.test.ts', 'b.test.ts'],
+  ],
 ])('selects the correct outcome %#', (changes, owners, fallback, mode, files) => {
   // arrange
-  const given = { project: 'unit', changes, inventory: ['b.test.ts', 'a.test.ts'], owners, fallback };
+  const given = {
+    project: 'unit',
+    changes,
+    inventory: ['b.test.ts', 'a.test.ts'],
+    owners,
+    fallback,
+  };
 
   // act
   const result = selectTests(given);

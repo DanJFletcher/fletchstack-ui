@@ -23,11 +23,20 @@ import { Toast, ToastViewport, Button } from 'fletchstack-ui';
 import 'fletchstack-ui/styles.css';
 
 <ToastViewport>
-  <Toast open={saved} onOpenChange={setSaved} tone="success" title="Changes saved"
-    action={<Button size="small" onClick={viewChanges}>View changes</Button>}>
+  <Toast
+    open={saved}
+    onOpenChange={setSaved}
+    tone="success"
+    title="Changes saved"
+    action={
+      <Button size="small" onClick={viewChanges}>
+        View changes
+      </Button>
+    }
+  >
     Your team can see the latest version.
   </Toast>
-</ToastViewport>
+</ToastViewport>;
 ```
 
 Keep stable keys when rendering a list. The application owns queue size, ordering, persistence, duplicate suppression, and asynchronous actions. Use `duration={5000}` only when the same information/action remains available elsewhere; pause-on-hover alone does not make a time-limited action accessible. Prefer persistent errors and undo actions. See [WCAG timing guidance](https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html) and [status messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html).

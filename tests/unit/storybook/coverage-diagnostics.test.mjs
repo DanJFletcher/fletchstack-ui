@@ -2,35 +2,60 @@ import { afterEach, expect, it, vi } from 'vitest';
 import CoverageReporter from '../../e2e/coverage/reporter.mjs';
 import { diagnosticSummary } from '../../e2e/coverage/summary.mjs';
 
-afterEach(() => { vi.restoreAllMocks(); });
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 /**
  * Build a synthetic file with exact counters for each independent metric.
  **/
 function file(sourcePath, covered = 0) {
   const metric = { covered, total: 2 };
-  return { sourcePath, summary: { statements: metric, branches: metric, functions: metric, lines: metric } };
+  return {
+    sourcePath,
+    summary: { statements: metric, branches: metric, functions: metric, lines: metric },
+  };
 }
 
 /**
  * Supply a report boundary without filesystem writes or browser collection.
  **/
 function report(files = [file('src/components/button/Button.tsx')]) {
-  return { cleanCache: vi.fn(), hasCache: vi.fn().mockReturnValue(true), generate: vi.fn().mockResolvedValue({ files }) };
+  return {
+    cleanCache: vi.fn(),
+    hasCache: vi.fn().mockReturnValue(true),
+    generate: vi.fn().mockResolvedValue({ files }),
+  };
 }
 
 it('separates production, demonstration and preview counters including unloaded files', () => {
   // arrange
-  const files = [file('src/components/button/Button.tsx', 2), file('src/components/button/stories/unvisited-helper.ts'), file('stories/shared/demo.tsx', 1), file('.storybook/preview.tsx')];
+  const files = [
+    file('src/components/button/Button.tsx', 2),
+    file('src/components/button/stories/unvisited-helper.ts'),
+    file('stories/shared/demo.tsx', 1),
+    file('.storybook/preview.tsx'),
+  ];
 
   // act
   const result = diagnosticSummary(files, { tests: ['synthetic journey'] });
 
   // assert
   expect(result.diagnostic).toBe(true);
-  expect(result.categories.production.metrics.lines).toEqual({ covered: 2, total: 2, percent: 100 });
-  expect(result.categories['story-demo'].metrics.lines).toEqual({ covered: 1, total: 4, percent: 25 });
-  expect(result.categories['story-demo'].files).toEqual(['src/components/button/stories/unvisited-helper.ts', 'stories/shared/demo.tsx']);
+  expect(result.categories.production.metrics.lines).toEqual({
+    covered: 2,
+    total: 2,
+    percent: 100,
+  });
+  expect(result.categories['story-demo'].metrics.lines).toEqual({
+    covered: 1,
+    total: 4,
+    percent: 25,
+  });
+  expect(result.categories['story-demo'].files).toEqual([
+    'src/components/button/stories/unvisited-helper.ts',
+    'stories/shared/demo.tsx',
+  ]);
   expect(result.categories.preview.metrics.lines).toEqual({ covered: 0, total: 2, percent: 0 });
   expect(result.scope.tests).toEqual(['synthetic journey']);
 });
@@ -43,7 +68,11 @@ it('does not turn zero-counter code into an invented percentage', () => {
   const result = diagnosticSummary(files, {});
 
   // assert
-  expect(result.categories.production.metrics.lines).toEqual({ covered: 0, total: 0, percent: null });
+  expect(result.categories.production.metrics.lines).toEqual({
+    covered: 0,
+    total: 0,
+    percent: null,
+  });
 });
 
 it('separates harness helpers from production totals', () => {
@@ -64,7 +93,10 @@ it('cleans diagnostic cache before collecting a new run', () => {
   const reporter = new CoverageReporter({ report: () => coverage, write: vi.fn() });
 
   // act
-  reporter.onBegin({ rootDir: process.cwd(), grep: /.*/, grepInvert: null }, { allTests: () => [] });
+  reporter.onBegin(
+    { rootDir: process.cwd(), grep: /.*/, grepInvert: null },
+    { allTests: () => [] },
+  );
 
   // assert
   expect(coverage.cleanCache).toHaveBeenCalledOnce();
@@ -110,7 +142,10 @@ it('fails instead of fabricating a report from an empty cache', async () => {
   // assert
   expect(result).toEqual({ status: 'failed' });
   expect(write).not.toHaveBeenCalled();
-  expect(error).toHaveBeenCalledWith('E2E diagnostic coverage could not be generated:', expect.objectContaining({ message: 'No browser coverage data collected' }));
+  expect(error).toHaveBeenCalledWith(
+    'E2E diagnostic coverage could not be generated:',
+    expect.objectContaining({ message: 'No browser coverage data collected' }),
+  );
 });
 
 it('fails when report generation fails', async () => {
@@ -142,7 +177,10 @@ it('fails when generation produces no scoped files', async () => {
 it('fails when writing the diagnostic summary fails', async () => {
   // arrange
   vi.spyOn(console, 'error').mockImplementation(() => {});
-  const reporter = new CoverageReporter({ report: () => report(), write: vi.fn().mockRejectedValue(new Error('disk full')) });
+  const reporter = new CoverageReporter({
+    report: () => report(),
+    write: vi.fn().mockRejectedValue(new Error('disk full')),
+  });
 
   // act
   const result = await reporter.onEnd({ status: 'passed' });

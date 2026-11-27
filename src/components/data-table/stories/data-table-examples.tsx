@@ -1,11 +1,21 @@
 import { useState } from 'react';
 import { DataTable } from '../DataTable';
-import type { DataTableProps, DataTablePagination, DataTableFilters, DataTableColumnVisibility } from '../types';
+import type {
+  DataTableProps,
+  DataTablePagination,
+  DataTableFilters,
+  DataTableColumnVisibility,
+} from '../types';
 import { createTableColumn } from '../../table/columns';
 import type { TableRowKey, TableSort } from '../../table/types';
 import { Menu } from '../../menu/Menu';
 
-export interface Payment { id: string; email: string; status: 'Paid' | 'Processing' | 'Failed'; amount: number }
+export interface Payment {
+  id: string;
+  email: string;
+  status: 'Paid' | 'Processing' | 'Failed';
+  amount: number;
+}
 export const payments: readonly Payment[] = [
   { id: 'payment-1', email: 'member-01@example.test', status: 'Paid', amount: 128 },
   { id: 'payment-2', email: 'member-02@example.test', status: 'Processing', amount: 85.5 },
@@ -28,21 +38,91 @@ const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: '
  **/
 function PaymentActions({ row }: { row: Payment }) {
   const [revealed, setRevealed] = useState(false);
-  return <><Menu className="payment-actions" trigger={<span aria-hidden="true">…</span>} triggerLabel={`Actions for ${row.email}`} menuLabel={`Payment ${row.email}`} items={[{ id: 'view', type: 'item', label: 'View payment ID', onSelect: () => { setRevealed(true); } }]} />{revealed && <span role="status">Payment ID: {row.id}</span>}</>;
+  return (
+    <>
+      <Menu
+        className="payment-actions"
+        trigger={<span aria-hidden="true">…</span>}
+        triggerLabel={`Actions for ${row.email}`}
+        menuLabel={`Payment ${row.email}`}
+        items={[
+          {
+            id: 'view',
+            type: 'item',
+            label: 'View payment ID',
+            onSelect: () => {
+              setRevealed(true);
+            },
+          },
+        ]}
+      />
+      {revealed && <span role="status">Payment ID: {row.id}</span>}
+    </>
+  );
 }
 export const paymentColumns = [
-  column({ id: 'status', header: 'Status', accessor: 'status', filterOptions: [{ label: 'Paid', value: 'Paid' }, { label: 'Processing', value: 'Processing' }, { label: 'Failed', value: 'Failed' }], cell: ({ value }) => <strong className={`payment-status payment-status--${value.toLowerCase()}`}>{value}</strong> }),
+  column({
+    id: 'status',
+    header: 'Status',
+    accessor: 'status',
+    filterOptions: [
+      { label: 'Paid', value: 'Paid' },
+      { label: 'Processing', value: 'Processing' },
+      { label: 'Failed', value: 'Failed' },
+    ],
+    cell: ({ value }) => (
+      <strong className={`payment-status payment-status--${value.toLowerCase()}`}>{value}</strong>
+    ),
+  }),
   column({ id: 'email', header: 'Email', accessor: 'email', sortable: true, hideable: false }),
-  column({ id: 'amount', header: 'Amount', accessor: 'amount', sortable: true, align: 'end', cell: ({ value }) => <span style={{ fontVariantNumeric: 'tabular-nums' }}>{currency.format(value)}</span> }),
-  column({ id: 'actions', header: <span className="fs-table__sr-only">Actions</span>, cell: ({ row }) => <PaymentActions row={row} /> }),
+  column({
+    id: 'amount',
+    header: 'Amount',
+    accessor: 'amount',
+    sortable: true,
+    align: 'end',
+    cell: ({ value }) => (
+      <span style={{ fontVariantNumeric: 'tabular-nums' }}>{currency.format(value)}</span>
+    ),
+  }),
+  column({
+    id: 'actions',
+    header: <span className="fs-table__sr-only">Actions</span>,
+    cell: ({ row }) => <PaymentActions row={row} />,
+  }),
 ];
-export const paymentProps: DataTableProps<Payment> = { caption: 'Payments', rows: payments, columns: paymentColumns, getRowKey: row => row.id, searchable: true, searchableColumns: ['email'], searchLabel: 'Search email', searchPlaceholder: 'Search by email', defaultSort: { columnId: 'email', direction: 'asc' }, selectionMode: 'multiple', defaultSelectedRowKeys: ['payment-1'], getSelectionLabel: row => `Select ${row.email}`, pagination: true, defaultPagination: { pageIndex: 0, pageSize: 3 }, columnChooser: true };
+export const paymentProps: DataTableProps<Payment> = {
+  caption: 'Payments',
+  rows: payments,
+  columns: paymentColumns,
+  getRowKey: (row) => row.id,
+  searchable: true,
+  searchableColumns: ['email'],
+  searchLabel: 'Search email',
+  searchPlaceholder: 'Search by email',
+  defaultSort: { columnId: 'email', direction: 'asc' },
+  selectionMode: 'multiple',
+  defaultSelectedRowKeys: ['payment-1'],
+  getSelectionLabel: (row) => `Select ${row.email}`,
+  pagination: true,
+  defaultPagination: { pageIndex: 0, pageSize: 3 },
+  columnChooser: true,
+};
 
 /**
  * Share all markup and data while allowing nested theme regions to supply palette values.
  **/
 export function DataTableExample() {
-  return <div className="data-table-demo">{(['corporate', 'luna'] as const).map(theme => <section key={theme} data-theme={theme}><h2>{theme === 'corporate' ? 'Corporate' : 'Luna'}</h2><DataTable {...paymentProps} /></section>)}</div>;
+  return (
+    <div className="data-table-demo">
+      {(['corporate', 'luna'] as const).map((theme) => (
+        <section key={theme} data-theme={theme}>
+          <h2>{theme === 'corporate' ? 'Corporate' : 'Luna'}</h2>
+          <DataTable {...paymentProps} />
+        </section>
+      ))}
+    </div>
+  );
 }
 
 /**
@@ -55,14 +135,45 @@ export function ControlledDataTable() {
   const [pagination, setPagination] = useState<DataTablePagination>({ pageIndex: 0, pageSize: 3 });
   const [filters, setFilters] = useState<DataTableFilters>({});
   const [visibility, setVisibility] = useState<DataTableColumnVisibility>({});
-  return <DataTable {...paymentProps} searchValue={query} onSearchChange={setQuery} sort={sort} onSortChange={setSort} selectedRowKeys={selected} onSelectionChange={setSelected} paginationState={pagination} onPaginationChange={setPagination} filters={filters} onFiltersChange={setFilters} columnVisibility={visibility} onColumnVisibilityChange={setVisibility} />;
+  return (
+    <DataTable
+      {...paymentProps}
+      searchValue={query}
+      onSearchChange={setQuery}
+      sort={sort}
+      onSortChange={setSort}
+      selectedRowKeys={selected}
+      onSelectionChange={setSelected}
+      paginationState={pagination}
+      onPaginationChange={setPagination}
+      filters={filters}
+      onFiltersChange={setFilters}
+      columnVisibility={visibility}
+      onColumnVisibilityChange={setVisibility}
+    />
+  );
 }
 
 /**
  * Confirm that data fields and rendering remain unrelated to the Payments demonstration.
  **/
 export function StockDataTable() {
-  return <DataTable caption="Stock" rows={[{ sku: 'chair', units: 12 }, { sku: 'desk', units: 4 }]} getRowKey={row => row.sku} columns={[{ id: 'sku', header: 'Product', accessor: 'sku' }, { id: 'units', header: 'Units', accessor: 'units', sortable: true }]} pagination defaultPagination={{ pageIndex: 0, pageSize: 1 }} />;
+  return (
+    <DataTable
+      caption="Stock"
+      rows={[
+        { sku: 'chair', units: 12 },
+        { sku: 'desk', units: 4 },
+      ]}
+      getRowKey={(row) => row.sku}
+      columns={[
+        { id: 'sku', header: 'Product', accessor: 'sku' },
+        { id: 'units', header: 'Units', accessor: 'units', sortable: true },
+      ]}
+      pagination
+      defaultPagination={{ pageIndex: 0, pageSize: 1 }}
+    />
+  );
 }
 
 /**
@@ -70,5 +181,11 @@ export function StockDataTable() {
  **/
 export function RetryDataTable() {
   const [failed, setFailed] = useState(true);
-  return <DataTable {...paymentProps} error={failed ? 'Payments could not be loaded.' : null} onRetry={() => setFailed(false)} />;
+  return (
+    <DataTable
+      {...paymentProps}
+      error={failed ? 'Payments could not be loaded.' : null}
+      onRetry={() => setFailed(false)}
+    />
+  );
 }

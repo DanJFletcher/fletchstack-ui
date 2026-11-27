@@ -47,9 +47,21 @@ describe('Button server rendering', () => {
     { name: 'an explicit reset type', props: { type: 'reset' }, expected: 'type="reset"' },
     { name: 'disabled state', props: { disabled: true }, expected: 'disabled=""' },
     { name: 'hidden state', props: { hidden: true }, expected: 'hidden=""' },
-    { name: 'an accessible name', props: { 'aria-label': 'Save settings' }, expected: 'aria-label="Save settings"' },
-    { name: 'native form association', props: { form: 'preferences' }, expected: 'form="preferences"' },
-    { name: 'a semantic style override', props: { style: { '--fs-button-radius': '0px' } }, expected: '--fs-button-radius:0px' },
+    {
+      name: 'an accessible name',
+      props: { 'aria-label': 'Save settings' },
+      expected: 'aria-label="Save settings"',
+    },
+    {
+      name: 'native form association',
+      props: { form: 'preferences' },
+      expected: 'form="preferences"',
+    },
+    {
+      name: 'a semantic style override',
+      props: { style: { '--fs-button-radius': '0px' } },
+      expected: '--fs-button-radius:0px',
+    },
   ])('includes $name before hydration', ({ props, expected }) => {
     // arrange
     const given = createElement(Button, props, 'Save changes');

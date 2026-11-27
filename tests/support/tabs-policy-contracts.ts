@@ -1,13 +1,29 @@
 import { expect, it } from 'vitest';
-import { selectedTab, tabDestination, tabMovement, validateTabs } from '../../src/components/tabs/tabs-policy';
+import {
+  selectedTab,
+  tabDestination,
+  tabMovement,
+  validateTabs,
+} from '../../src/components/tabs/tabs-policy';
 
 /**
  * Verify deterministic state and directional policies independently of browser layout.
  **/
 export function tabsPolicyContracts() {
   it.each([
-    { items: [{ id: '', label: 'Empty', content: null }], label: 'Workspace', expected: 'unique nonempty IDs' },
-    { items: [{ id: 'a', label: 'First', content: null }, { id: 'a', label: 'Second', content: null }], label: 'Workspace', expected: 'unique nonempty IDs' },
+    {
+      items: [{ id: '', label: 'Empty', content: null }],
+      label: 'Workspace',
+      expected: 'unique nonempty IDs',
+    },
+    {
+      items: [
+        { id: 'a', label: 'First', content: null },
+        { id: 'a', label: 'Second', content: null },
+      ],
+      label: 'Workspace',
+      expected: 'unique nonempty IDs',
+    },
     { items: [], label: ' ', expected: 'nonempty label' },
   ])('rejects an invalid configuration: $expected', ({ items, label, expected }) => {
     // arrange
@@ -30,15 +46,18 @@ export function tabsPolicyContracts() {
     { key: 'ArrowDown', orientation: 'vertical' as const, direction: 'ltr', expected: 1 },
     { key: 'ArrowUp', orientation: 'vertical' as const, direction: 'rtl', expected: -1 },
     { key: 'ArrowLeft', orientation: 'vertical' as const, direction: 'ltr', expected: undefined },
-  ])('maps $orientation $direction $key to $expected', ({ key, orientation, direction, expected }) => {
-    // arrange
+  ])(
+    'maps $orientation $direction $key to $expected',
+    ({ key, orientation, direction, expected }) => {
+      // arrange
 
-    // act
-    const result = tabMovement(key, orientation, direction);
+      // act
+      const result = tabMovement(key, orientation, direction);
 
-    // assert
-    expect(result).toBe(expected);
-  });
+      // assert
+      expect(result).toBe(expected);
+    },
+  );
   it.each([
     { movement: 'first' as const, current: 'b', expected: 'a' },
     { movement: 'last' as const, current: 'a', expected: 'b' },

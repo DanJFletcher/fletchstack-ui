@@ -10,13 +10,13 @@ Short supplementary, non-interactive help. Use a visible label for an action's n
 
 Import `tokens.css`, `tooltip.css` and the styles required by the child, or the combined `styles.css`. Tooltip adds no runtime dependency.
 
-| Prop | Default | Purpose |
-| --- | --- | --- |
-| `content` | required | Supplementary description as a React node; no interactive content |
-| `children` | required | Exactly one element that forwards `aria-describedby` to its trigger |
-| `placement` | `top` | Preferred `top`, `right`, `bottom` or `left` side |
-| `className`, `style`, native span attributes/handlers | forwarded | Wrapper customization, including typed `--fs-*` overrides |
-| ref | HTMLSpanElement | Native anchor wrapper |
+| Prop                                                  | Default         | Purpose                                                             |
+| ----------------------------------------------------- | --------------- | ------------------------------------------------------------------- |
+| `content`                                             | required        | Supplementary description as a React node; no interactive content   |
+| `children`                                            | required        | Exactly one element that forwards `aria-describedby` to its trigger |
+| `placement`                                           | `top`           | Preferred `top`, `right`, `bottom` or `left` side                   |
+| `className`, `style`, native span attributes/handlers | forwarded       | Wrapper customization, including typed `--fs-*` overrides           |
+| ref                                                   | HTMLSpanElement | Native anchor wrapper                                               |
 
 The child stays mounted and keeps its ref, handlers, URL, attributes, accessible name and tab order. Tooltip appends its own unique ID to existing `aria-describedby` IDs. Router links and custom trigger components must forward this attribute. Fragments and multiple children are unsupported. The wrapper does not add a tab stop or make a non-focusable/disabled trigger keyboard accessible; use a focusable control when help is needed by keyboard users. A hidden tooltip remains available as its trigger's referenced description, while the tooltip itself is absent from normal keyboard navigation and the accessibility tree.
 

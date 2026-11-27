@@ -1,5 +1,24 @@
-.tabs-demo { font-family: var(--fs-font-body); }
-.tabs-demo__theme { padding: var(--fs-space-inset); background: var(--fs-surface); color: var(--fs-text); }
-.tabs-demo__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--fs-space-stack); }
-.tabs-demo__card { min-inline-size: 0; padding: var(--fs-space-inset); border: 1px solid var(--fs-tabs-divider); border-radius: var(--fs-card-radius); }
-.tabs-demo__stats { display: flex; flex-wrap: wrap; gap: var(--fs-space-stack); }
+.tabs-demo {
+  font-family: var(--fs-font-body);
+}
+.tabs-demo__theme {
+  padding: var(--fs-space-inset);
+  background: var(--fs-surface);
+  color: var(--fs-text);
+}
+.tabs-demo__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--fs-space-stack);
+}
+.tabs-demo__card {
+  min-inline-size: 0;
+  padding: var(--fs-space-inset);
+  border: 1px solid var(--fs-tabs-divider);
+  border-radius: var(--fs-card-radius);
+}
+.tabs-demo__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fs-space-stack);
+}

@@ -3,7 +3,9 @@ import baseline from '../../fixtures/component-organization-baseline.json' with 
 import retiredSmokes from '../../fixtures/retired-story-smokes.json' with { type: 'json' };
 import { openStory } from '../fixtures/storybook';
 
-test('stories formerly covered by smoke loops remain discoverable and testable', async ({ request }) => {
+test('stories formerly covered by smoke loops remain discoverable and testable', async ({
+  request,
+}) => {
   const response = await request.get('/index.json');
   expect(response.ok()).toBe(true);
   const index = await response.json();
@@ -17,7 +19,10 @@ test('stories formerly covered by smoke loops remain discoverable and testable',
   }
 });
 
-test('legacy story and documentation IDs retain their corresponding examples', async ({ request, page }) => {
+test('legacy story and documentation IDs retain their corresponding examples', async ({
+  request,
+  page,
+}) => {
   await openStory(page, 'components-textarea--both-themes');
   const response = await request.get('/index.json');
   const index = await response.json();
@@ -30,7 +35,10 @@ test('legacy story and documentation IDs retain their corresponding examples', a
   }
 });
 
-test('the manager groups public components by function and retains example order', async ({ page, request }) => {
+test('the manager groups public components by function and retains example order', async ({
+  page,
+  request,
+}) => {
   await page.goto('/?path=/story/components-textarea--both-themes');
   const navigation = page.getByRole('navigation', { name: 'Stories' });
   const preview = page.frameLocator('#storybook-preview-iframe');
@@ -44,7 +52,9 @@ test('the manager groups public components by function and retains example order
   const index = await (await request.get('/index.json')).json();
   expect(index.entries['components-button--playground'].title).toBe('Components/Actions/Button');
   expect(index.entries['components-textarea--both-themes'].title).toBe('Components/Forms/Textarea');
-  expect(index.entries['components-card--reference-layouts'].title).toBe('Components/Surfaces/Card');
+  expect(index.entries['components-card--reference-layouts'].title).toBe(
+    'Components/Surfaces/Card',
+  );
   expect(index.entries['components-icon--gallery'].title).toBe('Components/Visuals/Icon');
 });
 
@@ -60,7 +70,7 @@ test('the Forms guide opens canonical compositions in the manager preview', asyn
   await expect(preview.getByRole('button', { name: 'Save', exact: true })).toBeVisible();
 });
 
-for (const story of baseline.stories.filter(entry => entry.type === 'docs')) {
+for (const story of baseline.stories.filter((entry) => entry.type === 'docs')) {
   test(`legacy documentation ${story.id} renders its owning guidance`, async ({ page }) => {
     await page.goto(`/?path=/docs/${story.id}`);
     const preview = page.frameLocator('#storybook-preview-iframe');
@@ -72,13 +82,22 @@ for (const story of baseline.stories.filter(entry => entry.type === 'docs')) {
 test('Card documents every compound part with its parent', async ({ page }) => {
   await page.goto('/?path=/docs/components-card--docs');
   const preview = page.frameLocator('#storybook-preview-iframe');
-  for (const name of ['CardHeader', 'CardContent', 'CardFooter', 'CardMedia', 'CardTitle', 'CardDescription']) {
+  for (const name of [
+    'CardHeader',
+    'CardContent',
+    'CardFooter',
+    'CardMedia',
+    'CardTitle',
+    'CardDescription',
+  ]) {
     await preview.getByRole('tab', { name, exact: true }).click();
     await expect(preview.getByRole('table').first()).toContainText('style');
   }
 });
 
-test('Textarea documentation presents standard examples before specialized guidance', async ({ page }) => {
+test('Textarea documentation presents standard examples before specialized guidance', async ({
+  page,
+}) => {
   await page.goto('/?path=/docs/components-textarea--docs');
   const preview = page.frameLocator('#storybook-preview-iframe');
   await expect(preview.getByRole('heading', { name: 'Textarea', exact: true })).toBeVisible();

@@ -12,7 +12,9 @@ describe('BounceCards', () => bounceContracts(render));
 describe('BounceCards geometry', bounceGeometryContracts);
 it('renders usable photo semantics before browser measurements', () => {
   // arrange
-  const element = <BounceCards images={[{ id: 'one', src: 'data:image/png,photo', alt: 'A landscape' }]} />;
+  const element = (
+    <BounceCards images={[{ id: 'one', src: 'data:image/png,photo', alt: 'A landscape' }]} />
+  );
   // act
   const result = renderToString(element);
   // assert

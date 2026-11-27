@@ -1,2 +1,11 @@
-.questionnaire-demo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--fs-space-stack); align-items: stretch; }
-@media (max-width: 960px) { .questionnaire-demo-grid { grid-template-columns: minmax(0, 1fr); } }
+.questionnaire-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--fs-space-stack);
+  align-items: stretch;
+}
+@media (max-width: 960px) {
+  .questionnaire-demo-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

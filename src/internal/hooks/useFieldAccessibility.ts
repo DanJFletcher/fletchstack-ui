@@ -13,10 +13,28 @@ type FieldAccessibilityOptions = {
 /**
  * Generate stable control IDs and preserve context before local descriptions and errors.
  **/
-export function useFieldAccessibility({ id, describedBy, invalid, error, descriptions, descriptionIds = [] }: FieldAccessibilityOptions): Pick<AriaAttributes, 'aria-describedby' | 'aria-invalid'> & { id: string } {
+export function useFieldAccessibility({
+  id,
+  describedBy,
+  invalid,
+  error,
+  descriptions,
+  descriptionIds = [],
+}: FieldAccessibilityOptions): Pick<AriaAttributes, 'aria-describedby' | 'aria-invalid'> & {
+  id: string;
+} {
   const generatedId = useId();
   const fieldId = id ?? generatedId;
-  const messages = descriptions.filter(([, content]) => Boolean(content)).map(([suffix]) => `${fieldId}-${suffix}`);
+  const messages = descriptions
+    .filter(([, content]) => Boolean(content))
+    .map(([suffix]) => `${fieldId}-${suffix}`);
 
-  return { id: fieldId, 'aria-describedby': [describedBy, ...descriptionIds, ...messages, error && `${fieldId}-error`].filter(Boolean).join(' ') || undefined, 'aria-invalid': error ? true : invalid };
+  return {
+    id: fieldId,
+    'aria-describedby':
+      [describedBy, ...descriptionIds, ...messages, error && `${fieldId}-error`]
+        .filter(Boolean)
+        .join(' ') || undefined,
+    'aria-invalid': error ? true : invalid,
+  };
 }

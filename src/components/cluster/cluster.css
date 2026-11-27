@@ -8,11 +8,27 @@
   justify-content: flex-start;
   min-inline-size: 0;
 }
-.fs-cluster[hidden] { display: none; }
-.fs-cluster--gap-none { gap: 0; }
-.fs-cluster--gap-related { gap: var(--fs-space-gap-related); }
-.fs-cluster--align-start { align-items: flex-start; }
-.fs-cluster--align-end { align-items: flex-end; }
-.fs-cluster--align-baseline { align-items: baseline; }
-.fs-cluster--justify-center { justify-content: center; }
-.fs-cluster--justify-end { justify-content: flex-end; }
+.fs-cluster[hidden] {
+  display: none;
+}
+.fs-cluster--gap-none {
+  gap: 0;
+}
+.fs-cluster--gap-related {
+  gap: var(--fs-space-gap-related);
+}
+.fs-cluster--align-start {
+  align-items: flex-start;
+}
+.fs-cluster--align-end {
+  align-items: flex-end;
+}
+.fs-cluster--align-baseline {
+  align-items: baseline;
+}
+.fs-cluster--justify-center {
+  justify-content: center;
+}
+.fs-cluster--justify-end {
+  justify-content: flex-end;
+}

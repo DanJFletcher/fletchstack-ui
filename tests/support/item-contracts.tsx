@@ -3,7 +3,17 @@ import type { RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, it, vi } from 'vitest';
 import { Item } from '../../src/components/item/Item';
-import { ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemMedia, ItemSeparator, ItemTitle } from '../../src/components/item/ItemParts';
+import {
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemGroup,
+  ItemHeader,
+  ItemMedia,
+  ItemSeparator,
+  ItemTitle,
+} from '../../src/components/item/ItemParts';
 
 /**
  * Exercise the public row contract in client rendering and independent server hydration.
@@ -23,7 +33,11 @@ export function itemContracts(render: (element: ReactElement) => RenderResult) {
   });
   it('forwards a destination and native anchor attributes', () => {
     // arrange
-    const given = <Item as="a" href="/guide" target="_blank" rel="noreferrer" aria-label="Read guide">Guide</Item>;
+    const given = (
+      <Item as="a" href="/guide" target="_blank" rel="noreferrer" aria-label="Read guide">
+        Guide
+      </Item>
+    );
 
     // act
     const result = render(given);
@@ -47,14 +61,22 @@ export function itemContracts(render: (element: ReactElement) => RenderResult) {
     const ref = createRef<HTMLElement>();
 
     // act
-    const result = render(<Item as="a" href="/guide" ref={ref}>Guide</Item>);
+    const result = render(
+      <Item as="a" href="/guide" ref={ref}>
+        Guide
+      </Item>,
+    );
 
     // assert
     expect(ref.current).toBe(result.getByRole('link'));
   });
   it('preserves caller classes and scoped overrides', () => {
     // arrange
-    const given = <Item className="custom" style={{ '--fs-item-padding': '32px' }} variant="muted" size="sm">Custom</Item>;
+    const given = (
+      <Item className="custom" style={{ '--fs-item-padding': '32px' }} variant="muted" size="sm">
+        Custom
+      </Item>
+    );
 
     // act
     const result = render(given);
@@ -65,7 +87,11 @@ export function itemContracts(render: (element: ReactElement) => RenderResult) {
   });
   it('keeps a hidden row out of accessible navigation', () => {
     // arrange
-    const given = <Item as="a" href="/guide" hidden>Guide</Item>;
+    const given = (
+      <Item as="a" href="/guide" hidden>
+        Guide
+      </Item>
+    );
 
     // act
     const result = render(given);
@@ -77,7 +103,16 @@ export function itemContracts(render: (element: ReactElement) => RenderResult) {
     // arrange
     const onClick = vi.fn();
     const user = userEvent.setup();
-    const result = render(<Item><ItemContent><ItemTitle>Invitation</ItemTitle></ItemContent><ItemActions><button onClick={onClick}>Accept</button></ItemActions></Item>);
+    const result = render(
+      <Item>
+        <ItemContent>
+          <ItemTitle>Invitation</ItemTitle>
+        </ItemContent>
+        <ItemActions>
+          <button onClick={onClick}>Accept</button>
+        </ItemActions>
+      </Item>,
+    );
 
     // act
     await user.click(result.getByRole('button', { name: 'Accept' }));
@@ -87,9 +122,13 @@ export function itemContracts(render: (element: ReactElement) => RenderResult) {
   });
   it('preserves consumer link handlers and cancellation', async () => {
     // arrange
-    const onClick = vi.fn(event => event.preventDefault());
+    const onClick = vi.fn((event) => event.preventDefault());
     const user = userEvent.setup();
-    const result = render(<Item as="a" href="/guide" onClick={onClick}>Guide</Item>);
+    const result = render(
+      <Item as="a" href="/guide" onClick={onClick}>
+        Guide
+      </Item>,
+    );
 
     // act
     await user.click(result.getByRole('link'));
@@ -100,7 +139,22 @@ export function itemContracts(render: (element: ReactElement) => RenderResult) {
   });
   it('composes all content regions in source order', () => {
     // arrange
-    const given = <ItemGroup><Item><ItemHeader>Header</ItemHeader><ItemMedia>Media</ItemMedia><ItemContent><ItemTitle>Title</ItemTitle><ItemDescription>Description</ItemDescription></ItemContent><ItemActions>Actions</ItemActions><ItemFooter>Footer</ItemFooter></Item><ItemSeparator /><Item>Second</Item></ItemGroup>;
+    const given = (
+      <ItemGroup>
+        <Item>
+          <ItemHeader>Header</ItemHeader>
+          <ItemMedia>Media</ItemMedia>
+          <ItemContent>
+            <ItemTitle>Title</ItemTitle>
+            <ItemDescription>Description</ItemDescription>
+          </ItemContent>
+          <ItemActions>Actions</ItemActions>
+          <ItemFooter>Footer</ItemFooter>
+        </Item>
+        <ItemSeparator />
+        <Item>Second</Item>
+      </ItemGroup>
+    );
 
     // act
     const result = render(given);
@@ -109,13 +163,26 @@ export function itemContracts(render: (element: ReactElement) => RenderResult) {
     expect(result.container.textContent).toBe('HeaderMediaTitleDescriptionActionsFooterSecond');
     expect(result.container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
   });
-  for (const [name, Part] of Object.entries({ ItemGroup, ItemMedia, ItemContent, ItemTitle, ItemActions, ItemHeader, ItemFooter, ItemSeparator })) {
+  for (const [name, Part] of Object.entries({
+    ItemGroup,
+    ItemMedia,
+    ItemContent,
+    ItemTitle,
+    ItemActions,
+    ItemHeader,
+    ItemFooter,
+    ItemSeparator,
+  })) {
     it(`${name} forwards native attributes, styles and ref`, () => {
       // arrange
       const ref = createRef<HTMLDivElement>();
 
       // act
-      const result = render(<Part ref={ref} className="custom" title="Region" style={{ '--fs-item-gap': '8px' }}>Content</Part>);
+      const result = render(
+        <Part ref={ref} className="custom" title="Region" style={{ '--fs-item-gap': '8px' }}>
+          Content
+        </Part>,
+      );
 
       // assert
       expect(ref.current).toBe(result.getByTitle('Region'));
@@ -128,7 +195,11 @@ export function itemContracts(render: (element: ReactElement) => RenderResult) {
     const ref = createRef<HTMLParagraphElement>();
 
     // act
-    const result = render(<ItemDescription ref={ref} className="custom" title="Details">Details</ItemDescription>);
+    const result = render(
+      <ItemDescription ref={ref} className="custom" title="Details">
+        Details
+      </ItemDescription>,
+    );
 
     // assert
     expect(ref.current).toBe(result.getByTitle('Details'));

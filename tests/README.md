@@ -4,19 +4,19 @@ The [browser-behavior matrix](browser-behavior-matrix.md) assigns each browser g
 
 Focused unit tests live with their component family. Integration and E2E remain central by suite and family. Start with the [component organization guide](../docs/component-organization.md) and choose the boundary you need to verify.
 
-| Location | Responsibility | Environment |
-| --- | --- | --- |
-| [component families](../src/components/) | Component DOM contracts and focused server-rendered markup | Per-file jsdom or Node and React SSR |
-| [unit/tokens/](unit/tokens/) | Token compilation, validation, naming, and value conversion | Node; synthetic in-memory inputs |
-| [unit/build/](unit/build/) | Build orchestration and errors at filesystem boundaries | Node; filesystem mocked |
-| [integration/components/](integration/components/) | Hydration, forms, keyboard behavior, refs, and native visibility | Chromium and real React |
-| [integration/themes/](integration/themes/) | Theme selection and generated CSS applied to real controls | Chromium and an isolated token project |
-| [integration/tokens/](integration/tokens/) | JSON documents through the real compiler to generated files | Node; temporary directories |
-| [integration/build/](integration/build/) | Command entry points and stylesheet publication | Node; real filesystem |
-| [e2e/components/](e2e/components/) | Served component behavior through HTTP and a browser | Playwright Test and Chromium against local Storybook |
-| [browser-harness/specs/](browser-harness/specs/) | Component and gallery native behavior, CSS and geometry | Playwright Test and Chromium against the private Vite gallery |
-| [e2e/storybook/](e2e/storybook/) | Documentation navigation and theme toolbar | Real Storybook manager and preview iframe |
-| [component stories](../src/components/) and [foundations/patterns](../stories/) | Component examples, interactions, and automated accessibility checks | Storybook in Chromium |
+| Location                                                                        | Responsibility                                                       | Environment                                                   |
+| ------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------- |
+| [component families](../src/components/)                                        | Component DOM contracts and focused server-rendered markup           | Per-file jsdom or Node and React SSR                          |
+| [unit/tokens/](unit/tokens/)                                                    | Token compilation, validation, naming, and value conversion          | Node; synthetic in-memory inputs                              |
+| [unit/build/](unit/build/)                                                      | Build orchestration and errors at filesystem boundaries              | Node; filesystem mocked                                       |
+| [integration/components/](integration/components/)                              | Hydration, forms, keyboard behavior, refs, and native visibility     | Chromium and real React                                       |
+| [integration/themes/](integration/themes/)                                      | Theme selection and generated CSS applied to real controls           | Chromium and an isolated token project                        |
+| [integration/tokens/](integration/tokens/)                                      | JSON documents through the real compiler to generated files          | Node; temporary directories                                   |
+| [integration/build/](integration/build/)                                        | Command entry points and stylesheet publication                      | Node; real filesystem                                         |
+| [e2e/components/](e2e/components/)                                              | Served component behavior through HTTP and a browser                 | Playwright Test and Chromium against local Storybook          |
+| [browser-harness/specs/](browser-harness/specs/)                                | Component and gallery native behavior, CSS and geometry              | Playwright Test and Chromium against the private Vite gallery |
+| [e2e/storybook/](e2e/storybook/)                                                | Documentation navigation and theme toolbar                           | Real Storybook manager and preview iframe                     |
+| [component stories](../src/components/) and [foundations/patterns](../stories/) | Component examples, interactions, and automated accessibility checks | Storybook in Chromium                                         |
 
 ## Naming and discovery
 
@@ -54,17 +54,17 @@ Use `screen.getByRole` with an accessible name to locate a control, and `within`
 
 For interaction tests, create `const user = userEvent.setup()` before rendering, then await `user.click`, `user.type`, or other actions in the test. Assert the consumer callback or visible result. Use `findBy` or `waitFor` only for eventual outcomes, and never repeat an action inside a retrying assertion. DOM matchers such as `toBeDisabled`, `toHaveAccessibleName`, and `toHaveFocus` express the promised state more precisely than HTML substrings.
 
-| Contract or risk | Primary test location | Assertion boundary |
-| --- | --- | --- |
-| Label and icon-only names; decorative composition | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Role/name queries and accessible names |
-| Default/explicit types, disabled/hidden attributes, external form association | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Native DOM attributes, state, and form ownership |
-| Variant and size selection | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Exact class membership for deliberate CSS styling hooks, independent of ordering |
-| Consumer classes, conventional styles, semantic custom properties | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Forwarded class membership and inline property values, not computed appearance |
-| Handler forwarding, disabled activation, public ref focus, prop updates | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx) | Awaited interactions, callback outcomes, focus, and `rerender` |
-| Native markup, repeatable initial HTML, types/state/ARIA/customization before hydration | [Button.ssr.test.tsx](../src/components/button/__tests__/Button.ssr.test.tsx) | Real server rendering with no browser globals |
-| Hydration, native forms, keyboard activation, disabled tab order, focus styling | [Button.hydration.test.ts](integration/components/button/Button.hydration.test.ts) | Real React and Chromium after server rendering |
-| CSS preserving native hidden behavior and tab order | [Button.hidden.test.ts](integration/components/button/Button.hidden.test.ts) | Actual browser visibility and navigation |
-| Theme selection, CSS cascade, visual states, reflow, accessibility | [Theme integration](integration/themes/), [stories](../stories/), and [browser verification](../scripts/verify-browser.mjs) | Generated styles, real browser behavior, and existing accessibility checks |
+| Contract or risk                                                                        | Primary test location                                                                                                       | Assertion boundary                                                               |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Label and icon-only names; decorative composition                                       | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx)                                                       | Role/name queries and accessible names                                           |
+| Default/explicit types, disabled/hidden attributes, external form association           | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx)                                                       | Native DOM attributes, state, and form ownership                                 |
+| Variant and size selection                                                              | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx)                                                       | Exact class membership for deliberate CSS styling hooks, independent of ordering |
+| Consumer classes, conventional styles, semantic custom properties                       | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx)                                                       | Forwarded class membership and inline property values, not computed appearance   |
+| Handler forwarding, disabled activation, public ref focus, prop updates                 | [Button.test.tsx](../src/components/button/__tests__/Button.test.tsx)                                                       | Awaited interactions, callback outcomes, focus, and `rerender`                   |
+| Native markup, repeatable initial HTML, types/state/ARIA/customization before hydration | [Button.ssr.test.tsx](../src/components/button/__tests__/Button.ssr.test.tsx)                                               | Real server rendering with no browser globals                                    |
+| Hydration, native forms, keyboard activation, disabled tab order, focus styling         | [Button.hydration.test.ts](integration/components/button/Button.hydration.test.ts)                                          | Real React and Chromium after server rendering                                   |
+| CSS preserving native hidden behavior and tab order                                     | [Button.hidden.test.ts](integration/components/button/Button.hidden.test.ts)                                                | Actual browser visibility and navigation                                         |
+| Theme selection, CSS cascade, visual states, reflow, accessibility                      | [Theme integration](integration/themes/), [stories](../stories/), and [browser verification](../scripts/verify-browser.mjs) | Generated styles, real browser behavior, and existing accessibility checks       |
 
 Class checks deliberately verify the CSS hooks that select variant/size styling; they do not prove colors or layout. Similarly, inspecting a custom property's inline value proves forwarding, not theme resolution. The hidden-attribute DOM test explicitly includes hidden elements because such an element has no accessible name; browser tests prove that it is actually hidden and skipped by Tab.
 
@@ -100,14 +100,14 @@ Vitest owns normal import dependency selection. Focused component tests and serv
 
 The [policy](../scripts/affected-policy.mjs) is deliberately conservative:
 
-| Changed input | Development selection |
-| --- | --- |
-| Implementation, test or imported helper | Vitest-related owners and directly changed tests |
-| Component CSS | Full integration; no additional unit appearance tests |
-| Tokens, generated CSS/reference, scripts, configuration, dependencies or public barrels | Full requested project |
-| Integration fixture/resource, stories/docs or added source/test inventory | Full integration; related owners or conservative fallback in unit |
-| Runtime rename/deletion, unknown resource or unproven runtime owners | Full requested project |
-| Unrelated OpenSpec planning prose | Safely empty unless another input selects tests |
+| Changed input                                                                           | Development selection                                             |
+| --------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Implementation, test or imported helper                                                 | Vitest-related owners and directly changed tests                  |
+| Component CSS                                                                           | Full integration; no additional unit appearance tests             |
+| Tokens, generated CSS/reference, scripts, configuration, dependencies or public barrels | Full requested project                                            |
+| Integration fixture/resource, stories/docs or added source/test inventory               | Full integration; related owners or conservative fallback in unit |
+| Runtime rename/deletion, unknown resource or unproven runtime owners                    | Full requested project                                            |
+| Unrelated OpenSpec planning prose                                                       | Safely empty unless another input selects tests                   |
 
 Paths under E2E or documentation are not blanket-ignored: some unit/integration tests import helpers there or read files from disk. A new unsupported dependency pattern must gain a tested rule or retain the full fallback. These unit/integration selectors provide no export-aware graph or persistent cache. Browser selection uses the separate [harness ownership policy](browser-harness/README.md#affected-selection). See [unit/integration selection evidence](../docs/affected-test-verification.md) for its measured results and limitations.
 
@@ -125,13 +125,13 @@ If final integration exposes a regression, reproduce and repair it with coverage
 
 During iteration, run specific browser scenarios and regression tests. At local completion for browser-impacting changes, run all Storybook render/play/accessibility checks and affected E2E suites, including composed consumers and retained served-Storybook boundaries. Use `npm run test:e2e:affected -- --base <git-ref>` and inspect its reasons. Explicit suite selection requires a stated ownership rationale; uncertain ownership requires the complete suite.
 
-| Changed input | Local E2E scope |
-| --- | --- |
-| Component implementation or scoped CSS with proven consumers | Owning suites plus dependent compositions |
-| Shared tokens, generated/global styles, browser setup or dependency/public-export configuration | Complete E2E |
-| Unknown impact or missing ownership | Complete E2E with fallback explanation |
-| Test-only repair with known dependencies | Changed tests and affected suites |
-| Shared readiness or harness repair | Complete E2E |
+| Changed input                                                                                   | Local E2E scope                           |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| Component implementation or scoped CSS with proven consumers                                    | Owning suites plus dependent compositions |
+| Shared tokens, generated/global styles, browser setup or dependency/public-export configuration | Complete E2E                              |
+| Unknown impact or missing ownership                                                             | Complete E2E with fallback explanation    |
+| Test-only repair with known dependencies                                                        | Changed tests and affected suites         |
+| Shared readiness or harness repair                                                              | Complete E2E                              |
 
 After a failure, reproduce it and repair it with focused checks, then rerun the scope affected by the final changes. Do not repeat unrelated local E2E solely because a failure happened. Never reuse results across relevant subsequent edits. Complete required CI always runs every browser suite and must pass after a CI failure is repaired. Independent full unit/integration coverage, lint, type, build and package obligations are unchanged.
 

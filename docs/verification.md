@@ -58,21 +58,21 @@ Run date: 2026-11-06. Environment: macOS arm64, temporary Node 22.23.4 runtime, 
 
 ## Commands and observed outcomes
 
-| Command | Result |
-| --- | --- |
-| `npm install` | Successful; reproducible package lock generated without the starter's external local-tarball dependency |
-| `npm run tokens` | Passed; two themes, identical contract of 59 semantic properties each |
-| `npm run lint` | Passed |
-| `npm run typecheck` | Passed |
-| `npm test` | Passed: 11 unit tests and 16 Chromium Storybook tests (27 total) |
-| `npm run build` | Passed; external React ESM bundle, declarations, combined and separate stylesheets |
-| `npm run build-storybook` | Passed; static Storybook generated |
-| `node scripts/verify-browser.mjs` | Passed: built-package CSS states, contrast, focus, enlarged text, reflow and text spacing |
-| `npm run verify:package` | Passed: npm tarball installed in a temporary consumer; public exports, NodeNext declarations, actual CSS imports through Vite, deterministic React 19.3.1 and 18.3.1 SSR, matching React 18/19 types |
-| `npm pack` | Installable tarball generated; not published |
-| `npm run build --prefix .verification/astro` | Passed with Astro 7.4.7, @astrojs/react 7.1.4 and React 19.3.1 using the packed library |
-| `node scripts/verify-astro.mjs` | Passed: static HTML with JavaScript disabled; one `client:load` React island; click changes label to Saved and disables control; no browser page errors |
-| `npm audit --omit=dev` | Zero production vulnerabilities |
+| Command                                      | Result                                                                                                                                                                                               |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm install`                                | Successful; reproducible package lock generated without the starter's external local-tarball dependency                                                                                              |
+| `npm run tokens`                             | Passed; two themes, identical contract of 59 semantic properties each                                                                                                                                |
+| `npm run lint`                               | Passed                                                                                                                                                                                               |
+| `npm run typecheck`                          | Passed                                                                                                                                                                                               |
+| `npm test`                                   | Passed: 11 unit tests and 16 Chromium Storybook tests (27 total)                                                                                                                                     |
+| `npm run build`                              | Passed; external React ESM bundle, declarations, combined and separate stylesheets                                                                                                                   |
+| `npm run build-storybook`                    | Passed; static Storybook generated                                                                                                                                                                   |
+| `node scripts/verify-browser.mjs`            | Passed: built-package CSS states, contrast, focus, enlarged text, reflow and text spacing                                                                                                            |
+| `npm run verify:package`                     | Passed: npm tarball installed in a temporary consumer; public exports, NodeNext declarations, actual CSS imports through Vite, deterministic React 19.3.1 and 18.3.1 SSR, matching React 18/19 types |
+| `npm pack`                                   | Installable tarball generated; not published                                                                                                                                                         |
+| `npm run build --prefix .verification/astro` | Passed with Astro 7.4.7, @astrojs/react 7.1.4 and React 19.3.1 using the packed library                                                                                                              |
+| `node scripts/verify-astro.mjs`              | Passed: static HTML with JavaScript disabled; one `client:load` React island; click changes label to Saved and disables control; no browser page errors                                              |
+| `npm audit --omit=dev`                       | Zero production vulnerabilities                                                                                                                                                                      |
 
 Storybook build warnings: its global settings file was outside the sandbox, but the build completed; docs/axe bundles exceed Vite's chunk-size warning threshold. These are preview tooling assets, not the library bundle (approximately 0.4kB JavaScript before compression).
 
@@ -92,10 +92,10 @@ Story interactions check accessible names, Enter and Space activation, focus-vis
 
 The built CSS was exercised with actual hover and mouse-down states in Chromium. All enabled label/state combinations meet 4.5:1, non-ghost control boundaries meet 3:1 against their region, and focus rings meet 3:1. Ghost's transparent resting boundary is intentional; the text identifies the action. Disabled text also meets 4.5:1, although exempt.
 
-| Theme | Default primary | Default secondary | Default ghost |
-| --- | --- | --- | --- |
-| Corporate | 7.75:1 | 7.75:1 | 7.75:1 |
-| Luna | 9.99:1 | 13.08:1 | 9.99:1 |
+| Theme     | Default primary | Default secondary | Default ghost |
+| --------- | --------------- | ----------------- | ------------- |
+| Corporate | 7.75:1          | 7.75:1            | 7.75:1        |
+| Luna      | 9.99:1          | 13.08:1           | 9.99:1        |
 
 Verified 3px solid focus outlines. At a 320 CSS pixel viewport, 200% root font size, 1.5 line height, 0.12em letter spacing, and 0.16em word spacing, no page-level horizontal overflow or button content clipping was detected. The paragraph override of 2em is included in the test stylesheet; this Button fixture contains no paragraphs. Normal and enlarged screenshots were visually reviewed: both theme palettes, visible focus, wrapping labels and growing controls remained legible. Screenshots can be regenerated in `.verification/` with `npm run verify:browser`.
 
@@ -149,18 +149,18 @@ Observed red-to-green checks: real theme compilation initially omitted all four 
 
 All checks passed sequentially after implementation:
 
-| Command | Observed result |
-| --- | --- |
-| `npm run lint` | Passed with SonarJS and required braces |
-| `npm run typecheck` | Passed, including isolated library declarations |
-| `npm run test:unit` | 184 tests; independent 100% statements/branches/functions/lines |
-| `npm run test:integration` | 87 tests; independent 100% statements/branches/functions/lines |
-| `npm run test:storybook` | 24 tests, with WCAG accessibility violations configured as failures |
-| `CI=true npm run test:e2e` | 32 Chromium journeys; independent 100% per browser source file; scripts excluded |
-| `npm run build` | Passed; Icon and eight named exports, declarations, and icon.css included |
-| `node scripts/verify-browser.mjs` | Passed existing built-package contrast/state/focus/reflow checks |
-| `npm run build-storybook` | Passed; existing preview chunk-size warnings remain |
-| `npm run verify:package` | Passed packed exports, combined/selective CSS, React 18/19 types and deterministic SSR, and production bundle opt-in checks |
+| Command                           | Observed result                                                                                                             |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `npm run lint`                    | Passed with SonarJS and required braces                                                                                     |
+| `npm run typecheck`               | Passed, including isolated library declarations                                                                             |
+| `npm run test:unit`               | 184 tests; independent 100% statements/branches/functions/lines                                                             |
+| `npm run test:integration`        | 87 tests; independent 100% statements/branches/functions/lines                                                              |
+| `npm run test:storybook`          | 24 tests, with WCAG accessibility violations configured as failures                                                         |
+| `CI=true npm run test:e2e`        | 32 Chromium journeys; independent 100% per browser source file; scripts excluded                                            |
+| `npm run build`                   | Passed; Icon and eight named exports, declarations, and icon.css included                                                   |
+| `node scripts/verify-browser.mjs` | Passed existing built-package contrast/state/focus/reflow checks                                                            |
+| `npm run build-storybook`         | Passed; existing preview chunk-size warnings remain                                                                         |
+| `npm run verify:package`          | Passed packed exports, combined/selective CSS, React 18/19 types and deterministic SSR, and production bundle opt-in checks |
 
 The unit and integration reports each count 136/136 statements, 109/109 branches, 38/38 functions, and 108/108 lines in their scoped executable source/build scripts. E2E separately covers the component source and authored Storybook browser modules; none of these gates borrow counters from another suite.
 

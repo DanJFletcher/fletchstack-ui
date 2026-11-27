@@ -2,7 +2,10 @@ import type { ComponentPropsWithoutRef, CSSProperties, ReactNode } from 'react';
 
 export type TabsItem = { id: string; label: ReactNode; content: ReactNode; disabled?: boolean };
 export type TabsStyle = CSSProperties & { [token: `--fs-${string}`]: string | number | undefined };
-export type TabsProps = Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'style' | 'dangerouslySetInnerHTML' | 'defaultValue' | 'onChange'> & {
+export type TabsProps = Omit<
+  ComponentPropsWithoutRef<'div'>,
+  'children' | 'style' | 'dangerouslySetInnerHTML' | 'defaultValue' | 'onChange'
+> & {
   label: string;
   items: readonly TabsItem[];
   value?: string;

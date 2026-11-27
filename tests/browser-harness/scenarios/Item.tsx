@@ -1,5 +1,14 @@
 import { Item, type ItemProps } from '../../../src/components/item/Item';
-import { ItemComposition, ItemExample, ItemLinkExample, ItemLongExample, ItemMediaExamples, ItemOverrides, ItemSizes, ItemVariants } from '../../../src/components/item/stories/item-examples';
+import {
+  ItemComposition,
+  ItemExample,
+  ItemLinkExample,
+  ItemLongExample,
+  ItemMediaExamples,
+  ItemOverrides,
+  ItemSizes,
+  ItemVariants,
+} from '../../../src/components/item/stories/item-examples';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/item/item.css';
 import '../../../src/components/button/button.css';
@@ -16,4 +25,14 @@ const Sizes: Scenario<ItemProps> = { render: () => <ItemSizes /> };
 const Variants: Scenario<ItemProps> = { render: () => <ItemVariants /> };
 export const component = Item;
 export const defaults: ItemProps = { children: 'A compact content row' };
-export const scenarios = { Playground, Composition, Actions, Link, Long, Media, Overrides, Sizes, Variants };
+export const scenarios = {
+  Playground,
+  Composition,
+  Actions,
+  Link,
+  Long,
+  Media,
+  Overrides,
+  Sizes,
+  Variants,
+};

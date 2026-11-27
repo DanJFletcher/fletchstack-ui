@@ -4,9 +4,25 @@ Approved from the supplied bottom-navigation design: equal destination cells, ic
 
 ```tsx
 <BottomNavigation aria-label="Primary">
-  <BottomNavigation.Item><a href="/"> <HomeIcon />Home</a></BottomNavigation.Item>
-  <BottomNavigation.Item><a href="/inbox" aria-current="page"><InboxIcon />Inbox</a></BottomNavigation.Item>
-  <BottomNavigation.Item><a href="/help"><HelpIcon />Help</a></BottomNavigation.Item>
+  <BottomNavigation.Item>
+    <a href="/">
+      {' '}
+      <HomeIcon />
+      Home
+    </a>
+  </BottomNavigation.Item>
+  <BottomNavigation.Item>
+    <a href="/inbox" aria-current="page">
+      <InboxIcon />
+      Inbox
+    </a>
+  </BottomNavigation.Item>
+  <BottomNavigation.Item>
+    <a href="/help">
+      <HelpIcon />
+      Help
+    </a>
+  </BottomNavigation.Item>
 </BottomNavigation>
 ```
 
@@ -14,14 +30,14 @@ Use one anchor or custom link component rendering an anchor per Item. Put a deco
 
 ## API
 
-| Component / prop | Type | Default |
-| --- | --- | --- |
-| BottomNavigation children | ReactNode | required |
-| aria-label / aria-labelledby | at least one string | required |
-| ref | HTMLElement (native nav) | — |
-| style | BottomNavigationStyle: CSSProperties plus `--fs-*` overrides | — |
-| native nav attributes / handlers | native props | forwarded |
-| BottomNavigation.Item children | one ReactElement producing an anchor | required |
+| Component / prop                 | Type                                                         | Default   |
+| -------------------------------- | ------------------------------------------------------------ | --------- |
+| BottomNavigation children        | ReactNode                                                    | required  |
+| aria-label / aria-labelledby     | at least one string                                          | required  |
+| ref                              | HTMLElement (native nav)                                     | —         |
+| style                            | BottomNavigationStyle: CSSProperties plus `--fs-*` overrides | —         |
+| native nav attributes / handlers | native props                                                 | forwarded |
+| BottomNavigation.Item children   | one ReactElement producing an anchor                         | required  |
 
 The public types are BottomNavigationProps, BottomNavigationItemProps, and BottomNavigationStyle. ID, className, handlers, native anchor attributes, router props, refs, and nested handlers remain consumer-owned. For mapped destinations place React keys on Item.
 
@@ -29,9 +45,24 @@ The public types are BottomNavigationProps, BottomNavigationItemProps, and Botto
 
 ```tsx
 <BottomNavigation aria-label="Primary">
-  <BottomNavigation.Item><NavLink to="/"><HomeIcon />Home</NavLink></BottomNavigation.Item>
-  <BottomNavigation.Item><NavLink to="/inbox"><InboxIcon />Inbox</NavLink></BottomNavigation.Item>
-  <BottomNavigation.Item><a href="/help" aria-current={isHelpPage ? 'page' : undefined}><HelpIcon />Help</a></BottomNavigation.Item>
+  <BottomNavigation.Item>
+    <NavLink to="/">
+      <HomeIcon />
+      Home
+    </NavLink>
+  </BottomNavigation.Item>
+  <BottomNavigation.Item>
+    <NavLink to="/inbox">
+      <InboxIcon />
+      Inbox
+    </NavLink>
+  </BottomNavigation.Item>
+  <BottomNavigation.Item>
+    <a href="/help" aria-current={isHelpPage ? 'page' : undefined}>
+      <HelpIcon />
+      Help
+    </a>
+  </BottomNavigation.Item>
 </BottomNavigation>
 ```
 

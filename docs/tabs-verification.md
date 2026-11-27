@@ -4,13 +4,13 @@ Verified on 2026-11-16 for [Tabs](./tabs.md) and [the change](../openspec/change
 
 ## Final checks
 
-| Scope | Coverage | Result | Runner duration |
-| --- | --- | --- | --- |
-| Full unit suite, 2 workers | enabled | 1,381 passed; statements, branches, functions and lines 100% | 96.71 seconds |
-| Full integration suite, 1 worker | enabled | 1,160 passed; statements, branches, functions and lines 100% | 109.09 seconds |
-| Full component browser suite, 2 workers | disabled | 572 passed | 2.6 minutes |
-| Full retained Storybook browser suite, 1 worker | disabled | 36 passed | 1.7 minutes |
-| Full Storybook render/play/accessibility | disabled | 510 passed | 67.56 seconds |
+| Scope                                           | Coverage | Result                                                       | Runner duration |
+| ----------------------------------------------- | -------- | ------------------------------------------------------------ | --------------- |
+| Full unit suite, 2 workers                      | enabled  | 1,381 passed; statements, branches, functions and lines 100% | 96.71 seconds   |
+| Full integration suite, 1 worker                | enabled  | 1,160 passed; statements, branches, functions and lines 100% | 109.09 seconds  |
+| Full component browser suite, 2 workers         | disabled | 572 passed                                                   | 2.6 minutes     |
+| Full retained Storybook browser suite, 1 worker | disabled | 36 passed                                                    | 1.7 minutes     |
+| Full Storybook render/play/accessibility        | disabled | 510 passed                                                   | 67.56 seconds   |
 
 Lint, both TypeScript configurations, component structural registration, token generation, whitespace checks, Storybook production build, library build/browser verification and installed-package verification passed. Installed consumers passed public types, negative type examples, runtime exports, CSS entry points, deterministic SSR and tree shaking under React 18.3.1 and 19.3.1. No runtime dependency was added. The final Storybook Vite build reported 55.20 seconds; that is its build phase, not total command time.
 

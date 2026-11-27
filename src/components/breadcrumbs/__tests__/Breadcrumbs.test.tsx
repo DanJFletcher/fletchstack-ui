@@ -7,7 +7,7 @@ import { breadcrumbViewport } from '../../../../tests/support/breadcrumbs-viewpo
 import { breadcrumbsContracts } from '../../../../tests/support/breadcrumbs-contracts';
 
 afterEach(() => vi.unstubAllGlobals());
-describe('client rendering', () => breadcrumbsContracts(element => render(element)));
+describe('client rendering', () => breadcrumbsContracts((element) => render(element)));
 it('preserves native hiding', () => {
   // arrange
   breadcrumbViewport(false);

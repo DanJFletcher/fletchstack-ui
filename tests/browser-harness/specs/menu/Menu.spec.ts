@@ -2,7 +2,10 @@ import { expect, test } from '../../fixtures/test';
 import { openScenario } from '../../fixtures/scenario';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} full keyboard round trip restores each parent and supports reopening`, async ({ page, mount }) => {
+  test(`${theme} full keyboard round trip restores each parent and supports reopening`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-menu--project', { theme });
     const trigger = page.getByRole('button', { name: 'Project actions' });
     await page.keyboard.press('Tab');
@@ -13,7 +16,10 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(page.getByRole('menuitem', { name: 'Export' })).toBeFocused();
     await page.keyboard.press('ArrowRight');
     await expect(page.getByRole('menuitem', { name: 'Download PDF' })).toBeFocused();
-    await expect(page.getByRole('menuitem', { name: 'Download PDF' })).toHaveCSS('outline-style', 'solid');
+    await expect(page.getByRole('menuitem', { name: 'Download PDF' })).toHaveCSS(
+      'outline-style',
+      'solid',
+    );
     await page.keyboard.press('Escape');
     await expect(page.getByRole('menuitem', { name: 'Export' })).toBeFocused();
     await expect(page.getByRole('menu', { name: 'Export' })).toHaveCount(0);
@@ -23,7 +29,10 @@ for (const theme of ['corporate', 'luna'] as const) {
     await page.keyboard.press('Space');
     await expect(page.getByRole('menuitem', { name: 'Rename' })).toBeFocused();
   });
-  test(`${theme} leaf keyboard activation runs once and selection can remain open`, async ({ page, mount }) => {
+  test(`${theme} leaf keyboard activation runs once and selection can remain open`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-menu--keep-open', { theme });
     await page.getByRole('button', { name: 'Project actions' }).click();
     await page.keyboard.press('Enter');
@@ -32,7 +41,10 @@ for (const theme of ['corporate', 'luna'] as const) {
     await page.keyboard.press('Space');
     await expect(page.getByLabel('Selected action')).toHaveText('Rename (2)');
   });
-  test(`${theme} desktop child aligns with its parent and flips within the viewport`, async ({ page, mount }) => {
+  test(`${theme} desktop child aligns with its parent and flips within the viewport`, async ({
+    page,
+    mount,
+  }) => {
     await page.setViewportSize({ width: 900, height: 700 });
     await openScenario(mount, 'components-menu--project', { theme });
     await page.addStyleTag({ content: '.fs-menu {margin-inline-start:550px}' });
@@ -45,12 +57,18 @@ for (const theme of ['corporate', 'luna'] as const) {
     expect(child!.x + child!.width).toBeLessThanOrEqual(892);
     expect(child!.x).toBeLessThan(row!.x);
   });
-  test(`${theme} narrow children expand inline and wrap enlarged spaced text`, async ({ page, mount }) => {
+  test(`${theme} narrow children expand inline and wrap enlarged spaced text`, async ({
+    page,
+    mount,
+  }) => {
     await page.setViewportSize({ width: 320, height: 900 });
     await openScenario(mount, 'components-menu--project', { theme });
     await page.getByRole('button', { name: 'Project actions' }).click();
     await page.getByRole('menuitem', { name: 'Export' }).click();
-    await page.addStyleTag({ content: 'html{font-size:200%}.fs-menu__panel{line-height:1.5;letter-spacing:.12em;word-spacing:.16em}' });
+    await page.addStyleTag({
+      content:
+        'html{font-size:200%}.fs-menu__panel{line-height:1.5;letter-spacing:.12em;word-spacing:.16em}',
+    });
     const child = page.getByRole('menu', { name: 'Export' });
     await expect(child).toHaveCSS('position', 'static');
     await expect(child).toHaveCSS('border-left-width', '1px');
@@ -58,12 +76,19 @@ for (const theme of ['corporate', 'luna'] as const) {
     const childBox = await child.boundingBox();
     expect(childBox!.y).toBeGreaterThanOrEqual(parentBox!.y + parentBox!.height);
     expect(childBox!.x).toBeGreaterThan(parentBox!.x);
-    expect(await child.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await child.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(
+      true,
+    );
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
   });
 }
 
-test('Tab closes from a submenu and continues to the next normal page control', async ({ page, mount }) => {
+test('Tab closes from a submenu and continues to the next normal page control', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-menu--project');
   await page.getByRole('button', { name: 'Project actions' }).click();
   await page.getByRole('menuitem', { name: 'Export' }).click();
@@ -78,7 +103,10 @@ test('Shift Tab closes and continues to the previous page control', async ({ pag
   await expect(page.getByRole('button', { name: 'Toggle externally' })).toBeFocused();
   await expect(page.getByRole('menu')).toHaveCount(0);
 });
-test('sibling switching applies recursively and disabled items are skipped', async ({ page, mount }) => {
+test('sibling switching applies recursively and disabled items are skipped', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-menu--advanced');
   await page.getByRole('button', { name: 'More actions' }).click();
   await page.getByRole('menuitem', { name: 'Export' }).click();
@@ -100,7 +128,10 @@ test('sibling switching applies recursively and disabled items are skipped', asy
   await page.keyboard.type('ar');
   await expect(page.getByRole('menuitem', { name: 'Archive' })).toBeFocused();
 });
-test('controlled state supports cancellable selection and outside dismissal', async ({ page, mount }) => {
+test('controlled state supports cancellable selection and outside dismissal', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-menu--controlled');
   await page.getByRole('button', { name: 'Toggle externally' }).click();
   await page.getByRole('menuitem', { name: 'Save draft' }).click();
@@ -117,15 +148,24 @@ test('native links navigate and close without duplicate selection', async ({ pag
   await expect(page).toHaveURL(/#publishing-guide$/);
   await expect(page.getByRole('menu')).toHaveCount(0);
 });
-test('empty menus are named, announce unavailability and dismiss by Escape', async ({ page, mount }) => {
+test('empty menus are named, announce unavailability and dismiss by Escape', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-menu--empty');
   await page.getByRole('button', { name: 'Project actions' }).click();
   await expect(page.getByRole('menu', { name: 'Project actions' })).toBeFocused();
-  await expect(page.getByRole('menuitem', { name: 'No actions available.' })).toHaveAttribute('aria-disabled', 'true');
+  await expect(page.getByRole('menuitem', { name: 'No actions available.' })).toHaveAttribute(
+    'aria-disabled',
+    'true',
+  );
   await page.keyboard.press('Escape');
   await expect(page.getByRole('button', { name: 'Project actions' })).toBeFocused();
 });
-test('motion follows live reduced-motion changes and closed branches disappear immediately', async ({ page, mount }) => {
+test('motion follows live reduced-motion changes and closed branches disappear immediately', async ({
+  page,
+  mount,
+}) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await openScenario(mount, 'components-menu--project');
   await page.getByRole('button', { name: 'Project actions' }).click();
@@ -143,7 +183,10 @@ test('forced colors preserve submenu focus and boundaries', async ({ page, mount
   await page.getByRole('button', { name: 'Project actions' }).click();
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('ArrowRight');
-  await expect(page.getByRole('menuitem', { name: 'Download PDF' })).toHaveCSS('outline-style', 'solid');
+  await expect(page.getByRole('menuitem', { name: 'Download PDF' })).toHaveCSS(
+    'outline-style',
+    'solid',
+  );
   await expect(page.getByRole('menu', { name: 'Export' })).toHaveCSS('border-left-style', 'solid');
 });
 

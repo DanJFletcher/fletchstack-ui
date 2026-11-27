@@ -6,9 +6,15 @@ import { test } from '../../fixtures/browser';
 import { Button } from '../../../../src/components/button/Button';
 
 test.beforeEach(async ({ page }) => {
-  const css = await readFile(new URL('../../../../src/components/button/button.css', import.meta.url), 'utf8');
-  const markup = ['Before', 'Hidden', 'After'].map(label =>
-    renderToStaticMarkup(createElement(Button, { hidden: label === 'Hidden' }, label))).join('');
+  const css = await readFile(
+    new URL('../../../../src/components/button/button.css', import.meta.url),
+    'utf8',
+  );
+  const markup = ['Before', 'Hidden', 'After']
+    .map((label) =>
+      renderToStaticMarkup(createElement(Button, { hidden: label === 'Hidden' }, label)),
+    )
+    .join('');
 
   await page.setContent(`<style>${css}</style>${markup}`);
 });

@@ -8,7 +8,11 @@ import { Icon } from '../Icon';
 
 it('uses a trimmed label as its image name', () => {
   // arrange
-  const given = <Icon label=" Night mode "><path d="M4 4h16v16H4Z" /></Icon>;
+  const given = (
+    <Icon label=" Night mode ">
+      <path d="M4 4h16v16H4Z" />
+    </Icon>
+  );
 
   // act
   render(given);
@@ -18,9 +22,16 @@ it('uses a trimmed label as its image name', () => {
   expect(result).toHaveAccessibleName('Night mode');
 });
 
-it.each([undefined, '', '   '])('keeps a %j label decorative', label => {
+it.each([undefined, '', '   '])('keeps a %j label decorative', (label) => {
   // arrange
-  const given = <Button>Save<Icon {...(label === undefined ? {} : { label })} data-testid="artwork"><path d="M4 4h16v16H4Z" /></Icon></Button>;
+  const given = (
+    <Button>
+      Save
+      <Icon {...(label === undefined ? {} : { label })} data-testid="artwork">
+        <path d="M4 4h16v16H4Z" />
+      </Icon>
+    </Button>
+  );
 
   // act
   render(given);
@@ -50,10 +61,21 @@ it.each([
 
 it('forwards SVG composition, coordinate space, and consumer customization', () => {
   // arrange
-  const given = <Icon label="Custom" viewBox="0 0 32 32" className="brand-art" data-source="consumer"
-    style={{ '--fs-icon-size-medium': '32px' }} fill="currentColor" stroke="none">
-    <g><path d="M4 4h24v24H4Z" /></g>
-  </Icon>;
+  const given = (
+    <Icon
+      label="Custom"
+      viewBox="0 0 32 32"
+      className="brand-art"
+      data-source="consumer"
+      style={{ '--fs-icon-size-medium': '32px' }}
+      fill="currentColor"
+      stroke="none"
+    >
+      <g>
+        <path d="M4 4h24v24H4Z" />
+      </g>
+    </Icon>
+  );
 
   // act
   render(given);
@@ -83,7 +105,16 @@ it('exposes its SVG root through the forwarded ref', () => {
 
 it('preserves its naming and focus contract against untyped prop overrides', () => {
   // arrange
-  const conflicting: Record<string, unknown> = { role: 'button', 'aria-label': 'Wrong', 'aria-labelledby': 'other', 'aria-hidden': true, tabIndex: 0, focusable: 'true', width: 900, height: 900 };
+  const conflicting: Record<string, unknown> = {
+    role: 'button',
+    'aria-label': 'Wrong',
+    'aria-labelledby': 'other',
+    'aria-hidden': true,
+    tabIndex: 0,
+    focusable: 'true',
+    width: 900,
+    height: 900,
+  };
   const given = <Icon {...conflicting} label="Correct" />;
 
   // act

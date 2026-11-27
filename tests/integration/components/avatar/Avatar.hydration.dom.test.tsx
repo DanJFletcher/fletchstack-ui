@@ -15,22 +15,33 @@ it.each([
   { props: { name: 'Élodie 李', alt: '' }, expected: 'É李' },
   { props: { name: 'Maya Chen', initials: 'm', shape: 'square', size: 'small' }, expected: 'M' },
   { props: { name: 'Maya Chen', initials: '  ', src: '  ' }, expected: 'MC' },
-] satisfies { props: AvatarProps; expected: string }[])('hydrates deterministic identity markup: $expected', ({ props, expected }) => {
-  // arrange
-  const ref = createRef<HTMLSpanElement>();
-  const given = <Avatar {...props} ref={ref} title="Owner" className="consumer" style={{ '--fs-avatar-size': '48px' }} />;
-  const container = document.createElement('div');
-  container.innerHTML = renderToString(given);
-  document.body.appendChild(container);
-  const onRecoverableError = vi.fn();
-  // act
-  render(given, { container, hydrate: true, onRecoverableError });
-  // assert
-  expect(ref.current).toHaveTextContent(expected);
-  expect(ref.current).toHaveClass('consumer');
-  expect(ref.current).toHaveAttribute('title', 'Owner');
-  expect(onRecoverableError).not.toHaveBeenCalled();
-});
+] satisfies { props: AvatarProps; expected: string }[])(
+  'hydrates deterministic identity markup: $expected',
+  ({ props, expected }) => {
+    // arrange
+    const ref = createRef<HTMLSpanElement>();
+    const given = (
+      <Avatar
+        {...props}
+        ref={ref}
+        title="Owner"
+        className="consumer"
+        style={{ '--fs-avatar-size': '48px' }}
+      />
+    );
+    const container = document.createElement('div');
+    container.innerHTML = renderToString(given);
+    document.body.appendChild(container);
+    const onRecoverableError = vi.fn();
+    // act
+    render(given, { container, hydrate: true, onRecoverableError });
+    // assert
+    expect(ref.current).toHaveTextContent(expected);
+    expect(ref.current).toHaveClass('consumer');
+    expect(ref.current).toHaveAttribute('title', 'Owner');
+    expect(onRecoverableError).not.toHaveBeenCalled();
+  },
+);
 
 it('hydrates a pending photo, replaces it after failure, and removes it after loading', () => {
   // arrange
@@ -53,25 +64,39 @@ it('hydrates a pending photo, replaces it after failure, and removes it after lo
   expect(errors).not.toHaveBeenCalled();
 });
 
-it.each([{ width: 64, expected: '' }, { width: 0, expected: 'MC' }])('recovers an image completed before hydration with natural width $width', ({ width, expected }) => {
-  // arrange
-  const given = <Avatar name="Maya Chen" src="/cached.svg" />;
-  const container = document.createElement('div');
-  container.innerHTML = renderToString(given);
-  document.body.appendChild(container);
-  vi.spyOn(HTMLImageElement.prototype, 'complete', 'get').mockReturnValue(true);
-  vi.spyOn(HTMLImageElement.prototype, 'naturalWidth', 'get').mockReturnValue(width);
-  const errors = vi.fn();
-  // act
-  render(given, { container, hydrate: true, onRecoverableError: errors });
-  // assert
-  expect(screen.getByRole('img', { name: 'Maya Chen' }).textContent).toBe(expected);
-  expect(errors).not.toHaveBeenCalled();
-});
+it.each([
+  { width: 64, expected: '' },
+  { width: 0, expected: 'MC' },
+])(
+  'recovers an image completed before hydration with natural width $width',
+  ({ width, expected }) => {
+    // arrange
+    const given = <Avatar name="Maya Chen" src="/cached.svg" />;
+    const container = document.createElement('div');
+    container.innerHTML = renderToString(given);
+    document.body.appendChild(container);
+    vi.spyOn(HTMLImageElement.prototype, 'complete', 'get').mockReturnValue(true);
+    vi.spyOn(HTMLImageElement.prototype, 'naturalWidth', 'get').mockReturnValue(width);
+    const errors = vi.fn();
+    // act
+    render(given, { container, hydrate: true, onRecoverableError: errors });
+    // assert
+    expect(screen.getByRole('img', { name: 'Maya Chen' }).textContent).toBe(expected);
+    expect(errors).not.toHaveBeenCalled();
+  },
+);
 
 it('keeps server output passive even with untyped interaction overrides', () => {
   // arrange
-  const given = { role: 'button', tabIndex: 0, onClick: vi.fn(), 'aria-live': 'polite', 'aria-label': 'Override', dangerouslySetInnerHTML: { __html: 'Override' }, title: 'Account' } as unknown as AvatarProps;
+  const given = {
+    role: 'button',
+    tabIndex: 0,
+    onClick: vi.fn(),
+    'aria-live': 'polite',
+    'aria-label': 'Override',
+    dangerouslySetInnerHTML: { __html: 'Override' },
+    title: 'Account',
+  } as unknown as AvatarProps;
   // act
   const result = renderToString(<Avatar {...given} name="Maya Chen" />);
   // assert

@@ -1,6 +1,25 @@
-.data-table-demo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--fs-table-padding-inline); min-inline-size: 0; }
-.data-table-demo > section { box-sizing: border-box; min-inline-size: 0; padding: var(--fs-table-padding-inline); color: var(--fs-table-text); background: var(--fs-table-surface); }
-.payment-status--paid { color: var(--fs-badge-success-text); }
-.payment-status--processing { color: var(--fs-badge-warning-text); }
-.payment-status--failed { color: var(--fs-badge-danger-text); }
-.payment-actions .fs-menu__trigger-chevron { display: none; }
+.data-table-demo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--fs-table-padding-inline);
+  min-inline-size: 0;
+}
+.data-table-demo > section {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding: var(--fs-table-padding-inline);
+  color: var(--fs-table-text);
+  background: var(--fs-table-surface);
+}
+.payment-status--paid {
+  color: var(--fs-badge-success-text);
+}
+.payment-status--processing {
+  color: var(--fs-badge-warning-text);
+}
+.payment-status--failed {
+  color: var(--fs-badge-danger-text);
+}
+.payment-actions .fs-menu__trigger-chevron {
+  display: none;
+}

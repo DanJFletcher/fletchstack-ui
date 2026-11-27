@@ -1,5 +1,51 @@
-.fs-kbd { box-sizing: border-box; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--fs-kbd-gap); min-inline-size: var(--fs-kbd-minimum-size); min-block-size: var(--fs-kbd-minimum-size); max-inline-size: 100%; padding: var(--fs-kbd-padding-block) var(--fs-kbd-padding-inline); border: var(--fs-kbd-border-width) solid var(--fs-kbd-border); border-radius: var(--fs-kbd-radius); background: var(--fs-kbd-surface); color: var(--fs-kbd-text); box-shadow: 0 var(--fs-kbd-shadow-offset) 0 var(--fs-kbd-border); font-family: var(--fs-kbd-font-family); font-size: var(--fs-kbd-font-size); font-weight: var(--fs-kbd-font-weight); line-height: var(--fs-kbd-font-line-height); text-align: center; vertical-align: middle; overflow-wrap: anywhere; }
-.fs-kbd > svg { flex-shrink: 0; inline-size: var(--fs-kbd-icon-size); block-size: var(--fs-kbd-icon-size); }
-.fs-kbd-group { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--fs-kbd-group-gap); min-inline-size: 0; max-inline-size: 100%; font: inherit; vertical-align: middle; }
-.fs-kbd[hidden], .fs-kbd-group[hidden] { display: none; }
-@media (forced-colors: active) { .fs-kbd { background: Canvas; color: CanvasText; border-color: CanvasText; box-shadow: none; } }
+.fs-kbd {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fs-kbd-gap);
+  min-inline-size: var(--fs-kbd-minimum-size);
+  min-block-size: var(--fs-kbd-minimum-size);
+  max-inline-size: 100%;
+  padding: var(--fs-kbd-padding-block) var(--fs-kbd-padding-inline);
+  border: var(--fs-kbd-border-width) solid var(--fs-kbd-border);
+  border-radius: var(--fs-kbd-radius);
+  background: var(--fs-kbd-surface);
+  color: var(--fs-kbd-text);
+  box-shadow: 0 var(--fs-kbd-shadow-offset) 0 var(--fs-kbd-border);
+  font-family: var(--fs-kbd-font-family);
+  font-size: var(--fs-kbd-font-size);
+  font-weight: var(--fs-kbd-font-weight);
+  line-height: var(--fs-kbd-font-line-height);
+  text-align: center;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+.fs-kbd > svg {
+  flex-shrink: 0;
+  inline-size: var(--fs-kbd-icon-size);
+  block-size: var(--fs-kbd-icon-size);
+}
+.fs-kbd-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--fs-kbd-group-gap);
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  font: inherit;
+  vertical-align: middle;
+}
+.fs-kbd[hidden],
+.fs-kbd-group[hidden] {
+  display: none;
+}
+@media (forced-colors: active) {
+  .fs-kbd {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+}

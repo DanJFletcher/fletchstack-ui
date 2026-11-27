@@ -26,13 +26,13 @@ The focused retained-Storybook run of `FieldLabel documents public props` and `t
 
 The final harness measurement was run without other validation concurrently. Same 52 cases, Chromium, three workers, zero retries, retained failure traces and coverage disabled. Harness command times: **10.602s, 9.251s, 9.556s**, median **9.556s**, range **9.251–10.602s**. Fresh Vite process readiness: **1.136s**, with disk caches retained and token generation excluded, as in the baseline. The paired workload is **75.6% faster by median command wall time (4.10×)**.
 
-| Measurement | Storybook baseline (three runs) | Harness (three runs) |
-| --- | --- | --- |
-| Passing cases per run | 52, 52, 52 | 52, 52, 52 |
-| Command wall seconds | 38.949, 39.183, 39.874 | 10.602, 9.251, 9.556 |
-| Runner wall seconds | 38.119, 38.230, 38.707 | 9.572, 8.369, 8.771 |
-| Sum of individual test seconds | 85.897, 85.555, 83.875 | 17.786, 15.282, 16.539 |
-| Fresh-server ready seconds | 3.392 | 1.136 |
+| Measurement                    | Storybook baseline (three runs) | Harness (three runs)   |
+| ------------------------------ | ------------------------------- | ---------------------- |
+| Passing cases per run          | 52, 52, 52                      | 52, 52, 52             |
+| Command wall seconds           | 38.949, 39.183, 39.874          | 10.602, 9.251, 9.556   |
+| Runner wall seconds            | 38.119, 38.230, 38.707          | 9.572, 8.369, 8.771    |
+| Sum of individual test seconds | 85.897, 85.555, 83.875          | 17.786, 15.282, 16.539 |
+| Fresh-server ready seconds     | 3.392                           | 1.136                  |
 
 Summed durations are not elapsed savings. Browser launch, scenario initialization, first-load transforms and teardown are included in each command but were not independently timed. The modes ran in blocks rather than alternating; normal machine variance and warm disk caches limit extrapolation. An earlier exploratory harness measurement overlapped type checking and is excluded from this acceptance table.
 
@@ -42,13 +42,13 @@ Summed durations are not elapsed savings. Browser launch, scenario initializatio
 
 Each bounded mutation was restored in a `finally` block and its focused checks then passed. The selected full owner lists and filtered probe invocations are retained in local measurement JSON; these probe executions are intentionally filtered evidence, not complete selected-run passes.
 
-| Mutation | Actual failing checks | Restored result |
-| --- | --- | --- |
-| Button activation prevents default and replaces the handler | Button native submit/reset and transitive CodeBlock native clipboard | Both pass |
-| Stack gap becomes 1px and alignment becomes center | Corporate gap geometry and RTL start alignment | Both pass |
-| CodeBlock copies corrupted text | Exact real clipboard text | Pass |
-| CodeBlock viewport ignores scoped inset | Scoped/reset padding | Pass |
-| Generated shared code-font token becomes 1px | Corporate literal-code typography | Pass; selection is complete fallback |
+| Mutation                                                    | Actual failing checks                                                | Restored result                      |
+| ----------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------ |
+| Button activation prevents default and replaces the handler | Button native submit/reset and transitive CodeBlock native clipboard | Both pass                            |
+| Stack gap becomes 1px and alignment becomes center          | Corporate gap geometry and RTL start alignment                       | Both pass                            |
+| CodeBlock copies corrupted text                             | Exact real clipboard text                                            | Pass                                 |
+| CodeBlock viewport ignores scoped inset                     | Scoped/reset padding                                                 | Pass                                 |
+| Generated shared code-font token becomes 1px                | Corporate literal-code typography                                    | Pass; selection is complete fallback |
 
 Disposable browser suites also proved that an uncaught page error fails fixture teardown, a legacy assertion fails, and a setup exception fails. Mixed harness/legacy execution continued through both failures and returned status 1; the disposable suites were removed. Unit tests cover launch failure and signal exit propagation. Unknown IDs, failed imports and React render errors reject mount, and subsequent clean scenarios work. Clipboard success/unavailable behavior passes in both orders; fresh contexts reset preferences and permissions.
 

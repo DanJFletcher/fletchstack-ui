@@ -1,10 +1,17 @@
 import { Dialog } from '../../../src/components/dialog/Dialog';
-import { DeferredDialog, DialogDemo, DialogExample, DialogOverrides, NestedDialog, type DialogDemoProps } from '../../../src/components/dialog/stories/dialog-examples';
+import {
+  DeferredDialog,
+  DialogDemo,
+  DialogExample,
+  DialogOverrides,
+  NestedDialog,
+  type DialogDemoProps,
+} from '../../../src/components/dialog/stories/dialog-examples';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/dialog/dialog.css';
 import '../../../src/components/dialog/stories/dialog.stories.css';
 
-const Playground: Scenario<DialogDemoProps> = { render: args => <DialogDemo {...args} /> };
+const Playground: Scenario<DialogDemoProps> = { render: (args) => <DialogDemo {...args} /> };
 const Composition: Scenario<DialogDemoProps> = { render: () => <DialogExample /> };
 const Deferred: Scenario<DialogDemoProps> = { render: () => <DeferredDialog /> };
 const Overrides: Scenario<DialogDemoProps> = { render: () => <DialogOverrides /> };

@@ -16,9 +16,11 @@ The library has disclosure and destination-navigation components, but no accessi
 ## Capabilities
 
 ### New Capabilities
+
 - `tabs`: Accessible in-view panel selection, keyboard focus management, panel lifecycle, responsive presentation, and consumer integration.
 
 ### Modified Capabilities
+
 None. Existing testing and browser-harness policies remain unchanged.
 
 ## Impact

@@ -14,25 +14,39 @@ it('defaults to body copy in a native paragraph', () => {
 
   // assert
   expect(screen.getByText('Manage your workspace.').tagName).toBe('P');
-  expect(screen.getByText('Manage your workspace.')).toHaveClass('fs-text--body', 'fs-text--default');
+  expect(screen.getByText('Manage your workspace.')).toHaveClass(
+    'fs-text--body',
+    'fs-text--default',
+  );
 });
 
-it.each(['lead', 'body', 'small'] as const)('supports %s text without changing semantics', size => {
-  // arrange
-  const given = <Text size={size}>Description</Text>;
+it.each(['lead', 'body', 'small'] as const)(
+  'supports %s text without changing semantics',
+  (size) => {
+    // arrange
+    const given = <Text size={size}>Description</Text>;
 
-  // act
-  render(given);
+    // act
+    render(given);
 
-  // assert
-  expect(screen.getByText('Description')).toHaveClass(`fs-text--${size}`);
-  expect(screen.getByText('Description').tagName).toBe('P');
-});
+    // assert
+    expect(screen.getByText('Description')).toHaveClass(`fs-text--${size}`);
+    expect(screen.getByText('Description').tagName).toBe('P');
+  },
+);
 
 it('supports an inline span with a native ref and muted tone', () => {
   // arrange
   const ref = createRef<HTMLSpanElement>();
-  const given = <p>Saved <Text as="span" tone="muted" ref={ref}>yesterday</Text>.</p>;
+  const given = (
+    <p>
+      Saved{' '}
+      <Text as="span" tone="muted" ref={ref}>
+        yesterday
+      </Text>
+      .
+    </p>
+  );
 
   // act
   render(given);
@@ -47,7 +61,11 @@ it('preserves native paragraph refs, attributes, classes and typed overrides', (
   // arrange
   const ref = createRef<HTMLParagraphElement>();
   const style: TextStyle = { '--fs-typography-text-font-body': '1.25rem' };
-  const given = <Text id="summary" dir="rtl" className="consumer" ref={ref} style={style}><strong>Project</strong> summary</Text>;
+  const given = (
+    <Text id="summary" dir="rtl" className="consumer" ref={ref} style={style}>
+      <strong>Project</strong> summary
+    </Text>
+  );
 
   // act
   render(given);

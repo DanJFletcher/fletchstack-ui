@@ -11,17 +11,17 @@
 
 Reviewed the shared policy, skill activation descriptions and closing checks, component guidance, and test-guide examples together. The following are manual instruction walkthroughs, not executed product tests or agent experiments.
 
-| Situation | Review result |
-| --- | --- |
+| Situation                          | Review result                                                                                                                                                                                                                                          |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Routine component tested afterward | Component, React, and Playwright entry points defer to shared cadence selection. API/accessibility planning precedes implementation; contract-based tests may follow it. Storybook, browser, accessibility, and final verification obligations remain. |
-| Batched rule examples | Shared policy permits related contract examples together before implementation; none of the dependent skills forces one red/green cycle per example. Unit authoring rules remain confined to unit tests. |
-| Explicit incremental TDD | Selected TDD requires running the explicit test before production changes, observing the intended behavioral failure, and rerunning the same test for green. Setup errors do not count as red. |
-| Reproducible bug | A disabled control incorrectly invoking its callback calls for a focused pre-fix failing regression where feasible, followed by passing verification after repair. |
-| Bug with unavailable environment | Report the concrete unavailable dependency or environment, perform available verification, and identify missing reproduction evidence. A later pass cannot be reported as an observed pre-fix failure. |
-| Behavior-preserving refactor | Missing relevant coverage calls for characterization checks and a passing baseline before edits; rerun checks afterward. No synthetic failure or mandatory delegated review is introduced. |
-| Wrong expected outcome | A zero-clamping discount contract requires `0` for `applyDiscount(10, 15)` even if current output is `-5`. Correct a mistaken assertion against the contract; do not copy the faulty output. |
-| Vacuous assertion | A deletion test that only asserts absence without establishing initial presence needs relevant preconditions and a focused probe or equivalent concrete evidence. Restore temporary perturbations before final checks. |
-| Failed final verification | Focused and affected passes cannot establish completion. Repair with focused feedback, then repeat required full verification on the final state. |
+| Batched rule examples              | Shared policy permits related contract examples together before implementation; none of the dependent skills forces one red/green cycle per example. Unit authoring rules remain confined to unit tests.                                               |
+| Explicit incremental TDD           | Selected TDD requires running the explicit test before production changes, observing the intended behavioral failure, and rerunning the same test for green. Setup errors do not count as red.                                                         |
+| Reproducible bug                   | A disabled control incorrectly invoking its callback calls for a focused pre-fix failing regression where feasible, followed by passing verification after repair.                                                                                     |
+| Bug with unavailable environment   | Report the concrete unavailable dependency or environment, perform available verification, and identify missing reproduction evidence. A later pass cannot be reported as an observed pre-fix failure.                                                 |
+| Behavior-preserving refactor       | Missing relevant coverage calls for characterization checks and a passing baseline before edits; rerun checks afterward. No synthetic failure or mandatory delegated review is introduced.                                                             |
+| Wrong expected outcome             | A zero-clamping discount contract requires `0` for `applyDiscount(10, 15)` even if current output is `-5`. Correct a mistaken assertion against the contract; do not copy the faulty output.                                                           |
+| Vacuous assertion                  | A deletion test that only asserts absence without establishing initial presence needs relevant preconditions and a focused probe or equivalent concrete evidence. Restore temporary perturbations before final checks.                                 |
+| Failed final verification          | Focused and affected passes cannot establish completion. Repair with focused feedback, then repeat required full verification on the final state.                                                                                                      |
 
 - Live-guidance search found no unconditional TDD referrals or blanket requirement that every test be observed failing. Strict red/green instructions remain conditional on selected TDD.
 - All five modified skills passed the skill-creator `quick_validate.py` check; their frontmatter names match their directories.

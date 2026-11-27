@@ -12,17 +12,17 @@ Scope: persistent, composable Callout; Corporate/Luna tone roles; Feedback stori
 
 ## Final checks
 
-| Check | Result |
-| --- | --- |
-| Full unit coverage | 69 files, 1,155 tests; 22.21s; independent 100% statements, branches, functions and lines |
-| Full integration coverage | 75 files, 958 tests; 98.15s; independent 100% statements, branches, functions and lines |
-| Complete component browser suite | 493 passed, 2.0m, two workers |
-| Complete retained Storybook browser suite | 36 passed, 1.5m, one worker |
-| Final Callout browser scope | 10 passed, 6.0s, one worker |
-| All Storybook render/play/axe checks | 39 files, 454 tests; 19.44s |
-| Storybook build | Passed; Vite build stage 6.60s |
-| Package build and installed consumers | Passed: public API, negative type assertions, CSS exports, bundling and deterministic React 18.3.1 / 19.3.1 SSR |
-| Lint, typecheck, structural component check, diff whitespace | Passed |
+| Check                                                        | Result                                                                                                          |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| Full unit coverage                                           | 69 files, 1,155 tests; 22.21s; independent 100% statements, branches, functions and lines                       |
+| Full integration coverage                                    | 75 files, 958 tests; 98.15s; independent 100% statements, branches, functions and lines                         |
+| Complete component browser suite                             | 493 passed, 2.0m, two workers                                                                                   |
+| Complete retained Storybook browser suite                    | 36 passed, 1.5m, one worker                                                                                     |
+| Final Callout browser scope                                  | 10 passed, 6.0s, one worker                                                                                     |
+| All Storybook render/play/axe checks                         | 39 files, 454 tests; 19.44s                                                                                     |
+| Storybook build                                              | Passed; Vite build stage 6.60s                                                                                  |
+| Package build and installed consumers                        | Passed: public API, negative type assertions, CSS exports, bundling and deterministic React 18.3.1 / 19.3.1 SSR |
+| Lint, typecheck, structural component check, diff whitespace | Passed                                                                                                          |
 
 Coverage began at final handoff verification, after implementation, tests and review. A final package failure returned to focused feedback for the declaration-suffix repair, followed by package verification and a fresh full unit coverage gate. The first full integration run had 957 passing tests and one 5-second CLI fixture timeout. All nine tests in that unchanged fixture then passed without coverage in 3.93s; the complete integration gate was rerun. No test timeout or retry setting was raised. Full integration coverage uses one worker in isolation to reduce contention in repository CLI/SSR fixtures.
 

@@ -6,11 +6,28 @@ for (const theme of ['corporate', 'luna'] as const) {
     test('the preferred scale displays every raw measurement', async ({ page, mount }) => {
       await openScenario(mount, 'design-system-spatial-examples--scale', { theme });
       const scale = page.getByRole('list', { name: 'Preferred spacing scale' });
-      await expect(scale.getByText(/^\d+px$/)).toHaveText(['0px', '4px', '8px', '12px', '16px', '20px', '24px', '32px', '40px', '48px', '64px', '80px', '96px']);
+      await expect(scale.getByText(/^\d+px$/)).toHaveText([
+        '0px',
+        '4px',
+        '8px',
+        '12px',
+        '16px',
+        '20px',
+        '24px',
+        '32px',
+        '40px',
+        '48px',
+        '64px',
+        '80px',
+        '96px',
+      ]);
       await expect(scale.getByRole('meter')).toHaveCount(13);
     });
 
-    test('keyboard typeahead changes parent gaps without changing Button padding', async ({ page, mount }) => {
+    test('keyboard typeahead changes parent gaps without changing Button padding', async ({
+      page,
+      mount,
+    }) => {
       await openScenario(mount, 'design-system-spatial-examples--composition', { theme });
       const select = page.getByRole('combobox', { name: 'Action spacing' });
       const actions = page.getByRole('group', { name: 'Adjustable actions' });
@@ -35,7 +52,10 @@ for (const theme of ['corporate', 'luna'] as const) {
       await expect(select).toHaveCSS('padding', '8px');
     });
 
-    test('scoped overrides reset only at explicit nested theme boundaries', async ({ page, mount }) => {
+    test('scoped overrides reset only at explicit nested theme boundaries', async ({
+      page,
+      mount,
+    }) => {
       await openScenario(mount, 'design-system-spatial-examples--scoped-overrides', { theme });
       await expect(page.getByRole('group', { name: 'Outer actions' })).toHaveCSS('gap', '32px');
       await expect(page.getByRole('group', { name: 'Nested actions' })).toHaveCSS('gap', '12px');
@@ -44,7 +64,10 @@ for (const theme of ['corporate', 'luna'] as const) {
       await expect(page.getByRole('group', { name: 'Sibling actions' })).toHaveCSS('gap', '12px');
     });
 
-    test('only the example-specific breakpoint changes section separation', async ({ page, mount }) => {
+    test('only the example-specific breakpoint changes section separation', async ({
+      page,
+      mount,
+    }) => {
       await page.setViewportSize({ width: 1024, height: 768 });
       await openScenario(mount, 'design-system-spatial-examples--responsive-sections', { theme });
       const sections = page.getByRole('group', { name: 'Page sections' });
@@ -59,10 +82,21 @@ for (const theme of ['corporate', 'luna'] as const) {
       test(`${story} reflows with 200% text and user text spacing`, async ({ page, mount }) => {
         await page.setViewportSize({ width: 320, height: 700 });
         await openScenario(mount, `design-system-spatial-examples--${story}`, { theme });
-        await page.addStyleTag({ content: 'html {font-size:200%} .spatial-demo, .spatial-demo * {line-height:1.5;letter-spacing:.12em;word-spacing:.16em} .spatial-demo p {margin-bottom:2em}' });
+        await page.addStyleTag({
+          content:
+            'html {font-size:200%} .spatial-demo, .spatial-demo * {line-height:1.5;letter-spacing:.12em;word-spacing:.16em} .spatial-demo p {margin-bottom:2em}',
+        });
         await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-        expect(await page.locator('.spatial-actions .fs-button').evaluateAll(buttons => buttons.every(button => button.scrollWidth <= button.clientWidth))).toBe(true);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+          true,
+        );
+        expect(
+          await page
+            .locator('.spatial-actions .fs-button')
+            .evaluateAll((buttons) =>
+              buttons.every((button) => button.scrollWidth <= button.clientWidth),
+            ),
+        ).toBe(true);
       });
     }
   });

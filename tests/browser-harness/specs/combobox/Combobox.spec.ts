@@ -2,7 +2,10 @@ import { expect, test } from '../../fixtures/test';
 import { openScenario } from '../../fixtures/scenario';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} keyboard query, highlight, commitment, editing and clearing submit only identities`, async ({ page, mount }) => {
+  test(`${theme} keyboard query, highlight, commitment, editing and clearing submit only identities`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-combobox--form', { theme });
     const input = page.getByRole('combobox', { name: 'Service region' });
     await page.getByRole('button', { name: 'Before region' }).focus();
@@ -11,10 +14,17 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(input).toHaveAttribute('aria-expanded', 'true');
     await input.pressSequentially('uni');
     await expect(page.getByRole('option')).toHaveCount(3);
-    await expect(page.locator('form').evaluate(form => (form as HTMLFormElement).checkValidity())).resolves.toBe(false);
+    await expect(
+      page.locator('form').evaluate((form) => (form as HTMLFormElement).checkValidity()),
+    ).resolves.toBe(false);
     await input.press('End');
-    await expect(input).toHaveAttribute('aria-activedescendant', (await page.getByRole('option', { name: 'United Arab Emirates' }).getAttribute('id'))!);
-    await expect(page.locator('form').evaluate(form => new FormData(form as HTMLFormElement).has('region'))).resolves.toBe(false);
+    await expect(input).toHaveAttribute(
+      'aria-activedescendant',
+      (await page.getByRole('option', { name: 'United Arab Emirates' }).getAttribute('id'))!,
+    );
+    await expect(
+      page.locator('form').evaluate((form) => new FormData(form as HTMLFormElement).has('region')),
+    ).resolves.toBe(false);
     await input.press('Home');
     await input.press('Enter');
     await expect(input).toHaveValue('United Kingdom');
@@ -24,11 +34,15 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(page.getByLabel('Submitted region')).toHaveText('gb');
     await input.focus();
     await input.press('End');
-    await expect(page.locator('form').evaluate(form => new FormData(form as HTMLFormElement).get('region'))).resolves.toBe('gb');
+    await expect(
+      page.locator('form').evaluate((form) => new FormData(form as HTMLFormElement).get('region')),
+    ).resolves.toBe('gb');
     await input.press('Escape');
     await expect(input).toHaveValue('United Kingdom');
     await input.pressSequentially('x');
-    await expect(page.locator('form').evaluate(form => new FormData(form as HTMLFormElement).has('region'))).resolves.toBe(false);
+    await expect(
+      page.locator('form').evaluate((form) => new FormData(form as HTMLFormElement).has('region')),
+    ).resolves.toBe(false);
     await input.press('Escape');
     await expect(input).toHaveValue('');
     await input.fill('uni');
@@ -37,7 +51,9 @@ for (const theme of ['corporate', 'luna'] as const) {
     await page.getByRole('button', { name: 'Clear selection' }).click();
     await expect(input).toBeFocused();
     await expect(input).toHaveValue('');
-    await expect(page.locator('form').evaluate(form => new FormData(form as HTMLFormElement).has('region'))).resolves.toBe(false);
+    await expect(
+      page.locator('form').evaluate((form) => new FormData(form as HTMLFormElement).has('region')),
+    ).resolves.toBe(false);
     await input.press('Tab');
     await expect(page.getByRole('button', { name: 'Submit region' })).toBeFocused();
     await expect(page.getByRole('listbox')).toHaveCount(0);
@@ -45,7 +61,10 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(input).toBeFocused();
   });
 
-  test(`${theme} disabled rows cannot be chosen and navigation skips them`, async ({ page, mount }) => {
+  test(`${theme} disabled rows cannot be chosen and navigation skips them`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-combobox--disabled-options', { theme });
     const input = page.getByRole('combobox');
     await input.click();
@@ -60,7 +79,10 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(input).toHaveValue('United Arab Emirates');
   });
 
-  test(`${theme} loading announces one status and no results appear only after a completed search`, async ({ page, mount }) => {
+  test(`${theme} loading announces one status and no results appear only after a completed search`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-combobox--loading', { theme });
     await page.getByRole('combobox').fill('uni');
     await expect(page.getByRole('status')).toHaveText('Loading regions…');
@@ -85,10 +107,16 @@ test('controlled selection responds to external updates and clearing', async ({ 
   await expect(page.getByRole('combobox')).toHaveValue('United States');
 });
 
-test('long labels wrap with aligned popup at 320px under enlarged spaced text', async ({ page, mount }) => {
+test('long labels wrap with aligned popup at 320px under enlarged spaced text', async ({
+  page,
+  mount,
+}) => {
   await page.setViewportSize({ width: 320, height: 800 });
   await openScenario(mount, 'components-combobox--long-labels');
-  await page.addStyleTag({ content: 'html { font-size: 200%; } .fs-combobox { letter-spacing: .12em; word-spacing: .16em; line-height: 1.5; }' });
+  await page.addStyleTag({
+    content:
+      'html { font-size: 200%; } .fs-combobox { letter-spacing: .12em; word-spacing: .16em; line-height: 1.5; }',
+  });
   await page.getByRole('combobox').click();
   const control = await page.locator('.fs-combobox__control').boundingBox();
   const popup = await page.locator('.fs-combobox__popup').boundingBox();
@@ -98,10 +126,15 @@ test('long labels wrap with aligned popup at 320px under enlarged spaced text', 
   expect((await page.getByRole('option').boundingBox())!.height).toBeGreaterThan(80);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
   await page.getByRole('option').click();
-  await expect(page.getByRole('combobox')).toHaveValue('United Kingdom — Northern regional operations and international customer support headquarters');
+  await expect(page.getByRole('combobox')).toHaveValue(
+    'United Kingdom — Northern regional operations and international customer support headquarters',
+  );
 });
 
-test('keyboard focus and highlighted row remain visible in forced colors', async ({ page, mount }) => {
+test('keyboard focus and highlighted row remain visible in forced colors', async ({
+  page,
+  mount,
+}) => {
   await page.emulateMedia({ forcedColors: 'active' });
   await openScenario(mount, 'components-combobox--playground');
   await page.keyboard.press('Tab');

@@ -1,14 +1,54 @@
 /* All artwork fitting, outlines and caption spacing below are consumer example styles. */
-.aspect-demo-media { display: block; inline-size: 100%; block-size: 100%; }
-.aspect-demo-cover { object-fit: cover; }
-.aspect-demo-contain { object-fit: contain; }
-.aspect-demo-embed { box-sizing: border-box; border: 0; }
-.aspect-demo-small { inline-size: 240px; max-inline-size: 100%; }
-.aspect-demo-wide { inline-size: 640px; max-inline-size: 100%; }
-.aspect-demo-guide { outline: 1px dashed var(--fs-card-border); }
-.aspect-demo-figure { margin: 0; }
-.aspect-demo-caption { padding: var(--fs-space-inset-container); overflow-wrap: anywhere; }
-.aspect-demo-oversized { inline-size: 400px; block-size: 180px; background: var(--fs-card-media-surface); }
-.aspect-demo-flex { display: flex; inline-size: 300px; max-inline-size: 100%; }
-.aspect-demo-fixed { flex: 0 0 100px; block-size: 200px; }
-.aspect-demo-grid { display: grid; inline-size: 200px; max-inline-size: 100%; block-size: 200px; }
+.aspect-demo-media {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+.aspect-demo-cover {
+  object-fit: cover;
+}
+.aspect-demo-contain {
+  object-fit: contain;
+}
+.aspect-demo-embed {
+  box-sizing: border-box;
+  border: 0;
+}
+.aspect-demo-small {
+  inline-size: 240px;
+  max-inline-size: 100%;
+}
+.aspect-demo-wide {
+  inline-size: 640px;
+  max-inline-size: 100%;
+}
+.aspect-demo-guide {
+  outline: 1px dashed var(--fs-card-border);
+}
+.aspect-demo-figure {
+  margin: 0;
+}
+.aspect-demo-caption {
+  padding: var(--fs-space-inset-container);
+  overflow-wrap: anywhere;
+}
+.aspect-demo-oversized {
+  inline-size: 400px;
+  block-size: 180px;
+  background: var(--fs-card-media-surface);
+}
+.aspect-demo-flex {
+  display: flex;
+  inline-size: 300px;
+  max-inline-size: 100%;
+}
+.aspect-demo-fixed {
+  flex: 0 0 100px;
+  block-size: 200px;
+}
+.aspect-demo-grid {
+  display: grid;
+  inline-size: 200px;
+  max-inline-size: 100%;
+  block-size: 200px;
+}

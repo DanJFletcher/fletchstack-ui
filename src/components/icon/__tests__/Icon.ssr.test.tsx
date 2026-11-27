@@ -4,7 +4,11 @@ import { Icon } from '../Icon';
 
 it('produces deterministic SVG markup without browser globals', () => {
   // arrange
-  const given = <Icon label="Moon"><path d="M4 4h16v16H4Z" /></Icon>;
+  const given = (
+    <Icon label="Moon">
+      <path d="M4 4h16v16H4Z" />
+    </Icon>
+  );
   const expected = renderToString(given);
 
   // act

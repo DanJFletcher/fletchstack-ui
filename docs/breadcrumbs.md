@@ -19,21 +19,21 @@ const items = [
   { label: 'Settings', current: true },
 ] satisfies BreadcrumbItem[];
 
-<Breadcrumbs items={items} />
+<Breadcrumbs items={items} />;
 ```
 
 For selective CSS imports, include `tokens.css`, `link.css` and `breadcrumbs.css`. Apply the enclosing theme as usual; nested theme regions work without additional component configuration.
 
 ## Props and customization
 
-| Prop | Type | Default | Purpose |
-| --- | --- | --- | --- |
-| `items` | `readonly BreadcrumbItem[]` | Required | Ordered ancestors followed by exactly one current page. |
-| `collapseAt` | `string` | `"40rem"` | CSS viewport width, inclusive, such as `"640px"` or `"56rem"`. |
-| `aria-label` | `string` | `"Breadcrumb"` | Name the navigation landmark. |
-| `className` | `string` | Unset | Style this instance through a scoped class. |
-| `style` | `BreadcrumbsStyle` | Unset | Native inline styles and typed `--fs-*` token overrides. |
-| `ref` | `Ref<HTMLElement>` | Unset | Reference the native navigation element. |
+| Prop         | Type                        | Default        | Purpose                                                        |
+| ------------ | --------------------------- | -------------- | -------------------------------------------------------------- |
+| `items`      | `readonly BreadcrumbItem[]` | Required       | Ordered ancestors followed by exactly one current page.        |
+| `collapseAt` | `string`                    | `"40rem"`      | CSS viewport width, inclusive, such as `"640px"` or `"56rem"`. |
+| `aria-label` | `string`                    | `"Breadcrumb"` | Name the navigation landmark.                                  |
+| `className`  | `string`                    | Unset          | Style this instance through a scoped class.                    |
+| `style`      | `BreadcrumbsStyle`          | Unset          | Native inline styles and typed `--fs-*` token overrides.       |
+| `ref`        | `Ref<HTMLElement>`          | Unset          | Reference the native navigation element.                       |
 
 Other native navigation attributes are forwarded. `children`, `dangerouslySetInnerHTML` and role overrides are excluded to preserve the ordered trail and landmark semantics. Ancestors require a non-empty `href`; the current item accepts no `href`. Empty trails, blank labels, blank ancestor destinations and misplaced current items are rejected.
 

@@ -24,13 +24,12 @@ import 'fletchstack-ui/code-block.css';
 
 <CodeBlock filename="settings.ts" language="TypeScript">
   {'const settings = {\n  theme: "corporate",\n};'}
-</CodeBlock>
+</CodeBlock>;
 ```
 
 The combined stylesheet includes dependencies. New `--fs-code-block-*` semantic roles directly reference existing primitives in both themes. Scoped overrides inherit; explicit nested themes reset the contract. Focus rings remain visible around both the code viewport and copy Button. The root does not clip overflow to round its corners. Code direction defaults to LTR independently of surrounding RTL metadata; native style overrides remain available.
 
 Unknown language labels remain plain text. Horizontal code scrolling is intentional for preserved source, while wrap mode is available when reflow is preferred. At narrow widths and with enlarged or spaced text, surrounding metadata, controls and failure guidance reflow. No fixed height or truncation hides content. Screen-reader and cross-browser verification limits are recorded in the verification guide.
-
 
 ## Syntax highlighting
 

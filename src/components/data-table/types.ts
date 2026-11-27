@@ -5,7 +5,10 @@ export type DataTableStyle = TableStyle;
 export type DataTableFilterValue = string | number | boolean;
 export type DataTableFilters = Readonly<Record<string, DataTableFilterValue | undefined>>;
 export type DataTableColumnVisibility = Readonly<Record<string, boolean>>;
-export interface DataTablePagination { pageIndex: number; pageSize: number }
+export interface DataTablePagination {
+  pageIndex: number;
+  pageSize: number;
+}
 type ClientTable<P> = P extends unknown ? Omit<P, 'sortMode'> : never;
 export type DataTableProps<T> = ClientTable<TableProps<T>> & {
   /** Client-side pagination; disabled by default. Default page size is ten. */

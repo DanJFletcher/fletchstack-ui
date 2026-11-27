@@ -1,5 +1,15 @@
-import { BottomNavigation, type BottomNavigationProps } from '../../../src/components/bottom-navigation/BottomNavigation';
-import { BottomNavigationExample, ChangingDestination, NativeDestinations, NavigationOverrides, RouterExample, ShellExample } from '../../../src/components/bottom-navigation/stories/bottom-navigation-examples';
+import {
+  BottomNavigation,
+  type BottomNavigationProps,
+} from '../../../src/components/bottom-navigation/BottomNavigation';
+import {
+  BottomNavigationExample,
+  ChangingDestination,
+  NativeDestinations,
+  NavigationOverrides,
+  RouterExample,
+  ShellExample,
+} from '../../../src/components/bottom-navigation/stories/bottom-navigation-examples';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/bottom-navigation/bottom-navigation.css';
 import '../../../src/components/app-shell/app-shell.css';
@@ -14,8 +24,22 @@ const LongLabels: Scenario<BottomNavigationProps> = { render: () => <NativeDesti
 const Overrides: Scenario<BottomNavigationProps> = { render: () => <NavigationOverrides /> };
 const Routing: Scenario<BottomNavigationProps> = { render: () => <RouterExample /> };
 const Shell: Scenario<BottomNavigationProps> = { render: () => <ShellExample /> };
-const SafeArea: Scenario<BottomNavigationProps> = { render: () => <ShellExample inset="24px" longLabels /> };
-const Viewport: Scenario<BottomNavigationProps> = { render: () => <ShellExample height="viewport" /> };
+const SafeArea: Scenario<BottomNavigationProps> = {
+  render: () => <ShellExample inset="24px" longLabels />,
+};
+const Viewport: Scenario<BottomNavigationProps> = {
+  render: () => <ShellExample height="viewport" />,
+};
 export const component = BottomNavigation;
 export const defaults: BottomNavigationProps = { 'aria-label': 'Primary', children: null };
-export const scenarios = { Playground, Composition, Changes, LongLabels, Overrides, Routing, Shell, SafeArea, Viewport };
+export const scenarios = {
+  Playground,
+  Composition,
+  Changes,
+  LongLabels,
+  Overrides,
+  Routing,
+  Shell,
+  SafeArea,
+  Viewport,
+};

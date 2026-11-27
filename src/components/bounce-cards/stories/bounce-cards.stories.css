@@ -1,6 +1,29 @@
-.bounce-demo { display: grid; gap: 24px; max-inline-size: 1120px; }
-.bounce-demo__theme { padding: 24px; border-radius: 12px; color: var(--fs-text); background: var(--fs-surface); border: 1px solid var(--fs-carousel-border); }
-.bounce-demo__theme h2 { margin: 0; }
-.bounce-demo__gallery { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 12px; min-inline-size: 0; }
-.bounce-demo__gallery output { display: block; overflow-wrap: anywhere; }
-.bounce-demo__narrow { max-inline-size: 320px; }
+.bounce-demo {
+  display: grid;
+  gap: 24px;
+  max-inline-size: 1120px;
+}
+.bounce-demo__theme {
+  padding: 24px;
+  border-radius: 12px;
+  color: var(--fs-text);
+  background: var(--fs-surface);
+  border: 1px solid var(--fs-carousel-border);
+}
+.bounce-demo__theme h2 {
+  margin: 0;
+}
+.bounce-demo__gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 12px;
+  min-inline-size: 0;
+}
+.bounce-demo__gallery output {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.bounce-demo__narrow {
+  max-inline-size: 320px;
+}

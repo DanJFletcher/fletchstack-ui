@@ -20,10 +20,16 @@ import 'fletchstack-ui/tokens.css';
 import 'fletchstack-ui/separator.css';
 
 <div style={{ display: 'grid', gap: 'var(--fs-space-stack)' }}>
-  <section><h2>Profile</h2><p>Your name and contact details.</p></section>
+  <section>
+    <h2>Profile</h2>
+    <p>Your name and contact details.</p>
+  </section>
   <Separator decorative={false} />
-  <section><h2>Preferences</h2><p>Your display and notification settings.</p></section>
-</div>
+  <section>
+    <h2>Preferences</h2>
+    <p>Your display and notification settings.</p>
+  </section>
+</div>;
 ```
 
 Storybook: Components → Layout → Separator. Use semantic separation intentionally and decorative grouping otherwise. Real screen-reader output and non-Chromium rendering require manual verification.

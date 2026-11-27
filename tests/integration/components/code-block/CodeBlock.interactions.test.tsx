@@ -9,10 +9,19 @@ afterEach(() => vi.restoreAllMocks());
 
 it('composes native copy feedback with filename labels and recovers after failure', async () => {
   const user = userEvent.setup();
-  const write = vi.spyOn(navigator.clipboard, 'writeText').mockRejectedValueOnce(new Error('Denied')).mockResolvedValue(undefined);
-  render(<CodeBlock filename="settings.ts" language="TypeScript" className="consumer">{'\n\tconst ready = true;\n'}</CodeBlock>);
+  const write = vi
+    .spyOn(navigator.clipboard, 'writeText')
+    .mockRejectedValueOnce(new Error('Denied'))
+    .mockResolvedValue(undefined);
+  render(
+    <CodeBlock filename="settings.ts" language="TypeScript" className="consumer">
+      {'\n\tconst ready = true;\n'}
+    </CodeBlock>,
+  );
   await user.click(screen.getByRole('button', { name: 'Copy settings.ts' }));
-  expect(screen.getByRole('status')).toHaveTextContent('Copy failed. Select the code to copy manually.');
+  expect(screen.getByRole('status')).toHaveTextContent(
+    'Copy failed. Select the code to copy manually.',
+  );
   await user.click(screen.getByRole('button', { name: 'Try again settings.ts' }));
   expect(write).toHaveBeenLastCalledWith('\n\tconst ready = true;\n');
   expect(screen.getByRole('button', { name: 'Copied settings.ts' })).toHaveFocus();
@@ -22,11 +31,22 @@ it('composes native copy feedback with filename labels and recovers after failur
 it('invalidates old source work and old attempt results through real rerenders', async () => {
   const user = userEvent.setup();
   let finish!: () => void;
-  vi.spyOn(navigator.clipboard, 'writeText').mockImplementationOnce(() => new Promise<void>(resolve => { finish = resolve; })).mockRejectedValue(new Error('Denied'));
+  vi.spyOn(navigator.clipboard, 'writeText')
+    .mockImplementationOnce(
+      () =>
+        new Promise<void>((resolve) => {
+          finish = resolve;
+        }),
+    )
+    .mockRejectedValue(new Error('Denied'));
   const { rerender } = render(<CodeBlock>old source</CodeBlock>);
   await user.click(screen.getByRole('button', { name: 'Copy' }));
   expect(screen.getByRole('button', { name: 'Copying…' })).toHaveAttribute('aria-busy', 'true');
-  rerender(<CodeBlock wrap label="Updated source" filename="" language="">new source</CodeBlock>);
+  rerender(
+    <CodeBlock wrap label="Updated source" filename="" language="">
+      new source
+    </CodeBlock>,
+  );
   await act(async () => finish());
   expect(screen.getByRole('status')).toBeEmptyDOMElement();
   await user.click(screen.getByRole('button', { name: 'Copy' }));
@@ -37,7 +57,14 @@ it('invalidates old source work and old attempt results through real rerenders',
 it('retains the newest result when older clipboard requests complete later', async () => {
   const user = userEvent.setup();
   let finish!: () => void;
-  vi.spyOn(navigator.clipboard, 'writeText').mockImplementationOnce(() => new Promise<void>(resolve => { finish = resolve; })).mockResolvedValue(undefined);
+  vi.spyOn(navigator.clipboard, 'writeText')
+    .mockImplementationOnce(
+      () =>
+        new Promise<void>((resolve) => {
+          finish = resolve;
+        }),
+    )
+    .mockResolvedValue(undefined);
   const { unmount } = render(<CodeBlock>source</CodeBlock>);
   await user.click(screen.getByRole('button', { name: 'Copy' }));
   await user.click(screen.getByRole('button', { name: 'Copying…' }));
@@ -51,12 +78,15 @@ it('can remove interactive controls without losing literal source and metadata',
   const { rerender } = render(<CodeBlock copyable={false}>{''}</CodeBlock>);
   expect(screen.getByRole('region', { name: 'Code sample' }).textContent).toBe('');
   expect(screen.queryByRole('status')).not.toBeInTheDocument();
-  rerender(<CodeBlock language="Shell" label="  " copyable={false}>npm install fletchstack-ui</CodeBlock>);
+  rerender(
+    <CodeBlock language="Shell" label="  " copyable={false}>
+      npm install fletchstack-ui
+    </CodeBlock>,
+  );
   expect(screen.getByText('Shell')).toBeVisible();
   expect(screen.getByRole('region', { name: 'Code sample' })).toHaveAttribute('tabindex', '0');
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
 });
-
 
 it.each([
   { language: undefined, highlight: true },
@@ -68,7 +98,11 @@ it.each([
   const given = 'const ready = true;';
 
   // act
-  render(<CodeBlock {...(language === undefined ? {} : { language })} highlight={highlight}>{given}</CodeBlock>);
+  render(
+    <CodeBlock {...(language === undefined ? {} : { language })} highlight={highlight}>
+      {given}
+    </CodeBlock>,
+  );
 
   // assert
   const code = screen.getByRole('region').querySelector('code')!;
@@ -77,12 +111,22 @@ it.each([
 });
 
 it.each([
-  { language: '  TypeScript  ', source: 'const ready: boolean = true;', token: 'keyword', text: 'const' },
+  {
+    language: '  TypeScript  ',
+    source: 'const ready: boolean = true;',
+    token: 'keyword',
+    text: 'const',
+  },
   { language: 'js', source: 'const ready = true;', token: 'keyword', text: 'const' },
   { language: 'tsx', source: 'const view = <Button />;', token: 'tag', text: '<Button />' },
   { language: 'jsx', source: 'const view = <Button />;', token: 'tag', text: '<Button />' },
   { language: 'JSON', source: '{"ready": true}', token: 'property', text: '"ready"' },
-  { language: 'HTML', source: '<div title="sample">&amp;</div>', token: 'tag', text: '<div title="sample">' },
+  {
+    language: 'HTML',
+    source: '<div title="sample">&amp;</div>',
+    token: 'tag',
+    text: '<div title="sample">',
+  },
   { language: 'CSS', source: '.sample { color: red; }', token: 'selector', text: '.sample' },
   { language: 'Shell', source: 'echo "sample"', token: 'string', text: '"sample"' },
   { language: 'md', source: '# Sample', token: 'title', text: '# Sample' },

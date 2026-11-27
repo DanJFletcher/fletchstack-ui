@@ -5,7 +5,10 @@ import components from '../../../playwright.components.config';
 
 it('enables collection and reporting only in the diagnostic configuration', () => {
   // arrange
-  const expected = [['list'], ['html', { open: 'never', outputFolder: 'playwright-report/storybook' }]];
+  const expected = [
+    ['list'],
+    ['html', { open: 'never', outputFolder: 'playwright-report/storybook' }],
+  ];
 
   // act
   const reporters = normal.reporter;
@@ -22,11 +25,14 @@ it('includes both disjoint projects in complete diagnostics with unchanged failu
   const expected = ['chromium', 'components'];
 
   // act
-  const result = diagnostic.projects?.map(project => project.name);
+  const result = diagnostic.projects?.map((project) => project.name);
 
   // assert
   expect(result).toEqual(expected);
-  expect(diagnostic.projects?.map(project => project.testDir)).toEqual([normal.testDir, components.testDir]);
+  expect(diagnostic.projects?.map((project) => project.testDir)).toEqual([
+    normal.testDir,
+    components.testDir,
+  ]);
   expect(diagnostic.webServer).toHaveLength(2);
   expect(diagnostic.use?.trace).toBe('retain-on-failure');
   expect(diagnostic.use?.screenshot).toBe('only-on-failure');

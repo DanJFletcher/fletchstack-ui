@@ -3,13 +3,20 @@ import { openScenario } from '../../fixtures/scenario';
 
 const atoms = [
   { id: 'field-label', name: 'FieldLabel', description: '' },
-  { id: 'field-description', name: 'FieldDescription', description: 'Use a short, descriptive name.' },
+  {
+    id: 'field-description',
+    name: 'FieldDescription',
+    description: 'Use a short, descriptive name.',
+  },
   { id: 'field-error', name: 'FieldError', description: 'Enter a project name.' },
 ];
 
 for (const atom of atoms) {
   for (const theme of ['corporate', 'luna'] as const) {
-    test(`${theme} ${atom.name} associates its control and reflows with enlarged text`, async ({ page, mount }) => {
+    test(`${theme} ${atom.name} associates its control and reflows with enlarged text`, async ({
+      page,
+      mount,
+    }) => {
       await page.setViewportSize({ width: 320, height: 900 });
       await openScenario(mount, `components-${atom.id}--playground`, { theme });
       const input = page.getByRole('textbox', { name: 'Project name' });
@@ -26,8 +33,13 @@ for (const atom of atoms) {
       if (atom.id === 'field-error') {
         await expect(input).toHaveAttribute('aria-invalid', 'true');
       }
-      await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      await page.addStyleTag({
+        content:
+          'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }',
+      });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
       await expect(input).toBeVisible();
     });
   }

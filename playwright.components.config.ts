@@ -10,6 +10,7 @@ export default defineConfig({
   projects: [{ ...base.projects![0], name: 'components' }],
   webServer: {
     command: 'npm run tokens && npx --no-install vite --config vite.harness.config.ts',
-    url: 'http://127.0.0.1:6008', reuseExistingServer: !process.env['CI'],
+    url: 'http://127.0.0.1:6008',
+    reuseExistingServer: !process.env['CI'],
   },
 });

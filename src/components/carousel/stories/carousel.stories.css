@@ -1,9 +1,45 @@
-.carousel-demo { display: grid; gap: 24px; max-inline-size: 1000px; }
-.carousel-demo__theme { padding: 24px; border-radius: 12px; color: var(--fs-text); background: var(--fs-surface); border: 1px solid var(--fs-carousel-border); }
-.carousel-demo__theme h2 { margin-block-start: 0; }
-.carousel-demo__slide { display: grid; place-content: center; gap: 16px; min-block-size: 240px; padding: 24px; text-align: center; background: var(--fs-surface); color: var(--fs-text); border-radius: var(--fs-carousel-slide-radius); }
-.carousel-demo__slide h3, .carousel-demo__slide p { margin: 0; }
-.carousel-demo__slide a { color: var(--fs-link-text); }
-.carousel-demo__slide input { max-inline-size: 100%; min-inline-size: 0; font: inherit; }
-.carousel-demo__slide label { display: grid; gap: 8px; }
-.carousel-demo__narrow { max-inline-size: 320px; }
+.carousel-demo {
+  display: grid;
+  gap: 24px;
+  max-inline-size: 1000px;
+}
+.carousel-demo__theme {
+  padding: 24px;
+  border-radius: 12px;
+  color: var(--fs-text);
+  background: var(--fs-surface);
+  border: 1px solid var(--fs-carousel-border);
+}
+.carousel-demo__theme h2 {
+  margin-block-start: 0;
+}
+.carousel-demo__slide {
+  display: grid;
+  place-content: center;
+  gap: 16px;
+  min-block-size: 240px;
+  padding: 24px;
+  text-align: center;
+  background: var(--fs-surface);
+  color: var(--fs-text);
+  border-radius: var(--fs-carousel-slide-radius);
+}
+.carousel-demo__slide h3,
+.carousel-demo__slide p {
+  margin: 0;
+}
+.carousel-demo__slide a {
+  color: var(--fs-link-text);
+}
+.carousel-demo__slide input {
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  font: inherit;
+}
+.carousel-demo__slide label {
+  display: grid;
+  gap: 8px;
+}
+.carousel-demo__narrow {
+  max-inline-size: 320px;
+}

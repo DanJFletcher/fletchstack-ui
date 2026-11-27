@@ -8,10 +8,19 @@ Compose with `FormGroup` for a visible fieldset legend. Its render prop links sh
 
 ```tsx
 <FormGroup legend="Delivery method" description="Choose one option.">
-  {control => <>
-    <Radio {...control} label="Standard delivery" description="Arrives in 3–5 business days." name="delivery" value="standard" defaultChecked />
-    <Radio {...control} label="Express delivery" name="delivery" value="express" />
-  </>}
+  {(control) => (
+    <>
+      <Radio
+        {...control}
+        label="Standard delivery"
+        description="Arrives in 3–5 business days."
+        name="delivery"
+        value="standard"
+        defaultChecked
+      />
+      <Radio {...control} label="Express delivery" name="delivery" value="express" />
+    </>
+  )}
 </FormGroup>
 ```
 

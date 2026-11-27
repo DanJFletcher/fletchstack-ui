@@ -13,7 +13,7 @@ function symbolAt(node, checker) {
  **/
 function walk(node, visit) {
   visit(node);
-  ts.forEachChild(node, child => walk(child, visit));
+  ts.forEachChild(node, (child) => walk(child, visit));
 }
 
 /**
@@ -22,24 +22,54 @@ function walk(node, visit) {
  **/
 function forwardedComponent(attribute, checker) {
   const attributes = attribute.parent.properties;
-  if (attributes.slice(attributes.indexOf(attribute) + 1).some(ts.isJsxSpreadAttribute)) { return; }
+  if (attributes.slice(attributes.indexOf(attribute) + 1).some(ts.isJsxSpreadAttribute)) {
+    return;
+  }
   const value = attribute.initializer.expression;
   const symbol = checker.getSymbolAtLocation(value);
-  if (symbol?.declarations?.length !== 1) { return; }
+  if (symbol?.declarations?.length !== 1) {
+    return;
+  }
   const binding = symbol.valueDeclaration;
-  if (!binding || !ts.isBindingElement(binding) || binding.initializer || binding.dotDotDotToken) { return; }
+  if (!binding || !ts.isBindingElement(binding) || binding.initializer || binding.dotDotDotToken) {
+    return;
+  }
   const resource = attribute.name.getText();
-  if ((binding.propertyName ?? binding.name).getText() !== resource) { return; }
+  if ((binding.propertyName ?? binding.name).getText() !== resource) {
+    return;
+  }
   const parameter = binding.parent.parent;
   const callback = parameter.parent;
-  if (!ts.isParameter(parameter) || parameter.initializer || parameter.dotDotDotToken || callback.parameters?.[0] !== parameter) { return; }
-  if (resource === 'src' && ts.isFunctionDeclaration(callback) && callback.name && !hasMutation(callback, checker)) {
+  if (
+    !ts.isParameter(parameter) ||
+    parameter.initializer ||
+    parameter.dotDotDotToken ||
+    callback.parameters?.[0] !== parameter
+  ) {
+    return;
+  }
+  if (
+    resource === 'src' &&
+    ts.isFunctionDeclaration(callback) &&
+    callback.name &&
+    !hasMutation(callback, checker)
+  ) {
     return { declaration: callback, symbol: checker.getSymbolAtLocation(callback.name), resource };
   }
-  if (!ts.isFunctionExpression(callback)) { return; }
+  if (!ts.isFunctionExpression(callback)) {
+    return;
+  }
   const call = callback.parent;
-  if (!ts.isCallExpression(call) || call.arguments[0] !== callback || !ts.isIdentifier(call.expression)) { return; }
-  if (!isReactForwardRef(call.expression, checker)) { return; }
+  if (
+    !ts.isCallExpression(call) ||
+    call.arguments[0] !== callback ||
+    !ts.isIdentifier(call.expression)
+  ) {
+    return;
+  }
+  if (!isReactForwardRef(call.expression, checker)) {
+    return;
+  }
   const component = immutableComponent(call, callback, checker);
   return component && { ...component, resource };
 }
@@ -49,8 +79,12 @@ function forwardedComponent(attribute, checker) {
  **/
 function isReactForwardRef(expression, checker) {
   const imported = checker.getSymbolAtLocation(expression)?.declarations?.[0];
-  return imported && ts.isImportSpecifier(imported) && (imported.propertyName ?? imported.name).text === 'forwardRef'
-    && imported.parent.parent.parent.moduleSpecifier.text === 'react';
+  return (
+    imported &&
+    ts.isImportSpecifier(imported) &&
+    (imported.propertyName ?? imported.name).text === 'forwardRef' &&
+    imported.parent.parent.parent.moduleSpecifier.text === 'react'
+  );
 }
 
 /**
@@ -58,8 +92,12 @@ function isReactForwardRef(expression, checker) {
  **/
 function immutableComponent(call, callback, checker) {
   const declaration = call.parent;
-  if (!ts.isVariableDeclaration(declaration) || !(declaration.parent.flags & ts.NodeFlags.Const)) { return; }
-  return hasMutation(callback, checker) ? undefined : { declaration, symbol: checker.getSymbolAtLocation(declaration.name) };
+  if (!ts.isVariableDeclaration(declaration) || !(declaration.parent.flags & ts.NodeFlags.Const)) {
+    return;
+  }
+  return hasMutation(callback, checker)
+    ? undefined
+    : { declaration, symbol: checker.getSymbolAtLocation(declaration.name) };
 }
 
 /**
@@ -68,11 +106,32 @@ function immutableComponent(call, callback, checker) {
 function hasMutation(callback, checker) {
   let unsafe = false;
   const callbackName = callback.name && checker.getSymbolAtLocation(callback.name);
-  walk(callback, node => {
-    if (ts.isBinaryExpression(node) && node.operatorToken.kind >= ts.SyntaxKind.FirstAssignment && node.operatorToken.kind <= ts.SyntaxKind.LastAssignment) { unsafe = true; }
-    if (ts.isPostfixUnaryExpression(node) || ts.isPrefixUnaryExpression(node) && [ts.SyntaxKind.PlusPlusToken, ts.SyntaxKind.MinusMinusToken].includes(node.operator)) { unsafe = true; }
-    if (ts.isForInStatement(node) || ts.isForOfStatement(node)) { unsafe = true; }
-    if (callbackName && ts.isIdentifier(node) && node !== callback.name && checker.getSymbolAtLocation(node) === callbackName) { unsafe = true; }
+  walk(callback, (node) => {
+    if (
+      ts.isBinaryExpression(node) &&
+      node.operatorToken.kind >= ts.SyntaxKind.FirstAssignment &&
+      node.operatorToken.kind <= ts.SyntaxKind.LastAssignment
+    ) {
+      unsafe = true;
+    }
+    if (
+      ts.isPostfixUnaryExpression(node) ||
+      (ts.isPrefixUnaryExpression(node) &&
+        [ts.SyntaxKind.PlusPlusToken, ts.SyntaxKind.MinusMinusToken].includes(node.operator))
+    ) {
+      unsafe = true;
+    }
+    if (ts.isForInStatement(node) || ts.isForOfStatement(node)) {
+      unsafe = true;
+    }
+    if (
+      callbackName &&
+      ts.isIdentifier(node) &&
+      node !== callback.name &&
+      checker.getSymbolAtLocation(node) === callbackName
+    ) {
+      unsafe = true;
+    }
   });
   return unsafe;
 }
@@ -83,8 +142,11 @@ function hasMutation(callback, checker) {
 function literalDestination(element, resource, context) {
   let safe = true;
   for (const attribute of element.attributes.properties) {
-    if (ts.isJsxSpreadAttribute(attribute)) { safe = false; }
-    else if (attribute.name.getText() === resource) { safe = provenValue(attribute, resource, context); }
+    if (ts.isJsxSpreadAttribute(attribute)) {
+      safe = false;
+    } else if (attribute.name.getText() === resource) {
+      safe = provenValue(attribute, resource, context);
+    }
   }
   return safe;
 }
@@ -94,13 +156,22 @@ function literalDestination(element, resource, context) {
  **/
 function provenValue(attribute, resource, context) {
   const value = attribute.initializer;
-  if (value && ts.isStringLiteral(value)) { return /^(?:$|#|data:|https?:\/\/)/.test(value.text); }
-  if (resource !== 'src' || !value || !ts.isJsxExpression(value) || !value.expression) { return false; }
+  if (value && ts.isStringLiteral(value)) {
+    return /^(?:$|#|data:|https?:\/\/)/.test(value.text);
+  }
+  if (resource !== 'src' || !value || !ts.isJsxExpression(value) || !value.expression) {
+    return false;
+  }
   const expression = value.expression;
   if (ts.isPropertyAccessExpression(expression) && expression.name.text === 'href') {
     const url = expression.expression;
-    return ts.isNewExpression(url) && url.expression.getText() === 'URL' && url.arguments?.length === 2
-      && ts.isStringLiteral(url.arguments[0]) && url.arguments[1].getText() === 'import.meta.url';
+    return (
+      ts.isNewExpression(url) &&
+      url.expression.getText() === 'URL' &&
+      url.arguments?.length === 2 &&
+      ts.isStringLiteral(url.arguments[0]) &&
+      url.arguments[1].getText() === 'import.meta.url'
+    );
   }
   const component = ts.isIdentifier(expression) && forwardedComponent(attribute, context.checker);
   return Boolean(component?.symbol && allUsesProven(component, context));
@@ -111,19 +182,36 @@ function provenValue(attribute, resource, context) {
  * Aliases, reexports, createElement and passing the component as data fail closed.
  **/
 function allUsesProven(component, { sources, checker, seen = new Set() }) {
-  if (seen.has(component.symbol)) { return false; }
+  if (seen.has(component.symbol)) {
+    return false;
+  }
   const context = { sources, checker, seen: new Set([...seen, component.symbol]) };
   const references = [];
   for (const source of sources) {
-    walk(source, node => {
-      if (!ts.isIdentifier(node) || symbolAt(node, checker) !== component.symbol || node === component.declaration.name) { return; }
-      if (!ts.isImportSpecifier(node.parent) && !ts.isJsxClosingElement(node.parent)) { references.push(node); }
+    walk(source, (node) => {
+      if (
+        !ts.isIdentifier(node) ||
+        symbolAt(node, checker) !== component.symbol ||
+        node === component.declaration.name
+      ) {
+        return;
+      }
+      if (!ts.isImportSpecifier(node.parent) && !ts.isJsxClosingElement(node.parent)) {
+        references.push(node);
+      }
     });
   }
-  return references.length > 0 && references.every(node => {
-    const parent = node.parent;
-    return (ts.isJsxSelfClosingElement(parent) || ts.isJsxOpeningElement(parent)) && parent.tagName === node && literalDestination(parent, component.resource, context);
-  });
+  return (
+    references.length > 0 &&
+    references.every((node) => {
+      const parent = node.parent;
+      return (
+        (ts.isJsxSelfClosingElement(parent) || ts.isJsxOpeningElement(parent)) &&
+        parent.tagName === node &&
+        literalDestination(parent, component.resource, context)
+      );
+    })
+  );
 }
 
 /**
@@ -131,15 +219,24 @@ function allUsesProven(component, { sources, checker, seen = new Set() }) {
  * No library code is loaded; unsupported forwarding or caller syntax stays unknown.
  **/
 export function provenForwardedResources(files, pending) {
-  if (!pending.length) { return new Set(); }
+  if (!pending.length) {
+    return new Set();
+  }
   const program = forwardingProgram(files);
   const checker = program.getTypeChecker();
   const proven = new Set();
   for (const { file, position } of pending) {
-    walk(program.getSourceFile(file), node => {
-      if (!ts.isJsxAttribute(node) || node.pos !== position) { return; }
+    walk(program.getSourceFile(file), (node) => {
+      if (!ts.isJsxAttribute(node) || node.pos !== position) {
+        return;
+      }
       const component = forwardedComponent(node, checker);
-      if (component?.symbol && allUsesProven(component, { sources: program.getSourceFiles(), checker })) { proven.add(`${file}:${position}`); }
+      if (
+        component?.symbol &&
+        allUsesProven(component, { sources: program.getSourceFiles(), checker })
+      ) {
+        proven.add(`${file}:${position}`);
+      }
     });
   }
   return proven;
@@ -149,6 +246,12 @@ export function provenForwardedResources(files, pending) {
  * Bind only the graph's authored modules, without resolving additional runtime files.
  **/
 function forwardingProgram(files) {
-  const roots = files.filter(file => /\.[cm]?[jt]sx?$/.test(file));
-  return ts.createProgram(roots, { noResolve: true, noLib: true, allowJs: true, jsx: ts.JsxEmit.Preserve, moduleResolution: ts.ModuleResolutionKind.Bundler });
+  const roots = files.filter((file) => /\.[cm]?[jt]sx?$/.test(file));
+  return ts.createProgram(roots, {
+    noResolve: true,
+    noLib: true,
+    allowJs: true,
+    jsx: ts.JsxEmit.Preserve,
+    moduleResolution: ts.ModuleResolutionKind.Bundler,
+  });
 }

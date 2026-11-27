@@ -9,36 +9,41 @@ import 'fletchstack-ui/styles.css';
 
 function ReviewChanges() {
   const [open, setOpen] = useState(false);
-  return <>
-    <Button onClick={() => setOpen(true)}>Review changes</Button>
-    <Dialog open={open} onOpenChange={setOpen}
-      heading="Confirm the changes?"
-      description="Review this action before continuing."
-      footer={<Button onClick={() => setOpen(false)}>Confirm</Button>}>
-      Your draft changes are ready to save.
-    </Dialog>
-  </>;
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Review changes</Button>
+      <Dialog
+        open={open}
+        onOpenChange={setOpen}
+        heading="Confirm the changes?"
+        description="Review this action before continuing."
+        footer={<Button onClick={() => setOpen(false)}>Confirm</Button>}
+      >
+        Your draft changes are ready to save.
+      </Dialog>
+    </>
+  );
 }
 ```
 
 ## Public API
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| open | boolean | required; parent owns state |
-| onOpenChange | (open: boolean) => void | required; dismissal requests false |
-| heading | ReactNode | omitted |
-| headingLevel | 1 through 6 | 2 |
-| description | ReactNode | omitted; associated using aria-describedby |
-| children / footer | ReactNode | omitted |
-| size | 'sm', 'md', 'lg' | 'md' (400/512/720px maximum widths) |
-| motion | 'fade', 'slide', 'none' | 'fade' |
-| closeOnEscape | boolean | true |
-| closeOnBackdropClick | boolean | true |
-| showCloseButton | boolean | true |
-| closeLabel | string | 'Close dialog' |
-| ref | Ref<HTMLDialogElement> | native element |
-| style | DialogStyle | CSSProperties plus scoped --fs-* tokens |
+| Prop                 | Type                    | Default                                    |
+| -------------------- | ----------------------- | ------------------------------------------ |
+| open                 | boolean                 | required; parent owns state                |
+| onOpenChange         | (open: boolean) => void | required; dismissal requests false         |
+| heading              | ReactNode               | omitted                                    |
+| headingLevel         | 1 through 6             | 2                                          |
+| description          | ReactNode               | omitted; associated using aria-describedby |
+| children / footer    | ReactNode               | omitted                                    |
+| size                 | 'sm', 'md', 'lg'        | 'md' (400/512/720px maximum widths)        |
+| motion               | 'fade', 'slide', 'none' | 'fade'                                     |
+| closeOnEscape        | boolean                 | true                                       |
+| closeOnBackdropClick | boolean                 | true                                       |
+| showCloseButton      | boolean                 | true                                       |
+| closeLabel           | string                  | 'Close dialog'                             |
+| ref                  | Ref<HTMLDialogElement>  | native element                             |
+| style                | DialogStyle             | CSSProperties plus scoped --fs-* tokens    |
 
 Exports: Dialog, DialogProps and DialogStyle. Native dialog attributes, className and event handlers are forwarded. Give every dialog a name through heading, aria-label or aria-labelledby. Explicit naming takes precedence over the generated heading association. Caller-provided aria-describedby is combined with description. Omitted slots leave no empty container. Keep body content structurally meaningful; omit description for complex content that should be explored in reading order.
 

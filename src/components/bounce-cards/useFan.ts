@@ -1,8 +1,19 @@
 import { useEffect, useRef, useState, type PointerEvent, type RefObject } from 'react';
-import { fanBounds, fanImages, fanSettings, fanSlots, nearestCard, type FanImage, type FanSettings, type FanSlot } from './geometry.js';
+import {
+  fanBounds,
+  fanImages,
+  fanSettings,
+  fanSlots,
+  nearestCard,
+  type FanImage,
+  type FanSettings,
+  type FanSlot,
+} from './geometry.js';
 import type { BounceCardsStyle, BounceCardsProps } from './types.js';
 
-export type FanStyle = BounceCardsStyle & { [property: `--fan-${string}`]: string | number | undefined };
+export type FanStyle = BounceCardsStyle & {
+  [property: `--fan-${string}`]: string | number | undefined;
+};
 
 export type FanModel = {
   root: RefObject<HTMLDivElement | null>;
@@ -30,7 +41,8 @@ function useWidth(root: RefObject<HTMLDivElement | null>, fallback: number): num
      **/
     const update = () => setWidth(element.clientWidth || fallback);
     const observer = new ResizeObserver(update);
-    observer.observe(element); update();
+    observer.observe(element);
+    update();
     return () => observer.disconnect();
   }, [root, fallback]);
   return width;
@@ -39,22 +51,52 @@ function useWidth(root: RefObject<HTMLDivElement | null>, fallback: number): num
 /**
  * Convert a pointer in the scaled stage to a stable source-position hit test.
  **/
-function pointerCard(event: PointerEvent<HTMLDivElement>, model: Pick<FanModel, 'slots' | 'scale' | 'settings'>): number {
+function pointerCard(
+  event: PointerEvent<HTMLDivElement>,
+  model: Pick<FanModel, 'slots' | 'scale' | 'settings'>,
+): number {
   const box = event.currentTarget.getBoundingClientRect();
-  return nearestCard({ x: (event.clientX - box.left - box.width / 2) / model.scale, y: (event.clientY - box.top - box.height / 2) / model.scale }, model.slots, model.settings.cardSize);
+  return nearestCard(
+    {
+      x: (event.clientX - box.left - box.width / 2) / model.scale,
+      y: (event.clientY - box.top - box.height / 2) / model.scale,
+    },
+    model.slots,
+    model.settings.cardSize,
+  );
 }
 
 /**
  * Preserve independent focus and hover ownership while data and container size change.
  **/
 export function useFan(props: BounceCardsProps): FanModel {
-  const root = useRef<HTMLDivElement>(null), [focused, focus] = useState<string | null>(null), [hovered, hover] = useState<string | null>(null);
-  const images = fanImages(props.images), settings = fanSettings(props), slots = fanSlots(settings, images.length, props.positions);
-  const bounds = fanBounds(settings, slots), width = useWidth(root, settings.containerWidth), scale = Math.min(1, width / bounds.width);
-  const active = images.findIndex(image => image.id === (focused ?? hovered));
-  return { root, images, slots, settings, bounds, scale, grid: scale * settings.cardSize < 44, active, focus, clear: () => hover(null), move: event => {
-    if (event.defaultPrevented || props.enableHover === false) { return; }
-    const index = pointerCard(event, { slots, scale, settings });
-    hover(images[index]?.id ?? null);
-  } };
+  const root = useRef<HTMLDivElement>(null),
+    [focused, focus] = useState<string | null>(null),
+    [hovered, hover] = useState<string | null>(null);
+  const images = fanImages(props.images),
+    settings = fanSettings(props),
+    slots = fanSlots(settings, images.length, props.positions);
+  const bounds = fanBounds(settings, slots),
+    width = useWidth(root, settings.containerWidth),
+    scale = Math.min(1, width / bounds.width);
+  const active = images.findIndex((image) => image.id === (focused ?? hovered));
+  return {
+    root,
+    images,
+    slots,
+    settings,
+    bounds,
+    scale,
+    grid: scale * settings.cardSize < 44,
+    active,
+    focus,
+    clear: () => hover(null),
+    move: (event) => {
+      if (event.defaultPrevented || props.enableHover === false) {
+        return;
+      }
+      const index = pointerCard(event, { slots, scale, settings });
+      hover(images[index]?.id ?? null);
+    },
+  };
 }

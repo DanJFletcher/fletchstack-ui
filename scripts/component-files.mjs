@@ -8,11 +8,20 @@ import { registrationPaths } from './component-plan.mjs';
 export function safeTarget(root, path) {
   const target = resolve(root, path);
   const local = relative(root, target);
-  if (!local || local.startsWith('..') || isAbsolute(local)) { throw new Error(`Unsafe destination: ${path}`); }
+  if (!local || local.startsWith('..') || isAbsolute(local)) {
+    throw new Error(`Unsafe destination: ${path}`);
+  }
   let current = target;
   while (current !== root) {
-    try { if (fs.lstatSync(current).isSymbolicLink()) { throw new Error(`Symlink destination: ${path}`); } }
-    catch (error) { if (error.code !== 'ENOENT') { throw error; } }
+    try {
+      if (fs.lstatSync(current).isSymbolicLink()) {
+        throw new Error(`Symlink destination: ${path}`);
+      }
+    } catch (error) {
+      if (error.code !== 'ENOENT') {
+        throw error;
+      }
+    }
     current = dirname(current);
   }
   return target;
@@ -22,11 +31,16 @@ export function safeTarget(root, path) {
  * Walk relevant authored text only, refusing to follow directory symlinks.
  **/
 function collectFiles(root, directory, files) {
-  if (!fs.existsSync(join(root, directory))) { return; }
+  if (!fs.existsSync(join(root, directory))) {
+    return;
+  }
   for (const entry of fs.readdirSync(join(root, directory), { withFileTypes: true })) {
     const path = `${directory}/${entry.name}`;
-    if (entry.isDirectory()) { collectFiles(root, path, files); }
-    else if (entry.isFile() && /\.(?:tsx?|css|json|md)$/.test(path)) { files[path] = fs.readFileSync(join(root, path), 'utf8'); }
+    if (entry.isDirectory()) {
+      collectFiles(root, path, files);
+    } else if (entry.isFile() && /\.(?:tsx?|css|json|md)$/.test(path)) {
+      files[path] = fs.readFileSync(join(root, path), 'utf8');
+    }
   }
 }
 
@@ -36,8 +50,18 @@ function collectFiles(root, directory, files) {
 export function readComponentProject(directory) {
   const root = fs.realpathSync(directory);
   const files = {};
-  for (const path of registrationPaths) { files[path] = fs.readFileSync(safeTarget(root, path), 'utf8'); }
-  for (const directory of ['src', '.storybook', 'docs', 'tests/browser-harness', 'tests/integration/components']) { collectFiles(root, directory, files); }
+  for (const path of registrationPaths) {
+    files[path] = fs.readFileSync(safeTarget(root, path), 'utf8');
+  }
+  for (const directory of [
+    'src',
+    '.storybook',
+    'docs',
+    'tests/browser-harness',
+    'tests/integration/components',
+  ]) {
+    collectFiles(root, directory, files);
+  }
   return { root, files };
 }
 
@@ -48,7 +72,9 @@ export function validatePlan(root, plan) {
   for (const change of plan.changes) {
     const target = safeTarget(root, change.path);
     const actual = fs.existsSync(target) ? fs.readFileSync(target, 'utf8') : null;
-    if (actual !== change.before) { throw new Error(`File changed since planning: ${change.path}`); }
+    if (actual !== change.before) {
+      throw new Error(`File changed since planning: ${change.path}`);
+    }
   }
 }
 
@@ -65,6 +91,10 @@ export function applyComponentPlan(root, plan) {
       fs.writeFileSync(target, change.after, { flag: change.before === null ? 'wx' : 'w' });
       changed.push(change.path);
     }
-  } catch (error) { throw new Error(`${error.message}\nFiles already changed: ${changed.join(', ') || '(none)'}`, { cause: error }); }
+  } catch (error) {
+    throw new Error(`${error.message}\nFiles already changed: ${changed.join(', ') || '(none)'}`, {
+      cause: error,
+    });
+  }
   return changed;
 }

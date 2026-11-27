@@ -4,17 +4,17 @@ Verified November 13, 2026 against the supplied five-column portfolio sheet and 
 
 ## Final checks
 
-| Check | Final evidence | Observed duration |
-| --- | --- | --- |
-| `npm run test:unit:coverage -- --maxWorkers=2` | 67 files, 1,132 tests; 100% statements, branches, functions and lines | 38.53s |
-| `npm run test:integration:coverage -- --maxWorkers=1` | 73 files, 936 tests; independent 100% coverage gate | 113.93s |
-| Complete component E2E, two workers | All 483 harness checks passed before the final local selection-slot repair | 1.8m |
-| Final affected Table E2E, one worker | All 13 Table journeys passed after that repair; untouched component-suite evidence retained | 10.6s |
-| Final retained Storybook E2E, one worker | All 36 boundary checks passed; combined validated browser scope is 519 tests | 1.5m |
-| `npm run test:storybook` | All 38 files / 445 render, play and accessibility checks passed | 27.05s |
-| `npm run build-storybook` | Passed | Vite 6.63s; total not separately measured |
-| `npm run verify:package` | Build, exports/types/styles, bundling, deterministic React 18.3.1 / React 19 SSR passed | Not separately measured |
-| Lint, type check, structural Table check, `git diff --check` | Passed | Not separately measured |
+| Check                                                        | Final evidence                                                                              | Observed duration                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `npm run test:unit:coverage -- --maxWorkers=2`               | 67 files, 1,132 tests; 100% statements, branches, functions and lines                       | 38.53s                                    |
+| `npm run test:integration:coverage -- --maxWorkers=1`        | 73 files, 936 tests; independent 100% coverage gate                                         | 113.93s                                   |
+| Complete component E2E, two workers                          | All 483 harness checks passed before the final local selection-slot repair                  | 1.8m                                      |
+| Final affected Table E2E, one worker                         | All 13 Table journeys passed after that repair; untouched component-suite evidence retained | 10.6s                                     |
+| Final retained Storybook E2E, one worker                     | All 36 boundary checks passed; combined validated browser scope is 519 tests                | 1.5m                                      |
+| `npm run test:storybook`                                     | All 38 files / 445 render, play and accessibility checks passed                             | 27.05s                                    |
+| `npm run build-storybook`                                    | Passed                                                                                      | Vite 6.63s; total not separately measured |
+| `npm run verify:package`                                     | Build, exports/types/styles, bundling, deterministic React 18.3.1 / React 19 SSR passed     | Not separately measured                   |
+| Lint, type check, structural Table check, `git diff --check` | Passed                                                                                      | Not separately measured                   |
 
 Development and failure-repair runs did not collect coverage. The unfiltered independent coverage gates ran at the final handoff boundary and were rerun after the selection-slot repair. Initial full browser scope was required by the new semantic token group and public/export/preview registration. The subsequent repair touched only Table selection markup: its directly owned suite and all Storybook checks were rerun, while valid results for untouched components were retained. Ordinary browser tests did not collect code coverage. Remote CI has not been run.
 

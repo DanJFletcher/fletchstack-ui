@@ -12,14 +12,27 @@ export default defineConfig({
       thresholds: { perFile: true, statements: 100, branches: 100, functions: 100, lines: 100 },
     },
     projects: [
-      { test: { name: 'unit', include: ['tests/unit/**/*.test.{ts,tsx,mjs}', 'src/components/**/__tests__/**/*.test.{ts,tsx,mjs}'] } },
+      {
+        test: {
+          name: 'unit',
+          include: [
+            'tests/unit/**/*.test.{ts,tsx,mjs}',
+            'src/components/**/__tests__/**/*.test.{ts,tsx,mjs}',
+          ],
+        },
+      },
       { test: { name: 'integration', include: ['tests/integration/**/*.test.{ts,tsx,mjs}'] } },
       {
         plugins: [storybookTest({ configDir: '.storybook' })],
         optimizeDeps: { include: ['storybook/internal/core-events'] },
         test: {
           name: 'storybook',
-          browser: { enabled: true, headless: true, provider: playwright(), instances: [{ browser: 'chromium' }] },
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright(),
+            instances: [{ browser: 'chromium' }],
+          },
         },
       },
     ],

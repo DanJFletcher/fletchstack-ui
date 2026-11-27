@@ -6,7 +6,9 @@
   min-inline-size: 0;
   align-self: start;
 }
-.fs-aspect-ratio[hidden] { display: none; }
+.fs-aspect-ratio[hidden] {
+  display: none;
+}
 .fs-aspect-ratio__content {
   position: absolute;
   inset: 0;

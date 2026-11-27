@@ -25,27 +25,27 @@ Current boundaries:
 
 Add the matrix to [the test guide](../../../tests/README.md), with a linked detailed inventory if necessary. Each row records component/behavior, applicable states/themes/environments, current test and assertion, retained primary owner, any distinct secondary boundary, removal/consolidation rationale, and validation evidence. Account for all standalone cases rather than deleting by title pattern. New components need applicable rows or a reason for non-applicability; raw story/test counts are not a substitute.
 
-| Boundary | Primary owner |
-| --- | --- |
-| Token compilation/validation, deterministic server HTML, package exports/types | Node unit/integration and package verification |
-| Props, attributes, refs, callback wiring, state transitions, ARIA relationships | DOM tests |
-| Every eligible CSF story's render/play and accessibility scan | Existing Storybook/Vitest browser project |
-| CSS before hydration, real hydration, selective stylesheet loading | Existing focused browser integration |
-| Native input, geometry, browser preferences, served manager/preview journeys | Focused standalone Playwright |
+| Boundary                                                                        | Primary owner                                  |
+| ------------------------------------------------------------------------------- | ---------------------------------------------- |
+| Token compilation/validation, deterministic server HTML, package exports/types  | Node unit/integration and package verification |
+| Props, attributes, refs, callback wiring, state transitions, ARIA relationships | DOM tests                                      |
+| Every eligible CSF story's render/play and accessibility scan                   | Existing Storybook/Vitest browser project      |
+| CSS before hydration, real hydration, selective stylesheet loading              | Existing focused browser integration           |
+| Native input, geometry, browser preferences, served manager/preview journeys    | Focused standalone Playwright                  |
 
 Do not move equivalent browser checks merely to use another runner. DOM callback tests and browser activation after hydration prove different boundaries. Storybook's `userEvent.selectOptions` does not replace native `page.keyboard` typeahead. Standalone CSS and built-package checks remain because Storybook imports all styles globally and can conceal missing dependencies.
 
 ### 2. Start from concrete, bounded duplication
 
-| Candidate | Change and retained evidence |
-| --- | --- |
-| Render-success loops in 16 families, including Select's 14 and Stack's 12 | Verify discovery parity, then remove individual cases that add only visibility/play completion. Keep Storybook rendering/a11y and representative served-preview checks. |
-| Button keyboard story wrappers and ref-focus replay | Remove wrappers whose only new assertion is the play's end state. Preserve native Enter/Space and disabled tab behavior in Chromium hydration/focused tests, DOM forwarding, and representative story interactions. |
-| Button title/class/default-type forwarding | Keep DOM/SSR assertions; retain a representative Controls/args integration check only for that distinct boundary. |
-| Field description ordering, slot classes, message tag names | Retain exhaustive DOM assertions and one browser label/description composition. Keep inline-label interaction when it proves a real browser boundary. |
-| Nested theme/consumer override assertions after the identical play | Assign the CSS assertion to one primary browser owner, keeping the served toolbar journey and token-generation integration. |
-| Stack/Container preset and alignment tables | Load a multi-example story once per relevant scenario/theme and measure each case with named steps. Preserve responsive changes, RTL, hidden participation and focus clearance. |
-| Theme-independent interactions and geometry | Use one exhaustive functional matrix plus explicit theme parity/reset checks when the CSS contract is shared. Keep both-theme checks where palette, typography, focus, state styling or boundaries differ. |
+| Candidate                                                                 | Change and retained evidence                                                                                                                                                                                        |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Render-success loops in 16 families, including Select's 14 and Stack's 12 | Verify discovery parity, then remove individual cases that add only visibility/play completion. Keep Storybook rendering/a11y and representative served-preview checks.                                             |
+| Button keyboard story wrappers and ref-focus replay                       | Remove wrappers whose only new assertion is the play's end state. Preserve native Enter/Space and disabled tab behavior in Chromium hydration/focused tests, DOM forwarding, and representative story interactions. |
+| Button title/class/default-type forwarding                                | Keep DOM/SSR assertions; retain a representative Controls/args integration check only for that distinct boundary.                                                                                                   |
+| Field description ordering, slot classes, message tag names               | Retain exhaustive DOM assertions and one browser label/description composition. Keep inline-label interaction when it proves a real browser boundary.                                                               |
+| Nested theme/consumer override assertions after the identical play        | Assign the CSS assertion to one primary browser owner, keeping the served toolbar journey and token-generation integration.                                                                                         |
+| Stack/Container preset and alignment tables                               | Load a multi-example story once per relevant scenario/theme and measure each case with named steps. Preserve responsive changes, RTL, hidden participation and focus clearance.                                     |
+| Theme-independent interactions and geometry                               | Use one exhaustive functional matrix plus explicit theme parity/reset checks when the CSS contract is shared. Keep both-theme checks where palette, typography, focus, state styling or boundaries differ.          |
 
 Do not remove all browser label/description assertions in favor of jsdom. Keep representative actual accessibility-tree relationships and native label activation. Keep 320px, 200% text and user-spacing checks for genuinely different CSS/compositions rather than one universal smoke. Do not combine unrelated journeys into a giant shared-state test; group measurements already present in the same fixture.
 

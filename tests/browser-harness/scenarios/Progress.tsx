@@ -1,15 +1,35 @@
 import { Progress, type ProgressProps } from '../../../src/components/progress/Progress';
-import { ProgressControlled, ProgressExample, ProgressOverrides, ProgressSizes } from '../../../src/components/progress/stories/progress-examples';
+import {
+  ProgressControlled,
+  ProgressExample,
+  ProgressOverrides,
+  ProgressSizes,
+} from '../../../src/components/progress/stories/progress-examples';
 import type { Scenario } from '../gallery/types';
 import '../../../src/components/progress/progress.css';
 import '../../../src/components/button/button.css';
 const Playground: Scenario<ProgressProps> = {};
 const Composition: Scenario<ProgressProps> = { render: () => <ProgressExample /> };
 const Controlled: Scenario<ProgressProps> = { render: () => <ProgressControlled /> };
-const Indeterminate: Scenario<ProgressProps> = { args: { value: null, label: 'Preparing files', showValue: true } };
+const Indeterminate: Scenario<ProgressProps> = {
+  args: { value: null, label: 'Preparing files', showValue: true },
+};
 const Sizes: Scenario<ProgressProps> = { render: () => <ProgressSizes /> };
 const Overrides: Scenario<ProgressProps> = { render: () => <ProgressOverrides /> };
-const Long: Scenario<ProgressProps> = { args: { label: 'LongUnbrokenLocalizedWorkspaceUploadProgressDescriptionThatMustWrap', showValue: true } };
+const Long: Scenario<ProgressProps> = {
+  args: {
+    label: 'LongUnbrokenLocalizedWorkspaceUploadProgressDescriptionThatMustWrap',
+    showValue: true,
+  },
+};
 export const component = Progress;
 export const defaults: ProgressProps = { value: 33, label: 'Upload progress' };
-export const scenarios = { Playground, Composition, Controlled, Indeterminate, Sizes, Overrides, Long };
+export const scenarios = {
+  Playground,
+  Composition,
+  Controlled,
+  Indeterminate,
+  Sizes,
+  Overrides,
+  Long,
+};

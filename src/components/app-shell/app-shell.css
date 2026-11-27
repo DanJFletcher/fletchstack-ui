@@ -1,6 +1,26 @@
-.fs-app-shell { box-sizing: border-box; display: flex; flex-direction: column; min-inline-size: 0; min-block-size: 0; overflow: hidden; background: var(--fs-surface); color: var(--fs-text); }
-.fs-app-shell[hidden] { display: none; }
-.fs-app-shell--viewport { block-size: 100vh; block-size: 100dvh; }
-.fs-app-shell--parent { block-size: 100%; }
-.fs-app-shell > * { flex-shrink: 0; }
-.fs-app-shell > .fs-app-content { flex: 1 1 0; }
+.fs-app-shell {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow: hidden;
+  background: var(--fs-surface);
+  color: var(--fs-text);
+}
+.fs-app-shell[hidden] {
+  display: none;
+}
+.fs-app-shell--viewport {
+  block-size: 100vh;
+  block-size: 100dvh;
+}
+.fs-app-shell--parent {
+  block-size: 100%;
+}
+.fs-app-shell > * {
+  flex-shrink: 0;
+}
+.fs-app-shell > .fs-app-content {
+  flex: 1 1 0;
+}

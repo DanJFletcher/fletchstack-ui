@@ -24,8 +24,12 @@ it('defaults integration execution to a real run', () => {
 });
 
 it.each([
-  [], ['storybook', '--base', 'HEAD'], ['unit'], ['unit', '--base'],
-  ['unit', '--base', '--dry-run'], ['unit', '--base', 'HEAD', '--base', 'main'],
+  [],
+  ['storybook', '--base', 'HEAD'],
+  ['unit'],
+  ['unit', '--base'],
+  ['unit', '--base', '--dry-run'],
+  ['unit', '--base', 'HEAD', '--base', 'main'],
   ['unit', '--base', 'HEAD', '--dry-run', '--dry-run'],
   ['unit', '--base', 'HEAD', '--coverage'],
 ])('rejects invalid arguments %j', (...given) => {

@@ -16,29 +16,35 @@ it('exposes a meaningful horizontal boundary when decorative mode is disabled', 
   expect(screen.getByRole('separator')).toHaveAttribute('aria-orientation', 'horizontal');
 });
 
-it.each(['horizontal', 'vertical'] as const)('exposes the semantic %s orientation', orientation => {
-  // arrange
-  const given = <Separator decorative={false} orientation={orientation} />;
+it.each(['horizontal', 'vertical'] as const)(
+  'exposes the semantic %s orientation',
+  (orientation) => {
+    // arrange
+    const given = <Separator decorative={false} orientation={orientation} />;
 
-  // act
-  render(given);
+    // act
+    render(given);
 
-  // assert
-  expect(screen.getByRole('separator')).toHaveAttribute('aria-orientation', orientation);
-});
+    // assert
+    expect(screen.getByRole('separator')).toHaveAttribute('aria-orientation', orientation);
+  },
+);
 
-it.each(['horizontal', 'vertical'] as const)('hides decorative %s grouping from assistive technology', orientation => {
-  // arrange
-  const given = <Separator orientation={orientation} />;
+it.each(['horizontal', 'vertical'] as const)(
+  'hides decorative %s grouping from assistive technology',
+  (orientation) => {
+    // arrange
+    const given = <Separator orientation={orientation} />;
 
-  // act
-  const result = render(given);
+    // act
+    const result = render(given);
 
-  // assert
-  expect(screen.queryByRole('separator')).not.toBeInTheDocument();
-  expect(result.container.firstElementChild).toHaveAttribute('aria-hidden', 'true');
-  expect(result.container.firstElementChild).not.toHaveAttribute('aria-orientation');
-});
+    // assert
+    expect(screen.queryByRole('separator')).not.toBeInTheDocument();
+    expect(result.container.firstElementChild).toHaveAttribute('aria-hidden', 'true');
+    expect(result.container.firstElementChild).not.toHaveAttribute('aria-orientation');
+  },
+);
 
 it('defaults to an empty horizontal rule', () => {
   // arrange
@@ -66,7 +72,16 @@ it('supports an optional accessible name for meaningful boundaries', () => {
 it('forwards a div ref and native consumer attributes', () => {
   // arrange
   const ref = createRef<HTMLDivElement>();
-  const given = <Separator ref={ref} decorative={false} id="boundary" title="Account boundary" className="custom" style={{ '--fs-separator-thickness': '2px' }} />;
+  const given = (
+    <Separator
+      ref={ref}
+      decorative={false}
+      id="boundary"
+      title="Account boundary"
+      className="custom"
+      style={{ '--fs-separator-thickness': '2px' }}
+    />
+  );
 
   // act
   render(given);
@@ -90,7 +105,23 @@ it('preserves native hidden semantics', () => {
   expect(screen.getByRole('separator', { hidden: true })).not.toBeVisible();
 });
 
-it.each(['role', 'aria-hidden', 'aria-orientation', 'tabIndex', 'contentEditable', 'aria-live', 'aria-atomic', 'aria-valuenow', 'aria-valuemin', 'aria-valuemax', 'aria-valuetext', 'children', 'dangerouslySetInnerHTML', 'onClick', 'onKeyDown'])('ignores the untyped override %s', name => {
+it.each([
+  'role',
+  'aria-hidden',
+  'aria-orientation',
+  'tabIndex',
+  'contentEditable',
+  'aria-live',
+  'aria-atomic',
+  'aria-valuenow',
+  'aria-valuemin',
+  'aria-valuemax',
+  'aria-valuetext',
+  'children',
+  'dangerouslySetInnerHTML',
+  'onClick',
+  'onKeyDown',
+])('ignores the untyped override %s', (name) => {
   // arrange
   const given = { [name]: 'override' } as unknown as SeparatorProps;
 
@@ -98,7 +129,11 @@ it.each(['role', 'aria-hidden', 'aria-orientation', 'tabIndex', 'contentEditable
   const result = render(<Separator {...given} decorative={false} />);
 
   // assert
-  expect(result.container.firstElementChild?.getAttributeNames()).toEqual(['class', 'role', 'aria-orientation']);
+  expect(result.container.firstElementChild?.getAttributeNames()).toEqual([
+    'class',
+    'role',
+    'aria-orientation',
+  ]);
   expect(screen.getByRole('separator')).toBeEmptyDOMElement();
 });
 

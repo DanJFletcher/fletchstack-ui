@@ -11,7 +11,9 @@
   border: 0;
   border-block-start: var(--fs-separator-thickness) solid var(--fs-separator-color);
 }
-.fs-separator[hidden] { display: none; }
+.fs-separator[hidden] {
+  display: none;
+}
 .fs-separator--vertical {
   align-self: stretch;
   inline-size: var(--fs-separator-thickness);
@@ -19,4 +21,8 @@
   border-block-start: 0;
   border-inline-start: var(--fs-separator-thickness) solid var(--fs-separator-color);
 }
-@media (forced-colors: active) { .fs-separator { border-color: CanvasText; } }
+@media (forced-colors: active) {
+  .fs-separator {
+    border-color: CanvasText;
+  }
+}

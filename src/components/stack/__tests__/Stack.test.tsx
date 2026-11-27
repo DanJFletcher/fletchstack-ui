@@ -7,7 +7,11 @@ import { Stack, type StackStyle } from '../Stack';
 
 it('preserves native description relationships on the layout wrapper', () => {
   // arrange
-  const given = <Stack id="settings" aria-describedby="summary" data-testid="layout"><p>Project settings</p></Stack>;
+  const given = (
+    <Stack id="settings" aria-describedby="summary" data-testid="layout">
+      <p>Project settings</p>
+    </Stack>
+  );
 
   // act
   render(given);
@@ -25,30 +29,39 @@ it('defaults to related spacing and stretch alignment', () => {
   render(given);
 
   // assert
-  expect(screen.getByTestId('layout')).toHaveClass('fs-stack--gap-related', 'fs-stack--align-stretch');
+  expect(screen.getByTestId('layout')).toHaveClass(
+    'fs-stack--gap-related',
+    'fs-stack--align-stretch',
+  );
 });
 
-it.each(['none', 'related', 'group', 'section'] as const)('supports the %s gap relationship', gap => {
-  // arrange
-  const given = <Stack gap={gap} data-testid="layout" />;
+it.each(['none', 'related', 'group', 'section'] as const)(
+  'supports the %s gap relationship',
+  (gap) => {
+    // arrange
+    const given = <Stack gap={gap} data-testid="layout" />;
 
-  // act
-  render(given);
+    // act
+    render(given);
 
-  // assert
-  expect(screen.getByTestId('layout')).toHaveClass(`fs-stack--gap-${gap}`);
-});
+    // assert
+    expect(screen.getByTestId('layout')).toHaveClass(`fs-stack--gap-${gap}`);
+  },
+);
 
-it.each(['stretch', 'start', 'center', 'end'] as const)('supports %s cross-axis alignment', align => {
-  // arrange
-  const given = <Stack align={align} data-testid="layout" />;
+it.each(['stretch', 'start', 'center', 'end'] as const)(
+  'supports %s cross-axis alignment',
+  (align) => {
+    // arrange
+    const given = <Stack align={align} data-testid="layout" />;
 
-  // act
-  render(given);
+    // act
+    render(given);
 
-  // assert
-  expect(screen.getByTestId('layout')).toHaveClass(`fs-stack--align-${align}`);
-});
+    // assert
+    expect(screen.getByTestId('layout')).toHaveClass(`fs-stack--align-${align}`);
+  },
+);
 
 it('forwards a native div ref', () => {
   // arrange
@@ -73,24 +86,38 @@ it('preserves consumer classes and typed semantic overrides', () => {
 
   // assert
   expect(screen.getByTestId('layout')).toHaveClass('consumer');
-  expect(screen.getByTestId('layout').style.getPropertyValue('--fs-space-gap-related')).toBe('32px');
+  expect(screen.getByTestId('layout').style.getPropertyValue('--fs-space-gap-related')).toBe(
+    '32px',
+  );
   expect(screen.getByTestId('layout')).toHaveStyle({ color: 'rgb(255, 0, 0)' });
 });
 
 it('preserves the supplied child order', () => {
   // arrange
-  const given = <Stack><button>First</button><button>Second</button></Stack>;
+  const given = (
+    <Stack>
+      <button>First</button>
+      <button>Second</button>
+    </Stack>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getAllByRole('button').map(button => button.textContent)).toEqual(['First', 'Second']);
+  expect(screen.getAllByRole('button').map((button) => button.textContent)).toEqual([
+    'First',
+    'Second',
+  ]);
 });
 
 it('preserves native hidden behavior', () => {
   // arrange
-  const given = <Stack hidden><p>Hidden content</p></Stack>;
+  const given = (
+    <Stack hidden>
+      <p>Hidden content</p>
+    </Stack>
+  );
 
   // act
   render(given);
@@ -101,7 +128,11 @@ it('preserves native hidden behavior', () => {
 
 it('adds no role or keyboard focus to the wrapper', () => {
   // arrange
-  const given = <Stack data-testid="layout"><p>Project settings</p></Stack>;
+  const given = (
+    <Stack data-testid="layout">
+      <p>Project settings</p>
+    </Stack>
+  );
 
   // act
   render(given);

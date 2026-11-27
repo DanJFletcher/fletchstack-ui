@@ -1,9 +1,32 @@
 /* Demonstration guides and child layout only; none of these ship in container.css. */
-.container-guide > .fs-container { outline: var(--fs-separator-thickness) dashed var(--fs-separator-color); outline-offset: -1px; }
-.container-content { display: grid; gap: var(--fs-space-stack-group); min-inline-size: 0; }
-.container-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--fs-space-gap-related); }
-.container-inset { padding-inline: var(--fs-space-inset-container); }
-.container-narrow { inline-size: 240px; max-inline-size: 100%; }
-.container-flex { display: flex; }
-.container-fixed { flex: 0 0 80px; }
-.container-parent-grid { display: grid; grid-template-columns: 80px minmax(0, 1fr); }
+.container-guide > .fs-container {
+  outline: var(--fs-separator-thickness) dashed var(--fs-separator-color);
+  outline-offset: -1px;
+}
+.container-content {
+  display: grid;
+  gap: var(--fs-space-stack-group);
+  min-inline-size: 0;
+}
+.container-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--fs-space-gap-related);
+}
+.container-inset {
+  padding-inline: var(--fs-space-inset-container);
+}
+.container-narrow {
+  inline-size: 240px;
+  max-inline-size: 100%;
+}
+.container-flex {
+  display: flex;
+}
+.container-fixed {
+  flex: 0 0 80px;
+}
+.container-parent-grid {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+}

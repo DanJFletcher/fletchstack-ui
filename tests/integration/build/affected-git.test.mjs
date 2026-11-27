@@ -16,7 +16,9 @@ beforeEach(async () => {
   gitOutput(['add', '.'], root);
   gitOutput(['-c', 'commit.gpgsign=false', 'commit', '-qm', 'baseline'], root);
 });
-afterEach(async () => { await rm(root, { recursive: true, force: true }); });
+afterEach(async () => {
+  await rm(root, { recursive: true, force: true });
+});
 
 it('retains committed paths even when staged and unstaged edits undo them', async () => {
   // arrange
@@ -34,7 +36,10 @@ it('retains committed paths even when staged and unstaged edits undo them', asyn
   const result = discoverChanges(base, root);
 
   // assert
-  expect(result.changes).toEqual([{ path: 'new test.ts', status: '?' }, { path: 'same name.ts', status: 'M' }]);
+  expect(result.changes).toEqual([
+    { path: 'new test.ts', status: '?' },
+    { path: 'same name.ts', status: 'M' },
+  ]);
 });
 
 it('reports both names of a staged rename', () => {
@@ -45,7 +50,10 @@ it('reports both names of a staged rename', () => {
   const result = discoverChanges('HEAD', root);
 
   // assert
-  expect(result.changes).toEqual([{ path: 'renamed.ts', status: 'R100' }, { path: 'same name.ts', status: 'R100' }]);
+  expect(result.changes).toEqual([
+    { path: 'renamed.ts', status: 'R100' },
+    { path: 'same name.ts', status: 'R100' },
+  ]);
 });
 
 it('reports deleted runtime paths', () => {
@@ -68,7 +76,11 @@ it('retains overlapping staged rename and unstaged deletion records', async () =
   const result = discoverChanges('HEAD', root);
 
   // assert
-  expect(result.changes).toEqual([{ path: 'renamed.ts', status: 'D' }, { path: 'renamed.ts', status: 'R100' }, { path: 'same name.ts', status: 'R100' }]);
+  expect(result.changes).toEqual([
+    { path: 'renamed.ts', status: 'D' },
+    { path: 'renamed.ts', status: 'R100' },
+    { path: 'same name.ts', status: 'R100' },
+  ]);
 });
 
 it('falls back for an unavailable ref', () => {
@@ -79,7 +91,12 @@ it('falls back for an unavailable ref', () => {
   const result = discoverChanges(given, root);
 
   // assert
-  expect(result).toMatchObject({ resolvedBase: null, mergeBase: null, changes: [], fallback: expect.stringContaining('history unavailable') });
+  expect(result).toMatchObject({
+    resolvedBase: null,
+    mergeBase: null,
+    changes: [],
+    fallback: expect.stringContaining('history unavailable'),
+  });
 });
 
 it('falls back when histories have no common ancestor', async () => {
@@ -113,7 +130,9 @@ it('fails outside a Git repository', async () => {
 it('surfaces a broken comparison command', () => {
   // arrange
   const git = (args, cwd) => {
-    if (args.includes('--quiet')) { throw Object.assign(new Error('repository unreadable'), { status: 128 }); }
+    if (args.includes('--quiet')) {
+      throw Object.assign(new Error('repository unreadable'), { status: 128 });
+    }
     return gitOutput(args, cwd);
   };
 
@@ -137,7 +156,10 @@ it('rejects truncated rename data', () => {
 
 it.each([
   [['unit', '--base', 'HEAD'], { project: 'unit', base: 'HEAD', dryRun: false }],
-  [['integration', '--dry-run', '--base', 'HEAD'], { project: 'integration', base: 'HEAD', dryRun: true }],
+  [
+    ['integration', '--dry-run', '--base', 'HEAD'],
+    { project: 'integration', base: 'HEAD', dryRun: true },
+  ],
 ])('accepts supported invocation %j', (given, expected) => {
   // arrange
 
@@ -148,7 +170,14 @@ it.each([
   expect(result).toEqual(expected);
 });
 
-it.each([[], ['unit'], ['unit', '--base'], ['e2e'], ['unit', '--base', 'HEAD', '--config', 'other'], ['unit', '--base', 'HEAD', '--dry-run', '--dry-run']])('rejects unsupported invocation %j', (...given) => {
+it.each([
+  [],
+  ['unit'],
+  ['unit', '--base'],
+  ['e2e'],
+  ['unit', '--base', 'HEAD', '--config', 'other'],
+  ['unit', '--base', 'HEAD', '--dry-run', '--dry-run'],
+])('rejects unsupported invocation %j', (...given) => {
   // arrange
 
   // act

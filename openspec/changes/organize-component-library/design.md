@@ -32,17 +32,17 @@ The owner approved the proposed counter-listener fix after the migration exposed
 
 Adopt lowercase kebab-case family directories and preserve PascalCase public component filenames. One family can contain several exports; there is no rule requiring one folder or implementation file per export.
 
-| Current owner | Destination family | Retained ownership |
-| --- | --- | --- |
-| Button | `src/components/button/` | Button implementation and CSS |
-| Card and its parts | `src/components/card/` | All compound parts remain together in Card.tsx |
-| Checkbox | `src/components/checkbox/` | Native checked/mixed behavior and marks |
-| Field and FieldPrimitives | `src/components/field/` | Composed field and standalone label/message atoms |
-| FormGroup | `src/components/form-group/` | Fieldset/legend composition |
-| Icon and named artwork | `src/components/icon/` and its `named/` directory | Wrapper plus existing eight named exports |
-| Select | `src/components/select/` | Native single-choice control |
-| TextInput | `src/components/text-input/` | Single-line control and private adornment |
-| Textarea | `src/components/textarea/` | Multiline control and private count/reset logic |
+| Current owner             | Destination family                                | Retained ownership                                |
+| ------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| Button                    | `src/components/button/`                          | Button implementation and CSS                     |
+| Card and its parts        | `src/components/card/`                            | All compound parts remain together in Card.tsx    |
+| Checkbox                  | `src/components/checkbox/`                        | Native checked/mixed behavior and marks           |
+| Field and FieldPrimitives | `src/components/field/`                           | Composed field and standalone label/message atoms |
+| FormGroup                 | `src/components/form-group/`                      | Fieldset/legend composition                       |
+| Icon and named artwork    | `src/components/icon/` and its `named/` directory | Wrapper plus existing eight named exports         |
+| Select                    | `src/components/select/`                          | Native single-choice control                      |
+| TextInput                 | `src/components/text-input/`                      | Single-line control and private adornment         |
+| Textarea                  | `src/components/textarea/`                        | Multiline control and private count/reset logic   |
 
 Example target layout:
 

@@ -19,7 +19,11 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('links the trigger to a named, described non-modal panel', () => {
     // arrange
-    const element = <Popover triggerLabel="Details" heading="Project" description="Draft context" defaultOpen>Content</Popover>;
+    const element = (
+      <Popover triggerLabel="Details" heading="Project" description="Draft context" defaultOpen>
+        Content
+      </Popover>
+    );
 
     // act
     render(element);
@@ -28,12 +32,25 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
     const panel = screen.getByRole('dialog', { name: 'Project' });
     expect(panel).toHaveAccessibleDescription('Draft context');
     expect(panel).not.toHaveAttribute('aria-modal');
-    expect(screen.getByRole('button', { name: 'Details' })).toHaveAttribute('aria-controls', panel.id);
+    expect(screen.getByRole('button', { name: 'Details' })).toHaveAttribute(
+      'aria-controls',
+      panel.id,
+    );
   });
   it('forwards wrapper attributes, handlers and ref', () => {
     // arrange
-    const ref = createRef<HTMLDivElement>(), clicked = vi.fn();
-    render(<Popover ref={ref} triggerLabel="Details" id="details" className="custom" style={{ '--fs-popover-radius': '20px' }} onClick={clicked} />);
+    const ref = createRef<HTMLDivElement>(),
+      clicked = vi.fn();
+    render(
+      <Popover
+        ref={ref}
+        triggerLabel="Details"
+        id="details"
+        className="custom"
+        style={{ '--fs-popover-radius': '20px' }}
+        onClick={clicked}
+      />,
+    );
 
     // act
     fireEvent.click(screen.getByRole('button', { name: 'Details' }));
@@ -92,7 +109,9 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('renders a description independently of a heading', () => {
     // arrange
-    const element = <Popover triggerLabel="Details" description="Context" defaultOpen showCloseButton={false} />;
+    const element = (
+      <Popover triggerLabel="Details" description="Context" defaultOpen showCloseButton={false} />
+    );
 
     // act
     render(element);
@@ -102,17 +121,37 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('keeps IDs unique across instances', () => {
     // arrange
-    const element = <><Popover triggerLabel="First" heading="First" defaultOpen /><Popover triggerLabel="Second" heading="Second" defaultOpen /></>;
+    const element = (
+      <>
+        <Popover triggerLabel="First" heading="First" defaultOpen />
+        <Popover triggerLabel="Second" heading="Second" defaultOpen />
+      </>
+    );
 
     // act
     render(element);
 
     // assert
-    expect(screen.getByRole('dialog', { name: 'First' }).id).not.toBe(screen.getByRole('dialog', { name: 'Second' }).id);
+    expect(screen.getByRole('dialog', { name: 'First' }).id).not.toBe(
+      screen.getByRole('dialog', { name: 'Second' }).id,
+    );
   });
   it('composes custom trigger content and panel overrides', () => {
     // arrange
-    const element = <Popover triggerLabel="Details" trigger={<span>More</span>} triggerVariant="ghost" triggerSize="small" defaultOpen closeLabel="Dismiss" panelClassName="my-panel" panelStyle={{ '--fs-popover-radius': '24px' }}>Draft</Popover>;
+    const element = (
+      <Popover
+        triggerLabel="Details"
+        trigger={<span>More</span>}
+        triggerVariant="ghost"
+        triggerSize="small"
+        defaultOpen
+        closeLabel="Dismiss"
+        panelClassName="my-panel"
+        panelStyle={{ '--fs-popover-radius': '24px' }}
+      >
+        Draft
+      </Popover>
+    );
 
     // act
     render(element);
@@ -125,7 +164,11 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('returns focus from panel content when Escape closes it', () => {
     // arrange
-    render(<Popover triggerLabel="Details" defaultOpen><button>Review</button></Popover>);
+    render(
+      <Popover triggerLabel="Details" defaultOpen>
+        <button>Review</button>
+      </Popover>,
+    );
     act(() => screen.getByRole('button', { name: 'Review' }).focus());
 
     // act
@@ -145,7 +188,10 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
     // assert
     expect(screen.queryByRole('dialog')).toBeNull();
   });
-  it.each([{ closeOnEscape: false }, { onKeyDown: (event: React.KeyboardEvent) => event.preventDefault() }])('allows a caller to veto Escape: %s', props => {
+  it.each([
+    { closeOnEscape: false },
+    { onKeyDown: (event: React.KeyboardEvent) => event.preventDefault() },
+  ])('allows a caller to veto Escape: %s', (props) => {
     // arrange
     render(<Popover triggerLabel="Details" defaultOpen {...props} />);
 
@@ -178,7 +224,12 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('dismisses an outside pointer activation', () => {
     // arrange
-    render(<><Popover triggerLabel="Details" defaultOpen /><button>Outside</button></>);
+    render(
+      <>
+        <Popover triggerLabel="Details" defaultOpen />
+        <button>Outside</button>
+      </>,
+    );
 
     // act
     fireEvent.pointerDown(screen.getByRole('button', { name: 'Outside' }));
@@ -188,7 +239,11 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('keeps inside pointer activation open', () => {
     // arrange
-    render(<Popover triggerLabel="Details" defaultOpen><button>Review</button></Popover>);
+    render(
+      <Popover triggerLabel="Details" defaultOpen>
+        <button>Review</button>
+      </Popover>,
+    );
 
     // act
     fireEvent.pointerDown(screen.getByRole('button', { name: 'Review' }));
@@ -198,7 +253,12 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('allows outside click dismissal to be disabled', () => {
     // arrange
-    render(<><Popover triggerLabel="Details" defaultOpen closeOnOutsideClick={false} /><button>Outside</button></>);
+    render(
+      <>
+        <Popover triggerLabel="Details" defaultOpen closeOnOutsideClick={false} />
+        <button>Outside</button>
+      </>,
+    );
 
     // act
     fireEvent.pointerDown(screen.getByRole('button', { name: 'Outside' }));
@@ -208,7 +268,12 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('dismisses when keyboard focus leaves the component', () => {
     // arrange
-    render(<><Popover triggerLabel="Details" defaultOpen /><button>Outside</button></>);
+    render(
+      <>
+        <Popover triggerLabel="Details" defaultOpen />
+        <button>Outside</button>
+      </>,
+    );
 
     // act
     act(() => screen.getByRole('button', { name: 'Outside' }).focus());
@@ -219,7 +284,12 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('allows focus leaving to remain open', () => {
     // arrange
-    render(<><Popover triggerLabel="Details" defaultOpen closeOnFocusOutside={false} /><button>Outside</button></>);
+    render(
+      <>
+        <Popover triggerLabel="Details" defaultOpen closeOnFocusOutside={false} />
+        <button>Outside</button>
+      </>,
+    );
 
     // act
     act(() => screen.getByRole('button', { name: 'Outside' }).focus());
@@ -239,7 +309,17 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('optionally focuses the first enabled control', () => {
     // arrange
-    const element = <Popover triggerLabel="Details" autoFocus defaultOpen showCloseButton={false}><button disabled>Unavailable</button><button hidden>Hidden</button><input type="hidden" /><div tabIndex={0} hidden>Hidden focusable</div><button>Review</button></Popover>;
+    const element = (
+      <Popover triggerLabel="Details" autoFocus defaultOpen showCloseButton={false}>
+        <button disabled>Unavailable</button>
+        <button hidden>Hidden</button>
+        <input type="hidden" />
+        <div tabIndex={0} hidden>
+          Hidden focusable
+        </div>
+        <button>Review</button>
+      </Popover>
+    );
 
     // act
     render(element);
@@ -249,7 +329,11 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('focuses the panel when autofocus has no control', () => {
     // arrange
-    const element = <Popover triggerLabel="Details" autoFocus defaultOpen showCloseButton={false}>Context</Popover>;
+    const element = (
+      <Popover triggerLabel="Details" autoFocus defaultOpen showCloseButton={false}>
+        Context
+      </Popover>
+    );
 
     // act
     render(element);
@@ -259,7 +343,12 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('leaves focus where it was when autofocus is omitted', () => {
     // arrange
-    render(<><button>Before</button><Popover triggerLabel="Details" /></>);
+    render(
+      <>
+        <button>Before</button>
+        <Popover triggerLabel="Details" />
+      </>,
+    );
     act(() => screen.getByRole('button', { name: 'Before' }).focus());
 
     // act
@@ -270,7 +359,18 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('updates sizing after a viewport resize', () => {
     // arrange
-    render(<Popover triggerLabel="Details" defaultOpen panelMaxWidth={300} matchTriggerWidth offset={4} collisionPadding={10} side="right" align="end" />);
+    render(
+      <Popover
+        triggerLabel="Details"
+        defaultOpen
+        panelMaxWidth={300}
+        matchTriggerWidth
+        offset={4}
+        collisionPadding={10}
+        side="right"
+        align="end"
+      />,
+    );
 
     // act
     fireEvent(window, new Event('resize'));
@@ -282,10 +382,24 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('uses visual viewport dimensions for collision constraints', () => {
     // arrange
-    const visual = Object.assign(new EventTarget(), { offsetLeft: 30, offsetTop: 20, width: 320, height: 500 });
+    const visual = Object.assign(new EventTarget(), {
+      offsetLeft: 30,
+      offsetTop: 20,
+      width: 320,
+      height: 500,
+    });
     const descriptor = Object.getOwnPropertyDescriptor(window, 'visualViewport');
     Object.defineProperty(window, 'visualViewport', { configurable: true, value: visual });
-    const view = render(<Popover triggerLabel="Details" defaultOpen panelMaxWidth="20rem" collisionPadding={10} offset={4} panelStyle={{ direction: 'rtl' }} />);
+    const view = render(
+      <Popover
+        triggerLabel="Details"
+        defaultOpen
+        panelMaxWidth="20rem"
+        collisionPadding={10}
+        offset={4}
+        panelStyle={{ direction: 'rtl' }}
+      />,
+    );
 
     // act
     act(() => visual.dispatchEvent(new Event('resize')));
@@ -294,8 +408,11 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
     expect(screen.getByRole('dialog').style.maxWidth).toBe('20rem');
     expect(screen.getByRole('dialog').style.maxHeight).toBe('480px');
     view.unmount();
-    if (descriptor) { Object.defineProperty(window, 'visualViewport', descriptor); }
-    else { Reflect.deleteProperty(window, 'visualViewport'); }
+    if (descriptor) {
+      Object.defineProperty(window, 'visualViewport', descriptor);
+    } else {
+      Reflect.deleteProperty(window, 'visualViewport');
+    }
   });
   it('ignores outside events with a non-node target', () => {
     // arrange
@@ -312,7 +429,12 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   it('requests a single dismissal for a controlled outside pointer and its focus event', () => {
     // arrange
     const change = vi.fn();
-    render(<><Popover triggerLabel="Details" open onOpenChange={change} /><button>Outside</button></>);
+    render(
+      <>
+        <Popover triggerLabel="Details" open onOpenChange={change} />
+        <button>Outside</button>
+      </>,
+    );
     fireEvent.pointerDown(screen.getByRole('button', { name: 'Outside' }));
 
     // act
@@ -324,7 +446,12 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
 
   it('still dismisses focus leaving when only outside click dismissal is disabled', () => {
     // arrange
-    render(<><Popover triggerLabel="Details" defaultOpen closeOnOutsideClick={false} /><button>Outside</button></>);
+    render(
+      <>
+        <Popover triggerLabel="Details" defaultOpen closeOnOutsideClick={false} />
+        <button>Outside</button>
+      </>,
+    );
     fireEvent.pointerDown(screen.getByRole('button', { name: 'Outside' }));
 
     // act
@@ -335,7 +462,12 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
   });
   it('skips an autofocus candidate whose focus handler redirects elsewhere', () => {
     // arrange
-    const element = <Popover triggerLabel="Details" defaultOpen autoFocus showCloseButton={false}><button onFocus={event => event.currentTarget.blur()}>Redirected</button><button>Review</button></Popover>;
+    const element = (
+      <Popover triggerLabel="Details" defaultOpen autoFocus showCloseButton={false}>
+        <button onFocus={(event) => event.currentTarget.blur()}>Redirected</button>
+        <button>Review</button>
+      </Popover>
+    );
 
     // act
     render(element);
@@ -346,7 +478,9 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
 
   it('accepts a CSS maximum-width keyword while retaining viewport width limits', () => {
     // arrange
-    const element = <Popover triggerLabel="Details" defaultOpen panelMaxWidth="none" collisionPadding={10} />;
+    const element = (
+      <Popover triggerLabel="Details" defaultOpen panelMaxWidth="none" collisionPadding={10} />
+    );
 
     // act
     render(element);
@@ -355,5 +489,4 @@ export function popoverContracts(render: (element: ReactElement) => RenderResult
     expect(screen.getByRole('dialog').style.maxWidth).toBe('none');
     expect(screen.getByRole('dialog').style.width).toBe('min(var(--fs-popover-width), 1004px)');
   });
-
 }

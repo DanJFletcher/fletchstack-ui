@@ -9,9 +9,14 @@ Textarea composes Field. It accepts native textarea attributes and a native ref,
 For controlled usage, update `value` from `onChange`; the count derives directly from that supplied value. Native input/reset observation is reserved for uncontrolled values so counter updates do not interrupt consumer-controlled editing.
 
 ```tsx
-<Textarea label="Project description" name="description"
-  placeholder="Describe your project..." helperText="Describe the goals of your project."
-  maxLength={200} showCount />
+<Textarea
+  label="Project description"
+  name="description"
+  placeholder="Describe your project..."
+  helperText="Describe the goals of your project."
+  maxLength={200}
+  showCount
+/>
 ```
 
 Import combined styles, or tokens.css plus textarea.css. Existing Field styles are included in the textarea stylesheet's component-specific rules. Real screen-reader output requires a separate assistive-technology check.

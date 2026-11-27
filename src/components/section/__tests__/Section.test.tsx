@@ -7,7 +7,11 @@ import { Section, type SectionStyle } from '../Section';
 
 it('preserves native description relationships on the section', () => {
   // arrange
-  const given = <Section id="projects" aria-describedby="summary" data-testid="section"><p>Project overview</p></Section>;
+  const given = (
+    <Section id="projects" aria-describedby="summary" data-testid="section">
+      <p>Project overview</p>
+    </Section>
+  );
 
   // act
   render(given);
@@ -29,21 +33,28 @@ it('renders a native section with default spacing', () => {
   expect(screen.getByTestId('section')).toHaveClass('fs-section--spacing-default');
 });
 
-it.each(['compact', 'default', 'spacious'] as const)('supports the %s padding preset', spacing => {
-  // arrange
-  const given = <Section spacing={spacing} data-testid="section" />;
+it.each(['compact', 'default', 'spacious'] as const)(
+  'supports the %s padding preset',
+  (spacing) => {
+    // arrange
+    const given = <Section spacing={spacing} data-testid="section" />;
 
-  // act
-  render(given);
+    // act
+    render(given);
 
-  // assert
-  expect(screen.getByTestId('section')).toHaveClass(`fs-section--spacing-${spacing}`);
-  expect(screen.getByTestId('section')).not.toHaveAttribute('spacing');
-});
+    // assert
+    expect(screen.getByTestId('section')).toHaveClass(`fs-section--spacing-${spacing}`);
+    expect(screen.getByTestId('section')).not.toHaveAttribute('spacing');
+  },
+);
 
 it('allows a purely visual native div wrapper', () => {
   // arrange
-  const given = <Section as="div" data-testid="section"><h2>Visual grouping</h2></Section>;
+  const given = (
+    <Section as="div" data-testid="section">
+      <h2>Visual grouping</h2>
+    </Section>
+  );
 
   // act
   render(given);
@@ -56,13 +67,19 @@ it('allows a purely visual native div wrapper', () => {
 
 it('associates a meaningful topic with its consumer heading', () => {
   // arrange
-  const given = <Section aria-labelledby="topic"><h2 id="topic">Next project</h2></Section>;
+  const given = (
+    <Section aria-labelledby="topic">
+      <h2 id="topic">Next project</h2>
+    </Section>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('region', { name: 'Next project' })).toContainElement(screen.getByRole('heading', { name: 'Next project', level: 2 }));
+  expect(screen.getByRole('region', { name: 'Next project' })).toContainElement(
+    screen.getByRole('heading', { name: 'Next project', level: 2 }),
+  );
 });
 
 it('forwards a native HTMLElement ref', () => {
@@ -100,7 +117,9 @@ it('preserves consumer classes and typed token overrides', () => {
 
   // assert
   expect(screen.getByTestId('section')).toHaveClass('consumer');
-  expect(screen.getByTestId('section').style.getPropertyValue('--fs-section-padding-default')).toBe('80px');
+  expect(screen.getByTestId('section').style.getPropertyValue('--fs-section-padding-default')).toBe(
+    '80px',
+  );
   expect(screen.getByTestId('section')).toHaveStyle({ color: 'rgb(255, 0, 0)' });
 });
 
@@ -117,18 +136,30 @@ it('preserves native padding overrides', () => {
 
 it('preserves native child order', () => {
   // arrange
-  const given = <Section><button>First</button><button>Second</button></Section>;
+  const given = (
+    <Section>
+      <button>First</button>
+      <button>Second</button>
+    </Section>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getAllByRole('button').map(button => button.textContent)).toEqual(['First', 'Second']);
+  expect(screen.getAllByRole('button').map((button) => button.textContent)).toEqual([
+    'First',
+    'Second',
+  ]);
 });
 
 it('preserves the native hidden attribute', () => {
   // arrange
-  const given = <Section hidden><p>Hidden topic</p></Section>;
+  const given = (
+    <Section hidden>
+      <p>Hidden topic</p>
+    </Section>
+  );
 
   // act
   render(given);

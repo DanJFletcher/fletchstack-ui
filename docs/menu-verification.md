@@ -14,16 +14,16 @@ Scope: typed recursive action menu, native links, responsive submenus, keyboard/
 
 ## Final checks
 
-| Check | Result |
-| --- | --- |
-| Full unit coverage | 71 files, 1,225 tests; 87.10s; independent 100% statements, branches, functions and lines |
-| Full integration coverage | 77 files, 1,027 tests; 123.77s; independent 100% statements, branches, functions and lines |
-| Complete component browser suite | 510 passed; 3.0m, two workers |
-| Complete retained Storybook browser suite | 36 passed; 1.4m, one worker |
-| All Storybook render/play/axe checks | 40 files, 462 tests; 54.74s |
-| Storybook build | Passed; Vite stage 22.00s |
-| Package build and installed consumers | Passed: public API/types, individual and combined CSS, bundling, React 18.3.1 / 19.3.1 deterministic SSR |
-| Lint, typecheck, component structure, diff whitespace | Passed |
+| Check                                                 | Result                                                                                                   |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Full unit coverage                                    | 71 files, 1,225 tests; 87.10s; independent 100% statements, branches, functions and lines                |
+| Full integration coverage                             | 77 files, 1,027 tests; 123.77s; independent 100% statements, branches, functions and lines               |
+| Complete component browser suite                      | 510 passed; 3.0m, two workers                                                                            |
+| Complete retained Storybook browser suite             | 36 passed; 1.4m, one worker                                                                              |
+| All Storybook render/play/axe checks                  | 40 files, 462 tests; 54.74s                                                                              |
+| Storybook build                                       | Passed; Vite stage 22.00s                                                                                |
+| Package build and installed consumers                 | Passed: public API/types, individual and combined CSS, bundling, React 18.3.1 / 19.3.1 deterministic SSR |
+| Lint, typecheck, component structure, diff whitespace | Passed                                                                                                   |
 
 Coverage started only after implementation, tests, cleanup and review were finished. Full integration coverage runs alone with one worker after browser/build/package work. Browser and Storybook execution are coverage-free. The initial retained Storybook run had 35 passes and one first-preview Button timeout (main.showcase was not present within 5 seconds). That unchanged test passed alone in 7.9s including startup, followed by a complete retained-suite pass in 1.4m. No timeouts, retry settings or assertions were relaxed.
 

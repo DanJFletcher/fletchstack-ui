@@ -6,21 +6,24 @@ Persistent, in-flow guidance approved from the publishing-warning design sheet a
 import { Callout, Button } from 'fletchstack-ui';
 import 'fletchstack-ui/styles.css';
 
-<Callout tone="warning" title="Review before publishing"
-  action={<Button variant="secondary">Review pages</Button>}>
+<Callout
+  tone="warning"
+  title="Review before publishing"
+  action={<Button variant="secondary">Review pages</Button>}
+>
   Two pages still need approval.
-</Callout>
+</Callout>;
 ```
 
-| Prop | Type | Default |
-| --- | --- | --- |
-| children | ReactNode; message body | required |
-| title, icon, action | ReactNode | omitted |
-| tone | info / success / warning / error / neutral | info |
-| role | note / status / alert | unset |
-| className | string | omitted |
-| style | CalloutStyle: CSSProperties plus --fs-* hooks | omitted |
-| ref | HTMLDivElement | omitted |
+| Prop                | Type                                          | Default  |
+| ------------------- | --------------------------------------------- | -------- |
+| children            | ReactNode; message body                       | required |
+| title, icon, action | ReactNode                                     | omitted  |
+| tone                | info / success / warning / error / neutral    | info     |
+| role                | note / status / alert                         | unset    |
+| className           | string                                        | omitted  |
+| style               | CalloutStyle: CSSProperties plus --fs-* hooks | omitted  |
+| ref                 | HTMLDivElement                                | omitted  |
 
 Native div attributes and event handlers are forwarded. The native string title attribute is replaced by the renderable title slot. Icons are decorative: do not put interactive controls in the icon slot. Use action for links and buttons; their native semantics and visible focus are preserved. No automatic dismissal or timers run. Callout does not choose announcement semantics from tone. Select note for supplemental content, status for a suitable polite update, or alert for an urgent update; leave persistent guidance generic by default. The message must express its meaning in words.
 

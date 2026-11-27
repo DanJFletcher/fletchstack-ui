@@ -8,8 +8,11 @@ export function applyMotionPreview({ globals }: { globals: Record<string, unknow
   const mode = globals['motion'];
   const root = document.documentElement;
 
-  if (mode === 'reduced' || mode === 'full') { root.dataset['fsPreviewMotion'] = mode; }
-  else { delete root.dataset['fsPreviewMotion']; }
+  if (mode === 'reduced' || mode === 'full') {
+    root.dataset['fsPreviewMotion'] = mode;
+  } else {
+    delete root.dataset['fsPreviewMotion'];
+  }
 }
 
 /**

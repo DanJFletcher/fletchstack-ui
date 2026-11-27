@@ -9,29 +9,51 @@ type Payment = { id: string; email: string; amount: number; status: string };
 const column = createTableColumn<Payment>();
 const columns = [
   column({ id: 'email', header: 'Email', accessor: 'email', sortable: true, hideable: false }),
-  column({ id: 'amount', header: 'Amount', accessor: 'amount', sortable: true, align: 'end', cell: ({ value }) => value.toFixed(2) }),
-  column({ id: 'status', header: 'Status', accessor: 'status', filterOptions: [{ label: 'Paid', value: 'paid' }] }),
+  column({
+    id: 'amount',
+    header: 'Amount',
+    accessor: 'amount',
+    sortable: true,
+    align: 'end',
+    cell: ({ value }) => value.toFixed(2),
+  }),
+  column({
+    id: 'status',
+    header: 'Status',
+    accessor: 'status',
+    filterOptions: [{ label: 'Paid', value: 'paid' }],
+  }),
 ];
-<DataTable caption="Payments" rows={payments} columns={columns} getRowKey={row => row.id}
-  searchable searchableColumns={['email']} searchLabel="Search email"
-  defaultSort={{ columnId: 'email', direction: 'asc' }} selectionMode="multiple"
-  pagination defaultPagination={{ pageIndex: 0, pageSize: 3 }} columnChooser />;
+<DataTable
+  caption="Payments"
+  rows={payments}
+  columns={columns}
+  getRowKey={(row) => row.id}
+  searchable
+  searchableColumns={['email']}
+  searchLabel="Search email"
+  defaultSort={{ columnId: 'email', direction: 'asc' }}
+  selectionMode="multiple"
+  pagination
+  defaultPagination={{ pageIndex: 0, pageSize: 3 }}
+  columnChooser
+/>;
 ```
 
 Reuse [Table's API and styling slots](table.md). The visible caption appears before the toolbar and names the native table through its hidden caption. `captionHidden` hides the visible heading; an `aria-label` can name a captionless table. Row-specific menus and cell formatting belong to the consumer. Menus need record-specific accessible labels.
 
-| Prop | Type / default |
-| --- | --- |
-| `rows`, `columns`, `getRowKey` | Required complete dataset, `TableColumn<T>[]`, stable string/number keys |
-| `pagination` | boolean; false |
-| `paginationState`, `defaultPagination` | `{pageIndex, pageSize}`; default `{pageIndex:0,pageSize:10}` |
-| `onPaginationChange` | requested page callback; controlled mode waits for the parent |
-| `filters`, `defaultFilters`, `onFiltersChange` | column ID → string/number/boolean; undefined means All |
-| `columnChooser` | boolean; false |
-| `columnVisibility`, `defaultColumnVisibility`, `onColumnVisibilityChange` | column ID → visible boolean; otherwise use column.hidden |
-| `error`, `onRetry` | renderable load error and optional recovery handler |
-| `loading`, `loadingMessage`, `loadingState` | inherited Table feedback; takes precedence over error |
-| `emptyState`, `noResultsState` | separate custom messages; no results also offers Clear filters |
+| Prop                                                                      | Type / default                                                           |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `rows`, `columns`, `getRowKey`                                            | Required complete dataset, `TableColumn<T>[]`, stable string/number keys |
+| `pagination`                                                              | boolean; false                                                           |
+| `paginationState`, `defaultPagination`                                    | `{pageIndex, pageSize}`; default `{pageIndex:0,pageSize:10}`             |
+| `onPaginationChange`                                                      | requested page callback; controlled mode waits for the parent            |
+| `filters`, `defaultFilters`, `onFiltersChange`                            | column ID → string/number/boolean; undefined means All                   |
+| `columnChooser`                                                           | boolean; false                                                           |
+| `columnVisibility`, `defaultColumnVisibility`, `onColumnVisibilityChange` | column ID → visible boolean; otherwise use column.hidden                 |
+| `error`, `onRetry`                                                        | renderable load error and optional recovery handler                      |
+| `loading`, `loadingMessage`, `loadingState`                               | inherited Table feedback; takes precedence over error                    |
+| `emptyState`, `noResultsState`                                            | separate custom messages; no results also offers Clear filters           |
 
 Columns additionally accept `filterOptions: readonly {label:string,value:string|number|boolean}[]`, optional `filterLabel`, and `hideable` (true by default). `createTableColumn<T>()` retains accessor and cell-value inference. Non-hideable columns stay visible. The last visible column cannot be hidden; an all-hidden controlled map falls back to the first column.
 

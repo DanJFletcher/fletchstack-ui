@@ -5,11 +5,17 @@ import { renderToString } from 'react-dom/server';
 import { expect, it } from 'vitest';
 import { progressContracts } from '../../../support/progress-contracts';
 import { Progress } from '../../../../src/components/progress/Progress';
-progressContracts(element => {
+progressContracts((element) => {
   const container = document.createElement('div');
   container.innerHTML = renderToString(element);
   document.body.appendChild(container);
-  return render(element, { container, hydrate: true, onRecoverableError: error => { throw error; } });
+  return render(element, {
+    container,
+    hydrate: true,
+    onRecoverableError: (error) => {
+      throw error;
+    },
+  });
 });
 it('exposes measured task completion on the first server render', () => {
   // arrange

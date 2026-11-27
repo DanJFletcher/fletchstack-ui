@@ -15,7 +15,9 @@ it('filters export names ignoring case and surrounding whitespace', async () => 
   await user.type(screen.getByRole('searchbox', { name: 'Search icons' }), '  mOoN  ');
 
   // assert
-  const result = within(screen.getByRole('list', { name: 'Icon results' })).getAllByRole('heading').map(heading => heading.textContent);
+  const result = within(screen.getByRole('list', { name: 'Icon results' }))
+    .getAllByRole('heading')
+    .map((heading) => heading.textContent);
   expect(result).toEqual(expected);
 });
 
@@ -24,7 +26,22 @@ it.each([
   { given: 'new', expected: ['PlusIcon'] },
   { given: 'add', expected: ['PlusIcon'] },
   { given: 'dismiss', expected: ['CloseIcon'] },
-  { given: '   ', expected: ['MoonIcon', 'SunIcon', 'CheckIcon', 'CloseIcon', 'ChevronDownIcon', 'ArrowRightIcon', 'PlusIcon', 'ExternalLinkIcon', 'HomeIcon', 'InboxIcon', 'HelpIcon'] },
+  {
+    given: '   ',
+    expected: [
+      'MoonIcon',
+      'SunIcon',
+      'CheckIcon',
+      'CloseIcon',
+      'ChevronDownIcon',
+      'ArrowRightIcon',
+      'PlusIcon',
+      'ExternalLinkIcon',
+      'HomeIcon',
+      'InboxIcon',
+      'HelpIcon',
+    ],
+  },
   { given: '[[', expected: [] }, // user-event escapes a literal opening bracket,
   { given: 'no-such-icon', expected: [] },
 ])('searches literal names, uses and keywords for "$given"', async ({ given, expected }) => {
@@ -36,7 +53,9 @@ it.each([
   await user.type(screen.getByRole('searchbox', { name: 'Search icons' }), given);
 
   // assert
-  const result = within(screen.getByRole('list', { name: 'Icon results' })).queryAllByRole('heading').map(heading => heading.textContent);
+  const result = within(screen.getByRole('list', { name: 'Icon results' }))
+    .queryAllByRole('heading')
+    .map((heading) => heading.textContent);
   expect(result).toEqual(expected);
 });
 
@@ -95,23 +114,26 @@ it('offers recovery guidance without removing the empty results list', async () 
   expect(screen.getByRole('button', { name: 'Clear search' })).toBeEnabled();
 });
 
-it.each(['moon', 'no-such-icon', ''])('restores the complete collection when clearing "%s"', async given => {
-  // arrange
-  const user = userEvent.setup();
-  render(<IconGallery />);
-  const input = screen.getByRole('searchbox', { name: 'Search icons' });
-  await user.click(input);
-  await user.paste(given);
+it.each(['moon', 'no-such-icon', ''])(
+  'restores the complete collection when clearing "%s"',
+  async (given) => {
+    // arrange
+    const user = userEvent.setup();
+    render(<IconGallery />);
+    const input = screen.getByRole('searchbox', { name: 'Search icons' });
+    await user.click(input);
+    await user.paste(given);
 
-  // act
-  await user.click(screen.getByRole('button', { name: 'Clear search' }));
+    // act
+    await user.click(screen.getByRole('button', { name: 'Clear search' }));
 
-  // assert
-  expect(input).toHaveValue('');
-  expect(input).toHaveFocus();
-  expect(screen.getByRole('status')).toHaveTextContent('11 icons');
-  expect(screen.getAllByRole('listitem')).toHaveLength(11);
-});
+    // assert
+    expect(input).toHaveValue('');
+    expect(input).toHaveFocus();
+    expect(screen.getByRole('status')).toHaveTextContent('11 icons');
+    expect(screen.getAllByRole('listitem')).toHaveLength(11);
+  },
+);
 
 it('returns focus to search after keyboard clearing', async () => {
   // arrange
@@ -146,7 +168,12 @@ it('keeps cards free of actions and accessible image duplication', () => {
 
 it('associates each instance with its own visible search label', () => {
   // arrange
-  const given = <><IconGallery /><IconGallery /></>;
+  const given = (
+    <>
+      <IconGallery />
+      <IconGallery />
+    </>
+  );
 
   // act
   render(given);
@@ -154,7 +181,7 @@ it('associates each instance with its own visible search label', () => {
   // assert
   const inputs = screen.getAllByRole('searchbox', { name: 'Search icons' });
   expect(inputs).toHaveLength(2);
-  expect(new Set(inputs.map(input => input.id)).size).toBe(2);
+  expect(new Set(inputs.map((input) => input.id)).size).toBe(2);
 });
 
 it('changes the artwork preview size without changing the collection', async () => {
@@ -167,7 +194,9 @@ it('changes the artwork preview size without changing the collection', async () 
 
   // assert
   expect(screen.getByRole('radio', { name: '16 px' })).toBeChecked();
-  expect(screen.getByRole('list', { name: 'Icon results' }).querySelectorAll('svg.fs-icon--small')).toHaveLength(11);
+  expect(
+    screen.getByRole('list', { name: 'Icon results' }).querySelectorAll('svg.fs-icon--small'),
+  ).toHaveLength(11);
 });
 
 it('selects a local theme without changing the search results', async () => {
@@ -180,6 +209,8 @@ it('selects a local theme without changing the search results', async () => {
 
   // assert
   expect(screen.getByRole('combobox', { name: 'Theme' })).toHaveValue('luna');
-  expect(screen.getByRole('list', { name: 'Icon results' }).closest('[data-theme]')).toHaveAttribute('data-theme', 'luna');
+  expect(
+    screen.getByRole('list', { name: 'Icon results' }).closest('[data-theme]'),
+  ).toHaveAttribute('data-theme', 'luna');
   expect(screen.getByRole('status')).toHaveTextContent('11 icons');
 });

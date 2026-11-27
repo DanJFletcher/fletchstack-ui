@@ -18,8 +18,13 @@ Independent checkbox.* semantics in both themes define surfaces, text, borders, 
 import { Checkbox } from 'fletchstack-ui';
 import 'fletchstack-ui/styles.css';
 
-<Checkbox label="Email updates" name="channels" value="email"
-  description="Receive product news and tips." defaultChecked />
+<Checkbox
+  label="Email updates"
+  name="channels"
+  value="email"
+  description="Receive product news and tips."
+  defaultChecked
+/>;
 ```
 
 Separate stylesheet consumers import tokens.css, icon.css, and checkbox.css. Marks are decorative and create no keyboard stops.

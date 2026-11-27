@@ -21,7 +21,11 @@ describe('Button', () => {
 
   it('uses an explicit accessible name for an icon-only action', () => {
     // arrange
-    const given = <Button aria-label="Add item"><span aria-hidden="true">+</span></Button>;
+    const given = (
+      <Button aria-label="Add item">
+        <span aria-hidden="true">+</span>
+      </Button>
+    );
 
     // act
     render(given);
@@ -45,7 +49,12 @@ describe('Button', () => {
 
   it('excludes decorative children from the composed label', () => {
     // arrange
-    const given = <Button><span aria-hidden="true">✓</span><span>Save changes</span></Button>;
+    const given = (
+      <Button>
+        <span aria-hidden="true">✓</span>
+        <span>Save changes</span>
+      </Button>
+    );
 
     // act
     render(given);
@@ -116,7 +125,12 @@ describe('Button native attributes', () => {
 
   it('associates with a form outside its parent', () => {
     // arrange
-    const given = <><form id="preferences" aria-label="Preferences" /><Button form="preferences">Save changes</Button></>;
+    const given = (
+      <>
+        <form id="preferences" aria-label="Preferences" />
+        <Button form="preferences">Save changes</Button>
+      </>
+    );
 
     // act
     render(given);
@@ -137,7 +151,12 @@ describe('Button consumer customization', () => {
 
     // assert
     const result = screen.getByRole('button', { name: 'Save changes' });
-    expect(result).toHaveClass('save-action', 'fs-button', 'fs-button--primary', 'fs-button--medium');
+    expect(result).toHaveClass(
+      'save-action',
+      'fs-button',
+      'fs-button--primary',
+      'fs-button--medium',
+    );
   });
 
   it('forwards a conventional inline style', () => {
@@ -160,7 +179,9 @@ describe('Button consumer customization', () => {
     render(given);
 
     // assert
-    const result = screen.getByRole('button', { name: 'Save changes' }).style.getPropertyValue('--fs-button-radius');
+    const result = screen
+      .getByRole('button', { name: 'Save changes' })
+      .style.getPropertyValue('--fs-button-radius');
     expect(result).toBe('0px');
   });
 });
@@ -229,7 +250,11 @@ describe('Button interactions', () => {
     // arrange
     const user = userEvent.setup();
     const onClick = vi.fn();
-    render(<Button disabled onClick={onClick}>Save changes</Button>);
+    render(
+      <Button disabled onClick={onClick}>
+        Save changes
+      </Button>,
+    );
 
     // act
     await user.click(screen.getByRole('button', { name: 'Save changes' }));
@@ -268,7 +293,11 @@ describe('Button interactions', () => {
     const user = userEvent.setup();
     const onClick = vi.fn();
     const { rerender } = render(<Button onClick={onClick}>Save changes</Button>);
-    rerender(<Button disabled onClick={onClick}>Save changes</Button>);
+    rerender(
+      <Button disabled onClick={onClick}>
+        Save changes
+      </Button>,
+    );
 
     // act
     await user.click(screen.getByRole('button', { name: 'Save changes' }));

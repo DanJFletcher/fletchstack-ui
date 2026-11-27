@@ -1,0 +1,22 @@
+# Dependencies and build/test output (also excluded by .gitignore).
+node_modules/
+dist/
+storybook-static/
+coverage/
+.verification/
+.astro/
+playwright-report/
+test-results/
+
+# Generated files: their generators own their formatting.
+package-lock.json
+src/generated/
+docs/tokens.md
+
+# Installed agent customizations and managed instruction blocks.
+.agents/
+.codex/
+.github/skills/
+.github/agents/
+.github/copilot-instructions.md
+AGENTS.md

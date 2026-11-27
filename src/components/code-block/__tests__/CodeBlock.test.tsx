@@ -29,11 +29,17 @@ it('renders escaped source literally inside a named keyboard-scrollable region',
   const given = '\n<script>alert("sample")</script>\n\t  literal';
 
   // act
-  render(<CodeBlock filename="settings.ts" language="TypeScript">{given}</CodeBlock>);
+  render(
+    <CodeBlock filename="settings.ts" language="TypeScript">
+      {given}
+    </CodeBlock>,
+  );
 
   // assert
   const region = screen.getByRole('region', { name: 'Code in settings.ts' });
-  expect(region.querySelector('code')?.textContent).toBe('\n<script>alert("sample")</script>\n\t  literal');
+  expect(region.querySelector('code')?.textContent).toBe(
+    '\n<script>alert("sample")</script>\n\t  literal',
+  );
   expect(region.querySelector('script')).toBeNull();
   expect(region).toHaveAttribute('tabindex', '0');
   expect(screen.getByText('TypeScript')).toBeVisible();
@@ -41,7 +47,11 @@ it('renders escaped source literally inside a named keyboard-scrollable region',
 
 it('supports visual wrapping without adding a code viewport keyboard stop', () => {
   // arrange
-  const given = <CodeBlock wrap label="Install command">npm install fletchstack-ui</CodeBlock>;
+  const given = (
+    <CodeBlock wrap label="Install command">
+      npm install fletchstack-ui
+    </CodeBlock>
+  );
 
   // act
   render(given);
@@ -67,7 +77,11 @@ it('omits copy controls and empty metadata for read-only code', () => {
 
 it('keeps filename and language metadata when copying is omitted', () => {
   // arrange
-  const given = <CodeBlock filename="settings.ts" language="TypeScript" copyable={false}>const ready = true;</CodeBlock>;
+  const given = (
+    <CodeBlock filename="settings.ts" language="TypeScript" copyable={false}>
+      const ready = true;
+    </CodeBlock>
+  );
 
   // act
   render(given);
@@ -82,7 +96,19 @@ it('forwards native wrapper refs, attributes, className and typed token override
   // arrange
   const ref = createRef<HTMLDivElement>();
   const style: CodeBlockStyle = { '--fs-code-block-inset': '24px' };
-  const given = <CodeBlock ref={ref} id="example" title="Example" className="consumer" dir="rtl" style={style} label="  ">source</CodeBlock>;
+  const given = (
+    <CodeBlock
+      ref={ref}
+      id="example"
+      title="Example"
+      className="consumer"
+      dir="rtl"
+      style={style}
+      label="  "
+    >
+      source
+    </CodeBlock>
+  );
 
   // act
   render(given);
@@ -109,14 +135,19 @@ it('shows one polite failure message while preserving focus for retry', async ()
   // assert
   expect(await screen.findByRole('button', { name: 'Try again settings.ts' })).toHaveFocus();
   expect(screen.getAllByRole('status')).toHaveLength(1);
-  expect(screen.getByRole('status')).toHaveTextContent('Copy failed. Select the code to copy manually.');
+  expect(screen.getByRole('status')).toHaveTextContent(
+    'Copy failed. Select the code to copy manually.',
+  );
   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 });
 
 it('recovers on retry without changing copied source', async () => {
   // arrange
   const user = userEvent.setup();
-  const write = vi.spyOn(navigator.clipboard, 'writeText').mockRejectedValueOnce(new Error('Denied')).mockResolvedValue(undefined);
+  const write = vi
+    .spyOn(navigator.clipboard, 'writeText')
+    .mockRejectedValueOnce(new Error('Denied'))
+    .mockResolvedValue(undefined);
   render(<CodeBlock wrap>{'\tline one\nline two'}</CodeBlock>);
   await user.click(screen.getByRole('button', { name: 'Copy' }));
 
@@ -149,7 +180,12 @@ it('shows pending state without disabling or blurring the copy button', async ()
   // arrange
   const user = userEvent.setup();
   let finish!: () => void;
-  vi.spyOn(navigator.clipboard, 'writeText').mockImplementation(() => new Promise<void>(resolve => { finish = resolve; }));
+  vi.spyOn(navigator.clipboard, 'writeText').mockImplementation(
+    () =>
+      new Promise<void>((resolve) => {
+        finish = resolve;
+      }),
+  );
   render(<CodeBlock>source</CodeBlock>);
 
   // act
@@ -168,7 +204,15 @@ it('ignores pending results for changed source and copies the updated source', a
   // arrange
   const user = userEvent.setup();
   let finish!: () => void;
-  const write = vi.spyOn(navigator.clipboard, 'writeText').mockImplementationOnce(() => new Promise<void>(resolve => { finish = resolve; })).mockResolvedValue(undefined);
+  const write = vi
+    .spyOn(navigator.clipboard, 'writeText')
+    .mockImplementationOnce(
+      () =>
+        new Promise<void>((resolve) => {
+          finish = resolve;
+        }),
+    )
+    .mockResolvedValue(undefined);
   const { rerender } = render(<CodeBlock>old</CodeBlock>);
   await user.click(screen.getByRole('button', { name: 'Copy' }));
   rerender(<CodeBlock>new</CodeBlock>);
@@ -186,7 +230,14 @@ it('ignores an older completion after a newer attempt fails', async () => {
   // arrange
   const user = userEvent.setup();
   let finish!: () => void;
-  vi.spyOn(navigator.clipboard, 'writeText').mockImplementationOnce(() => new Promise<void>(resolve => { finish = resolve; })).mockRejectedValueOnce(new Error('Denied'));
+  vi.spyOn(navigator.clipboard, 'writeText')
+    .mockImplementationOnce(
+      () =>
+        new Promise<void>((resolve) => {
+          finish = resolve;
+        }),
+    )
+    .mockRejectedValueOnce(new Error('Denied'));
   render(<CodeBlock>source</CodeBlock>);
   await user.click(screen.getByRole('button', { name: 'Copy' }));
   await user.click(screen.getByRole('button', { name: 'Copying…' }));
@@ -203,7 +254,12 @@ it('ignores clipboard completion after unmount', async () => {
   // arrange
   const user = userEvent.setup();
   let finish!: () => void;
-  vi.spyOn(navigator.clipboard, 'writeText').mockImplementation(() => new Promise<void>(resolve => { finish = resolve; }));
+  vi.spyOn(navigator.clipboard, 'writeText').mockImplementation(
+    () =>
+      new Promise<void>((resolve) => {
+        finish = resolve;
+      }),
+  );
   const { unmount } = render(<CodeBlock>source</CodeBlock>);
   await user.click(screen.getByRole('button', { name: 'Copy' }));
   unmount();
@@ -217,7 +273,11 @@ it('ignores clipboard completion after unmount', async () => {
 
 it('keeps a language-only header for read-only source', () => {
   // arrange
-  const given = <CodeBlock language="Shell" copyable={false}>npm run build</CodeBlock>;
+  const given = (
+    <CodeBlock language="Shell" copyable={false}>
+      npm run build
+    </CodeBlock>
+  );
 
   // act
   render(given);
@@ -227,7 +287,6 @@ it('keeps a language-only header for read-only source', () => {
   expect(screen.getByRole('region', { name: 'Code sample' })).toHaveTextContent('npm run build');
   expect(screen.queryByRole('button')).not.toBeInTheDocument();
 });
-
 
 it('highlights a recognized language while preserving the exact source', () => {
   // arrange
@@ -242,7 +301,6 @@ it('highlights a recognized language while preserving the exact source', () => {
   expect(code.textContent).toBe('\n\tconst ready = true;\n');
 });
 
-
 it.each([
   { language: undefined, highlight: true },
   { language: 'Unsupported language', highlight: true },
@@ -253,7 +311,11 @@ it.each([
   const given = 'const ready = true;';
 
   // act
-  render(<CodeBlock {...(language === undefined ? {} : { language })} highlight={highlight}>{given}</CodeBlock>);
+  render(
+    <CodeBlock {...(language === undefined ? {} : { language })} highlight={highlight}>
+      {given}
+    </CodeBlock>,
+  );
 
   // assert
   const code = screen.getByRole('region').querySelector('code')!;
@@ -262,12 +324,22 @@ it.each([
 });
 
 it.each([
-  { language: '  TypeScript  ', source: 'const ready: boolean = true;', token: 'keyword', text: 'const' },
+  {
+    language: '  TypeScript  ',
+    source: 'const ready: boolean = true;',
+    token: 'keyword',
+    text: 'const',
+  },
   { language: 'js', source: 'const ready = true;', token: 'keyword', text: 'const' },
   { language: 'tsx', source: 'const view = <Button />;', token: 'tag', text: '<Button />' },
   { language: 'jsx', source: 'const view = <Button />;', token: 'tag', text: '<Button />' },
   { language: 'JSON', source: '{"ready": true}', token: 'property', text: '"ready"' },
-  { language: 'HTML', source: '<div title="sample">&amp;</div>', token: 'tag', text: '<div title="sample">' },
+  {
+    language: 'HTML',
+    source: '<div title="sample">&amp;</div>',
+    token: 'tag',
+    text: '<div title="sample">',
+  },
   { language: 'CSS', source: '.sample { color: red; }', token: 'selector', text: '.sample' },
   { language: 'Shell', source: 'echo "sample"', token: 'string', text: '"sample"' },
   { language: 'md', source: '# Sample', token: 'title', text: '# Sample' },

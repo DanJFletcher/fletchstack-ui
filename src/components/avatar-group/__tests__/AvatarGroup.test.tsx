@@ -7,19 +7,33 @@ import { expect, it } from 'vitest';
 import { AvatarGroup, type AvatarGroupProps } from '../AvatarGroup';
 
 const members = [
-  { id: 'a', name: 'Alex Example' }, { id: 'b', name: 'Blair Sample', initials: 'B' },
-  { id: 'c', name: 'Casey Demo' }, { id: 'd', name: 'Drew Example' }, { id: 'e', name: 'Emery Sample' },
+  { id: 'a', name: 'Alex Example' },
+  { id: 'b', name: 'Blair Sample', initials: 'B' },
+  { id: 'c', name: 'Casey Demo' },
+  { id: 'd', name: 'Drew Example' },
+  { id: 'e', name: 'Emery Sample' },
 ];
 
 it('names the group and preserves the first three members in order by default', () => {
   // act
   render(<AvatarGroup label="Editors" members={members} />);
   // assert
-  expect(within(screen.getByRole('group', { name: 'Editors' })).getAllByRole('img').map(image => image.getAttribute('aria-label'))).toEqual(['Alex Example', 'Blair Sample', 'Casey Demo']);
+  expect(
+    within(screen.getByRole('group', { name: 'Editors' }))
+      .getAllByRole('img')
+      .map((image) => image.getAttribute('aria-label')),
+  ).toEqual(['Alex Example', 'Blair Sample', 'Casey Demo']);
   expect(screen.getByLabelText('Show 2 more members')).toHaveTextContent('+2');
 });
 
-it.each([{ maxVisible: 0, expected: 0 }, { maxVisible: -2, expected: 0 }, { maxVisible: 1.9, expected: 1 }, { maxVisible: 99, expected: 5 }, { maxVisible: Number.NaN, expected: 3 }, { maxVisible: Infinity, expected: 3 }])('normalizes maxVisible $maxVisible', ({ maxVisible, expected }) => {
+it.each([
+  { maxVisible: 0, expected: 0 },
+  { maxVisible: -2, expected: 0 },
+  { maxVisible: 1.9, expected: 1 },
+  { maxVisible: 99, expected: 5 },
+  { maxVisible: Number.NaN, expected: 3 },
+  { maxVisible: Infinity, expected: 3 },
+])('normalizes maxVisible $maxVisible', ({ maxVisible, expected }) => {
   // act
   render(<AvatarGroup label="Editors" members={members} maxVisible={maxVisible} />);
   // assert
@@ -50,22 +64,56 @@ it('uses a singular default disclosure name for one remaining member', () => {
 it('localizes the disclosure/list and exposes hidden names only on native expansion', async () => {
   // arrange
   const user = userEvent.setup();
-  render(<AvatarGroup label="Editors" members={members} maxVisible={0} overflowLabel="View assigned editors" overflowListLabel="Assigned editors" />);
+  render(
+    <AvatarGroup
+      label="Editors"
+      members={members}
+      maxVisible={0}
+      overflowLabel="View assigned editors"
+      overflowListLabel="Assigned editors"
+    />,
+  );
   expect(screen.getByRole('list', { name: 'Assigned editors' })).not.toBeVisible();
   // act
   await user.click(screen.getByLabelText('View assigned editors'));
   // assert
   const list = screen.getByRole('list', { name: 'Assigned editors' });
-  expect(within(list).getAllByRole('listitem').map(item => item.textContent)).toEqual(['AEAlex Example', 'BBlair Sample', 'CDCasey Demo', 'DEDrew Example', 'ESEmery Sample']);
+  expect(
+    within(list)
+      .getAllByRole('listitem')
+      .map((item) => item.textContent),
+  ).toEqual([
+    'AEAlex Example',
+    'BBlair Sample',
+    'CDCasey Demo',
+    'DEDrew Example',
+    'ESEmery Sample',
+  ]);
   expect(within(list).queryAllByRole('img')).toHaveLength(0);
 });
 
 it('forwards descriptive styling/ref attributes without allowing owned content or identity overrides', () => {
   // arrange
   const ref = createRef<HTMLDivElement>();
-  const props = { children: 'Override', role: 'button', 'aria-label': 'Override', 'aria-labelledby': 'elsewhere', dangerouslySetInnerHTML: { __html: 'Override' } } as unknown as AvatarGroupProps;
+  const props = {
+    children: 'Override',
+    role: 'button',
+    'aria-label': 'Override',
+    'aria-labelledby': 'elsewhere',
+    dangerouslySetInnerHTML: { __html: 'Override' },
+  } as unknown as AvatarGroupProps;
   // act
-  render(<AvatarGroup {...props} label="Editors" members={members} ref={ref} title="People" className="custom" style={{ '--fs-avatar-group-overlap': '4px' }} />);
+  render(
+    <AvatarGroup
+      {...props}
+      label="Editors"
+      members={members}
+      ref={ref}
+      title="People"
+      className="custom"
+      style={{ '--fs-avatar-group-overlap': '4px' }}
+    />,
+  );
   // assert
   expect(ref.current).toBe(screen.getByRole('group', { name: 'Editors' }));
   expect(ref.current).toHaveAttribute('title', 'People');

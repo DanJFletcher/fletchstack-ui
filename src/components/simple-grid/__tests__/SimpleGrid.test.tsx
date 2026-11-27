@@ -7,7 +7,11 @@ import { SimpleGrid, type SimpleGridStyle } from '../SimpleGrid';
 
 it('preserves native description relationships on the layout wrapper', () => {
   // arrange
-  const given = <SimpleGrid id="settings" aria-describedby="summary" data-testid="layout"><p>Project settings</p></SimpleGrid>;
+  const given = (
+    <SimpleGrid id="settings" aria-describedby="summary" data-testid="layout">
+      <p>Project settings</p>
+    </SimpleGrid>
+  );
 
   // act
   render(given);
@@ -28,7 +32,7 @@ it('defaults to related spacing', () => {
   expect(screen.getByTestId('layout')).toHaveClass('fs-simple-grid--gap-related');
 });
 
-it.each(['none', 'related', 'group'] as const)('supports the %s gap relationship', gap => {
+it.each(['none', 'related', 'group'] as const)('supports the %s gap relationship', (gap) => {
   // arrange
   const given = <SimpleGrid gap={gap} data-testid="layout" />;
 
@@ -62,24 +66,38 @@ it('preserves consumer classes and typed semantic overrides', () => {
 
   // assert
   expect(screen.getByTestId('layout')).toHaveClass('consumer');
-  expect(screen.getByTestId('layout').style.getPropertyValue('--fs-space-gap-related')).toBe('32px');
+  expect(screen.getByTestId('layout').style.getPropertyValue('--fs-space-gap-related')).toBe(
+    '32px',
+  );
   expect(screen.getByTestId('layout')).toHaveStyle({ color: 'rgb(255, 0, 0)' });
 });
 
 it('preserves the supplied child order', () => {
   // arrange
-  const given = <SimpleGrid><button>First</button><button>Second</button></SimpleGrid>;
+  const given = (
+    <SimpleGrid>
+      <button>First</button>
+      <button>Second</button>
+    </SimpleGrid>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getAllByRole('button').map(button => button.textContent)).toEqual(['First', 'Second']);
+  expect(screen.getAllByRole('button').map((button) => button.textContent)).toEqual([
+    'First',
+    'Second',
+  ]);
 });
 
 it('preserves native hidden behavior', () => {
   // arrange
-  const given = <SimpleGrid hidden><p>Hidden content</p></SimpleGrid>;
+  const given = (
+    <SimpleGrid hidden>
+      <p>Hidden content</p>
+    </SimpleGrid>
+  );
 
   // act
   render(given);
@@ -90,7 +108,11 @@ it('preserves native hidden behavior', () => {
 
 it('adds no role or keyboard focus to the wrapper', () => {
   // arrange
-  const given = <SimpleGrid data-testid="layout"><p>Project settings</p></SimpleGrid>;
+  const given = (
+    <SimpleGrid data-testid="layout">
+      <p>Project settings</p>
+    </SimpleGrid>
+  );
 
   // act
   render(given);

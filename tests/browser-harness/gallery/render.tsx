@@ -16,17 +16,23 @@ class RenderBoundary extends Component<CommitProps, { failed: boolean }> {
   /**
    * Remove a failed tree without trying to render it again.
    **/
-  static getDerivedStateFromError() { return { failed: true }; }
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
 
   /**
    * Forward React's caught error to the awaiting Playwright mount.
    **/
-  override componentDidCatch(error: Error) { this.props.reject(error); }
+  override componentDidCatch(error: Error) {
+    this.props.reject(error);
+  }
 
   /**
    * Expose children only while the render remains healthy.
    **/
-  override render() { return this.state.failed ? null : this.props.children; }
+  override render() {
+    return this.state.failed ? null : this.props.children;
+  }
 }
 
 /**
@@ -46,7 +52,11 @@ export async function renderScenario(children: ReactNode, key: string) {
   root ??= createRoot(document.getElementById('root')!);
   await new Promise<void>((resolve, reject) => {
     const callbacks = { resolve, reject };
-    root!.render(<RenderBoundary key={key} {...callbacks}><Committed {...callbacks}>{children}</Committed></RenderBoundary>);
+    root!.render(
+      <RenderBoundary key={key} {...callbacks}>
+        <Committed {...callbacks}>{children}</Committed>
+      </RenderBoundary>,
+    );
   });
 }
 

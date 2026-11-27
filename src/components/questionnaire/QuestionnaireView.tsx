@@ -14,16 +14,59 @@ function Question({ model, prefix }: { model: QuestionnaireModel; prefix: string
   const { state, validation, submission, props } = model;
   const item = state.item!;
   const answer = readAnswer(state.answers, item.id);
-  const describedBy = [item.description && `${prefix}-description`, validation.error && `${prefix}-error`].filter(Boolean).join(' ');
+  const describedBy = [
+    item.description && `${prefix}-description`,
+    validation.error && `${prefix}-error`,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  return <fieldset key={item.id} ref={model.fieldset} className="fs-questionnaire__question" tabIndex={-1} disabled={submission.pending} aria-describedby={describedBy} aria-invalid={Boolean(validation.error)}>
-    <legend className="fs-questionnaire__title">{item.title}</legend>
-    {item.description && <FieldDescription id={`${prefix}-description`} className="fs-questionnaire__description">{item.description}</FieldDescription>}
-    <QuestionnaireFields item={item} answer={answer} prefix={prefix} describedBy={describedBy} error={validation.error} pending={submission.pending} shortcuts={props.shortcuts ?? 'none'}
-      choose={value => state.changeAnswers(replaceAnswer(state.answers, item.id, chooseAnswer(item as Exclude<typeof item, { type: 'text' }>, answer, value)))}
-      write={text => state.changeAnswers(replaceAnswer(state.answers, item.id, writeAnswer(item, answer, text)))} />
-    {validation.error && <FieldError id={`${prefix}-error`} role="alert" className="fs-questionnaire__error">{validation.error}</FieldError>}
-  </fieldset>;
+  return (
+    <fieldset
+      key={item.id}
+      ref={model.fieldset}
+      className="fs-questionnaire__question"
+      tabIndex={-1}
+      disabled={submission.pending}
+      aria-describedby={describedBy}
+      aria-invalid={Boolean(validation.error)}
+    >
+      <legend className="fs-questionnaire__title">{item.title}</legend>
+      {item.description && (
+        <FieldDescription id={`${prefix}-description`} className="fs-questionnaire__description">
+          {item.description}
+        </FieldDescription>
+      )}
+      <QuestionnaireFields
+        item={item}
+        answer={answer}
+        prefix={prefix}
+        describedBy={describedBy}
+        error={validation.error}
+        pending={submission.pending}
+        shortcuts={props.shortcuts ?? 'none'}
+        choose={(value) =>
+          state.changeAnswers(
+            replaceAnswer(
+              state.answers,
+              item.id,
+              chooseAnswer(item as Exclude<typeof item, { type: 'text' }>, answer, value),
+            ),
+          )
+        }
+        write={(text) =>
+          state.changeAnswers(
+            replaceAnswer(state.answers, item.id, writeAnswer(item, answer, text)),
+          )
+        }
+      />
+      {validation.error && (
+        <FieldError id={`${prefix}-error`} role="alert" className="fs-questionnaire__error">
+          {validation.error}
+        </FieldError>
+      )}
+    </fieldset>
+  );
 }
 
 /**
@@ -34,11 +77,35 @@ function QuestionnaireActions({ model }: { model: QuestionnaireModel }) {
   const final = state.index === props.items.length - 1;
   const actionLabel = final ? labels.submit : labels.next;
 
-  return <div className="fs-questionnaire__actions">
-    {state.index > 0 && <Button type="button" variant="secondary" disabled={submission.pending} onClick={() => previousQuestionnaire(model)}>{labels.previous}</Button>}
-    <div className="fs-questionnaire__forward">{state.item!.required === false && <Button type="button" variant="secondary" disabled={submission.pending} onClick={() => skipQuestionnaire(model)}>{labels.skip}</Button>}
-      <Button type="submit" disabled={submission.pending}>{submission.pending ? labels.submitting : actionLabel}</Button></div>
-  </div>;
+  return (
+    <div className="fs-questionnaire__actions">
+      {state.index > 0 && (
+        <Button
+          type="button"
+          variant="secondary"
+          disabled={submission.pending}
+          onClick={() => previousQuestionnaire(model)}
+        >
+          {labels.previous}
+        </Button>
+      )}
+      <div className="fs-questionnaire__forward">
+        {state.item!.required === false && (
+          <Button
+            type="button"
+            variant="secondary"
+            disabled={submission.pending}
+            onClick={() => skipQuestionnaire(model)}
+          >
+            {labels.skip}
+          </Button>
+        )}
+        <Button type="submit" disabled={submission.pending}>
+          {submission.pending ? labels.submitting : actionLabel}
+        </Button>
+      </div>
+    </div>
+  );
 }
 
 /**
@@ -47,9 +114,22 @@ function QuestionnaireActions({ model }: { model: QuestionnaireModel }) {
 export function QuestionnaireView({ model }: { model: QuestionnaireModel }): ReactElement {
   const prefix = useId();
   const { state, labels, submission } = model;
-  if (!state.item) { return <p className="fs-questionnaire__empty">{labels.empty}</p>; }
+  if (!state.item) {
+    return <p className="fs-questionnaire__empty">{labels.empty}</p>;
+  }
 
-  return <><p className="fs-questionnaire__progress" role="status" aria-live="polite" aria-atomic="true">{labels.progress(state.index + 1, model.props.items.length)}</p>
-    <Question model={model} prefix={prefix} />{submission.failed && <FieldError role="alert" className="fs-questionnaire__error">{labels.submitError}</FieldError>}
-    <QuestionnaireActions model={model} /></>;
+  return (
+    <>
+      <p className="fs-questionnaire__progress" role="status" aria-live="polite" aria-atomic="true">
+        {labels.progress(state.index + 1, model.props.items.length)}
+      </p>
+      <Question model={model} prefix={prefix} />
+      {submission.failed && (
+        <FieldError role="alert" className="fs-questionnaire__error">
+          {labels.submitError}
+        </FieldError>
+      )}
+      <QuestionnaireActions model={model} />
+    </>
+  );
 }

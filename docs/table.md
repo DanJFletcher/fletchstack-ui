@@ -16,16 +16,34 @@ type Usage = { id: string; team: string; seats: number; updated: Date };
 const column = createTableColumn<Usage>();
 const columns = [
   column({ id: 'team', header: 'Team', accessor: 'team' }),
-  column({ id: 'updated', header: 'Updated', accessor: row => row.updated,
-    sortable: true, cell: ({ value }) => value.toLocaleDateString() }),
-  column({ id: 'seats', header: 'Seats', accessor: 'seats', sortable: true,
-    align: 'end', cell: ({ value }) => value.toFixed(0),
-    cellStyle: { fontVariantNumeric: 'tabular-nums' } }),
+  column({
+    id: 'updated',
+    header: 'Updated',
+    accessor: (row) => row.updated,
+    sortable: true,
+    cell: ({ value }) => value.toLocaleDateString(),
+  }),
+  column({
+    id: 'seats',
+    header: 'Seats',
+    accessor: 'seats',
+    sortable: true,
+    align: 'end',
+    cell: ({ value }) => value.toFixed(0),
+    cellStyle: { fontVariantNumeric: 'tabular-nums' },
+  }),
 ];
 
 export function UsageTable({ rows }: { rows: Usage[] }) {
-  return <Table rows={rows} columns={columns} getRowKey={row => row.id}
-    caption="Team usage" defaultSort={{ columnId: 'seats', direction: 'desc' }} />;
+  return (
+    <Table
+      rows={rows}
+      columns={columns}
+      getRowKey={(row) => row.id}
+      caption="Team usage"
+      defaultSort={{ columnId: 'seats', direction: 'desc' }}
+    />
+  );
 }
 ```
 
@@ -33,38 +51,38 @@ For individual stylesheets, import `tokens.css`, `field.css`, `icon.css`, `check
 
 ## Props and defaults
 
-| Prop | Type / default | Behavior |
-| --- | --- | --- |
-| `rows` | Required `readonly T[]` | Consumer-owned original records; never mutated |
-| `columns` | Required `readonly TableColumn<T>[]` | Ordered column definitions; at least one must be visible |
-| `getRowKey` | Required `(row: T) => string \| number` | Stable identity for rendering and selection; finite numbers and nonblank strings are supported |
-| `caption` / `aria-label` | At least one required | Names the native table; caption may contain renderable content |
-| `captionHidden` | `false` | Visually hides the caption while retaining its accessible name |
-| `density` | `'comfortable'` / `'compact'` | Comfortable 12px or compact 4px vertical cell padding |
-| `borders` | `'horizontal'` / `'all'` / `'none'` | Subtle horizontal dividers by default |
-| `striped`, `hover` | Both `false` | Alternate-row and hover surfaces; selected rows keep precedence |
-| `stickyHeader` | `false` | Native header cells remain sticky inside the scroll region |
-| `maxHeight` | Optional CSS `maxHeight` | Constrains vertical scrolling; horizontal scrolling is always available when needed |
-| `scrollLabel` | `'Scrollable table'` | Accessible name of the keyboard-focusable scroll region |
-| `className`, `style` | Optional wrapper class / `TableStyle` | Scope one instance, including semantic variable overrides |
-| `classNames`, `styles` | Typed slot maps | Customize structure without replacing native elements or component handlers |
-| `sort`, `defaultSort` | `TableSort \| null`; default `null` | Controlled or initial uncontrolled sorting |
-| `onSortChange` | `(sort: TableSort \| null) => void` | Reports the requested column/direction, including unsorted `null` |
-| `sortMode` | `'client'` / `'manual'` | Client reorders a copy; manual preserves supplied row order |
-| `selectionMode` | `'none'` / `'single'` / `'multiple'`; default `'none'` | Enables named native row checkboxes |
-| `selectedRowKeys`, `defaultSelectedRowKeys` | `readonly TableRowKey[]`; default `[]` | Controlled or initial stable selection |
-| `onSelectionChange` | `(keys: TableRowKey[]) => void` | Reports a new selection array without mutating the old one |
-| `isRowSelectable` | `(row: T) => boolean`; default all | Disables unavailable row controls and excludes them from select-all |
-| `getSelectionLabel` | `(row: T) => string` | Defaults to `Select row {key}`; use meaningful domain labels when keys are opaque |
-| `selectAllLabel` | `'Select all selectable rows'` | Names the multiple-mode header checkbox |
-| `searchable` | `false` | Enables local filtering and the visible, labeled search field |
-| `searchValue`, `defaultSearchValue` | `string`; default `''` | Controlled or initial query |
-| `onSearchChange` | `(query: string) => void` | Reports the editable query |
-| `searchableColumns` | Optional `readonly string[]` | Restricts default matching to those visible accessor-column IDs |
-| `searchFunction` | `(row: T, query: string, columns: readonly TableColumn<T>[]) => boolean` | Replaces default matching; receives the raw query and eligible columns |
-| `searchLabel`, `searchPlaceholder` | `'Search table'`, `'Search…'` | Name and visible hint for the search input |
-| `loading`, `loadingMessage` | `false`, `'Loading rows…'` | Gives loading precedence; the status is announced outside the busy table |
-| `loadingState`, `emptyState`, `noResultsState` | Optional `ReactNode` | Defaults to a decorative Spinner/message, `No rows yet.`, and `No matching rows.` |
+| Prop                                           | Type / default                                                           | Behavior                                                                                       |
+| ---------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| `rows`                                         | Required `readonly T[]`                                                  | Consumer-owned original records; never mutated                                                 |
+| `columns`                                      | Required `readonly TableColumn<T>[]`                                     | Ordered column definitions; at least one must be visible                                       |
+| `getRowKey`                                    | Required `(row: T) => string \| number`                                  | Stable identity for rendering and selection; finite numbers and nonblank strings are supported |
+| `caption` / `aria-label`                       | At least one required                                                    | Names the native table; caption may contain renderable content                                 |
+| `captionHidden`                                | `false`                                                                  | Visually hides the caption while retaining its accessible name                                 |
+| `density`                                      | `'comfortable'` / `'compact'`                                            | Comfortable 12px or compact 4px vertical cell padding                                          |
+| `borders`                                      | `'horizontal'` / `'all'` / `'none'`                                      | Subtle horizontal dividers by default                                                          |
+| `striped`, `hover`                             | Both `false`                                                             | Alternate-row and hover surfaces; selected rows keep precedence                                |
+| `stickyHeader`                                 | `false`                                                                  | Native header cells remain sticky inside the scroll region                                     |
+| `maxHeight`                                    | Optional CSS `maxHeight`                                                 | Constrains vertical scrolling; horizontal scrolling is always available when needed            |
+| `scrollLabel`                                  | `'Scrollable table'`                                                     | Accessible name of the keyboard-focusable scroll region                                        |
+| `className`, `style`                           | Optional wrapper class / `TableStyle`                                    | Scope one instance, including semantic variable overrides                                      |
+| `classNames`, `styles`                         | Typed slot maps                                                          | Customize structure without replacing native elements or component handlers                    |
+| `sort`, `defaultSort`                          | `TableSort \| null`; default `null`                                      | Controlled or initial uncontrolled sorting                                                     |
+| `onSortChange`                                 | `(sort: TableSort \| null) => void`                                      | Reports the requested column/direction, including unsorted `null`                              |
+| `sortMode`                                     | `'client'` / `'manual'`                                                  | Client reorders a copy; manual preserves supplied row order                                    |
+| `selectionMode`                                | `'none'` / `'single'` / `'multiple'`; default `'none'`                   | Enables named native row checkboxes                                                            |
+| `selectedRowKeys`, `defaultSelectedRowKeys`    | `readonly TableRowKey[]`; default `[]`                                   | Controlled or initial stable selection                                                         |
+| `onSelectionChange`                            | `(keys: TableRowKey[]) => void`                                          | Reports a new selection array without mutating the old one                                     |
+| `isRowSelectable`                              | `(row: T) => boolean`; default all                                       | Disables unavailable row controls and excludes them from select-all                            |
+| `getSelectionLabel`                            | `(row: T) => string`                                                     | Defaults to `Select row {key}`; use meaningful domain labels when keys are opaque              |
+| `selectAllLabel`                               | `'Select all selectable rows'`                                           | Names the multiple-mode header checkbox                                                        |
+| `searchable`                                   | `false`                                                                  | Enables local filtering and the visible, labeled search field                                  |
+| `searchValue`, `defaultSearchValue`            | `string`; default `''`                                                   | Controlled or initial query                                                                    |
+| `onSearchChange`                               | `(query: string) => void`                                                | Reports the editable query                                                                     |
+| `searchableColumns`                            | Optional `readonly string[]`                                             | Restricts default matching to those visible accessor-column IDs                                |
+| `searchFunction`                               | `(row: T, query: string, columns: readonly TableColumn<T>[]) => boolean` | Replaces default matching; receives the raw query and eligible columns                         |
+| `searchLabel`, `searchPlaceholder`             | `'Search table'`, `'Search…'`                                            | Name and visible hint for the search input                                                     |
+| `loading`, `loadingMessage`                    | `false`, `'Loading rows…'`                                               | Gives loading precedence; the status is announced outside the busy table                       |
+| `loadingState`, `emptyState`, `noResultsState` | Optional `ReactNode`                                                     | Defaults to a decorative Spinner/message, `No rows yet.`, and `No matching rows.`              |
 
 Ordinary native table attributes such as `id`, `title`, `data-*` and ARIA descriptions go to the table; `className` and `style` scope its wrapper. Native semantic structure, busy state, caption, sort buttons and selection controls remain component-owned. Children, injected HTML and custom table roles are excluded.
 
@@ -93,15 +111,26 @@ The slot keys are `wrapper`, `scrollRegion`, `table`, `caption`, `toolbar`, `hea
 ```tsx
 const columns = [
   column({ id: 'team', header: 'Team', accessor: 'team' }),
-  column({ id: 'seats', header: 'Seats', accessor: 'seats', align: 'end',
-    headerClassName: 'seat-heading', cellClassName: 'seat-count',
-    cellStyle: ({ row }) => ({ fontWeight: row.seats < 10 ? 700 : 400 }) }),
+  column({
+    id: 'seats',
+    header: 'Seats',
+    accessor: 'seats',
+    align: 'end',
+    headerClassName: 'seat-heading',
+    cellClassName: 'seat-count',
+    cellStyle: ({ row }) => ({ fontWeight: row.seats < 10 ? 700 : 400 }),
+  }),
 ];
 
-<Table rows={rows} columns={columns} getRowKey={row => row.id} caption="Team usage"
+<Table
+  rows={rows}
+  columns={columns}
+  getRowKey={(row) => row.id}
+  caption="Team usage"
   style={{ '--fs-table-header-surface': 'var(--fs-badge-info-background)' }}
-  classNames={{ bodyRow: ({ row }) => row.id === 'review' ? 'needs-review' : undefined }}
-  styles={{ bodyRow: ({ selected }) => selected ? { fontWeight: 600 } : undefined }} />
+  classNames={{ bodyRow: ({ row }) => (row.id === 'review' ? 'needs-review' : undefined) }}
+  styles={{ bodyRow: ({ selected }) => (selected ? { fontWeight: 600 } : undefined) }}
+/>;
 ```
 
 Built-in classes remain alongside supplied classes. Column constraints/alignment apply first, instance cell styles next, and column-specific cell styles last. Wrapper slot styles override the top-level `style`. Use theme-aware semantic variables rather than fixed light/dark colors. Selected surface/foreground/control-accent roles are `--fs-table-row-selected`, `--fs-table-row-selected-fg`, and `--fs-table-row-selected-border`; focus uses `--fs-table-focus-*`. Theme boundaries reset the same complete token contract. The portfolio uses existing success/info/neutral Badge tones, with display-only size/radius overrides in its story.

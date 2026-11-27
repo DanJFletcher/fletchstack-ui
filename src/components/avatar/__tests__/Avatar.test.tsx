@@ -24,7 +24,11 @@ it.each([
   expect(screen.getByText(expected)).toBeInTheDocument();
 });
 
-it.each([{ initials: ' m ', expected: 'M' }, { initials: 'abc', expected: 'AB' }, { initials: ' ', expected: 'MC' }])('uses custom initials "$initials"', ({ initials, expected }) => {
+it.each([
+  { initials: ' m ', expected: 'M' },
+  { initials: 'abc', expected: 'AB' },
+  { initials: ' ', expected: 'MC' },
+])('uses custom initials "$initials"', ({ initials, expected }) => {
   // act
   render(<Avatar name="Maya Chen" initials={initials} />);
   // assert
@@ -57,7 +61,19 @@ it('forwards native presentation attributes and the span ref', () => {
   // arrange
   const ref = createRef<HTMLSpanElement>();
   // act
-  render(<Avatar ref={ref} name="Maya Chen" id="owner" title="Owner" className="custom" size="xlarge" shape="rounded" hidden style={{ '--fs-avatar-size': '80px' }} />);
+  render(
+    <Avatar
+      ref={ref}
+      name="Maya Chen"
+      id="owner"
+      title="Owner"
+      className="custom"
+      size="xlarge"
+      shape="rounded"
+      hidden
+      style={{ '--fs-avatar-size': '80px' }}
+    />,
+  );
   // assert
   expect(ref.current).toHaveClass('fs-avatar--xlarge', 'fs-avatar--rounded', 'custom');
   expect(ref.current).toHaveAttribute('id', 'owner');
@@ -69,7 +85,17 @@ it('forwards native presentation attributes and the span ref', () => {
 it('ignores owned and interactive overrides from untyped callers', () => {
   // arrange
   const onClick = vi.fn();
-  const given = { role: 'button', tabIndex: 0, 'aria-label': 'Wrong', 'aria-hidden': true, contentEditable: true, children: 'Wrong', onClick, 'aria-live': 'polite', dangerouslySetInnerHTML: { __html: '<b>Wrong</b>' } } as unknown as AvatarProps;
+  const given = {
+    role: 'button',
+    tabIndex: 0,
+    'aria-label': 'Wrong',
+    'aria-hidden': true,
+    contentEditable: true,
+    children: 'Wrong',
+    onClick,
+    'aria-live': 'polite',
+    dangerouslySetInnerHTML: { __html: '<b>Wrong</b>' },
+  } as unknown as AvatarProps;
   render(<Avatar {...given} name="Maya Chen" />);
   // act
   fireEvent.click(screen.getByRole('img', { name: 'Maya Chen' }));
@@ -142,7 +168,10 @@ it('restores initials when a loaded source is removed', () => {
   expect(screen.getByRole('img').querySelector('img')).toBeNull();
 });
 
-it.each([{ width: 80, expected: '' }, { width: 0, expected: 'MC' }])('recognizes an already-complete image with width $width', ({ width, expected }) => {
+it.each([
+  { width: 80, expected: '' },
+  { width: 0, expected: 'MC' },
+])('recognizes an already-complete image with width $width', ({ width, expected }) => {
   // arrange
   vi.spyOn(HTMLImageElement.prototype, 'complete', 'get').mockReturnValue(true);
   vi.spyOn(HTMLImageElement.prototype, 'naturalWidth', 'get').mockReturnValue(width);

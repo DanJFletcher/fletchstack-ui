@@ -11,7 +11,7 @@ import 'fletchstack-ui/aspect-ratio.css';
     <img className="project-art" src="/project.jpg" alt="A mountain landscape at sunrise" />
   </AspectRatio>
   <figcaption>Project landscape. Captions remain outside the ratio frame.</figcaption>
-</figure>
+</figure>;
 ```
 
 ```css

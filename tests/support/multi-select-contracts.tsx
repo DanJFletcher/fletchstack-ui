@@ -2,9 +2,21 @@ import { createRef, useState, type ReactElement } from 'react';
 import { fireEvent, screen, act } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { MultiSelect } from '../../src/components/multi-select/MultiSelect';
-import { filterLabels, nextActive, selectedOptions, selectionError, unavailable, validateSelection } from '../../src/components/multi-select/multiselect-policy';
+import {
+  filterLabels,
+  nextActive,
+  selectedOptions,
+  selectionError,
+  unavailable,
+  validateSelection,
+} from '../../src/components/multi-select/multiselect-policy';
 
-const options = [{ value: 'react', label: 'React' }, { value: 'disabled', label: 'Archived', disabled: true }, { value: 'design', label: 'Design systems' }, { value: 'product', label: 'Product design' }];
+const options = [
+  { value: 'react', label: 'React' },
+  { value: 'disabled', label: 'Archived', disabled: true },
+  { value: 'design', label: 'Design systems' },
+  { value: 'product', label: 'Product design' },
+];
 const base = { label: 'Topics', options };
 type Mount = (element: ReactElement) => unknown;
 
@@ -17,7 +29,19 @@ export function multiSelectContracts(mount: Mount) {
       // arrange
       const ref = createRef<HTMLInputElement>();
       // act
-      mount(<MultiSelect {...base} ref={ref} id="topics" title="Choose topics" size="large" className="consumer" wrapperClassName="wrapper" helperText="Help" aria-describedby="external" />);
+      mount(
+        <MultiSelect
+          {...base}
+          ref={ref}
+          id="topics"
+          title="Choose topics"
+          size="large"
+          className="consumer"
+          wrapperClassName="wrapper"
+          helperText="Help"
+          aria-describedby="external"
+        />,
+      );
       // assert
       expect(ref.current).toBe(screen.getByRole('combobox', { name: 'Topics' }));
       expect(ref.current).toHaveAttribute('title', 'Choose topics');
@@ -29,12 +53,20 @@ export function multiSelectContracts(mount: Mount) {
       // act
       fireEvent.change(screen.getByRole('combobox'), { target: { value: ' DES ' } });
       // assert
-      expect(screen.getAllByRole('option').map(option => option.textContent)).toEqual(['Design systems', 'Product design']);
+      expect(screen.getAllByRole('option').map((option) => option.textContent)).toEqual([
+        'Design systems',
+        'Product design',
+      ]);
       expect(screen.getByRole('button', { name: 'Remove React' })).toBeEnabled();
     });
     it('uses the caller matching policy', () => {
       // arrange
-      mount(<MultiSelect {...base} filterOptions={(items, query) => items.filter(item => item.value === query)} />);
+      mount(
+        <MultiSelect
+          {...base}
+          filterOptions={(items, query) => items.filter((item) => item.value === query)}
+        />,
+      );
       // act
       fireEvent.change(screen.getByRole('combobox'), { target: { value: 'react' } });
       // assert
@@ -49,7 +81,10 @@ export function multiSelectContracts(mount: Mount) {
       fireEvent.click(screen.getByRole('option', { name: 'React' }));
       // assert
       expect(onValueChange).toHaveBeenCalledWith(['react']);
-      expect(screen.getByRole('option', { name: 'React' })).toHaveAttribute('aria-selected', 'true');
+      expect(screen.getByRole('option', { name: 'React' })).toHaveAttribute(
+        'aria-selected',
+        'true',
+      );
     });
     it('toggles an existing selection off', () => {
       // arrange
@@ -62,7 +97,13 @@ export function multiSelectContracts(mount: Mount) {
     });
     it('removes a tag with its named button', () => {
       // arrange
-      mount(<MultiSelect {...base} defaultValue={['react']} removeLabel={option => `Delete ${option.label}`} />);
+      mount(
+        <MultiSelect
+          {...base}
+          defaultValue={['react']}
+          removeLabel={(option) => `Delete ${option.label}`}
+        />,
+      );
       // act
       fireEvent.click(screen.getByRole('button', { name: 'Delete React' }));
       // assert
@@ -71,7 +112,9 @@ export function multiSelectContracts(mount: Mount) {
     });
     it('clears only selections that are not explicitly disabled', () => {
       // arrange
-      mount(<MultiSelect {...base} defaultValue={['react', 'disabled']} clearLabel="Erase choices" />);
+      mount(
+        <MultiSelect {...base} defaultValue={['react', 'disabled']} clearLabel="Erase choices" />,
+      );
       // act
       fireEvent.click(screen.getByRole('button', { name: 'Erase choices' }));
       // assert
@@ -105,7 +148,11 @@ export function multiSelectContracts(mount: Mount) {
     });
     it('submits repeated selected values without submitting query text', () => {
       // arrange
-      mount(<form aria-label="Editor"><MultiSelect {...base} name="topics" defaultValue={['react', 'design']} /></form>);
+      mount(
+        <form aria-label="Editor">
+          <MultiSelect {...base} name="topics" defaultValue={['react', 'design']} />
+        </form>,
+      );
       fireEvent.change(screen.getByRole('combobox'), { target: { value: 'product' } });
       // act
       const result = new FormData(screen.getByRole('form') as HTMLFormElement).getAll('topics');
@@ -114,19 +161,33 @@ export function multiSelectContracts(mount: Mount) {
     });
     it('restores mount defaults on native form reset', async () => {
       // arrange
-      mount(<form aria-label="Editor"><MultiSelect {...base} name="topics" defaultValue={['react']} /><button type="reset">Reset</button></form>);
+      mount(
+        <form aria-label="Editor">
+          <MultiSelect {...base} name="topics" defaultValue={['react']} />
+          <button type="reset">Reset</button>
+        </form>,
+      );
       fireEvent.click(screen.getByRole('button', { name: 'Clear selections' }));
       // act
-      await act(async () => { fireEvent.click(screen.getByRole('button', { name: 'Reset' })); });
+      await act(async () => {
+        fireEvent.click(screen.getByRole('button', { name: 'Reset' }));
+      });
       // assert
       expect(screen.getByRole('button', { name: 'Remove React' })).toBeInTheDocument();
     });
     it('respects a cancelled native reset', async () => {
       // arrange
-      mount(<form onReset={event => event.preventDefault()}><MultiSelect {...base} defaultValue={['react']} /><button type="reset">Reset</button></form>);
+      mount(
+        <form onReset={(event) => event.preventDefault()}>
+          <MultiSelect {...base} defaultValue={['react']} />
+          <button type="reset">Reset</button>
+        </form>,
+      );
       fireEvent.click(screen.getByRole('button', { name: 'Clear selections' }));
       // act
-      await act(async () => { fireEvent.click(screen.getByRole('button', { name: 'Reset' })); });
+      await act(async () => {
+        fireEvent.click(screen.getByRole('button', { name: 'Reset' }));
+      });
       // assert
       expect(screen.queryByRole('button', { name: 'Remove React' })).not.toBeInTheDocument();
     });
@@ -151,7 +212,13 @@ export function multiSelectContracts(mount: Mount) {
     it('shows the localized minimum error', () => {
       // arrange
       // act
-      mount(<MultiSelect {...base} minSelections={2} minSelectionsMessage={count => `Choose ${count} topics`} />);
+      mount(
+        <MultiSelect
+          {...base}
+          minSelections={2}
+          minSelectionsMessage={(count) => `Choose ${count} topics`}
+        />,
+      );
       // assert
       expect(screen.getByRole('combobox')).toHaveAccessibleDescription('Choose 2 topics');
     });
@@ -169,13 +236,23 @@ export function multiSelectContracts(mount: Mount) {
       // act
       fireEvent.click(screen.getByRole('option', { name: 'Design systems' }));
       // assert
-      expect(screen.queryByRole('button', { name: 'Remove Design systems' })).not.toBeInTheDocument();
-      expect(screen.getByText('1 of 1 selected. Remove a selection to choose another.')).toBeVisible();
+      expect(
+        screen.queryByRole('button', { name: 'Remove Design systems' }),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText('1 of 1 selected. Remove a selection to choose another.'),
+      ).toBeVisible();
     });
     it('localizes a zero-capacity status', () => {
       // arrange
       // act
-      mount(<MultiSelect {...base} maxSelections={0} maxSelectionsMessage={count => `Capacity ${count}`} />);
+      mount(
+        <MultiSelect
+          {...base}
+          maxSelections={0}
+          maxSelectionsMessage={(count) => `Capacity ${count}`}
+        />,
+      );
       // assert
       expect(screen.getByText('Capacity 0')).toBeVisible();
     });
@@ -186,7 +263,10 @@ export function multiSelectContracts(mount: Mount) {
       // assert
       expect(screen.getByRole('button', { name: 'Remove Design systems' })).toBeEnabled();
     });
-    it.each([{ props: { disabled: true }, disabled: true }, { props: { readOnly: true }, disabled: false }])('prevents edits for $props', ({ props, disabled }) => {
+    it.each([
+      { props: { disabled: true }, disabled: true },
+      { props: { readOnly: true }, disabled: false },
+    ])('prevents edits for $props', ({ props, disabled }) => {
       // arrange
       mount(<MultiSelect {...base} {...props} defaultValue={['react']} />);
       // act
@@ -215,15 +295,24 @@ export function multiSelectContracts(mount: Mount) {
       // assert
       expect(screen.getByText('Fetching topics')).toBeVisible();
     });
-    it.each([undefined, 'Nothing found'])('renders empty text $0 without an active target', message => {
-      // arrange
-      mount(<MultiSelect label="Topics" options={[]} {...(message ? { noResultsMessage: message } : {})} />);
-      // act
-      fireEvent.focus(screen.getByRole('combobox'));
-      // assert
-      expect(screen.getByText(message ?? 'No matching options.')).toBeVisible();
-      expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-activedescendant');
-    });
+    it.each([undefined, 'Nothing found'])(
+      'renders empty text $0 without an active target',
+      (message) => {
+        // arrange
+        mount(
+          <MultiSelect
+            label="Topics"
+            options={[]}
+            {...(message ? { noResultsMessage: message } : {})}
+          />,
+        );
+        // act
+        fireEvent.focus(screen.getByRole('combobox'));
+        // assert
+        expect(screen.getByText(message ?? 'No matching options.')).toBeVisible();
+        expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-activedescendant');
+      },
+    );
   });
   multiSelectNativeContracts(mount);
   keyboardContracts(mount);
@@ -244,27 +333,38 @@ function ControlledFixture() {
 function keyboardContracts(mount: Mount) {
   describe('MultiSelect keyboard contract', () => {
     it.each([
-      { keys: ['ArrowDown'], expected: 'design' }, { keys: ['End'], expected: 'product' },
-      { keys: ['End', 'ArrowDown'], expected: 'react' }, { keys: ['ArrowUp'], expected: 'product' },
+      { keys: ['ArrowDown'], expected: 'design' },
+      { keys: ['End'], expected: 'product' },
+      { keys: ['End', 'ArrowDown'], expected: 'react' },
+      { keys: ['ArrowUp'], expected: 'product' },
       { keys: ['End', 'Home'], expected: 'react' },
-    ])('moves $keys to $expected while skipping explicitly disabled options', ({ keys, expected }) => {
-      // arrange
-      mount(<MultiSelect {...base} id="topics" />);
-      fireEvent.focus(screen.getByRole('combobox'));
-      // act
-      keys.forEach(key => fireEvent.keyDown(screen.getByRole('combobox'), { key }));
-      // assert
-      expect(screen.getByRole('combobox')).toHaveAttribute('aria-activedescendant', `topics-option-${expected}`);
-    });
-    it.each(['ArrowDown', 'ArrowUp'])('reopens with $0 at the correct boundary', key => {
+    ])(
+      'moves $keys to $expected while skipping explicitly disabled options',
+      ({ keys, expected }) => {
+        // arrange
+        mount(<MultiSelect {...base} id="topics" />);
+        fireEvent.focus(screen.getByRole('combobox'));
+        // act
+        keys.forEach((key) => fireEvent.keyDown(screen.getByRole('combobox'), { key }));
+        // assert
+        expect(screen.getByRole('combobox')).toHaveAttribute(
+          'aria-activedescendant',
+          `topics-option-${expected}`,
+        );
+      },
+    );
+    it.each(['ArrowDown', 'ArrowUp'])('reopens with $0 at the correct boundary', (key) => {
       // arrange
       mount(<MultiSelect {...base} id="topics" />);
       // act
       fireEvent.keyDown(screen.getByRole('combobox'), { key });
       // assert
-      expect(screen.getByRole('combobox')).toHaveAttribute('aria-activedescendant', key === 'ArrowDown' ? 'topics-option-react' : 'topics-option-product');
+      expect(screen.getByRole('combobox')).toHaveAttribute(
+        'aria-activedescendant',
+        key === 'ArrowDown' ? 'topics-option-react' : 'topics-option-product',
+      );
     });
-    it.each(['Escape', 'Tab'])('closes on $0 without trapping focus', key => {
+    it.each(['Escape', 'Tab'])('closes on $0 without trapping focus', (key) => {
       // arrange
       mount(<MultiSelect {...base} />);
       fireEvent.focus(screen.getByRole('combobox'));
@@ -287,7 +387,9 @@ function keyboardContracts(mount: Mount) {
       mount(<MultiSelect {...base} defaultValue={['react']} />);
       fireEvent.focus(screen.getByRole('combobox'));
       // act
-      fireEvent.blur(screen.getByRole('combobox'), { relatedTarget: screen.getByRole('button', { name: 'Remove React' }) });
+      fireEvent.blur(screen.getByRole('combobox'), {
+        relatedTarget: screen.getByRole('button', { name: 'Remove React' }),
+      });
       // assert
       expect(screen.getByRole('listbox')).toBeVisible();
     });
@@ -297,18 +399,23 @@ function keyboardContracts(mount: Mount) {
       // act
       fireEvent.keyDown(screen.getByRole('combobox'), { key: 'Backspace' });
       // assert
-      expect(screen.queryByRole('button', { name: 'Remove Design systems' })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'Remove Design systems' }),
+      ).not.toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'Remove Archived' })).toBeDisabled();
     });
-    it.each([{ defaultValue: [] }, { defaultValue: ['disabled'] }])('leaves immutable or empty selections unchanged on Backspace: $defaultValue', ({ defaultValue }) => {
-      // arrange
-      const change = vi.fn();
-      mount(<MultiSelect {...base} defaultValue={defaultValue} onValueChange={change} />);
-      // act
-      fireEvent.keyDown(screen.getByRole('combobox'), { key: 'Backspace' });
-      // assert
-      expect(change).not.toHaveBeenCalled();
-    });
+    it.each([{ defaultValue: [] }, { defaultValue: ['disabled'] }])(
+      'leaves immutable or empty selections unchanged on Backspace: $defaultValue',
+      ({ defaultValue }) => {
+        // arrange
+        const change = vi.fn();
+        mount(<MultiSelect {...base} defaultValue={defaultValue} onValueChange={change} />);
+        // act
+        fireEvent.keyDown(screen.getByRole('combobox'), { key: 'Backspace' });
+        // assert
+        expect(change).not.toHaveBeenCalled();
+      },
+    );
     it('lets Backspace edit a nonempty query', () => {
       // arrange
       const change = vi.fn();
@@ -319,16 +426,19 @@ function keyboardContracts(mount: Mount) {
       // assert
       expect(change).not.toHaveBeenCalled();
     });
-    it.each([{ loading: true }, { options: [] }])('does not select a missing or loading target: $0', props => {
-      // arrange
-      const change = vi.fn();
-      mount(<MultiSelect {...base} {...props} onValueChange={change} />);
-      fireEvent.focus(screen.getByRole('combobox'));
-      // act
-      fireEvent.keyDown(screen.getByRole('combobox'), { key: 'Enter' });
-      // assert
-      expect(change).not.toHaveBeenCalled();
-    });
+    it.each([{ loading: true }, { options: [] }])(
+      'does not select a missing or loading target: $0',
+      (props) => {
+        // arrange
+        const change = vi.fn();
+        mount(<MultiSelect {...base} {...props} onValueChange={change} />);
+        fireEvent.focus(screen.getByRole('combobox'));
+        // act
+        fireEvent.keyDown(screen.getByRole('combobox'), { key: 'Enter' });
+        // assert
+        expect(change).not.toHaveBeenCalled();
+      },
+    );
     it('does not select when the popup is closed', () => {
       // arrange
       const change = vi.fn();
@@ -340,7 +450,7 @@ function keyboardContracts(mount: Mount) {
     });
     it('respects a parent key handler that prevents default', () => {
       // arrange
-      mount(<MultiSelect {...base} onKeyDown={event => event.preventDefault()} />);
+      mount(<MultiSelect {...base} onKeyDown={(event) => event.preventDefault()} />);
       // act
       fireEvent.keyDown(screen.getByRole('combobox'), { key: 'ArrowDown' });
       // assert
@@ -384,10 +494,18 @@ function keyboardContracts(mount: Mount) {
 function policyContracts() {
   describe('MultiSelect configuration policy', () => {
     it.each([
-      { minSelections: -1 }, { maxSelections: 1.5 }, { minSelections: Number.NaN },
-      { minSelections: 2, maxSelections: 1 }, { required: true, maxSelections: 0 },
-      { options: [{ value: 'a', label: 'A' }, { value: 'a', label: 'B' }] },
-    ])('rejects ambiguous or impossible configuration $0', props => {
+      { minSelections: -1 },
+      { maxSelections: 1.5 },
+      { minSelections: Number.NaN },
+      { minSelections: 2, maxSelections: 1 },
+      { required: true, maxSelections: 0 },
+      {
+        options: [
+          { value: 'a', label: 'A' },
+          { value: 'a', label: 'B' },
+        ],
+      },
+    ])('rejects ambiguous or impossible configuration $0', (props) => {
       // arrange
       const given = { ...base, ...props };
       // act
@@ -395,13 +513,16 @@ function policyContracts() {
       // assert
       expect(result).toThrow(Error);
     });
-    it.each([{ selected: ['react', 'react'] }, { selected: ['missing'] }])('rejects invalid selected values $selected', ({ selected }) => {
-      // arrange
-      // act
-      const result = () => validateSelection(base, selected);
-      // assert
-      expect(result).toThrow(Error);
-    });
+    it.each([{ selected: ['react', 'react'] }, { selected: ['missing'] }])(
+      'rejects invalid selected values $selected',
+      ({ selected }) => {
+        // arrange
+        // act
+        const result = () => validateSelection(base, selected);
+        // assert
+        expect(result).toThrow(Error);
+      },
+    );
     it('permits unknown selected values during loading', () => {
       // arrange
       // act
@@ -456,15 +577,32 @@ function policyContracts() {
  **/
 export function multiSelectNativeContracts(mount: Mount) {
   describe('MultiSelect native interoperability', () => {
-    it.each(['small', 'medium', 'large'] as const)('renders the %s geometry and custom properties', size => {
-      // arrange
-      // act
-      mount(<MultiSelect {...base} size={size} className="custom-control" style={{ '--fs-multi-select-radius': '8px' }} wrapperClassName="custom-field" wrapperStyle={{ width: '240px' }} />);
-      // assert
-      expect(screen.getByRole('combobox').closest('.fs-multi-select')).toHaveClass(`fs-multi-select--${size}`, 'custom-field');
-      expect(screen.getByRole('combobox').parentElement).toHaveClass('custom-control');
-      expect(screen.getByRole('combobox').parentElement).toHaveStyle('--fs-multi-select-radius: 8px');
-    });
+    it.each(['small', 'medium', 'large'] as const)(
+      'renders the %s geometry and custom properties',
+      (size) => {
+        // arrange
+        // act
+        mount(
+          <MultiSelect
+            {...base}
+            size={size}
+            className="custom-control"
+            style={{ '--fs-multi-select-radius': '8px' }}
+            wrapperClassName="custom-field"
+            wrapperStyle={{ width: '240px' }}
+          />,
+        );
+        // assert
+        expect(screen.getByRole('combobox').closest('.fs-multi-select')).toHaveClass(
+          `fs-multi-select--${size}`,
+          'custom-field',
+        );
+        expect(screen.getByRole('combobox').parentElement).toHaveClass('custom-control');
+        expect(screen.getByRole('combobox').parentElement).toHaveStyle(
+          '--fs-multi-select-radius: 8px',
+        );
+      },
+    );
     it('composes native focus and blur callbacks', () => {
       // arrange
       const focus = vi.fn();
@@ -486,7 +624,14 @@ export function multiSelectNativeContracts(mount: Mount) {
     });
     it('protects composite ownership from untyped props', () => {
       // arrange
-      const unsafe = { role: 'button', type: 'password', 'aria-label': 'Wrong name', list: 'wrong-list', children: 'Wrong content', dangerouslySetInnerHTML: { __html: 'Wrong markup' } } as unknown as Partial<Parameters<typeof MultiSelect>[0]>;
+      const unsafe = {
+        role: 'button',
+        type: 'password',
+        'aria-label': 'Wrong name',
+        list: 'wrong-list',
+        children: 'Wrong content',
+        dangerouslySetInnerHTML: { __html: 'Wrong markup' },
+      } as unknown as Partial<Parameters<typeof MultiSelect>[0]>;
       // act
       mount(<MultiSelect {...base} {...unsafe} />);
       // assert
@@ -496,7 +641,12 @@ export function multiSelectNativeContracts(mount: Mount) {
     });
     it('associates repeated hidden values with an external form', () => {
       // arrange
-      mount(<><form id="external" aria-label="External" /><MultiSelect {...base} form="external" name="topics" defaultValue={['react']} /></>);
+      mount(
+        <>
+          <form id="external" aria-label="External" />
+          <MultiSelect {...base} form="external" name="topics" defaultValue={['react']} />
+        </>,
+      );
       // act
       const result = new FormData(screen.getByRole('form') as HTMLFormElement).getAll('topics');
       // assert
@@ -504,7 +654,11 @@ export function multiSelectNativeContracts(mount: Mount) {
     });
     it('excludes disabled values from form submission', () => {
       // arrange
-      mount(<form aria-label="Editor"><MultiSelect {...base} disabled name="topics" defaultValue={['react']} /></form>);
+      mount(
+        <form aria-label="Editor">
+          <MultiSelect {...base} disabled name="topics" defaultValue={['react']} />
+        </form>,
+      );
       // act
       const result = new FormData(screen.getByRole('form') as HTMLFormElement).getAll('topics');
       // assert
@@ -520,7 +674,12 @@ export function multiSelectNativeContracts(mount: Mount) {
     });
     it('keeps keyboard opening safe when every option is disabled', () => {
       // arrange
-      mount(<MultiSelect label="Topics" options={[{ value: 'fixed', label: 'Fixed', disabled: true }]} />);
+      mount(
+        <MultiSelect
+          label="Topics"
+          options={[{ value: 'fixed', label: 'Fixed', disabled: true }]}
+        />,
+      );
       // act
       fireEvent.keyDown(screen.getByRole('combobox'), { key: 'ArrowDown' });
       // assert

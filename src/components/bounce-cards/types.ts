@@ -2,8 +2,13 @@ import type { ComponentPropsWithoutRef, CSSProperties } from 'react';
 
 export type BounceCardsImage = { id?: string; src: string; alt?: string };
 export type BounceCardsPosition = { x: number; y: number; rotation?: number };
-export type BounceCardsStyle = CSSProperties & { [token: `--fs-${string}`]: string | number | undefined };
-export type BounceCardsProps = Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'style' | 'dangerouslySetInnerHTML'> & {
+export type BounceCardsStyle = CSSProperties & {
+  [token: `--fs-${string}`]: string | number | undefined;
+};
+export type BounceCardsProps = Omit<
+  ComponentPropsWithoutRef<'div'>,
+  'children' | 'style' | 'dangerouslySetInnerHTML'
+> & {
   children?: never;
   dangerouslySetInnerHTML?: never;
   images: readonly (string | BounceCardsImage)[];

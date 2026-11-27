@@ -23,11 +23,11 @@ npm run test:e2e:storybook -- tests/e2e/components/typography/Typography.spec.ts
 npm run test:e2e:components -- tests/browser-harness/specs/typography --workers=3
 ```
 
-| Measurement | Storybook | Harness |
-| --- | ---: | ---: |
-| Passing cases | 7 | 7 |
-| Command wall time | 13.78s | 5.33s |
-| Runner duration | 13.1s | 4.7s |
+| Measurement       | Storybook | Harness |
+| ----------------- | --------: | ------: |
+| Passing cases     |         7 |       7 |
+| Command wall time |    13.78s |   5.33s |
+| Runner duration   |     13.1s |    4.7s |
 
 Observed command wall time fell **61.3% (2.59×)**. This is one before/after observation using existing caches and ordinary managed-server startup, not a cold-start benchmark, repeat-run median or full-suite speedup claim. Logs are under ignored `.verification/typography-migration/`.
 

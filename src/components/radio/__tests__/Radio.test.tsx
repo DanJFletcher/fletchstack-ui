@@ -32,19 +32,31 @@ it('selects an option when its description is clicked', async () => {
 it('clears the previous selection within a named group', async () => {
   // arrange
   const user = userEvent.setup();
-  render(<><Radio label="Standard" name="delivery" defaultChecked /><Radio label="Express" name="delivery" /></>);
+  render(
+    <>
+      <Radio label="Standard" name="delivery" defaultChecked />
+      <Radio label="Express" name="delivery" />
+    </>,
+  );
 
   // act
   await user.click(screen.getByRole('radio', { name: 'Express' }));
 
   // assert
-  expect(screen.getAllByRole('radio', { checked: true })).toEqual([screen.getByRole('radio', { name: 'Express' })]);
+  expect(screen.getAllByRole('radio', { checked: true })).toEqual([
+    screen.getByRole('radio', { name: 'Express' }),
+  ]);
 });
 
 it('retains independent selection in different named groups', async () => {
   // arrange
   const user = userEvent.setup();
-  render(<><Radio label="Standard" name="delivery" defaultChecked /><Radio label="Personal" name="workspace" /></>);
+  render(
+    <>
+      <Radio label="Standard" name="delivery" defaultChecked />
+      <Radio label="Personal" name="workspace" />
+    </>,
+  );
 
   // act
   await user.click(screen.getByRole('radio', { name: 'Personal' }));
@@ -74,18 +86,34 @@ it('preserves consumer-controlled selection', async () => {
   await user.click(screen.getByRole('radio', { name: 'Express' }));
 
   // assert
-  expect(screen.getAllByRole('radio', { checked: true })).toEqual([screen.getByRole('radio', { name: 'Express' })]);
+  expect(screen.getAllByRole('radio', { checked: true })).toEqual([
+    screen.getByRole('radio', { name: 'Express' }),
+  ]);
 });
 
 it('combines external context with local messages without changing the name', () => {
   // arrange
-  const given = <><p id="context">Delivery settings.</p><Radio id="standard" label="Standard" aria-describedby="context" aria-invalid={false} description="Arrives soon." error="Choose a delivery method." /></>;
+  const given = (
+    <>
+      <p id="context">Delivery settings.</p>
+      <Radio
+        id="standard"
+        label="Standard"
+        aria-describedby="context"
+        aria-invalid={false}
+        description="Arrives soon."
+        error="Choose a delivery method."
+      />
+    </>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('radio', { name: 'Standard' })).toHaveAccessibleDescription('Delivery settings. Arrives soon. Choose a delivery method.');
+  expect(screen.getByRole('radio', { name: 'Standard' })).toHaveAccessibleDescription(
+    'Delivery settings. Arrives soon. Choose a delivery method.',
+  );
   expect(screen.getByRole('radio')).toBeInvalid();
 });
 
@@ -115,7 +143,16 @@ it('does not select a disabled option', async () => {
 it('forwards the native input ref and consumer customization', () => {
   // arrange
   const ref = createRef<HTMLInputElement>();
-  const given = <Radio ref={ref} label="Standard" className="custom-input" wrapperClassName="custom-wrapper" style={{ '--fs-radio-dot-size': '8px' }} wrapperStyle={{ '--fs-radio-label-gap': '12px' }} />;
+  const given = (
+    <Radio
+      ref={ref}
+      label="Standard"
+      className="custom-input"
+      wrapperClassName="custom-wrapper"
+      style={{ '--fs-radio-dot-size': '8px' }}
+      wrapperStyle={{ '--fs-radio-label-gap': '12px' }}
+    />
+  );
 
   // act
   const { container } = render(given);
@@ -130,7 +167,12 @@ it('forwards the native input ref and consumer customization', () => {
 
 it('gives repeated options distinct message relationships', () => {
   // arrange
-  const given = <><Radio label="Standard" description="Slower." /><Radio label="Express" description="Faster." /></>;
+  const given = (
+    <>
+      <Radio label="Standard" description="Slower." />
+      <Radio label="Express" description="Faster." />
+    </>
+  );
 
   // act
   render(given);
@@ -157,5 +199,18 @@ it('hides the complete option when hidden', () => {
 function ControlledRadio() {
   const [value, setValue] = useState('standard');
 
-  return <>{['standard', 'express'].map(option => <Radio key={option} label={option === 'standard' ? 'Standard' : 'Express'} name="delivery" value={option} checked={value === option} onChange={event => setValue(event.target.value)} />)}</>;
+  return (
+    <>
+      {['standard', 'express'].map((option) => (
+        <Radio
+          key={option}
+          label={option === 'standard' ? 'Standard' : 'Express'}
+          name="delivery"
+          value={option}
+          checked={value === option}
+          onChange={(event) => setValue(event.target.value)}
+        />
+      ))}
+    </>
+  );
 }

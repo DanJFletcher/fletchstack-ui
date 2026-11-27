@@ -4,7 +4,19 @@ import { Button, Container, FormGroup, Select, Stack, TextInput } from '../../..
 
 it('renders a composed consumer form through the public entrypoint', () => {
   // arrange
-  const given = <Container><Stack><FormGroup legend="Project"><TextInput label="Name" defaultValue="Example" /><Select label="Workspace" defaultValue="personal"><option value="personal">Personal</option></Select><Button type="submit">Save</Button></FormGroup></Stack></Container>;
+  const given = (
+    <Container>
+      <Stack>
+        <FormGroup legend="Project">
+          <TextInput label="Name" defaultValue="Example" />
+          <Select label="Workspace" defaultValue="personal">
+            <option value="personal">Personal</option>
+          </Select>
+          <Button type="submit">Save</Button>
+        </FormGroup>
+      </Stack>
+    </Container>
+  );
 
   // act
   const result = renderToStaticMarkup(given);

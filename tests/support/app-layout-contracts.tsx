@@ -11,7 +11,11 @@ import { AppContent } from '../../src/components/app-content/AppContent';
 export function appLayoutContracts(render: (element: ReactElement) => unknown) {
   it('defaults to viewport sizing and a main landmark', () => {
     // arrange
-    const given = <AppShell data-testid="shell"><AppContent>Page</AppContent></AppShell>;
+    const given = (
+      <AppShell data-testid="shell">
+        <AppContent>Page</AppContent>
+      </AppShell>
+    );
 
     // act
     render(given);
@@ -23,8 +27,29 @@ export function appLayoutContracts(render: (element: ReactElement) => unknown) {
 
   it('forwards layout refs and native styling', () => {
     // arrange
-    const shell = createRef<HTMLDivElement>(), content = createRef<HTMLElement>();
-    const given = <AppShell ref={shell} height="parent" data-testid="shell" id="app" className="custom-shell" style={{ '--fs-surface': 'navy' }}><AppContent as="div" ref={content} data-testid="content" id="page" className="custom-content" style={{ padding: 12 }}>Content</AppContent></AppShell>;
+    const shell = createRef<HTMLDivElement>(),
+      content = createRef<HTMLElement>();
+    const given = (
+      <AppShell
+        ref={shell}
+        height="parent"
+        data-testid="shell"
+        id="app"
+        className="custom-shell"
+        style={{ '--fs-surface': 'navy' }}
+      >
+        <AppContent
+          as="div"
+          ref={content}
+          data-testid="content"
+          id="page"
+          className="custom-content"
+          style={{ padding: 12 }}
+        >
+          Content
+        </AppContent>
+      </AppShell>
+    );
 
     // act
     render(given);
@@ -43,8 +68,16 @@ export function appLayoutContracts(render: (element: ReactElement) => unknown) {
 
   it('forwards consumer native events through content and shell', async () => {
     // arrange
-    const user = userEvent.setup(), shellClick = vi.fn(), contentClick = vi.fn();
-    render(<AppShell onClick={shellClick}><AppContent onClick={contentClick}><button>Open</button></AppContent></AppShell>);
+    const user = userEvent.setup(),
+      shellClick = vi.fn(),
+      contentClick = vi.fn();
+    render(
+      <AppShell onClick={shellClick}>
+        <AppContent onClick={contentClick}>
+          <button>Open</button>
+        </AppContent>
+      </AppShell>,
+    );
 
     // act
     await user.click(screen.getByRole('button', { name: 'Open' }));

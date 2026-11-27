@@ -10,8 +10,14 @@ test('both themes coexist without sharing action colors', async ({ page, mount }
     has: page.getByRole('heading', { name: 'Luna', exact: true }),
   });
 
-  await expect(corporate.getByRole('button', { name: 'Save changes' })).toHaveCSS('background-color', 'rgb(36, 75, 176)');
-  await expect(luna.getByRole('button', { name: 'Save changes' })).toHaveCSS('background-color', 'rgb(199, 181, 255)');
+  await expect(corporate.getByRole('button', { name: 'Save changes' })).toHaveCSS(
+    'background-color',
+    'rgb(36, 75, 176)',
+  );
+  await expect(luna.getByRole('button', { name: 'Save changes' })).toHaveCSS(
+    'background-color',
+    'rgb(199, 181, 255)',
+  );
   await expect(corporate.getByRole('button', { name: 'Saved', exact: true })).toBeDisabled();
   await expect(luna.getByRole('button', { name: 'Saved', exact: true })).toBeDisabled();
 });

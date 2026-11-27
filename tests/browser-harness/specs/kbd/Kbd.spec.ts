@@ -3,11 +3,17 @@ import { openScenario } from '../../fixtures/scenario';
 import { contrast } from '../../../e2e/fixtures/contrast';
 
 for (const theme of ['corporate', 'luna'] as const) {
-  test(`${theme} native keycaps use theme paint and compact monospace type`, async ({ page, mount }) => {
+  test(`${theme} native keycaps use theme paint and compact monospace type`, async ({
+    page,
+    mount,
+  }) => {
     await openScenario(mount, 'components-kbd--playground', { theme });
     const key = page.locator('kbd');
     await expect(key).toHaveText('Ctrl');
-    const paint = await key.evaluate(node => ({ text: getComputedStyle(node).color, fill: getComputedStyle(node).backgroundColor }));
+    const paint = await key.evaluate((node) => ({
+      text: getComputedStyle(node).color,
+      fill: getComputedStyle(node).backgroundColor,
+    }));
     expect(contrast(paint.text, paint.fill)).toBeGreaterThanOrEqual(4.5);
     await expect(key).toHaveCSS('font-size', '12px');
     await expect(key).toHaveCSS('min-height', '20px');
@@ -16,18 +22,38 @@ for (const theme of ['corporate', 'luna'] as const) {
     await expect(key).not.toHaveAttribute('tabindex');
   });
 
-  test(`${theme} long labels reflow with 200 percent text and text spacing at 320px`, async ({ page, mount }) => {
+  test(`${theme} long labels reflow with 200 percent text and text spacing at 320px`, async ({
+    page,
+    mount,
+  }) => {
     await page.setViewportSize({ width: 320, height: 800 });
     await openScenario(mount, 'components-kbd--long', { theme });
-    await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }' });
+    await page.addStyleTag({
+      content:
+        'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; }',
+    });
     const key = page.locator('kbd');
     await expect(key).toHaveCSS('font-size', '24px');
-    expect(await key.evaluate(node => node.scrollWidth <= node.clientWidth && node.scrollHeight <= node.clientHeight)).toBe(true);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(
+      await key.evaluate(
+        (node) => node.scrollWidth <= node.clientWidth && node.scrollHeight <= node.clientHeight,
+      ),
+    ).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
     await openScenario(mount, 'components-kbd--wrapping', { theme });
     const group = page.locator('kbd.fs-kbd-group');
-    expect(await group.evaluate(node => node.getBoundingClientRect().height > node.querySelector('kbd')!.getBoundingClientRect().height)).toBe(true);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(
+      await group.evaluate(
+        (node) =>
+          node.getBoundingClientRect().height >
+          node.querySelector('kbd')!.getBoundingClientRect().height,
+      ),
+    ).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
   });
 }
 
@@ -42,7 +68,10 @@ test('a grouped shortcut leaves the native tab sequence unchanged', async ({ pag
   await expect(page.locator('kbd.fs-kbd-group')).toHaveText('Ctrl + K');
 });
 
-test('keycaps do not replace native button keyboard or pointer activation', async ({ page, mount }) => {
+test('keycaps do not replace native button keyboard or pointer activation', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-kbd--button');
   const button = page.getByRole('button', { name: 'Accept Enter' });
   await page.keyboard.press('Tab');
@@ -55,7 +84,10 @@ test('keycaps do not replace native button keyboard or pointer activation', asyn
   await expect(page.getByRole('button')).toHaveCount(1);
 });
 
-test('tooltip key labels describe the focused button without an additional focus stop', async ({ page, mount }) => {
+test('tooltip key labels describe the focused button without an additional focus stop', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-kbd--tooltip');
   const button = page.getByRole('button', { name: 'Save', exact: true });
   await button.focus();
@@ -71,7 +103,9 @@ test('tooltip key labels describe the focused button without an additional focus
 test('a search hint is associated with its native input', async ({ page, mount }) => {
   await openScenario(mount, 'components-kbd--search');
   const input = page.getByRole('searchbox', { name: 'Search workspace' });
-  await expect(input).toHaveAccessibleDescription(/^Focus search using Ctrl\s*\+\s*K\s*\.\s*Shortcut handling belongs to your application\.$/);
+  await expect(input).toHaveAccessibleDescription(
+    /^Focus search using Ctrl\s*\+\s*K\s*\.\s*Shortcut handling belongs to your application\.$/,
+  );
   await input.fill('Projects');
   await expect(input).toHaveValue('Projects');
 });
@@ -80,7 +114,9 @@ test('nested regions inherit their theme while overrides remain local', async ({
   await openScenario(mount, 'components-kbd--composition', { theme: 'luna' });
   const corporate = page.locator('[data-theme="corporate"]').getByText('Esc', { exact: true });
   const luna = page.locator('section[data-theme="luna"]').getByText('Esc', { exact: true });
-  expect(await corporate.evaluate(node => getComputedStyle(node).backgroundColor)).not.toBe(await luna.evaluate(node => getComputedStyle(node).backgroundColor));
+  expect(await corporate.evaluate((node) => getComputedStyle(node).backgroundColor)).not.toBe(
+    await luna.evaluate((node) => getComputedStyle(node).backgroundColor),
+  );
   await openScenario(mount, 'components-kbd--overrides');
   const keys = page.getByText('Enter', { exact: true });
   await expect(keys.nth(0)).toHaveCSS('border-radius', '0px');
@@ -88,14 +124,20 @@ test('nested regions inherit their theme while overrides remain local', async ({
   await expect(page.locator('kbd.fs-kbd-group')).toHaveCSS('gap', '12px');
 });
 
-test('explicit left to right chords retain key order in right to left content', async ({ page, mount }) => {
+test('explicit left to right chords retain key order in right to left content', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-kbd--rtl');
   const control = await page.getByText('Ctrl', { exact: true }).boundingBox();
   const key = await page.getByText('K', { exact: true }).boundingBox();
   expect(control!.x).toBeLessThan(key!.x);
 });
 
-test('native hidden removes both keys and groups from rendered content', async ({ page, mount }) => {
+test('native hidden removes both keys and groups from rendered content', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-kbd--playground', { args: { hidden: true } });
   await expect(page.locator('kbd')).toBeHidden();
   await openScenario(mount, 'components-kbd--hidden-group');

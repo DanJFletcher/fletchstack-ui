@@ -6,8 +6,16 @@ import { Accordion, type AccordionProps } from '../../src/components/accordion/A
 import { validateAccordion } from '../../src/components/accordion/useAccordion';
 
 const items = [
-  { id: 'join', title: 'Who can join?', content: <input aria-label="Member name" defaultValue="Example" /> },
-  { id: 'invite', title: 'How do I invite someone?', content: <a href="#settings">Team settings</a> },
+  {
+    id: 'join',
+    title: 'Who can join?',
+    content: <input aria-label="Member name" defaultValue="Example" />,
+  },
+  {
+    id: 'invite',
+    title: 'How do I invite someone?',
+    content: <a href="#settings">Team settings</a>,
+  },
   { id: 'role', title: 'Can I change a role?', content: 'Ask an administrator.', disabled: true },
 ];
 
@@ -21,7 +29,9 @@ export function accordionContracts(mount: (element: ReactElement) => unknown) {
       // act
       mount(<Accordion items={items} />);
       // assert
-      expect(screen.getAllByRole('button').map(button => button.getAttribute('aria-expanded'))).toEqual(['false', 'false', 'false']);
+      expect(
+        screen.getAllByRole('button').map((button) => button.getAttribute('aria-expanded')),
+      ).toEqual(['false', 'false', 'false']);
       expect(screen.getAllByRole('heading', { level: 3 })).toHaveLength(3);
       expect(screen.queryByRole('link')).not.toBeInTheDocument();
       expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
@@ -31,7 +41,9 @@ export function accordionContracts(mount: (element: ReactElement) => unknown) {
       // act
       mount(<Accordion items={items} defaultOpenItems={['invite']} />);
       // assert
-      expect(screen.getByRole('region', { name: 'How do I invite someone?' })).toContainElement(screen.getByRole('link', { name: 'Team settings' }));
+      expect(screen.getByRole('region', { name: 'How do I invite someone?' })).toContainElement(
+        screen.getByRole('link', { name: 'Team settings' }),
+      );
     });
     it('closes the previous panel when another opens', () => {
       // arrange
@@ -49,7 +61,10 @@ export function accordionContracts(mount: (element: ReactElement) => unknown) {
       fireEvent.click(screen.getByRole('button', { name: 'How do I invite someone?' }));
       // assert
       expect(screen.queryByRole('link')).not.toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'How do I invite someone?' })).toHaveAttribute('aria-expanded', 'false');
+      expect(screen.getByRole('button', { name: 'How do I invite someone?' })).toHaveAttribute(
+        'aria-expanded',
+        'false',
+      );
     });
     it('opens independent panels in multiple mode', () => {
       // arrange
@@ -65,7 +80,9 @@ export function accordionContracts(mount: (element: ReactElement) => unknown) {
       // act
       fireEvent.click(screen.getByRole('button', { name: 'Who can join?' }));
       // assert
-      expect(screen.getAllByRole('region').map(region => region.getAttribute('aria-labelledby'))).toEqual([screen.getByRole('button', { name: 'How do I invite someone?' }).id]);
+      expect(
+        screen.getAllByRole('region').map((region) => region.getAttribute('aria-labelledby')),
+      ).toEqual([screen.getByRole('button', { name: 'How do I invite someone?' }).id]);
     });
     it('does not toggle disabled items', () => {
       // arrange
@@ -108,40 +125,70 @@ export function accordionContracts(mount: (element: ReactElement) => unknown) {
     });
     it('keeps generated relationships distinct even with the same caller id', () => {
       // arrange
-      mount(<><Accordion id="faq" label="First" items={items} /><Accordion id="faq" label="Second" items={items} /></>);
-      const first = within(screen.getByRole('group', { name: 'First' })).getByRole('button', { name: 'Who can join?' });
-      const second = within(screen.getByRole('group', { name: 'Second' })).getByRole('button', { name: 'Who can join?' });
+      mount(
+        <>
+          <Accordion id="faq" label="First" items={items} />
+          <Accordion id="faq" label="Second" items={items} />
+        </>,
+      );
+      const first = within(screen.getByRole('group', { name: 'First' })).getByRole('button', {
+        name: 'Who can join?',
+      });
+      const second = within(screen.getByRole('group', { name: 'Second' })).getByRole('button', {
+        name: 'Who can join?',
+      });
       // act
       fireEvent.click(first);
       // assert
       expect(first.id).not.toBe(second.id);
-      expect(first).toHaveAttribute('aria-controls', screen.getByRole('region', { name: 'Who can join?' }).id);
-      expect(screen.getByRole('region', { name: 'Who can join?' })).toHaveAttribute('aria-labelledby', first.id);
+      expect(first).toHaveAttribute(
+        'aria-controls',
+        screen.getByRole('region', { name: 'Who can join?' }).id,
+      );
+      expect(screen.getByRole('region', { name: 'Who can join?' })).toHaveAttribute(
+        'aria-labelledby',
+        first.id,
+      );
     });
-    it.each([1, 2, 3, 4, 5, 6] as const)('uses heading level %s', headingLevel => {
+    it.each([1, 2, 3, 4, 5, 6] as const)('uses heading level %s', (headingLevel) => {
       // arrange
       // act
       mount(<Accordion items={items} headingLevel={headingLevel} />);
       // assert
       expect(screen.getAllByRole('heading', { level: headingLevel })).toHaveLength(3);
     });
-    it.each(['divided', 'outlined', 'surface'] as const)('forwards %s appearance and native attributes', variant => {
-      // arrange
-      const ref = createRef<HTMLDivElement>();
-      // act
-      mount(<Accordion items={items} variant={variant} ref={ref} label="FAQ" title="Team guidance" className="consumer" style={{ '--fs-space-gap-related': '20px' }} />);
-      // assert
-      expect(ref.current).toBe(screen.getByRole('group', { name: 'FAQ' }));
-      expect(ref.current).toHaveClass(`fs-accordion--${variant}`, 'consumer');
-      expect(ref.current).toHaveAttribute('title', 'Team guidance');
-      expect(ref.current).toHaveStyle('--fs-space-gap-related: 20px');
-    });
+    it.each(['divided', 'outlined', 'surface'] as const)(
+      'forwards %s appearance and native attributes',
+      (variant) => {
+        // arrange
+        const ref = createRef<HTMLDivElement>();
+        // act
+        mount(
+          <Accordion
+            items={items}
+            variant={variant}
+            ref={ref}
+            label="FAQ"
+            title="Team guidance"
+            className="consumer"
+            style={{ '--fs-space-gap-related': '20px' }}
+          />,
+        );
+        // assert
+        expect(ref.current).toBe(screen.getByRole('group', { name: 'FAQ' }));
+        expect(ref.current).toHaveClass(`fs-accordion--${variant}`, 'consumer');
+        expect(ref.current).toHaveAttribute('title', 'Team guidance');
+        expect(ref.current).toHaveStyle('--fs-space-gap-related: 20px');
+      },
+    );
     it('preserves native group semantics when no label prop is supplied', () => {
       // arrange
       // act
       mount(<Accordion items={items} role="group" aria-label="Native FAQ" />);
       // assert
-      expect(screen.getByRole('group', { name: 'Native FAQ' })).toHaveClass('fs-accordion--divided');
+      expect(screen.getByRole('group', { name: 'Native FAQ' })).toHaveClass(
+        'fs-accordion--divided',
+      );
     });
     it('forwards hidden to the complete group', () => {
       // arrange
@@ -178,7 +225,10 @@ export function accordionContracts(mount: (element: ReactElement) => unknown) {
       // act
       fireEvent.click(screen.getByRole('button', { name: 'Reorder questions' }));
       // assert
-      expect(screen.getByRole('button', { name: 'How do I invite someone?' })).toHaveAttribute('id', triggerId);
+      expect(screen.getByRole('button', { name: 'How do I invite someone?' })).toHaveAttribute(
+        'id',
+        triggerId,
+      );
       expect(screen.getByRole('link', { name: 'Team settings' })).toBeVisible();
     });
     it('supports an empty collection', () => {
@@ -190,7 +240,10 @@ export function accordionContracts(mount: (element: ReactElement) => unknown) {
     });
     it('ignores untyped raw markup and children overrides', () => {
       // arrange
-      const unsafe = { children: 'Wrong child', dangerouslySetInnerHTML: { __html: 'Wrong markup' } } as unknown as AccordionProps;
+      const unsafe = {
+        children: 'Wrong child',
+        dangerouslySetInnerHTML: { __html: 'Wrong markup' },
+      } as unknown as AccordionProps;
       // act
       mount(<Accordion {...unsafe} items={items} />);
       // assert
@@ -198,9 +251,12 @@ export function accordionContracts(mount: (element: ReactElement) => unknown) {
       expect(screen.queryByText('Wrong child')).not.toBeInTheDocument();
     });
     it.each([
-      { items: [{ ...items[0]!, id: '  ' }] }, { items: [items[0]!, items[0]!] },
-      { openItems: ['missing'] }, { openItems: ['join', 'join'], multiple: true }, { openItems: ['join', 'invite'] },
-    ])('rejects ambiguous identities or expansion $0', props => {
+      { items: [{ ...items[0]!, id: '  ' }] },
+      { items: [items[0]!, items[0]!] },
+      { openItems: ['missing'] },
+      { openItems: ['join', 'join'], multiple: true },
+      { openItems: ['join', 'invite'] },
+    ])('rejects ambiguous identities or expansion $0', (props) => {
       // arrange
       const given = { items, ...props };
       // act
@@ -231,5 +287,12 @@ export function animatedServerMarkup(): string {
  **/
 function ReorderFixture() {
   const [ordered, setOrdered] = useState(items);
-  return <><Accordion items={ordered} /><button type="button" onClick={() => setOrdered([...ordered].reverse())}>Reorder questions</button></>;
+  return (
+    <>
+      <Accordion items={ordered} />
+      <button type="button" onClick={() => setOrdered([...ordered].reverse())}>
+        Reorder questions
+      </button>
+    </>
+  );
 }

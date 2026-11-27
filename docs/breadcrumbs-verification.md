@@ -12,16 +12,16 @@ Scope: ordered native navigation, caller-owned destinations, responsive inline d
 
 ## Final checks
 
-| Check | Result |
-| --- | --- |
-| Full unit coverage | 73 files, 1,254 tests; 33.79s; independent 100% statements, branches, functions and lines |
-| Full integration coverage | 79 files, 1,055 tests; 102.64s; independent 100% statements, branches, functions and lines |
-| Complete component browser suite | 523 passed; 1.8m, two workers |
-| Complete retained Storybook browser suite | 36 passed; 1.3m, one worker |
-| All Storybook render/play/axe checks | 41 files, 471 tests; 30.78s |
-| Storybook build | Passed; Vite stage 13.53s |
-| Package build and installed consumers | Passed: public API/types, individual and combined CSS, bundling, React 18.3.1 / 19.3.1 deterministic SSR |
-| Lint, typecheck, component structure, diff whitespace | Passed |
+| Check                                                 | Result                                                                                                   |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Full unit coverage                                    | 73 files, 1,254 tests; 33.79s; independent 100% statements, branches, functions and lines                |
+| Full integration coverage                             | 79 files, 1,055 tests; 102.64s; independent 100% statements, branches, functions and lines               |
+| Complete component browser suite                      | 523 passed; 1.8m, two workers                                                                            |
+| Complete retained Storybook browser suite             | 36 passed; 1.3m, one worker                                                                              |
+| All Storybook render/play/axe checks                  | 41 files, 471 tests; 30.78s                                                                              |
+| Storybook build                                       | Passed; Vite stage 13.53s                                                                                |
+| Package build and installed consumers                 | Passed: public API/types, individual and combined CSS, bundling, React 18.3.1 / 19.3.1 deterministic SSR |
+| Lint, typecheck, component structure, diff whitespace | Passed                                                                                                   |
 
 Coverage began only after implementation, tests, cleanup and review finished. Shared theme tokens and export/preview registrations require the complete browser fallback. Browser and Storybook tests remain coverage-free; the full integration coverage gate runs alone with one worker after browser/build/package work.
 

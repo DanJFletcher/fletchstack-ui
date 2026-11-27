@@ -4,13 +4,13 @@ Verified on 2026-11-16. Implements [BottomNavigation](./bottom-navigation.md), [
 
 ## Final results
 
-| Scope | Mode | Result | Runner duration |
-| --- | --- | --- | --- |
-| Full unit suite | coverage enabled; 2 workers | 1,319 passed; all four coverage metrics 100% | 97.48 seconds |
-| Full integration suite | coverage enabled; 1 worker, isolated after browser/build/package work | 1,100 passed; all four coverage metrics 100% | 106.85 seconds |
-| Full component browser suite | no coverage; 2 workers | 555 passed | 2.9 minutes |
-| Full retained Storybook E2E | no coverage; 1 worker | 36 passed | 2.3 minutes |
-| Full Storybook render/play/accessibility suite | no coverage | 494 passed | 61.07 seconds |
+| Scope                                          | Mode                                                                  | Result                                       | Runner duration |
+| ---------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------- | --------------- |
+| Full unit suite                                | coverage enabled; 2 workers                                           | 1,319 passed; all four coverage metrics 100% | 97.48 seconds   |
+| Full integration suite                         | coverage enabled; 1 worker, isolated after browser/build/package work | 1,100 passed; all four coverage metrics 100% | 106.85 seconds  |
+| Full component browser suite                   | no coverage; 2 workers                                                | 555 passed                                   | 2.9 minutes     |
+| Full retained Storybook E2E                    | no coverage; 1 worker                                                 | 36 passed                                    | 2.3 minutes     |
+| Full Storybook render/play/accessibility suite | no coverage                                                           | 494 passed                                   | 61.07 seconds   |
 
 Runner durations are observed, rounded where reported by Playwright, and are not an isolated performance benchmark. Some independent final checks ran concurrently. Coverage was disabled throughout development and focused repair work. Both independent coverage gates cover the entire configured production scope, with 100% per-file thresholds unchanged.
 

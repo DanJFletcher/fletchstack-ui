@@ -25,9 +25,9 @@ Link implementation or CSS edits select both Link and Typography harness consume
 The same 14 cases passed in Chromium with three workers and zero retries:
 
 | Runner duration (including managed server startup) | Storybook | Harness |
-| --- | ---: | ---: |
-| Passing cases | 14 | 14 |
-| Playwright duration | 19.2s | 6.3s |
+| -------------------------------------------------- | --------: | ------: |
+| Passing cases                                      |        14 |      14 |
+| Playwright duration                                |     19.2s |    6.3s |
 
 This is a single before/after observation with existing caches, not a cold-start benchmark or repeat-run median. No other browser workload ran concurrently. A separate development run of the complete Link/Typography harness suites passed all 21 cases in 7.28s command wall time while non-browser validation was also running. Development runs collected no code coverage.
 

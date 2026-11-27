@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { Callout } from '../Callout';
 import { calloutContracts } from '../../../../tests/support/callout-contracts';
 
-describe('client rendering', () => calloutContracts(element => render(element)));
+describe('client rendering', () => calloutContracts((element) => render(element)));
 it('preserves native hiding', () => {
   // arrange
   // act

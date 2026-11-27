@@ -4,14 +4,28 @@ import { expect, userEvent, within } from 'storybook/test';
 import { Button, Checkbox } from '../../../index';
 
 const meta = {
-  id: 'components-checkbox', title: 'Components/Forms/Checkbox', component: Checkbox, tags: ['autodocs'],
+  id: 'components-checkbox',
+  title: 'Components/Forms/Checkbox',
+  component: Checkbox,
+  tags: ['autodocs'],
   args: { label: 'Email updates', description: 'Receive product news and tips.' },
-  parameters: { docs: { description: { component: 'A native independent choice with a clickable visible label and description. Supports controlled/uncontrolled checked state, native mixed state, errors, disabled choices, forms, refs, and scoped checkbox.* token overrides. Use fieldset/legend to group choices. Indeterminate is applied on client mount and prop changes; native activation clears it. Parents own group state and external spacing.' } } },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'A native independent choice with a clickable visible label and description. Supports controlled/uncontrolled checked state, native mixed state, errors, disabled choices, forms, refs, and scoped checkbox.* token overrides. Use fieldset/legend to group choices. Indeterminate is applied on client mount and prop changes; native activation clears it. Parents own group state and external spacing.',
+      },
+    },
+  },
 } satisfies Meta<typeof Checkbox>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const channels = [{ value: 'email', label: 'Email' }, { value: 'sms', label: 'SMS' }, { value: 'push', label: 'Push notifications' }];
+const channels = [
+  { value: 'email', label: 'Email' },
+  { value: 'sms', label: 'SMS' },
+  { value: 'push', label: 'Push notifications' },
+];
 
 /**
  * Derive the Select all checkbox's checked/mixed state from its child choices.
@@ -21,11 +35,38 @@ function ChannelGroup() {
   const all = selected.length === channels.length;
   const some = selected.length > 0 && !all;
 
-  return <fieldset className="checkbox-demo__group"><legend>Notification channels</legend>
-    <Checkbox label="Select all" checked={all} indeterminate={some} onChange={event => setSelected(event.target.checked ? channels.map(channel => channel.value) : [])} />
-    <div className="checkbox-demo__children">{channels.map(channel => <Checkbox key={channel.value} label={channel.label} value={channel.value} checked={selected.includes(channel.value)} onChange={event => { const checked = event.target.checked; setSelected(current => checked ? [...current, channel.value] : current.filter(value => value !== channel.value)); }} />)}</div>
-    <p>Indeterminate means some options are selected.</p>
-  </fieldset>;
+  return (
+    <fieldset className="checkbox-demo__group">
+      <legend>Notification channels</legend>
+      <Checkbox
+        label="Select all"
+        checked={all}
+        indeterminate={some}
+        onChange={(event) =>
+          setSelected(event.target.checked ? channels.map((channel) => channel.value) : [])
+        }
+      />
+      <div className="checkbox-demo__children">
+        {channels.map((channel) => (
+          <Checkbox
+            key={channel.value}
+            label={channel.label}
+            value={channel.value}
+            checked={selected.includes(channel.value)}
+            onChange={(event) => {
+              const checked = event.target.checked;
+              setSelected((current) =>
+                checked
+                  ? [...current, channel.value]
+                  : current.filter((value) => value !== channel.value),
+              );
+            }}
+          />
+        ))}
+      </div>
+      <p>Indeterminate means some options are selected.</p>
+    </fieldset>
+  );
 }
 
 /**
@@ -34,7 +75,16 @@ function ChannelGroup() {
 function ControlledExample() {
   const [checked, setChecked] = useState(false);
 
-  return <div className="stack"><Checkbox label="Email updates" checked={checked} onChange={event => setChecked(event.target.checked)} /><output aria-label="Email preference">{checked ? 'Enabled' : 'Disabled'}</output></div>;
+  return (
+    <div className="stack">
+      <Checkbox
+        label="Email updates"
+        checked={checked}
+        onChange={(event) => setChecked(event.target.checked)}
+      />
+      <output aria-label="Email preference">{checked ? 'Enabled' : 'Disabled'}</output>
+    </div>
+  );
 }
 
 /**
@@ -43,14 +93,46 @@ function ControlledExample() {
 function FormExample() {
   const [result, setResult] = useState('Not submitted');
 
-  return <form className="stack" onSubmit={event => { event.preventDefault(); setResult(new FormData(event.currentTarget).getAll('channels').join(', ')); }}><fieldset className="checkbox-demo__group"><legend>Notification channels</legend><Checkbox label="Email" name="channels" value="email" defaultChecked /><Checkbox label="SMS" name="channels" value="sms" /><Checkbox label="Push notifications" name="channels" value="push" disabled defaultChecked /></fieldset><Checkbox label="Accept terms" name="terms" required /><div className="actions"><Button type="submit">Save preferences</Button><Button type="reset" variant="secondary">Reset</Button></div><output aria-label="Submitted channels">{result}</output></form>;
+  return (
+    <form
+      className="stack"
+      onSubmit={(event) => {
+        event.preventDefault();
+        setResult(new FormData(event.currentTarget).getAll('channels').join(', '));
+      }}
+    >
+      <fieldset className="checkbox-demo__group">
+        <legend>Notification channels</legend>
+        <Checkbox label="Email" name="channels" value="email" defaultChecked />
+        <Checkbox label="SMS" name="channels" value="sms" />
+        <Checkbox label="Push notifications" name="channels" value="push" disabled defaultChecked />
+      </fieldset>
+      <Checkbox label="Accept terms" name="terms" required />
+      <div className="actions">
+        <Button type="submit">Save preferences</Button>
+        <Button type="reset" variant="secondary">
+          Reset
+        </Button>
+      </div>
+      <output aria-label="Submitted channels">{result}</output>
+    </form>
+  );
 }
-
 
 export const Playground: Story = {};
 
 export const States: Story = {
-  render: () => <div className="theme-grid"><Checkbox label="Unchecked" /><Checkbox label="Checked" defaultChecked /><Checkbox label="Indeterminate" indeterminate /><Checkbox label="Error" error="Choose at least one channel." /><Checkbox label="Disabled unchecked" disabled /><Checkbox label="Disabled checked" disabled defaultChecked /><Checkbox label="Disabled mixed" disabled indeterminate /></div>,
+  render: () => (
+    <div className="theme-grid">
+      <Checkbox label="Unchecked" />
+      <Checkbox label="Checked" defaultChecked />
+      <Checkbox label="Indeterminate" indeterminate />
+      <Checkbox label="Error" error="Choose at least one channel." />
+      <Checkbox label="Disabled unchecked" disabled />
+      <Checkbox label="Disabled checked" disabled defaultChecked />
+      <Checkbox label="Disabled mixed" disabled indeterminate />
+    </div>
+  ),
 };
 export const Checked: Story = { args: { defaultChecked: true } };
 export const Indeterminate: Story = { args: { indeterminate: true } };
@@ -78,11 +160,44 @@ export const GroupSelection: Story = {
 };
 
 export const Customization: Story = {
-  render: () => <Checkbox label="Custom choice" description="Scoped shape and spacing overrides." defaultChecked className="custom-checkbox" wrapperClassName="custom-checkbox-field" wrapperStyle={{ '--fs-checkbox-control-size': '24px', '--fs-checkbox-label-gap': '16px', '--fs-checkbox-radius': '8px' }} style={{ borderWidth: '2px' }} />,
+  render: () => (
+    <Checkbox
+      label="Custom choice"
+      description="Scoped shape and spacing overrides."
+      defaultChecked
+      className="custom-checkbox"
+      wrapperClassName="custom-checkbox-field"
+      wrapperStyle={{
+        '--fs-checkbox-control-size': '24px',
+        '--fs-checkbox-label-gap': '16px',
+        '--fs-checkbox-radius': '8px',
+      }}
+      style={{ borderWidth: '2px' }}
+    />
+  ),
 };
 
 export const BothThemes: Story = {
-  render: () => <div className="theme-grid">{(['corporate', 'luna'] as const).map(theme => <section key={theme} data-theme={theme} className="theme-panel stack"><h2>{theme}</h2><Checkbox label={`${theme} email updates`} description="Receive product news and tips." defaultChecked /><Checkbox label={`${theme} select all`} indeterminate /><Checkbox label={`${theme} required choice`} error="Choose at least one channel." required /></section>)}</div>,
+  render: () => (
+    <div className="theme-grid">
+      {(['corporate', 'luna'] as const).map((theme) => (
+        <section key={theme} data-theme={theme} className="theme-panel stack">
+          <h2>{theme}</h2>
+          <Checkbox
+            label={`${theme} email updates`}
+            description="Receive product news and tips."
+            defaultChecked
+          />
+          <Checkbox label={`${theme} select all`} indeterminate />
+          <Checkbox
+            label={`${theme} required choice`}
+            error="Choose at least one channel."
+            required
+          />
+        </section>
+      ))}
+    </div>
+  ),
 };
 
 export const Controlled: Story = {
@@ -113,7 +228,13 @@ export const NativeForm: Story = {
 };
 
 export const Keyboard: Story = {
-  render: () => <div><Checkbox label="Email updates" /><Checkbox label="Unavailable channel" disabled /><Checkbox label="SMS" /></div>,
+  render: () => (
+    <div>
+      <Checkbox label="Email updates" />
+      <Checkbox label="Unavailable channel" disabled />
+      <Checkbox label="SMS" />
+    </div>
+  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const checkbox = canvas.getByRole('checkbox', { name: 'Email updates' });
@@ -128,14 +249,30 @@ export const Keyboard: Story = {
 };
 
 export const Descriptions: Story = {
-  render: () => <div><p id="checkbox-context">Notification settings.</p><Checkbox id="email-channel" label="Email updates" aria-describedby="checkbox-context" description="Receive product news and tips." error="Choose at least one channel." /></div>,
+  render: () => (
+    <div>
+      <p id="checkbox-context">Notification settings.</p>
+      <Checkbox
+        id="email-channel"
+        label="Email updates"
+        aria-describedby="checkbox-context"
+        description="Receive product news and tips."
+        error="Choose at least one channel."
+      />
+    </div>
+  ),
 };
 
 export const RefAccess: Story = {
   render: () => {
     const input = createRef<HTMLInputElement>();
 
-    return <div className="stack"><Button onClick={() => input.current?.focus()}>Focus preference</Button><Checkbox label="Email updates" ref={input} /></div>;
+    return (
+      <div className="stack">
+        <Button onClick={() => input.current?.focus()}>Focus preference</Button>
+        <Checkbox label="Email updates" ref={input} />
+      </div>
+    );
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -149,7 +286,15 @@ export const RefAccess: Story = {
 };
 
 export const LongLabels: Story = {
-  render: () => <div style={{ maxWidth: '320px' }}><Checkbox label="Receive notifications about updates to every shared component in this workspace" description="ThisLongUnbrokenDescriptionMustWrapWithoutWideningThePage" error="Choose at least one notification channel before continuing." /></div>,
+  render: () => (
+    <div style={{ maxWidth: '320px' }}>
+      <Checkbox
+        label="Receive notifications about updates to every shared component in this workspace"
+        description="ThisLongUnbrokenDescriptionMustWrapWithoutWideningThePage"
+        error="Choose at least one notification channel before continuing."
+      />
+    </div>
+  ),
 };
 
 export const LunaGroup: Story = { ...GroupSelection, globals: { theme: 'luna' } };

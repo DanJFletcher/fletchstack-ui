@@ -7,7 +7,11 @@ import { AspectRatio, type AspectRatioStyle } from '../AspectRatio';
 
 it('preserves native media description relationships', () => {
   // arrange
-  const given = <AspectRatio id="project-media" aria-describedby="caption" data-testid="frame"><img alt="Project landscape" /></AspectRatio>;
+  const given = (
+    <AspectRatio id="project-media" aria-describedby="caption" data-testid="frame">
+      <img alt="Project landscape" />
+    </AspectRatio>
+  );
 
   // act
   render(given);
@@ -28,7 +32,11 @@ it('defaults to the landscape numeric ratio', () => {
   expect(screen.getByTestId('frame')).toHaveStyle({ aspectRatio: '1.7777777777777777' });
 });
 
-it.each([{ ratio: 1, expected: '1' }, { ratio: 0.75, expected: '0.75' }, { ratio: 2.4, expected: '2.4' }])('supports a positive $ratio ratio', ({ ratio, expected }) => {
+it.each([
+  { ratio: 1, expected: '1' },
+  { ratio: 0.75, expected: '0.75' },
+  { ratio: 2.4, expected: '2.4' },
+])('supports a positive $ratio ratio', ({ ratio, expected }) => {
   // arrange
   const given = <AspectRatio ratio={ratio} data-testid="frame" />;
 
@@ -39,21 +47,28 @@ it.each([{ ratio: 1, expected: '1' }, { ratio: 0.75, expected: '0.75' }, { ratio
   expect(screen.getByTestId('frame')).toHaveStyle({ aspectRatio: expected });
 });
 
-it.each([0, -1, NaN, Infinity, -Infinity])('falls back to landscape for invalid numeric ratio %s', ratio => {
-  // arrange
-  const given = <AspectRatio ratio={ratio} data-testid="frame" />;
+it.each([0, -1, NaN, Infinity, -Infinity])(
+  'falls back to landscape for invalid numeric ratio %s',
+  (ratio) => {
+    // arrange
+    const given = <AspectRatio ratio={ratio} data-testid="frame" />;
 
-  // act
-  render(given);
+    // act
+    render(given);
 
-  // assert
-  expect(screen.getByTestId('frame')).toHaveStyle({ aspectRatio: '1.7777777777777777' });
-});
+    // assert
+    expect(screen.getByTestId('frame')).toHaveStyle({ aspectRatio: '1.7777777777777777' });
+  },
+);
 
 it('forwards the ref to the native outer div', () => {
   // arrange
   const ref = createRef<HTMLDivElement>();
-  const given = <AspectRatio ref={ref} data-testid="frame"><img alt="Project artwork" /></AspectRatio>;
+  const given = (
+    <AspectRatio ref={ref} data-testid="frame">
+      <img alt="Project artwork" />
+    </AspectRatio>
+  );
 
   // act
   render(given);
@@ -90,18 +105,30 @@ it('lets native aspectRatio styles override the ratio prop', () => {
 
 it('preserves native child semantics and source order', () => {
   // arrange
-  const given = <AspectRatio><button>Play</button><button>Pause</button></AspectRatio>;
+  const given = (
+    <AspectRatio>
+      <button>Play</button>
+      <button>Pause</button>
+    </AspectRatio>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getAllByRole('button').map(button => button.textContent)).toEqual(['Play', 'Pause']);
+  expect(screen.getAllByRole('button').map((button) => button.textContent)).toEqual([
+    'Play',
+    'Pause',
+  ]);
 });
 
 it('preserves the native hidden attribute', () => {
   // arrange
-  const given = <AspectRatio hidden><img alt="Hidden artwork" /></AspectRatio>;
+  const given = (
+    <AspectRatio hidden>
+      <img alt="Hidden artwork" />
+    </AspectRatio>
+  );
 
   // act
   render(given);

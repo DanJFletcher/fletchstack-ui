@@ -4,18 +4,18 @@ Verified locally on 2026-11-12 for [introduce-motion-foundation](../openspec/cha
 
 ## Final results
 
-| Check | Result |
-| --- | --- |
-| `npm run test:unit:coverage` | 954 tests / 62 files passed; 10.16s runner time |
-| `npm run test:integration:coverage -- --maxWorkers=1` | 760 tests / 68 files passed; 144.13s runner time |
-| Unit and integration coverage | Each independently reached 100% statements, branches, functions and lines, including per-file gates |
-| `npm run test:e2e -- --workers=1` | Complete scope: 446 component tests (2.6m) and 36 retained Storybook tests (1.7m), all passed |
-| `npm run test:storybook` | All 400 render/play/accessibility checks / 35 files passed; 21.39s runner time |
-| Lint and typecheck | Passed |
-| Library build and `npm run verify:browser` | Passed; consumer interaction, contrast, 320px reflow, enlargement and text spacing |
-| `npm run verify:package` | Packed exports, types, CSS imports, bundling and React 18/19 SSR passed |
-| `npm run build-storybook` | Passed; existing non-blocking large-chunk warning |
-| Strict OpenSpec validation and whitespace checks | Passed |
+| Check                                                 | Result                                                                                              |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `npm run test:unit:coverage`                          | 954 tests / 62 files passed; 10.16s runner time                                                     |
+| `npm run test:integration:coverage -- --maxWorkers=1` | 760 tests / 68 files passed; 144.13s runner time                                                    |
+| Unit and integration coverage                         | Each independently reached 100% statements, branches, functions and lines, including per-file gates |
+| `npm run test:e2e -- --workers=1`                     | Complete scope: 446 component tests (2.6m) and 36 retained Storybook tests (1.7m), all passed       |
+| `npm run test:storybook`                              | All 400 render/play/accessibility checks / 35 files passed; 21.39s runner time                      |
+| Lint and typecheck                                    | Passed                                                                                              |
+| Library build and `npm run verify:browser`            | Passed; consumer interaction, contrast, 320px reflow, enlargement and text spacing                  |
+| `npm run verify:package`                              | Packed exports, types, CSS imports, bundling and React 18/19 SSR passed                             |
+| `npm run build-storybook`                             | Passed; existing non-blocking large-chunk warning                                                   |
+| Strict OpenSpec validation and whitespace checks      | Passed                                                                                              |
 
 Development baseline, focused implementation checks and failure repair ran without coverage. Only final unit/integration gates collected coverage; E2E and Storybook runs did not. Shared tokens, generated styles and preview infrastructure required the full local browser scope, rather than affected-only selection. Runner times above are separate measurements, not a total wall-clock development duration.
 

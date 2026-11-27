@@ -36,12 +36,12 @@ Alternative: a mandatory decorative flag on every usage is noisy for the common 
 
 Proposed initial roles, identical in Corporate and Luna:
 
-| Semantic path | CSS property | Initial value | Type |
-| --- | --- | --- | --- |
-| icon.size.small | --fs-icon-size-small | 16px | dimension |
-| icon.size.medium | --fs-icon-size-medium | 20px | dimension |
-| icon.size.large | --fs-icon-size-large | 24px | dimension |
-| icon.strokeWidth | --fs-icon-stroke-width | 2 | number |
+| Semantic path    | CSS property           | Initial value | Type      |
+| ---------------- | ---------------------- | ------------- | --------- |
+| icon.size.small  | --fs-icon-size-small   | 16px          | dimension |
+| icon.size.medium | --fs-icon-size-medium  | 20px          | dimension |
+| icon.size.large  | --fs-icon-size-large   | 24px          | dimension |
+| icon.strokeWidth | --fs-icon-stroke-width | 2             | number    |
 
 Reference existing primitives when suitable and add missing raw values in primitives.json. The sizes match a compact icon rhythm and preserve the old moon's 20px default. Stroke width is unitless in SVG coordinate space; it is not a CSS spacing token. The 24×24 viewBox and round caps/joins describe the artwork convention, not a third token layer. Use ordinary scaling strokes, so 2 user units scale with icon size rather than vector-effect non-scaling-stroke.
 

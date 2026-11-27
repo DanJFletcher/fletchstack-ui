@@ -8,18 +8,28 @@ import { Link } from '../Link';
 
 it('announces an explicit new-tab destination', () => {
   // arrange
-  const given = <Link href="https://example.com/docs" target="_blank">Read documentation</Link>;
+  const given = (
+    <Link href="https://example.com/docs" target="_blank">
+      Read documentation
+    </Link>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('link', { name: 'Read documentation' })).toHaveAccessibleDescription('Opens in a new tab.');
+  expect(screen.getByRole('link', { name: 'Read documentation' })).toHaveAccessibleDescription(
+    'Opens in a new tab.',
+  );
 });
 
 it('keeps external destinations in the current tab unless explicitly requested', () => {
   // arrange
-  const given = <Link href="https://example.com/docs" icon={<span>Destination</span>}>Documentation</Link>;
+  const given = (
+    <Link href="https://example.com/docs" icon={<span>Destination</span>}>
+      Documentation
+    </Link>
+  );
 
   // act
   render(given);
@@ -31,19 +41,32 @@ it('keeps external destinations in the current tab unless explicitly requested',
 
 it('preserves caller context when announcing a case-insensitive new-tab target', () => {
   // arrange
-  const given = <><p id="context">Reference material.</p><Link href="/docs" target="_BLANK" rel="noreferrer author" aria-describedby="context">Documentation</Link></>;
+  const given = (
+    <>
+      <p id="context">Reference material.</p>
+      <Link href="/docs" target="_BLANK" rel="noreferrer author" aria-describedby="context">
+        Documentation
+      </Link>
+    </>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('link')).toHaveAccessibleDescription('Reference material. Opens in a new tab.');
+  expect(screen.getByRole('link')).toHaveAccessibleDescription(
+    'Reference material. Opens in a new tab.',
+  );
   expect(screen.getByRole('link')).toHaveAttribute('rel', 'noreferrer author noopener');
 });
 
 it('preserves native named targets and relationships', () => {
   // arrange
-  const given = <Link href="/docs" target="reference-window" rel="author">Documentation</Link>;
+  const given = (
+    <Link href="/docs" target="reference-window" rel="author">
+      Documentation
+    </Link>
+  );
 
   // act
   render(given);
@@ -67,7 +90,11 @@ it('preserves an empty-string href for native current-page navigation', () => {
 
 it('renders unavailable text without a hyperlink role', () => {
   // arrange
-  const given = <Link target="_blank" rel="author" tabIndex={0}>Documentation</Link>;
+  const given = (
+    <Link target="_blank" rel="author" tabIndex={0}>
+      Documentation
+    </Link>
+  );
 
   // act
   render(given);
@@ -98,7 +125,10 @@ it('does not handle auxiliary activation without a destination', () => {
   render(<Link onAuxClick={onAuxClick}>Documentation</Link>);
 
   // act
-  fireEvent(screen.getByText('Documentation'), new MouseEvent('auxclick', { bubbles: true, button: 1 }));
+  fireEvent(
+    screen.getByText('Documentation'),
+    new MouseEvent('auxclick', { bubbles: true, button: 1 }),
+  );
 
   // assert
   expect(onAuxClick).not.toHaveBeenCalled();
@@ -106,8 +136,12 @@ it('does not handle auxiliary activation without a destination', () => {
 
 it('preserves modified native click events for consumers', () => {
   // arrange
-  const onClick = vi.fn(event => event.preventDefault());
-  render(<Link href="/docs" onClick={onClick}>Documentation</Link>);
+  const onClick = vi.fn((event) => event.preventDefault());
+  render(
+    <Link href="/docs" onClick={onClick}>
+      Documentation
+    </Link>,
+  );
 
   // act
   fireEvent.click(screen.getByRole('link'), { ctrlKey: true });
@@ -119,7 +153,18 @@ it('preserves modified native click events for consumers', () => {
 it('forwards native download attributes and a native anchor ref', () => {
   // arrange
   const ref = createRef<HTMLAnchorElement>();
-  const given = <Link ref={ref} href="/guide.pdf" download="guide.pdf" className="custom" variant="standalone" style={{ '--fs-link-icon-gap': '12px' }}>Download guide</Link>;
+  const given = (
+    <Link
+      ref={ref}
+      href="/guide.pdf"
+      download="guide.pdf"
+      className="custom"
+      variant="standalone"
+      style={{ '--fs-link-icon-gap': '12px' }}
+    >
+      Download guide
+    </Link>
+  );
 
   // act
   render(given);
@@ -133,18 +178,33 @@ it('forwards native download attributes and a native anchor ref', () => {
 
 it('assigns independent announcements to repeated new-tab links', () => {
   // arrange
-  const given = <><Link href="/first" target="_blank">First</Link><Link href="/second" target="_blank">Second</Link></>;
+  const given = (
+    <>
+      <Link href="/first" target="_blank">
+        First
+      </Link>
+      <Link href="/second" target="_blank">
+        Second
+      </Link>
+    </>
+  );
 
   // act
   render(given);
 
   // assert
-  expect(screen.getByRole('link', { name: 'First' }).getAttribute('aria-describedby')).not.toBe(screen.getByRole('link', { name: 'Second' }).getAttribute('aria-describedby'));
+  expect(screen.getByRole('link', { name: 'First' }).getAttribute('aria-describedby')).not.toBe(
+    screen.getByRole('link', { name: 'Second' }).getAttribute('aria-describedby'),
+  );
 });
 
 it('preserves native hidden behavior', () => {
   // arrange
-  const given = <Link href="/docs" hidden>Documentation</Link>;
+  const given = (
+    <Link href="/docs" hidden>
+      Documentation
+    </Link>
+  );
 
   // act
   render(given);

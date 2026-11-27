@@ -10,7 +10,11 @@ import { AppContent } from '../AppContent';
 
 it('preserves the native hidden attribute', () => {
   // arrange
-  const given = <AppContent hidden><span>Hidden content</span></AppContent>;
+  const given = (
+    <AppContent hidden>
+      <span>Hidden content</span>
+    </AppContent>
+  );
 
   // act
   render(given);

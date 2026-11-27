@@ -10,7 +10,11 @@ import { AppShell } from '../AppShell';
 
 it('preserves the native hidden attribute', () => {
   // arrange
-  const given = <AppShell hidden><span>Hidden content</span></AppShell>;
+  const given = (
+    <AppShell hidden>
+      <span>Hidden content</span>
+    </AppShell>
+  );
 
   // act
   render(given);

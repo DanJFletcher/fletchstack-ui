@@ -2,9 +2,12 @@
 import '../../../../tests/support/dom';
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
-import { accordionContracts, animatedServerMarkup } from '../../../../tests/support/accordion-contracts';
+import {
+  accordionContracts,
+  animatedServerMarkup,
+} from '../../../../tests/support/accordion-contracts';
 
-describe('client rendering', () => accordionContracts(element => render(element)));
+describe('client rendering', () => accordionContracts((element) => render(element)));
 it('server hides animated panels before inert can be installed', () => {
   // arrange
   // act

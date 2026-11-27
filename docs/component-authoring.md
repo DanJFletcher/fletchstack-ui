@@ -4,12 +4,12 @@ Use this recipe with the [component skill](../.agents/skills/build-react-compone
 
 ## Choose references by concern
 
-| Concern | Reference | Boundary |
-| --- | --- | --- |
-| Layout and semantic spacing | [Stack](../src/components/stack/Stack.tsx) | Does not define interactive semantics |
-| Passive content | [Badge](../src/components/badge/Badge.tsx) | Its attribute restrictions are specific to passive status |
-| Native controls and field relationships | [Switch](../src/components/switch/Switch.tsx) | Reuse field utilities only when those relationships apply |
-| Resources, fallbacks, hydration | [Avatar](../src/components/avatar/Avatar.tsx) | Loading state is unnecessary for components without resources |
+| Concern                                 | Reference                                     | Boundary                                                      |
+| --------------------------------------- | --------------------------------------------- | ------------------------------------------------------------- |
+| Layout and semantic spacing             | [Stack](../src/components/stack/Stack.tsx)    | Does not define interactive semantics                         |
+| Passive content                         | [Badge](../src/components/badge/Badge.tsx)    | Its attribute restrictions are specific to passive status     |
+| Native controls and field relationships | [Switch](../src/components/switch/Switch.tsx) | Reuse field utilities only when those relationships apply     |
+| Resources, fallbacks, hydration         | [Avatar](../src/components/avatar/Avatar.tsx) | Loading state is unnecessary for components without resources |
 
 Resolve responsibility and parent-owned layout, the native element and accessible name, applicable keyboard/focus behavior, requested variants/states, semantic tokens, and verification boundaries. A short checklist in the conversation is enough. Routine choices need no extra approval or planning document; ask about genuinely missing product decisions. Do not copy unrelated props, variants, or defensive checks from a reference.
 
@@ -29,15 +29,15 @@ Keep shared examples plain React with direct implementation imports. Storybook o
 
 ## Complete integration
 
-| Location | Responsibility |
-| --- | --- |
-| [Source exports](../src/index.ts) and component index | Explicit runtime and type exports |
-| [Style distribution](../scripts/copy-styles.mjs) and [package exports](../package.json) | Individual and ordered combined styles |
-| [Preview](../.storybook/preview.tsx) | CSS import and category placement |
-| [Harness catalog](../tests/browser-harness/catalog.json) | Scenario IDs and actual suite ownership |
-| [Public API test](../tests/unit/build/public-api.test.tsx) | Independently reviewed runtime API |
+| Location                                                                                                    | Responsibility                                |
+| ----------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| [Source exports](../src/index.ts) and component index                                                       | Explicit runtime and type exports             |
+| [Style distribution](../scripts/copy-styles.mjs) and [package exports](../package.json)                     | Individual and ordered combined styles        |
+| [Preview](../.storybook/preview.tsx)                                                                        | CSS import and category placement             |
+| [Harness catalog](../tests/browser-harness/catalog.json)                                                    | Scenario IDs and actual suite ownership       |
+| [Public API test](../tests/unit/build/public-api.test.tsx)                                                  | Independently reviewed runtime API            |
 | [Typed consumer](../scripts/fixtures/consumer.tsx) and [runtime consumer](../scripts/fixtures/consumer.mjs) | Installed package behavior, types, and styles |
-| [Browser behavior matrix](../tests/browser-behavior-matrix.md) | Browser guarantees and owners |
+| [Browser behavior matrix](../tests/browser-behavior-matrix.md)                                              | Browser guarantees and owners                 |
 
 The build-only [component-family inventory](../scripts/component-inventory.json) owns mechanical source/export/style/category mappings and stylesheet order. Multiple public components can belong to one family; internal modules remain explicitly classified. Static exports and preview imports remain reviewable. Do not use inventory membership as browser dependency ownership or generate every expected public contract from it. Shared field CSS stays ahead of consumers; tokens stay first.
 

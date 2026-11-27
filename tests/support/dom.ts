@@ -7,7 +7,11 @@ let previousActEnvironment: PropertyDescriptor | undefined;
 
 beforeAll(() => {
   previousActEnvironment = Object.getOwnPropertyDescriptor(globalThis, 'IS_REACT_ACT_ENVIRONMENT');
-  Object.defineProperty(globalThis, 'IS_REACT_ACT_ENVIRONMENT', { configurable: true, writable: true, value: true });
+  Object.defineProperty(globalThis, 'IS_REACT_ACT_ENVIRONMENT', {
+    configurable: true,
+    writable: true,
+    value: true,
+  });
 });
 
 afterEach(cleanup);

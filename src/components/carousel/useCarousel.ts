@@ -7,29 +7,60 @@ import type { CarouselProps } from './types.js';
  * Own selection requests and rotation pauses while preserving controlled state.
  **/
 export function useCarousel(props: CarouselProps): CarouselModel {
-  const [stopped, stop] = useState(false), [hovered, hover] = useState(false);
-  const reduced = useReducedMotion(), pointerStop = useRef<boolean | null>(null);
+  const [stopped, stop] = useState(false),
+    [hovered, hover] = useState(false);
+  const reduced = useReducedMotion(),
+    pointerStop = useRef<boolean | null>(null);
   const { index, select } = useSelection(props, stop);
-  const playing = Boolean(props.autoPlay && !stopped && !reduced && props.slides.length > 1 && (props.loop || index < props.slides.length - 1));
+  const playing = Boolean(
+    props.autoPlay &&
+    !stopped &&
+    !reduced &&
+    props.slides.length > 1 &&
+    (props.loop || index < props.slides.length - 1),
+  );
   const rotating = playing && !hovered;
   useRotation(rotating, props.autoPlayInterval, () => select(index + 1, false));
-  return { index, playing, rotating, reduced, select, stop, hover, pointerStop, toggle: () => { stop(pointerStop.current ?? !stopped); pointerStop.current = null; }, stopped };
+  return {
+    index,
+    playing,
+    rotating,
+    reduced,
+    select,
+    stop,
+    hover,
+    pointerStop,
+    toggle: () => {
+      stop(pointerStop.current ?? !stopped);
+      pointerStop.current = null;
+    },
+    stopped,
+  };
 }
 
 /**
  * Resolve controlled/uncontrolled selection and emit only changed index requests.
  **/
-function useSelection(props: CarouselProps, stop: (stopped: boolean) => void): Pick<CarouselModel, 'index' | 'select'> {
+function useSelection(
+  props: CarouselProps,
+  stop: (stopped: boolean) => void,
+): Pick<CarouselModel, 'index' | 'select'> {
   const [internal, setInternal] = useState(props.defaultIndex ?? 0);
   const index = clampIndex(props.index ?? internal, props.slides.length);
   /**
    * Stop manual rotation before requesting a bounded selection.
    **/
   const select = (requested: number, manual = true) => {
-    if (manual) { stop(true); }
+    if (manual) {
+      stop(true);
+    }
     const target = nextIndex(requested, props.slides.length, props.loop ?? false);
-    if (target === index) { return; }
-    if (props.index === undefined) { setInternal(target); }
+    if (target === index) {
+      return;
+    }
+    if (props.index === undefined) {
+      setInternal(target);
+    }
     props.onIndexChange?.(target);
   };
   return { index, select };
@@ -40,8 +71,11 @@ function useSelection(props: CarouselProps, stop: (stopped: boolean) => void): P
  **/
 function useRotation(rotating: boolean, interval: number | undefined, advance: () => void): void {
   useEffect(() => {
-    if (!rotating) { return; }
-    const delay = interval !== undefined && Number.isFinite(interval) ? Math.max(1000, interval) : 5000;
+    if (!rotating) {
+      return;
+    }
+    const delay =
+      interval !== undefined && Number.isFinite(interval) ? Math.max(1000, interval) : 5000;
     const timer = window.setTimeout(advance, delay);
     return () => window.clearTimeout(timer);
   }, [rotating, interval, advance]);

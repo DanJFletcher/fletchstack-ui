@@ -6,12 +6,12 @@ The owner-supplied Stack design and request approve this optional vertical layou
 
 `Stack` renders a native div. It supports children, native div attributes, className, a forwarded HTMLDivElement ref and typed `StackStyle` CSS/token overrides. `gap` is `none`, `related` (default), `group`, or `section`. `align` is `stretch` (default), `start`, `center`, or `end`. No horizontal direction, reverse, wrapping, breakpoint objects, automatic separators or arbitrary styling props are supplied.
 
-| Gap | Existing semantic role | Initial value in both themes |
-| --- | --- | --- |
-| none | Literal zero | 0 |
-| related | `--fs-space-gap-related` | 16px |
-| group | `--fs-space-stack-group` | 24px |
-| section | `--fs-layout-section-gap` | 64px |
+| Gap     | Existing semantic role    | Initial value in both themes |
+| ------- | ------------------------- | ---------------------------- |
+| none    | Literal zero              | 0                            |
+| related | `--fs-space-gap-related`  | 16px                         |
+| group   | `--fs-space-stack-group`  | 24px                         |
+| section | `--fs-layout-section-gap` | 64px                         |
 
 These existing variables are used directly: no new tokens or aliases are needed. Scoped overrides inherit normally, while explicit nested themes restore their complete defaults. The component CSS contains no breakpoint. Consumers can change the existing roles with their own scoped CSS/media queries; Stack stays vertical at every width. Use the optional [Cluster](./cluster.md) component for horizontal wrapping relationships. Ordinary wrapping flex rows remain available.
 
@@ -38,10 +38,12 @@ import 'fletchstack-ui/button.css';
   <form>
     <Stack gap="group">
       <TextInput label="Project name" name="project" />
-      <Stack align="start"><Button type="submit">Save changes</Button></Stack>
+      <Stack align="start">
+        <Button type="submit">Save changes</Button>
+      </Stack>
     </Stack>
   </form>
-</Container>
+</Container>;
 ```
 
 Use combined `styles.css` or the appropriate standalone stylesheets. JavaScript imports no CSS, browser globals, providers or layout effects, and CSS layout works before hydration. Storybook: Components → Layout → Stack. All example outlines, measurement blocks and margin resets belong to demonstration CSS or consumer content; they are not Stack's appearance.

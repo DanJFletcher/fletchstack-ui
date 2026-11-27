@@ -23,8 +23,16 @@ export async function writeProject(root, document, themes = {}) {
   const { primitive, ...corporate } = document;
   await mkdir(new URL('tokens', root));
   await mkdir(new URL('docs', root));
-  const documents = { 'primitives.json': { $type: document.$type, primitive }, 'corporate.json': corporate, ...themes };
-  await Promise.all(Object.entries(documents).map(([name, value]) => writeFile(new URL(`tokens/${name}`, root), JSON.stringify(value))));
+  const documents = {
+    'primitives.json': { $type: document.$type, primitive },
+    'corporate.json': corporate,
+    ...themes,
+  };
+  await Promise.all(
+    Object.entries(documents).map(([name, value]) =>
+      writeFile(new URL(`tokens/${name}`, root), JSON.stringify(value)),
+    ),
+  );
   await writeFile(new URL('tokens/README.md', root), 'Ignored by theme discovery.');
 }
 
@@ -34,6 +42,8 @@ export async function writeProject(root, document, themes = {}) {
 export function tokenDocument(type, value) {
   return {
     primitive: { sample: { $type: type, $value: value } },
-    semantic: { sample: { $type: type, $value: '{primitive.sample}', $description: 'Example purpose.' } },
+    semantic: {
+      sample: { $type: type, $value: '{primitive.sample}', $description: 'Example purpose.' },
+    },
   };
 }

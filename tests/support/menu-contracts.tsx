@@ -9,16 +9,46 @@ import type { MenuItem } from '../../src/components/menu/types';
  * Build a synthetic recursive action configuration with repeated IDs in different sibling sets.
  **/
 function items(selected = vi.fn()): MenuItem[] {
-  return [{ type: 'item', id: 'rename', label: 'Rename', onSelect: selected },
-    { type: 'submenu', id: 'export', label: 'Export', items: [
-      { type: 'item', id: 'pdf', label: 'Download PDF', onSelect: selected },
-      { type: 'item', id: 'csv', label: 'Download CSV', onSelect: selected }] },
+  return [
+    { type: 'item', id: 'rename', label: 'Rename', onSelect: selected },
+    {
+      type: 'submenu',
+      id: 'export',
+      label: 'Export',
+      items: [
+        { type: 'item', id: 'pdf', label: 'Download PDF', onSelect: selected },
+        { type: 'item', id: 'csv', label: 'Download CSV', onSelect: selected },
+      ],
+    },
     { type: 'divider', id: 'divider' },
     { type: 'item', id: 'disabled', label: 'Delete', disabled: true, onSelect: selected },
-    { type: 'item', id: 'link', label: 'Guide', href: '#guide', icon: <svg role="img" aria-label="Guide icon" /> },
-    { type: 'submenu', id: 'share', label: 'Share', items: [
-      { type: 'submenu', id: 'team', label: 'Team', items: [{ type: 'item', id: 'pdf', label: 'Copy team link', onSelect: selected }] },
-      { type: 'submenu', id: 'public', label: 'Public', items: [{ type: 'item', id: 'pdf', label: 'Copy public link', onSelect: selected }] }] }];
+    {
+      type: 'item',
+      id: 'link',
+      label: 'Guide',
+      href: '#guide',
+      icon: <svg role="img" aria-label="Guide icon" />,
+    },
+    {
+      type: 'submenu',
+      id: 'share',
+      label: 'Share',
+      items: [
+        {
+          type: 'submenu',
+          id: 'team',
+          label: 'Team',
+          items: [{ type: 'item', id: 'pdf', label: 'Copy team link', onSelect: selected }],
+        },
+        {
+          type: 'submenu',
+          id: 'public',
+          label: 'Public',
+          items: [{ type: 'item', id: 'pdf', label: 'Copy public link', onSelect: selected }],
+        },
+      ],
+    },
+  ];
 }
 
 /**
@@ -26,7 +56,15 @@ function items(selected = vi.fn()): MenuItem[] {
  **/
 function Controlled() {
   const [open, setOpen] = useState(false);
-  return <Menu triggerLabel="Actions" menuLabel="Project menu" items={items()} open={open} onOpenChange={setOpen} />;
+  return (
+    <Menu
+      triggerLabel="Actions"
+      menuLabel="Project menu"
+      items={items()}
+      open={open}
+      onOpenChange={setOpen}
+    />
+  );
 }
 
 /**
@@ -36,7 +74,14 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
   it('supports decorative trigger content with an independent accessible name', () => {
     // arrange
     // act
-    mount(<Menu triggerLabel="Actions for record one" menuLabel="Record one" trigger={<span aria-hidden="true">…</span>} items={[]} />);
+    mount(
+      <Menu
+        triggerLabel="Actions for record one"
+        menuLabel="Record one"
+        trigger={<span aria-hidden="true">…</span>}
+        items={[]}
+      />,
+    );
     // assert
     expect(screen.getByRole('button', { name: 'Actions for record one' })).toHaveTextContent('…');
   });
@@ -46,7 +91,10 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
     mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={items()} />);
 
     // assert
-    expect(screen.getByRole('button', { name: 'Actions' })).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.getByRole('button', { name: 'Actions' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   });
   it('renders an initial menu with its own accessible name', () => {
@@ -56,9 +104,12 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
 
     // assert
     expect(screen.getByRole('menu', { name: 'Project menu' })).toBeVisible();
-    expect(screen.getByRole('button', { name: 'Actions' })).toHaveAttribute('aria-controls', screen.getByRole('menu').id);
+    expect(screen.getByRole('button', { name: 'Actions' })).toHaveAttribute(
+      'aria-controls',
+      screen.getByRole('menu').id,
+    );
   });
-  it.each(['{Enter}', ' '])('%s opens the root and focuses its first enabled item', async key => {
+  it.each(['{Enter}', ' '])('%s opens the root and focuses its first enabled item', async (key) => {
     // arrange
     const user = userEvent.setup();
     mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={items()} />);
@@ -70,7 +121,7 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
     // assert
     expect(screen.getByRole('menuitem', { name: 'Rename' })).toHaveFocus();
   });
-  it.each(['{Enter}', ' ', '{ArrowRight}'])('%s enters the focused submenu', async key => {
+  it.each(['{Enter}', ' ', '{ArrowRight}'])('%s enters the focused submenu', async (key) => {
     // arrange
     const user = userEvent.setup();
     mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={items()} defaultOpen />);
@@ -83,7 +134,7 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
     expect(screen.getByRole('menuitem', { name: 'Download PDF' })).toHaveFocus();
     expect(screen.getByRole('menu', { name: 'Export' })).toBeVisible();
   });
-  it.each(['Escape', 'ArrowLeft'])('%s returns one level to its parent trigger', key => {
+  it.each(['Escape', 'ArrowLeft'])('%s returns one level to its parent trigger', (key) => {
     // arrange
     mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={items()} defaultOpen />);
     fireEvent.click(screen.getByRole('menuitem', { name: 'Export' }));
@@ -106,7 +157,14 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
     expect(screen.getByRole('button', { name: 'Actions' })).toHaveFocus();
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   });
-  it.each([{ key: 'ArrowDown', from: 'Export', expected: 'Guide' }, { key: 'ArrowUp', from: 'Guide', expected: 'Export' }, { key: 'Home', from: 'Share', expected: 'Rename' }, { key: 'End', from: 'Rename', expected: 'Share' }, { key: 'ArrowUp', from: 'Rename', expected: 'Share' }, { key: 'ArrowDown', from: 'Share', expected: 'Rename' }])('$key moves from $from to $expected within one level', ({ key, from, expected }) => {
+  it.each([
+    { key: 'ArrowDown', from: 'Export', expected: 'Guide' },
+    { key: 'ArrowUp', from: 'Guide', expected: 'Export' },
+    { key: 'Home', from: 'Share', expected: 'Rename' },
+    { key: 'End', from: 'Rename', expected: 'Share' },
+    { key: 'ArrowUp', from: 'Rename', expected: 'Share' },
+    { key: 'ArrowDown', from: 'Share', expected: 'Rename' },
+  ])('$key moves from $from to $expected within one level', ({ key, from, expected }) => {
     // arrange
     mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={items()} defaultOpen />);
     screen.getByRole('menuitem', { name: from }).focus();
@@ -175,10 +233,13 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
     // assert
     expect(screen.queryByRole('menu', { name: 'Export' })).not.toBeInTheDocument();
   });
-  it.each(['{Enter}', ' '])('%s activates a leaf exactly once', async key => {
+  it.each(['{Enter}', ' '])('%s activates a leaf exactly once', async (key) => {
     // arrange
-    const user = userEvent.setup(), selected = vi.fn();
-    mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={items(selected)} defaultOpen />);
+    const user = userEvent.setup(),
+      selected = vi.fn();
+    mount(
+      <Menu triggerLabel="Actions" menuLabel="Project menu" items={items(selected)} defaultOpen />,
+    );
     screen.getByRole('menuitem', { name: 'Rename' }).focus();
 
     // act
@@ -190,7 +251,15 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
   });
   it('closeOnSelect=false keeps the selected menu open', () => {
     // arrange
-    mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={items()} defaultOpen closeOnSelect={false} />);
+    mount(
+      <Menu
+        triggerLabel="Actions"
+        menuLabel="Project menu"
+        items={items()}
+        defaultOpen
+        closeOnSelect={false}
+      />,
+    );
 
     // act
     fireEvent.click(screen.getByRole('menuitem', { name: 'Rename' }));
@@ -200,7 +269,16 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
   });
   it('a selection handler can prevent dismissal', () => {
     // arrange
-    mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={[{ type: 'item', id: 'save', label: 'Save', onSelect: event => event.preventDefault() }]} defaultOpen />);
+    mount(
+      <Menu
+        triggerLabel="Actions"
+        menuLabel="Project menu"
+        items={[
+          { type: 'item', id: 'save', label: 'Save', onSelect: (event) => event.preventDefault() },
+        ]}
+        defaultOpen
+      />,
+    );
 
     // act
     fireEvent.click(screen.getByRole('menuitem', { name: 'Save' }));
@@ -223,7 +301,23 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
   it('disabled native links cannot activate or dismiss', () => {
     // arrange
     const selected = vi.fn();
-    mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={[{ type: 'item', id: 'guide', label: 'Guide', href: '#guide', disabled: true, onSelect: selected }]} defaultOpen />);
+    mount(
+      <Menu
+        triggerLabel="Actions"
+        menuLabel="Project menu"
+        items={[
+          {
+            type: 'item',
+            id: 'guide',
+            label: 'Guide',
+            href: '#guide',
+            disabled: true,
+            onSelect: selected,
+          },
+        ]}
+        defaultOpen
+      />,
+    );
 
     // act
     fireEvent.click(screen.getByRole('menuitem', { name: 'Guide' }));
@@ -257,7 +351,15 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
   it('controlled opening reports changes without overriding its parent', () => {
     // arrange
     const changed = vi.fn();
-    mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={items()} open={false} onOpenChange={changed} />);
+    mount(
+      <Menu
+        triggerLabel="Actions"
+        menuLabel="Project menu"
+        items={items()}
+        open={false}
+        onOpenChange={changed}
+      />,
+    );
 
     // act
     fireEvent.click(screen.getByRole('button', { name: 'Actions' }));
@@ -278,7 +380,15 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
   });
   it('empty menus keep an accessible named container and feedback', () => {
     // arrange
-    mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={[]} defaultOpen emptyMessage="Nothing to do" />);
+    mount(
+      <Menu
+        triggerLabel="Actions"
+        menuLabel="Project menu"
+        items={[]}
+        defaultOpen
+        emptyMessage="Nothing to do"
+      />,
+    );
 
     // act
     fireEvent.keyDown(screen.getByRole('menu'), { key: 'ArrowDown' });
@@ -311,7 +421,16 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
     const ref = createRef<HTMLDivElement>();
 
     // act
-    mount(<Menu ref={ref} className="project-menu" style={{ '--fs-menu-radius': '0px' }} triggerLabel="Actions" menuLabel="Project menu" items={items()} />);
+    mount(
+      <Menu
+        ref={ref}
+        className="project-menu"
+        style={{ '--fs-menu-radius': '0px' }}
+        triggerLabel="Actions"
+        menuLabel="Project menu"
+        items={items()}
+      />,
+    );
 
     // assert
     expect(ref.current).toHaveClass('project-menu');
@@ -320,14 +439,25 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
   it('uses different instance IDs for equal item configurations', () => {
     // arrange
     // act
-    mount(<><Menu triggerLabel="First" menuLabel="First actions" items={items()} defaultOpen /><Menu triggerLabel="Second" menuLabel="Second actions" items={items()} defaultOpen /></>);
+    mount(
+      <>
+        <Menu triggerLabel="First" menuLabel="First actions" items={items()} defaultOpen />
+        <Menu triggerLabel="Second" menuLabel="Second actions" items={items()} defaultOpen />
+      </>,
+    );
 
     // assert
-    expect(screen.getByRole('button', { name: 'First' }).getAttribute('aria-controls')).not.toBe(screen.getByRole('button', { name: 'Second' }).getAttribute('aria-controls'));
+    expect(screen.getByRole('button', { name: 'First' }).getAttribute('aria-controls')).not.toBe(
+      screen.getByRole('button', { name: 'Second' }).getAttribute('aria-controls'),
+    );
   });
-  it.each([{ type: 'divider', id: '' }, { type: 'item', id: 'blank', label: ' ', onSelect: () => {} }] as MenuItem[])('rejects invalid identities or labels: $id', item => {
+  it.each([
+    { type: 'divider', id: '' },
+    { type: 'item', id: 'blank', label: ' ', onSelect: () => {} },
+  ] as MenuItem[])('rejects invalid identities or labels: $id', (item) => {
     // arrange
-    const act = () => mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={[item]} />);
+    const act = () =>
+      mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={[item]} />);
 
     // act
     // assert
@@ -335,7 +465,17 @@ export function menuContracts(mount: (element: ReactElement) => unknown) {
   });
   it('rejects duplicate IDs within a sibling set', () => {
     // arrange
-    const act = () => mount(<Menu triggerLabel="Actions" menuLabel="Project menu" items={[{ type: 'divider', id: 'same' }, { type: 'divider', id: 'same' }]} />);
+    const act = () =>
+      mount(
+        <Menu
+          triggerLabel="Actions"
+          menuLabel="Project menu"
+          items={[
+            { type: 'divider', id: 'same' },
+            { type: 'divider', id: 'same' },
+          ]}
+        />,
+      );
 
     // act
     // assert

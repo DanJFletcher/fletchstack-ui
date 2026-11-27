@@ -10,7 +10,11 @@ import { BottomNavigation } from '../BottomNavigation';
 
 it('preserves the native hidden attribute', () => {
   // arrange
-  const given = <BottomNavigation aria-label="Hidden" hidden><span>Hidden content</span></BottomNavigation>;
+  const given = (
+    <BottomNavigation aria-label="Hidden" hidden>
+      <span>Hidden content</span>
+    </BottomNavigation>
+  );
 
   // act
   render(given);

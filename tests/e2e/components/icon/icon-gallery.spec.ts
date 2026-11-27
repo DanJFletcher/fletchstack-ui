@@ -1,6 +1,8 @@
 import { expect, test } from '../../fixtures/test';
 
-test('the actual theme toolbar switches Gallery and its native control palette', async ({ page }) => {
+test('the actual theme toolbar switches Gallery and its native control palette', async ({
+  page,
+}) => {
   await page.goto('/?path=/story/components-icon--gallery');
   const preview = page.frameLocator('#storybook-preview-iframe');
   const search = preview.getByRole('searchbox', { name: 'Search icons' });

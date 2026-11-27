@@ -8,19 +8,30 @@ import 'fletchstack-ui/styles.css';
 
 const items = [
   {
-    id: 'direction', type: 'single', title: 'What should we build next?',
+    id: 'direction',
+    type: 'single',
+    title: 'What should we build next?',
     options: [{ value: 'history', label: 'Searchable history' }],
     other: { label: 'Another feature', placeholder: 'Describe your idea' },
   },
   {
-    id: 'context', type: 'multiple', required: false,
+    id: 'context',
+    type: 'multiple',
+    required: false,
     title: 'Which context should we include?',
-    options: [{ value: 'tests', label: 'Tests' }, { value: 'docs', label: 'Documentation' }],
+    options: [
+      { value: 'tests', label: 'Tests' },
+      { value: 'docs', label: 'Documentation' },
+    ],
   },
 ] satisfies readonly QuestionnaireItem[];
 
-<Questionnaire aria-label="Plan the next feature" items={items}
-  labels={{ submit: 'Save plan' }} onSubmit={savePlan} />
+<Questionnaire
+  aria-label="Plan the next feature"
+  items={items}
+  labels={{ submit: 'Save plan' }}
+  onSubmit={savePlan}
+/>;
 ```
 
 `savePlan` is application code receiving a validated snapshot; it may return a promise. The application owns transport, storage, branching, cancellation and the success destination. The component never automatically advances on selection or replaces itself on success.
@@ -29,19 +40,19 @@ const items = [
 
 All public types are exported at the package root: `QuestionnaireProps`, `QuestionnaireStyle`, `QuestionnaireItem`, `QuestionnaireOption`, `QuestionnaireTextField`, `QuestionnaireAnswer`, `QuestionnaireAnswers`, `QuestionnaireErrors`, and `QuestionnaireLabels`.
 
-| Prop | Type / default | Behavior |
-| --- | --- | --- |
-| `items` | readonly `QuestionnaireItem[]`, required | Ordered single, multiple or text questions, keyed by stable `id`. |
-| `answers`, `onAnswersChange` | `QuestionnaireAnswers`, callback | Controlled drafts; requests do not override the supplied prop. |
-| `defaultAnswers` | `QuestionnaireAnswers`, `{}` | Mount-time uncontrolled defaults. |
-| `value`, `onValueChange` | question ID, callback | Independently controlled navigation. Focus moves after the active ID changes. |
-| `defaultValue` | question ID, first item | Mount-time resume position. |
-| `onSubmit` | `(answers) => void \| Promise<void>`, required | Validated, normalized full snapshot. |
-| `validate` | synchronous `(answers) => QuestionnaireErrors` | Pure application validator after built-in rules; receives normalized answers. |
-| `shortcuts` | `none` (default), `letters`, `numbers` | Optional focused-question choice shortcuts. |
-| `labels` | partial `QuestionnaireLabels` | Previous, Next, Skip, Submit, pending/error/empty copy, and `progress(position, total)`. |
-| `className`, `style` | native class, `QuestionnaireStyle` | Instance-scoped CSS and semantic `--fs-questionnaire-*` overrides. |
-| native form props / ref | native attributes / `HTMLFormElement` | Naming, IDs, handlers and native reset. Document-navigation form props and children are owned by the component. |
+| Prop                         | Type / default                                 | Behavior                                                                                                        |
+| ---------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `items`                      | readonly `QuestionnaireItem[]`, required       | Ordered single, multiple or text questions, keyed by stable `id`.                                               |
+| `answers`, `onAnswersChange` | `QuestionnaireAnswers`, callback               | Controlled drafts; requests do not override the supplied prop.                                                  |
+| `defaultAnswers`             | `QuestionnaireAnswers`, `{}`                   | Mount-time uncontrolled defaults.                                                                               |
+| `value`, `onValueChange`     | question ID, callback                          | Independently controlled navigation. Focus moves after the active ID changes.                                   |
+| `defaultValue`               | question ID, first item                        | Mount-time resume position.                                                                                     |
+| `onSubmit`                   | `(answers) => void \| Promise<void>`, required | Validated, normalized full snapshot.                                                                            |
+| `validate`                   | synchronous `(answers) => QuestionnaireErrors` | Pure application validator after built-in rules; receives normalized answers.                                   |
+| `shortcuts`                  | `none` (default), `letters`, `numbers`         | Optional focused-question choice shortcuts.                                                                     |
+| `labels`                     | partial `QuestionnaireLabels`                  | Previous, Next, Skip, Submit, pending/error/empty copy, and `progress(position, total)`.                        |
+| `className`, `style`         | native class, `QuestionnaireStyle`             | Instance-scoped CSS and semantic `--fs-questionnaire-*` overrides.                                              |
+| native form props / ref      | native attributes / `HTMLFormElement`          | Naming, IDs, handlers and native reset. Document-navigation form props and children are owned by the component. |
 
 Questions have a nonempty unique `id`, visible `title`, optional `description`, and `required` (default true). Single/multiple questions have unique nonempty option values, visible option labels, optional descriptions/disabled states, and optional `other: QuestionnaireTextField`. Text questions use `input: QuestionnaireTextField`. Text fields have a visible `label`, optional `placeholder`, `multiline` and nonnegative integer `maxLength`. Choice questions need an enabled option or a usable custom field. Malformed definitions throw descriptive errors.
 

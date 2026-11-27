@@ -4,17 +4,17 @@ Completed November 22, 2026. The component contract is in [Toast](./toast.md); e
 
 ## Final results
 
-| Check | Result |
-| --- | --- |
-| Full unit coverage | 1,903 tests; 100% statements, branches, functions and lines, with per-file gates |
-| Full integration coverage | 1,681 tests; the same independent 100% gates; four workers |
-| All Storybook render/play/axe checks | 675 passed |
-| Full component browser suite | 734 passed |
-| Full retained Storybook browser suite | 50 passed; one startup timeout passed on focused rerun |
-| Lint, TypeScript, structural registration, whitespace checks | Passed |
-| Installed React 18/19 consumers | Types, runtime exports, individual/combined CSS, bundling and deterministic SSR passed |
-| Foundation browser checks | Both themes, control states, narrow reflow, enlarged text and spacing passed |
-| Production Storybook build | Passed |
+| Check                                                        | Result                                                                                 |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| Full unit coverage                                           | 1,903 tests; 100% statements, branches, functions and lines, with per-file gates       |
+| Full integration coverage                                    | 1,681 tests; the same independent 100% gates; four workers                             |
+| All Storybook render/play/axe checks                         | 675 passed                                                                             |
+| Full component browser suite                                 | 734 passed                                                                             |
+| Full retained Storybook browser suite                        | 50 passed; one startup timeout passed on focused rerun                                 |
+| Lint, TypeScript, structural registration, whitespace checks | Passed                                                                                 |
+| Installed React 18/19 consumers                              | Types, runtime exports, individual/combined CSS, bundling and deterministic SSR passed |
+| Foundation browser checks                                    | Both themes, control states, narrow reflow, enlarged text and spacing passed           |
+| Production Storybook build                                   | Passed                                                                                 |
 
 Browser coverage instrumentation was off. Full browser verification was selected because the change adds semantic tokens, public exports and preview registration. Development checks were coverage-free; full coverage began after implementation, tests and review.
 

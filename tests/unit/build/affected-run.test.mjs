@@ -11,9 +11,29 @@ afterEach(() => vi.restoreAllMocks());
  * Model one selected test without filesystem or runner work.
  **/
 function boundaries() {
-  const info = { root: '/repo', base: 'HEAD', resolvedBase: 'head', head: 'head', mergeBase: 'head', changes: [{ path: 'src/example.ts', status: 'M' }], fallback: null };
-  const runner = { inventory: ['example.test.ts'], owners: new Map([['src/example.ts', ['example.test.ts']]]), run: vi.fn().mockResolvedValue(0), close: vi.fn() };
-  return { info, runner, write: vi.fn(), cwd: '/repo', discover: () => info, open: async () => runner };
+  const info = {
+    root: '/repo',
+    base: 'HEAD',
+    resolvedBase: 'head',
+    head: 'head',
+    mergeBase: 'head',
+    changes: [{ path: 'src/example.ts', status: 'M' }],
+    fallback: null,
+  };
+  const runner = {
+    inventory: ['example.test.ts'],
+    owners: new Map([['src/example.ts', ['example.test.ts']]]),
+    run: vi.fn().mockResolvedValue(0),
+    close: vi.fn(),
+  };
+  return {
+    info,
+    runner,
+    write: vi.fn(),
+    cwd: '/repo',
+    discover: () => info,
+    open: async () => runner,
+  };
 }
 
 it('uses the default boundaries for successful command execution', async () => {
@@ -41,7 +61,9 @@ it('explains a dry run without executing selected tests', async () => {
 
   // assert
   expect(result).toBe(0);
-  expect(given.write).toHaveBeenCalledWith(expect.stringContaining('Affected integration: selected'));
+  expect(given.write).toHaveBeenCalledWith(
+    expect.stringContaining('Affected integration: selected'),
+  );
   expect(given.runner.run).not.toHaveBeenCalled();
   expect(given.runner.close).toHaveBeenCalledOnce();
 });
@@ -70,7 +92,9 @@ it('explains and executes the complete project for unavailable history', async (
 
   // assert
   expect(result).toBe(0);
-  expect(given.write).toHaveBeenCalledWith(expect.stringContaining('Comparison history unavailable'));
+  expect(given.write).toHaveBeenCalledWith(
+    expect.stringContaining('Comparison history unavailable'),
+  );
   expect(given.runner.run).toHaveBeenCalledWith(given.runner.inventory);
 });
 
@@ -92,7 +116,9 @@ it('returns an actionable nonzero status for invocation errors', async () => {
   const write = vi.spyOn(console, 'error').mockImplementation(() => {});
 
   // act
-  const result = await affectedMain([], async () => { throw new Error('Required: --base'); });
+  const result = await affectedMain([], async () => {
+    throw new Error('Required: --base');
+  });
 
   // assert
   expect(result).toBe(1);

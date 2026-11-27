@@ -9,7 +9,11 @@ import { Toast } from '../Toast';
 it('keeps the dismiss button from submitting its enclosing form', () => {
   // arrange
   // act
-  const result = render(<form><Toast>Saved</Toast></form>);
+  const result = render(
+    <form>
+      <Toast>Saved</Toast>
+    </form>,
+  );
 
   // assert
   expect(result.getByRole('button')).toHaveAttribute('type', 'button');

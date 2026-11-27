@@ -10,15 +10,27 @@ export function resizeFan(element: Element, width: number): void {
 }
 beforeEach(() => {
   updates.clear();
-  vi.stubGlobal('ResizeObserver', class {
-    private element?: Element;
-    private update: () => void;
-    /**
-     * Retain the observer notification supplied by the component.
-     **/
-    constructor(update: () => void) { this.update = update; }
-    observe = (element: Element) => { this.element = element; updates.set(element, this.update); };
-    disconnect = () => { if (this.element) { updates.delete(this.element); } };
-  });
+  vi.stubGlobal(
+    'ResizeObserver',
+    class {
+      private element?: Element;
+      private update: () => void;
+      /**
+       * Retain the observer notification supplied by the component.
+       **/
+      constructor(update: () => void) {
+        this.update = update;
+      }
+      observe = (element: Element) => {
+        this.element = element;
+        updates.set(element, this.update);
+      };
+      disconnect = () => {
+        if (this.element) {
+          updates.delete(this.element);
+        }
+      };
+    },
+  );
 });
 afterEach(() => vi.unstubAllGlobals());

@@ -13,12 +13,18 @@ const entries: Record<string, { module: string; export: string }> = catalog.scen
  **/
 async function loadScenario(id: string) {
   const entry = entries[id];
-  if (!entry) { throw new Error(`Unknown scenario: ${id}`); }
+  if (!entry) {
+    throw new Error(`Unknown scenario: ${id}`);
+  }
   const loader = loaders[entry.module.replace('tests/browser-harness/', '../')];
-  if (!loader) { throw new Error(`Missing scenario module: ${entry.module}`); }
+  if (!loader) {
+    throw new Error(`Missing scenario module: ${entry.module}`);
+  }
   const module = await loader();
   const scenario = module.scenarios[entry.export];
-  if (!scenario) { throw new Error(`Missing scenario export: ${entry.export}`); }
+  if (!scenario) {
+    throw new Error(`Missing scenario export: ${entry.export}`);
+  }
 
   return { module, scenario };
 }
@@ -32,7 +38,12 @@ async function mountScenario({ story, props = {} }: MountRequest) {
   const args = { ...module.defaults, ...scenario.args, ...overrides };
   const content = scenario.render ? scenario.render(args) : createElement(module.component, args);
 
-  await renderScenario(<main className="showcase" data-theme={String(theme)}>{content}</main>, story);
+  await renderScenario(
+    <main className="showcase" data-theme={String(theme)}>
+      {content}
+    </main>,
+    story,
+  );
 }
 
 window.mount = mountScenario;

@@ -1,6 +1,8 @@
 import { expect, test } from '../fixtures/test';
 
-test('the Storybook sidebar and guide link to runnable spacing examples and tokens', async ({ page }) => {
+test('the Storybook sidebar and guide link to runnable spacing examples and tokens', async ({
+  page,
+}) => {
   await page.goto('/?path=/docs/design-system-spatial-system--docs');
   const preview = page.frameLocator('#storybook-preview-iframe');
   await expect(preview.getByRole('heading', { name: /Spatial system$/i })).toBeVisible();

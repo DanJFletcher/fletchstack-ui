@@ -5,7 +5,10 @@ import type { ReactElement } from 'react';
 import { Tabs } from '../../src/components/tabs/Tabs';
 import type { TabsItem } from '../../src/components/tabs/types';
 
-const items: TabsItem[] = [{ id: 'a', label: 'Alpha', content: 'Alpha text' }, { id: 'b', label: 'Beta', content: 'Beta text' }];
+const items: TabsItem[] = [
+  { id: 'a', label: 'Alpha', content: 'Alpha text' },
+  { id: 'b', label: 'Beta', content: 'Beta text' },
+];
 
 /**
  * Exercise focus ownership and browser-boundary geometry through observable DOM behavior.
@@ -13,13 +16,23 @@ const items: TabsItem[] = [{ id: 'a', label: 'Alpha', content: 'Alpha text' }, {
 export function tabsFocusContracts(render: (element: ReactElement) => RenderResult) {
   it('exposes vertical pills with full-width presentation', () => {
     // arrange
-    const props = { label: 'Workspace', items, variant: 'pills' as const, orientation: 'vertical' as const, fullWidth: true };
+    const props = {
+      label: 'Workspace',
+      items,
+      variant: 'pills' as const,
+      orientation: 'vertical' as const,
+      fullWidth: true,
+    };
 
     // act
     const view = render(<Tabs {...props} />);
 
     // assert
-    expect(view.container.firstChild).toHaveClass('fs-tabs--pills', 'fs-tabs--vertical', 'fs-tabs--full-width');
+    expect(view.container.firstChild).toHaveClass(
+      'fs-tabs--pills',
+      'fs-tabs--vertical',
+      'fs-tabs--full-width',
+    );
     expect(screen.getByRole('tablist')).toHaveAttribute('aria-orientation', 'vertical');
   });
   it('moves focus from the programmatic list target to the first enabled tab', () => {
@@ -33,11 +46,12 @@ export function tabsFocusContracts(render: (element: ReactElement) => RenderResu
     expect(screen.getByRole('tab', { name: 'Alpha' })).toHaveFocus();
   });
   afterEach(() => vi.restoreAllMocks());
-  it.each(['remove', 'disable'])('repairs focused tab after %s', operation => {
+  it.each(['remove', 'disable'])('repairs focused tab after %s', (operation) => {
     // arrange
     const view = render(<Tabs label="Workspace" items={items} />);
     act(() => screen.getByRole('tab', { name: 'Beta' }).focus());
-    const next = operation === 'remove' ? [items[0]!] : [items[0]!, { ...items[1]!, disabled: true }];
+    const next =
+      operation === 'remove' ? [items[0]!] : [items[0]!, { ...items[1]!, disabled: true }];
 
     // act
     view.rerender(<Tabs label="Workspace" items={next} />);
@@ -61,7 +75,9 @@ export function tabsFocusContracts(render: (element: ReactElement) => RenderResu
     // arrange
     const user = userEvent.setup();
     render(<Tabs label="Workspace" items={items} activationMode="manual" />);
-    await user.tab(); await user.keyboard('{ArrowRight}'); await user.tab();
+    await user.tab();
+    await user.keyboard('{ArrowRight}');
+    await user.tab();
 
     // act
     await user.tab({ shift: true });
@@ -69,10 +85,18 @@ export function tabsFocusContracts(render: (element: ReactElement) => RenderResu
     // assert
     expect(screen.getByRole('tab', { name: 'Alpha' })).toHaveFocus();
   });
-  it.each([{ x: 50, expected: -50 }, { x: 220, expected: 60 }, { x: 120, expected: 0 }])('reveals the clipped tab edge at $x within the list', ({ x, expected }) => {
+  it.each([
+    { x: 50, expected: -50 },
+    { x: 220, expected: 60 },
+    { x: 120, expected: 0 },
+  ])('reveals the clipped tab edge at $x within the list', ({ x, expected }) => {
     // arrange
-    vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function rect(this: Element) {
-      return this.getAttribute('role') === 'tablist' ? new DOMRect(100, 0, 100, 20) : new DOMRect(x, 0, 40, 20);
+    vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function rect(
+      this: Element,
+    ) {
+      return this.getAttribute('role') === 'tablist'
+        ? new DOMRect(100, 0, 100, 20)
+        : new DOMRect(x, 0, 40, 20);
     });
     render(<Tabs label="Workspace" items={items} />);
 
@@ -82,20 +106,28 @@ export function tabsFocusContracts(render: (element: ReactElement) => RenderResu
     // assert
     expect(screen.getByRole('tablist').scrollLeft).toBe(expected);
   });
-  it.each([{ ctrlKey: true }, { altKey: true }, { metaKey: true }])('leaves modified navigation to the browser: %j', modifier => {
-    // arrange
-    render(<Tabs label="Workspace" items={items} />);
-    act(() => screen.getByRole('tab', { name: 'Alpha' }).focus());
+  it.each([{ ctrlKey: true }, { altKey: true }, { metaKey: true }])(
+    'leaves modified navigation to the browser: %j',
+    (modifier) => {
+      // arrange
+      render(<Tabs label="Workspace" items={items} />);
+      act(() => screen.getByRole('tab', { name: 'Alpha' }).focus());
 
-    // act
-    fireEvent.keyDown(screen.getByRole('tab', { name: 'Alpha' }), { key: 'ArrowRight', ...modifier });
+      // act
+      fireEvent.keyDown(screen.getByRole('tab', { name: 'Alpha' }), {
+        key: 'ArrowRight',
+        ...modifier,
+      });
 
-    // assert
-    expect(screen.getByRole('tab', { name: 'Alpha' })).toHaveFocus();
-  });
+      // assert
+      expect(screen.getByRole('tab', { name: 'Alpha' })).toHaveFocus();
+    },
+  );
   it('respects consumer capture cancellation of keyboard movement', () => {
     // arrange
-    render(<Tabs label="Workspace" items={items} onKeyDownCapture={event => event.preventDefault()} />);
+    render(
+      <Tabs label="Workspace" items={items} onKeyDownCapture={(event) => event.preventDefault()} />,
+    );
     act(() => screen.getByRole('tab', { name: 'Alpha' }).focus());
 
     // act

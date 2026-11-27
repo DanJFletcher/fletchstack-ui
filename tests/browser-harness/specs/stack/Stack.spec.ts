@@ -6,8 +6,10 @@ import { openScenario } from '../../fixtures/scenario';
  * Measure real participating item separation without assuming item heights.
  **/
 async function itemGaps(stack: Locator) {
-  return stack.evaluate(element => {
-    const boxes = [...element.children].filter(child => getComputedStyle(child).display !== 'none').map(child => child.getBoundingClientRect());
+  return stack.evaluate((element) => {
+    const boxes = [...element.children]
+      .filter((child) => getComputedStyle(child).display !== 'none')
+      .map((child) => child.getBoundingClientRect());
 
     return boxes.slice(1).map((box, index) => box.top - boxes[index]!.bottom);
   });
@@ -17,18 +19,30 @@ async function itemGaps(stack: Locator) {
  * Read logical alignment as physical edges along with the preserved child order.
  **/
 async function alignment(stack: Locator) {
-  return stack.evaluate(element => {
+  return stack.evaluate((element) => {
     const parent = element.getBoundingClientRect();
     const first = element.children[0]!.getBoundingClientRect();
 
-    return { start: first.left - parent.left, end: parent.right - first.right, width: first.width, parent: parent.width, fixed: element.children[1]!.getBoundingClientRect().width, order: [...element.children].map(child => child.textContent) };
+    return {
+      start: first.left - parent.left,
+      end: parent.right - first.right,
+      width: first.width,
+      parent: parent.width,
+      fixed: element.children[1]!.getBoundingClientRect().width,
+      order: [...element.children].map((child) => child.textContent),
+    };
   });
 }
 
 for (const theme of ['corporate', 'luna'] as const) {
   test(`${theme} Stack gap presets preserve every relationship`, async ({ page, mount }) => {
     await openScenario(mount, 'components-stack--gaps', { theme });
-    for (const [gap, pixels] of [['none', 0], ['related', 16], ['group', 24], ['section', 64]] as const) {
+    for (const [gap, pixels] of [
+      ['none', 0],
+      ['related', 16],
+      ['group', 24],
+      ['section', 64],
+    ] as const) {
       await test.step(`${theme} ${gap} Stack uses the existing ${pixels}px relationship`, async () => {
         expect(await itemGaps(page.getByTestId(`gap-${gap}`))).toEqual([pixels, pixels]);
         await expect(page.getByTestId(`gap-${gap}`)).toHaveCSS('flex-direction', 'column');
@@ -36,17 +50,25 @@ for (const theme of ['corporate', 'luna'] as const) {
     }
   });
 
-  test(`${theme} form remains usable at 320px with enlarged and spaced text`, async ({ page, mount }) => {
+  test(`${theme} form remains usable at 320px with enlarged and spaced text`, async ({
+    page,
+    mount,
+  }) => {
     await page.setViewportSize({ width: 320, height: 1000 });
     await openScenario(mount, 'components-stack--form-composition', { theme });
-    await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
+    await page.addStyleTag({
+      content:
+        'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }',
+    });
     await expect(page.getByRole('textbox', { name: 'Project name' })).toBeVisible();
     await expect(page.getByRole('textbox', { name: 'Description' })).toBeVisible();
     await expect(page.getByRole('checkbox', { name: 'Email updates' })).toBeVisible();
     await page.getByRole('textbox', { name: 'Project name' }).fill('Readable project');
     await page.getByRole('button', { name: 'Save changes' }).click();
     await expect(page.getByRole('status')).toHaveText('Project settings saved.');
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
   });
 }
 
@@ -57,13 +79,21 @@ test('Stack alignment presets honor fixed widths', async ({ page, mount }) => {
       const box = await alignment(page.getByTestId(`align-${align}`));
       expect(box.fixed).toBe(120);
       expect(box.order).toEqual(['One', 'Two', 'Three']);
-      const expected = { stretch: { start: 0, end: 0 }, start: { start: 0 }, center: { start: box.end }, end: { end: 0 } };
+      const expected = {
+        stretch: { start: 0, end: 0 },
+        start: { start: 0 },
+        center: { start: box.end },
+        end: { end: 0 },
+      };
       expect(box).toMatchObject(expected[align]);
     });
   }
 });
 
-for (const [align, edge] of [['start', 'end'], ['end', 'start']] as const) {
+for (const [align, edge] of [
+  ['start', 'end'],
+  ['end', 'start'],
+] as const) {
   test(`RTL ${align} follows writing direction without reordering`, async ({ page, mount }) => {
     await openScenario(mount, 'components-stack--alignments');
     await page.addStyleTag({ content: 'html { direction: rtl; }' });
@@ -73,7 +103,10 @@ for (const [align, edge] of [['start', 'end'], ['end', 'start']] as const) {
   });
 }
 
-test('default Stack has related gaps and no inset, surface, boundary or focus stop', async ({ page, mount }) => {
+test('default Stack has related gaps and no inset, surface, boundary or focus stop', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-stack--playground');
   const stack = page.getByTestId('default-stack');
   expect(await itemGaps(stack)).toEqual([16, 16]);
@@ -106,7 +139,10 @@ test('consumer child margins remain additional to the Stack gap', async ({ page,
   await expect(page.getByText('First', { exact: true })).toHaveCSS('margin-bottom', '8px');
 });
 
-test('scoped spacing overrides preserve independent roles and nested theme resets', async ({ page, mount }) => {
+test('scoped spacing overrides preserve independent roles and nested theme resets', async ({
+  page,
+  mount,
+}) => {
   await openScenario(mount, 'components-stack--scoped-overrides');
   expect(await itemGaps(page.getByTestId('scoped-stack'))).toEqual([32, 32]);
   expect(await itemGaps(page.getByTestId('independent-stack'))).toEqual([24, 24]);
@@ -114,7 +150,10 @@ test('scoped spacing overrides preserve independent roles and nested theme reset
   expect(await itemGaps(page.getByTestId('sibling-stack'))).toEqual([16, 16]);
 });
 
-test('consumer responsive gap CSS changes spacing while Stack stays vertical', async ({ page, mount }) => {
+test('consumer responsive gap CSS changes spacing while Stack stays vertical', async ({
+  page,
+  mount,
+}) => {
   await page.setViewportSize({ width: 601, height: 900 });
   await openScenario(mount, 'components-stack--responsive-gap');
   const stack = page.getByTestId('responsive-stack');
@@ -134,19 +173,28 @@ test('Stack can shrink within narrow flex/grid parents', async ({ page, mount })
   await expect(page.getByTestId('grid-stack')).toHaveCSS('min-width', '0px');
 });
 
-test('long children grow under text enlargement with no fixed Stack height or clipping', async ({ page, mount }) => {
+test('long children grow under text enlargement with no fixed Stack height or clipping', async ({
+  page,
+  mount,
+}) => {
   await page.setViewportSize({ width: 320, height: 1000 });
   await openScenario(mount, 'components-stack--long-content');
   const stack = page.getByTestId('long-stack');
   const before = await stack.boundingBox();
-  await page.addStyleTag({ content: 'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }' });
+  await page.addStyleTag({
+    content:
+      'html { font-size: 200%; } * { line-height: 1.5 !important; letter-spacing: .12em !important; word-spacing: .16em !important; } p { margin-block-end: 2em !important; }',
+  });
   const after = await stack.boundingBox();
   expect(after!.height).toBeGreaterThan(before!.height);
   await expect(stack).toHaveCSS('overflow', 'visible');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
-test('Stack preserves form keyboard order and focus clearance inside Container', async ({ page, mount }) => {
+test('Stack preserves form keyboard order and focus clearance inside Container', async ({
+  page,
+  mount,
+}) => {
   await page.setViewportSize({ width: 320, height: 1000 });
   await openScenario(mount, 'components-stack--form-composition');
   await page.getByRole('textbox', { name: 'Project name' }).focus();
@@ -158,13 +206,19 @@ test('Stack preserves form keyboard order and focus clearance inside Container',
   const button = page.getByRole('button', { name: 'Save changes' });
   await expect(button).toBeFocused();
   await expect(button).toHaveCSS('outline-style', 'solid');
-  const clearance = await button.evaluate(element => {
+  const clearance = await button.evaluate((element) => {
     const style = getComputedStyle(element);
     const ring = parseFloat(style.outlineWidth) + parseFloat(style.outlineOffset);
     const box = element.getBoundingClientRect();
     const parent = element.closest('.fs-container')!.getBoundingClientRect();
 
-    return { left: box.left - ring >= parent.left, right: box.right + ring <= parent.right, clipping: [...element.closest('form')!.querySelectorAll('.fs-stack')].some(stack => getComputedStyle(stack).overflow !== 'visible') };
+    return {
+      left: box.left - ring >= parent.left,
+      right: box.right + ring <= parent.right,
+      clipping: [...element.closest('form')!.querySelectorAll('.fs-stack')].some(
+        (stack) => getComputedStyle(stack).overflow !== 'visible',
+      ),
+    };
   });
   expect(clearance).toEqual({ left: true, right: true, clipping: false });
   await page.keyboard.press('Tab');

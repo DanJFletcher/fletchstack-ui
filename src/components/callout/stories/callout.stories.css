@@ -1,13 +1,53 @@
-.callout-demo { --callout-demo-heading: var(--fs-text); max-inline-size: 1120px; margin-inline: auto; font-family: var(--fs-font-body); }
-.callout-demo h1 { font-size: 3rem; margin-block: 24px; }
-.callout-demo h2 { font-size: 1.5rem; margin-block: 0 16px; }
-.callout-demo__themes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-.callout-demo__theme { min-inline-size: 0; }
-.callout-demo__theme > h2 { color: var(--callout-demo-heading); }
-.callout-demo__stack { display: grid; gap: 12px; }
-.callout-demo__tones { margin-block-start: 32px; padding-block-start: 16px; border-block-start: 1px solid var(--fs-callout-neutral-accent); }
-.callout-demo__narrow { max-inline-size: 280px; }
-.callout-demo__result { display: block; font-size: .875rem; margin-block-start: 8px; color: var(--fs-text); background: var(--fs-surface); }
-@media (max-width: 700px) { .callout-demo__themes { grid-template-columns: 1fr; } }
+.callout-demo {
+  --callout-demo-heading: var(--fs-text);
+  max-inline-size: 1120px;
+  margin-inline: auto;
+  font-family: var(--fs-font-body);
+}
+.callout-demo h1 {
+  font-size: 3rem;
+  margin-block: 24px;
+}
+.callout-demo h2 {
+  font-size: 1.5rem;
+  margin-block: 0 16px;
+}
+.callout-demo__themes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.callout-demo__theme {
+  min-inline-size: 0;
+}
+.callout-demo__theme > h2 {
+  color: var(--callout-demo-heading);
+}
+.callout-demo__stack {
+  display: grid;
+  gap: 12px;
+}
+.callout-demo__tones {
+  margin-block-start: 32px;
+  padding-block-start: 16px;
+  border-block-start: 1px solid var(--fs-callout-neutral-accent);
+}
+.callout-demo__narrow {
+  max-inline-size: 280px;
+}
+.callout-demo__result {
+  display: block;
+  font-size: 0.875rem;
+  margin-block-start: 8px;
+  color: var(--fs-text);
+  background: var(--fs-surface);
+}
+@media (max-width: 700px) {
+  .callout-demo__themes {
+    grid-template-columns: 1fr;
+  }
+}
 
-.callout-demo .fs-callout { --fs-callout-font-size: 1.25rem; }
+.callout-demo .fs-callout {
+  --fs-callout-font-size: 1.25rem;
+}

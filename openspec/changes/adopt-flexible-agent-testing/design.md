@@ -56,15 +56,15 @@ Alternative: coupling affected execution to red/green vocabulary unnecessarily e
 
 ### 5. Apply a bounded coordinated edit
 
-| Target | Implementation responsibility |
-| --- | --- |
-| [Testing guidelines](../../../.agents/guidelines/testing-guidelines.md) | Authoritative cadence, intent, evidence, and reporting policy; qualify unit-only rules. |
-| [TDD skill](../../../.agents/skills/tdd/SKILL.md) | Narrow discovery and activation; retain the selected strict workflow and link to shared execution policy. |
-| [Component-building skill](../../../.agents/skills/build-react-components/SKILL.md) | Retain contract-first API/accessibility planning and replace automatic TDD referral. |
-| [React Testing Library skill](../../../.agents/skills/react-testing-library/SKILL.md) | Replace initial referral and qualify closing failure-evidence instruction. |
-| [Playwright skill](../../../.agents/skills/playwright-e2e/SKILL.md) | Select cadence through shared policy; preserve meaningful browser journeys and diagnostic evidence. |
-| [Refactoring skill](../../../.agents/skills/typescript-refactor/SKILL.md) | Preserve baseline/refactor discipline; route intentional behavior changes to shared policy. |
-| [Component guidelines](../../../.agents/guidelines/component-library.md) and [test guide](../../../tests/README.md) | Use cadence-neutral execution language and examples of both selected TDD and test-after. |
+| Target                                                                                                              | Implementation responsibility                                                                             |
+| ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| [Testing guidelines](../../../.agents/guidelines/testing-guidelines.md)                                             | Authoritative cadence, intent, evidence, and reporting policy; qualify unit-only rules.                   |
+| [TDD skill](../../../.agents/skills/tdd/SKILL.md)                                                                   | Narrow discovery and activation; retain the selected strict workflow and link to shared execution policy. |
+| [Component-building skill](../../../.agents/skills/build-react-components/SKILL.md)                                 | Retain contract-first API/accessibility planning and replace automatic TDD referral.                      |
+| [React Testing Library skill](../../../.agents/skills/react-testing-library/SKILL.md)                               | Replace initial referral and qualify closing failure-evidence instruction.                                |
+| [Playwright skill](../../../.agents/skills/playwright-e2e/SKILL.md)                                                 | Select cadence through shared policy; preserve meaningful browser journeys and diagnostic evidence.       |
+| [Refactoring skill](../../../.agents/skills/typescript-refactor/SKILL.md)                                           | Preserve baseline/refactor discipline; route intentional behavior changes to shared policy.               |
+| [Component guidelines](../../../.agents/guidelines/component-library.md) and [test guide](../../../tests/README.md) | Use cadence-neutral execution language and examples of both selected TDD and test-after.                  |
 
 Treat these as local customizations. Do not rewrite installer hashes to disguise them as upstream content, reinstall the package, or edit its tarball. Record this maintenance boundary in the test guide. General policy can be upstreamed later under separate authorization.
 

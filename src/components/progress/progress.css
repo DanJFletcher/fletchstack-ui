@@ -1,14 +1,78 @@
-.fs-progress { min-inline-size: 0; max-inline-size: 100%; color: var(--fs-progress-text); font-family: var(--fs-progress-font-family); font-size: var(--fs-progress-font-size); line-height: var(--fs-progress-font-line-height); overflow-wrap: anywhere; }
-.fs-progress:not([hidden]) { display: flex; flex-direction: column; gap: var(--fs-progress-gap); }
-.fs-progress--small { --fs-progress-height: var(--fs-progress-height-small); }
-.fs-progress--medium { --fs-progress-height: var(--fs-progress-height-medium); }
-.fs-progress--large { --fs-progress-height: var(--fs-progress-height-large); }
-.fs-progress__header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--fs-progress-gap); }
-.fs-progress__label { min-inline-size: 0; }
-.fs-progress__value { font-variant-numeric: tabular-nums; }
-.fs-progress__track { overflow: hidden; block-size: var(--fs-progress-height); border-radius: var(--fs-progress-radius); background: var(--fs-progress-track); }
-.fs-progress__indicator { position: relative; block-size: 100%; border-radius: inherit; background: var(--fs-progress-indicator); transition: inline-size var(--fs-motion-duration-standard) var(--fs-motion-easing-standard); }
-.fs-progress[data-state="indeterminate"] .fs-progress__indicator { inline-size: 35%; inset-inline-start: 32.5%; animation: fs-progress-loading calc(var(--fs-motion-duration-spinner) * 1.5) linear infinite; transition: none; }
-@keyframes fs-progress-loading { from { inset-inline-start: -35%; } to { inset-inline-start: 100%; } }
-@media (prefers-reduced-motion: reduce) { .fs-progress[data-state] .fs-progress__indicator { animation: none; transition: none; } }
-@media (forced-colors: active) { .fs-progress__track { outline: 1px solid CanvasText; background: Canvas; } .fs-progress__indicator { background: Highlight; } }
+.fs-progress {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  color: var(--fs-progress-text);
+  font-family: var(--fs-progress-font-family);
+  font-size: var(--fs-progress-font-size);
+  line-height: var(--fs-progress-font-line-height);
+  overflow-wrap: anywhere;
+}
+.fs-progress:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fs-progress-gap);
+}
+.fs-progress--small {
+  --fs-progress-height: var(--fs-progress-height-small);
+}
+.fs-progress--medium {
+  --fs-progress-height: var(--fs-progress-height-medium);
+}
+.fs-progress--large {
+  --fs-progress-height: var(--fs-progress-height-large);
+}
+.fs-progress__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--fs-progress-gap);
+}
+.fs-progress__label {
+  min-inline-size: 0;
+}
+.fs-progress__value {
+  font-variant-numeric: tabular-nums;
+}
+.fs-progress__track {
+  overflow: hidden;
+  block-size: var(--fs-progress-height);
+  border-radius: var(--fs-progress-radius);
+  background: var(--fs-progress-track);
+}
+.fs-progress__indicator {
+  position: relative;
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--fs-progress-indicator);
+  transition: inline-size var(--fs-motion-duration-standard) var(--fs-motion-easing-standard);
+}
+.fs-progress[data-state='indeterminate'] .fs-progress__indicator {
+  inline-size: 35%;
+  inset-inline-start: 32.5%;
+  animation: fs-progress-loading calc(var(--fs-motion-duration-spinner) * 1.5) linear infinite;
+  transition: none;
+}
+@keyframes fs-progress-loading {
+  from {
+    inset-inline-start: -35%;
+  }
+  to {
+    inset-inline-start: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fs-progress[data-state] .fs-progress__indicator {
+    animation: none;
+    transition: none;
+  }
+}
+@media (forced-colors: active) {
+  .fs-progress__track {
+    outline: 1px solid CanvasText;
+    background: Canvas;
+  }
+  .fs-progress__indicator {
+    background: Highlight;
+  }
+}

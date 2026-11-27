@@ -6,7 +6,10 @@ import { Tabs } from '../Tabs';
 import { tabsFocusContracts } from '../../../../tests/support/tabs-focus-contracts';
 import { tabItems, tabsContracts } from '../../../../tests/support/tabs-contracts';
 
-describe('client rendering', () => { tabsContracts(render); tabsFocusContracts(render); });
+describe('client rendering', () => {
+  tabsContracts(render);
+  tabsFocusContracts(render);
+});
 it('preserves native root hiding', () => {
   // arrange
   const given = <Tabs label="Workspace" items={tabItems} hidden />;

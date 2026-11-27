@@ -27,16 +27,29 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
       expect(screen.getByText('4.5 / 5')).toHaveAttribute('aria-hidden', 'true');
       expect(screen.getByText('Customer rating')).toBeVisible();
     });
-    it.each(['star', 'heart', 'thumbs'] as const)('localizes the %s display image', symbol => {
+    it.each(['star', 'heart', 'thumbs'] as const)('localizes the %s display image', (symbol) => {
       // arrange
-      const getRatingLabel = (value: number, max: number, kind: string) => `${value} sur ${max}: ${kind}`;
+      const getRatingLabel = (value: number, max: number, kind: string) =>
+        `${value} sur ${max}: ${kind}`;
       // act
-      mount(<Rating symbol={symbol} defaultValue={2.5} max={3} getRatingLabel={getRatingLabel} formatValue={() => 'Deux et demi'} showValue />);
+      mount(
+        <Rating
+          symbol={symbol}
+          defaultValue={2.5}
+          max={3}
+          getRatingLabel={getRatingLabel}
+          formatValue={() => 'Deux et demi'}
+          showValue
+        />,
+      );
       // assert
       expect(screen.getByRole('img', { name: `2.5 sur 3: ${symbol}` })).toBeVisible();
       expect(screen.getByText('Deux et demi')).toBeVisible();
     });
-    it.each([{ symbol: 'heart', name: '3 out of 5 hearts' }, { symbol: 'thumbs', name: '3 out of 5 thumbs up' }] as const)('names $symbol choices', ({ symbol, name }) => {
+    it.each([
+      { symbol: 'heart', name: '3 out of 5 hearts' },
+      { symbol: 'thumbs', name: '3 out of 5 thumbs up' },
+    ] as const)('names $symbol choices', ({ symbol, name }) => {
       // arrange
       // act
       mount(<Rating mode="input" label="Review" symbol={symbol} defaultValue={3} />);
@@ -46,7 +59,9 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
     it('renders ten half-step choices in a named native fieldset', () => {
       // arrange
       // act
-      mount(<Rating mode="input" label="Review" step={0.5} defaultValue={3.5} name="score" showValue />);
+      mount(
+        <Rating mode="input" label="Review" step={0.5} defaultValue={3.5} name="score" showValue />,
+      );
       // assert
       expect(screen.getByRole('group', { name: 'Review' }).tagName).toBe('FIELDSET');
       expect(screen.getAllByRole('radio')).toHaveLength(10);
@@ -92,7 +107,11 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
     });
     it('submits a half-step numeric value under the supplied name', () => {
       // arrange
-      mount(<form aria-label="Review form"><Rating mode="input" label="Review" name="score" defaultValue={3.5} step={0.5} /></form>);
+      mount(
+        <form aria-label="Review form">
+          <Rating mode="input" label="Review" name="score" defaultValue={3.5} step={0.5} />
+        </form>,
+      );
       // act
       const result = new FormData(screen.getByRole('form') as HTMLFormElement).get('score');
       // assert
@@ -100,21 +119,41 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
     });
     it('leaves unanswered required fields invalid', () => {
       // arrange
-      mount(<form><Rating mode="input" label="Review" name="score" required /></form>);
+      mount(
+        <form>
+          <Rating mode="input" label="Review" name="score" required />
+        </form>,
+      );
       // act
       const result = (screen.getAllByRole('radio')[0] as HTMLInputElement).checkValidity();
       // assert
       expect(result).toBe(false);
-      expect(screen.getAllByRole('radio').filter(input => (input as HTMLInputElement).checked)).toHaveLength(0);
+      expect(
+        screen.getAllByRole('radio').filter((input) => (input as HTMLInputElement).checked),
+      ).toHaveLength(0);
     });
     it('associates description and error with the group and choices', () => {
       // arrange
       // act
-      mount(<Rating mode="input" label="Review" id="review" description="Choose one score" error="Choose a rating" aria-describedby="context" />);
+      mount(
+        <Rating
+          mode="input"
+          label="Review"
+          id="review"
+          description="Choose one score"
+          error="Choose a rating"
+          aria-describedby="context"
+        />,
+      );
       // assert
-      expect(screen.getByRole('group')).toHaveAttribute('aria-describedby', 'context review-description review-error');
+      expect(screen.getByRole('group')).toHaveAttribute(
+        'aria-describedby',
+        'context review-description review-error',
+      );
       expect(screen.getByRole('group')).toHaveAttribute('aria-invalid', 'true');
-      expect(screen.getAllByRole('radio')[0]).toHaveAccessibleDescription('Choose one score Choose a rating');
+      expect(screen.getAllByRole('radio')[0]).toHaveAccessibleDescription(
+        'Choose one score Choose a rating',
+      );
     });
     it('honors explicit invalid state', () => {
       // arrange
@@ -134,7 +173,16 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
       // arrange
       const user = userEvent.setup();
       const onValueChange = vi.fn();
-      mount(<Rating mode="input" label="Closed" value={4} onValueChange={onValueChange} disabled showValue />);
+      mount(
+        <Rating
+          mode="input"
+          label="Closed"
+          value={4}
+          onValueChange={onValueChange}
+          disabled
+          showValue
+        />,
+      );
       // act
       await user.click(screen.getByRole('radio', { name: '2 out of 5 stars' }));
       // assert
@@ -145,7 +193,12 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
     it('isolates unnamed native groups', () => {
       // arrange
       // act
-      mount(<><Rating mode="input" label="First" /><Rating mode="input" label="Second" /></>);
+      mount(
+        <>
+          <Rating mode="input" label="First" />
+          <Rating mode="input" label="Second" />
+        </>,
+      );
       // assert
       const first = within(screen.getByRole('group', { name: 'First' })).getAllByRole('radio')[0];
       const second = within(screen.getByRole('group', { name: 'Second' })).getAllByRole('radio')[0];
@@ -155,7 +208,15 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
       // arrange
       const ref = createRef<HTMLDivElement>();
       // act
-      mount(<Rating ref={ref} className="custom" hidden data-testid="rating" style={{ '--fs-rating-fill': 'orange' }} />);
+      mount(
+        <Rating
+          ref={ref}
+          className="custom"
+          hidden
+          data-testid="rating"
+          style={{ '--fs-rating-fill': 'orange' }}
+        />,
+      );
       // assert
       expect(ref.current).toBe(screen.getByTestId('rating'));
       expect(ref.current).toHaveClass('custom');
@@ -164,14 +225,19 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
     it('localizes radio accessible names', () => {
       // arrange
       // act
-      mount(<Rating mode="input" label="Avis" getRatingLabel={value => `${value} étoiles`} />);
+      mount(<Rating mode="input" label="Avis" getRatingLabel={(value) => `${value} étoiles`} />);
       // assert
       expect(screen.getByRole('radio', { name: '3 étoiles' })).toBeVisible();
     });
     it('resets uncontrolled selection to its mount default', async () => {
       // arrange
       const user = userEvent.setup();
-      mount(<form aria-label="Review form"><Rating mode="input" label="Review" defaultValue={2} showValue /><button type="reset">Reset</button></form>);
+      mount(
+        <form aria-label="Review form">
+          <Rating mode="input" label="Review" defaultValue={2} showValue />
+          <button type="reset">Reset</button>
+        </form>,
+      );
       await user.click(screen.getByRole('radio', { name: '4 out of 5 stars' }));
       // act
       await user.click(screen.getByRole('button', { name: 'Reset' }));
@@ -181,17 +247,28 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
     });
     it('honors canceled native reset', async () => {
       // arrange
-      mount(<form aria-label="Review form" onReset={event => event.preventDefault()}><Rating mode="input" label="Review" defaultValue={2} /></form>);
+      mount(
+        <form aria-label="Review form" onReset={(event) => event.preventDefault()}>
+          <Rating mode="input" label="Review" defaultValue={2} />
+        </form>,
+      );
       fireEvent.click(screen.getByRole('radio', { name: '4 out of 5 stars' }));
       // act: dispatch the cancelable native reset boundary.
-      await act(async () => { fireEvent.reset(screen.getByRole('form')); });
+      await act(async () => {
+        fireEvent.reset(screen.getByRole('form'));
+      });
       // assert
       expect(screen.getByRole('radio', { name: '4 out of 5 stars' })).toBeChecked();
     });
     it('preserves controlled state on native reset', async () => {
       // arrange
       const user = userEvent.setup();
-      mount(<form><Rating mode="input" label="Review" value={4} defaultValue={2} /><button type="reset">Reset</button></form>);
+      mount(
+        <form>
+          <Rating mode="input" label="Review" value={4} defaultValue={2} />
+          <button type="reset">Reset</button>
+        </form>,
+      );
       // act
       await user.click(screen.getByRole('button', { name: 'Reset' }));
       // assert
@@ -199,7 +276,12 @@ export function ratingContracts(mount: (element: ReactElement) => unknown) {
     });
     it('associates native inputs with an external form', () => {
       // arrange
-      mount(<><form id="external" aria-label="External" /><Rating mode="input" label="Review" form="external" name="score" defaultValue={3} /></>);
+      mount(
+        <>
+          <form id="external" aria-label="External" />
+          <Rating mode="input" label="Review" form="external" name="score" defaultValue={3} />
+        </>,
+      );
       // act
       const result = new FormData(screen.getByRole('form') as HTMLFormElement).get('score');
       // assert
@@ -222,10 +304,15 @@ function Controlled() {
  **/
 function invalidRatingContracts() {
   it.each([
-    { props: { max: 0 }, value: 0, message: 'Rating max' }, { props: { max: 11 }, value: 0, message: 'Rating max' },
-    { props: { max: 2.5 }, value: 0, message: 'Rating max' }, { props: { step: 0.25 }, value: 0, message: 'Rating step' },
-    { props: {}, value: NaN, message: 'Rating value' }, { props: {}, value: -1, message: 'Rating value' }, { props: {}, value: 6, message: 'Rating value' },
-    { props: { mode: 'input', label: '' }, value: 0, message: 'visible label' }, { props: { mode: 'input' }, value: 0, message: 'visible label' },
+    { props: { max: 0 }, value: 0, message: 'Rating max' },
+    { props: { max: 11 }, value: 0, message: 'Rating max' },
+    { props: { max: 2.5 }, value: 0, message: 'Rating max' },
+    { props: { step: 0.25 }, value: 0, message: 'Rating step' },
+    { props: {}, value: NaN, message: 'Rating value' },
+    { props: {}, value: -1, message: 'Rating value' },
+    { props: {}, value: 6, message: 'Rating value' },
+    { props: { mode: 'input', label: '' }, value: 0, message: 'visible label' },
+    { props: { mode: 'input' }, value: 0, message: 'visible label' },
     { props: { mode: 'input', label: 'Review' }, value: 2.5, message: 'match step' },
   ])('rejects $props with score $value', ({ props, value, message }) => {
     // arrange

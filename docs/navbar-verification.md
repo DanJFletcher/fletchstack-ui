@@ -13,16 +13,16 @@ Scope: the native Navbar and Brand/Item placement API, persistent child identity
 
 ## Final verification
 
-| Check | Result |
-| --- | --- |
-| Full unit coverage | 75 files, 1,290 tests; 30.11s; independent 100% statements, branches, functions and lines |
-| Full integration coverage | 81 files, 1,090 tests; 96.33s; independent 100% statements, branches, functions and lines |
-| Complete component browser suite | 538 passed; 1.6m, two workers |
-| Complete retained Storybook browser suite | 36 passed; 1.2m, one worker |
-| All Storybook render/play/axe | 42 files, 479 tests; 26.47s |
-| Storybook build | Passed; Vite stage 6.56s |
-| Package build and installed consumers | Passed: compound public API/types, optional mapped placement, individual and combined CSS, bundling, React 18.3.1 / 19.3.1 deterministic SSR |
-| Lint, typecheck, component structure, diff whitespace | Passed |
+| Check                                                 | Result                                                                                                                                       |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Full unit coverage                                    | 75 files, 1,290 tests; 30.11s; independent 100% statements, branches, functions and lines                                                    |
+| Full integration coverage                             | 81 files, 1,090 tests; 96.33s; independent 100% statements, branches, functions and lines                                                    |
+| Complete component browser suite                      | 538 passed; 1.6m, two workers                                                                                                                |
+| Complete retained Storybook browser suite             | 36 passed; 1.2m, one worker                                                                                                                  |
+| All Storybook render/play/axe                         | 42 files, 479 tests; 26.47s                                                                                                                  |
+| Storybook build                                       | Passed; Vite stage 6.56s                                                                                                                     |
+| Package build and installed consumers                 | Passed: compound public API/types, optional mapped placement, individual and combined CSS, bundling, React 18.3.1 / 19.3.1 deterministic SSR |
+| Lint, typecheck, component structure, diff whitespace | Passed                                                                                                                                       |
 
 Final coverage began after implementation, tests, cleanup and review. Shared tokens, preview and public-export registration require full local browser verification. Browser/Storybook tests remain coverage-free. Full integration coverage runs alone with one worker after browser/build/package checks to avoid concurrent fixture contention. Required CI remains independent of local evidence.
 

@@ -4,12 +4,35 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { expect, it, vi } from 'vitest';
-import { AspectRatio, type AspectRatioProps } from '../../../../src/components/aspect-ratio/AspectRatio';
+import {
+  AspectRatio,
+  type AspectRatioProps,
+} from '../../../../src/components/aspect-ratio/AspectRatio';
 
-it.each<AspectRatioProps>([{}, { ratio: 1 }, { ratio: 0.75 }, { ratio: 0 }, { ratio: -1 }, { ratio: NaN }, { ratio: Infinity }])('hydrates %j without losing native media semantics', props => {
+it.each<AspectRatioProps>([
+  {},
+  { ratio: 1 },
+  { ratio: 0.75 },
+  { ratio: 0 },
+  { ratio: -1 },
+  { ratio: NaN },
+  { ratio: Infinity },
+])('hydrates %j without losing native media semantics', (props) => {
   // arrange
   const ref = createRef<HTMLDivElement>();
-  const given = <AspectRatio {...props} ref={ref} id="media" className="custom" style={{ '--fs-space-gap-related': '24px' }} data-testid="frame"><img alt="Project landscape" /><button>Play</button></AspectRatio>;
+  const given = (
+    <AspectRatio
+      {...props}
+      ref={ref}
+      id="media"
+      className="custom"
+      style={{ '--fs-space-gap-related': '24px' }}
+      data-testid="frame"
+    >
+      <img alt="Project landscape" />
+      <button>Play</button>
+    </AspectRatio>
+  );
   const container = document.createElement('div');
   container.innerHTML = renderToString(given);
   document.body.appendChild(container);
